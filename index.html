@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Charge &amp; Chew — Tesla Superchargers near your favorite restaurants &amp; stores</title>
-<meta name="description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and 20+ other chains. Plan road trip charging stops around where you actually want to eat.">
+<meta name="description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://chargeandchew.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Charge &amp; Chew">
 <meta property="og:title" content="Charge &amp; Chew — Superchargers near your favorite chains">
-<meta property="og:description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and 24 other chains. Plan road trip charging stops around where you actually want to eat.">
+<meta property="og:description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Plan road trip charging stops around where you actually want to eat.">
 <meta property="og:url" content="https://chargeandchew.com/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#0a0d12">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Charge & Chew",
 "url":"https://chargeandchew.com/","applicationCategory":"TravelApplication",
@@ -26,423 +26,941 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  :root{
-    --bg:#0d1117; --panel:#161b22; --panel2:#1e242c; --line:#2b333d;
-    --txt:#e6edf3; --dim:#8b949e; --red:#e82127; --green:#3fb950; --amber:#d29922;
-    --chipH:34px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  #app{display:flex;flex-direction:column;height:100%}
+:root{
+  --bg:#0a0d12; --surface:#12161d; --surface2:#1a1f28; --line:#252c37; --line2:#323b48;
+  --txt:#eef2f7; --dim:#8892a0; --dim2:#5f6875;
+  --red:#ff3b3f; --amber:#ffb020; --green:#31c46b; --blue:#4c9dff;
+  --glass:rgba(18,22,29,.82);
+  --sh:0 8px 32px rgba(0,0,0,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+#app{display:flex;flex-direction:column;height:100%;position:relative}
 
-  /* ---------- header ---------- */
-  header{padding:calc(env(safe-area-inset-top) + 10px) 14px 8px;background:var(--panel);
-    border-bottom:1px solid var(--line);z-index:1000}
-  .brand{display:flex;align-items:baseline;gap:8px}
-  .brand h1{font-size:20px;font-weight:800;letter-spacing:1px}
-  .brand h1 .red{color:var(--red)}
-  .brand .tag{font-size:11px;color:var(--dim)}
-  .brand .about{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);
-    color:var(--dim);font-size:12px;display:flex;align-items:center;justify-content:center;text-decoration:none}
-  #about{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:5000;align-items:center;justify-content:center;padding:20px}
-  #about:target{display:flex}
-  #about .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;max-width:440px;font-size:13px;line-height:1.5;color:var(--dim)}
-  #about .box h2{color:var(--txt);font-size:16px;margin-bottom:8px}
-  #about .box p{margin-bottom:8px}
-  #about .box a{color:#58a6ff}
-  .stateTag{font-size:11px;color:var(--amber);margin-left:6px}
-  .modes{display:flex;gap:6px;margin-top:8px}
-  .modes button{flex:1;padding:7px 0;border:1px solid var(--line);background:var(--panel2);
-    color:var(--dim);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
-  .modes button.on{background:var(--red);border-color:var(--red);color:#fff}
+/* ══════════ splash ══════════ */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .4s}
+#splash.gone{opacity:0;pointer-events:none}
+.splash-logo{font-size:clamp(28px,7vw,42px);font-weight:800;letter-spacing:-.5px}
+.splash-logo .amp{color:var(--red)}
+.splash-bar{width:160px;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.splash-bar i{display:block;height:100%;width:40%;background:var(--red);border-radius:2px;
+  animation:slide 1.1s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+#splash small{color:var(--dim);font-size:13px}
 
-  /* ---------- route bar ---------- */
-  #routeBar{display:none;padding:8px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
-  #routeBar.show{display:block}
-  .rrow{display:flex;gap:6px;margin-bottom:6px}
-  .rrow input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:8px;
-    background:var(--panel2);color:var(--txt);font-size:14px;min-width:0}
-  .rrow input::placeholder{color:var(--dim)}
-  #goBtn{padding:8px 16px;border:none;border-radius:8px;background:var(--red);color:#fff;
-    font-weight:700;font-size:14px;cursor:pointer}
-  #goBtn:disabled{opacity:.5}
-  .corridor{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
-  .corridor .cbtn{padding:4px 10px;border:1px solid var(--line);border-radius:12px;
-    background:var(--panel2);color:var(--dim);font-size:12px;cursor:pointer}
-  .corridor .cbtn.on{background:#30363d;color:var(--txt);border-color:#4a5460}
-  #routeStatus{font-size:12px;color:var(--amber);margin-top:4px;min-height:0}
+/* ══════════ header ══════════ */
+header{position:relative;z-index:900;background:var(--surface);
+  border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 10px) 12px 0}
+.brandrow{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:0 2px}
+.logo{font-size:17px;font-weight:800;letter-spacing:-.3px;white-space:nowrap}
+.logo .amp{color:var(--red)}
+.tagline{font-size:11px;color:var(--dim2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface2);color:var(--dim);display:grid;place-items:center;font-size:14px;
+  flex-shrink:0;transition:.15s;text-decoration:none}
+.iconbtn:hover{color:var(--txt);border-color:var(--line2)}
+.iconbtn.on{background:var(--red);border-color:var(--red);color:#fff}
 
-  /* ---------- chips ---------- */
-  #chips{display:flex;gap:6px;overflow-x:auto;padding:8px 14px;background:var(--panel);
-    border-bottom:1px solid var(--line);scrollbar-width:none;flex-shrink:0}
-  #chips::-webkit-scrollbar{display:none}
-  .chip{flex-shrink:0;height:var(--chipH);display:flex;align-items:center;gap:5px;
-    padding:0 12px;border-radius:17px;border:1px solid var(--line);background:var(--panel2);
-    color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;user-select:none;white-space:nowrap}
-  .chip.on{background:var(--red);border-color:var(--red)}
-  .chip .cnt{font-size:10px;color:var(--dim);font-weight:400}
-  .chip.on .cnt{color:#ffd7d8}
-  .chip.divider{border:none;background:none;padding:0 2px;color:var(--dim);font-size:11px;
-    cursor:default}
+.searchrow{display:flex;gap:8px;margin-bottom:10px}
+header.routing .searchrow{display:none}
+header.routing .tagline{display:none}
+.searchbox{flex:1;display:flex;align-items:center;gap:8px;background:var(--surface2);
+  border:1px solid var(--line);border-radius:12px;padding:0 12px;height:40px;transition:.15s;min-width:0}
+.searchbox:focus-within{border-color:var(--line2);background:#1e242e}
+.searchbox svg{flex-shrink:0;opacity:.5}
+.searchbox input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
+.searchbox input::placeholder{color:var(--dim2)}
+.searchbox .clr{color:var(--dim2);font-size:15px;padding:4px;display:none}
+.searchbox.has .clr{display:block}
 
-  /* ---------- map ---------- */
-  #mapWrap{flex:1;position:relative;min-height:0}
-  #map{position:absolute;inset:0;background:#0d1117}
-  .leaflet-container{font:inherit}
-  .leaflet-popup-content-wrapper{background:var(--panel);color:var(--txt);border-radius:10px;
-    box-shadow:0 4px 20px rgba(0,0,0,.5)}
-  .leaflet-popup-tip{background:var(--panel)}
-  .leaflet-popup-content{margin:12px 14px;line-height:1.45;font-size:13px}
-  .pp-name{font-weight:700;font-size:14px;margin-bottom:2px}
-  .pp-meta{color:var(--dim);font-size:12px;margin-bottom:6px}
-  .pp-host{color:var(--amber);font-size:12px;margin-bottom:6px}
-  .pp-chain{display:flex;justify-content:space-between;gap:14px;font-size:13px;padding:1px 0}
-  .pp-chain .d{color:var(--dim);font-size:12px}
-  .pp-links{margin-top:8px;display:flex;gap:12px}
-  .pp-links a{color:#58a6ff;font-size:12px;text-decoration:none}
-  #locBtn{position:absolute;right:12px;bottom:12px;z-index:500;width:42px;height:42px;
-    border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--txt);
-    font-size:18px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.tabs{display:flex;gap:4px;padding:0 2px 8px}
+.tab{padding:6px 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--dim);transition:.15s}
+.tab.on{background:var(--surface2);color:var(--txt)}
+.tab .n{font-size:10px;opacity:.6;margin-left:3px}
 
-  /* ---------- bottom sheet ---------- */
-  #sheet{background:var(--panel);border-top:1px solid var(--line);flex-shrink:0;
-    transition:max-height .25s ease;max-height:44px;display:flex;flex-direction:column;
-    padding-bottom:env(safe-area-inset-bottom)}
-  #sheet.open{max-height:45%}
-  #sheetBar{padding:11px 14px;font-size:13px;font-weight:600;cursor:pointer;display:flex;
-    justify-content:space-between;align-items:center;flex-shrink:0}
-  #sheetBar .arrow{color:var(--dim);font-size:11px}
-  #sheetList{overflow-y:auto;padding:0 14px 10px}
-  .row{padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
-  .row-name{font-weight:600;font-size:14px;display:flex;justify-content:space-between;gap:8px}
-  .row-name .stalls{color:var(--dim);font-weight:400;font-size:12px;flex-shrink:0}
-  .row-chains{color:var(--dim);font-size:12px;margin-top:2px}
-  .row-chains b{color:var(--txt);font-weight:600}
-  .empty{color:var(--dim);font-size:13px;padding:14px 0;text-align:center}
-  #loading{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;
-    align-items:center;justify-content:center;flex-direction:column;gap:10px}
-  #loading .big{font-size:26px;font-weight:800;letter-spacing:2px}
+#chips{display:flex;gap:7px;overflow-x:auto;padding:0 12px 11px;margin:0 -12px;scrollbar-width:none}
+#chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;display:flex;align-items:center;gap:6px;height:34px;padding:0 13px;
+  border-radius:11px;border:1px solid var(--line);background:var(--surface2);
+  font-size:13px;font-weight:600;white-space:nowrap;transition:transform .12s,background .15s,border-color .15s}
+.chip:active{transform:scale(.94)}
+.chip .cnt{font-size:10px;color:var(--dim2);font-weight:500}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 2px 12px rgba(255,59,63,.3)}
+.chip.on .cnt{color:rgba(255,255,255,.75)}
+.chip.more{background:none;border-style:dashed;color:var(--dim)}
+
+/* ══════════ route panel ══════════ */
+#routePanel{display:none;padding:0 12px 11px}
+#routePanel.show{display:block;animation:drop .2s ease}
+@keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.rfield{display:flex;align-items:center;gap:9px;background:var(--surface2);border:1px solid var(--line);
+  border-radius:12px;padding:0 12px;height:40px;margin-bottom:7px}
+.rfield .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.rfield .dot.a{background:var(--green)}
+.rfield .dot.b{background:var(--red)}
+.rfield input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
+.rfield input::placeholder{color:var(--dim2)}
+.rfield .mini{font-size:15px;color:var(--dim);padding:4px}
+.rrow2{display:flex;gap:8px;align-items:center}
+#goBtn{flex:1;height:40px;border-radius:12px;background:var(--red);color:#fff;font-weight:700;
+  font-size:14px;box-shadow:0 3px 14px rgba(255,59,63,.28);transition:.15s}
+#goBtn:disabled{opacity:.45;box-shadow:none}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;
+  padding:3px;gap:2px;height:40px;align-items:center}
+.seg button{padding:0 11px;height:32px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim)}
+.seg button.on{background:var(--line2);color:var(--txt)}
+#routeInfo{font-size:12.5px;color:var(--amber);margin-top:7px;min-height:17px}
+#routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
+#routePanel.collapsed #routeInfo{margin-top:0;display:flex;align-items:center;gap:9px;
+  background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:9px 12px;
+  color:var(--txt);font-size:13px;font-weight:600;cursor:pointer}
+#routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--amber)}
+#routePanel.collapsed #routeInfo .ed{color:var(--dim);font-size:12px;font-weight:600;flex-shrink:0}
+
+/* ══════════ map ══════════ */
+#mapWrap{flex:1;position:relative;min-height:0}
+#map{position:absolute;inset:0;background:#0a0d12}
+.leaflet-container{font:inherit;background:#0a0d12}
+.leaflet-control-attribution{background:rgba(10,13,18,.75)!important;color:var(--dim2)!important;
+  font-size:10px!important;padding:2px 6px!important}
+.leaflet-control-attribution a{color:var(--dim)!important}
+
+.mapctl{position:absolute;right:12px;bottom:14px;z-index:600;display:flex;flex-direction:column;gap:8px}
+.mbtn{width:42px;height:42px;border-radius:13px;background:var(--glass);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border:1px solid var(--line);color:var(--txt);
+  display:grid;place-items:center;font-size:17px;box-shadow:var(--sh);transition:.15s}
+.mbtn:active{transform:scale(.93)}
+.mbtn.on{background:var(--red);border-color:var(--red);color:#fff}
+.mbtn.busy{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.45}}
+
+#centerCard{position:absolute;left:12px;top:12px;right:66px;z-index:600;display:none;
+  background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:13px;padding:9px 11px;box-shadow:var(--sh);
+  align-items:center;gap:10px}
+#centerCard.show{display:flex;animation:drop .2s}
+#centerCard .ic{font-size:15px}
+#centerCard .txt{flex:1;min-width:0}
+#centerCard .lbl{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#centerCard .sub{font-size:11px;color:var(--dim)}
+#centerCard .rad{display:flex;gap:3px}
+#centerCard .rad button{font-size:11px;font-weight:600;color:var(--dim);padding:3px 7px;border-radius:7px;
+  background:var(--surface2)}
+#centerCard .rad button.on{background:var(--red);color:#fff}
+#centerCard .x{font-size:14px;color:var(--dim2);padding:2px 4px}
+
+#pinHint{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:601;
+  background:var(--red);color:#fff;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:11px;
+  box-shadow:var(--sh);display:none;white-space:nowrap}
+#pinHint.show{display:block;animation:drop .2s}
+
+.leaflet-popup-content-wrapper{background:var(--surface);color:var(--txt);border-radius:14px;
+  border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.6)}
+.leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
+.leaflet-popup-content{margin:13px 15px;font-size:13px}
+.leaflet-popup-close-button{color:var(--dim2)!important;padding:8px 8px 0 0!important}
+.pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:3px}
+.pp-name{font-weight:700;font-size:14.5px;flex:1;padding-right:14px}
+.pp-fav{font-size:15px;color:var(--dim2);flex-shrink:0;line-height:1}
+.pp-fav.on{color:var(--amber)}
+.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:8px}
+.pp-host{color:var(--amber);font-size:11.5px;margin-bottom:8px}
+.pp-list{max-height:168px;overflow-y:auto}
+.pp-chain{display:flex;justify-content:space-between;gap:12px;padding:2.5px 0;font-size:12.5px}
+.pp-chain .d{color:var(--dim);font-size:11.5px;white-space:nowrap}
+.pp-links{margin-top:9px;padding-top:9px;border-top:1px solid var(--line);display:flex;gap:14px}
+.pp-links a{color:var(--blue);font-size:12px;text-decoration:none;font-weight:600}
+
+/* ══════════ sheet ══════════ */
+#sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
+  box-shadow:0 -6px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;flex-shrink:0;
+  height:52px;transition:height .28s cubic-bezier(.32,.72,0,1);
+  padding-bottom:env(safe-area-inset-bottom)}
+.handle{padding:7px 0 3px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
+.handle i{width:34px;height:4px;border-radius:2px;background:var(--line2);display:block}
+.sheethead{display:flex;align-items:center;gap:10px;padding:0 14px 9px;flex-shrink:0}
+.sheethead .t{flex:1;font-size:13.5px;font-weight:600;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.sheethead .t em{font-style:normal;color:var(--dim);font-weight:500}
+.sortbtn{font-size:11.5px;color:var(--dim);background:var(--surface2);border:1px solid var(--line);
+  padding:4px 9px;border-radius:8px;font-weight:600;flex-shrink:0}
+#list{overflow-y:auto;overscroll-behavior:contain;padding:0 14px 14px;flex:1}
+.row{display:flex;gap:11px;padding:11px 0;border-top:1px solid var(--line);cursor:pointer}
+.row:active{opacity:.6}
+.row .idx{width:22px;height:22px;border-radius:7px;background:var(--surface2);color:var(--dim);
+  font-size:11px;font-weight:700;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.row .body{flex:1;min-width:0}
+.row .n{display:flex;gap:8px;align-items:baseline}
+.row .n b{font-size:14px;font-weight:600;flex:1;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.row .n s{text-decoration:none;color:var(--dim);font-size:11.5px;white-space:nowrap}
+.row .sub{color:var(--dim2);font-size:11.5px;margin-top:1px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.row .ch{font-size:12px;margin-top:4px;color:var(--dim);display:flex;flex-wrap:wrap;gap:3px 10px}
+.row .ch b{color:var(--txt);font-weight:600}
+.row .star{font-size:14px;color:var(--dim2);padding:2px 0 0 2px;flex-shrink:0;align-self:flex-start}
+.row .star.on{color:var(--amber)}
+.empty{text-align:center;color:var(--dim);font-size:13px;padding:28px 20px;line-height:1.6}
+.empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14px}
+
+/* ══════════ chain picker ══════════ */
+#picker{position:fixed;inset:0;z-index:2000;background:rgba(5,7,10,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;
+  align-items:flex-end;justify-content:center}
+#picker.show{display:flex;animation:fade .18s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.pk{background:var(--surface);width:100%;max-width:620px;max-height:86vh;border-radius:22px 22px 0 0;
+  border:1px solid var(--line);border-bottom:none;display:flex;flex-direction:column;
+  animation:up .26s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.pk h3{font-size:16px;padding:16px 16px 11px;display:flex;align-items:center;gap:10px}
+.pk h3 span{flex:1}
+.pk .searchbox{margin:0 16px 11px}
+.pkcats{display:flex;gap:5px;padding:0 16px 11px;overflow-x:auto;scrollbar-width:none}
+.pkcats::-webkit-scrollbar{display:none}
+.pkgrid{overflow-y:auto;padding:0 16px 16px;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:7px;align-content:start}
+.pkitem{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:11px;
+  background:var(--surface2);border:1px solid var(--line);font-size:13px;font-weight:600;
+  text-align:left;transition:.12s}
+.pkitem:active{transform:scale(.97)}
+.pkitem.on{background:var(--red);border-color:var(--red);color:#fff}
+.pkitem .e{font-size:15px;flex-shrink:0}
+.pkitem .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pkitem .c{font-size:10px;color:var(--dim2);font-weight:500}
+.pkitem.on .c{color:rgba(255,255,255,.7)}
+.pkfoot{display:flex;gap:9px;padding:12px 16px;border-top:1px solid var(--line);flex-shrink:0}
+.pkfoot button{flex:1;height:42px;border-radius:12px;font-weight:700;font-size:14px}
+.pkfoot .clear{background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
+.pkfoot .done{background:var(--red);color:#fff}
+
+/* ══════════ about ══════════ */
+#about{position:fixed;inset:0;z-index:3000;background:rgba(5,7,10,.8);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+#about:target{display:flex}
+#about .box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;
+  max-width:460px;max-height:80vh;overflow-y:auto;font-size:13.5px;color:var(--dim);line-height:1.6}
+#about h2{color:var(--txt);font-size:18px;margin-bottom:11px}
+#about p{margin-bottom:11px}
+#about a{color:var(--blue);text-decoration:none}
+#about .close{display:block;text-align:center;margin-top:6px;padding:11px;background:var(--surface2);
+  border-radius:11px;color:var(--txt);font-weight:600;text-decoration:none}
+
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 76px);
+  transform:translateX(-50%) translateY(14px);
+  background:var(--surface2);border:1px solid var(--line2);color:var(--txt);font-size:13px;
+  font-weight:600;padding:10px 18px;border-radius:12px;box-shadow:var(--sh);z-index:4000;
+  opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90vw;
+  overflow:hidden;text-overflow:ellipsis}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(min-width:760px){
+  header{padding-left:18px;padding-right:18px}
+  #chips{padding-left:18px;padding-right:18px;margin:0 -18px}
+  .tagline{font-size:12px}
+}
 </style>
 </head>
 <body>
-<div id="loading"><div class="big">CHARGE <span style="color:var(--red)">&amp;</span> CHEW</div><div style="color:var(--dim);font-size:13px">Loading charger data…</div></div>
+
+<div id="splash">
+  <div class="splash-logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
+  <div class="splash-bar"><i></i></div>
+  <small>Loading Superchargers…</small>
+</div>
+
 <div id="app">
   <header>
-    <div class="brand"><h1>CHARGE <span class="red">&amp;</span> CHEW</h1>
-      <span class="tag">Superchargers near your favorite chains</span><a class="about" href="#about">?</a></div>
-    <div class="modes">
-      <button id="modeExplore" class="on">🗺️ Explore</button>
-      <button id="modeRoute">🛣️ Road Trip</button>
+    <div class="brandrow">
+      <div class="logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
+      <div class="tagline">Superchargers near the places you actually stop</div>
+      <button class="iconbtn" id="routeToggle" title="Plan a road trip">🛣️</button>
+      <a class="iconbtn" href="#about" title="About">?</a>
     </div>
+
+    <div class="searchrow">
+      <div class="searchbox" id="placeBox">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="placeIn" placeholder="Search a city, address or area…" autocomplete="off" enterkeyhint="search">
+        <button class="clr" id="placeClr">✕</button>
+      </div>
+      <button class="iconbtn" id="locBtn" title="Use my location" style="width:40px;height:40px">📍</button>
+    </div>
+
+    <div id="routePanel">
+      <div class="rfield"><span class="dot a"></span>
+        <input id="fromIn" placeholder="Start — city or address" autocomplete="off">
+        <button class="mini" id="useLoc" title="Use my location">📍</button></div>
+      <div class="rfield"><span class="dot b"></span>
+        <input id="toIn" placeholder="Destination" autocomplete="off"></div>
+      <div class="rrow2">
+        <button id="goBtn">Find stops along route</button>
+        <div class="seg" id="corridorSeg">
+          <button data-mi="2">2mi</button>
+          <button data-mi="5" class="on">5mi</button>
+          <button data-mi="10">10mi</button>
+        </div>
+      </div>
+      <div id="routeInfo"></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab on" data-cat="all">All</button>
+      <button class="tab" data-cat="food">🍔 Food</button>
+      <button class="tab" data-cat="store">🛒 Stores</button>
+      <button class="tab" data-cat="fav">⭐ Saved <span class="n" id="favN"></span></button>
+    </div>
+
+    <div id="chips"></div>
   </header>
-
-  <div id="routeBar">
-    <div class="rrow">
-      <input id="fromIn" placeholder="From (e.g. Los Angeles, CA)" autocomplete="off">
-      <input id="toIn" placeholder="To (e.g. Las Vegas, NV)" autocomplete="off">
-      <button id="goBtn">GO</button>
-    </div>
-    <div class="corridor">Corridor:
-      <button class="cbtn" data-mi="2">2 mi</button>
-      <button class="cbtn on" data-mi="5">5 mi</button>
-      <button class="cbtn" data-mi="10">10 mi</button>
-      <span id="routeStatus"></span>
-    </div>
-  </div>
-
-  <div id="chips"></div>
 
   <div id="mapWrap">
     <div id="map"></div>
-    <button id="locBtn" title="My location">📍</button>
+    <div id="centerCard">
+      <span class="ic" id="ccIcon">📍</span>
+      <div class="txt"><div class="lbl" id="ccLabel"></div><div class="sub" id="ccSub"></div></div>
+      <div class="rad" id="ccRad">
+        <button data-mi="10">10</button><button data-mi="25" class="on">25</button><button data-mi="50">50</button>
+      </div>
+      <button class="x" id="ccX">✕</button>
+    </div>
+    <div id="pinHint">Tap the map to search that area</div>
+    <div class="mapctl">
+      <button class="mbtn" id="pinBtn" title="Drop a pin to search an area">📌</button>
+      <button class="mbtn" id="shareBtn" title="Copy link to this view">🔗</button>
+    </div>
   </div>
 
-  <div id="sheet">
-    <div id="sheetBar"><span id="sheetTitle">…</span><span class="arrow" id="sheetArrow">▲</span></div>
-    <div id="sheetList"></div>
+  <section id="sheet">
+    <div class="handle" id="handle"><i></i></div>
+    <div class="sheethead">
+      <div class="t" id="sheetTitle">…</div>
+      <button class="sortbtn" id="sortBtn">Sort</button>
+    </div>
+    <div id="list"></div>
+  </section>
+</div>
+
+<div id="picker">
+  <div class="pk">
+    <h3><span>Pick chains</span><button class="iconbtn" id="pkClose">✕</button></h3>
+    <div class="searchbox" id="pkSearchBox">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="pkSearch" placeholder="Filter chains…" autocomplete="off">
+    </div>
+    <div class="pkcats" id="pkCats"></div>
+    <div class="pkgrid" id="pkGrid"></div>
+    <div class="pkfoot">
+      <button class="clear" id="pkClear">Clear all</button>
+      <button class="done" id="pkDone">Show results</button>
+    </div>
   </div>
 </div>
 
 <div id="about"><div class="box">
   <h2>Charge &amp; Chew</h2>
-  <p>Find Tesla Superchargers within a 10-minute walk of the restaurants and stores you actually want to stop at — then plan a road trip around them.</p>
-  <p>Charger data from <a href="https://supercharge.info" target="_blank">supercharge.info</a>; chain locations from <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a>. Walk times assume ~3 mph straight-line distance — always check the real route. Coverage is ~90–95% per chain; a missing chain doesn't mean it isn't there.</p>
+  <p>Every Tesla Supercharger in the US, matched against the restaurants and stores within a 10-minute walk — so you can plan a stop around what you actually want to do while the car charges.</p>
+  <p><b style="color:var(--txt)">How to use it:</b> tap chains to filter, search a place or drop a 📌 pin to explore an area, or hit 🛣️ to plan a route and see every matching stop along the way. Tap ⭐ to save a stop for later.</p>
+  <p>Charger data from <a href="https://supercharge.info" target="_blank" rel="noopener">supercharge.info</a>; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph — always check the real route. Chain coverage runs about 90–95%, so a missing chain doesn't guarantee it isn't there.</p>
   <p>Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="near/">Browse all chains &amp; states →</a></p>
-  <p style="text-align:right"><a href="#">Close</a></p>
+  <a class="close" href="#">Close</a>
 </div></div>
+
+<div id="toast"></div>
+
 <script src="data.js"></script>
 <script>
 (() => {
-  const D = window.PITSTOP_DATA;
-  if (!D) { document.getElementById('loading').innerHTML = '<div style="color:#e82127">data.js missing — run data/fetch_pois.py first</div>'; return; }
-  document.getElementById('loading').style.display = 'none';
+'use strict';
+const D = window.PITSTOP_DATA;
+const $ = id => document.getElementById(id);
+if (!D) { document.getElementById('splash').innerHTML =
+  '<div style="color:#ff3b3f;font-size:14px">data.js failed to load</div>'; return; }
 
-  const $ = id => document.getElementById(id);
-  const WALK_MPM = 80; // meters per minute walking
+const WALK_MPM = 80, MI = 1609.34;
+const SITES = D.sites, BRANDS = D.brands;
+const MATCH = {}; for (const k in D.matches) MATCH[+k] = D.matches[k];
+const byId = {}; SITES.forEach(s => byId[s.id] = s);
 
-  // ---------- state ----------
-  const active = new Set();          // selected brand keys
-  let mode = 'explore';              // 'explore' | 'route'
-  let corridorMi = 5;
-  let routeLine = null;              // leaflet polyline
-  let routeVerts = null;             // [[lat,lon],...]
-  let routeSiteIds = null;           // Set of site ids inside corridor (null = no route yet)
-  let routeOrder = null;             // Map id -> index along route
-  let stateFilter = null;            // e.g. 'TX' from ?state=
+/* ───────── state ───────── */
+const active = new Set();
+let cat = 'all';
+let center = null;
+let radiusMi = 25;
+let route = null;
+let corridorMi = 5;
+let pinMode = false;
+let sortBy = 'walk';
+let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
 
-  // ---------- map ----------
-  const map = L.map('map', { zoomControl: false, attributionControl: true })
-    .setView([39.5, -98.35], 4);
-  L.control.attribution({ prefix: false }).addAttribution(
-    'Chargers: <a href="https://supercharge.info">supercharge.info</a> · POIs © <a href="https://openstreetmap.org">OSM</a> · © <a href="https://carto.com">CARTO</a>');
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    { maxZoom: 19, subdomains: 'abcd' }).addTo(map);
-  const canvas = L.canvas({ padding: .5 });
-  const markers = {}; // id -> circleMarker
+/* ───────── helpers ───────── */
+const hav = (a1, o1, a2, o2) => {
+  const R = 6371000, p = Math.PI / 180;
+  const dA = (a2 - a1) * p, dO = (o2 - o1) * p;
+  const x = Math.sin(dA / 2) ** 2 + Math.cos(a1 * p) * Math.cos(a2 * p) * Math.sin(dO / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+};
+const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
+const fmtFt = m => m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let toastT;
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
+}
+const saveFavs = () => {
+  localStorage.setItem('cc_favs', JSON.stringify([...favs]));
+  $('favN').textContent = favs.size || '';
+};
 
-  function fmtDist(m) {
-    const min = Math.max(1, Math.round(m / WALK_MPM));
-    const mi = m / 1609.34;
-    return `~${min} min walk · ${mi < .1 ? Math.round(m * 3.281) + ' ft' : mi.toFixed(1) + ' mi'}`;
-  }
+/* ───────── map ───────── */
+const map = L.map('map', { zoomControl: false, attributionControl: true, worldCopyJump: true })
+  .setView([39.3, -96.5], 4);
+L.control.attribution({ prefix: false }).addAttribution(
+  '<a href="https://supercharge.info">supercharge.info</a> · © <a href="https://openstreetmap.org">OSM</a> · <a href="https://carto.com">CARTO</a>');
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  { maxZoom: 19, subdomains: 'abcd' }).addTo(map);
 
-  function popupHtml(s) {
-    const m = D.matches[s.id] || {};
-    const chains = Object.entries(m)
-      .map(([k, d]) => `<div class="pp-chain"><span>${D.brands[k].e} ${k}</span><span class="d">${fmtDist(d)}</span></div>`)
-      .join('') || '<div class="pp-chain" style="color:var(--dim)">No tracked chains within a 10-min walk</div>';
-    return `<div class="pp-name">${s.name}</div>
-      <div class="pp-meta">${s.stalls} stalls · ${s.kw} kW${s.street ? ' · ' + s.street : ''}</div>
-      ${s.host ? `<div class="pp-host">📍 Located at: ${s.host}</div>` : ''}
-      ${chains}
-      <div class="pp-links">
-        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}">Google Maps</a>
-        <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}">Directions</a>
-      </div>`;
-  }
+const canvas = L.canvas({ padding: .6 });
+const mk = {};
+let centerLayer = null, radiusLayer = null, routeLayer = null, routeCase = null;
 
-  D.sites.forEach(s => {
-    const mk = L.circleMarker([s.lat, s.lon], {
-      renderer: canvas, radius: 4, weight: 1,
-      color: '#7d8590', fillColor: '#7d8590', fillOpacity: .7,
-    }).addTo(map);
-    mk.bindPopup(() => popupHtml(s), { maxWidth: 290 });
-    markers[s.id] = mk;
-  });
+function popupHtml(s) {
+  const m = MATCH[s.id] || {};
+  const rows = Object.entries(m).map(([k, d]) =>
+    `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
+     <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span></div>`).join('')
+    || '<div class="pp-chain" style="color:var(--dim2)">No tracked chains within a 10-min walk</div>';
+  return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
+      <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
+    <div class="pp-meta">${s.stalls} stalls · ${s.kw} kW${s.street ? ' · ' + esc(s.street) : ''}</div>
+    ${s.host ? `<div class="pp-host">📍 At ${esc(s.host)}</div>` : ''}
+    <div class="pp-list">${rows}</div>
+    <div class="pp-links">
+      <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}">Map</a>
+      <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}">Directions</a>
+    </div>`;
+}
 
-  // ---------- filtering ----------
-  function siteMatches(s) {
-    if (stateFilter && s.st !== stateFilter) return false;
-    if (routeSiteIds && !routeSiteIds.has(s.id)) return false;
-    if (active.size === 0) return true;
-    const m = D.matches[s.id];
-    if (!m) return false;
-    for (const k of active) if (k in m) return true;   // ANY of the selected chains
-    return false;
-  }
+SITES.forEach(s => {
+  const m = L.circleMarker([s.lat, s.lon], { renderer: canvas, radius: 3.5, weight: 1,
+    color: '#6b7482', fillColor: '#6b7482', fillOpacity: .6 }).addTo(map);
+  m.bindPopup(() => popupHtml(s), { maxWidth: 300, autoPanPadding: [24, 24] });
+  mk[s.id] = m;
+});
 
-  function restyle() {
-    const visible = [];
-    D.sites.forEach(s => {
-      const mk = markers[s.id];
-      const inRoute = (!routeSiteIds || routeSiteIds.has(s.id)) && (!stateFilter || s.st === stateFilter);
-      if (!inRoute) { mk.setStyle({ radius: 0, fillOpacity: 0, opacity: 0 }); return; }
-      if (siteMatches(s)) {
-        visible.push(s);
-        const hit = active.size > 0;
-        mk.setStyle({
-          radius: hit ? 7 : 4, weight: hit ? 2 : 1,
-          color: hit ? '#fff' : '#7d8590',
-          fillColor: hit ? '#e82127' : '#7d8590',
-          fillOpacity: hit ? .95 : .7, opacity: 1,
-        });
-        if (hit) mk.bringToFront();
-      } else {
-        mk.setStyle({ radius: 2.5, weight: 0, fillColor: '#3a424c', fillOpacity: .5, opacity: 1 });
-      }
-    });
-    renderSheet(visible);
-  }
-
-  // ---------- chips ----------
-  const chipsEl = $('chips');
-  function buildChips() {
-    chipsEl.innerHTML = '';
-    const keys = Object.keys(D.brands).filter(k => D.brands[k].n > 0);
-    const food = keys.filter(k => D.brands[k].cat === 'food');
-    const store = keys.filter(k => D.brands[k].cat === 'store');
-    const counts = {};
-    keys.forEach(k => counts[k] = 0);
-    Object.values(D.matches).forEach(m => { for (const k in m) counts[k]++; });
-    food.sort((a, b) => counts[b] - counts[a]);
-    store.sort((a, b) => counts[b] - counts[a]);
-    const add = k => {
-      const c = document.createElement('div');
-      c.className = 'chip'; c.dataset.k = k;
-      c.innerHTML = `${D.brands[k].e} ${k} <span class="cnt">${counts[k]}</span>`;
-      c.onclick = () => { active.has(k) ? active.delete(k) : active.add(k);
-        c.classList.toggle('on'); restyle(); syncUrl(); };
-      chipsEl.appendChild(c);
-    };
-    store.forEach(add);
-    const dv = document.createElement('div');
-    dv.className = 'chip divider'; dv.textContent = '|';
-    chipsEl.appendChild(dv);
-    food.forEach(add);
-  }
-
-  // ---------- bottom sheet ----------
-  const sheet = $('sheet'), list = $('sheetList');
-  $('sheetBar').onclick = () => {
-    sheet.classList.toggle('open');
-    $('sheetArrow').textContent = sheet.classList.contains('open') ? '▼' : '▲';
+map.on('popupopen', e => {
+  const el = e.popup.getElement();
+  const b = el && el.querySelector('[data-fav]');
+  if (b) b.onclick = () => {
+    toggleFav(+b.dataset.fav);
+    const on = favs.has(+b.dataset.fav);
+    b.classList.toggle('on', on); b.textContent = on ? '★' : '☆';
   };
-  function renderSheet(visible) {
-    const filt = active.size > 0;
-    let shown = visible;
-    if (routeOrder) shown = [...visible].sort((a, b) => (routeOrder.get(a.id) ?? 9e9) - (routeOrder.get(b.id) ?? 9e9));
-    else if (filt) {
-      const best = s => Math.min(...[...active].map(k => (D.matches[s.id] || {})[k] ?? 9e9));
-      shown = [...visible].sort((a, b) => best(a) - best(b));
+});
+
+function toggleFav(id) {
+  const had = favs.has(id);
+  had ? favs.delete(id) : favs.add(id);
+  saveFavs(); render();
+  toast(had ? 'Removed from saved' : 'Saved');
+}
+
+/* ───────── filtering ───────── */
+function passesChain(s) {
+  if (cat === 'fav') return favs.has(s.id);
+  if (!active.size) return true;
+  const m = MATCH[s.id]; if (!m) return false;
+  for (const k of active) if (k in m) return true;
+  return false;
+}
+function inScope(s) {
+  if (route) return route.ids.has(s.id);
+  if (center) return hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI;
+  return true;
+}
+function bestWalk(s) {
+  const m = MATCH[s.id] || {};
+  const keys = active.size ? [...active].filter(k => k in m) : Object.keys(m);
+  return keys.length ? Math.min(...keys.map(k => m[k])) : 9e9;
+}
+function visibleSites() {
+  const out = [];
+  for (const s of SITES) if (inScope(s) && passesChain(s)) out.push(s);
+  if (route) out.sort((a, b) => (route.order.get(a.id) ?? 9e9) - (route.order.get(b.id) ?? 9e9));
+  else if (sortBy === 'dist' && center) out.sort((a, b) =>
+    hav(center.lat, center.lon, a.lat, a.lon) - hav(center.lat, center.lon, b.lat, b.lon));
+  else if (sortBy === 'stalls') out.sort((a, b) => b.stalls - a.stalls);
+  else if (sortBy === 'power') out.sort((a, b) => b.kw - a.kw);
+  else out.sort((a, b) => bestWalk(a) - bestWalk(b));
+  return out;
+}
+
+function render() {
+  const vis = visibleSites(), visIds = new Set(vis.map(s => s.id));
+  const filtering = active.size > 0 || cat === 'fav';
+  for (const s of SITES) {
+    const m = mk[s.id];
+    if (!inScope(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
+    if (visIds.has(s.id)) {
+      m.setStyle({ radius: filtering ? 6.5 : 4, weight: filtering ? 1.8 : 1,
+        color: filtering ? '#fff' : '#7d8794', fillColor: filtering ? '#ff3b3f' : '#7d8794',
+        fillOpacity: filtering ? .95 : .62, opacity: 1 });
+      if (filtering) m.bringToFront();
+    } else {
+      m.setStyle({ radius: 2.2, weight: 0, fillColor: '#39414d', fillOpacity: .5, opacity: 1 });
     }
-    const what = filt ? [...active].map(k => D.brands[k].e + ' ' + k).join(' or ') : 'any chain';
-    $('sheetTitle').textContent = filt || routeSiteIds
-      ? `${visible.length} Supercharger${visible.length === 1 ? '' : 's'} ${filt ? 'near ' + what : ''}${routeSiteIds ? ' on route' : ''}`
-      : `${D.sites.length} Superchargers · pick a chain above`;
-    if (stateFilter) $('sheetTitle').textContent += ` · ${stateFilter}`;
-    if (!filt && !routeSiteIds) { list.innerHTML = '<div class="empty">Tap a chain chip to find Superchargers within a 10-minute walk of it.</div>'; return; }
-    if (visible.length === 0) { list.innerHTML = '<div class="empty">No matches. Try more chains or a wider corridor.</div>'; return; }
-    list.innerHTML = shown.slice(0, 200).map(s => {
-      const m = D.matches[s.id] || {};
-      const parts = Object.entries(m).slice(0, 4)
-        .map(([k, d]) => (active.has(k) ? `<b>${D.brands[k].e} ${k}</b>` : `${D.brands[k].e} ${k}`) +
-          ` <span>${Math.max(1, Math.round(d / WALK_MPM))} min</span>`);
-      return `<div class="row" data-id="${s.id}">
-        <div class="row-name"><span>${s.name}</span><span class="stalls">${s.stalls}⚡ ${s.kw}kW</span></div>
-        <div class="row-chains">${parts.join(' · ') || '—'}</div></div>`;
-    }).join('');
-    list.querySelectorAll('.row').forEach(r => r.onclick = () => {
-      const s = D.sites.find(x => x.id == r.dataset.id);
-      map.flyTo([s.lat, s.lon], 14, { duration: .8 });
-      setTimeout(() => markers[s.id].openPopup(), 900);
-      if (window.innerWidth < 700) { sheet.classList.remove('open'); $('sheetArrow').textContent = '▲'; }
-    });
   }
+  renderList(vis);
+  renderChips();
+  if (center) updateCenterSub(vis.length);
+}
 
-  // ---------- modes ----------
-  $('modeExplore').onclick = () => setMode('explore');
-  $('modeRoute').onclick = () => setMode('route');
-  function setMode(m2) {
-    mode = m2;
-    $('modeExplore').classList.toggle('on', mode === 'explore');
-    $('modeRoute').classList.toggle('on', mode === 'route');
-    $('routeBar').classList.toggle('show', mode === 'route');
-    if (mode === 'explore') clearRoute();
-  }
-  function clearRoute() {
-    if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
-    routeVerts = routeSiteIds = routeOrder = null;
-    $('routeStatus').textContent = '';
-    restyle();
-  }
+/* ───────── chips ───────── */
+const counts = {};
+for (const k in BRANDS) counts[k] = 0;
+for (const id in MATCH) for (const k in MATCH[id]) counts[k]++;
+const CHAIN_KEYS = Object.keys(BRANDS).filter(k => counts[k] > 0).sort((a, b) => counts[b] - counts[a]);
 
-  document.querySelectorAll('.cbtn').forEach(b => b.onclick = () => {
-    document.querySelectorAll('.cbtn').forEach(x => x.classList.remove('on'));
-    b.classList.add('on'); corridorMi = +b.dataset.mi;
-    if (routeVerts) applyCorridor();
+function renderChips() {
+  const el = $('chips');
+  const keep = el.scrollLeft;
+  let keys = CHAIN_KEYS;
+  if (cat === 'food' || cat === 'store') keys = keys.filter(k => BRANDS[k].cat === cat);
+  if (cat === 'fav') keys = [...active];
+  const top = keys.slice(0, 14);
+  for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
+  el.innerHTML = top.map(k =>
+    `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
+      <span class="cnt">${counts[k]}</span></button>`).join('')
+    + `<button class="chip more" id="moreChip">＋ All ${CHAIN_KEYS.length} chains</button>`;
+  el.querySelectorAll('.chip[data-k]').forEach(c => c.onclick = () => {
+    const k = c.dataset.k;
+    active.has(k) ? active.delete(k) : active.add(k);
+    render(); syncUrl();
   });
+  $('moreChip').onclick = openPicker;
+  el.scrollLeft = keep;
+}
 
-  async function geocode(q) {
-    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q=' + encodeURIComponent(q),
-      { headers: { 'Accept': 'application/json' } });
-    const j = await r.json();
-    if (!j.length) throw new Error('Could not find "' + q + '"');
-    return [+j[0].lat, +j[0].lon];
+/* ───────── list ───────── */
+function renderList(vis) {
+  const filtering = active.size > 0 || cat === 'fav';
+  const what = cat === 'fav' ? 'saved' : [...active].map(k => BRANDS[k].e + ' ' + k).join(' or ');
+  let scope = '';
+  if (route) scope = ' on route';
+  else if (center) scope = ` within ${radiusMi} mi of ${center.label}`;
+
+  $('sheetTitle').innerHTML = (filtering || route || center)
+    ? `${vis.length} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
+    : `${SITES.length.toLocaleString()} Superchargers <em>· pick a chain to filter</em>`;
+
+  if (!vis.length) {
+    $('list').innerHTML = cat === 'fav'
+      ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
+      : '<div class="empty"><b>Nothing matches</b>Try more chains, a bigger radius, or a wider route corridor.</div>';
+    return;
   }
+  const showIdx = !!route;
+  $('list').innerHTML = vis.slice(0, 300).map((s, i) => {
+    const m = MATCH[s.id] || {};
+    const ent = Object.entries(m);
+    ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || a[1] - b[1]);
+    const chains = ent.slice(0, 4).map(([k, d]) =>
+      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ${walkMin(d)}m</span>`).join('');
+    const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
+    const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
+    return `<div class="row" data-id="${s.id}">
+      ${showIdx ? `<div class="idx">${i + 1}</div>` : ''}
+      <div class="body">
+        <div class="n"><b>${esc(s.name)}</b><s>${s.stalls}⚡ ${s.kw}kW</s></div>
+        <div class="sub">${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${s.host ? ' · ' + esc(s.host) : ''}</div>
+        <div class="ch">${chains}${extra}</div>
+      </div>
+      <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
+    </div>`;
+  }).join('') + (vis.length > 300
+    ? `<div class="empty">Showing the first 300 of ${vis.length}. Narrow the filter to see more.</div>` : '');
 
-  $('goBtn').onclick = async () => {
-    const from = $('fromIn').value.trim(), to = $('toIn').value.trim();
-    if (!from || !to) { $('routeStatus').textContent = 'Enter both places.'; return; }
-    $('goBtn').disabled = true; $('routeStatus').textContent = 'Routing…';
-    try {
-      const [a, b] = await Promise.all([geocode(from), geocode(to)]);
-      const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${a[1]},${a[0]};${b[1]},${b[0]}?overview=full&geometries=geojson`);
-      const j = await r.json();
-      if (!j.routes || !j.routes.length) throw new Error('No route found');
-      routeVerts = j.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-      if (routeLine) map.removeLayer(routeLine);
-      routeLine = L.polyline(routeVerts, { color: '#58a6ff', weight: 3, opacity: .8 }).addTo(map);
-      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
-      const hrs = j.routes[0].duration / 3600, mi = j.routes[0].distance / 1609.34;
-      $('routeStatus').textContent = `${Math.round(mi)} mi · ${Math.floor(hrs)}h ${Math.round((hrs % 1) * 60)}m`;
-      applyCorridor();
-    } catch (e) { $('routeStatus').textContent = e.message; }
-    $('goBtn').disabled = false;
-  };
-
-  function applyCorridor() {
-    const maxM = corridorMi * 1609.34;
-    // coarse: bucket route verts by 0.05deg for prefilter
-    const cells = new Set();
-    const reach = Math.ceil(maxM / 111000 / 0.05) + 1;
-    routeVerts.forEach(([la, lo]) => {
-      const ci = Math.round(la / .05), cj = Math.round(lo / .05);
-      for (let di = -reach; di <= reach; di++) for (let dj = -reach; dj <= reach; dj++)
-        cells.add((ci + di) + ',' + (cj + dj));
-    });
-    const hv = (la1, lo1, la2, lo2) => {
-      const R = 6371000, p = Math.PI / 180;
-      const dLa = (la2 - la1) * p, dLo = (lo2 - lo1) * p;
-      const x = Math.sin(dLa / 2) ** 2 + Math.cos(la1 * p) * Math.cos(la2 * p) * Math.sin(dLo / 2) ** 2;
-      return 2 * R * Math.asin(Math.sqrt(x));
+  $('list').querySelectorAll('.row').forEach(r => {
+    r.onclick = e => {
+      if (e.target.dataset.star !== undefined) return;
+      const s = byId[+r.dataset.id];
+      map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
+      setTimeout(() => mk[s.id].openPopup(), 780);
+      if (window.innerWidth < 760) setSheet('peek');
     };
-    routeSiteIds = new Set(); routeOrder = new Map();
-    D.sites.forEach(s => {
-      if (!cells.has(Math.round(s.lat / .05) + ',' + Math.round(s.lon / .05))) return;
-      let best = 9e9, bestI = 0;
-      for (let i = 0; i < routeVerts.length; i += 2) {
-        const d = hv(s.lat, s.lon, routeVerts[i][0], routeVerts[i][1]);
-        if (d < best) { best = d; bestI = i; }
-      }
-      if (best <= maxM) { routeSiteIds.add(s.id); routeOrder.set(s.id, bestI); }
-    });
-    restyle();
-    sheet.classList.add('open'); $('sheetArrow').textContent = '▼';
-  }
-
-  // ---------- locate ----------
-  $('locBtn').onclick = () => {
-    navigator.geolocation?.getCurrentPosition(
-      p => map.flyTo([p.coords.latitude, p.coords.longitude], 10, { duration: 1 }),
-      () => alert('Could not get location'));
-  };
-
-  function syncUrl() {
-    const u = new URL(location.href);
-    active.size ? u.searchParams.set('chain', [...active].join(',')) : u.searchParams.delete('chain');
-    history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
-  }
-
-  buildChips();
-  // ---- deep links: ?chain=IHOP,Walmart&state=TX&from=...&to=... ----
-  const q = new URLSearchParams(location.search);
-  if (q.get('state')) stateFilter = q.get('state').toUpperCase();
-  (q.get('chain') || '').split(',').map(x => x.trim()).filter(Boolean).forEach(k => {
-    const key = Object.keys(D.brands).find(b => b.toLowerCase() === k.toLowerCase());
-    if (key) { active.add(key); chipsEl.querySelector(`.chip[data-k="${CSS.escape(key)}"]`)?.classList.add('on'); }
   });
-  restyle();
-  if (active.size || stateFilter) {
-    const pts = D.sites.filter(siteMatches).map(s => [s.lat, s.lon]);
-    if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [30, 30], maxZoom: 11 });
-    sheet.classList.add('open'); $('sheetArrow').textContent = '▼';
-    const on = chipsEl.querySelector('.chip.on'); if (on) on.scrollIntoView({ inline: 'center', block: 'nearest' });
+  $('list').querySelectorAll('[data-star]').forEach(b => b.onclick = e => {
+    e.stopPropagation(); toggleFav(+b.dataset.star);
+  });
+}
+
+/* ───────── sheet ───────── */
+let sheetState = 'peek';
+function sheetPx(s) {
+  const h = window.innerHeight;
+  if (s === 'peek') return 52;
+  if (s === 'full') return Math.round(h * 0.82);
+  return Math.round(h * (window.innerWidth >= 760 ? 0.38 : 0.44));
+}
+function setSheet(s) {
+  sheetState = s;
+  const el = $('sheet');
+  el.classList.toggle('mid', s === 'mid');
+  el.classList.toggle('full', s === 'full');
+  el.style.height = sheetPx(s) + 'px';
+  setTimeout(() => map.invalidateSize({ pan: false }), 300);
+}
+window.addEventListener('resize', () => {
+  $('sheet').style.height = sheetPx(sheetState) + 'px';
+  setTimeout(() => map.invalidateSize({ pan: false }), 60);
+});
+$('handle').onclick = () =>
+  setSheet(sheetState === 'peek' ? 'mid' : sheetState === 'mid' ? 'full' : 'peek');
+let dragY = null, dragState = null;
+$('handle').addEventListener('touchstart', e => { dragY = e.touches[0].clientY; dragState = sheetState; }, { passive: true });
+$('handle').addEventListener('touchmove', e => {
+  if (dragY === null) return;
+  const dy = e.touches[0].clientY - dragY;
+  if (Math.abs(dy) < 40) return;
+  const order = ['peek', 'mid', 'full'];
+  let i = order.indexOf(dragState) + (dy < 0 ? 1 : -1);
+  i = Math.max(0, Math.min(2, i));
+  if (order[i] !== sheetState) setSheet(order[i]);
+  dragY = null;
+}, { passive: true });
+$('handle').addEventListener('touchend', () => { dragY = null; }, { passive: true });
+
+const SORT_LABEL = { dist: 'Nearest', walk: 'Shortest walk', stalls: 'Most stalls', power: 'Fastest' };
+$('sortBtn').onclick = () => {
+  const opts = center ? ['dist', 'walk', 'stalls', 'power'] : ['walk', 'stalls', 'power'];
+  sortBy = opts[(opts.indexOf(sortBy) + 1) % opts.length];
+  $('sortBtn').textContent = SORT_LABEL[sortBy];
+  render();
+};
+
+/* ───────── tabs ───────── */
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  t.classList.add('on'); cat = t.dataset.cat;
+  render();
+  if (cat === 'fav' && favs.size) setSheet('mid');
+});
+
+/* ───────── chain picker ───────── */
+let pkCat = 'all';
+function openPicker() {
+  $('picker').classList.add('show');
+  $('pkCats').innerHTML = ['all', 'food', 'store'].map(c =>
+    `<button class="tab ${c === pkCat ? 'on' : ''}" data-c="${c}">${{ all: 'All', food: '🍔 Food', store: '🛒 Stores' }[c]}</button>`).join('');
+  $('pkCats').querySelectorAll('[data-c]').forEach(b => b.onclick = () => { pkCat = b.dataset.c; openPicker(); });
+  drawPicker();
+}
+function drawPicker() {
+  const q = $('pkSearch').value.trim().toLowerCase();
+  let keys = CHAIN_KEYS.filter(k => pkCat === 'all' || BRANDS[k].cat === pkCat);
+  if (q) keys = keys.filter(k => k.toLowerCase().includes(q));
+  $('pkGrid').innerHTML = keys.map(k =>
+    `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
+      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k]}</span>
+     </button>`).join('') || '<div class="empty">No chains match.</div>';
+  $('pkGrid').querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
+    const k = b.dataset.k;
+    active.has(k) ? active.delete(k) : active.add(k);
+    b.classList.toggle('on'); render(); syncUrl();
+  });
+}
+$('pkSearch').oninput = drawPicker;
+function closePicker() {
+  $('picker').classList.remove('show');
+  if (active.size && !route) { setSheet('mid'); if (!center) fitToResults(); }
+}
+$('pkClose').onclick = $('pkDone').onclick = closePicker;
+$('pkClear').onclick = () => { active.clear(); drawPicker(); render(); syncUrl(); };
+$('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
+
+/* ───────── center: locate / pin / place ───────── */
+function setCenter(lat, lon, label, kind) {
+  center = { lat, lon, label, kind };
+  route = null; clearRoute();
+  if (centerLayer) map.removeLayer(centerLayer);
+  if (radiusLayer) map.removeLayer(radiusLayer);
+  centerLayer = L.circleMarker([lat, lon], { radius: 7, color: '#fff', weight: 2.5,
+    fillColor: kind === 'me' ? '#4c9dff' : '#ffb020', fillOpacity: 1 }).addTo(map);
+  radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: '#4c9dff', weight: 1.2,
+    opacity: .5, fillColor: '#4c9dff', fillOpacity: .045, interactive: false }).addTo(map);
+  $('centerCard').classList.add('show');
+  $('ccIcon').textContent = kind === 'me' ? '🔵' : kind === 'pin' ? '📌' : '🔎';
+  $('ccLabel').textContent = label;
+  sortBy = 'dist'; $('sortBtn').textContent = SORT_LABEL.dist;
+  render(); setSheet('mid'); syncUrl();
+  settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
+}
+function updateCenterSub(n) {
+  $('ccSub').textContent = `${n} stop${n === 1 ? '' : 's'} within ${radiusMi} mi`;
+}
+function clearCenter() {
+  center = null;
+  if (centerLayer) { map.removeLayer(centerLayer); centerLayer = null; }
+  if (radiusLayer) { map.removeLayer(radiusLayer); radiusLayer = null; }
+  $('centerCard').classList.remove('show');
+  sortBy = 'walk'; $('sortBtn').textContent = SORT_LABEL.walk;
+  render(); syncUrl();
+}
+$('ccX').onclick = clearCenter;
+$('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
+  $('ccRad').querySelectorAll('button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); radiusMi = +b.dataset.mi;
+  if (center) setCenter(center.lat, center.lon, center.label, center.kind);
+});
+
+function locate(target) {
+  if (!navigator.geolocation) return toast('Location not supported on this device');
+  $('locBtn').classList.add('busy'); toast('Finding you…');
+  navigator.geolocation.getCurrentPosition(p => {
+    $('locBtn').classList.remove('busy');
+    const la = p.coords.latitude, lo = p.coords.longitude;
+    if (target === 'route') {
+      $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
+      toast('Start set to your location');
+    } else setCenter(la, lo, 'My location', 'me');
+  }, err => {
+    $('locBtn').classList.remove('busy');
+    toast(err.code === 1 ? 'Location permission denied' : 'Could not get your location');
+  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+}
+$('locBtn').onclick = () => locate('center');
+$('useLoc').onclick = () => locate('route');
+
+/* drop pin */
+$('pinBtn').onclick = () => {
+  pinMode = !pinMode;
+  $('pinBtn').classList.toggle('on', pinMode);
+  $('pinHint').classList.toggle('show', pinMode);
+  map.getContainer().style.cursor = pinMode ? 'crosshair' : '';
+};
+map.on('click', e => {
+  if (!pinMode) return;
+  pinMode = false;
+  $('pinBtn').classList.remove('on'); $('pinHint').classList.remove('show');
+  map.getContainer().style.cursor = '';
+  setCenter(e.latlng.lat, e.latlng.lng, 'Dropped pin', 'pin');
+  reverseName(e.latlng.lat, e.latlng.lng);
+});
+async function reverseName(lat, lon) {
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`);
+    const j = await r.json();
+    const nm = placeLabel(j);
+    if (nm && center && center.kind === 'pin') {
+      center.label = nm; $('ccLabel').textContent = nm; render();
+    }
+  } catch (e) { /* keep the generic label */ }
+}
+
+/* place search */
+const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
+connecticut:'CT',delaware:'DE',florida:'FL',georgia:'GA',hawaii:'HI',idaho:'ID',illinois:'IL',
+indiana:'IN',iowa:'IA',kansas:'KS',kentucky:'KY',louisiana:'LA',maine:'ME',maryland:'MD',
+massachusetts:'MA',michigan:'MI',minnesota:'MN',mississippi:'MS',missouri:'MO',montana:'MT',
+nebraska:'NE',nevada:'NV','new hampshire':'NH','new jersey':'NJ','new mexico':'NM','new york':'NY',
+'north carolina':'NC','north dakota':'ND',ohio:'OH',oklahoma:'OK',oregon:'OR',pennsylvania:'PA',
+'rhode island':'RI','south carolina':'SC','south dakota':'SD',tennessee:'TN',texas:'TX',utah:'UT',
+vermont:'VT',virginia:'VA',washington:'WA','west virginia':'WV',wisconsin:'WI',wyoming:'WY',
+'district of columbia':'DC'};
+function placeLabel(j) {
+  const a = j.address || {};
+  const town = a.city || a.town || a.village || a.hamlet || a.suburb || a.county || a.neighbourhood;
+  const st = ST[(a.state || '').toLowerCase()] || a.state;
+  if (town && st) return `${town}, ${st}`;
+  return (town || st || j.display_name.split(',')[0]).trim();
+}
+async function geocode(q) {
+  const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
+  if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
+  const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=1&countrycodes=us&q=' + encodeURIComponent(q));
+  const j = await r.json();
+  if (!j.length) throw new Error(`Couldn't find "${q}"`);
+  return { lat: +j[0].lat, lon: +j[0].lon, label: placeLabel(j[0]) };
+}
+$('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
+$('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
+$('placeIn').addEventListener('keydown', async e => {
+  if (e.key !== 'Enter') return;
+  const q = $('placeIn').value.trim(); if (!q) return;
+  $('placeIn').blur(); toast('Searching…');
+  try { const g = await geocode(q); setCenter(g.lat, g.lon, g.label, 'place'); }
+  catch (err) { toast(err.message); }
+});
+
+/* ───────── route ───────── */
+$('routeToggle').onclick = () => {
+  const on = $('routePanel').classList.toggle('show');
+  document.querySelector('header').classList.toggle('routing', on);
+  $('routeToggle').classList.toggle('on', on);
+  if (!on) { clearRoute(); route = null; render(); syncUrl(); }
+  setTimeout(() => map.invalidateSize({ pan: false }), 220);
+};
+function clearRoute() {
+  if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+  if (routeCase) { map.removeLayer(routeCase); routeCase = null; }
+  $('routePanel').classList.remove('collapsed');
+  $('routeInfo').onclick = null;
+  $('routeInfo').textContent = '';
+}
+$('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
+  $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); corridorMi = +b.dataset.mi;
+  if (route) applyCorridor(route.verts, route.mi, route.hr);
+});
+$('goBtn').onclick = async () => {
+  const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
+  if (!f || !t) return toast('Enter a start and a destination');
+  $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
+  try {
+    const [a, b] = await Promise.all([geocode(f), geocode(t)]);
+    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`);
+    const j = await r.json();
+    if (!j.routes || !j.routes.length) throw new Error('No driving route found');
+    const verts = j.routes[0].geometry.coordinates.map(c2 => [c2[1], c2[0]]);
+    clearCenter();
+    applyCorridor(verts, j.routes[0].distance / MI, j.routes[0].duration / 3600);
+  } catch (e) { $('routeInfo').textContent = e.message; }
+  $('goBtn').disabled = false;
+};
+function applyCorridor(verts, mi, hr) {
+  clearRoute();
+  routeCase = L.polyline(verts, { color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
+  routeLayer = L.polyline(verts, { color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
+  const maxM = corridorMi * MI;
+  const cells = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
+  for (const v of verts) {
+    const ci = Math.round(v[0] / .05), cj = Math.round(v[1] / .05);
+    for (let di = -reach; di <= reach; di++) for (let dj = -reach; dj <= reach; dj++) cells.add((ci + di) + ',' + (cj + dj));
   }
-  if (q.get('from') && q.get('to')) {
-    setMode('route'); $('fromIn').value = q.get('from'); $('toIn').value = q.get('to'); $('goBtn').click();
+  const ids = new Set(), order = new Map();
+  const step = verts.length > 3000 ? 3 : 1;
+  for (const s of SITES) {
+    if (!cells.has(Math.round(s.lat / .05) + ',' + Math.round(s.lon / .05))) continue;
+    let best = 9e9, bi = 0;
+    for (let i = 0; i < verts.length; i += step) {
+      const d = hav(s.lat, s.lon, verts[i][0], verts[i][1]);
+      if (d < best) { best = d; bi = i; }
+    }
+    if (best <= maxM) { ids.add(s.id); order.set(s.id, bi); }
   }
+  route = { verts, ids, order, mi, hr };
+  map.fitBounds(routeLayer.getBounds(), { padding: [28, 28], animate: false });
+  const trip = `${$('fromIn').value.trim()} → ${$('toIn').value.trim()}`;
+  $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
+    `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · ${ids.size} chargers ≤${corridorMi}mi</i></span>` +
+    `<span class="ed">Edit</span>`;
+  $('routePanel').classList.add('collapsed');
+  $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
+    $('routeInfo').onclick = null;
+    $('routeInfo').textContent = `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${ids.size} Superchargers within ${corridorMi} mi`;
+    setTimeout(() => map.invalidateSize({ pan: false }), 220); };
+  render(); setSheet('mid'); syncUrl();
+  settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
+}
+
+/* ───────── share / url ───────── */
+function syncUrl() {
+  const u = new URL(location.href), p = u.searchParams;
+  active.size ? p.set('chain', [...active].join(',')) : p.delete('chain');
+  p.delete('state');
+  if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
+  else { p.delete('at'); p.delete('r'); }
+  if (route) { p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
+  else { p.delete('from'); p.delete('to'); p.delete('c'); }
+  history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+}
+$('shareBtn').onclick = async () => {
+  syncUrl();
+  const url = location.href;
+  try {
+    if (navigator.share && window.innerWidth < 760) { await navigator.share({ title: 'Charge & Chew', url }); return; }
+    await navigator.clipboard.writeText(url);
+    toast('Link copied to clipboard');
+  } catch (e) { toast('Copy the URL from the address bar'); }
+};
+
+function settleFit(getBounds, padding, maxZoom) {
+  setTimeout(() => {
+    map.invalidateSize({ pan: false });
+    setTimeout(() => {
+      const b = getBounds();
+      if (!b) return;
+      const o = { padding, animate: false };
+      if (maxZoom) o.maxZoom = maxZoom;
+      map.fitBounds(b, o);
+    }, 80);
+  }, 340);
+}
+
+function fitToResults() {
+  const v = visibleSites();
+  if (!v.length) return;
+  const b = L.latLngBounds(v.map(s => [s.lat, s.lon]));
+  settleFit(() => b, [26, 26], 11);
+}
+
+/* ───────── boot ───────── */
+saveFavs();
+$('sortBtn').textContent = SORT_LABEL.walk;
+
+const q = new URLSearchParams(location.search);
+(q.get('chain') || '').split(',').map(x => x.trim()).filter(Boolean).forEach(k => {
+  const key = CHAIN_KEYS.find(b => b.toLowerCase() === k.toLowerCase());
+  if (key) active.add(key);
+});
+if (q.get('r')) {
+  radiusMi = +q.get('r') || 25;
+  $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));
+}
+if (q.get('c')) {
+  corridorMi = +q.get('c') || 5;
+  $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === corridorMi));
+}
+render();
+
+let boot = null;
+if (q.get('at')) {
+  const [la, lo] = q.get('at').split(',').map(Number);
+  if (isFinite(la) && isFinite(lo)) boot = () => { setCenter(la, lo, 'Shared spot', 'pin'); reverseName(la, lo); };
+} else if (q.get('state')) {
+  const st = q.get('state').toUpperCase();
+  const inState = SITES.filter(s => s.st === st);
+  if (inState.length) {
+    const la = inState.reduce((a, s) => a + s.lat, 0) / inState.length;
+    const lo = inState.reduce((a, s) => a + s.lon, 0) / inState.length;
+    radiusMi = 50;
+    $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.mi === '50'));
+    boot = () => setCenter(la, lo, st, 'place');
+  }
+}
+if (q.get('from') && q.get('to')) {
+  $('routePanel').classList.add('show'); $('routeToggle').classList.add('on');
+  document.querySelector('header').classList.add('routing');
+  $('fromIn').value = q.get('from'); $('toIn').value = q.get('to');
+  boot = () => $('goBtn').click();
+}
+if (boot) setTimeout(boot, 80);
+else if (active.size) { setSheet('mid'); fitToResults(); }
+
+setTimeout(() => {
+  $('splash').classList.add('gone');
+  setTimeout(() => { const s = $('splash'); if (s) s.remove(); }, 450);
+}, 260);
 })();
 </script>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
