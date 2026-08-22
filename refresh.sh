@@ -5,11 +5,11 @@ set -euo pipefail
 cd "$(dirname "$0")"
 echo "[$(date)] refresh starting"
 
-# 1. fresh Supercharger list (chain POIs stay cached; delete data/pois.json to refetch those too)
-curl -sf --max-time 120 https://supercharge.info/service/supercharge/allSites -o data/allSites.json
+# 1. fresh all-network charger list (chain POIs stay cached in data/pois.json)
+python3 data/fetch_chargers.py
 
 # 2. rematch + rebuild
-python3 data/fetch_pois.py
+python3 data/build_data.py
 python3 build.py --base https://chargeandchew.com
 
 # 3. publish only if something actually changed

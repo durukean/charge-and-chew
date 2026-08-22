@@ -89,7 +89,7 @@ def page(path, title, desc, body, canonical, jsonld=""):
 <header><a class="logo" href="{root}">CHARGE <span>&amp;</span> CHEW</a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
-<footer>Charger data: <a href="https://supercharge.info">supercharge.info</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
+<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
 Walk times are straight-line estimates at ~3 mph; verify before relying on them. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -103,7 +103,7 @@ def jsonld_state(key, st, sn, sites_list, canonical):
     for i, (d, sid) in enumerate(sites_list[:25], 1):
         s = sites[sid]
         items.append({"@type": "ListItem", "position": i, "item": {
-            "@type": "Place", "name": f"Tesla Supercharger — {s['name']}",
+            "@type": "Place", "name": f"{s.get('net','DC fast charger')} — {s['name']}",
             "address": {"@type": "PostalAddress", "streetAddress": s["street"],
                         "addressLocality": s["city"], "addressRegion": s["st"], "addressCountry": "US"},
             "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}})
@@ -113,7 +113,7 @@ def jsonld_state(key, st, sn, sites_list, canonical):
             {"@type": "ListItem", "position": 2, "name": key, "item": f"{BASE}/near/{slug(key)}/"},
             {"@type": "ListItem", "position": 3, "name": sn, "item": f"{BASE}/{canonical}"}]},
         {"@context": "https://schema.org", "@type": "ItemList",
-         "name": f"Tesla Superchargers near {key} in {sn}",
+         "name": f"Fast chargers near {key} in {sn}",
          "numberOfItems": len(sites_list), "itemListElement": items}]
     return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
 
@@ -124,9 +124,10 @@ def site_card(s, focus, root):
     for k, d in m.items():
         t = f"{brands[k]['e']} {esc(k)} <span>{mins(d)} min · {fmt_d(d)}</span>"
         chains.append(f"<b>{t}</b>" if k == focus else t)
-    host = f'<div class="host">📍 Located at {esc(s["host"])}</div>' if s["host"] else ""
-    return f"""<div class="card"><div class="n"><span>{esc(s['name'])}</span><small>{s['stalls']} stalls · {s['kw']} kW</small></div>
-<div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>{host}
+    net = f'<div class="host">{esc(s.get("net",""))}</div>' if s.get("net") else ""
+    spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "", f"{s['stalls']} stalls" if s.get('stalls') else ""] if x)
+    return f"""<div class="card"><div class="n"><span>{esc(s['name'])}</span><small>{spec}</small></div>
+<div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>{net}
 <div class="c">{' · '.join(chains[:6])}</div>
 <div class="l"><a href="https://www.google.com/maps/search/?api=1&query={s['lat']},{s['lon']}" target="_blank" rel="noopener">Google Maps</a>
 <a href="{root}?chain={esc(focus)}&amp;state={s['st']}">Show on map</a></div></div>"""
@@ -152,10 +153,10 @@ for key, b in brands.items():
                           for st, v in sorted(by_state.items(), key=lambda x: -len(x[1])))
     # national page: top 40 closest, then state links
     top = "".join(site_card(sites[sid], key, "../../") for d, sid in hits[:40])
-    title = f"Tesla Superchargers near {key} ({n} locations)"
-    desc = f"{n} Tesla Superchargers within a 10-minute walk of a {key}, ranked by walking distance. Browse by state or open the interactive map."
-    body = f"""<h1>{b['e']} Tesla Superchargers near {esc(key)}</h1>
-<p class="lead">We found <b>{n} Superchargers</b> in the US with a {esc(key)} within a 10-minute walk (800 m). Closest first — the first few are practically in the same parking lot.</p>
+    title = f"EV fast chargers near {key} ({n} locations)"
+    desc = f"{n} EV DC fast chargers within a 10-minute walk of a {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
+    body = f"""<h1>{b['e']} EV fast chargers near {esc(key)}</h1>
+<p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with a {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
 <h2>By state</h2><div class="chips">{state_links}</div>
 <h2>Closest {min(40, n)} nationwide</h2>{top}"""
@@ -174,13 +175,13 @@ for key, b in brands.items():
         cards = "".join(site_card(sites[sid], key, "../../../") for d, sid in v)
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
-        title = f"Tesla Superchargers near {key} in {sn} ({len(v)})"
-        desc = f"All {len(v)} Tesla Superchargers in {sn} with a {key} within walking distance — stalls, power, walk time and directions."
-        body = f"""<h1>{b['e']} Superchargers near {esc(key)} in {sn}</h1>
-<p class="lead"><b>{len(v)} Superchargers</b> in {sn} have a {esc(key)} within a 10-minute walk. Sorted closest first.</p>
+        title = f"EV fast chargers near {key} in {sn} ({len(v)})"
+        desc = f"All {len(v)} EV DC fast chargers in {sn} with a {key} within walking distance — network, power, walk time and directions."
+        body = f"""<h1>{b['e']} EV fast chargers near {esc(key)} in {sn}</h1>
+<p class="lead"><b>{len(v)} DC fast chargers</b> in {sn} have a {esc(key)} within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {cards}
-<h2>Other chains near Superchargers in {sn}</h2><div class="chips">{others or '—'}</div>
+<h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
 <h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>"""
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
@@ -194,12 +195,12 @@ states_html = "".join(
     "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
             for k, c in sorted(cm.items(), key=lambda x: -x[1])) + "</div>"
     for st, cm in sorted(state_chain.items(), key=lambda x: STATES.get(x[0], x[0])))
-body = f"""<h1>Tesla Superchargers near restaurants &amp; stores</h1>
-<p class="lead">{len(matches)} of {len(sites)} US Superchargers have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
+body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
+<p class="lead">{len(matches)} of {len(sites)} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <a class="cta" href="../">Open the interactive map →</a>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
 {states_html}"""
-page("near/index.html", "Superchargers near every chain, by state", "Browse Tesla Superchargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
+page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
 add("near/index.html")
 
 # ---- sitemap / robots ----

@@ -78,6 +78,26 @@ header.routing .tagline{display:none}
 .searchbox .clr{color:var(--dim2);font-size:15px;padding:4px;display:none}
 .searchbox.has .clr{display:block}
 
+#carBar{display:none;margin:0 2px 10px}
+#carBar.show{display:flex;gap:7px;align-items:center}
+#carBar .cartag{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--line);
+  border-radius:11px;padding:7px 11px;font-size:12.5px;font-weight:600;flex:1;min-width:0}
+#carBar .cartag .m{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#carBar .cartag .spec{color:var(--dim);font-weight:500;font-size:11px}
+#carBar .mine{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);
+  border-radius:11px;padding:7px 11px;font-size:12px;font-weight:600;color:var(--dim);white-space:nowrap}
+#carBar .mine.on{background:var(--blue);border-color:var(--blue);color:#fff}
+#carPicker{position:fixed;inset:0;z-index:2000;background:rgba(5,7,10,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;
+  align-items:flex-end;justify-content:center}
+#carPicker.show{display:flex;animation:fade .18s}
+.caritem{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;
+  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left;transition:.12s}
+.caritem:active{transform:scale(.99)}
+.caritem.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.caritem .m{flex:1}
+.caritem .spec{font-size:11px;color:var(--dim2);font-weight:500}
+.caritem.on .spec{color:rgba(255,255,255,.75)}
 .tabs{display:flex;gap:4px;padding:0 2px 8px}
 .tab{padding:6px 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--dim);transition:.15s}
 .tab.on{background:var(--surface2);color:var(--txt)}
@@ -169,7 +189,15 @@ header.routing .tagline{display:none}
 .pp-name{font-weight:700;font-size:14.5px;flex:1;padding-right:14px}
 .pp-fav{font-size:15px;color:var(--dim2);flex-shrink:0;line-height:1}
 .pp-fav.on{color:var(--amber)}
-.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:8px}
+.pp-net{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-bottom:5px}
+.pp-net .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:4px}
+.pp-car{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:11.5px;color:var(--dim);
+  margin:6px 0 8px;padding:6px 8px;background:var(--surface2);border-radius:9px}
+.pp-car .cc{font-weight:700;font-size:11px}
+.pp-car .cc.native{color:var(--green)}
+.pp-car .cc.adapter{color:var(--amber)}
+.pp-car .cc.null{color:var(--dim2)}
 .pp-host{color:var(--amber);font-size:11.5px;margin-bottom:8px}
 .pp-list{max-height:168px;overflow-y:auto}
 .pp-chain{display:flex;justify-content:space-between;gap:12px;padding:2.5px 0;font-size:12.5px}
@@ -200,8 +228,13 @@ header.routing .tagline{display:none}
 .row .n b{font-size:14px;font-weight:600;flex:1;min-width:0;overflow:hidden;
   text-overflow:ellipsis;white-space:nowrap}
 .row .n s{text-decoration:none;color:var(--dim);font-size:11.5px;white-space:nowrap}
-.row .sub{color:var(--dim2);font-size:11.5px;margin-top:1px;overflow:hidden;
+.row .sub{color:var(--dim2);font-size:11.5px;margin-top:2px;overflow:hidden;
   text-overflow:ellipsis;white-space:nowrap}
+.row .sub .netdot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.row .cbadge{margin-left:6px;padding:1px 6px;border-radius:6px;font-weight:700;font-size:10.5px;
+  background:rgba(76,157,255,.14);color:var(--blue)}
+.row .cbadge.adapter{background:rgba(255,176,32,.14);color:var(--amber)}
+.row .cbadge.null{background:rgba(136,146,160,.14);color:var(--dim2)}
 .row .ch{font-size:12px;margin-top:4px;color:var(--dim);display:flex;flex-wrap:wrap;gap:3px 10px}
 .row .ch b{color:var(--txt);font-weight:600}
 .row .star{font-size:14px;color:var(--dim2);padding:2px 0 0 2px;flex-shrink:0;align-self:flex-start}
@@ -273,17 +306,19 @@ header.routing .tagline{display:none}
 <div id="splash">
   <div class="splash-logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
   <div class="splash-bar"><i></i></div>
-  <small>Loading Superchargers…</small>
+  <small>Loading fast chargers…</small>
 </div>
 
 <div id="app">
   <header>
     <div class="brandrow">
       <div class="logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
-      <div class="tagline">Superchargers near the places you actually stop</div>
+      <div class="tagline">Fast chargers near the places you actually stop</div>
+      <button class="iconbtn" id="carBtn" title="Set your EV">🚗</button>
       <button class="iconbtn" id="routeToggle" title="Plan a road trip">🛣️</button>
       <a class="iconbtn" href="#about" title="About">?</a>
     </div>
+    <div id="carBar"></div>
 
     <div class="searchrow">
       <div class="searchbox" id="placeBox">
@@ -364,12 +399,29 @@ header.routing .tagline{display:none}
   </div>
 </div>
 
+<div id="carPicker">
+  <div class="pk">
+    <h3><span>Your EV</span><button class="iconbtn" id="carClose">✕</button></h3>
+    <p style="padding:0 16px 10px;color:var(--dim);font-size:12.5px;line-height:1.5">
+      Pick your car for connector compatibility and an estimated charge time at each stop.
+      Stored on this device only.</p>
+    <div class="searchbox" id="carSearchBox" style="margin:0 16px 11px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="carSearch" placeholder="Search your model…" autocomplete="off">
+    </div>
+    <div class="pkgrid" id="carGrid" style="grid-template-columns:1fr"></div>
+    <div class="pkfoot">
+      <button class="clear" id="carNone">No car</button>
+    </div>
+  </div>
+</div>
+
 <div id="about"><div class="box">
   <h2>Charge &amp; Chew</h2>
-  <p>Every Tesla Supercharger in the US, matched against the restaurants and stores within a 10-minute walk — so you can plan a stop around what you actually want to do while the car charges.</p>
-  <p><b style="color:var(--txt)">How to use it:</b> tap chains to filter, search a place or drop a 📌 pin to explore an area, or hit 🛣️ to plan a route and see every matching stop along the way. Tap ⭐ to save a stop for later.</p>
-  <p>Charger data from <a href="https://supercharge.info" target="_blank" rel="noopener">supercharge.info</a>; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph — always check the real route. Chain coverage runs about 90–95%, so a missing chain doesn't guarantee it isn't there.</p>
-  <p>Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</p>
+  <p>Every public DC fast charger in the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
+  <p><b style="color:var(--txt)">How to use it:</b> set your 🚗 car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a 📌 pin to explore an area, or hit 🛣️ to plan a route and see every matching stop along the way. Tap ⭐ to save a stop.</p>
+  <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
+  <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="near/">Browse all chains &amp; states →</a></p>
   <a class="close" href="#">Close</a>
 </div></div>
@@ -400,6 +452,9 @@ let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
 let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
+const CARS = D.cars || {};
+let car = localStorage.getItem('cc_car') || '';   // model name or '' for none
+let onlyMine = localStorage.getItem('cc_onlymine') === '1';   // connector filter
 
 /* ───────── helpers ───────── */
 const hav = (a1, o1, a2, o2) => {
@@ -409,6 +464,35 @@ const hav = (a1, o1, a2, o2) => {
   return 2 * R * Math.asin(Math.sqrt(x));
 };
 const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
+const CONN_NAME = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO' };
+function connList(bits) {
+  return [1, 2, 4].filter(b => bits & b).map(b => CONN_NAME[b]).join(' · ');
+}
+// car = [battery kWh, max DC kW, connector bit]
+function carInfo() { return car && CARS[car] ? CARS[car] : null; }
+// compatibility: 'native' | 'adapter' | null (can't use)
+function compat(s) {
+  const c = carInfo(); if (!c) return null;
+  const carBit = c[2];
+  if (s.conn & carBit) return 'native';
+  // CCS<->NACS interoperate via adapter; CHAdeMO (4) is native-only
+  if (carBit !== 4 && (s.conn & 1 || s.conn & 2)) return 'adapter';
+  return null;
+}
+function chargeMin(s) {
+  const c = carInfo(); if (!c) return null;
+  const [bat, cmax] = c;
+  const eff = Math.min(cmax, s.kw || cmax);
+  if (!eff) return null;
+  // 10-80% ≈ 70% of pack; average ~0.55 of peak across the curve
+  return Math.round((0.7 * bat) / (0.55 * eff) * 60);
+}
+function dwell(min) {
+  if (min == null) return '';
+  if (min <= 18) return 'coffee / drive-thru';
+  if (min <= 40) return 'quick meal';
+  return 'sit-down meal';
+}
 const fmtFt = m => m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let toastT;
@@ -439,10 +523,17 @@ function popupHtml(s) {
     `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
      <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span></div>`).join('')
     || '<div class="pp-chain" style="color:var(--dim2)">No tracked chains within a 10-min walk</div>';
+  const cm = chargeMin(s), cp = compat(s);
+  const carLine = cm != null
+    ? `<div class="pp-car"><span class="cc ${cp}">${cp === 'native' ? '✓ fits your car' : cp === 'adapter' ? '⚠ needs adapter' : '✕ incompatible'}</span>
+       <span>~${cm} min charge · ${dwell(cm)}</span></div>`
+    : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
-    <div class="pp-meta">${s.stalls} stalls · ${s.kw} kW${s.street ? ' · ' + esc(s.street) : ''}</div>
-    ${s.host ? `<div class="pp-host">📍 At ${esc(s.host)}</div>` : ''}
+    <div class="pp-net"><span class="dot" style="background:${s.col}"></span>${esc(s.net)}</div>
+    <div class="pp-meta">${s.stalls ? s.stalls + ' stalls · ' : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
+    ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
+    ${carLine}
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}">Map</a>
@@ -476,6 +567,7 @@ function toggleFav(id) {
 
 /* ───────── filtering ───────── */
 function passesChain(s) {
+  if (onlyMine && carInfo() && compat(s) === null) return false;
   if (cat === 'fav') return favs.has(s.id);
   if (!active.size) return true;
   const m = MATCH[s.id]; if (!m) return false;
@@ -500,6 +592,7 @@ function visibleSites() {
     hav(center.lat, center.lon, a.lat, a.lon) - hav(center.lat, center.lon, b.lat, b.lon));
   else if (sortBy === 'stalls') out.sort((a, b) => b.stalls - a.stalls);
   else if (sortBy === 'power') out.sort((a, b) => b.kw - a.kw);
+  else if (sortBy === 'charge' && carInfo()) out.sort((a, b) => (chargeMin(a) ?? 9e9) - (chargeMin(b) ?? 9e9));
   else out.sort((a, b) => bestWalk(a) - bestWalk(b));
   return out;
 }
@@ -561,7 +654,7 @@ function renderList(vis) {
 
   $('sheetTitle').innerHTML = (filtering || route || center)
     ? `${vis.length} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
-    : `${SITES.length.toLocaleString()} Superchargers <em>· pick a chain to filter</em>`;
+    : `${SITES.length.toLocaleString()} fast chargers <em>· pick a chain to filter</em>`;
 
   if (!vis.length) {
     $('list').innerHTML = cat === 'fav'
@@ -578,11 +671,14 @@ function renderList(vis) {
       `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ${walkMin(d)}m</span>`).join('');
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
+    const cm = chargeMin(s), cp = compat(s);
+    const carBadge = cm != null
+      ? `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : cp === null ? '✕' : '⚡'} ~${cm}m</span>` : '';
     return `<div class="row" data-id="${s.id}">
       ${showIdx ? `<div class="idx">${i + 1}</div>` : ''}
       <div class="body">
-        <div class="n"><b>${esc(s.name)}</b><s>${s.stalls}⚡ ${s.kw}kW</s></div>
-        <div class="sub">${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${s.host ? ' · ' + esc(s.host) : ''}</div>
+        <div class="n"><b>${esc(s.name)}</b><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
+        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
       <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
@@ -640,10 +736,15 @@ $('handle').addEventListener('touchmove', e => {
 }, { passive: true });
 $('handle').addEventListener('touchend', () => { dragY = null; }, { passive: true });
 
-const SORT_LABEL = { dist: 'Nearest', walk: 'Shortest walk', stalls: 'Most stalls', power: 'Fastest' };
+const SORT_LABEL = { dist: 'Nearest', walk: 'Shortest walk', stalls: 'Most stalls', power: 'Fastest charger', charge: 'Fastest for my car' };
 $('sortBtn').onclick = () => {
-  const opts = center ? ['dist', 'walk', 'stalls', 'power'] : ['walk', 'stalls', 'power'];
+  const opts = [];
+  if (center) opts.push('dist');
+  opts.push('walk');
+  if (carInfo()) opts.push('charge');
+  opts.push('stalls', 'power');
   sortBy = opts[(opts.indexOf(sortBy) + 1) % opts.length];
+  if (sortBy === undefined || opts.indexOf(sortBy) < 0) sortBy = opts[0];
   $('sortBtn').textContent = SORT_LABEL[sortBy];
   render();
 };
@@ -655,6 +756,57 @@ document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
   render();
   if (cat === 'fav' && favs.size) setSheet('mid');
 });
+
+/* ───────── car profile ───────── */
+const CONN_LABEL = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO' };
+function renderCarBar() {
+  const bar = $('carBar');
+  if (!carInfo()) { bar.className = ''; bar.innerHTML = ''; $('carBtn').classList.remove('on'); return; }
+  const c = CARS[car];
+  bar.className = 'show';
+  bar.innerHTML =
+    `<button class="cartag" id="carEdit">🚗 <span class="m">${esc(car)}</span>
+      <span class="spec">${c[1]}kW · ${CONN_LABEL[c[2]]}</span></button>
+     <button class="mine ${onlyMine ? 'on' : ''}" id="mineToggle">⚡ Fits my car</button>`;
+  $('carBtn').classList.add('on');
+  $('carEdit').onclick = openCarPicker;
+  $('mineToggle').onclick = () => {
+    onlyMine = !onlyMine;
+    localStorage.setItem('cc_onlymine', onlyMine ? '1' : '0');
+    renderCarBar(); render();
+  };
+}
+function openCarPicker() {
+  $('carPicker').classList.add('show');
+  drawCarGrid();
+  setTimeout(() => $('carSearch').focus(), 100);
+}
+function drawCarGrid() {
+  const q = $('carSearch').value.trim().toLowerCase();
+  const keys = Object.keys(CARS).filter(k => !q || k.toLowerCase().includes(q));
+  $('carGrid').innerHTML = keys.map(k => {
+    const c = CARS[k];
+    return `<button class="caritem ${k === car ? 'on' : ''}" data-car="${esc(k)}">
+      <span class="m">${esc(k)}</span>
+      <span class="spec">${c[0]}kWh · ${c[1]}kW · ${CONN_LABEL[c[2]]}</span></button>`;
+  }).join('') || '<div class="empty">No match. Pick "Other CCS EV" or "Other Tesla/NACS EV".</div>';
+  $('carGrid').querySelectorAll('[data-car]').forEach(b => b.onclick = () => {
+    car = b.dataset.car; localStorage.setItem('cc_car', car);
+    $('carPicker').classList.remove('show');
+    renderCarBar(); render();
+    toast('Car set: ' + car);
+  });
+}
+$('carBtn').onclick = openCarPicker;
+$('carClose').onclick = () => $('carPicker').classList.remove('show');
+$('carPicker').onclick = e => { if (e.target.id === 'carPicker') $('carPicker').classList.remove('show'); };
+$('carSearch').oninput = drawCarGrid;
+$('carNone').onclick = () => {
+  car = ''; onlyMine = false;
+  localStorage.removeItem('cc_car'); localStorage.setItem('cc_onlymine', '0');
+  $('carPicker').classList.remove('show');
+  renderCarBar(); render();
+};
 
 /* ───────── chain picker ───────── */
 let pkCat = 'all';
@@ -916,6 +1068,7 @@ function fitToResults() {
 
 /* ───────── boot ───────── */
 saveFavs();
+renderCarBar();
 $('sortBtn').textContent = SORT_LABEL.walk;
 
 const q = new URLSearchParams(location.search);

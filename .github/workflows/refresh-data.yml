@@ -28,16 +28,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Download current Supercharger list
-        run: curl -sf --max-time 180 https://supercharge.info/service/supercharge/allSites -o data/allSites.json
-
       - name: Drop cached chain locations (optional full refetch)
         if: ${{ inputs.refetch_chains }}
         run: rm -f data/pois.json
 
-      - name: Rematch chargers to chains and rebuild pages
+      - name: Pull all-network chargers, rematch chains, rebuild pages
+        env:
+          AFDC_API_KEY: ${{ secrets.AFDC_API_KEY }}
         run: |
-          python3 data/fetch_pois.py
+          python3 data/fetch_chargers.py
+          [ -f data/pois.json ] && python3 data/fetch_pois.py || true
+          python3 data/build_data.py
           python3 build.py --base https://chargeandchew.com
 
       - name: Commit and push if anything changed
