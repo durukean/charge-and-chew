@@ -7,8 +7,7 @@ read as marketing, and they react well to "I built this because it annoyed me."
 
 ## r/TeslaMotors · r/electricvehicles · r/TeslaLounge
 
-**Title:** I got tired of guessing what's next to a Supercharger, so I mapped every US
-Supercharger against 75 restaurant and store chains
+**Title:** I mapped every US EV fast charger — all networks — against 75 restaurant and store chains
 
 **Body:**
 
@@ -24,17 +23,18 @@ https://chargeandchew.com
 
 A few things that surprised me once the data was in:
 
-- 2,867 of 3,201 US Superchargers (90%) have at least one of these 75 chains within an
-  800 m walk
-- 1,413 have a Starbucks that close; only 36 have a Buc-ee's
-- The Valdosta, GA and Palmdale, CA stops each have 28 different chains within a 10-minute walk
+- 12,219 of 15,317 US public DC fast chargers (79%) — Tesla, Electrify America, EVgo,
+  ChargePoint, IONNA, Rivian and more — have at least one of these 75 chains within an 800 m walk
+- Set your car and it shows connector compatibility (native / adapter) and an estimated
+  charge time at each stop, so you can match the stop to how long you'll actually be there
+- 4,939 chargers have a Starbucks that close; only 36 have a Buc-ee's
 
 You can also drop a pin anywhere to see what's around that area, or put in a route
 (say Dallas → Houston) and it lists every matching stop in driving order — that one
 turned up two Buc-ee's stops on I-45 I didn't know were Superchargers.
 
-It's free, no ads, no login, no app. Charger data is from supercharge.info and chain
-locations from OpenStreetMap, so coverage is roughly 90-95% per chain — a missing chain
+It's free, no ads, no login, no app. Charger data is the US DOE / NREL public database and
+chain locations are from OpenStreetMap, so coverage is roughly 90-95% per chain — a missing chain
 doesn't guarantee it isn't there. Walk times are straight-line estimates, so check the
 real walk before trusting them.
 
@@ -54,25 +54,24 @@ built the lookup:
 
 https://chargeandchew.com
 
-Pick one or more of 75 chains and the map shows only Superchargers with that chain
+Pick one or more of 75 chains and the map shows only DC fast chargers (any network) with that chain
 within a 10-minute walk, with the walk time, stall count and power for each. There's a
 route mode that lists matching stops in driving order, and you can drop a pin to search
 any area.
 
-Data: supercharge.info for chargers, OpenStreetMap for chain locations, rematched
+Data: US DOE / NREL for chargers (all networks), OpenStreetMap for chain locations, rematched
 monthly. Free, no account, no ads. Tell me which chains to add.
 
 ---
 
 ## Short version (X / Bluesky / Threads)
 
-Every US Tesla Supercharger, matched against 75 restaurant and store chains within a
-10-minute walk.
+Every US EV fast charger — all networks — matched against 75 restaurant & store chains within a 10-minute walk.
 
 Want a stop with an IHOP? A Buc-ee's? A Walmart to kill 20 minutes in? Pick the chain,
 get the chargers.
 
-90% of Superchargers have at least one. Free, no login:
+79% have at least one. Set your car for charge-time + connector fit. Free, no login:
 https://chargeandchew.com
 
 ---
