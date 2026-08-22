@@ -1,0 +1,54 @@
+name: Refresh data
+
+on:
+  schedule:
+    - cron: '17 9 1 * *'      # 09:17 UTC on the 1st of each month
+  workflow_dispatch:
+    inputs:
+      refetch_chains:
+        description: 'Also re-download chain locations from OpenStreetMap (slow, ~40 min)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Download current Supercharger list
+        run: curl -sf --max-time 180 https://supercharge.info/service/supercharge/allSites -o data/allSites.json
+
+      - name: Drop cached chain locations (optional full refetch)
+        if: ${{ inputs.refetch_chains }}
+        run: rm -f data/pois.json
+
+      - name: Rematch chargers to chains and rebuild pages
+        run: |
+          python3 data/fetch_pois.py
+          python3 build.py --base https://chargeandchew.com
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add -A
+            git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+            git push
+            echo "pushed"
+          else
+            echo "no changes"
+          fi
