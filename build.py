@@ -66,7 +66,7 @@ footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(
 footer a{color:var(--blue)}
 """
 
-def page(path, title, desc, body, canonical):
+def page(path, title, desc, body, canonical, jsonld=""):
     depth = path.count("/")
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
@@ -74,16 +74,49 @@ def page(path, title, desc, body, canonical):
 <title>{esc(title)} | {BRAND}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{BASE}/{canonical}">
+<link rel="icon" href="{BASE}/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{BRAND}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{BASE}/{canonical}">
+<meta property="og:image" content="{BASE}/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d1117">
+{jsonld}
 <style>{CSS}</style></head><body><div class="wrap">
 <header><a class="logo" href="{root}">CHARGE <span>&amp;</span> CHEW</a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
 <footer>Charger data: <a href="https://supercharge.info">supercharge.info</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
 Walk times are straight-line estimates at ~3 mph; verify before relying on them. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
-</div></body></html>"""
+</div>
+<script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body></html>"""
     full = os.path.join(HERE, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, "w").write(out)
+
+def jsonld_state(key, st, sn, sites_list, canonical):
+    items = []
+    for i, (d, sid) in enumerate(sites_list[:25], 1):
+        s = sites[sid]
+        items.append({"@type": "ListItem", "position": i, "item": {
+            "@type": "Place", "name": f"Tesla Supercharger — {s['name']}",
+            "address": {"@type": "PostalAddress", "streetAddress": s["street"],
+                        "addressLocality": s["city"], "addressRegion": s["st"], "addressCountry": "US"},
+            "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}})
+    blocks = [
+        {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Chains", "item": f"{BASE}/near/"},
+            {"@type": "ListItem", "position": 2, "name": key, "item": f"{BASE}/near/{slug(key)}/"},
+            {"@type": "ListItem", "position": 3, "name": sn, "item": f"{BASE}/{canonical}"}]},
+        {"@context": "https://schema.org", "@type": "ItemList",
+         "name": f"Tesla Superchargers near {key} in {sn}",
+         "numberOfItems": len(sites_list), "itemListElement": items}]
+    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+
 
 def site_card(s, focus, root):
     m = matches.get(s["id"], {})
@@ -149,7 +182,9 @@ for key, b in brands.items():
 {cards}
 <h2>Other chains near Superchargers in {sn}</h2><div class="chips">{others or '—'}</div>
 <h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>"""
-        path = f"near/{cs}/{st.lower()}/index.html"; page(path, title, desc, body, f"near/{cs}/{st.lower()}/"); add(path)
+        can = f"near/{cs}/{st.lower()}/"
+        path = f"near/{cs}/{st.lower()}/index.html"
+        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can)); add(path)
 
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)
