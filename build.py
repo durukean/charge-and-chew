@@ -293,6 +293,13 @@ def site_card(s, focus, root):
 <a href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a></div>
 </div></div>"""
 
+# Phase 1 indexing strategy. Google logged 246 of these as "crawled - currently not
+# indexed", which since the 2024 core update overwhelmingly means "templated, low unique
+# value" — and a large thin set drags down the whole pattern. So we only INDEX a small,
+# strong launch set and noindex,follow the rest. They stay crawlable and keep passing
+# link equity; raise STATE_INDEX_MIN once these are indexing and ranking.
+STATE_INDEX_MIN = 150      # chain x state pages need at least this many chargers to be indexed
+
 urls = []
 def add(path): urls.append(f"{BASE}/{path.replace('index.html','')}")
 
@@ -356,7 +363,7 @@ for key, b in brands.items():
 {faq_html}"""
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
-        thin = len(v) < 3          # near-duplicate stubs hurt indexing; keep linked, drop from index
+        thin = len(v) < STATE_INDEX_MIN   # keep crawlable, but out of the index for now
         page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can, faq_schema), thin=thin)
         if not thin: add(path)
 
