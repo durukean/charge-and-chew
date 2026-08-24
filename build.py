@@ -94,6 +94,10 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#f4f5f7">
 <title>{esc(title)} | {BRAND}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{BASE}/{canonical}">

@@ -6,6 +6,11 @@
 <title>Charge &amp; Chew — Fast EV chargers near your favorite restaurants &amp; stores</title>
 <meta name="description" content="Find EV fast chargers — Tesla, Electrify America, EVgo and more — within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Charge &amp; Chew">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="canonical" href="https://chargeandchew.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Charge &amp; Chew">
@@ -382,6 +387,9 @@ svg{display:block}
 #about .close{display:block;text-align:center;margin-top:6px;padding:12px;background:var(--surface2);
   border-radius:12px;color:var(--txt);font-weight:700;text-decoration:none}
 
+#offlineBar{position:fixed;top:0;left:0;right:0;z-index:5000;background:var(--warn);color:#231a05;
+  font-size:12.5px;font-weight:700;text-align:center;padding:calc(env(safe-area-inset-top) + 6px) 10px 6px}
+#offlineBar[hidden]{display:none}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);
   transform:translateX(-50%) translateY(14px);background:var(--txt);color:var(--bg);font-size:13px;
   font-weight:600;padding:11px 19px;border-radius:13px;box-shadow:var(--sh);z-index:4000;opacity:0;
@@ -571,6 +579,7 @@ svg{display:block}
   <a class="close" href="#">Close</a>
 </div></div>
 
+<div id="offlineBar" hidden>Offline — showing saved data</div>
 <div id="toast"></div>
 
 <script src="data.js?v=4"></script>
@@ -1443,6 +1452,42 @@ if (q.get('from') && q.get('to')) {
 if (boot) setTimeout(boot, 80);
 else if (active.size) { setSheet('mid'); fitToResults(); }
 else if (localStorage.getItem('cc_hero') !== '0') showHero();
+
+/* ───────── offline / installable ───────── */
+function setOnline(on) {
+  $('offlineBar').hidden = on;
+  document.body.style.setProperty('padding-top', on ? '' : '0');
+}
+window.addEventListener('online', () => { setOnline(true); toast('Back online'); });
+window.addEventListener('offline', () => setOnline(false));
+setOnline(navigator.onLine);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const w = reg.installing;
+        if (!w) return;
+        w.addEventListener('statechange', () => {
+          // only prompt when this is an update, not the very first install
+          if (w.state === 'installed' && navigator.serviceWorker.controller) {
+            const t = $('toast');
+            t.textContent = 'New version — tap to reload';
+            t.classList.add('show');
+            t.style.pointerEvents = 'auto';
+            t.onclick = () => { w.postMessage('skipWaiting'); location.reload(); };
+            clearTimeout(toastT);
+            toastT = setTimeout(() => { t.classList.remove('show'); t.style.pointerEvents = 'none'; t.onclick = null; }, 12000);
+          }
+        });
+      });
+    }).catch(() => { /* offline support simply unavailable */ });
+  });
+}
+
+/* PWA shortcut deep links */
+if (q.get('near') === '1') setTimeout(() => locate('center'), 400);
+if (q.get('saved') === '1') setTimeout(() => $('savedChip').click(), 200);
 
 setTimeout(() => {
   $('splash').classList.add('gone');
