@@ -383,6 +383,110 @@ body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
 add("near/index.html")
 
+# ---- interstate corridor pages: "chargers with food along I-95" ----
+# Real search intent that nothing serves well. Only ~30 pages, each genuinely unique, so
+# these are indexed even while the chain x state set is throttled back.
+HW_PATH = os.path.join(HERE, "data", "highways.json")
+CORRIDOR_MI = 3.0
+INTERSTATE_MIN_KW = 50
+
+def _hav_m(a1, o1, a2, o2):
+    import math
+    R = 6371000; p = math.pi / 180
+    x = (math.sin((a2-a1)*p/2)**2
+         + math.cos(a1*p)*math.cos(a2*p)*math.sin((o2-o1)*p/2)**2)
+    return 2 * R * math.asin(math.sqrt(x))
+
+if os.path.exists(HW_PATH):
+    highways = json.load(open(HW_PATH))
+    hw_links = []
+    for ref, pts in sorted(highways.items(), key=lambda x: int(x[0].split()[1])):
+        if len(pts) < 50:
+            continue
+        # grid-index the corridor so this stays fast
+        cell = 0.05
+        grid = {}
+        for i, (la, lo) in enumerate(pts):
+            grid.setdefault((round(la / cell), round(lo / cell)), []).append(i)
+        maxm = CORRIDOR_MI * 1609.34
+        reach = int(maxm / 111000 / cell) + 1
+        found = []
+        for sid, s_ in sites.items():
+            if (s_.get("kw") or 0) < INTERSTATE_MIN_KW:
+                continue
+            best = None; bi = 0
+            ci, cj = round(s_["lat"] / cell), round(s_["lon"] / cell)
+            cand = []
+            for di in range(-reach, reach + 1):
+                for dj in range(-reach, reach + 1):
+                    cand.extend(grid.get((ci + di, cj + dj), ()))
+            for i in cand:
+                d = _hav_m(s_["lat"], s_["lon"], pts[i][0], pts[i][1])
+                if best is None or d < best:
+                    best = d; bi = i
+            if best is not None and best <= maxm:
+                found.append((bi, sid, best))
+        if len(found) < 12:
+            continue
+        found.sort()
+        slug_ref = ref.lower().replace(" ", "-")
+        disp = ref.replace(" ", "-")   # "I 95" -> "I-95", which is how people search
+        states = []
+        for _, sid, _d in found:
+            st_ = sites[sid]["st"]
+            if st_ and st_ not in states:
+                states.append(st_)
+        withchain = [f for f in found if matches.get(f[1])]
+        cards = []
+        for bi, sid, dist in withchain[:60]:
+            s_ = sites[sid]
+            m = matches.get(sid, {})
+            k0 = min(m, key=lambda k: m[k]) if m else None
+            focus = k0 if k0 else ""
+            cards.append(site_card(s_, focus, "../../"))
+        kws = [sites[f[1]]["kw"] for f in found if sites[f[1]].get("kw")]
+        med = sorted(kws)[len(kws)//2] if kws else 0
+        big = sum(1 for k in kws if k >= 150)
+        h24 = sum(1 for f in found if sites[f[1]].get("h24"))
+        title = f"EV fast chargers along {disp} — with food and stores nearby"
+        desc = (f"{len(found)} public DC fast chargers within {CORRIDOR_MI:g} miles of {disp}, "
+                f"{len(withchain)} of them within a 10-minute walk of a restaurant or store. "
+                f"Ordered along the route through {len(states)} states.")
+        body = f'''<h1>EV fast chargers along {disp}</h1>
+<p class="lead"><b>{len(found)} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {disp}, and
+<b>{len(withchain)}</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
+order along the route, {" → ".join(states[:12])}{" …" if len(states) > 12 else ""}.</p>
+<a class="cta" href="../../">Open the map →</a>
+<p class="stats">Typical power along this corridor is <b>{med} kW</b>, with <b>{big}</b> stops at
+150 kW or more and <b>{h24}</b> listed as open 24 hours. Chargers under {INTERSTATE_MIN_KW} kW are
+left out — on an interstate run they cost more time than they save.</p>
+<h2>Stops with food or shopping within a walk</h2>
+{"".join(cards)}
+<h2>Other interstates</h2><div class="chips" id="hwchips"></div>'''
+        path = f"along/{slug_ref}/index.html"
+        page(path, title, desc, body, f"along/{slug_ref}/")
+        add(path)
+        hw_links.append((disp, slug_ref, len(found)))
+
+    # cross-link the corridor pages to each other + an index
+    if hw_links:
+        chips = "".join(f'<a href="../{sl}/">{r} <small>{n}</small></a>' for r, sl, n in hw_links)
+        for r, sl, n in hw_links:
+            f = os.path.join(HERE, f"along/{sl}/index.html")
+            html_doc = open(f).read().replace('<div class="chips" id="hwchips"></div>',
+                f'<div class="chips">{chips}</div>')
+            open(f, "w").write(html_doc)
+        idx_chips = "".join(f'<a href="{sl}/">{r} <small>{n} chargers</small></a>' for r, sl, n in hw_links)
+        body = f'''<h1>EV fast chargers by interstate</h1>
+<p class="lead">Pick an interstate to see every fast charger within {CORRIDOR_MI:g} miles of it, in order
+along the route, with the restaurants and stores within a 10-minute walk of each stop.</p>
+<div class="chips">{idx_chips}</div>'''
+        page("along/index.html", "EV fast chargers along the interstates",
+             "Fast chargers along I-95, I-10, I-5, I-80 and other major US interstates, in route "
+             "order, with nearby food and shopping for each stop.", body, "along/")
+        add("along/index.html")
+        print(f"Interstate corridor pages: {len(hw_links)}")
+
 # ---- sitemap / robots ----
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 sm += f"<url><loc>{BASE}/</loc></url>\n" + "".join(f"<url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
