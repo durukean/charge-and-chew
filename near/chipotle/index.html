@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Chipotle (2068 locations) | Charge & Chew</title>
-<meta name="description" content="2068 EV DC fast chargers within a 10-minute walk of a Chipotle, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Chipotle (1972 locations) | Charge & Chew</title>
+<meta name="description" content="1972 EV DC fast chargers within a 10-minute walk of a Chipotle, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/chipotle/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Chipotle (2068 locations)">
-<meta property="og:description" content="2068 EV DC fast chargers within a 10-minute walk of a Chipotle, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Chipotle (1972 locations)">
+<meta property="og:description" content="1972 EV DC fast chargers within a 10-minute walk of a Chipotle, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/chipotle/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🌯 EV fast chargers near Chipotle</h1>
-<p class="lead">We found <b>2068 DC fast chargers</b> in the US — across all networks — with a Chipotle within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1972 DC fast chargers</b> in the US — across all networks — with a Chipotle within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Chipotle">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>562</small></a><a href="fl/">Florida <small>114</small></a><a href="tx/">Texas <small>104</small></a><a href="il/">Illinois <small>102</small></a><a href="wa/">Washington <small>97</small></a><a href="oh/">Ohio <small>96</small></a><a href="ny/">New York <small>92</small></a><a href="va/">Virginia <small>83</small></a><a href="md/">Maryland <small>83</small></a><a href="ga/">Georgia <small>65</small></a><a href="ma/">Massachusetts <small>61</small></a><a href="nj/">New Jersey <small>52</small></a><a href="pa/">Pennsylvania <small>46</small></a><a href="co/">Colorado <small>45</small></a><a href="nc/">North Carolina <small>40</small></a><a href="or/">Oregon <small>38</small></a><a href="az/">Arizona <small>33</small></a><a href="mi/">Michigan <small>32</small></a><a href="in/">Indiana <small>30</small></a><a href="sc/">South Carolina <small>28</small></a><a href="mn/">Minnesota <small>27</small></a><a href="tn/">Tennessee <small>22</small></a><a href="nv/">Nevada <small>21</small></a><a href="mo/">Missouri <small>17</small></a><a href="nh/">New Hampshire <small>17</small></a><a href="al/">Alabama <small>15</small></a><a href="ct/">Connecticut <small>13</small></a><a href="wi/">Wisconsin <small>12</small></a><a href="ut/">Utah <small>12</small></a><a href="nm/">New Mexico <small>10</small></a><a href="me/">Maine <small>10</small></a><a href="ok/">Oklahoma <small>9</small></a><a href="ky/">Kentucky <small>8</small></a><a href="ia/">Iowa <small>8</small></a><a href="ri/">Rhode Island <small>7</small></a><a href="ms/">Mississippi <small>7</small></a><a href="de/">Delaware <small>7</small></a><a href="ks/">Kansas <small>7</small></a><a href="la/">Louisiana <small>7</small></a><a href="id/">Idaho <small>7</small></a><a href="dc/">Washington DC <small>6</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ar/">Arkansas <small>3</small></a><a href="vt/">Vermont <small>2</small></a><a href="nd/">North Dakota <small>2</small></a><a href="ne/">Nebraska <small>2</small></a><a href="mt/">Montana <small>2</small></a><a href="wv/">West Virginia <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>703 England</span><small>360 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>522</small></a><a href="fl/">Florida <small>109</small></a><a href="tx/">Texas <small>101</small></a><a href="il/">Illinois <small>99</small></a><a href="wa/">Washington <small>91</small></a><a href="oh/">Ohio <small>91</small></a><a href="ny/">New York <small>86</small></a><a href="va/">Virginia <small>81</small></a><a href="md/">Maryland <small>80</small></a><a href="ga/">Georgia <small>64</small></a><a href="ma/">Massachusetts <small>56</small></a><a href="nj/">New Jersey <small>50</small></a><a href="pa/">Pennsylvania <small>45</small></a><a href="co/">Colorado <small>43</small></a><a href="nc/">North Carolina <small>40</small></a><a href="or/">Oregon <small>35</small></a><a href="az/">Arizona <small>33</small></a><a href="mi/">Michigan <small>31</small></a><a href="sc/">South Carolina <small>28</small></a><a href="in/">Indiana <small>28</small></a><a href="mn/">Minnesota <small>27</small></a><a href="tn/">Tennessee <small>22</small></a><a href="nv/">Nevada <small>21</small></a><a href="mo/">Missouri <small>17</small></a><a href="nh/">New Hampshire <small>16</small></a><a href="ct/">Connecticut <small>13</small></a><a href="al/">Alabama <small>13</small></a><a href="wi/">Wisconsin <small>12</small></a><a href="ut/">Utah <small>12</small></a><a href="nm/">New Mexico <small>10</small></a><a href="ok/">Oklahoma <small>9</small></a><a href="me/">Maine <small>9</small></a><a href="ky/">Kentucky <small>8</small></a><a href="ia/">Iowa <small>8</small></a><a href="ri/">Rhode Island <small>7</small></a><a href="de/">Delaware <small>7</small></a><a href="ks/">Kansas <small>7</small></a><a href="la/">Louisiana <small>7</small></a><a href="dc/">Washington DC <small>6</small></a><a href="ms/">Mississippi <small>6</small></a><a href="id/">Idaho <small>6</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ar/">Arkansas <small>3</small></a><a href="vt/">Vermont <small>2</small></a><a href="nd/">North Dakota <small>2</small></a><a href="ne/">Nebraska <small>2</small></a><a href="mt/">Montana <small>2</small></a><a href="wv/">West Virginia <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>703 England</span><small>360 kW · 4 stalls</small></div>
 <div class="a">703 England St, Ashland, VA</div><div class="host">EV Connect</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 0 ft</span></b> · 🍔 Five Guys <span>≥1 min · 26 ft</span> · ☕ Starbucks <span>≥2 min · 449 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥2 min · 0.1 mi</span> · 🦆 Wawa <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.75779,-77.47033" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Cedar Commons</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🦆 Wawa ≥2 min</span><span>+17</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75779,-77.47033" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cedar Commons</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3040 Excelsior Blvd, Minneapolis, MN</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 0 ft</span></b> · ☕ Caribou Coffee <span>≥1 min · 23 ft</span> · 🥬 Whole Foods <span>≥1 min · 279 ft</span> · 💊 Walgreens <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · ⛽ Speedway <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.94747,-93.32123" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Eastlake Village Center</span><small>60 kW · 12 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Caribou Coffee ≥1 min</span><span>🥬 Whole Foods ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Speedway ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.94747,-93.32123" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Eastlake Village Center</span><small>60 kW · 12 stalls</small></div>
 <div class="a">2290 Otay Lakes Rd, Chula Vista, CA</div><div class="host">Go To U</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 30 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 157 ft</span> · 🥞 IHOP <span>≥1 min · 256 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 256 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 367 ft</span> · ☕ Starbucks <span>≥2 min · 492 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.64718,-116.96552" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Chipotle Beach and University</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64718,-116.96552" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chipotle Beach and University</span><small>350 kW · 4 stalls</small></div>
 <div class="a">5801 Beach Blvd, Jacksonville, FL</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 36 ft</span></b> · 🍗 Wingstop <span>≥1 min · 217 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 404 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 463 ft</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span> · ⛽ Speedway <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.29361,-81.60406" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Chipotle Corinth</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>⛽ Speedway ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.29361,-81.60406" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chipotle Corinth</span><small>350 kW · 4 stalls</small></div>
 <div class="a">8201 S Interstate 35 E, Corinth, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 46 ft</span></b> · 🍗 Popeyes <span>≥1 min · 328 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 420 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.13042,-97.03901" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Wellington Circle Plaza</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>⛽ QuikTrip ≥2 min</span><span>+14</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.13042,-97.03901" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wellington Circle Plaza</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4110 Mystic Valley Parkway, Medford, MA</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 52 ft</span></b> · 💊 CVS <span>≥1 min · 144 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 210 ft</span> · 🥪 Subway <span>≥1 min · 217 ft</span> · 🛒 Aldi <span>≥1 min · 354 ft</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.40601,-71.08314" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Seville Commons</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.40601,-71.08314" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Seville Commons</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2151 North Collins St., Arlington, TX</div><div class="host">EVgo</div>
-<div class="c">🥪 Subway <span>≥1 min · 0 ft</span> · <b>🌯 Chipotle <span>≥1 min · 59 ft</span></b> · 🍔 Whataburger <span>≥2 min · 469 ft</span> · 🛒 Walmart <span>≥2 min · 492 ft</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🥬 Whole Foods <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.769,-97.09657" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Fort Lauderdale, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍔 Whataburger ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🥬 Whole Foods ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.769,-97.09657" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fort Lauderdale, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">2620 West Broward Boulevard, Fort Lauderdale, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 72 ft</span></b> · 🦆 Wawa <span>≥1 min · 144 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · ⛽ RaceTrac <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=26.12095,-80.17709" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>PetsMart Center</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>⛽ RaceTrac ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.12095,-80.17709" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>PetsMart Center</span><small>50 kW · 2 stalls</small></div>
 <div class="a">865 Colusa Ave, Yuba City, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 72 ft</span></b> · 💊 Walgreens <span>≥1 min · 276 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 345 ft</span> · 🥪 Subway <span>≥2 min · 505 ft</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.14241,-121.62966" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Evroadway Ca-Chipotle01</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.14241,-121.62966" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evroadway Ca-Chipotle01</span><small>62 kW · 1 stalls</small></div>
 <div class="a">128 Vintage Way, Novato, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 72 ft</span></b> · ☕ Starbucks <span>≥1 min · 315 ft</span> · 🥞 IHOP <span>≥2 min · 413 ft</span> · 🥖 Panera Bread <span>≥2 min · 509 ft</span> · 🍔 In-N-Out <span>≥3 min · 0.2 mi</span> · 🎯 Target <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.09126,-122.55613" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>HondoGO - Kingston, NY</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>🎯 Target ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.09126,-122.55613" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>HondoGO - Kingston, NY</span><small>200 kW · 4 stalls</small></div>
 <div class="a">1221 Ulster Ave, Kingston, NY</div><div class="host">EV Gateway</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 89 ft</span></b> · 👑 Burger King <span>≥1 min · 331 ft</span> · 🍔 Five Guys <span>≥2 min · 443 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 443 ft</span> · 🍎 Applebee&#x27;s <span>≥3 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.96659,-73.99005" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Brunswick, GA Rechargery Relay - Shupe Wy</span><small>400 kW · 16 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.96659,-73.99005" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Brunswick, GA Rechargery Relay - Shupe Wy</span><small>400 kW · 16 stalls</small></div>
 <div class="a">399 Canal Rd, Brunswick, GA</div><div class="host">IONNA</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 95 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 522 ft</span> · ⛽ RaceTrac <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🏪 Sam&#x27;s Club <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.2319,-81.49963" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Miami, FL - Blue Lagoon Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>⛽ RaceTrac ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.2319,-81.49963" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Miami, FL - Blue Lagoon Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">5600 Blue Lagoon Dr, Miami, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c">🐼 Panda Express <span>≥1 min · 72 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 46 ft</span> · <b>🌯 Chipotle <span>≥1 min · 105 ft</span></b> · ☕ Starbucks <span>≥1 min · 177 ft</span> · 🛒 Publix <span>≥3 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=25.78145,-80.28764" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>The Field at Commonwealth</span><small>50 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 Publix ≥3 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=25.78145,-80.28764" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>The Field at Commonwealth</span><small>50 kW · 4 stalls</small></div>
 <div class="a">14335 Newbrook Dr, Chantilly, VA</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 118 ft</span></b> · ☕ Peet&#x27;s Coffee <span>≥1 min · 210 ft</span> · 🤠 Texas Roadhouse <span>≥8 min · 0.4 mi</span> · 🍎 Applebee&#x27;s <span>≥8 min · 0.4 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.87635,-77.44293" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Westfield Century City (Los Angeles, CA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥1 min</span><span>🤠 Texas Roadhouse ≥8 min</span><span>🍎 Applebee&#x27;s ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.87635,-77.44293" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Westfield Century City (Los Angeles, CA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">10250 Santa Monica Blvd, Los Angeles, CA</div><div class="host">Electrify America</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 69 ft</span> · 🐼 Panda Express <span>≥1 min · 115 ft</span> · <b>🌯 Chipotle <span>≥1 min · 125 ft</span></b> · 🍔 Shake Shack <span>≥1 min · 154 ft</span> · 💊 Walgreens <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.05794,-118.41993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Boston, MA - Allstate Road - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>💊 Walgreens ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.05794,-118.41993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Boston, MA - Allstate Road - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
 <div class="a">101 Allstate Road, Boston, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 112 ft</span> · <b>🌯 Chipotle <span>≥1 min · 138 ft</span></b> · 🍝 Olive Garden <span>≥1 min · 259 ft</span> · 🍎 Applebee&#x27;s <span>≥1 min · 302 ft</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.3254,-71.06292" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Fayetteville, GA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍝 Olive Garden ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>💻 Best Buy ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.3254,-71.06292" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fayetteville, GA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">1135 GA-85, Fayetteville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 141 ft</span></b> · ⛽ RaceTrac <span>≥1 min · 302 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🛒 Aldi <span>≥2 min · 0.1 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.2 mi</span> · 🍗 Zaxby&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.47203,-84.44249" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Chase Bank - 5601 Red Bug Lake Rd</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>⛽ RaceTrac ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.47203,-84.44249" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chase Bank - 5601 Red Bug Lake Rd</span><small>350 kW · 4 stalls</small></div>
 <div class="a">5601 Red Bug Lake Rd, Winter Springs, FL</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 144 ft</span></b> · 🛒 Publix <span>≥1 min · 262 ft</span> · 💊 CVS <span>≥2 min · 443 ft</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.64728,-81.27008" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>First Washington Realty Lakeshore Plaza (San Francisco, CA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🛒 Publix ≥1 min</span><span>💊 CVS ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.64728,-81.27008" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>First Washington Realty Lakeshore Plaza (San Francisco, CA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">4258 Ocean Avenue, San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 148 ft</span></b> · ☕ Peet&#x27;s Coffee <span>≥2 min · 410 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.73241,-122.48944" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Vintage Oaks - EVroadway</span><small>400 kW · 3 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.73241,-122.48944" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Vintage Oaks - EVroadway</span><small>400 kW · 3 stalls</small></div>
 <div class="a">128 Vintage Way, Novato, CA</div><div class="host">Autel</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 148 ft</span></b> · ☕ Starbucks <span>≥1 min · 345 ft</span> · 🥞 IHOP <span>≥1 min · 371 ft</span> · 🥖 Panera Bread <span>≥2 min · 522 ft</span> · 🍔 In-N-Out <span>≥3 min · 0.1 mi</span> · 🎯 Target <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.09103,-122.55618" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Federal Way</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>🎯 Target ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.09103,-122.55618" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Federal Way</span><small>200 kW · 4 stalls</small></div>
 <div class="a">31717 Pacific Highway, Federal Way, WA</div><div class="host">Red E</div>
-<div class="c">🐼 Panda Express <span>≥1 min · 75 ft</span> · <b>🌯 Chipotle <span>≥1 min · 148 ft</span></b> · 🍕 Little Caesars <span>≥1 min · 338 ft</span> · 💻 Best Buy <span>≥3 min · 0.1 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.31669,-122.31393" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Pnc Bank Freewire</span><small>200 kW · 2 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>💻 Best Buy ≥3 min</span><span>🛍️ Trader Joe&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.31669,-122.31393" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pnc Bank Freewire</span><small>200 kW · 2 stalls</small></div>
 <div class="a">931 Brodhead Rd, Carnot-Moon, PA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 154 ft</span></b> · 💊 Walgreens <span>≥2 min · 443 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.51762,-80.22276" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Shoppes on Bluebell - New Philadelphia</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.51762,-80.22276" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Shoppes on Bluebell - New Philadelphia</span><small>400 kW · 4 stalls</small></div>
 <div class="a">125 Bluebell Drive SW, New Philadelphia, OH</div><div class="host">Francis Energy</div>
-<div class="c">☕ Starbucks <span>≥1 min · 89 ft</span> · <b>🌯 Chipotle <span>≥1 min · 154 ft</span></b> · 🍳 Denny&#x27;s <span>≥1 min · 312 ft</span> · ⛽ Speedway <span>≥2 min · 400 ft</span> · 👑 Burger King <span>≥2 min · 518 ft</span> · ⛽ Sheetz <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.49266,-81.47188" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Walnut - Penn Place</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>👑 Burger King ≥2 min</span><span>⛽ Sheetz ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49266,-81.47188" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walnut - Penn Place</span><small>350 kW · 6 stalls</small></div>
 <div class="a">4145 William Penn Highway, Monroeville, PA</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 154 ft</span></b> · 🐼 Panda Express <span>≥1 min · 305 ft</span> · 🐔 Chick-fil-A <span>≥1 min · 345 ft</span> · 🥖 Panera Bread <span>≥2 min · 512 ft</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.43936,-79.76645" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>The Mix</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.43936,-79.76645" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>The Mix</span><small>350 kW · 4 stalls</small></div>
 <div class="a">8400 Balboa Blvd, Northridge, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 157 ft</span></b> · 🍔 Five Guys <span>≥1 min · 220 ft</span> · 🤡 Jack in the Box <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍗 KFC <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.22407,-118.50203" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Lodi Target</span><small>80 kW · 1 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍗 KFC ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.22407,-118.50203" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Lodi Target</span><small>80 kW · 1 stalls</small></div>
 <div class="a">2355 W Kettleman Ln, Lodi, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 161 ft</span></b> · 🎯 Target <span>≥1 min · 279 ft</span> · 🤡 Jack in the Box <span>≥2 min · 0.1 mi</span> · 🐕 Raising Cane&#x27;s <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🛒 Safeway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.11691,-121.30301" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Everett, WA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Safeway ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.11691,-121.30301" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Everett, WA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">405 SE Everett Mall Way, Everett, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 121 ft</span> · <b>🌯 Chipotle <span>≥1 min · 161 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 482 ft</span> · 🎯 Target <span>≥2 min · 499 ft</span> · 🥪 Subway <span>≥2 min · 512 ft</span> · 🚒 Firehouse Subs <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.90931,-122.22583" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger-Frys 135 (Phoenix, AZ)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🎯 Target ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.90931,-122.22583" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger-Frys 135 (Phoenix, AZ)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4505 E Thomas Rd, Phoenix, AZ</div><div class="host">Electrify America</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 167 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 472 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span> · 🦬 Buffalo Wild Wings <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.4794,-111.98564" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Chatsworth, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.4794,-111.98564" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chatsworth, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">9185 De Soto Ave, Chatsworth, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 95 ft</span> · <b>🌯 Chipotle <span>≥1 min · 171 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.23793,-118.5894" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Janesville, WI Rechargery Relay - Morse St</span><small>400 kW · 16 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.23793,-118.5894" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Janesville, WI Rechargery Relay - Morse St</span><small>400 kW · 16 stalls</small></div>
 <div class="a">2081 Morse St, Janesville, WI</div><div class="host">IONNA</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 171 ft</span></b> · 🍗 Popeyes <span>≥1 min · 256 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 364 ft</span> · 🚒 Firehouse Subs <span>≥2 min · 453 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · ⛽ Kwik Trip <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.72405,-88.99568" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=WI">Show on map</a></div></div><div class="card"><div class="n"><span>Arcadia Coleman Landing (San Jose, CA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>⛽ Kwik Trip ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.72405,-88.99568" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Arcadia Coleman Landing (San Jose, CA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">760 Newhall Dr, San Jose, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 177 ft</span></b> · ☕ Starbucks <span>≥1 min · 230 ft</span> · 🍔 In-N-Out <span>≥1 min · 299 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.35051,-121.92286" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Jamestown Georgetown Park Garage (Washington, DC)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 In-N-Out ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.35051,-121.92286" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jamestown Georgetown Park Garage (Washington, DC)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3222 M St NW, Washington, DC</div><div class="host">Electrify America</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 177 ft</span></b> · 🍕 Domino&#x27;s <span>≥2 min · 446 ft</span> · 💊 CVS <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.90501,-77.06406" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=DC">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1858 (Charlottesville, VA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>💊 CVS ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=DC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.90501,-77.06406" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1858 (Charlottesville, VA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">312 Connor Dr, Charlottesville, VA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 180 ft</span></b> · 🎯 Target <span>≥2 min · 446 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.12784,-78.4415" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Corpus Christi, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.12784,-78.4415" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Corpus Christi, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">4938 South Staples Street, Corpus Christi, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 125 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 184 ft</span> · <b>🌯 Chipotle <span>≥1 min · 184 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.71034,-97.36851" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Suwanee, GA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.71034,-97.36851" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Suwanee, GA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">3186 Lawrenceville-Suwanee Road, Suwanee, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 184 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 394 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 446 ft</span> · 🍔 Whataburger <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.0341,-84.05269" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Glendale, AZ - W Northern Ave - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Whataburger ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.0341,-84.05269" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Glendale, AZ - W Northern Ave - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">5809 W Northern Ave, Glendale, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 184 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 292 ft</span> · 🔧 Lowe&#x27;s <span>≥2 min · 522 ft</span> · 🚒 Firehouse Subs <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.55185,-112.18569" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Evroadway Vo#6</span><small>120 kW · 1 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🥪 Subway ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.55185,-112.18569" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evroadway Vo#6</span><small>120 kW · 1 stalls</small></div>
 <div class="a">128 Vintage Way, Novato, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 184 ft</span></b> · ☕ Starbucks <span>≥1 min · 315 ft</span> · 🥞 IHOP <span>≥1 min · 338 ft</span> · 🥖 Panera Bread <span>≥2 min · 463 ft</span> · 🍔 In-N-Out <span>≥3 min · 0.1 mi</span> · 🎯 Target <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.09102,-122.55606" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Irvine Company Woodbury</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>🎯 Target ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.09102,-122.55606" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Irvine Company Woodbury</span><small>50 kW · 1 stalls</small></div>
 <div class="a">6428 Irvine Blvd, Irvine, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 187 ft</span></b> · 🐔 Chick-fil-A <span>≥1 min · 187 ft</span> · 🥪 Subway <span>≥1 min · 315 ft</span> · 🥖 Panera Bread <span>≥2 min · 495 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.69885,-117.74054" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Johns Creek, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69885,-117.74054" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Johns Creek, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">11720 Medlock Bridge Rd, Johns Creek, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 187 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 472 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🌶️ Chili&#x27;s <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.06785,-84.16896" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>San Marcos, CA - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06785,-84.16896" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Marcos, CA - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
 <div class="a">563 Grand Avenue, San Marcos, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌯 Chipotle <span>≥1 min · 190 ft</span></b> · 🥖 Panera Bread <span>≥1 min · 236 ft</span> · 🍔 In-N-Out <span>≥2 min · 427 ft</span> · 💻 Best Buy <span>≥2 min · 499 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.13654,-117.17598" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div></div>
+<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>💻 Best Buy ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.13654,-117.17598" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

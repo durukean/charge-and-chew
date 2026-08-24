@@ -20,56 +20,93 @@
 <meta name="theme-color" content="#0d1117">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Chains", "item": "https://chargeandchew.com/near/"}, {"@type": "ListItem", "position": 2, "name": "Jersey Mike's", "item": "https://chargeandchew.com/near/jersey-mike-s/"}, {"@type": "ListItem", "position": 3, "name": "West Virginia", "item": "https://chargeandchew.com/near/jersey-mike-s/wv/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Fast chargers near Jersey Mike's in West Virginia", "numberOfItems": 4, "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "Place", "name": "ChargePoint \u2014 Freedom Kia Fast DC Charger", "address": {"@type": "PostalAddress", "streetAddress": "601 Mary Jane Wood Circle", "addressLocality": "Morgantown", "addressRegion": "WV", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 39.6391, "longitude": -79.99682}}}, {"@type": "ListItem", "position": 2, "item": {"@type": "Place", "name": "ChargePoint \u2014 Astorg Auto Jlr Charleston", "address": {"@type": "PostalAddress", "streetAddress": "5 Dudley Farms Ln", "addressLocality": "Charleston", "addressRegion": "WV", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 38.32668, "longitude": -81.71327}}}, {"@type": "ListItem", "position": 3, "item": {"@type": "Place", "name": "Tesla Supercharger \u2014 Martinsburg, WV - Apple Harvest Drive - Tesla Supercharger", "address": {"@type": "PostalAddress", "streetAddress": "14686 Apple Harvest Dr", "addressLocality": "Martinsburg", "addressRegion": "WV", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 39.44271, "longitude": -77.98646}}}, {"@type": "ListItem", "position": 4, "item": {"@type": "Place", "name": "EV Connect \u2014 Premier Automotive", "address": {"@type": "PostalAddress", "streetAddress": "5392 UNIVERSITY TOWN CENTRE DR.", "addressLocality": "MORGANTOWN", "addressRegion": "WV", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 39.64604, "longitude": -80.00275}}}]}</script>
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../../">Map</a><a href="../../../near/">All chains</a></nav></header>
 <h1>🥪 EV fast chargers near Jersey Mike&#x27;s in West Virginia</h1>
 <p class="lead"><b>4 DC fast chargers</b> in West Virginia have a Jersey Mike&#x27;s within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Open on the map →</a>
-<div class="card"><div class="n"><span>Freedom Kia Fast DC Charger</span><small>24 kW · 1 stalls</small></div>
+<div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
+<div class="n"><span>Freedom Kia Fast DC Charger</span><small>24 kW · 1 stalls</small></div>
 <div class="a">601 Mary Jane Wood Circle, Morgantown, WV</div><div class="host">ChargePoint</div>
-<div class="c">🐼 Panda Express <span>≥3 min · 0.1 mi</span> · <b>🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span></b> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥4 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥5 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.6391,-79.99682" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Astorg Auto Jlr Charleston</span><small>40 kW · 1 stalls</small></div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.6391,-79.99682" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
+<div class="n"><span>Astorg Auto Jlr Charleston</span><small>40 kW · 1 stalls</small></div>
 <div class="a">5 Dudley Farms Ln, Charleston, WV</div><div class="host">ChargePoint</div>
-<div class="c">🍎 Applebee&#x27;s <span>≥1 min · 381 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · <b>🥪 Jersey Mike&#x27;s <span>≥3 min · 0.2 mi</span></b> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🍔 Five Guys <span>≥4 min · 0.2 mi</span> · ⛽ Speedway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.32668,-81.71327" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Martinsburg, WV - Apple Harvest Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥3 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍔 Five Guys ≥4 min</span><span>⛽ Speedway ≥4 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.32668,-81.71327" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
+<div class="n"><span>Martinsburg, WV - Apple Harvest Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">14686 Apple Harvest Dr, Martinsburg, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c">⛽ Sheetz <span>≥1 min · 154 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 338 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🧇 Waffle House <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.44271,-77.98646" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Premier Automotive</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥6 min</span><span>⛽ Sheetz ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.44271,-77.98646" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
+<div class="n"><span>Premier Automotive</span><small>50 kW · 1 stalls</small></div>
 <div class="a">5392 UNIVERSITY TOWN CENTRE DR., MORGANTOWN, WV</div><div class="host">EV Connect</div>
-<div class="c">🚒 Firehouse Subs <span>≥2 min · 0.1 mi</span> · 🏪 Sam&#x27;s Club <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥5 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🎯 Target <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.64604,-80.00275" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a></div></div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥9 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>💊 CVS ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Jersey Mike&#x27;s&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.64604,-80.00275" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <h2>Other chains near fast chargers in West Virginia</h2><div class="chips"><a href="../../sheetz/wv/">⛽ Sheetz <small>24</small></a><a href="../../mcdonald-s/wv/">🍟 McDonald&#x27;s <small>20</small></a><a href="../../taco-bell/wv/">🌮 Taco Bell <small>19</small></a><a href="../../wendy-s/wv/">🍔 Wendy&#x27;s <small>19</small></a><a href="../../subway/wv/">🥪 Subway <small>17</small></a><a href="../../walmart/wv/">🛒 Walmart <small>15</small></a><a href="../../arby-s/wv/">🥩 Arby&#x27;s <small>15</small></a><a href="../../chick-fil-a/wv/">🐔 Chick-fil-A <small>13</small></a><a href="../../kfc/wv/">🍗 KFC <small>13</small></a><a href="../../cvs/wv/">💊 CVS <small>11</small></a><a href="../../starbucks/wv/">☕ Starbucks <small>10</small></a><a href="../../burger-king/wv/">👑 Burger King <small>10</small></a><a href="../../texas-roadhouse/wv/">🤠 Texas Roadhouse <small>8</small></a><a href="../../target/wv/">🎯 Target <small>6</small></a><a href="../../hardee-s/wv/">⭐ Hardee&#x27;s <small>6</small></a><a href="../../little-caesars/wv/">🍕 Little Caesars <small>6</small></a><a href="../../kroger/wv/">🛒 Kroger <small>6</small></a><a href="../../speedway/wv/">⛽ Speedway <small>6</small></a><a href="../../applebee-s/wv/">🍎 Applebee&#x27;s <small>5</small></a><a href="../../best-buy/wv/">💻 Best Buy <small>5</small></a><a href="../../panera-bread/wv/">🥖 Panera Bread <small>4</small></a><a href="../../chili-s/wv/">🌶️ Chili&#x27;s <small>4</small></a><a href="../../sam-s-club/wv/">🏪 Sam&#x27;s Club <small>4</small></a><a href="../../aldi/wv/">🛒 Aldi <small>4</small></a><a href="../../lowe-s/wv/">🔧 Lowe&#x27;s <small>4</small></a><a href="../../dunkin/wv/">🍩 Dunkin&#x27; <small>3</small></a><a href="../../panda-express/wv/">🐼 Panda Express <small>3</small></a><a href="../../buffalo-wild-wings/wv/">🦬 Buffalo Wild Wings <small>3</small></a><a href="../../domino-s/wv/">🍕 Domino&#x27;s <small>3</small></a><a href="../../five-guys/wv/">🍔 Five Guys <small>2</small></a><a href="../../popeyes/wv/">🍗 Popeyes <small>2</small></a><a href="../../pilot/wv/">⛽ Pilot <small>2</small></a><a href="../../denny-s/wv/">🍳 Denny&#x27;s <small>1</small></a><a href="../../waffle-house/wv/">🧇 Waffle House <small>1</small></a><a href="../../cracker-barrel/wv/">🪵 Cracker Barrel <small>1</small></a><a href="../../chipotle/wv/">🌯 Chipotle <small>1</small></a><a href="../../olive-garden/wv/">🍝 Olive Garden <small>1</small></a><a href="../../dairy-queen/wv/">🍦 Dairy Queen <small>1</small></a><a href="../../bojangles/wv/">🍗 Bojangles <small>1</small></a><a href="../../firehouse-subs/wv/">🚒 Firehouse Subs <small>1</small></a><a href="../../pizza-hut/wv/">🍕 Pizza Hut <small>1</small></a><a href="../../walgreens/wv/">💊 Walgreens <small>1</small></a></div>
 <h2>Jersey Mike&#x27;s in other states</h2><div class="chips"><a href="../">All states</a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.

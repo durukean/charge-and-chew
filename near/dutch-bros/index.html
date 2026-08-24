@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Dutch Bros (348 locations) | Charge & Chew</title>
-<meta name="description" content="348 EV DC fast chargers within a 10-minute walk of a Dutch Bros, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Dutch Bros (331 locations) | Charge & Chew</title>
+<meta name="description" content="331 EV DC fast chargers within a 10-minute walk of a Dutch Bros, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/dutch-bros/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Dutch Bros (348 locations)">
-<meta property="og:description" content="348 EV DC fast chargers within a 10-minute walk of a Dutch Bros, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Dutch Bros (331 locations)">
+<meta property="og:description" content="331 EV DC fast chargers within a 10-minute walk of a Dutch Bros, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/dutch-bros/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>☕ EV fast chargers near Dutch Bros</h1>
-<p class="lead">We found <b>348 DC fast chargers</b> in the US — across all networks — with a Dutch Bros within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>331 DC fast chargers</b> in the US — across all networks — with a Dutch Bros within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Dutch Bros">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>102</small></a><a href="or/">Oregon <small>72</small></a><a href="wa/">Washington <small>47</small></a><a href="tx/">Texas <small>29</small></a><a href="az/">Arizona <small>18</small></a><a href="co/">Colorado <small>18</small></a><a href="ut/">Utah <small>15</small></a><a href="id/">Idaho <small>12</small></a><a href="ok/">Oklahoma <small>8</small></a><a href="nv/">Nevada <small>7</small></a><a href="nm/">New Mexico <small>7</small></a><a href="tn/">Tennessee <small>3</small></a><a href="mo/">Missouri <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="ga/">Georgia <small>1</small></a><a href="fl/">Florida <small>1</small></a><a href="ky/">Kentucky <small>1</small></a><a href="al/">Alabama <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Ethan Conrad Granite Bay</span><small>350 kW · 8 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>93</small></a><a href="or/">Oregon <small>67</small></a><a href="wa/">Washington <small>46</small></a><a href="tx/">Texas <small>29</small></a><a href="az/">Arizona <small>18</small></a><a href="co/">Colorado <small>17</small></a><a href="ut/">Utah <small>15</small></a><a href="id/">Idaho <small>11</small></a><a href="ok/">Oklahoma <small>8</small></a><a href="nv/">Nevada <small>7</small></a><a href="nm/">New Mexico <small>7</small></a><a href="tn/">Tennessee <small>3</small></a><a href="mo/">Missouri <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="ga/">Georgia <small>1</small></a><a href="fl/">Florida <small>1</small></a><a href="ky/">Kentucky <small>1</small></a><a href="al/">Alabama <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ethan Conrad Granite Bay</span><small>350 kW · 8 stalls</small></div>
 <div class="a">8595 Auburn Folsom Rd., Granite Bay, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 66 ft</span></b> · 🥪 Subway <span>≥1 min · 374 ft</span> · ⛽ Speedway <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.74147,-121.16996" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>San Antonio, TX - West Loop 1604 North - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Speedway ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>💊 CVS ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.74147,-121.16996" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Antonio, TX - West Loop 1604 North - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">7010 W Loop 1604 N, San Antonio, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 72 ft</span></b> · 🛒 Walmart <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.50368,-98.6993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Sacramento, CA Rechargery Relay - Stockton Blvd</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🛒 Walmart ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.50368,-98.6993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sacramento, CA Rechargery Relay - Stockton Blvd</span><small>400 kW · 8 stalls</small></div>
 <div class="a">7775 Stockton Blvd, Sacramento, CA</div><div class="host">IONNA</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 75 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 338 ft</span> · 🍳 Denny&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥8 min · 0.4 mi</span> · 🍔 Wendy&#x27;s <span>≥9 min · 0.5 mi</span> · 💊 CVS <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.47584,-121.41896" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>CircleK - Wenatchee, WA</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🍗 KFC ≥8 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>💊 CVS ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.47584,-121.41896" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>CircleK - Wenatchee, WA</span><small>180 kW · 4 stalls</small></div>
 <div class="a">153 Easy St, Wenatchee, WA</div><div class="host">Circle K</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 118 ft</span></b> · 🥪 Subway <span>≥1 min · 285 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46825,-120.33491" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Chevron Redlands #4</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46825,-120.33491" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chevron Redlands #4</span><small>50 kW · 1 stalls</small></div>
 <div class="a">27321 San Bernardino Ave, Redlands, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 125 ft</span></b> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span> · 🎯 Target <span>≥6 min · 0.3 mi</span> · 🛒 Aldi <span>≥7 min · 0.3 mi</span> · 🌶️ Chili&#x27;s <span>≥8 min · 0.4 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07695,-117.20815" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Chevron Redlands #2</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🌯 Chipotle ≥5 min</span><span>🎯 Target ≥6 min</span><span>🛒 Aldi ≥7 min</span><span>🌶️ Chili&#x27;s ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07695,-117.20815" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chevron Redlands #2</span><small>50 kW · 1 stalls</small></div>
 <div class="a">27321 San Bernardino Ave, Redlands, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 148 ft</span></b> · 🌯 Chipotle <span>≥6 min · 0.3 mi</span> · 🎯 Target <span>≥6 min · 0.3 mi</span> · 🛒 Aldi <span>≥7 min · 0.3 mi</span> · 🌶️ Chili&#x27;s <span>≥8 min · 0.4 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07703,-117.20829" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Raley&#x27;s Citrus Heights #239</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🌯 Chipotle ≥6 min</span><span>🎯 Target ≥6 min</span><span>🛒 Aldi ≥7 min</span><span>🌶️ Chili&#x27;s ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07703,-117.20829" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Raley&#x27;s Citrus Heights #239</span><small>350 kW · 6 stalls</small></div>
 <div class="a">7847 Lichen Dr, Citrus Heights, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 154 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 367 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 499 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.1 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.70884,-121.31367" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Chevron Redlands #3</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.70884,-121.31367" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chevron Redlands #3</span><small>50 kW · 1 stalls</small></div>
 <div class="a">27321 San Bernardino Ave, Redlands, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 157 ft</span></b> · 🌯 Chipotle <span>≥6 min · 0.3 mi</span> · 🎯 Target <span>≥6 min · 0.3 mi</span> · 🛒 Aldi <span>≥7 min · 0.3 mi</span> · 🌶️ Chili&#x27;s <span>≥8 min · 0.4 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07702,-117.2082" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Community Services (DCFC)</span><small>120 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🌯 Chipotle ≥6 min</span><span>🎯 Target ≥6 min</span><span>🛒 Aldi ≥7 min</span><span>🌶️ Chili&#x27;s ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07702,-117.2082" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Community Services (DCFC)</span><small>120 kW · 2 stalls</small></div>
 <div class="a">805 South Mission Street, Wenatchee, WA</div><div class="host">Blink</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 164 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.41342,-120.30376" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Anderson, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.41342,-120.30376" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Anderson, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">5025 Rhonda Rd, Anderson, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 167 ft</span></b> · 🐼 Panda Express <span>≥1 min · 381 ft</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.4336,-122.28876" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Chevron Redlands #1</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🚗 Sonic ≥3 min</span><span>🤡 Jack in the Box ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.4336,-122.28876" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chevron Redlands #1</span><small>50 kW · 1 stalls</small></div>
 <div class="a">27321 San Bernardino Ave, Redlands, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 171 ft</span></b> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span> · 🎯 Target <span>≥7 min · 0.3 mi</span> · 🛒 Aldi <span>≥7 min · 0.3 mi</span> · 🌶️ Chili&#x27;s <span>≥8 min · 0.4 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07704,-117.20812" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Klamath Falls, OR</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🌯 Chipotle ≥5 min</span><span>🛒 Aldi ≥7 min</span><span>🎯 Target ≥7 min</span><span>🌶️ Chili&#x27;s ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07704,-117.20812" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Klamath Falls, OR</span><small>300 kW · 6 stalls</small></div>
 <div class="a">2750 Campus Drive, Klamath Falls, OR</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 217 ft</span></b> · 🍎 Applebee&#x27;s <span>≥1 min · 233 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.24994,-121.78721" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Ethan Conrad #70</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.24994,-121.78721" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ethan Conrad #70</span><small>350 kW · 6 stalls</small></div>
 <div class="a">8732 La Riviera Drive, Sacramento, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 249 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 371 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.56327,-121.3803" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Glendale, AZ - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.56327,-121.3803" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Glendale, AZ - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">6755 West Brandon Lane, Glendale, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 266 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 292 ft</span> · 🍔 Five Guys <span>≥2 min · 515 ft</span> · 🍝 Olive Garden <span>≥2 min · 0.1 mi</span> · 🦬 Buffalo Wild Wings <span>≥2 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.53601,-112.26287" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Carson City</span><small>180 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.53601,-112.26287" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Carson City</span><small>180 kW · 8 stalls</small></div>
 <div class="a">4640 S Carson St S, Carson City, NV</div><div class="host">Evrange</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 302 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 492 ft</span> · 🥖 Panera Bread <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span> · 🍝 Olive Garden <span>≥6 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.1254,-119.77173" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=NV">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 3867 (Westminster, CO)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍝 Olive Garden ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.1254,-119.77173" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 3867 (Westminster, CO)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">200 W. 136th Ave, Westminster, CO</div><div class="host">Electrify America</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 305 ft</span></b> · 🛒 Walmart <span>≥2 min · 509 ft</span> · 🍗 KFC <span>≥2 min · 509 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.94117,-104.99198" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Capitol Chevrolet - Customer Parking</span><small>120 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍗 KFC ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.94117,-104.99198" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Capitol Chevrolet - Customer Parking</span><small>120 kW · 4 stalls</small></div>
 <div class="a">2855 Maple Ave NE, Salem, OR</div><div class="host">Blink</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 315 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 364 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥5 min · 0.2 mi</span> · 🔨 Home Depot <span>≥6 min · 0.3 mi</span> · 🍎 Applebee&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.96864,-123.02683" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>7171 Southwest Fwy</span><small>350 kW · 7 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍗 KFC ≥5 min</span><span>🔨 Home Depot ≥6 min</span><span>🍎 Applebee&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.96864,-123.02683" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7171 Southwest Fwy</span><small>350 kW · 7 stalls</small></div>
 <div class="a">7171 SOUTHWEST FWY, HOUSTON, TX</div><div class="host">Shell Recharge</div>
-<div class="c">🍗 Popeyes <span>≥1 min · 203 ft</span> · <b>☕ Dutch Bros <span>≥1 min · 318 ft</span></b> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.70413,-95.5115" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Rochester, WA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>🤡 Jack in the Box ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.70413,-95.5115" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Rochester, WA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">19615 Elderberry St SW, Rochester, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 121 ft</span> · <b>☕ Dutch Bros <span>≥1 min · 335 ft</span></b> · 👑 Burger King <span>≥2 min · 469 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.80409,-123.01229" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 4622 Valero Longmont</span><small>240 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.80409,-123.01229" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 4622 Valero Longmont</span><small>240 kW · 2 stalls</small></div>
 <div class="a">902 Main Street, Longmont, CO</div><div class="host">Red E</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 335 ft</span></b> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥5 min · 0.2 mi</span> · 🍦 Dairy Queen <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.17456,-105.10211" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Chico Nissan</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>💊 Walgreens ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🍦 Dairy Queen ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.17456,-105.10211" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chico Nissan</span><small>50 kW · 1 stalls</small></div>
 <div class="a">575 Manzanita Ave, Chico, CA</div><div class="host">In Charge</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 351 ft</span></b> · ⛽ Speedway <span>≥2 min · 407 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 466 ft</span> · 🐼 Panda Express <span>≥3 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥4 min · 0.2 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.75697,-121.84368" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Berry Patch Restaurant</span><small>100 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.75697,-121.84368" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Berry Patch Restaurant</span><small>100 kW · 4 stalls</small></div>
 <div class="a">900 Newville Rd, Orland, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 367 ft</span></b> · 👑 Burger King <span>≥2 min · 440 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 479 ft</span> · 💊 CVS <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.75042,-122.20278" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Rr #70 Dixon DC</span><small>100 kW · 1 stalls</small></div>
-<div class="a">2299 N 1st St, Dixon, CA</div><div class="host">ChargePoint</div>
-<div class="c">🌯 Chipotle <span>≥1 min · 269 ft</span> · <b>☕ Dutch Bros <span>≥1 min · 367 ft</span></b> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.46698,-121.82276" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Patterson, CA - Rogers Road - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 CVS ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.75042,-122.20278" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Patterson, CA - Rogers Road - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
 <div class="a">40 Rogers Rd, Patterson, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Subway <span>≥1 min · 85 ft</span> · 🤡 Jack in the Box <span>≥1 min · 292 ft</span> · ☕ Starbucks <span>≥1 min · 328 ft</span> · <b>☕ Dutch Bros <span>≥1 min · 371 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥2 min · 486 ft</span> · 🍳 Denny&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.46505,-121.17454" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Los Banos</span><small>200 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.46505,-121.17454" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Los Banos</span><small>200 kW · 2 stalls</small></div>
 <div class="a">1460 E Pacheco Blvd, Los Banos, CA</div><div class="host">Evrange</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 371 ft</span></b> · ☕ Starbucks <span>≥2 min · 499 ft</span> · 🤡 Jack in the Box <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.05829,-120.83232" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 2075 (Bend, OR)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🤡 Jack in the Box ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.05829,-120.83232" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 2075 (Bend, OR)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">20120 SW Pinebrook Blvd, Bend, OR</div><div class="host">Electrify America</div>
-<div class="c">🐼 Panda Express <span>≥1 min · 171 ft</span> · 🛒 Walmart <span>≥1 min · 328 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 345 ft</span> · <b>☕ Dutch Bros <span>≥1 min · 374 ft</span></b> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.02256,-121.31675" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>7509 N Willow Ave</span><small>50 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🥪 Subway ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.02256,-121.31675" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7509 N Willow Ave</span><small>50 kW · 4 stalls</small></div>
 <div class="a">7509 N Willow Ave, Fresno, CA</div><div class="host">EVCS</div>
-<div class="c"><b>☕ Dutch Bros <span>≥1 min · 387 ft</span></b> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥6 min · 0.3 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥6 min · 0.3 mi</span> · 💊 CVS <span>≥6 min · 0.3 mi</span> · 🎯 Target <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.84569,-119.73019" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Klamath Falls, OR - North Eldorado Avenue - Tesla Supercharg</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🛍️ Trader Joe&#x27;s ≥6 min</span><span>💊 CVS ≥6 min</span><span>🎯 Target ≥8 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.84569,-119.73019" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Klamath Falls, OR - North Eldorado Avenue - Tesla Supercharg</span><small>325 kW · 12 stalls</small></div>
 <div class="a">2229 N Eldorado Ave, Klamath Falls, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 397 ft</span></b> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.249,-121.78707" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Rr #70 Dixon DC</span><small>100 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.249,-121.78707" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Rr #70 Dixon DC</span><small>100 kW · 1 stalls</small></div>
 <div class="a">2299 N 1st St, Dixon, CA</div><div class="host">ChargePoint</div>
-<div class="c">🌯 Chipotle <span>≥1 min · 253 ft</span> · <b>☕ Dutch Bros <span>≥2 min · 404 ft</span></b> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.46695,-121.82275" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Butler Auto Ford Sales Lot</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🌯 Chipotle ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.46695,-121.82275" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Butler Auto Ford Sales Lot</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1977 Oregon 99, Ashland, OR</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 407 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.21863,-122.73788" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Foodsco N. Bakersfield H</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.21863,-122.73788" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Foodsco N. Bakersfield H</span><small>350 kW · 8 stalls</small></div>
 <div class="a">2505 Haley St, Bakersfield, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 417 ft</span></b> · 🔧 Lowe&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.39641,-118.97565" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Chico Vw DC Wallbox</span><small>24 kW · 1 stalls</small></div>
-<div class="a">902 Oroville Ave, Chico, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 420 ft</span></b> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span> · 🍕 Little Caesars <span>≥7 min · 0.3 mi</span> · ☕ Starbucks <span>≥8 min · 0.4 mi</span> · ☕ Peet&#x27;s Coffee <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.72503,-121.83531" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Meals on Wheels</span><small>50 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39641,-118.97565" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Meals on Wheels</span><small>50 kW · 4 stalls</small></div>
 <div class="a">2718 Danbury St, San Antonio, TX</div><div class="host">Loop</div>
-<div class="c">🍕 Pizza Hut <span>≥1 min · 299 ft</span> · <b>☕ Dutch Bros <span>≥2 min · 436 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.51879,-98.44864" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>H-D Scottsdale Dcfast Hog</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🍕 Pizza Hut ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.51879,-98.44864" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>H-D Scottsdale Dcfast Hog</span><small>24 kW · 1 stalls</small></div>
 <div class="a">15656 N Hayden Rd, Scottsdale, AZ</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 443 ft</span></b> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.62806,-111.89552" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>TS&amp;S Ford</span><small>120 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.62806,-111.89552" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>TS&amp;S Ford</span><small>120 kW · 4 stalls</small></div>
 <div class="a">1825 U.S. 97, Madras, OR</div><div class="host">Blink</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 446 ft</span></b> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span> · 🥬 Whole Foods <span>≥7 min · 0.3 mi</span> · ☕ Starbucks <span>≥8 min · 0.4 mi</span> · 🛒 Safeway <span>≥8 min · 0.4 mi</span> · 🌮 Taco Bell <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.05568,-121.27256" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Chico Vw DC Wallbox</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🥬 Whole Foods ≥7 min</span><span>☕ Starbucks ≥8 min</span><span>🛒 Safeway ≥8 min</span><span>🌮 Taco Bell ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.05568,-121.27256" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Chico Vw DC Wallbox</span><small>24 kW · 1 stalls</small></div>
 <div class="a">902 Main St, Chico, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 449 ft</span></b> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span> · 🍕 Little Caesars <span>≥7 min · 0.3 mi</span> · ☕ Starbucks <span>≥8 min · 0.4 mi</span> · ☕ Peet&#x27;s Coffee <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.72483,-121.83519" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🤡 Jack in the Box ≥5 min</span><span>🍕 Little Caesars ≥7 min</span><span>☕ Starbucks ≥8 min</span><span>☕ Peet&#x27;s Coffee ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.72483,-121.83519" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
 <div class="a">2411 W Court Street, Pasco, WA</div><div class="host">Opconnect</div>
-<div class="c">☕ Starbucks <span>≥1 min · 0 ft</span> · 👑 Burger King <span>≥1 min · 125 ft</span> · 🌮 Taco Bell <span>≥2 min · 394 ft</span> · <b>☕ Dutch Bros <span>≥2 min · 453 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 502 ft</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.24182,-119.12418" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Phoenix MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.24182,-119.12418" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Phoenix MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">4149 South Pacific Hwy, Phoenix, OR</div><div class="host">Mercedes Benz</div>
-<div class="c">☕ Starbucks <span>≥1 min · 148 ft</span> · <b>☕ Dutch Bros <span>≥2 min · 456 ft</span></b> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 🔨 Home Depot <span>≥8 min · 0.4 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.28058,-122.82152" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Cascade Chevrolet</span><small>25 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>🔨 Home Depot ≥8 min</span><span>🥪 Subway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.28058,-122.82152" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Cascade Chevrolet</span><small>25 kW · 1 stalls</small></div>
 <div class="a">148 Easy St, Wenatchee, WA</div><div class="host">Non-networked</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 479 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46746,-120.33692" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Butler Auto Ford</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🥪 Subway ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46746,-120.33692" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Butler Auto Ford</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1977 Oregon 99, Ashland, OR</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Dutch Bros <span>≥2 min · 479 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.21907,-122.73801" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a></div></div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.21907,-122.73801" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Butler Auto Acura Sales Pdi</span><small>125 kW · 1 stalls</small></div>
+<div class="a">1977 Oregon 99, Ashland, OR</div><div class="host">ChargePoint</div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.21912,-122.73805" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>W.L.K.S.T. Partners</span><small>50 kW · 8 stalls</small></div>
+<div class="a">1859 Pacific Ave, Stockton, CA</div><div class="host">Non-networked</div>
+<div class="c"><span>☕ <b>Dutch Bros</b> ≥2 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dutch Bros&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.96983,-121.29977" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

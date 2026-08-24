@@ -59,33 +59,66 @@ def fmt_d(m):
     return f"{round(m*3.281)} ft" if mi < .1 else f"{mi:.1f} mi"
 
 CSS = """
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 """
 
 def page(path, title, desc, body, canonical, jsonld="", thin=False):
@@ -114,7 +147,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta name="theme-color" content="#0d1117">
 {jsonld}
 <style>{CSS}</style></head><body><div class="wrap">
-<header><a class="logo" href="{root}">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="{root}"><span class="mk">\u26a1</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
@@ -147,18 +180,26 @@ def jsonld_state(key, st, sn, sites_list, canonical):
 
 
 def site_card(s, focus, root):
+    """Mirrors the app's result card: walk-time ring, mono spec badge, chain pills."""
     m = matches.get(s["id"], {})
     chains = []
-    for k, d in m.items():
-        t = f"{brands[k]['e']} {esc(k)} <span>≥{mins(d)} min · {fmt_d(d)}</span>"
-        chains.append(f"<b>{t}</b>" if k == focus else t)
-    net = f'<div class="host">{esc(s.get("net",""))}</div>' if s.get("net") else ""
-    spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "", f"{s['stalls']} stalls" if s.get('stalls') else ""] if x)
-    return f"""<div class="card"><div class="n"><span>{esc(s['name'])}</span><small>{spec}</small></div>
+    for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[1]))[:6]:
+        label = f"{brands[k]['e']} {'<b>' + esc(k) + '</b>' if k == focus else esc(k)} ≥{mins(d)} min"
+        chains.append(f"<span>{label}</span>")
+    focus_d = m.get(focus)
+    ring = (f'<div class="ring"><b>≥{mins(focus_d)}</b><span>min</span></div>'
+            if focus_d is not None else '<div class="ring">⚡</div>')
+    net = f'<div class="host">{esc(s.get("net", ""))}</div>' if s.get("net") else ""
+    spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "",
+                                  f"{s['stalls']} stalls" if s.get('stalls') else ""] if x)
+    extra = f'<span>+{len(m) - 6}</span>' if len(m) > 6 else ""
+    return f"""<div class="card">{ring}<div class="body">
+<div class="n"><span>{esc(s['name'])}</span><small>{spec}</small></div>
 <div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>{net}
-<div class="c">{' · '.join(chains[:6])}</div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query={s['lat']},{s['lon']}" target="_blank" rel="noopener">Google Maps</a>
-<a href="{root}?chain={esc(focus)}&amp;state={s['st']}">Show on map</a></div></div>"""
+<div class="c">{''.join(chains)}{extra}</div>
+<div class="l"><a class="pri" href="{root}?chain={esc(focus)}&amp;state={s['st']}">Show on map</a>\
+<a href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a></div>
+</div></div>"""
 
 urls = []
 def add(path): urls.append(f"{BASE}/{path.replace('index.html','')}")

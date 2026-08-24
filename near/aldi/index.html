@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Aldi (1059 locations) | Charge & Chew</title>
-<meta name="description" content="1059 EV DC fast chargers within a 10-minute walk of a Aldi, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Aldi (1013 locations) | Charge & Chew</title>
+<meta name="description" content="1013 EV DC fast chargers within a 10-minute walk of a Aldi, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/aldi/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Aldi (1059 locations)">
-<meta property="og:description" content="1059 EV DC fast chargers within a 10-minute walk of a Aldi, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Aldi (1013 locations)">
+<meta property="og:description" content="1013 EV DC fast chargers within a 10-minute walk of a Aldi, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/aldi/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🛒 EV fast chargers near Aldi</h1>
-<p class="lead">We found <b>1059 DC fast chargers</b> in the US — across all networks — with an Aldi within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1013 DC fast chargers</b> in the US — across all networks — with an Aldi within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Aldi">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="fl/">Florida <small>105</small></a><a href="il/">Illinois <small>99</small></a><a href="ca/">California <small>96</small></a><a href="ny/">New York <small>94</small></a><a href="oh/">Ohio <small>69</small></a><a href="mi/">Michigan <small>61</small></a><a href="pa/">Pennsylvania <small>49</small></a><a href="va/">Virginia <small>37</small></a><a href="md/">Maryland <small>36</small></a><a href="ma/">Massachusetts <small>35</small></a><a href="nc/">North Carolina <small>32</small></a><a href="ga/">Georgia <small>32</small></a><a href="in/">Indiana <small>32</small></a><a href="mn/">Minnesota <small>31</small></a><a href="tx/">Texas <small>28</small></a><a href="wi/">Wisconsin <small>27</small></a><a href="mo/">Missouri <small>26</small></a><a href="nj/">New Jersey <small>24</small></a><a href="al/">Alabama <small>16</small></a><a href="sc/">South Carolina <small>16</small></a><a href="ia/">Iowa <small>13</small></a><a href="ky/">Kentucky <small>11</small></a><a href="nh/">New Hampshire <small>10</small></a><a href="tn/">Tennessee <small>10</small></a><a href="ok/">Oklahoma <small>9</small></a><a href="ct/">Connecticut <small>8</small></a><a href="la/">Louisiana <small>8</small></a><a href="ms/">Mississippi <small>8</small></a><a href="ks/">Kansas <small>8</small></a><a href="de/">Delaware <small>5</small></a><a href="ri/">Rhode Island <small>5</small></a><a href="az/">Arizona <small>4</small></a><a href="wv/">West Virginia <small>4</small></a><a href="ar/">Arkansas <small>3</small></a><a href="nd/">North Dakota <small>2</small></a><a href="sd/">South Dakota <small>2</small></a><a href="nv/">Nevada <small>2</small></a><a href="ne/">Nebraska <small>2</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Windsor Corner (East Windsor, NJ)</span><small>350 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="il/">Illinois <small>97</small></a><a href="fl/">Florida <small>96</small></a><a href="ca/">California <small>87</small></a><a href="ny/">New York <small>87</small></a><a href="oh/">Ohio <small>66</small></a><a href="mi/">Michigan <small>59</small></a><a href="pa/">Pennsylvania <small>48</small></a><a href="va/">Virginia <small>37</small></a><a href="md/">Maryland <small>34</small></a><a href="ga/">Georgia <small>32</small></a><a href="nc/">North Carolina <small>31</small></a><a href="mn/">Minnesota <small>31</small></a><a href="in/">Indiana <small>31</small></a><a href="ma/">Massachusetts <small>29</small></a><a href="wi/">Wisconsin <small>27</small></a><a href="tx/">Texas <small>27</small></a><a href="mo/">Missouri <small>26</small></a><a href="nj/">New Jersey <small>24</small></a><a href="sc/">South Carolina <small>16</small></a><a href="al/">Alabama <small>15</small></a><a href="ia/">Iowa <small>13</small></a><a href="ky/">Kentucky <small>11</small></a><a href="nh/">New Hampshire <small>10</small></a><a href="tn/">Tennessee <small>10</small></a><a href="ok/">Oklahoma <small>9</small></a><a href="ct/">Connecticut <small>8</small></a><a href="la/">Louisiana <small>8</small></a><a href="ks/">Kansas <small>8</small></a><a href="ms/">Mississippi <small>7</small></a><a href="de/">Delaware <small>5</small></a><a href="ri/">Rhode Island <small>5</small></a><a href="az/">Arizona <small>4</small></a><a href="wv/">West Virginia <small>4</small></a><a href="ar/">Arkansas <small>3</small></a><a href="nd/">North Dakota <small>2</small></a><a href="sd/">South Dakota <small>2</small></a><a href="nv/">Nevada <small>2</small></a><a href="ne/">Nebraska <small>2</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Windsor Corner (East Windsor, NJ)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">440 US 130, East Windsor, NJ</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 66 ft</span></b> · 🌮 Taco Bell <span>≥2 min · 449 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.27293,-74.54102" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Target T0940 (Palm Desert, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.27293,-74.54102" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T0940 (Palm Desert, CA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">72549 Highway 111, Palm Desert, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 125 ft</span></b> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🥬 Whole Foods <span>≥3 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.1 mi</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.72481,-116.40206" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Camillus TUL</span><small>320 kW · 3 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🥬 Whole Foods ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.72481,-116.40206" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Camillus TUL</span><small>320 kW · 3 stalls</small></div>
 <div class="a">3747 Milton Ave, Camillus, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 128 ft</span></b> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span> · 📦 Costco <span>≥7 min · 0.3 mi</span> · 🐦 Red Robin <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.05214,-76.26327" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Pulaski</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🔨 Home Depot ≥2 min</span><span>📦 Costco ≥7 min</span><span>🐦 Red Robin ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.05214,-76.26327" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Pulaski</span><small>320 kW · 4 stalls</small></div>
 <div class="a">3863 Rome Rd, Pulaski, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 135 ft</span></b> · 🍩 Dunkin&#x27; <span>≥2 min · 495 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥6 min · 0.3 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.55942,-76.12153" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi TUL 80 Elmwood</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍕 Little Caesars ≥6 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.55942,-76.12153" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi TUL 80 Elmwood</span><small>320 kW · 4 stalls</small></div>
 <div class="a">2090 Elmwood Ave, Buffalo, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 138 ft</span></b> · 🍗 Popeyes <span>≥1 min · 174 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🎯 Target <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.95454,-78.87943" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Broadway TUL</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🎯 Target ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.95454,-78.87943" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Broadway TUL</span><small>320 kW · 4 stalls</small></div>
 <div class="a">998 Broadway St, Buffalo, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 144 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.89349,-78.83782" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Coppus Motors 1 Coppus Motors</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.89349,-78.83782" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Coppus Motors 1 Coppus Motors</span><small>24 kW · 1 stalls</small></div>
 <div class="a">2190 W Market St, Tiffin, OH</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 154 ft</span></b> · 🐼 Panda Express <span>≥2 min · 486 ft</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.2 mi</span> · 🛒 Kroger <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.10988,-83.21149" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Yorkville</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🛒 Kroger ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.10988,-83.21149" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Yorkville</span><small>150 kW · 8 stalls</small></div>
 <div class="a">315 Oriskany Blvd, Yorkville, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 161 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 515 ft</span> · 🌮 Taco Bell <span>≥2 min · 525 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · ⛽ Speedway <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.11278,-75.27583" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Ballston Spa TUL</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>⛽ Speedway ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.11278,-75.27583" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Ballston Spa TUL</span><small>150 kW · 8 stalls</small></div>
 <div class="a">2008 Doubleday Ave, Ballston Spa, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 174 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 213 ft</span> · 💊 CVS <span>≥5 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span> · 🍕 Pizza Hut <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01123,-73.84882" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Carthage TUL</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>💊 CVS ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🍕 Pizza Hut ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01123,-73.84882" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Carthage TUL</span><small>150 kW · 8 stalls</small></div>
 <div class="a">14 N Broad St, West Carthage, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 177 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.96926,-75.62409" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Modern Hyundai</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.96926,-75.62409" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Modern Hyundai</span><small>62 kW · 1 stalls</small></div>
 <div class="a">965 Concord Pkwy S, Concord, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 180 ft</span></b> · 🤡 Jack in the Box <span>≥3 min · 0.1 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥5 min · 0.2 mi</span> · 🍗 Bojangles <span>≥6 min · 0.3 mi</span> · ⛽ QuikTrip <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.39231,-80.62172" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>The Shops at Southgate</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>🍗 Bojangles ≥6 min</span><span>⛽ QuikTrip ≥6 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39231,-80.62172" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>The Shops at Southgate</span><small>50 kW · 2 stalls</small></div>
 <div class="a">100 E Fairfax St, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c">🥪 Subway <span>≥1 min · 167 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 184 ft</span> · <b>🛒 Aldi <span>≥1 min · 190 ft</span></b> · 🥬 Whole Foods <span>≥3 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.88009,-77.17221" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Carle Place, NY - Glen Cove Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥬 Whole Foods ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>💊 CVS ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.88009,-77.17221" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Carle Place, NY - Glen Cove Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">209 Glen Cove Rd, Carle Place, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 197 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 509 ft</span> · 🥖 Panera Bread <span>≥7 min · 0.3 mi</span> · 🌯 Chipotle <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.74842,-73.61676" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>North Babylon, NY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥7 min</span><span>🌯 Chipotle ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.74842,-73.61676" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>North Babylon, NY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1261 Deer Park Avenue, North Babylon, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 200 ft</span></b> · ⛽ Speedway <span>≥1 min · 276 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 256 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.73954,-73.3197" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Yorktowne Center</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🚗 Sonic ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.73954,-73.3197" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Yorktowne Center</span><small>200 kW · 4 stalls</small></div>
 <div class="a">8130 Arlington Blvd, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 203 ft</span></b> · ☕ Starbucks <span>≥1 min · 322 ft</span> · 💊 CVS <span>≥2 min · 472 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.86595,-77.22528" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Johnstown TUL</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🐼 Panda Express ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.86595,-77.22528" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Johnstown TUL</span><small>150 kW · 8 stalls</small></div>
 <div class="a">266 N Comrie Ave, Johnstown, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 213 ft</span></b> · ⛽ Speedway <span>≥1 min · 262 ft</span> · 🍗 Popeyes <span>≥1 min · 295 ft</span> · 🍎 Applebee&#x27;s <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01806,-74.36112" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi TUL 21 Oswego</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01806,-74.36112" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi TUL 21 Oswego</span><small>320 kW · 4 stalls</small></div>
 <div class="a">290 NY-104, Oswego, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 217 ft</span></b> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.46158,-76.4787" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>New Castle, PA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍗 KFC ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.46158,-76.4787" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Castle, PA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">2604 W State St, New Castle, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c">⛽ Sheetz <span>≥1 min · 121 ft</span> · <b>🛒 Aldi <span>≥1 min · 220 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🔧 Lowe&#x27;s <span>≥4 min · 0.2 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.01437,-80.39756" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Geneseo TUL</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.01437,-80.39756" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Geneseo TUL</span><small>150 kW · 8 stalls</small></div>
 <div class="a">4566 Morganview Rd, Geneseo, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 223 ft</span></b> · 🍎 Applebee&#x27;s <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span> · 🛒 Walmart <span>≥10 min · 0.5 mi</span> · 🥪 Subway <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.79943,-77.78013" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Burns Front A</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🛒 Walmart ≥10 min</span><span>🥪 Subway ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.79943,-77.78013" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Burns Front A</span><small>62 kW · 1 stalls</small></div>
 <div class="a">601 NJ-70, Evesham, NJ</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 233 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🦆 Wawa <span>≥5 min · 0.3 mi</span> · 🍩 Dunkin&#x27; <span>≥6 min · 0.3 mi</span> · ☕ Starbucks <span>≥7 min · 0.3 mi</span> · 🍔 Shake Shack <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.89572,-74.93707" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi TUL 46 Saranac Lake</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🦆 Wawa ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>☕ Starbucks ≥7 min</span><span>🍔 Shake Shack ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.89572,-74.93707" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi TUL 46 Saranac Lake</span><small>150 kW · 8 stalls</small></div>
 <div class="a">587 Lake Flower Ave, Saranac Lake, NY</div><div class="host">Red E</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 167 ft</span> · <b>🛒 Aldi <span>≥1 min · 233 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 361 ft</span> · 🥪 Subway <span>≥2 min · 456 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.31265,-74.11557" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Martinezdc1</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.31265,-74.11557" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Martinezdc1</span><small>125 kW · 1 stalls</small></div>
 <div class="a">221 Bobby Jones Expy, Martinez, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 236 ft</span></b> · 🔧 Lowe&#x27;s <span>≥3 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.3 mi</span> · 🍗 Bojangles <span>≥6 min · 0.3 mi</span> · 🍗 Wingstop <span>≥7 min · 0.4 mi</span> · 🛒 Walmart <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.50691,-82.09316" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Baldwinsville</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🍗 Bojangles ≥6 min</span><span>🍗 Wingstop ≥7 min</span><span>🛒 Walmart ≥9 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.50691,-82.09316" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Baldwinsville</span><small>150 kW · 8 stalls</small></div>
 <div class="a">2254 Downer St, Baldwinsville, NY</div><div class="host">Red E</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 128 ft</span> · 🥪 Subway <span>≥1 min · 174 ft</span> · <b>🛒 Aldi <span>≥1 min · 236 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 335 ft</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.15133,-76.35087" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Auburn, AL - S College St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.15133,-76.35087" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Auburn, AL - S College St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1617 South College Street, Auburn, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 246 ft</span></b> · 🍕 Little Caesars <span>≥1 min · 285 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 486 ft</span> · 🥩 Arby&#x27;s <span>≥7 min · 0.3 mi</span> · 🍔 Wendy&#x27;s <span>≥7 min · 0.3 mi</span> · 🛒 Walmart <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.57642,-85.49755" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Nordic Star LLC-Evergreen Square (Pine City, MN)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🚗 Sonic ≥6 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.57642,-85.49755" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Nordic Star LLC-Evergreen Square (Pine City, MN)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">110 Evergreen Sq SW, Pine City, MN</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 249 ft</span></b> · 🥪 Subway <span>≥1 min · 384 ft</span> · 🛒 Walmart <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span> · 🍦 Dairy Queen <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.81846,-92.97899" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Olympic Oaks Village</span><small>60 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🍗 KFC ≥3 min</span><span>🍦 Dairy Queen ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.81846,-92.97899" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Olympic Oaks Village</span><small>60 kW · 4 stalls</small></div>
 <div class="a">12101 Manchester Road, Des Peres, MO</div><div class="host">Blink</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 249 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥5 min · 0.3 mi</span> · 🌯 Chipotle <span>≥10 min · 0.5 mi</span> · 🐔 Chick-fil-A <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.6035,-90.43929" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Jurupa Valley, CA - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 Walgreens ≥5 min</span><span>🌯 Chipotle ≥10 min</span><span>🐔 Chick-fil-A ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.6035,-90.43929" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jurupa Valley, CA - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">8169 Mission Blvd, Jurupa Valley, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 253 ft</span></b> · 🐕 Raising Cane&#x27;s <span>≥1 min · 335 ft</span> · 🌯 Chipotle <span>≥2 min · 407 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🍔 In-N-Out <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.01254,-117.46065" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Gaithersburg, MD Rechargery Relay - S Frederick Ave</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🎯 Target ≥2 min</span><span>🍔 In-N-Out ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.01254,-117.46065" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gaithersburg, MD Rechargery Relay - S Frederick Ave</span><small>400 kW · 10 stalls</small></div>
 <div class="a">16529 S Frederick Ave, Gaithersburg, MD</div><div class="host">IONNA</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 253 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.12769,-77.18459" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Burbank, CA - N Victory Blvd - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.12769,-77.18459" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Burbank, CA - N Victory Blvd - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">677 N Victory Blvd, Burbank, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 256 ft</span></b> · 👑 Burger King <span>≥2 min · 449 ft</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 📦 Costco <span>≥8 min · 0.4 mi</span> · 🥪 Subway <span>≥10 min · 0.5 mi</span> · 🍔 In-N-Out <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.17931,-118.32121" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Alexander City, AL - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>📦 Costco ≥8 min</span><span>🥪 Subway ≥10 min</span><span>🍔 In-N-Out ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.17931,-118.32121" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Alexander City, AL - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">1061 US-280, Alexander City, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 187 ft</span> · <b>🛒 Aldi <span>≥1 min · 256 ft</span></b> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.92254,-85.96045" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 1700 (Poway, CA)</span><small>150 kW · 3 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.92254,-85.96045" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 1700 (Poway, CA)</span><small>150 kW · 3 stalls</small></div>
 <div class="a">13425 Community Rd, Poway, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 259 ft</span></b> · 🛒 Walmart <span>≥2 min · 420 ft</span> · ☕ Starbucks <span>≥2 min · 479 ft</span> · 🌯 Chipotle <span>≥2 min · 0.1 mi</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.9583,-117.03865" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Brixmor Parkway Plaza (Carle Place, NY)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.9583,-117.03865" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Brixmor Parkway Plaza (Carle Place, NY)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">207-225 Glen Cove Rd, Carle Place, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 259 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥6 min · 0.3 mi</span> · 🌯 Chipotle <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.74809,-73.61688" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Annandale Shopping Center</span><small>100 kW · 2 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥6 min</span><span>🌯 Chipotle ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.74809,-73.61688" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Annandale Shopping Center</span><small>100 kW · 2 stalls</small></div>
 <div class="a">7040 Columbia Pike, Annandale, VA</div><div class="host">EVgo</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 184 ft</span> · <b>🛒 Aldi <span>≥1 min · 259 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.83392,-77.18789" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Harry Brown&#x27;s Family Automotive</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥4 min</span><span>🍕 Pizza Hut ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.83392,-77.18789" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Harry Brown&#x27;s Family Automotive</span><small>50 kW · 1 stalls</small></div>
 <div class="a">1747 Grant Street, Faribault, MN</div><div class="host">EV Connect</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 262 ft</span></b> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🍦 Dairy Queen <span>≥5 min · 0.3 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span> · 🍗 KFC <span>≥6 min · 0.3 mi</span> · ⛽ Kwik Trip <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.29375,-93.29474" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi South Salina</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍦 Dairy Queen ≥5 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>🍗 KFC ≥6 min</span><span>⛽ Kwik Trip ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.29375,-93.29474" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi South Salina</span><small>320 kW · 4 stalls</small></div>
 <div class="a">6111 S Salina St, Syracuse, NY</div><div class="host">Red E</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 223 ft</span> · <b>🛒 Aldi <span>≥1 min · 262 ft</span></b> · ⛽ Speedway <span>≥1 min · 390 ft</span> · 💊 Walgreens <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.98236,-76.14261" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Jefferson City, MO - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>💊 Walgreens ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.98236,-76.14261" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jefferson City, MO - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">735 W Stadium Blvd, Jefferson City, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 269 ft</span></b> · 🍕 Little Caesars <span>≥2 min · 407 ft</span> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🐕 Raising Cane&#x27;s <span>≥3 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.57968,-92.21541" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Harrisburg, PA - Grayson Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🎯 Target ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.57968,-92.21541" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Harrisburg, PA - Grayson Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">6301 Grayson Rd, Harrisburg, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 148 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 154 ft</span> · <b>🛒 Aldi <span>≥1 min · 279 ft</span></b> · 💊 CVS <span>≥2 min · 420 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 433 ft</span> · ⛽ Speedway <span>≥2 min · 486 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.26032,-76.77582" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Tonawanda</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.26032,-76.77582" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Tonawanda</span><small>150 kW · 8 stalls</small></div>
 <div class="a">3939 Niagara Falls Blvd, North Tonawanda, NY</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 279 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.055,-78.82761" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Vapex Smoke Shop</span><small>90 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.055,-78.82761" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Vapex Smoke Shop</span><small>90 kW · 4 stalls</small></div>
 <div class="a">1718 N Illinois St, Swansea, IL</div><div class="host">Universal</div>
-<div class="c">🤡 Jack in the Box <span>≥1 min · 259 ft</span> · <b>🛒 Aldi <span>≥1 min · 279 ft</span></b> · 💊 CVS <span>≥2 min · 476 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.53329,-89.98401" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>520 River St Hack DC Left</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>💊 CVS ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.53329,-89.98401" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>520 River St Hack DC Left</span><small>125 kW · 1 stalls</small></div>
 <div class="a">520 River St, Hackensack, NJ</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Aldi <span>≥1 min · 285 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥6 min · 0.3 mi</span> · 💊 CVS <span>≥6 min · 0.3 mi</span> · 🎯 Target <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.8947,-74.03817" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Aldi&amp;state=NJ">Show on map</a></div></div>
+<div class="c"><span>🛒 <b>Aldi</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🌮 Taco Bell ≥6 min</span><span>💊 CVS ≥6 min</span><span>🎯 Target ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.8947,-74.03817" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

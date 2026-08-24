@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Fetch US locations of popular road-trip chains from Overpass (OSM),
-then match them to Superchargers within walking distance.
+"""Fetch US locations of popular road-trip chains from Overpass (OSM).
 
-Outputs:
-  data/pois.json   - raw brand POIs (cache, so reruns skip fetched brands)
-  ../data.js       - window.PITSTOP_DATA = {sites, brands, matches}
+Output: data/pois.json — {brand: [{lat,lon}, ...]}, used as a cache so reruns
+skip brands already fetched. Delete a brand's entry to refetch just that one.
+
+This script does NOT build data.js — run data/build_data.py for that.
 """
 import json, math, os, re, sys, time, urllib.request, urllib.parse
 
@@ -42,7 +42,7 @@ BRANDS = {
     "Wawa":            ("🦆", "store", r"^Wawa$"),
     "Whole Foods":     ("🥬", "store", r"^Whole Foods"),
     "Trader Joe's":    ("🛍️", "store", r"^Trader Joe'?s$"),
-    "Sonic":           ("🚗", "food",  r"^Sonic Drive-?In$"),
+    "Sonic":           ("🚗", "food",  r"^Sonic( Drive-?In)?$"),   # OSM tags these just "Sonic"
     "Dairy Queen":     ("🍦", "food",  r"^Dairy Queen"),
     "KFC":             ("🍗", "food",  r"^KFC$"),
     "Popeyes":         ("🍗", "food",  r"^Popeyes"),
@@ -81,7 +81,7 @@ BRANDS = {
     "IKEA":            ("🪑", "store", r"^IKEA$"),
     "Walgreens":       ("💊", "store", r"^Walgreens$"),
     "CVS":             ("💊", "store", r"^CVS( Pharmacy)?$"),
-    "Love's":          ("⛽", "store", r"^Love'?s Travel Stop"),
+    "Love's":          ("⛽", "store", r"^Love'?s$"),   # OSM tags these just "Love's"
     "Pilot":           ("⛽", "store", r"^Pilot( Travel Center)?$"),
     "Flying J":        ("⛽", "store", r"^(Pilot )?Flying J$"),
     "QuikTrip":        ("⛽", "store", r"^QuikTrip$"),
@@ -145,60 +145,17 @@ def main():
         json.dump(pois, open(cache_path, "w"))
         time.sleep(8)  # be polite to overpass
 
-    # --- match to superchargers ---
-    sites_raw = json.load(open(os.path.join(HERE, "allSites.json")))
-    sites = [s for s in sites_raw
-             if s["address"].get("country") == "USA" and s["status"] == "OPEN"]
+    # Sanity check: a brand whose OSM count collapses is almost always a bad regex
+    # (Love's silently returned 1 POI for weeks because OSM tags it "Love's", not
+    # "Love's Travel Stop"). Warn loudly instead of shipping an empty chain.
+    thin = {k: len(v) for k, v in pois.items() if len(v) < 40}
+    if thin:
+        print("\n!! Suspiciously few POIs — check the brand regex for:", flush=True)
+        for k, n in sorted(thin.items(), key=lambda x: x[1]):
+            print(f"     {k}: {n}", flush=True)
+    print(f"\nCached {len(pois)} brands, {sum(len(v) for v in pois.values())} POIs total.")
+    print("Run data/build_data.py next — this script no longer writes data.js.")
 
-    # grid-bucket POIs for fast lookup (0.02 deg ~ 2km)
-    grid = {}
-    for key, pts in pois.items():
-        for p in pts:
-            cell = (int(p["lat"] / 0.02), int(p["lon"] / 0.02))
-            grid.setdefault(cell, []).append((key, p["lat"], p["lon"]))
-
-    out_sites, matches = [], {}
-    for s in sites:
-        lat, lon = s["gps"]["latitude"], s["gps"]["longitude"]
-        sid = s["id"]
-        out_sites.append({
-            "id": sid,
-            "name": s["name"],
-            "lat": round(lat, 5),
-            "lon": round(lon, 5),
-            "stalls": s.get("stallCount", 0),
-            "kw": s.get("powerKilowatt", 0),
-            "st": s["address"].get("state", ""),
-            "city": s["address"].get("city", ""),
-            "street": s["address"].get("street", ""),
-            "host": s.get("facilityName", "") or "",
-        })
-        c0 = (int(lat / 0.02), int(lon / 0.02))
-        found = {}
-        for di in (-1, 0, 1):
-            for dj in (-1, 0, 1):
-                for (bkey, plat, plon) in grid.get((c0[0]+di, c0[1]+dj), []):
-                    d = haversine(lat, lon, plat, plon)
-                    if d <= WALK_M and (bkey not in found or d < found[bkey]):
-                        found[bkey] = d
-        if found:
-            matches[sid] = {k: int(v) for k, v in sorted(found.items(), key=lambda x: x[1])}
-
-    brands_out = {k: {"e": v[0], "cat": v[1], "n": len(pois.get(k, []))}
-                  for k, v in BRANDS.items()}
-    payload = {"generated": time.strftime("%Y-%m-%d"), "walkM": WALK_M,
-               "sites": out_sites, "brands": brands_out, "matches": matches}
-    js = "window.PITSTOP_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n"
-    out_path = os.path.join(HERE, "..", "data.js")
-    open(out_path, "w").write(js)
-    print(f"\nWrote {out_path} ({len(js)//1024} KB)")
-    print(f"Sites: {len(out_sites)}, with >=1 chain match: {len(matches)}")
-    from collections import Counter
-    cnt = Counter()
-    for m in matches.values():
-        for k in m: cnt[k] += 1
-    for k, c in cnt.most_common():
-        print(f"  {c:5d} superchargers near {k}")
 
 if __name__ == "__main__":
     main()

@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near KFC (1231 locations) | Charge & Chew</title>
-<meta name="description" content="1231 EV DC fast chargers within a 10-minute walk of a KFC, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near KFC (1187 locations) | Charge & Chew</title>
+<meta name="description" content="1187 EV DC fast chargers within a 10-minute walk of a KFC, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/kfc/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near KFC (1231 locations)">
-<meta property="og:description" content="1231 EV DC fast chargers within a 10-minute walk of a KFC, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near KFC (1187 locations)">
+<meta property="og:description" content="1187 EV DC fast chargers within a 10-minute walk of a KFC, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/kfc/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍗 EV fast chargers near KFC</h1>
-<p class="lead">We found <b>1231 DC fast chargers</b> in the US — across all networks — with a KFC within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1187 DC fast chargers</b> in the US — across all networks — with a KFC within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=KFC">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>236</small></a><a href="fl/">Florida <small>75</small></a><a href="wa/">Washington <small>51</small></a><a href="ny/">New York <small>51</small></a><a href="ga/">Georgia <small>50</small></a><a href="oh/">Ohio <small>49</small></a><a href="tx/">Texas <small>49</small></a><a href="mi/">Michigan <small>45</small></a><a href="va/">Virginia <small>44</small></a><a href="il/">Illinois <small>40</small></a><a href="nc/">North Carolina <small>39</small></a><a href="or/">Oregon <small>37</small></a><a href="mn/">Minnesota <small>30</small></a><a href="pa/">Pennsylvania <small>29</small></a><a href="md/">Maryland <small>26</small></a><a href="mo/">Missouri <small>26</small></a><a href="nj/">New Jersey <small>26</small></a><a href="ma/">Massachusetts <small>26</small></a><a href="tn/">Tennessee <small>23</small></a><a href="co/">Colorado <small>23</small></a><a href="in/">Indiana <small>21</small></a><a href="sc/">South Carolina <small>19</small></a><a href="me/">Maine <small>16</small></a><a href="ut/">Utah <small>15</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="az/">Arizona <small>14</small></a><a href="ky/">Kentucky <small>14</small></a><a href="al/">Alabama <small>14</small></a><a href="wi/">Wisconsin <small>13</small></a><a href="wv/">West Virginia <small>13</small></a><a href="ct/">Connecticut <small>13</small></a><a href="ia/">Iowa <small>13</small></a><a href="nv/">Nevada <small>11</small></a><a href="nm/">New Mexico <small>9</small></a><a href="nh/">New Hampshire <small>6</small></a><a href="hi/">Hawaii <small>6</small></a><a href="id/">Idaho <small>6</small></a><a href="ms/">Mississippi <small>6</small></a><a href="wy/">Wyoming <small>6</small></a><a href="la/">Louisiana <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="ri/">Rhode Island <small>3</small></a><a href="mt/">Montana <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="de/">Delaware <small>2</small></a><a href="ak/">Alaska <small>2</small></a><a href="ne/">Nebraska <small>2</small></a><a href="sd/">South Dakota <small>1</small></a><a href="vt/">Vermont <small>1</small></a><a href="nd/">North Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>El Monte, CA - Peck Road - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>231</small></a><a href="fl/">Florida <small>66</small></a><a href="wa/">Washington <small>48</small></a><a href="ny/">New York <small>48</small></a><a href="tx/">Texas <small>48</small></a><a href="ga/">Georgia <small>47</small></a><a href="oh/">Ohio <small>47</small></a><a href="mi/">Michigan <small>45</small></a><a href="va/">Virginia <small>44</small></a><a href="il/">Illinois <small>40</small></a><a href="nc/">North Carolina <small>38</small></a><a href="or/">Oregon <small>34</small></a><a href="mn/">Minnesota <small>30</small></a><a href="pa/">Pennsylvania <small>29</small></a><a href="nj/">New Jersey <small>26</small></a><a href="md/">Maryland <small>25</small></a><a href="mo/">Missouri <small>25</small></a><a href="tn/">Tennessee <small>23</small></a><a href="ma/">Massachusetts <small>23</small></a><a href="co/">Colorado <small>21</small></a><a href="in/">Indiana <small>20</small></a><a href="sc/">South Carolina <small>18</small></a><a href="ut/">Utah <small>15</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="az/">Arizona <small>14</small></a><a href="ky/">Kentucky <small>14</small></a><a href="wi/">Wisconsin <small>13</small></a><a href="wv/">West Virginia <small>13</small></a><a href="ia/">Iowa <small>13</small></a><a href="al/">Alabama <small>13</small></a><a href="me/">Maine <small>13</small></a><a href="ct/">Connecticut <small>12</small></a><a href="nv/">Nevada <small>11</small></a><a href="nm/">New Mexico <small>9</small></a><a href="nh/">New Hampshire <small>6</small></a><a href="hi/">Hawaii <small>6</small></a><a href="id/">Idaho <small>6</small></a><a href="ms/">Mississippi <small>6</small></a><a href="wy/">Wyoming <small>6</small></a><a href="la/">Louisiana <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="ri/">Rhode Island <small>3</small></a><a href="mt/">Montana <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="de/">Delaware <small>2</small></a><a href="ak/">Alaska <small>2</small></a><a href="ne/">Nebraska <small>2</small></a><a href="sd/">South Dakota <small>1</small></a><a href="vt/">Vermont <small>1</small></a><a href="nd/">North Dakota <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>El Monte, CA - Peck Road - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
 <div class="a">3818 Peck Rd, El Monte, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 79 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 331 ft</span> · 👑 Burger King <span>≥2 min · 449 ft</span> · 🌮 Taco Bell <span>≥2 min · 463 ft</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span> · 🤡 Jack in the Box <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07442,-118.0221" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Park Plaza Shopping Center (Pico Rivera)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🤡 Jack in the Box ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07442,-118.0221" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Park Plaza Shopping Center (Pico Rivera)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">6101 Rosemead Blvd, Pico Rivera, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 92 ft</span></b> · ⛽ Speedway <span>≥2 min · 489 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.99169,-118.0912" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Bishopville, SC - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⛽ Speedway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.99169,-118.0912" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bishopville, SC - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">1071 Sumter Hwy, Bishopville, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 95 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 187 ft</span> · 🧇 Waffle House <span>≥1 min · 331 ft</span> · 🍕 Pizza Hut <span>≥2 min · 466 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · ⛽ Pilot <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.19744,-80.27659" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Claymont, DE - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>⛽ Pilot ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.19744,-80.27659" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Claymont, DE - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">605 Naamans Road, Brandywine, DE</div><div class="host">Tesla Supercharger</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 112 ft</span> · <b>🍗 KFC <span>≥1 min · 108 ft</span></b> · 🦆 Wawa <span>≥1 min · 144 ft</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span> · 💊 CVS <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.81749,-75.45727" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=DE">Show on map</a></div></div><div class="card"><div class="n"><span>Citi Trends Oakland</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🔨 Home Depot ≥2 min</span><span>💊 CVS ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=DE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.81749,-75.45727" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Citi Trends Oakland</span><small>350 kW · 8 stalls</small></div>
 <div class="a">900 Market St, Oakland, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 108 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 184 ft</span> · 🍗 Popeyes <span>≥9 min · 0.5 mi</span> · 🥪 Subway <span>≥9 min · 0.5 mi</span> · 🐼 Panda Express <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.80373,-122.28209" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>K02 Kunes Chevrolet Cadillac of Delavan</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Popeyes ≥9 min</span><span>🥪 Subway ≥9 min</span><span>🐼 Panda Express ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.80373,-122.28209" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>K02 Kunes Chevrolet Cadillac of Delavan</span><small>50 kW · 2 stalls</small></div>
 <div class="a">1231 East Geneva St, Delavan, WI</div><div class="host">EV Connect</div>
-<div class="c">🍔 Wendy&#x27;s <span>≥1 min · 52 ft</span> · <b>🍗 KFC <span>≥1 min · 108 ft</span></b> · 💊 Walgreens <span>≥1 min · 243 ft</span> · ⛽ Kwik Trip <span>≥2 min · 400 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 413 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 436 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.62807,-88.626" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=WI">Show on map</a></div></div><div class="card"><div class="n"><span>Price, UT</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>⛽ Kwik Trip ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.62807,-88.626" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Price, UT</span><small>300 kW · 6 stalls</small></div>
 <div class="a">120 N. Carbonville Road, Price, UT</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 118 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 144 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 322 ft</span> · 👑 Burger King <span>≥2 min · 482 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.60116,-110.82204" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=UT">Show on map</a></div></div><div class="card"><div class="n"><span>Florida Power &amp; Light - EVolution - West Palm Beach Turnpike</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.60116,-110.82204" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Florida Power &amp; Light - EVolution - West Palm Beach Turnpike</span><small>350 kW · 4 stalls</small></div>
 <div class="a">94 Florida&#x27;s Turnpike, Lake Worth, FL</div><div class="host">FPL EVolution</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 95 ft</span> · 🍕 Pizza Hut <span>≥1 min · 95 ft</span> · <b>🍗 KFC <span>≥1 min · 121 ft</span></b> · 👑 Burger King <span>≥1 min · 121 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=26.63446,-80.17506" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>👑 Burger King ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.63446,-80.17506" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">882 Georgia Highway 100, Tallapoosa, GA</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 72 ft</span> · 🌮 Taco Bell <span>≥1 min · 125 ft</span> · <b>🍗 KFC <span>≥1 min · 125 ft</span></b> · 🧇 Waffle House <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.68282,-85.26289" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Okahumpka, FL - Florida Turnpike Service Plaza - Tesla Super</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🧇 Waffle House ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.68282,-85.26289" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Okahumpka, FL - Florida Turnpike Service Plaza - Tesla Super</span><small>250 kW · 8 stalls</small></div>
 <div class="a">299 Florida-91, Wildwood, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 144 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 157 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 157 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.78718,-81.98241" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Northside Chevrolet GMC</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.78718,-81.98241" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Northside Chevrolet GMC</span><small>50 kW · 2 stalls</small></div>
 <div class="a">807 Northside Dr, Summersville, WV</div><div class="host">Non-networked</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 148 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 449 ft</span> · ⛽ Sheetz <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.30323,-80.8324" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Mallah Inc.</span><small>50 kW · 5 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>⛽ Sheetz ≥3 min</span><span>💊 CVS ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.30323,-80.8324" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mallah Inc.</span><small>50 kW · 5 stalls</small></div>
 <div class="a">5310 W. Spruce Ave, Fresno, CA</div><div class="host">Synergev</div>
-<div class="c">🥪 Subway <span>≥1 min · 36 ft</span> · <b>🍗 KFC <span>≥1 min · 157 ft</span></b> · 🍕 Little Caesars <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.83775,-119.88873" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Walterboro, SC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍕 Little Caesars ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.83775,-119.88873" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walterboro, SC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">2098 Bells Highway, Walterboro, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 180 ft</span></b> · 🥞 IHOP <span>≥2 min · 453 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.2 mi</span> · ⛽ QuikTrip <span>≥4 min · 0.2 mi</span> · 🧇 Waffle House <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.9333,-80.69249" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>⛽ QuikTrip ≥4 min</span><span>🧇 Waffle House ≥8 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.9333,-80.69249" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
 <div class="a">20245 Route 19, Cranberry Township, PA</div><div class="host">Walmart Charge</div>
-<div class="c">🛒 Walmart <span>≥1 min · 36 ft</span> · <b>🍗 KFC <span>≥1 min · 180 ft</span></b> · ⛽ Sheetz <span>≥3 min · 0.2 mi</span> · 📦 Costco <span>≥4 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥4 min · 0.2 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.68778,-80.10555" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Menards Homewood 3345 (Homewood, IL)</span><small>350 kW · 12 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>⛽ Sheetz ≥3 min</span><span>📦 Costco ≥4 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>💊 Walgreens ≥4 min</span><span>+12</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.68778,-80.10555" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Menards Homewood 3345 (Homewood, IL)</span><small>350 kW · 12 stalls</small></div>
 <div class="a">17545 S Halsted St, Homewood, IL</div><div class="host">Electrify America</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 184 ft</span></b> · 🦬 Buffalo Wild Wings <span>≥1 min · 328 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 400 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.57095,-87.63581" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Ontario, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>💊 CVS ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.57095,-87.63581" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ontario, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">203 East Street West, Ontario, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 187 ft</span></b> · 🌯 Chipotle <span>≥1 min · 223 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 256 ft</span> · 🍳 Denny&#x27;s <span>≥1 min · 269 ft</span> · 🍦 Dairy Queen <span>≥2 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.02561,-116.9421" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Blarney Castle Ez Mart Clare</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍦 Dairy Queen ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.02561,-116.9421" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Blarney Castle Ez Mart Clare</span><small>102 kW · 1 stalls</small></div>
 <div class="a">10400 S Clare Ave, Clare, MI</div><div class="host">ChargePoint</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 194 ft</span> · <b>🍗 KFC <span>≥1 min · 194 ft</span></b> · 🍦 Culver&#x27;s <span>≥2 min · 525 ft</span> · 🛒 Aldi <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.83769,-84.76943" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>#1 Cochran Ford Austintown</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.83769,-84.76943" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>#1 Cochran Ford Austintown</span><small>240 kW · 4 stalls</small></div>
 <div class="a">4702 Mahoning Ave, Youngstown, OH</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 194 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.10129,-80.74127" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Rossford, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.10129,-80.74127" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Rossford, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">10055 Olde US-20, Rossford, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 197 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.54611,-83.59016" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Central Lakeside Shopping Center</span><small>350 kW · 10 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.54611,-83.59016" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Central Lakeside Shopping Center</span><small>350 kW · 10 stalls</small></div>
 <div class="a">9728 Winter Gardens Blvd, Lakeside, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 197 ft</span></b> · 💊 Walgreens <span>≥1 min · 269 ft</span> · ☕ Starbucks <span>≥2 min · 404 ft</span> · 🥩 Arby&#x27;s <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.85539,-116.93273" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Cromwell, CT - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.85539,-116.93273" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cromwell, CT - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">32-34 Shunpike Rd, Cromwell, CT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 197 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 322 ft</span> · 🍗 Popeyes <span>≥2 min · 515 ft</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🤠 Texas Roadhouse <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.60213,-72.67519" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CT">Show on map</a></div></div><div class="card"><div class="n"><span>US Bank Tulare</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.60213,-72.67519" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>US Bank Tulare</span><small>50 kW · 1 stalls</small></div>
 <div class="a">801 East Prosperity Avenue, Tulare, CA</div><div class="host">EVCS</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 200 ft</span></b> · 👑 Burger King <span>≥1 min · 266 ft</span> · 🍳 Denny&#x27;s <span>≥1 min · 295 ft</span> · 🍗 Popeyes <span>≥1 min · 374 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 509 ft</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.22509,-119.33642" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>3591 Bradshaw Rd</span><small>180 kW · 6 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.22509,-119.33642" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>3591 Bradshaw Rd</span><small>180 kW · 6 stalls</small></div>
 <div class="a">3591 Bradshaw Rd, Sacramento, CA</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 200 ft</span></b> · 👑 Burger King <span>≥2 min · 440 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 443 ft</span> · 🥞 IHOP <span>≥2 min · 512 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.55743,-121.33595" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Jack Flash Greenville IL</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🥪 Subway ≥2 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.55743,-121.33595" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jack Flash Greenville IL</span><small>320 kW · 4 stalls</small></div>
 <div class="a">1701 IL-127, Greenville, IL</div><div class="host">Red E</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 154 ft</span> · <b>🍗 KFC <span>≥1 min · 200 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.87693,-89.39078" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Crossroads Center (Statesville, NC)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>⛽ Love&#x27;s ≥5 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.87693,-89.39078" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Crossroads Center (Statesville, NC)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1000 Crossroads Dr, Statesville, NC</div><div class="host">Electrify America</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 207 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 276 ft</span> · 🪵 Cracker Barrel <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥2 min · 0.1 mi</span> · 🍗 Bojangles <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.8101,-80.87331" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Anaheim, CA - East Lincoln Ave - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>🍗 Bojangles ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.8101,-80.87331" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Anaheim, CA - East Lincoln Ave - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">2270 East Lincoln Avenue, Anaheim, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 210 ft</span></b> · 🌯 Chipotle <span>≥1 min · 203 ft</span> · 🍗 Wingstop <span>≥1 min · 282 ft</span> · 🍎 Applebee&#x27;s <span>≥1 min · 282 ft</span> · 💊 Walgreens <span>≥2 min · 440 ft</span> · 🍕 Pizza Hut <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.83901,-117.8883" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Fender Gmc Fender Buick DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.83901,-117.8883" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fender Gmc Fender Buick DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">736 W 2nd St, Tifton, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 213 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 387 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🧇 Waffle House <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.45724,-83.5247" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Monticello, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🧇 Waffle House ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥪 Subway ≥6 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.45724,-83.5247" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Monticello, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">216 7th Street West, Monticello, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 217 ft</span></b> · ☕ Caribou Coffee <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · ⛽ Speedway <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.30082,-93.79956" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Hd South Dcfast Hog</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>☕ Caribou Coffee ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ Speedway ≥6 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.30082,-93.79956" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hd South Dcfast Hog</span><small>24 kW · 1 stalls</small></div>
 <div class="a">19825 S Dixie Hwy, Cutler Bay, FL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 220 ft</span></b> · 🐕 Raising Cane&#x27;s <span>≥1 min · 315 ft</span> · 🛒 Aldi <span>≥2 min · 449 ft</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥8 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=25.58417,-80.36372" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Baker Travel Plaza</span><small>60 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🛒 Aldi ≥2 min</span><span>🔨 Home Depot ≥4 min</span><span>🍳 Denny&#x27;s ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=25.58417,-80.36372" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Baker Travel Plaza</span><small>60 kW · 8 stalls</small></div>
 <div class="a">72924 Baker Blvd, Baker, CA</div><div class="host">EV Gateway</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 220 ft</span></b> · 🍕 Pizza Hut <span>≥1 min · 253 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.27676,-116.05702" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Wi-Not Stop 370 Ee Wine Gw M</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.27676,-116.05702" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wi-Not Stop 370 Ee Wine Gw M</span><small>125 kW · 1 stalls</small></div>
 <div class="a">14101 Whitney Rd, Gainesville, VA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 223 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 367 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.79324,-77.61124" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Lanier Crossing</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.79324,-77.61124" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Lanier Crossing</span><small>350 kW · 4 stalls</small></div>
 <div class="a">655 Atlanta Hwy, Cumming, GA</div><div class="host">EVgo</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 226 ft</span></b> · 🥪 Subway <span>≥1 min · 335 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 453 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.18805,-84.14386" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Astoria, OR</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18805,-84.14386" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Astoria, OR</span><small>300 kW · 6 stalls</small></div>
 <div class="a">55 Basin St, Astoria, OR</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 226 ft</span></b> · ☕ Dutch Bros <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.18816,-123.85227" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Pinole, CA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>☕ Dutch Bros ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.18816,-123.85227" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pinole, CA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">1552 Fitzgerald Drive, Pinole, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">⭐ Carl&#x27;s Jr. <span>≥1 min · 148 ft</span> · <b>🍗 KFC <span>≥1 min · 230 ft</span></b> · ☕ Starbucks <span>≥1 min · 295 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 400 ft</span> · 👑 Burger King <span>≥2 min · 410 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.99074,-122.30168" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>West Lebanon, NH</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.99074,-122.30168" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>West Lebanon, NH</span><small>300 kW · 6 stalls</small></div>
 <div class="a">10 Benning St, West Lebanon, NH</div><div class="host">Rivian Adventure</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 190 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 230 ft</span> · <b>🍗 KFC <span>≥1 min · 233 ft</span></b> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.63266,-72.31713" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=NH">Show on map</a></div></div><div class="card"><div class="n"><span>BP Ford of Long Beach</span><small>120 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🥪 Subway ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=NH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.63266,-72.31713" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>BP Ford of Long Beach</span><small>120 kW · 4 stalls</small></div>
 <div class="a">2950 N Bellflower Blvd, Long Beach, CA</div><div class="host">EV Connect</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 236 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 390 ft</span> · 👑 Burger King <span>≥2 min · 459 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🍳 Denny&#x27;s <span>≥3 min · 0.1 mi</span> · 🔧 Lowe&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.81006,-118.12418" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.81006,-118.12418" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">502 Gordonsville Highway, Gordonsville, TN</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 85 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 174 ft</span> · 🌮 Taco Bell <span>≥1 min · 190 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 236 ft</span> · <b>🍗 KFC <span>≥1 min · 246 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 269 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.1773,-85.94795" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Morgantown, WV - Earl L Core Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.1773,-85.94795" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Morgantown, WV - Earl L Core Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">1901 Earl L Core Road, Morgantown, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c">⛽ Sheetz <span>≥1 min · 138 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 180 ft</span> · <b>🍗 KFC <span>≥1 min · 249 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 322 ft</span> · 🛒 Kroger <span>≥2 min · 515 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.62012,-79.92373" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Tower Shopping Center</span><small>200 kW · 2 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.62012,-79.92373" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Tower Shopping Center</span><small>200 kW · 2 stalls</small></div>
 <div class="a">6801 Bland St, Springfield, VA</div><div class="host">EVgo</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 249 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 249 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 522 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🛒 Aldi <span>≥4 min · 0.2 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.78128,-77.18501" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Wi-Not Stop 370 Ee Wine Gw Mo</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.78128,-77.18501" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wi-Not Stop 370 Ee Wine Gw Mo</span><small>125 kW · 1 stalls</small></div>
 <div class="a">14101 Whitney Rd, Gainesville, VA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍗 KFC <span>≥1 min · 249 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 387 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.7933,-77.61128" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=KFC&amp;state=VA">Show on map</a></div></div>
+<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.7933,-77.61128" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

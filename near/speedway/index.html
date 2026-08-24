@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Speedway (748 locations) | Charge & Chew</title>
-<meta name="description" content="748 EV DC fast chargers within a 10-minute walk of a Speedway, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Speedway (719 locations) | Charge & Chew</title>
+<meta name="description" content="719 EV DC fast chargers within a 10-minute walk of a Speedway, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/speedway/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Speedway (748 locations)">
-<meta property="og:description" content="748 EV DC fast chargers within a 10-minute walk of a Speedway, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Speedway (719 locations)">
+<meta property="og:description" content="719 EV DC fast chargers within a 10-minute walk of a Speedway, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/speedway/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Speedway</h1>
-<p class="lead">We found <b>748 DC fast chargers</b> in the US — across all networks — with a Speedway within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>719 DC fast chargers</b> in the US — across all networks — with a Speedway within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Speedway">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ny/">New York <small>85</small></a><a href="mi/">Michigan <small>82</small></a><a href="oh/">Ohio <small>80</small></a><a href="ca/">California <small>75</small></a><a href="in/">Indiana <small>53</small></a><a href="fl/">Florida <small>52</small></a><a href="mn/">Minnesota <small>43</small></a><a href="nc/">North Carolina <small>42</small></a><a href="ma/">Massachusetts <small>30</small></a><a href="il/">Illinois <small>30</small></a><a href="nj/">New Jersey <small>29</small></a><a href="ky/">Kentucky <small>23</small></a><a href="pa/">Pennsylvania <small>19</small></a><a href="nm/">New Mexico <small>15</small></a><a href="wi/">Wisconsin <small>12</small></a><a href="wa/">Washington <small>11</small></a><a href="az/">Arizona <small>11</small></a><a href="va/">Virginia <small>10</small></a><a href="tn/">Tennessee <small>9</small></a><a href="ut/">Utah <small>7</small></a><a href="sc/">South Carolina <small>7</small></a><a href="wv/">West Virginia <small>6</small></a><a href="tx/">Texas <small>4</small></a><a href="al/">Alabama <small>3</small></a><a href="co/">Colorado <small>3</small></a><a href="sd/">South Dakota <small>2</small></a><a href="ri/">Rhode Island <small>2</small></a><a href="mo/">Missouri <small>1</small></a><a href="nh/">New Hampshire <small>1</small></a><a href="ak/">Alaska <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Speedway - 23rd and</span><small>50 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="mi/">Michigan <small>81</small></a><a href="ny/">New York <small>79</small></a><a href="oh/">Ohio <small>77</small></a><a href="ca/">California <small>72</small></a><a href="in/">Indiana <small>49</small></a><a href="fl/">Florida <small>47</small></a><a href="mn/">Minnesota <small>43</small></a><a href="nc/">North Carolina <small>41</small></a><a href="il/">Illinois <small>30</small></a><a href="ma/">Massachusetts <small>29</small></a><a href="nj/">New Jersey <small>25</small></a><a href="ky/">Kentucky <small>23</small></a><a href="pa/">Pennsylvania <small>19</small></a><a href="nm/">New Mexico <small>15</small></a><a href="wi/">Wisconsin <small>12</small></a><a href="wa/">Washington <small>11</small></a><a href="az/">Arizona <small>11</small></a><a href="va/">Virginia <small>10</small></a><a href="tn/">Tennessee <small>9</small></a><a href="sc/">South Carolina <small>7</small></a><a href="ut/">Utah <small>6</small></a><a href="wv/">West Virginia <small>6</small></a><a href="tx/">Texas <small>4</small></a><a href="al/">Alabama <small>3</small></a><a href="co/">Colorado <small>3</small></a><a href="sd/">South Dakota <small>2</small></a><a href="ri/">Rhode Island <small>2</small></a><a href="mo/">Missouri <small>1</small></a><a href="nh/">New Hampshire <small>1</small></a><a href="ak/">Alaska <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Speedway - 23rd and</span><small>50 kW · 4 stalls</small></div>
 <div class="a">3301 S 2300 E, Salt Lake City, UT</div><div class="host">Evpower</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 43 ft</span></b> · 🍕 Pizza Hut <span>≥1 min · 197 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.69961,-111.82416" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=UT">Show on map</a></div></div><div class="card"><div class="n"><span>Sunoco - 525 County St</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.69961,-111.82416" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sunoco - 525 County St</span><small>180 kW · 4 stalls</small></div>
 <div class="a">525 County St, Somerset, MA, Somerset, MA</div><div class="host">Blink</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 154 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.74116,-71.148" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Cheboygan City Parking</span><small>160 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.74116,-71.148" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cheboygan City Parking</span><small>160 kW · 6 stalls</small></div>
 <div class="a">403 N Huron St, Cheboygan, MI</div><div class="host">Red E</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 164 ft</span></b> · 🥪 Subway <span>≥2 min · 417 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.64716,-84.4761" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Ukiah, CA - N State St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.64716,-84.4761" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ukiah, CA - N State St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1315 North State Street, Ukiah, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 184 ft</span></b> · 🥪 Subway <span>≥1 min · 226 ft</span> · 🍕 Little Caesars <span>≥1 min · 282 ft</span> · 🍔 In-N-Out <span>≥1 min · 354 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 512 ft</span> · 🍗 Wingstop <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.16783,-123.20999" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Grand Rapids, MI - Lake Michigan Drive Northwest - Tesla Sup</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍔 In-N-Out ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.16783,-123.20999" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Grand Rapids, MI - Lake Michigan Drive Northwest - Tesla Sup</span><small>325 kW · 8 stalls</small></div>
 <div class="a">2755 Lake Michigan Dr NW, Grand Rapids, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 184 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.97196,-85.73682" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Somerville, MA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.97196,-85.73682" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Somerville, MA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">779 McGrath Highway, Somerville, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 187 ft</span></b> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span> · 🔨 Home Depot <span>≥7 min · 0.3 mi</span> · 💊 CVS <span>≥7 min · 0.4 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥7 min · 0.4 mi</span> · 🍔 Shake Shack <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.39052,-71.08589" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Store 394 (Mentor, OH)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🔨 Home Depot ≥7 min</span><span>💊 CVS ≥7 min</span><span>🛍️ Trader Joe&#x27;s ≥7 min</span><span>🍔 Shake Shack ≥8 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.39052,-71.08589" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Store 394 (Mentor, OH)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">7777 Reynolds Rd., Mentor, OH</div><div class="host">Electrify America</div>
-<div class="c">⛽ Sheetz <span>≥1 min · 135 ft</span> · <b>⛽ Speedway <span>≥1 min · 197 ft</span></b> · 🌯 Chipotle <span>≥1 min · 302 ft</span> · ☕ Starbucks <span>≥2 min · 456 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 456 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.65984,-81.37651" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>New City Hall City Hall</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.65984,-81.37651" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New City Hall City Hall</span><small>125 kW · 1 stalls</small></div>
 <div class="a">2838 South Park Ave, Buffalo, NY</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 217 ft</span></b> · 🥪 Subway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.82255,-78.82354" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>ChargeSmart EV - Queensbury</span><small>320 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🥪 Subway ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.82255,-78.82354" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>ChargeSmart EV - Queensbury</span><small>320 kW · 8 stalls</small></div>
 <div class="a">524 Aviation Road, Queensbury, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 223 ft</span></b> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span> · 🎯 Target <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.32953,-73.68146" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Chase Bank - 109 N Pottstown Pike</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🎯 Target ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.32953,-73.68146" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chase Bank - 109 N Pottstown Pike</span><small>350 kW · 4 stalls</small></div>
 <div class="a">109 N Pottstown Pike, Exton, PA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 230 ft</span></b> · 🥬 Whole Foods <span>≥1 min · 335 ft</span> · 🌮 Taco Bell <span>≥2 min · 479 ft</span> · 🍗 KFC <span>≥2 min · 479 ft</span> · 💊 CVS <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.03013,-75.62918" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Dick Huvaere&#x27;S</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🥬 Whole Foods ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.03013,-75.62918" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Dick Huvaere&#x27;S</span><small>62 kW · 1 stalls</small></div>
 <div class="a">67567 Main St, Richmond, MI</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 243 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 371 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 476 ft</span> · 💊 CVS <span>≥6 min · 0.3 mi</span> · 👑 Burger King <span>≥7 min · 0.4 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.79853,-82.74097" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Auburn, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 CVS ≥6 min</span><span>👑 Burger King ≥7 min</span><span>🥪 Subway ≥8 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.79853,-82.74097" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Auburn, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">13437 Bowman Road, Auburn, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 249 ft</span></b> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.92628,-121.05806" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Advcharger Fast</span><small>40 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.92628,-121.05806" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Advcharger Fast</span><small>40 kW · 1 stalls</small></div>
 <div class="a">440 Plainview Rd, Hicksville, NY</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 249 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 269 ft</span> · 🥪 Subway <span>≥1 min · 322 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 💊 CVS <span>≥9 min · 0.4 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.77001,-73.50262" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Oneonta, NY - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Subway ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 CVS ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77001,-73.50262" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Oneonta, NY - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">4968 NY-23, Oneonta, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 259 ft</span></b> · 🍳 Denny&#x27;s <span>≥1 min · 328 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 377 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.44772,-75.04868" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>New City Hall City Hall</span><small>125 kW · 1 stalls</small></div>
-<div class="a">2838 South Park Ave, Buffalo, NY</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 259 ft</span></b> · 🥪 Subway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.82277,-78.82352" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Aldi Johnstown TUL</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.44772,-75.04868" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aldi Johnstown TUL</span><small>150 kW · 8 stalls</small></div>
 <div class="a">266 N Comrie Ave, Johnstown, NY</div><div class="host">Red E</div>
-<div class="c">🛒 Aldi <span>≥1 min · 213 ft</span> · <b>⛽ Speedway <span>≥1 min · 262 ft</span></b> · 🍗 Popeyes <span>≥1 min · 295 ft</span> · 🍎 Applebee&#x27;s <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01806,-74.36112" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Safeway 0273 (Anderson, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01806,-74.36112" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Safeway 0273 (Anderson, CA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2601 Balls Ferry Road, Anderson, CA</div><div class="host">Electrify America</div>
-<div class="c">🛒 Safeway <span>≥1 min · 233 ft</span> · <b>⛽ Speedway <span>≥1 min · 266 ft</span></b> · ☕ Starbucks <span>≥1 min · 331 ft</span> · 🥪 Subway <span>≥2 min · 472 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.45348,-122.28917" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Casey&#x27;s #3535 - Cridersville</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.45348,-122.28917" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Casey&#x27;s #3535 - Cridersville</span><small>400 kW · 4 stalls</small></div>
 <div class="a">100 S Dixie Hwy, Cridersville, OH</div><div class="host">Francis Energy</div>
-<div class="c">🥪 Subway <span>≥1 min · 220 ft</span> · <b>⛽ Speedway <span>≥1 min · 272 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.65427,-84.13423" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Lucky</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.65427,-84.13423" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Lucky</span><small>50 kW · 2 stalls</small></div>
 <div class="a">1312 Trancas St, Napa, CA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 276 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 417 ft</span> · 💊 CVS <span>≥3 min · 0.1 mi</span> · 🛒 Safeway <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.32363,-122.30141" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>North Babylon, NY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>💊 CVS ≥3 min</span><span>🛒 Safeway ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+12</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.32363,-122.30141" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>North Babylon, NY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1261 Deer Park Avenue, North Babylon, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c">🛒 Aldi <span>≥1 min · 200 ft</span> · <b>⛽ Speedway <span>≥1 min · 276 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 256 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.73954,-73.3197" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Advcharger Fast Charger</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🚗 Sonic ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.73954,-73.3197" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Advcharger Fast Charger</span><small>62 kW · 1 stalls</small></div>
 <div class="a">440 Plainview Rd, Hicksville, NY</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 276 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 295 ft</span> · 🥪 Subway <span>≥1 min · 322 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 💊 CVS <span>≥9 min · 0.4 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.77002,-73.50268" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Flemington, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Subway ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 CVS ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77002,-73.50268" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flemington, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">20 NJ-31, Flemington, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c">🦆 Wawa <span>≥1 min · 89 ft</span> · <b>⛽ Speedway <span>≥1 min · 292 ft</span></b> · 🎯 Target <span>≥2 min · 413 ft</span> · 💊 Walgreens <span>≥2 min · 466 ft</span> · 🥖 Panera Bread <span>≥2 min · 492 ft</span> · 👑 Burger King <span>≥2 min · 515 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.50497,-74.85163" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>New Philadelphia, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🎯 Target ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.50497,-74.85163" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Philadelphia, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1281 W High Ave, New Philadelphia, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c">👑 Burger King <span>≥1 min · 108 ft</span> · ⛽ Sheetz <span>≥1 min · 115 ft</span> · 🤠 Texas Roadhouse <span>≥1 min · 217 ft</span> · <b>⛽ Speedway <span>≥1 min · 292 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 417 ft</span> · 🍳 Denny&#x27;s <span>≥2 min · 413 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.49393,-81.47344" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Sandman Bros</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49393,-81.47344" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sandman Bros</span><small>50 kW · 1 stalls</small></div>
 <div class="a">56 E Broadway St, Shelbyville, IN</div><div class="host">EV Connect</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 292 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.52339,-85.77507" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Greensborohonda Cp250-2</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.52339,-85.77507" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Greensborohonda Cp250-2</span><small>62 kW · 1 stalls</small></div>
 <div class="a">3633 W Wendover Ave, Greensboro, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 292 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.05987,-79.87043" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>EVolve NY Camillus</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.05987,-79.87043" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>EVolve NY Camillus</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2052 Genesee Street, Camillus, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 292 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.03409,-76.36475" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.03409,-76.36475" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2640 North 600 West, Greenfield, IN</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 0 ft</span> · <b>⛽ Speedway <span>≥1 min · 292 ft</span></b> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.82154,-85.91613" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Blowing Rock, NC</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🌮 Taco Bell ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.82154,-85.91613" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Blowing Rock, NC</span><small>300 kW · 6 stalls</small></div>
 <div class="a">278 Shoppes on the Parkway Road, Blowing Rock, NC</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 302 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.14231,-81.67004" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Ciocca Ford Service of Quakertown</span><small>120 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.14231,-81.67004" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ciocca Ford Service of Quakertown</span><small>120 kW · 2 stalls</small></div>
 <div class="a">1531 Park Ave., Quakertown, PA</div><div class="host">Blink</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 305 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 387 ft</span> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.1 mi</span> · 🍗 Bojangles <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.43883,-75.35691" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>CalTrans - Bishop</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🍗 Bojangles ≥4 min</span><span>🥪 Subway ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.43883,-75.35691" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>CalTrans - Bishop</span><small>50 kW · 1 stalls</small></div>
 <div class="a">500 S Main St, Bishop, CA</div><div class="host">Non-networked</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 312 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 371 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.35652,-118.39482" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Richardson Midland</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.35652,-118.39482" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Richardson Midland</span><small>50 kW · 2 stalls</small></div>
 <div class="a">2400 N Saginaw Rd, Midland, MI</div><div class="host">EV Connect</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 318 ft</span></b> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🍕 Little Caesars <span>≥7 min · 0.4 mi</span> · 🥪 Subway <span>≥7 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.4 mi</span> · 💊 Walgreens <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.64178,-84.25595" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Stuart, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍕 Little Caesars ≥7 min</span><span>🥪 Subway ≥7 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>💊 Walgreens ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.64178,-84.25595" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Stuart, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">2401 South Kanner Highway, Stuart, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c">🦆 Wawa <span>≥1 min · 148 ft</span> · <b>⛽ Speedway <span>≥1 min · 325 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 325 ft</span> · 🍦 Culver&#x27;s <span>≥2 min · 420 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.17551,-80.25257" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Greensborohonda Cp250-1</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍦 Culver&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.17551,-80.25257" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Greensborohonda Cp250-1</span><small>62 kW · 1 stalls</small></div>
 <div class="a">3633 W Wendover Ave, Greensboro, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 328 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.05985,-79.87057" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Cleveland, OH - W 150th Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.05985,-79.87057" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cleveland, OH - W 150th Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">4277 W 150th St, Cleveland, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 331 ft</span></b> · 🍳 Denny&#x27;s <span>≥2 min · 436 ft</span> · 👑 Burger King <span>≥6 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.43798,-81.80059" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 5783 Lemmen Coopersville</span><small>240 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>👑 Burger King ≥6 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.43798,-81.80059" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 5783 Lemmen Coopersville</span><small>240 kW · 2 stalls</small></div>
 <div class="a">125 68th S., Coopersville, MI</div><div class="host">Red E</div>
-<div class="c">👑 Burger King <span>≥1 min · 135 ft</span> · <b>⛽ Speedway <span>≥1 min · 331 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 436 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.05715,-85.95723" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Gallup, NM</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.05715,-85.95723" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gallup, NM</span><small>300 kW · 6 stalls</small></div>
 <div class="a">980 U.S. 491, Gallup, NM</div><div class="host">Rivian Adventure</div>
-<div class="c">☕ Starbucks <span>≥1 min · 246 ft</span> · 🥪 Subway <span>≥1 min · 322 ft</span> · 🌮 Taco Bell <span>≥1 min · 325 ft</span> · <b>⛽ Speedway <span>≥1 min · 338 ft</span></b> · 🍳 Denny&#x27;s <span>≥2 min · 427 ft</span> · 🛒 Safeway <span>≥2 min · 469 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.53503,-108.75783" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NM">Show on map</a></div></div><div class="card"><div class="n"><span>EVolve NY Hamilton</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🛒 Safeway ≥2 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.53503,-108.75783" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>EVolve NY Hamilton</span><small>350 kW · 4 stalls</small></div>
 <div class="a">47 Utica Street, Hamilton, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 345 ft</span></b> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.82891,-75.54734" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Autel - Williamsburg Chrysler Dodge Jeep RAM</span><small>240 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.82891,-75.54734" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Autel - Williamsburg Chrysler Dodge Jeep RAM</span><small>240 kW · 2 stalls</small></div>
 <div class="a">3012 Richmond Rd B, Williamsburg, VA</div><div class="host">Autel</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 348 ft</span></b> · 🍝 Olive Garden <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.30357,-76.72881" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>DePaula Chevrolet</span><small>60 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍝 Olive Garden ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.30357,-76.72881" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DePaula Chevrolet</span><small>60 kW · 1 stalls</small></div>
 <div class="a">785 Central Ave, Albany, NY</div><div class="host">Vialynk</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 351 ft</span></b> · 💊 CVS <span>≥3 min · 0.2 mi</span> · 🍔 Five Guys <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 🍗 Wingstop <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.67914,-73.78762" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍗 Popeyes ≥4 min</span><span>🍗 Wingstop ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.67914,-73.78762" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">900 Tyson Road, Hope Hull, AL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Speedway <span>≥1 min · 351 ft</span></b> · ⛽ Flying J <span>≥2 min · 456 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.19501,-86.41924" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Speedway&amp;state=AL">Show on map</a></div></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>⛽ Flying J ≥2 min</span><span>⛽ Love&#x27;s ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.19501,-86.41924" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hampton Inn Owego</span><small>180 kW · 8 stalls</small></div>
+<div class="a">1030 NY-17C, Owego, NY</div><div class="host">EV Gateway</div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.09749,-76.23471" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

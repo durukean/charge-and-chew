@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Waffle House (645 locations) | Charge & Chew</title>
-<meta name="description" content="645 EV DC fast chargers within a 10-minute walk of a Waffle House, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Waffle House (619 locations) | Charge & Chew</title>
+<meta name="description" content="619 EV DC fast chargers within a 10-minute walk of a Waffle House, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/waffle-house/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Waffle House (645 locations)">
-<meta property="og:description" content="645 EV DC fast chargers within a 10-minute walk of a Waffle House, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Waffle House (619 locations)">
+<meta property="og:description" content="619 EV DC fast chargers within a 10-minute walk of a Waffle House, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/waffle-house/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🧇 EV fast chargers near Waffle House</h1>
-<p class="lead">We found <b>645 DC fast chargers</b> in the US — across all networks — with a Waffle House within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>619 DC fast chargers</b> in the US — across all networks — with a Waffle House within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Waffle House">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ga/">Georgia <small>171</small></a><a href="fl/">Florida <small>81</small></a><a href="nc/">North Carolina <small>53</small></a><a href="sc/">South Carolina <small>51</small></a><a href="al/">Alabama <small>43</small></a><a href="tx/">Texas <small>40</small></a><a href="tn/">Tennessee <small>39</small></a><a href="oh/">Ohio <small>27</small></a><a href="va/">Virginia <small>27</small></a><a href="ms/">Mississippi <small>20</small></a><a href="la/">Louisiana <small>18</small></a><a href="mo/">Missouri <small>13</small></a><a href="ar/">Arkansas <small>11</small></a><a href="md/">Maryland <small>9</small></a><a href="ky/">Kentucky <small>9</small></a><a href="ok/">Oklahoma <small>6</small></a><a href="az/">Arizona <small>5</small></a><a href="pa/">Pennsylvania <small>5</small></a><a href="in/">Indiana <small>5</small></a><a href="il/">Illinois <small>4</small></a><a href="co/">Colorado <small>2</small></a><a href="nm/">New Mexico <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="wv/">West Virginia <small>1</small></a><a href="de/">Delaware <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Waffle House Marianna</span><small>184 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ga/">Georgia <small>160</small></a><a href="fl/">Florida <small>79</small></a><a href="nc/">North Carolina <small>51</small></a><a href="sc/">South Carolina <small>49</small></a><a href="tx/">Texas <small>39</small></a><a href="tn/">Tennessee <small>39</small></a><a href="al/">Alabama <small>37</small></a><a href="va/">Virginia <small>27</small></a><a href="oh/">Ohio <small>26</small></a><a href="ms/">Mississippi <small>19</small></a><a href="la/">Louisiana <small>18</small></a><a href="mo/">Missouri <small>13</small></a><a href="ar/">Arkansas <small>11</small></a><a href="md/">Maryland <small>9</small></a><a href="ky/">Kentucky <small>9</small></a><a href="ok/">Oklahoma <small>6</small></a><a href="az/">Arizona <small>5</small></a><a href="pa/">Pennsylvania <small>5</small></a><a href="in/">Indiana <small>5</small></a><a href="il/">Illinois <small>4</small></a><a href="co/">Colorado <small>2</small></a><a href="nm/">New Mexico <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="wv/">West Virginia <small>1</small></a><a href="de/">Delaware <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Marianna</span><small>184 kW · 4 stalls</small></div>
 <div class="a">2215 Florida 71, Marianna, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 0 ft</span></b> · ⛽ Pilot <span>≥1 min · 190 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥3 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.72598,-85.18603" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Thomson</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🔧 Lowe&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.72598,-85.18603" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Thomson</span><small>125 kW · 1 stalls</small></div>
 <div class="a">2101 Washington Rd, Thomson, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 30 ft</span></b> · 🥪 Subway <span>≥1 min · 249 ft</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 🍗 Zaxby&#x27;s <span>≥7 min · 0.3 mi</span> · 👑 Burger King <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.51355,-82.50309" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Madison</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍗 Zaxby&#x27;s ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.51355,-82.50309" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Madison</span><small>184 kW · 4 stalls</small></div>
 <div class="a">145 SE Bandit St Madison, Madison, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 36 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 299 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 502 ft</span> · 🍦 Dairy Queen <span>≥2 min · 518 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.39885,-83.3578" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House - Crestview</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍦 Dairy Queen ≥2 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.39885,-83.3578" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House - Crestview</span><small>184 kW · 4 stalls</small></div>
 <div class="a">3804 South Ferdon Boulevard, Crestview, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 36 ft</span></b> · 🍔 Whataburger <span>≥1 min · 220 ft</span> · 🍗 Popeyes <span>≥2 min · 476 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.72243,-86.56967" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Pensacola</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍔 Whataburger ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.72243,-86.56967" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Pensacola</span><small>184 kW · 4 stalls</small></div>
 <div class="a">7329 North Davis Highway, Pensacola, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b> · 🤠 Texas Roadhouse <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥5 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥7 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.50248,-87.22222" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Chipley</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍳 Denny&#x27;s ≥5 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.50248,-87.22222" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Chipley</span><small>184 kW · 4 stalls</small></div>
 <div class="a">1680 Main Street, Chipley, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b> · 👑 Burger King <span>≥1 min · 361 ft</span> · 🍕 Domino&#x27;s <span>≥2 min · 499 ft</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.75286,-85.55095" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Ocala</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.75286,-85.55095" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Ocala</span><small>184 kW · 4 stalls</small></div>
 <div class="a">22 NW 34th Ave, Ocala, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 118 ft</span> · 🍗 Zaxby&#x27;s <span>≥1 min · 295 ft</span> · 🍗 Popeyes <span>≥2 min · 505 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🦆 Wawa <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.18694,-82.17896" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Lakeland</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🦆 Wawa ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.18694,-82.17896" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Lakeland</span><small>184 kW · 4 stalls</small></div>
 <div class="a">4210 Lakeland Hills Blvd, Lakeland, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b> · 🪵 Cracker Barrel <span>≥2 min · 476 ft</span> · 🍎 Applebee&#x27;s <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥7 min · 0.4 mi</span> · 🍔 Five Guys <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.09676,-81.95211" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Bay Car South DC</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍔 Five Guys ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.09676,-81.95211" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bay Car South DC</span><small>125 kW · 1 stalls</small></div>
 <div class="a">641 W 15th St, Panama City, FL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.17472,-85.66727" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Bay Car South DC</span><small>125 kW · 1 stalls</small></div>
-<div class="a">641 W 15th St, Panama City, FL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 72 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.17478,-85.66727" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Norcross</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.17472,-85.66727" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Norcross</span><small>125 kW · 1 stalls</small></div>
 <div class="a">6079 Goshen Springs Rd, Norcross, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 79 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥7 min · 0.3 mi</span> · 🍳 Denny&#x27;s <span>≥9 min · 0.4 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.91563,-84.20812" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Jacksonville</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🪵 Cracker Barrel ≥4 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>🍳 Denny&#x27;s ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.91563,-84.20812" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Jacksonville</span><small>184 kW · 4 stalls</small></div>
 <div class="a">5067 J Turner Butler Blvd, Jacksonville, FL</div><div class="host">Blink</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 79 ft</span></b> · 🍎 Applebee&#x27;s <span>≥1 min · 171 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 331 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.24565,-81.59893" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Norcross</span><small>125 kW · 1 stalls</small></div>
-<div class="a">6079 Goshen Springs Rd, Norcross, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 92 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥7 min · 0.3 mi</span> · 🍳 Denny&#x27;s <span>≥9 min · 0.4 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.91567,-84.20815" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Thomson</span><small>125 kW · 1 stalls</small></div>
-<div class="a">2101 Washington Rd, Thomson, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 92 ft</span></b> · 🥪 Subway <span>≥1 min · 203 ft</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span> · 🍗 Zaxby&#x27;s <span>≥7 min · 0.3 mi</span> · 👑 Burger King <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.51373,-82.50319" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Wright Plaza</span><small>400 kW · 2 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.24565,-81.59893" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wright Plaza</span><small>400 kW · 2 stalls</small></div>
 <div class="a">450 Racetrack Rd NW, Fort Walton Beach, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 92 ft</span></b> · 💊 Walgreens <span>≥1 min · 305 ft</span> · ⭐ Hardee&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🛒 Aldi <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.44977,-86.63751" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Hardeeville, SC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>💊 CVS ≥8 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.44977,-86.63751" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hardeeville, SC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">16319 Whyte Hardee Blvd, Hardeeville, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 125 ft</span></b> · ⛽ QuikTrip <span>≥2 min · 472 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · ⛽ Pilot <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.27052,-81.08105" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Ridgeland, SC - East Main Street - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>⛽ QuikTrip ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>⛽ Pilot ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.27052,-81.08105" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ridgeland, SC - East Main Street - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">8205 E Main St, Ridgeland, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 125 ft</span></b> · 💊 Walgreens <span>≥1 min · 236 ft</span> · 👑 Burger King <span>≥1 min · 377 ft</span> · 🥪 Subway <span>≥2 min · 453 ft</span> · 🍟 McDonald&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.47921,-80.97421" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Polaris, OH - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.47921,-80.97421" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Polaris, OH - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">1177 Polaris Parkway, Columbus, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 177 ft</span></b> · ☕ Starbucks <span>≥1 min · 377 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 400 ft</span> · 🛒 Kroger <span>≥2 min · 446 ft</span> · 🐔 Chick-fil-A <span>≥3 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.14105,-82.98897" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
-<div class="a">4752 Atlanta Hwy, Loganville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 184 ft</span></b> · 🛒 Kroger <span>≥1 min · 282 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.83347,-83.88383" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Schlotzsky&#x27;s Hapeville</span><small>200 kW · 2 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🛒 Kroger ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.14105,-82.98897" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Schlotzsky&#x27;s Hapeville</span><small>200 kW · 2 stalls</small></div>
 <div class="a">861 Virginia Ave, Hapeville, GA</div><div class="host">EVgo</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 187 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 374 ft</span> · 🍕 Pizza Hut <span>≥1 min · 361 ft</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.65948,-84.41725" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power E Ellijay</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🛒 Walmart ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.65948,-84.41725" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power E Ellijay</span><small>125 kW · 1 stalls</small></div>
 <div class="a">696 1st Ave, East Ellijay, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 200 ft</span></b> · 👑 Burger King <span>≥2 min · 397 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 512 ft</span> · 🥩 Arby&#x27;s <span>≥9 min · 0.5 mi</span> · 💊 Walgreens <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.67769,-84.47708" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥9 min</span><span>💊 Walgreens ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.67769,-84.47708" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">6830 Franklin-Lebanon Road, Franklin, OH</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 46 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 167 ft</span> · <b>🧇 Waffle House <span>≥1 min · 200 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 200 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.54207,-84.29126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.54207,-84.29126" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
 <div class="a">4752 Atlanta Hwy, Loganville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 210 ft</span></b> · 🛒 Kroger <span>≥1 min · 266 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.8334,-83.88376" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Perry, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🛒 Kroger ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🍕 Pizza Hut ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8334,-83.88376" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Perry, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">101 Lect Dr, Perry, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🪵 Cracker Barrel <span>≥1 min · 190 ft</span> · <b>🧇 Waffle House <span>≥1 min · 213 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.448,-83.75274" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 915 (Stafford, TX)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.448,-83.75274" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 915 (Stafford, TX)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">11210 West  Airport Blvd., Stafford, TX</div><div class="host">Electrify America</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 220 ft</span></b> · 🛒 Walmart <span>≥2 min · 453 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🐔 Chick-fil-A <span>≥3 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.64283,-95.57278" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>TA US-17, Richmond Hill, GA</span><small>400 kW · 12 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.64283,-95.57278" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>TA US-17, Richmond Hill, GA</span><small>400 kW · 12 stalls</small></div>
 <div class="a">4401 US-17, Richmond Hill, GA</div><div class="host">bp pulse</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 220 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 315 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 472 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 495 ft</span> · 🍗 Popeyes <span>≥2 min · 469 ft</span> · ⛽ TA Travel Center <span>≥2 min · 512 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.92518,-81.33419" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Shell Montgomery Gas Station</span><small>150 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⛽ TA Travel Center ≥2 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.92518,-81.33419" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Shell Montgomery Gas Station</span><small>150 kW · 4 stalls</small></div>
 <div class="a">843 Taylor Rd, Montgomery, AL</div><div class="host">Powerpump</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 226 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.37,-86.17077" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Jlrb Electric Off Network</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.37,-86.17077" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jlrb Electric Off Network</span><small>24 kW · 1 stalls</small></div>
 <div class="a">3040 Piedmont Rd NE, Atlanta, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 236 ft</span></b> · 🛒 Aldi <span>≥7 min · 0.3 mi</span> · 💊 CVS <span>≥7 min · 0.4 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥8 min · 0.4 mi</span> · 🐔 Chick-fil-A <span>≥9 min · 0.4 mi</span> · ☕ Caribou Coffee <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.8378,-84.36919" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Acworth, GA - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🛒 Aldi ≥7 min</span><span>💊 CVS ≥7 min</span><span>🛍️ Trader Joe&#x27;s ≥8 min</span><span>☕ Caribou Coffee ≥9 min</span><span>🐔 Chick-fil-A ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8378,-84.36919" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Acworth, GA - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
 <div class="a">3500 Baker Road, Acworth, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍗 Zaxby&#x27;s <span>≥1 min · 184 ft</span> · <b>🧇 Waffle House <span>≥1 min · 243 ft</span></b> · 🍗 Popeyes <span>≥1 min · 361 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 377 ft</span> · 🛒 Publix <span>≥2 min · 482 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 476 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07583,-84.65218" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Baton Rouge, LA - Highland Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07583,-84.65218" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Baton Rouge, LA - Highland Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">18149 Highland Rd, Baton Rouge, LA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 253 ft</span></b> · ☕ Starbucks <span>≥2 min · 476 ft</span> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span> · ⛽ RaceTrac <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.3489,-91.02841" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=LA">Show on map</a></div></div><div class="card"><div class="n"><span>Orlando, FL - International Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>⛽ RaceTrac ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.3489,-91.02841" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Orlando, FL - International Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">6315 International Dr, Orlando, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 253 ft</span></b> · 🍦 Dairy Queen <span>≥1 min · 289 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 476 ft</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 🥞 IHOP <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.46148,-81.46731" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Mobile, AL - US-90 - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍦 Dairy Queen ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🥞 IHOP ≥6 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.46148,-81.46731" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mobile, AL - US-90 - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">5440 US-90, Mobile, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 256 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 404 ft</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 👑 Burger King <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.58717,-88.17036" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Reynoldsburg, OH Rechargery - Brice Rd</span><small>400 kW · 12 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥5 min</span><span>👑 Burger King ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.58717,-88.17036" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Reynoldsburg, OH Rechargery - Brice Rd</span><small>400 kW · 12 stalls</small></div>
 <div class="a">2727 Brice Road, Reynoldsburg, OH</div><div class="host">IONNA</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 256 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 417 ft</span> · 💊 Walgreens <span>≥2 min · 472 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.92563,-82.83209" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Jackson, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🥪 Subway ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.92563,-82.83209" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jackson, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">56 Casey Jones Lane, Jackson, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 269 ft</span></b> · 🌮 Taco Bell <span>≥2 min · 495 ft</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 💻 Best Buy <span>≥5 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥5 min · 0.3 mi</span> · 🍕 Pizza Hut <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.66028,-88.85573" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Commerce Bank</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>💻 Best Buy ≥5 min</span><span>🦬 Buffalo Wild Wings ≥5 min</span><span>🍕 Pizza Hut ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.66028,-88.85573" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Commerce Bank</span><small>50 kW · 1 stalls</small></div>
 <div class="a">1102 Bradley St, Festus, MO</div><div class="host">EVgo</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 269 ft</span></b> · ⭐ Hardee&#x27;s <span>≥2 min · 436 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 482 ft</span> · 🔧 Lowe&#x27;s <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.21233,-90.40831" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥5 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.21233,-90.40831" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2209 Highway 71, Marianna, FL</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 98 ft</span> · <b>🧇 Waffle House <span>≥1 min · 269 ft</span></b> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.72534,-85.1865" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Greenville, SC Rechargery Relay @ Circle K - E. Butler Rd</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.72534,-85.1865" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Greenville, SC Rechargery Relay @ Circle K - E. Butler Rd</span><small>400 kW · 4 stalls</small></div>
 <div class="a">825 E. Butler Rd, Greenville, SC</div><div class="host">IONNA</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 276 ft</span></b> · 🍗 Bojangles <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span> · ⛽ QuikTrip <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.80333,-82.28576" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Cfa 02749 Lafayette Par#1</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>⛽ QuikTrip ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.80333,-82.28576" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cfa 02749 Lafayette Par#1</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1574 Lafayette Pkwy, LaGrange, GA</div><div class="host">ChargePoint</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 171 ft</span> · 👑 Burger King <span>≥1 min · 233 ft</span> · <b>🧇 Waffle House <span>≥1 min · 279 ft</span></b> · 🍎 Applebee&#x27;s <span>≥2 min · 423 ft</span> · 🪵 Cracker Barrel <span>≥2 min · 0.1 mi</span> · ⛽ RaceTrac <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.04116,-84.97483" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Cadillac Of Fayetteville</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>⛽ RaceTrac ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.04116,-84.97483" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cadillac Of Fayetteville</span><small>50 kW · 2 stalls</small></div>
 <div class="a">1637 SKIBO RD, FAYETTEVILLE, NC</div><div class="host">EV Connect</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 282 ft</span></b> · 💊 Walgreens <span>≥2 min · 466 ft</span> · 🛒 Walmart <span>≥5 min · 0.3 mi</span> · ☕ Starbucks <span>≥7 min · 0.4 mi</span> · 🍔 Five Guys <span>≥8 min · 0.4 mi</span> · 🪵 Cracker Barrel <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.07792,-78.95733" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Clarion Pointe Marshall</span><small>150 kW · 4 stalls</small></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>☕ Starbucks ≥7 min</span><span>🚗 Sonic ≥7 min</span><span>🍔 Five Guys ≥8 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.07792,-78.95733" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Clarion Pointe Marshall</span><small>150 kW · 4 stalls</small></div>
 <div class="a">5301 E End Blvd S, Marshall, TX</div><div class="host">Graviti Energy</div>
-<div class="c"><b>🧇 Waffle House <span>≥1 min · 289 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 525 ft</span> · 🥞 IHOP <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.49511,-94.3588" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Waffle House&amp;state=TX">Show on map</a></div></div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.49511,-94.3588" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7Charge - Sarasota</span><small>180 kW · 4 stalls</small></div>
+<div class="a">5745 Clark Rd, Sarasota, FL</div><div class="host">7Charge</div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍎 Applebee&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.26989,-82.4545" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Carroll Emc HQ Chick-Fil-A-Dc2</span><small>125 kW · 1 stalls</small></div>
+<div class="a">89 US Highway 27 Bypass, Bremen, GA</div><div class="host">ChargePoint</div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.68825,-85.15021" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>CircleK - Greenville</span><small>180 kW · 4 stalls</small></div>
+<div class="a">821 E Butler Rd, Mauldin, SC</div><div class="host">Circle K</div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>⛽ QuikTrip ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.80308,-82.28558" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cat Card Bk Phenix</span><small>80 kW · 1 stalls</small></div>
+<div class="a">1127 E 280 Byp, Phenix City, AL</div><div class="host">ChargePoint</div>
+<div class="c"><span>🧇 <b>Waffle House</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Del Taco ≥2 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.46902,-85.02931" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

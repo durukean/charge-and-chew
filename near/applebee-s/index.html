@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Applebee&#x27;s (886 locations) | Charge & Chew</title>
-<meta name="description" content="886 EV DC fast chargers within a 10-minute walk of a Applebee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Applebee&#x27;s (848 locations) | Charge & Chew</title>
+<meta name="description" content="848 EV DC fast chargers within a 10-minute walk of a Applebee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/applebee-s/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Applebee&#x27;s (886 locations)">
-<meta property="og:description" content="886 EV DC fast chargers within a 10-minute walk of a Applebee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Applebee&#x27;s (848 locations)">
+<meta property="og:description" content="848 EV DC fast chargers within a 10-minute walk of a Applebee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/applebee-s/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍎 EV fast chargers near Applebee&#x27;s</h1>
-<p class="lead">We found <b>886 DC fast chargers</b> in the US — across all networks — with an Applebee&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>848 DC fast chargers</b> in the US — across all networks — with an Applebee&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Applebee&#x27;s">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>108</small></a><a href="ny/">New York <small>69</small></a><a href="mi/">Michigan <small>55</small></a><a href="fl/">Florida <small>49</small></a><a href="wa/">Washington <small>40</small></a><a href="oh/">Ohio <small>39</small></a><a href="nj/">New Jersey <small>37</small></a><a href="ga/">Georgia <small>35</small></a><a href="il/">Illinois <small>34</small></a><a href="tx/">Texas <small>30</small></a><a href="va/">Virginia <small>28</small></a><a href="nc/">North Carolina <small>26</small></a><a href="mo/">Missouri <small>25</small></a><a href="mn/">Minnesota <small>25</small></a><a href="pa/">Pennsylvania <small>22</small></a><a href="ma/">Massachusetts <small>20</small></a><a href="wi/">Wisconsin <small>17</small></a><a href="co/">Colorado <small>16</small></a><a href="in/">Indiana <small>16</small></a><a href="me/">Maine <small>16</small></a><a href="or/">Oregon <small>14</small></a><a href="ia/">Iowa <small>13</small></a><a href="nh/">New Hampshire <small>12</small></a><a href="sc/">South Carolina <small>12</small></a><a href="ut/">Utah <small>9</small></a><a href="nd/">North Dakota <small>9</small></a><a href="id/">Idaho <small>9</small></a><a href="ks/">Kansas <small>8</small></a><a href="nm/">New Mexico <small>8</small></a><a href="md/">Maryland <small>8</small></a><a href="ms/">Mississippi <small>8</small></a><a href="al/">Alabama <small>8</small></a><a href="nv/">Nevada <small>7</small></a><a href="az/">Arizona <small>6</small></a><a href="wy/">Wyoming <small>5</small></a><a href="ky/">Kentucky <small>5</small></a><a href="vt/">Vermont <small>5</small></a><a href="wv/">West Virginia <small>5</small></a><a href="de/">Delaware <small>5</small></a><a href="ne/">Nebraska <small>5</small></a><a href="tn/">Tennessee <small>4</small></a><a href="la/">Louisiana <small>4</small></a><a href="mt/">Montana <small>4</small></a><a href="ct/">Connecticut <small>4</small></a><a href="ok/">Oklahoma <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Kohl&#x27;s 308 - Mechanicsville</span><small>350 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>104</small></a><a href="ny/">New York <small>65</small></a><a href="mi/">Michigan <small>53</small></a><a href="fl/">Florida <small>44</small></a><a href="nj/">New Jersey <small>37</small></a><a href="oh/">Ohio <small>36</small></a><a href="wa/">Washington <small>35</small></a><a href="ga/">Georgia <small>33</small></a><a href="il/">Illinois <small>32</small></a><a href="va/">Virginia <small>28</small></a><a href="tx/">Texas <small>28</small></a><a href="nc/">North Carolina <small>25</small></a><a href="mo/">Missouri <small>25</small></a><a href="mn/">Minnesota <small>25</small></a><a href="pa/">Pennsylvania <small>22</small></a><a href="ma/">Massachusetts <small>20</small></a><a href="wi/">Wisconsin <small>17</small></a><a href="in/">Indiana <small>15</small></a><a href="co/">Colorado <small>14</small></a><a href="or/">Oregon <small>14</small></a><a href="me/">Maine <small>14</small></a><a href="ia/">Iowa <small>13</small></a><a href="nh/">New Hampshire <small>12</small></a><a href="sc/">South Carolina <small>12</small></a><a href="ut/">Utah <small>9</small></a><a href="nd/">North Dakota <small>9</small></a><a href="id/">Idaho <small>9</small></a><a href="ks/">Kansas <small>8</small></a><a href="nm/">New Mexico <small>8</small></a><a href="md/">Maryland <small>8</small></a><a href="ms/">Mississippi <small>7</small></a><a href="al/">Alabama <small>7</small></a><a href="nv/">Nevada <small>7</small></a><a href="az/">Arizona <small>6</small></a><a href="wy/">Wyoming <small>5</small></a><a href="ky/">Kentucky <small>5</small></a><a href="vt/">Vermont <small>5</small></a><a href="wv/">West Virginia <small>5</small></a><a href="de/">Delaware <small>5</small></a><a href="ne/">Nebraska <small>5</small></a><a href="tn/">Tennessee <small>4</small></a><a href="la/">Louisiana <small>4</small></a><a href="mt/">Montana <small>4</small></a><a href="ct/">Connecticut <small>3</small></a><a href="ok/">Oklahoma <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kohl&#x27;s 308 - Mechanicsville</span><small>350 kW · 4 stalls</small></div>
 <div class="a">7390 Bell Creek Rd, Mechanicsville, VA</div><div class="host">EVgo</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 26 ft</span></b> · ☕ Starbucks <span>≥2 min · 456 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.60746,-77.35474" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Queens, NY - Queens Center - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.60746,-77.35474" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Queens, NY - Queens Center - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
 <div class="a">90-15 Queens Boulevard, Queens, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 36 ft</span></b> · 🍔 Shake Shack <span>≥2 min · 486 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥3 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.73508,-73.87067" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Wichita, KS - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍔 Shake Shack ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍝 Olive Garden ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.73508,-73.87067" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wichita, KS - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">4760 S. Broadway Street, Wichita, KS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 72 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 479 ft</span> · 🍕 Pizza Hut <span>≥2 min · 472 ft</span> · 🌮 Taco Bell <span>≥2 min · 512 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.6088,-97.33317" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=KS">Show on map</a></div></div><div class="card"><div class="n"><span>7-Eleven, Inc. 32990Pueblo</span><small>120 kW · 1 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍗 KFC ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.6088,-97.33317" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7-Eleven, Inc. 32990Pueblo</span><small>120 kW · 1 stalls</small></div>
 <div class="a">3510 N Elizabeth St, Pueblo, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 75 ft</span></b> · 🍗 Wingstop <span>≥1 min · 345 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 381 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🍝 Olive Garden <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.30651,-104.61454" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>7-Eleven, Inc. 32990Pueblo</span><small>120 kW · 1 stalls</small></div>
-<div class="a">3510 N Elizabeth St, Pueblo, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 75 ft</span></b> · 🍗 Wingstop <span>≥1 min · 338 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 374 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🍝 Olive Garden <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.30652,-104.61463" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Queens Center Mall (Elmhurst, NY)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍝 Olive Garden ≥4 min</span><span>🍕 Pizza Hut ≥4 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.30651,-104.61454" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Queens Center Mall (Elmhurst, NY)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">90-15 Queens Blvd., Elmhurst, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 108 ft</span></b> · 🍔 Shake Shack <span>≥1 min · 351 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 443 ft</span> · 🍝 Olive Garden <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · 🌯 Chipotle <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.73487,-73.87038" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Hays, KS - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>🌯 Chipotle ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.73487,-73.87038" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hays, KS - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
 <div class="a">4101 Vine St, Hays, KS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 118 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 397 ft</span> · 🛒 Walmart <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span> · 🍗 Popeyes <span>≥5 min · 0.2 mi</span> · 🥞 IHOP <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.90053,-99.31927" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=KS">Show on map</a></div></div><div class="card"><div class="n"><span>Painted Post, NY - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🍗 Popeyes ≥5 min</span><span>🥞 IHOP ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.90053,-99.31927" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Painted Post, NY - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">3159 Silverback Ln, Painted Post, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 128 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 272 ft</span> · 🛒 Aldi <span>≥1 min · 289 ft</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🔨 Home Depot <span>≥3 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.15395,-77.1051" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Albuquerque, NM - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🛒 Walmart ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🥩 Arby&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.15395,-77.1051" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Albuquerque, NM - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
 <div class="a">2600 Menaul Blvd NE, Albuquerque, NM</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 138 ft</span></b> · 🛒 Walmart <span>≥7 min · 0.3 mi</span> · ☕ Starbucks <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.10852,-106.6128" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a></div></div><div class="card"><div class="n"><span>Commerce Bank - Shiloh</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥7 min</span><span>☕ Starbucks ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.10852,-106.6128" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Commerce Bank - Shiloh</span><small>50 kW · 1 stalls</small></div>
 <div class="a">4400 Green Mount Crossing Dr, Shiloh, IL</div><div class="host">EVgo</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 138 ft</span></b> · 🥖 Panera Bread <span>≥2 min · 515 ft</span> · 🍕 Little Caesars <span>≥2 min · 525 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥3 min · 0.2 mi</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.57211,-89.92806" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Jacksonville</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.57211,-89.92806" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Jacksonville</span><small>184 kW · 4 stalls</small></div>
 <div class="a">5067 J Turner Butler Blvd, Jacksonville, FL</div><div class="host">Blink</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 79 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 171 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 331 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.24565,-81.59893" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 4619 FastMarket Valero Albuquerque</span><small>320 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.24565,-81.59893" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 4619 FastMarket Valero Albuquerque</span><small>320 kW · 4 stalls</small></div>
 <div class="a">2721 Coors Blvd NW, Albuquerque, NM</div><div class="host">Red E</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 171 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 305 ft</span> · 🍗 Wingstop <span>≥2 min · 423 ft</span> · ⛽ Speedway <span>≥2 min · 515 ft</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.11494,-106.70259" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 4638 Express Stop BP Birch Run</span><small>240 kW · 2 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>+12</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.11494,-106.70259" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 4638 Express Stop BP Birch Run</span><small>240 kW · 2 stalls</small></div>
 <div class="a">8830 Main St, Birch Run, MI</div><div class="host">Red E</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 36 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 174 ft</span></b> · 🦬 Buffalo Wild Wings <span>≥2 min · 420 ft</span> · 🌮 Taco Bell <span>≥2 min · 489 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.24954,-83.77772" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Oregon, OH - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.24954,-83.77772" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Oregon, OH - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">2839 N Curtice Rd, Curtice, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 184 ft</span></b> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥7 min · 0.4 mi</span> · 🥪 Subway <span>≥7 min · 0.4 mi</span> · ⛽ Speedway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.61748,-83.48179" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Boone, NC Rechargery Relay @ Circle K - Blowing Rock Rd.</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>🥪 Subway ≥7 min</span><span>⛽ Speedway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.61748,-83.48179" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Boone, NC Rechargery Relay @ Circle K - Blowing Rock Rd.</span><small>400 kW · 4 stalls</small></div>
 <div class="a">1996 Blowing Rock Rd., Boone, NC</div><div class="host">IONNA</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 190 ft</span></b> · 🌶️ Chili&#x27;s <span>≥1 min · 308 ft</span> · 🍗 Wingstop <span>≥1 min · 367 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 440 ft</span> · 💊 CVS <span>≥3 min · 0.2 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.19672,-81.65589" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Nameoki Commons</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>💊 CVS ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.19672,-81.65589" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Nameoki Commons</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3401 Nameoki Rd, Granite City, IL</div><div class="host">EVgo</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 200 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 443 ft</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · 💊 Walgreens <span>≥3 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.72675,-90.12454" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Lima, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>👑 Burger King ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>💊 CVS ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.72675,-90.12454" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Lima, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">1933 Roschman Ave., Lima, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 213 ft</span></b> · 🦬 Buffalo Wild Wings <span>≥1 min · 246 ft</span> · 🪵 Cracker Barrel <span>≥2 min · 0.1 mi</span> · 🏪 Sam&#x27;s Club <span>≥3 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥3 min · 0.1 mi</span> · 🤠 Texas Roadhouse <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.72664,-84.0719" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Rock Springs, WY - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72664,-84.0719" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Rock Springs, WY - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">2441 Foothill Blvd., Rock Springs, WY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 220 ft</span></b> · 🍗 KFC <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥8 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.58079,-109.26217" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=WY">Show on map</a></div></div><div class="card"><div class="n"><span>Thornton, CO - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍗 KFC ≥4 min</span><span>🔨 Home Depot ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=WY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.58079,-109.26217" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Thornton, CO - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">237 East 120th Avenue, Thornton, CO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 220 ft</span></b> · ☕ Starbucks <span>≥1 min · 325 ft</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥6 min · 0.3 mi</span> · 🛒 Safeway <span>≥7 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.91483,-104.98668" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Ashley Investments (Manteca, CA)</span><small>350 kW · 10 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥖 Panera Bread ≥3 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🛒 Safeway ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.91483,-104.98668" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ashley Investments (Manteca, CA)</span><small>350 kW · 10 stalls</small></div>
 <div class="a">131 Spreckels Ave, Manteca, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 220 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 279 ft</span> · 🐕 Raising Cane&#x27;s <span>≥2 min · 486 ft</span> · 🍗 Wingstop <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥2 min · 0.1 mi</span> · 🌮 Del Taco <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.79646,-121.1967" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Vaughn Cadillac</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Del Taco ≥2 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79646,-121.1967" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Vaughn Cadillac</span><small>50 kW · 1 stalls</small></div>
 <div class="a">1311 VAUGHN DRIVE, OTTUMWA, IA</div><div class="host">EV Connect</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 223 ft</span></b> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🍗 KFC <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.01949,-92.43992" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IA">Show on map</a></div></div><div class="card"><div class="n"><span>Team One Chevrolet</span><small>24 kW · 1 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍗 KFC ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🥪 Subway ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.01949,-92.43992" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Team One Chevrolet</span><small>24 kW · 1 stalls</small></div>
 <div class="a">1616 Lansing Rd, Charlotte, MI</div><div class="host">Non-networked</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 233 ft</span></b> · 🛒 Walmart <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.5822,-84.80553" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Klamath Falls, OR</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.5822,-84.80553" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Klamath Falls, OR</span><small>300 kW · 6 stalls</small></div>
 <div class="a">2750 Campus Drive, Klamath Falls, OR</div><div class="host">Rivian Adventure</div>
-<div class="c">☕ Dutch Bros <span>≥1 min · 217 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 233 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.24994,-121.78721" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>DeNooyer Chevrolet Marshall MI</span><small>60 kW · 2 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Dutch Bros ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.24994,-121.78721" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DeNooyer Chevrolet Marshall MI</span><small>60 kW · 2 stalls</small></div>
 <div class="a">1201 W Michigan Ave, Marshall, MI</div><div class="host">Red E</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 236 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 302 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 390 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.27155,-84.98221" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Renaissance Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.27155,-84.98221" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Renaissance Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">100 Renaissance Ctr, Detroit, MI</div><div class="host">EVgo</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 243 ft</span></b> · 🥞 IHOP <span>≥1 min · 289 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ☕ Peet&#x27;s Coffee <span>≥5 min · 0.3 mi</span> · ⛽ Speedway <span>≥5 min · 0.3 mi</span> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.32991,-83.04067" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Meijer-Meijer 154 (Indianapolis, IN)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🥪 Subway ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>⛽ Speedway ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.32991,-83.04067" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Meijer-Meijer 154 (Indianapolis, IN)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">8375 E 96th Street, Indianapolis, IN</div><div class="host">Electrify America</div>
-<div class="c">🐼 Panda Express <span>≥1 min · 207 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 256 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.92702,-86.02099" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Puyallup, WA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.92702,-86.02099" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Puyallup, WA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">3310 S Meridian, Puyallup, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 256 ft</span></b> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🍦 Dairy Queen <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.15872,-122.29362" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Amazing Hospitality Corp</span><small>60 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍦 Dairy Queen ≥3 min</span><span>🥪 Subway ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+16</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.15872,-122.29362" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Amazing Hospitality Corp</span><small>60 kW · 4 stalls</small></div>
 <div class="a">2500 Menaul Boulevard, Albuquerque, NM</div><div class="host">Blink</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 266 ft</span></b> · 🛒 Walmart <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.10877,-106.61419" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a></div></div><div class="card"><div class="n"><span>Latham, NY</span><small>300 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.10877,-106.61419" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Latham, NY</span><small>300 kW · 8 stalls</small></div>
 <div class="a">549 Troy-Schenectady Rd, Latham, NY</div><div class="host">Rivian Adventure</div>
-<div class="c">☕ Starbucks <span>≥1 min · 79 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 279 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥5 min · 0.3 mi</span> · 🛒 Walmart <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.75094,-73.76414" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Anaheim, CA - East Lincoln Ave - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.75094,-73.76414" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Anaheim, CA - East Lincoln Ave - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">2270 East Lincoln Avenue, Anaheim, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍗 KFC <span>≥1 min · 210 ft</span> · 🌯 Chipotle <span>≥1 min · 203 ft</span> · 🍗 Wingstop <span>≥1 min · 282 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 282 ft</span></b> · 💊 Walgreens <span>≥2 min · 440 ft</span> · 🍕 Pizza Hut <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.83901,-117.8883" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Newnan</span><small>360 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.83901,-117.8883" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Newnan</span><small>360 kW · 4 stalls</small></div>
 <div class="a">955 Bullsboro Dr, Newnan, GA</div><div class="host">EV Connect</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 305 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 295 ft</span></b> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🧇 Waffle House <span>≥3 min · 0.2 mi</span> · 🛒 Walmart <span>≥3 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.39531,-84.74564" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Boston, MA - Allstate Road - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.39531,-84.74564" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Boston, MA - Allstate Road - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
 <div class="a">101 Allstate Road, Boston, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 112 ft</span> · 🌯 Chipotle <span>≥1 min · 138 ft</span> · 🍝 Olive Garden <span>≥1 min · 259 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 302 ft</span></b> · 💻 Best Buy <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.3254,-71.06292" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 2104 (Newburgh, NY)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍝 Olive Garden ≥1 min</span><span>💻 Best Buy ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.3254,-71.06292" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 2104 (Newburgh, NY)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1201 Route 300, Newburgh, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 305 ft</span></b> · 🛒 Walmart <span>≥2 min · 476 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥4 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.49792,-74.07305" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Cumming, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🚗 Sonic ≥3 min</span><span>🔨 Home Depot ≥4 min</span><span>🥪 Jersey Mike&#x27;s ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.49792,-74.07305" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cumming, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">501 Lakeland Plaza, Cumming, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍔 Whataburger <span>≥1 min · 249 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 308 ft</span></b> · 🥖 Panera Bread <span>≥2 min · 482 ft</span> · 🤠 Texas Roadhouse <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.18502,-84.14234" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Fort Wayne, IN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍔 Whataburger ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18502,-84.14234" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fort Wayne, IN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">6309 Lima Road, Fort Wayne, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 230 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 312 ft</span></b> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · 🏪 Sam&#x27;s Club <span>≥3 min · 0.2 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.13841,-85.16335" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 1161 (St Charles, MO)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🐼 Panda Express ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.13841,-85.16335" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 1161 (St Charles, MO)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2897 Veterans Memorial Parkway, St. Charles, MO</div><div class="host">Electrify America</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 315 ft</span></b> · 🐼 Panda Express <span>≥1 min · 371 ft</span> · 🛒 Walmart <span>≥2 min · 509 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🏪 Sam&#x27;s Club <span>≥4 min · 0.2 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.78358,-90.52782" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Frankfort, KY - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🥪 Jersey Mike&#x27;s ≥4 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.78358,-90.52782" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Frankfort, KY - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">1302 US-127, Frankfort, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 315 ft</span></b> · 💊 Walgreens <span>≥2 min · 463 ft</span> · ☕ Starbucks <span>≥2 min · 476 ft</span> · 🛒 Kroger <span>≥2 min · 0.1 mi</span> · 🛒 Aldi <span>≥3 min · 0.1 mi</span> · 🐔 Chick-fil-A <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.16553,-84.89803" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Northgate Mall</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛒 Kroger ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.16553,-84.89803" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Northgate Mall</span><small>50 kW · 2 stalls</small></div>
 <div class="a">5800 Northgate Dr, San Rafael, CA</div><div class="host">EVgo</div>
-<div class="c">🌯 Chipotle <span>≥1 min · 213 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 322 ft</span></b> · 🐼 Panda Express <span>≥1 min · 302 ft</span> · 🥖 Panera Bread <span>≥2 min · 476 ft</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.00534,-122.54506" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Bradley, IL - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00534,-122.54506" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bradley, IL - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">990 N Kinzie Ave, Bradley, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍎 Applebee&#x27;s <span>≥1 min · 331 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 440 ft</span> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🤠 Texas Roadhouse <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.15974,-87.84899" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>2980 Cook Rd</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.15974,-87.84899" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>2980 Cook Rd</span><small>180 kW · 4 stalls</small></div>
 <div class="a">2980 Cook Rd, West Branch, MI</div><div class="host">Shell Recharge</div>
-<div class="c">🥪 Subway <span>≥1 min · 308 ft</span> · <b>🍎 Applebee&#x27;s <span>≥1 min · 331 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 495 ft</span> · 🍗 KFC <span>≥2 min · 505 ft</span> · 🌮 Taco Bell <span>≥2 min · 525 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.24907,-84.22661" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div></div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.24907,-84.22661" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Front Royal, VA</span><small>300 kW · 6 stalls</small></div>
+<div class="a">10 Riverton Commons Drive, Front Royal, VA</div><div class="host">Rivian Adventure</div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96358,-78.18933" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

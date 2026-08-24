@@ -100,22 +100,43 @@ def clean(sites):
             stats["low_kw"] += 1; continue
         if PRIVATE_RE.search(s.get("name", "")):
             stats["private"] += 1; continue
-        kept.append(s)
-
-    # de-duplicate: same ~11 m spot, keep the richest record
-    best = {}
-    for s in kept:
-        key = (round(s["lat"], 4), round(s["lon"], 4))
-        score = (s.get("kw") or 0, s.get("stalls") or 0, len(s.get("name") or ""))
-        if key not in best or score > best[key][0]:
-            best[key] = (score, s)
-    deduped = [v[1] for v in best.values()]
-    stats["dup"] = len(kept) - len(deduped)
-
-    for s in deduped:
+        # tidy the name BEFORE de-duplicating: "PIE AE AUSTIN HS DCFC1" and "...DCFC2" are the
+        # same site, and only look identical once the trailing cabinet code is stripped
         pn = pretty_name(s.get("name", ""))
         if pn != s.get("name"):
             s["name"] = pn; stats["renamed"] += 1
+        kept.append(s)
+
+    # de-duplicate in two passes:
+    #   1. identical coordinates (~11 m)
+    #   2. same name within 200 m — AFDC lists many sites once per cabinet, which is
+    #      why a route could surface "Pie Ae Austin Hs" four times in a row
+    def richness(x):
+        return (x.get("kw") or 0, x.get("stalls") or 0, len(x.get("name") or ""))
+
+    best = {}
+    for s in kept:
+        key = (round(s["lat"], 4), round(s["lon"], 4))
+        if key not in best or richness(s) > richness(best[key]):
+            best[key] = s
+    stage1 = list(best.values())
+
+    by_name = {}
+    for s in stage1:
+        by_name.setdefault((s["name"].lower(), s.get("st", "")), []).append(s)
+    deduped = []
+    for group in by_name.values():
+        if len(group) == 1:
+            deduped.extend(group); continue
+        group.sort(key=richness, reverse=True)   # keep the richest of each cluster
+        picked = []
+        for s in group:
+            if all(hav(s["lat"], s["lon"], p["lat"], p["lon"]) > 200 for p in picked):
+                picked.append(s)
+        deduped.extend(picked)
+    stats["dup"] = len(kept) - len(deduped)
+
+    for s in deduped:
         if DEALER_RE.search(s["name"]):
             s["dlr"] = 1; stats["dealer"] += 1
     stats["end"] = len(deduped)

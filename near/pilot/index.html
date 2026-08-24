@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Pilot (381 locations) | Charge & Chew</title>
-<meta name="description" content="381 EV DC fast chargers within a 10-minute walk of a Pilot, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Pilot (374 locations) | Charge & Chew</title>
+<meta name="description" content="374 EV DC fast chargers within a 10-minute walk of a Pilot, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/pilot/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Pilot (381 locations)">
-<meta property="og:description" content="381 EV DC fast chargers within a 10-minute walk of a Pilot, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Pilot (374 locations)">
+<meta property="og:description" content="374 EV DC fast chargers within a 10-minute walk of a Pilot, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/pilot/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Pilot</h1>
-<p class="lead">We found <b>381 DC fast chargers</b> in the US — across all networks — with a Pilot within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>374 DC fast chargers</b> in the US — across all networks — with a Pilot within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Pilot">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>38</small></a><a href="il/">Illinois <small>33</small></a><a href="oh/">Ohio <small>23</small></a><a href="tn/">Tennessee <small>19</small></a><a href="ca/">California <small>19</small></a><a href="ga/">Georgia <small>18</small></a><a href="va/">Virginia <small>17</small></a><a href="fl/">Florida <small>17</small></a><a href="in/">Indiana <small>15</small></a><a href="az/">Arizona <small>13</small></a><a href="ky/">Kentucky <small>11</small></a><a href="sc/">South Carolina <small>11</small></a><a href="pa/">Pennsylvania <small>10</small></a><a href="mo/">Missouri <small>9</small></a><a href="nc/">North Carolina <small>9</small></a><a href="la/">Louisiana <small>8</small></a><a href="ia/">Iowa <small>8</small></a><a href="nm/">New Mexico <small>8</small></a><a href="mt/">Montana <small>8</small></a><a href="al/">Alabama <small>7</small></a><a href="wa/">Washington <small>6</small></a><a href="ok/">Oklahoma <small>6</small></a><a href="ut/">Utah <small>6</small></a><a href="nj/">New Jersey <small>6</small></a><a href="ar/">Arkansas <small>5</small></a><a href="co/">Colorado <small>5</small></a><a href="or/">Oregon <small>5</small></a><a href="nv/">Nevada <small>5</small></a><a href="ny/">New York <small>4</small></a><a href="ms/">Mississippi <small>4</small></a><a href="wi/">Wisconsin <small>4</small></a><a href="mi/">Michigan <small>4</small></a><a href="ma/">Massachusetts <small>4</small></a><a href="md/">Maryland <small>3</small></a><a href="mn/">Minnesota <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="wv/">West Virginia <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="nd/">North Dakota <small>2</small></a><a href="wy/">Wyoming <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>38</small></a><a href="il/">Illinois <small>33</small></a><a href="oh/">Ohio <small>23</small></a><a href="tn/">Tennessee <small>19</small></a><a href="ca/">California <small>19</small></a><a href="ga/">Georgia <small>18</small></a><a href="fl/">Florida <small>16</small></a><a href="va/">Virginia <small>15</small></a><a href="in/">Indiana <small>15</small></a><a href="az/">Arizona <small>13</small></a><a href="ky/">Kentucky <small>11</small></a><a href="sc/">South Carolina <small>11</small></a><a href="mo/">Missouri <small>9</small></a><a href="nc/">North Carolina <small>9</small></a><a href="pa/">Pennsylvania <small>8</small></a><a href="la/">Louisiana <small>8</small></a><a href="nm/">New Mexico <small>8</small></a><a href="mt/">Montana <small>8</small></a><a href="ia/">Iowa <small>7</small></a><a href="al/">Alabama <small>7</small></a><a href="wa/">Washington <small>6</small></a><a href="ok/">Oklahoma <small>6</small></a><a href="ut/">Utah <small>6</small></a><a href="nj/">New Jersey <small>6</small></a><a href="ar/">Arkansas <small>5</small></a><a href="co/">Colorado <small>5</small></a><a href="or/">Oregon <small>5</small></a><a href="nv/">Nevada <small>5</small></a><a href="ny/">New York <small>4</small></a><a href="ms/">Mississippi <small>4</small></a><a href="wi/">Wisconsin <small>4</small></a><a href="mi/">Michigan <small>4</small></a><a href="md/">Maryland <small>3</small></a><a href="mn/">Minnesota <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="ma/">Massachusetts <small>3</small></a><a href="wv/">West Virginia <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="nd/">North Dakota <small>2</small></a><a href="wy/">Wyoming <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">7801 Alcoa Rd, Benton, AR</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥪 Subway <span>≥1 min · 46 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 518 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.60832,-92.53334" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=AR">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.60832,-92.53334" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">205 Pendleton Road, Pendleton, KY</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.45401,-85.29709" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.45401,-85.29709" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">713 Oakland Circle, Raphine, VA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 46 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 46 ft</span> · ☕ Caribou Coffee <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.93214,-79.23193" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>☕ Caribou Coffee ≥4 min</span><span>👑 Burger King ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.93214,-79.23193" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2400 Alliance Gateway Fwy, Fort Worth, TX</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 30 ft</span> · 🥪 Subway <span>≥1 min · 46 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.95768,-97.30757" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.95768,-97.30757" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">815 Hwy 24 West, Gilman, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 400 ft</span> · 🥪 Subway <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.75113,-88.00134" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75113,-88.00134" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1128 Duanesburg Road, Rotterdam, NY</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 26 ft</span> · 🥪 Subway <span>≥1 min · 62 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 456 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.78142,-74.02882" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.78142,-74.02882" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1405 East Main St., Duncan, SC</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 207 ft</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · ⛽ TA Travel Center <span>≥4 min · 0.2 mi</span> · ⛽ QuikTrip <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.91564,-82.10756" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⛽ TA Travel Center ≥4 min</span><span>⛽ QuikTrip ≥4 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.91564,-82.10756" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">8035 Perry Highway, Erie, PA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥪 Subway <span>≥1 min · 135 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.3 mi</span> · ⛽ Sheetz <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.06973,-80.03825" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>⛽ Sheetz ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.06973,-80.03825" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">10 Interstate Drive, Vandalia, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🛒 Walmart <span>≥6 min · 0.3 mi</span> · 🍗 KFC <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.97118,-89.13613" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🛒 Walmart ≥6 min</span><span>🍗 KFC ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.97118,-89.13613" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3000 Chestnut Ridge Road, Grantsville, MD</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 200 ft</span> · 🍕 Little Caesars <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.69194,-79.10068" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍕 Little Caesars ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>👑 Burger King ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.69194,-79.10068" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">11650 Courthouse Blvd., Inver Grove Heights, MN</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥪 Subway <span>≥1 min · 105 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.78087,-93.03404" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.78087,-93.03404" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">699 State Route 203, East St. Louis, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 118 ft</span> · 🥪 Subway <span>≥1 min · 141 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.65208,-90.13191" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J 676 - eXtend</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.65208,-90.13191" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J 676 - eXtend</span><small>350 kW · 4 stalls</small></div>
 <div class="a">9351 Canal Road, Gulfport, MS</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍳 Denny&#x27;s <span>≥1 min · 46 ft</span> · ⛽ Flying J <span>≥1 min · 144 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 331 ft</span> · 🧇 Waffle House <span>≥3 min · 0.1 mi</span> · ⛽ QuikTrip <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.42138,-89.138" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=MS">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Flying J ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🧇 Waffle House ≥3 min</span><span>⛽ QuikTrip ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.42138,-89.138" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">490 North Elm Street, Haughton, LA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 72 ft</span> · 🧇 Waffle House <span>≥2 min · 472 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.5448,-93.51605" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=LA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🚗 Sonic ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.5448,-93.51605" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2647 South 24th Street, Council Bluffs, IA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 141 ft</span> · 👑 Burger King <span>≥1 min · 328 ft</span> · 🤠 Texas Roadhouse <span>≥8 min · 0.4 mi</span> · 🍦 Culver&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.23561,-95.87878" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🤠 Texas Roadhouse ≥8 min</span><span>🍦 Culver&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.23561,-95.87878" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3600 Interchange Road, Columbus, OH</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 115 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 335 ft</span> · 🧇 Waffle House <span>≥3 min · 0.1 mi</span> · ⛽ Speedway <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.97308,-83.09956" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🧇 Waffle House ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>🥪 Subway ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.97308,-83.09956" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2320 Highway 46 South, Dickson, TN</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 69 ft</span> · 🧇 Waffle House <span>≥2 min · 459 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 Bojangles <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.02266,-87.34121" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍗 Bojangles ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.02266,-87.34121" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">30035 County Road 8, Dunnigan, CA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 112 ft</span> · 👑 Burger King <span>≥1 min · 295 ft</span> · 🌮 Taco Bell <span>≥2 min · 410 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.86252,-121.95095" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.86252,-121.95095" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2640 North 600 West, Greenfield, IN</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · ⛽ Speedway <span>≥1 min · 292 ft</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.82154,-85.91613" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🌮 Taco Bell ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.82154,-85.91613" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">7210 Strawberry Plains Pike, Knoxville, TN</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 👑 Burger King <span>≥1 min · 354 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🪵 Cracker Barrel <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.99938,-83.77715" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center 358 - eXtend</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🪵 Cracker Barrel ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.99938,-83.77715" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center 358 - eXtend</span><small>350 kW · 4 stalls</small></div>
 <div class="a">5353 Cairo Road, Paducah, KY</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.0975,-88.69117" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.0975,-88.69117" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">301 Ridge Road, Minooka, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 115 ft</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span> · 🍩 Dunkin&#x27; <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.46076,-88.27203" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.46076,-88.27203" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">6705 Hwy 63, Moss Point, MS</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🧇 Waffle House <span>≥1 min · 331 ft</span> · 🥪 Subway <span>≥2 min · 489 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.43845,-88.52845" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=MS">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.43845,-88.52845" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">7501 South Harlem Ave, Bridgeview, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span> · 🛒 Aldi <span>≥8 min · 0.4 mi</span> · 🍕 Pizza Hut <span>≥8 min · 0.4 mi</span> · ⛽ Speedway <span>≥8 min · 0.4 mi</span> · 💊 Walgreens <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.75469,-87.79958" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🛒 Aldi ≥8 min</span><span>🍕 Pizza Hut ≥8 min</span><span>⛽ Speedway ≥8 min</span><span>💊 Walgreens ≥8 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.75469,-87.79958" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2975 Gun Club Road, Augusta, GA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 0 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 108 ft</span> · 🧇 Waffle House <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.52351,-82.03382" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🧇 Waffle House ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.52351,-82.03382" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1307 North Dolarway Rd., Ellensburg, WA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 23 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 151 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.00615,-120.58679" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>☕ Starbucks ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.00615,-120.58679" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2430 State Route 530 NE, Arlington, WA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 23 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 174 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.18761,-122.19654" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.18761,-122.19654" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1365 Sr 42 Ne, London, OH</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 26 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 177 ft</span> · ⛽ Sheetz <span>≥2 min · 522 ft</span> · 🧇 Waffle House <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.95955,-83.36923" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Sheetz ≥2 min</span><span>🧇 Waffle House ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.95955,-83.36923" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">395 E. Vista Drive, Weed, CA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 26 ft</span></b> · 🥪 Subway <span>≥1 min · 197 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.39931,-122.37635" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>☕ Starbucks ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.39931,-122.37635" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">15455 Terrazzo Drive, Monument, CO</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 26 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 26 ft</span> · ⛽ QuikTrip <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.05569,-104.85352" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center 592 - eXtend</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ QuikTrip ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.05569,-104.85352" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center 592 - eXtend</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2195 Hwy 6 And 50, Grand Junction, CO</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 26 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.2 mi</span> · ⛽ TA Travel Center <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.11254,-108.64817" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>⛽ Love&#x27;s ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>⛽ TA Travel Center ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.11254,-108.64817" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">40 East Laraway Road, Joliet, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 26 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.48051,-88.07921" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.48051,-88.07921" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3240 Point Mallard Parkway, Priceville, AL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 30 ft</span></b> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.1 mi</span> · 🧇 Waffle House <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.53799,-86.91088" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>👑 Burger King ≥3 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🧇 Waffle House ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.53799,-86.91088" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">503 N. Oakwood Street, Oakwood, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 36 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 112 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 466 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · ⛽ Speedway <span>≥2 min · 0.1 mi</span> · ⭐ Hardee&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.12383,-87.77948" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>⛽ Love&#x27;s ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.12383,-87.77948" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">600 W MO-92, Kearney, MO</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 36 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 302 ft</span> · 👑 Burger King <span>≥2 min · 400 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.36846,-94.3742" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.36846,-94.3742" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2342 North Main Street, Junction, TX</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 36 ft</span></b> · 🥪 Subway <span>≥1 min · 79 ft</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.50567,-99.77641" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.50567,-99.77641" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4416 Skyland Boulevard East, Tuscaloosa, AL</div><div class="host">EVgo</div>
-<div class="c">🥪 Subway <span>≥1 min · 36 ft</span> · <b>⛽ Pilot <span>≥1 min · 36 ft</span></b> · 🪵 Cracker Barrel <span>≥6 min · 0.3 mi</span> · 🛒 Walmart <span>≥6 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥7 min · 0.4 mi</span> · 👑 Burger King <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.17339,-87.47872" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Flying J Store</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🛒 Walmart ≥6 min</span><span>🌮 Taco Bell ≥7 min</span><span>👑 Burger King ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.17339,-87.47872" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Flying J Store</span><small>350 kW · 4 stalls</small></div>
 <div class="a">10048 Avon Lake Road, Burbank, OH</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 43 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 194 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 285 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · ⭐ Hardee&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.99922,-81.99773" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>⛽ Love&#x27;s ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.99922,-81.99773" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">900 Plaza Avenue, Woodhull, IL</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 43 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.18057,-90.3385" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.18057,-90.3385" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">6830 Franklin-Lebanon Road, Franklin, OH</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Pilot <span>≥1 min · 46 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 167 ft</span> · 🧇 Waffle House <span>≥1 min · 200 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 200 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.54207,-84.29126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Pilot&amp;state=OH">Show on map</a></div></div>
+<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.54207,-84.29126" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

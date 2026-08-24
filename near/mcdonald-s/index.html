@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near McDonald&#x27;s (4846 locations) | Charge & Chew</title>
-<meta name="description" content="4846 EV DC fast chargers within a 10-minute walk of a McDonald&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near McDonald&#x27;s (4595 locations) | Charge & Chew</title>
+<meta name="description" content="4595 EV DC fast chargers within a 10-minute walk of a McDonald&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/mcdonald-s/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near McDonald&#x27;s (4846 locations)">
-<meta property="og:description" content="4846 EV DC fast chargers within a 10-minute walk of a McDonald&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near McDonald&#x27;s (4595 locations)">
+<meta property="og:description" content="4595 EV DC fast chargers within a 10-minute walk of a McDonald&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/mcdonald-s/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍟 EV fast chargers near McDonald&#x27;s</h1>
-<p class="lead">We found <b>4846 DC fast chargers</b> in the US — across all networks — with a McDonald&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>4595 DC fast chargers</b> in the US — across all networks — with a McDonald&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=McDonald&#x27;s">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>883</small></a><a href="fl/">Florida <small>279</small></a><a href="tx/">Texas <small>261</small></a><a href="il/">Illinois <small>223</small></a><a href="ga/">Georgia <small>198</small></a><a href="ny/">New York <small>192</small></a><a href="wa/">Washington <small>188</small></a><a href="mi/">Michigan <small>167</small></a><a href="oh/">Ohio <small>156</small></a><a href="va/">Virginia <small>145</small></a><a href="co/">Colorado <small>126</small></a><a href="ma/">Massachusetts <small>122</small></a><a href="pa/">Pennsylvania <small>116</small></a><a href="md/">Maryland <small>112</small></a><a href="nj/">New Jersey <small>106</small></a><a href="nc/">North Carolina <small>106</small></a><a href="or/">Oregon <small>102</small></a><a href="tn/">Tennessee <small>96</small></a><a href="mo/">Missouri <small>93</small></a><a href="in/">Indiana <small>80</small></a><a href="az/">Arizona <small>78</small></a><a href="wi/">Wisconsin <small>77</small></a><a href="mn/">Minnesota <small>73</small></a><a href="ct/">Connecticut <small>72</small></a><a href="al/">Alabama <small>68</small></a><a href="ut/">Utah <small>63</small></a><a href="sc/">South Carolina <small>61</small></a><a href="nv/">Nevada <small>53</small></a><a href="ky/">Kentucky <small>44</small></a><a href="ia/">Iowa <small>44</small></a><a href="nm/">New Mexico <small>42</small></a><a href="ok/">Oklahoma <small>40</small></a><a href="la/">Louisiana <small>39</small></a><a href="ks/">Kansas <small>37</small></a><a href="me/">Maine <small>36</small></a><a href="id/">Idaho <small>31</small></a><a href="hi/">Hawaii <small>25</small></a><a href="ne/">Nebraska <small>24</small></a><a href="ar/">Arkansas <small>23</small></a><a href="nh/">New Hampshire <small>22</small></a><a href="de/">Delaware <small>22</small></a><a href="wv/">West Virginia <small>20</small></a><a href="vt/">Vermont <small>19</small></a><a href="ms/">Mississippi <small>18</small></a><a href="nd/">North Dakota <small>17</small></a><a href="mt/">Montana <small>15</small></a><a href="wy/">Wyoming <small>13</small></a><a href="ri/">Rhode Island <small>7</small></a><a href="sd/">South Dakota <small>7</small></a><a href="dc/">Washington DC <small>4</small></a><a href="ak/">Alaska <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>I-95 Milford SB Service Plaza</span><small>350 kW · 2 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>828</small></a><a href="fl/">Florida <small>264</small></a><a href="tx/">Texas <small>256</small></a><a href="il/">Illinois <small>215</small></a><a href="ny/">New York <small>179</small></a><a href="ga/">Georgia <small>176</small></a><a href="wa/">Washington <small>173</small></a><a href="mi/">Michigan <small>161</small></a><a href="oh/">Ohio <small>147</small></a><a href="va/">Virginia <small>144</small></a><a href="pa/">Pennsylvania <small>112</small></a><a href="ma/">Massachusetts <small>109</small></a><a href="co/">Colorado <small>108</small></a><a href="md/">Maryland <small>107</small></a><a href="nc/">North Carolina <small>104</small></a><a href="nj/">New Jersey <small>102</small></a><a href="or/">Oregon <small>90</small></a><a href="mo/">Missouri <small>90</small></a><a href="tn/">Tennessee <small>89</small></a><a href="az/">Arizona <small>77</small></a><a href="in/">Indiana <small>76</small></a><a href="wi/">Wisconsin <small>76</small></a><a href="mn/">Minnesota <small>73</small></a><a href="ct/">Connecticut <small>71</small></a><a href="al/">Alabama <small>61</small></a><a href="ut/">Utah <small>60</small></a><a href="sc/">South Carolina <small>59</small></a><a href="nv/">Nevada <small>53</small></a><a href="ky/">Kentucky <small>43</small></a><a href="ia/">Iowa <small>43</small></a><a href="nm/">New Mexico <small>41</small></a><a href="ok/">Oklahoma <small>40</small></a><a href="la/">Louisiana <small>38</small></a><a href="ks/">Kansas <small>37</small></a><a href="me/">Maine <small>32</small></a><a href="id/">Idaho <small>30</small></a><a href="hi/">Hawaii <small>25</small></a><a href="ne/">Nebraska <small>24</small></a><a href="ar/">Arkansas <small>23</small></a><a href="de/">Delaware <small>22</small></a><a href="nh/">New Hampshire <small>21</small></a><a href="wv/">West Virginia <small>20</small></a><a href="nd/">North Dakota <small>17</small></a><a href="vt/">Vermont <small>16</small></a><a href="ms/">Mississippi <small>16</small></a><a href="mt/">Montana <small>15</small></a><a href="wy/">Wyoming <small>13</small></a><a href="ri/">Rhode Island <small>7</small></a><a href="sd/">South Dakota <small>7</small></a><a href="dc/">Washington DC <small>4</small></a><a href="ak/">Alaska <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>I-95 Milford SB Service Plaza</span><small>350 kW · 2 stalls</small></div>
 <div class="a">I-95 Connecticut Turnpike, Milford, CT</div><div class="host">Applegreen</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 26 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 43 ft</span> · 🥪 Subway <span>≥1 min · 66 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.24659,-73.01007" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CT">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.24659,-73.01007" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2400 Alliance Gateway Fwy, Fort Worth, TX</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 0 ft</span> · <b>🍟 McDonald&#x27;s <span>≥1 min · 30 ft</span></b> · 🥪 Subway <span>≥1 min · 46 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.95768,-97.30757" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Puna Kai Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.95768,-97.30757" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Puna Kai Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
 <div class="a">15-2714 Pahoa Village Rd, Pahoa, HI</div><div class="host">Opconnect</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 36 ft</span></b> · 🍕 Pizza Hut <span>≥1 min · 249 ft</span> · 🍕 Domino&#x27;s <span>≥1 min · 289 ft</span> · 🍗 Popeyes <span>≥2 min · 417 ft</span> · 👑 Burger King <span>≥2 min · 449 ft</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=19.5033,-154.95597" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=HI">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Mcfast Charge</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=19.5033,-154.95597" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Mcfast Charge</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1245 Interquest Pkwy, Colorado Springs, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 46 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 449 ft</span> · 🍔 Shake Shack <span>≥2 min · 453 ft</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.99042,-104.80601" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>McDonalds #4700 Manhattan</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍔 Shake Shack ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.99042,-104.80601" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McDonalds #4700 Manhattan</span><small>350 kW · 4 stalls</small></div>
 <div class="a">567 Manhattan Blvd, Toledo, OH</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 52 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 272 ft</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.6869,-83.53233" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 360 - Ky #360</span><small>320 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.6869,-83.53233" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 360 - Ky #360</span><small>320 kW · 2 stalls</small></div>
 <div class="a">4000 L and North Turnpike Road, Horse Cave, KY</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 56 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.20141,-85.93518" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Southside Marketplace</span><small>80 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.20141,-85.93518" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Southside Marketplace</span><small>80 kW · 2 stalls</small></div>
 <div class="a">825 E Fort Ave, Baltimore, MD</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 66 ft</span></b> · 🌯 Chipotle <span>≥1 min · 249 ft</span> · ☕ Starbucks <span>≥1 min · 243 ft</span> · 🥪 Subway <span>≥1 min · 312 ft</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.27169,-76.60193" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Mcfast Charge</span><small>125 kW · 1 stalls</small></div>
-<div class="a">1245 Interquest Pkwy, Colorado Springs, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 66 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 443 ft</span> · 🍔 Shake Shack <span>≥2 min · 479 ft</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.99038,-104.80609" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Santa Ana Downtown Plaza</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.27169,-76.60193" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Santa Ana Downtown Plaza</span><small>350 kW · 4 stalls</small></div>
 <div class="a">301 E 1st St, Santa Ana, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 69 ft</span></b> · 💊 CVS <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🤡 Jack in the Box <span>≥7 min · 0.3 mi</span> · 👑 Burger King <span>≥7 min · 0.4 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.74584,-117.86502" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Dunkin Donuts - West Orange</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>☕ Starbucks ≥6 min</span><span>🤡 Jack in the Box ≥7 min</span><span>👑 Burger King ≥7 min</span><span>🥪 Subway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.74584,-117.86502" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Dunkin Donuts - West Orange</span><small>50 kW · 2 stalls</small></div>
 <div class="a">563 Northfield Ave, West Orange, NJ</div><div class="host">Blink</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 72 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.77044,-74.28126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>15476 Highway 105 West</span><small>350 kW · 7 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77044,-74.28126" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>15476 Highway 105 West</span><small>350 kW · 7 stalls</small></div>
 <div class="a">15476 Highway 105 West, Montgomery, TX</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 72 ft</span></b> · 🥞 IHOP <span>≥1 min · 217 ft</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥5 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.35991,-95.59744" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>McDonalds #12407, Maple Grove</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>💊 CVS ≥5 min</span><span>🌮 Taco Bell ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.35991,-95.59744" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McDonalds #12407, Maple Grove</span><small>350 kW · 4 stalls</small></div>
 <div class="a">13595 83rd Way, Maple Grove, MN</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 72 ft</span></b> · 🍕 Domino&#x27;s <span>≥1 min · 230 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 223 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 243 ft</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · ⛽ Speedway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.10532,-93.45243" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Hsi Lai Center</span><small>100 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.10532,-93.45243" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hsi Lai Center</span><small>100 kW · 2 stalls</small></div>
 <div class="a">3130 Colima Rd, Hacienda Heights, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 79 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.98051,-117.97345" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>1200 League Line Rd</span><small>180 kW · 6 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.98051,-117.97345" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>1200 League Line Rd</span><small>180 kW · 6 stalls</small></div>
 <div class="a">1200 League Line, Conroe, TX</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 79 ft</span></b> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span> · 🪵 Cracker Barrel <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.3674,-95.4838" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Aemc- Mcdonalds</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🪵 Cracker Barrel ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.3674,-95.4838" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Aemc- Mcdonalds</span><small>62 kW · 1 stalls</small></div>
 <div class="a">105 Tanglewood Parkway, Elizabeth City, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 92 ft</span></b> · ☕ Starbucks <span>≥1 min · 138 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.29362,-76.29702" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Gf4Eva Hangtown</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.29362,-76.29702" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gf4Eva Hangtown</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1184 Broadway, Placerville, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 92 ft</span></b> · ☕ Starbucks <span>≥2 min · 404 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.73065,-120.78824" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Holiday Inn Express - South San Francisco</span><small>350 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.73065,-120.78824" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Holiday Inn Express - South San Francisco</span><small>350 kW · 2 stalls</small></div>
 <div class="a">373 S. Airport Rd., South San Francisco, CA</div><div class="host">Evrange</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 92 ft</span></b> · 🥞 IHOP <span>≥3 min · 0.1 mi</span> · 📦 Costco <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥8 min · 0.4 mi</span> · 🍩 Dunkin&#x27; <span>≥8 min · 0.4 mi</span> · 🍳 Denny&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.6441,-122.40388" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥞 IHOP ≥3 min</span><span>📦 Costco ≥4 min</span><span>🍗 Popeyes ≥8 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🍳 Denny&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.6441,-122.40388" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1851 West 400 North, Shelbyville, IN</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 66 ft</span> · <b>🍟 McDonald&#x27;s <span>≥1 min · 92 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.58348,-85.81804" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Chatsworth, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.58348,-85.81804" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chatsworth, CA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">9185 De Soto Ave, Chatsworth, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 95 ft</span></b> · 🌯 Chipotle <span>≥1 min · 171 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.23793,-118.5894" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>ONE9 Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.23793,-118.5894" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>ONE9 Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">39 Victory Lane, Vienna, GA</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 98 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.08578,-83.76053" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Leavenworth, WA - Tesla Supercharger</span><small>150 kW · 16 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.08578,-83.76053" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Leavenworth, WA - Tesla Supercharger</span><small>150 kW · 16 stalls</small></div>
 <div class="a">1329 US Hwy 2, Leavenworth, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span></b> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🥪 Subway <span>≥6 min · 0.3 mi</span> · 🛒 Safeway <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.59851,-120.65602" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Vero Beach</span><small>125 kW · 1 stalls</small></div>
-<div class="a">9050 20th St, Vero Beach, FL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span></b> · 🦆 Wawa <span>≥1 min · 102 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ⛽ TA Travel Center <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.63992,-80.51353" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Converse, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>🥪 Subway ≥6 min</span><span>🛒 Safeway ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.59851,-120.65602" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Converse, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">3835 E Loop 1604 N, Converse, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span></b> · 🍔 Whataburger <span>≥1 min · 364 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.46415,-98.28906" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Weimar, TX - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍔 Whataburger ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.46415,-98.28906" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Weimar, TX - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">720 S Eagle St, Weimar, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.69289,-96.77739" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 342 - Tx #342</span><small>320 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.69289,-96.77739" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 342 - Tx #342</span><small>320 kW · 2 stalls</small></div>
 <div class="a">2645 Interstate 37, Three Rivers, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span></b> · 🥪 Subway <span>≥1 min · 128 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.52125,-98.1857" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Gpm Investments 5156 DC</span><small>160 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.52125,-98.1857" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gpm Investments 5156 DC</span><small>160 kW · 1 stalls</small></div>
 <div class="a">15766 Manchester Rd, South Beloit, IL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 105 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.48992,-88.98938" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>McDonalds #7056 Rogers</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.48992,-88.98938" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McDonalds #7056 Rogers</span><small>350 kW · 6 stalls</small></div>
 <div class="a">21300 Rogers Dr, Rogers, MN 55374, MN</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 108 ft</span></b> · ⛽ TA Travel Center <span>≥1 min · 351 ft</span> · 🍳 Denny&#x27;s <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 🎯 Target <span>≥5 min · 0.3 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.19563,-93.54936" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>🎯 Target ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.19563,-93.54936" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">110 Frontage Road, Piedmont, SC</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 108 ft</span></b> · ⛽ Pilot <span>≥1 min · 161 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🍗 Zaxby&#x27;s <span>≥5 min · 0.3 mi</span> · 🍗 Bojangles <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.71051,-82.49784" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Revup1 Mcdonalds Ashbo</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>🍗 Bojangles ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.71051,-82.49784" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Revup1 Mcdonalds Ashbo</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1415 E Dixie Dr, Asheboro, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b> · 🍕 Pizza Hut <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🛒 Aldi <span>≥5 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥6 min · 0.3 mi</span> · 🍕 Little Caesars <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.69991,-79.78762" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Gf4Eva Carl&#x27;S Jr DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍕 Pizza Hut ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>🍕 Little Caesars ≥7 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.69991,-79.78762" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gf4Eva Carl&#x27;S Jr DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1842 Fort Jones Rd, Yreka, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 121 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 272 ft</span> · 🌮 Taco Bell <span>≥1 min · 308 ft</span> · ☕ Starbucks <span>≥1 min · 335 ft</span> · 👑 Burger King <span>≥2 min · 410 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.70232,-122.64514" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Gf4Eva Hangtown</span><small>62 kW · 1 stalls</small></div>
-<div class="a">1216-1252 Broadway, Placerville, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b> · ☕ Starbucks <span>≥1 min · 348 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.73064,-120.78801" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Gpm Investments 5156 DC</span><small>120 kW · 1 stalls</small></div>
-<div class="a">15766 Manchester Rd - McDonalds/FasMart Lot, South Beloit, IL</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.49002,-88.98938" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥2 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.70232,-122.64514" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1191 70th Avenue, Roberts, WI</div><div class="host">EVgo</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b> · ⛽ Flying J <span>≥2 min · 407 ft</span> · ⛽ Kwik Trip <span>≥2 min · 512 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.96323,-92.56047" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=WI">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 366 - Pa #366</span><small>320 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Flying J ≥2 min</span><span>⛽ Kwik Trip ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.96323,-92.56047" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 366 - Pa #366</span><small>320 kW · 2 stalls</small></div>
 <div class="a">22 Old Forge Rd, Jonestown, PA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · ⛽ Speedway <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.44997,-76.51512" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 383 - Ky #383</span><small>320 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>⛽ Speedway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.44997,-76.51512" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 383 - Ky #383</span><small>320 kW · 2 stalls</small></div>
 <div class="a">499 Loves Dr, Sparta, KY</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 112 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.6938,-84.93871" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Best Western DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.6938,-84.93871" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Best Western DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">301 N Central Ave, Hapeville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 115 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🐔 Chick-fil-A <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.65398,-84.39765" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Hood River, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.65398,-84.39765" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hood River, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">2249 Cascade Avenue, Hood River, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 125 ft</span></b> · 🛒 Safeway <span>≥1 min · 256 ft</span> · ☕ Starbucks <span>≥1 min · 325 ft</span> · 🍕 Domino&#x27;s <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.7096,-121.53461" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Salt Lake Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.7096,-121.53461" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Salt Lake Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
 <div class="a">848 Ala Lilikoi St., Honolulu, HI</div><div class="host">Opconnect</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 125 ft</span></b> · 🥪 Subway <span>≥2 min · 495 ft</span> · 🛒 Safeway <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=21.34607,-157.91319" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=HI">Show on map</a></div></div><div class="card"><div class="n"><span>San Antonio TX- TPG</span><small>350 kW · 7 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Safeway ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=21.34607,-157.91319" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Antonio TX- TPG</span><small>350 kW · 7 stalls</small></div>
 <div class="a">25200 I-10, San Antonio, TX 78, San Antonio, TX</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 125 ft</span></b> · 🍔 Whataburger <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥8 min · 0.4 mi</span> · 🥪 Subway <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.67577,-98.63456" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>15900 N Interstate</span><small>350 kW · 5 stalls</small></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍔 Whataburger ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🐔 Chick-fil-A ≥8 min</span><span>🥪 Subway ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.67577,-98.63456" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>15900 N Interstate</span><small>350 kW · 5 stalls</small></div>
 <div class="a">15900 N Interstate 35, Austin, TX</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍟 McDonald&#x27;s <span>≥1 min · 125 ft</span></b> · 🥪 Subway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.45618,-97.66812" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a></div></div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.45618,-97.66812" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Carmel Commons</span><small>350 kW · 4 stalls</small></div>
+<div class="a">7601 Pineville Matthews Rd, Charlotte, NC</div><div class="host">EVgo</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>🛒 Publix ≥6 min</span><span>🔧 Lowe&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.08712,-80.84921" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McD #671 Jefferson</span><small>350 kW · 4 stalls</small></div>
+<div class="a">551 Jefferson Ave., St. Paul, MN</div><div class="host">EVgo</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.93103,-93.12236" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Roseville Pit Stop</span><small>240 kW · 4 stalls</small></div>
+<div class="a">26765 Gratiot Ave, Roseville, MI</div><div class="host">Red E</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>📦 Costco ≥5 min</span><span>🛒 Kroger ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49391,-82.94043" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kool Toyota Cpe-Fast</span><small>50 kW · 1 stalls</small></div>
+<div class="a">3780 Plainfield Ave NE, Grand Rapids, MI</div><div class="host">ChargePoint</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>💊 Walgreens ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>🥪 Subway ≥7 min</span><span>💊 CVS ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.03198,-85.62588" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

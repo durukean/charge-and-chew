@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Starbucks (4689 locations) | Charge & Chew</title>
-<meta name="description" content="4689 EV DC fast chargers within a 10-minute walk of a Starbucks, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Starbucks (4460 locations) | Charge & Chew</title>
+<meta name="description" content="4460 EV DC fast chargers within a 10-minute walk of a Starbucks, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/starbucks/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Starbucks (4689 locations)">
-<meta property="og:description" content="4689 EV DC fast chargers within a 10-minute walk of a Starbucks, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Starbucks (4460 locations)">
+<meta property="og:description" content="4460 EV DC fast chargers within a 10-minute walk of a Starbucks, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/starbucks/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>☕ EV fast chargers near Starbucks</h1>
-<p class="lead">We found <b>4689 DC fast chargers</b> in the US — across all networks — with a Starbucks within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>4460 DC fast chargers</b> in the US — across all networks — with a Starbucks within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Starbucks">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>1414</small></a><a href="wa/">Washington <small>260</small></a><a href="tx/">Texas <small>243</small></a><a href="fl/">Florida <small>217</small></a><a href="il/">Illinois <small>196</small></a><a href="ny/">New York <small>183</small></a><a href="co/">Colorado <small>152</small></a><a href="va/">Virginia <small>147</small></a><a href="or/">Oregon <small>133</small></a><a href="oh/">Ohio <small>130</small></a><a href="ma/">Massachusetts <small>123</small></a><a href="md/">Maryland <small>118</small></a><a href="ga/">Georgia <small>111</small></a><a href="pa/">Pennsylvania <small>111</small></a><a href="nj/">New Jersey <small>100</small></a><a href="mi/">Michigan <small>82</small></a><a href="az/">Arizona <small>79</small></a><a href="nc/">North Carolina <small>78</small></a><a href="wi/">Wisconsin <small>59</small></a><a href="nv/">Nevada <small>56</small></a><a href="in/">Indiana <small>53</small></a><a href="sc/">South Carolina <small>49</small></a><a href="mn/">Minnesota <small>48</small></a><a href="ct/">Connecticut <small>48</small></a><a href="mo/">Missouri <small>47</small></a><a href="ut/">Utah <small>43</small></a><a href="tn/">Tennessee <small>40</small></a><a href="nm/">New Mexico <small>35</small></a><a href="al/">Alabama <small>28</small></a><a href="nh/">New Hampshire <small>28</small></a><a href="hi/">Hawaii <small>27</small></a><a href="ok/">Oklahoma <small>27</small></a><a href="ia/">Iowa <small>25</small></a><a href="la/">Louisiana <small>23</small></a><a href="id/">Idaho <small>21</small></a><a href="me/">Maine <small>16</small></a><a href="de/">Delaware <small>14</small></a><a href="ne/">Nebraska <small>14</small></a><a href="ks/">Kansas <small>13</small></a><a href="ky/">Kentucky <small>13</small></a><a href="wv/">West Virginia <small>10</small></a><a href="mt/">Montana <small>10</small></a><a href="wy/">Wyoming <small>10</small></a><a href="ar/">Arkansas <small>9</small></a><a href="sd/">South Dakota <small>9</small></a><a href="ms/">Mississippi <small>9</small></a><a href="ri/">Rhode Island <small>8</small></a><a href="dc/">Washington DC <small>6</small></a><a href="vt/">Vermont <small>6</small></a><a href="ak/">Alaska <small>4</small></a><a href="nd/">North Dakota <small>4</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>WCEH Bellingham</span><small>175 kW · 2 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>1332</small></a><a href="wa/">Washington <small>241</small></a><a href="tx/">Texas <small>233</small></a><a href="fl/">Florida <small>211</small></a><a href="il/">Illinois <small>194</small></a><a href="ny/">New York <small>165</small></a><a href="va/">Virginia <small>147</small></a><a href="co/">Colorado <small>135</small></a><a href="oh/">Ohio <small>128</small></a><a href="or/">Oregon <small>117</small></a><a href="md/">Maryland <small>115</small></a><a href="ma/">Massachusetts <small>114</small></a><a href="pa/">Pennsylvania <small>108</small></a><a href="ga/">Georgia <small>105</small></a><a href="nj/">New Jersey <small>97</small></a><a href="az/">Arizona <small>78</small></a><a href="nc/">North Carolina <small>77</small></a><a href="mi/">Michigan <small>73</small></a><a href="wi/">Wisconsin <small>56</small></a><a href="nv/">Nevada <small>55</small></a><a href="in/">Indiana <small>52</small></a><a href="sc/">South Carolina <small>49</small></a><a href="mn/">Minnesota <small>48</small></a><a href="ct/">Connecticut <small>47</small></a><a href="mo/">Missouri <small>45</small></a><a href="ut/">Utah <small>41</small></a><a href="tn/">Tennessee <small>40</small></a><a href="nm/">New Mexico <small>34</small></a><a href="nh/">New Hampshire <small>28</small></a><a href="hi/">Hawaii <small>27</small></a><a href="ok/">Oklahoma <small>27</small></a><a href="al/">Alabama <small>25</small></a><a href="ia/">Iowa <small>24</small></a><a href="la/">Louisiana <small>22</small></a><a href="id/">Idaho <small>20</small></a><a href="de/">Delaware <small>14</small></a><a href="ne/">Nebraska <small>14</small></a><a href="me/">Maine <small>13</small></a><a href="ks/">Kansas <small>13</small></a><a href="ky/">Kentucky <small>13</small></a><a href="wv/">West Virginia <small>10</small></a><a href="mt/">Montana <small>10</small></a><a href="wy/">Wyoming <small>10</small></a><a href="ar/">Arkansas <small>9</small></a><a href="sd/">South Dakota <small>9</small></a><a href="ms/">Mississippi <small>8</small></a><a href="ri/">Rhode Island <small>7</small></a><a href="dc/">Washington DC <small>6</small></a><a href="vt/">Vermont <small>6</small></a><a href="ak/">Alaska <small>4</small></a><a href="nd/">North Dakota <small>4</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>WCEH Bellingham</span><small>175 kW · 2 stalls</small></div>
 <div class="a">222 36th St, Bellingham, WA</div><div class="host">EVCS</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 0 ft</span></b> · 🍕 Domino&#x27;s <span>≥1 min · 230 ft</span> · 💊 CVS <span>≥1 min · 299 ft</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 💊 Walgreens <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.73118,-122.47123" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>💊 Walgreens ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.73118,-122.47123" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
 <div class="a">2411 W Court Street, Pasco, WA</div><div class="host">Opconnect</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 0 ft</span></b> · 👑 Burger King <span>≥1 min · 125 ft</span> · 🌮 Taco Bell <span>≥2 min · 394 ft</span> · ☕ Dutch Bros <span>≥2 min · 453 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 502 ft</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.24182,-119.12418" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Meijer Stores Grand Rapids</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Dutch Bros ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.24182,-119.12418" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Meijer Stores Grand Rapids</span><small>62 kW · 1 stalls</small></div>
 <div class="a">2988 Walker Ave NW, Grand Rapids, MI</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 26 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 518 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01828,-85.72377" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Meijer Stores Grand Rapids</span><small>62 kW · 1 stalls</small></div>
-<div class="a">2988 Walker Ave NW, Grand Rapids, MI</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 26 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 518 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01828,-85.72375" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Issaquah</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01828,-85.72377" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Volvo Car Usa Issaquah</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1460 NW Gilman Blvd, Issaquah, WA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 43 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 325 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥5 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.54584,-122.0597" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks - Sacramento, CA</span><small>60 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Subway ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.54584,-122.0597" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks - Sacramento, CA</span><small>60 kW · 2 stalls</small></div>
 <div class="a">2610 Arena Boulevard, Sacramento, CA</div><div class="host">Blink</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 46 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 144 ft</span> · 🥪 Subway <span>≥1 min · 285 ft</span> · 🌯 Chipotle <span>≥1 min · 315 ft</span> · 📦 Costco <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.64247,-121.51998" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Twin Falls</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>📦 Costco ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.64247,-121.51998" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Volvo Car Usa Twin Falls</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1951 Bridgeview Blvd, Twin Falls, ID</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 52 ft</span></b> · 💻 Best Buy <span>≥1 min · 295 ft</span> · 🥞 IHOP <span>≥1 min · 305 ft</span> · 🌮 Taco Bell <span>≥1 min · 348 ft</span> · 🍔 In-N-Out <span>≥3 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.59596,-114.45343" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=ID">Show on map</a></div></div><div class="card"><div class="n"><span>Applegreen Electric - Clifton Springs Travel Plaza</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>💻 Best Buy ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 In-N-Out ≥3 min</span><span>🍝 Olive Garden ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=ID">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.59596,-114.45343" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Applegreen Electric - Clifton Springs Travel Plaza</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3236 NY-96, Clifton Springs, NY</div><div class="host">Applegreen</div>
-<div class="c">👑 Burger King <span>≥1 min · 62 ft</span> · <b>☕ Starbucks <span>≥1 min · 62 ft</span></b> · 🐔 Chick-fil-A <span>≥1 min · 62 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.97276,-77.17345" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>San Francisco, CA - Geary Boulevard - Tesla Supercharger</span><small>250 kW · 34 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.97276,-77.17345" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Francisco, CA - Geary Boulevard - Tesla Supercharger</span><small>250 kW · 34 stalls</small></div>
 <div class="a">2675 Geary Blvd, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🎯 Target <span>≥1 min · 56 ft</span> · <b>☕ Starbucks <span>≥1 min · 66 ft</span></b> · 🌯 Chipotle <span>≥1 min · 381 ft</span> · 🥪 Subway <span>≥2 min · 443 ft</span> · 🛍️ Trader Joe&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Peet&#x27;s Coffee <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.78206,-122.44697" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Bayview Plaza San Francisco</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78206,-122.44697" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bayview Plaza San Francisco</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3911 3rd St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 66 ft</span></b> · 🐼 Panda Express <span>≥1 min · 187 ft</span> · 🥪 Subway <span>≥1 min · 203 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.74134,-122.38799" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Acworth, GA - Cobb Parkway Northwest - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.74134,-122.38799" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Acworth, GA - Cobb Parkway Northwest - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">3622 Cobb Pkwy NW, Acworth, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 69 ft</span></b> · 👑 Burger King <span>≥1 min · 220 ft</span> · 🛒 Walmart <span>≥7 min · 0.3 mi</span> · ⛽ QuikTrip <span>≥8 min · 0.4 mi</span> · 🍔 Five Guys <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.04435,-84.69587" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Alpharetta, GA - Holcomb Bridge Road - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🛒 Walmart ≥7 min</span><span>⛽ QuikTrip ≥8 min</span><span>🍔 Five Guys ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.04435,-84.69587" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Alpharetta, GA - Holcomb Bridge Road - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">8500 Holcomb Bridge Rd, Alpharetta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 69 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span> · 🛒 Kroger <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥5 min · 0.3 mi</span> · 🧇 Waffle House <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.98792,-84.27313" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Calexico</span><small>90 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🛒 Kroger ≥4 min</span><span>💊 CVS ≥5 min</span><span>🧇 Waffle House ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.98792,-84.27313" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Calexico</span><small>90 kW · 8 stalls</small></div>
 <div class="a">1113 Imperial W Ave, Calexico, CA</div><div class="host">Chaevi</div>
-<div class="c">🍕 Little Caesars <span>≥1 min · 30 ft</span> · <b>☕ Starbucks <span>≥1 min · 69 ft</span></b> · 🥪 Subway <span>≥1 min · 59 ft</span> · 🍗 Popeyes <span>≥1 min · 364 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.2 mi</span> · ⛽ Speedway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.68068,-115.49971" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Hermiston</span><small>102 kW · 1 stalls</small></div>
-<div class="a">1235 N 1st St, Hermiston, OR</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 72 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 217 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 354 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.8492,-119.2907" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>⛽ Speedway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.68068,-115.49971" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks</span><small>240 kW · 4 stalls</small></div>
 <div class="a">9200 FL-228, Macclenny, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 72 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 381 ft</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.26383,-82.10685" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Langston Landing</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🛒 Walmart ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.26383,-82.10685" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Langston Landing</span><small>350 kW · 6 stalls</small></div>
 <div class="a">322 Washington Ave S, Kent, WA</div><div class="host">EVgo</div>
-<div class="c">🛒 Safeway <span>≥1 min · 23 ft</span> · <b>☕ Starbucks <span>≥1 min · 72 ft</span></b> · 🍕 Little Caesars <span>≥2 min · 443 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 525 ft</span> · 🌮 Taco Bell <span>≥2 min · 525 ft</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.38041,-122.24653" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Everett, WA Rechargery Relay - Broadway</span><small>400 kW · 14 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.38041,-122.24653" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Everett, WA Rechargery Relay - Broadway</span><small>400 kW · 14 stalls</small></div>
 <div class="a">3615 Broadway, Everett, WA</div><div class="host">IONNA</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 72 ft</span></b> · 🥪 Subway <span>≥2 min · 453 ft</span> · 🥞 IHOP <span>≥2 min · 479 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.96943,-122.20086" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Hermiston</span><small>125 kW · 1 stalls</small></div>
-<div class="a">1235 N 1st St, Hermiston, OR</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 75 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 220 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 335 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.84919,-119.29062" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Swift Creek</span><small>360 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🥞 IHOP ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.96943,-122.20086" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Swift Creek</span><small>360 kW · 4 stalls</small></div>
 <div class="a">13501 Hull Street Rd, Midlothian, VA</div><div class="host">EV Connect</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 75 ft</span></b> · 🤠 Texas Roadhouse <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥6 min · 0.3 mi</span> · 🐼 Panda Express <span>≥7 min · 0.4 mi</span> · 🥩 Arby&#x27;s <span>≥8 min · 0.4 mi</span> · 🌯 Chipotle <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.41139,-77.64656" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Safeway Santa Rosa #1576</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🐼 Panda Express ≥7 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.41139,-77.64656" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Safeway Santa Rosa #1576</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2300 Mendocino Ave, Santa Rosa, CA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 75 ft</span></b> · 🛒 Safeway <span>≥1 min · 180 ft</span> · 🍔 Five Guys <span>≥2 min · 459 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · ☕ Peet&#x27;s Coffee <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.46324,-122.71737" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Weed, CA - Shastina Dr - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.46324,-122.71737" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Weed, CA - Shastina Dr - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">1855 Shastina Dr, Weed, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 75 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 377 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · ⛽ Pilot <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.39855,-122.38041" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Latham, NY</span><small>300 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>⛽ Pilot ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥪 Subway ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.39855,-122.38041" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Latham, NY</span><small>300 kW · 8 stalls</small></div>
 <div class="a">549 Troy-Schenectady Rd, Latham, NY</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 79 ft</span></b> · 🍎 Applebee&#x27;s <span>≥1 min · 279 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥5 min · 0.3 mi</span> · 🛒 Walmart <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.75094,-73.76414" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Provo</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.75094,-73.76414" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Volvo Car Usa Provo</span><small>62 kW · 1 stalls</small></div>
 <div class="a">979 S University Ave, Provo, UT</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 82 ft</span></b> · 🍗 KFC <span>≥1 min · 285 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 364 ft</span> · 👑 Burger King <span>≥2 min · 522 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.22043,-111.65868" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=UT">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Issaquah</span><small>80 kW · 1 stalls</small></div>
-<div class="a">1540 NW Gilman Blvd, Issaquah, WA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 82 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 367 ft</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥5 min · 0.3 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.54588,-122.05988" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>ChargeNet - Taco Bell</span><small>75 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍕 Little Caesars ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.22043,-111.65868" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>ChargeNet - Taco Bell</span><small>75 kW · 6 stalls</small></div>
 <div class="a">39199 Cedar Blvd, Newark, CA</div><div class="host">Chargenet</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 85 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 138 ft</span> · 🍕 Little Caesars <span>≥1 min · 112 ft</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.52276,-122.00455" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Ellensburg, WA</span><small>300 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🥪 Subway ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.52276,-122.00455" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ellensburg, WA</span><small>300 kW · 8 stalls</small></div>
 <div class="a">2708 Triple L Loop, Ellensburg, WA</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 85 ft</span></b> · 🥞 IHOP <span>≥1 min · 292 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ⛽ Pilot <span>≥4 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.00857,-120.58985" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Robbinsdale, MN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>⛽ Love&#x27;s ≥4 min</span><span>🥪 Subway ≥4 min</span><span>⛽ Pilot ≥4 min</span><span>🥩 Arby&#x27;s ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.00857,-120.58985" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Robbinsdale, MN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">3501 West Broadway Avenue, Robbinsdale, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.01921,-93.32628" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Logan Airport Airport</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.01921,-93.32628" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Logan Airport Airport</span><small>62 kW · 1 stalls</small></div>
 <div class="a">45 Transportation Wy, Boston, MA</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🍩 Dunkin&#x27; <span>≥6 min · 0.3 mi</span> · ☕ Peet&#x27;s Coffee <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.36613,-71.02781" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Hermiston</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.36613,-71.02781" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Volvo Car Usa Hermiston</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1235 N 1st St, Hermiston, OR</div><div class="host">ChargePoint</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🤡 Jack in the Box <span>≥1 min · 223 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 315 ft</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.8492,-119.29049" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>New Seasons Palisades</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Subway ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>🔨 Home Depot ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.8492,-119.29049" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Seasons Palisades</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1377 Mcvey Ave, Lake Oswego, OR</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🍕 Domino&#x27;s <span>≥1 min · 105 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.4061,-122.67747" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Plattekill Service Area</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.4061,-122.67747" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Plattekill Service Area</span><small>350 kW · 6 stalls</small></div>
 <div class="a">I-87 - NYS Thruway NB, Plattekill, NY</div><div class="host">Applegreen</div>
-<div class="c">👑 Burger King <span>≥1 min · 0 ft</span> · <b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🐔 Chick-fil-A <span>≥1 min · 89 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.57765,-74.08539" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Shoppes on Bluebell - New Philadelphia</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.57765,-74.08539" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Shoppes on Bluebell - New Philadelphia</span><small>400 kW · 4 stalls</small></div>
 <div class="a">125 Bluebell Drive SW, New Philadelphia, OH</div><div class="host">Francis Energy</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🌯 Chipotle <span>≥1 min · 154 ft</span> · 🍳 Denny&#x27;s <span>≥1 min · 312 ft</span> · ⛽ Speedway <span>≥2 min · 400 ft</span> · 👑 Burger King <span>≥2 min · 518 ft</span> · ⛽ Sheetz <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.49266,-81.47188" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Red Bluff MB.HPC</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>👑 Burger King ≥2 min</span><span>⛽ Sheetz ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49266,-81.47188" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Red Bluff MB.HPC</span><small>400 kW · 4 stalls</small></div>
 <div class="a">525 Adobe Rd, Red Bluff, CA</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 89 ft</span></b> · 🔨 Home Depot <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.19151,-122.23673" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>St. George, UT - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🔨 Home Depot ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.19151,-122.23673" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>St. George, UT - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">1091 N Bluff St, St. George, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 92 ft</span></b> · 🌮 Del Taco <span>≥2 min · 509 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.12643,-113.60184" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=UT">Show on map</a></div></div><div class="card"><div class="n"><span>Barcroft Plaza</span><small>100 kW · 2 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🌮 Del Taco ≥2 min</span><span>🐼 Panda Express ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.12643,-113.60184" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Barcroft Plaza</span><small>100 kW · 2 stalls</small></div>
 <div class="a">6345 Columbia Pike, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 92 ft</span></b> · 🍕 Domino&#x27;s <span>≥1 min · 184 ft</span> · 🥪 Subway <span>≥1 min · 302 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.83619,-77.15616" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Panama City Beach, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.83619,-77.15616" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Panama City Beach, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">14100 Panama City Beach Parkway, Panama City Beach, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 95 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.21198,-85.84995" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>El Paso, TX - Eastlake Boulevard - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.21198,-85.84995" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>El Paso, TX - Eastlake Boulevard - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">12161 Eastlake Blvd, El Paso, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 69 ft</span> · <b>☕ Starbucks <span>≥1 min · 95 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 308 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 289 ft</span> · 🐼 Panda Express <span>≥1 min · 387 ft</span> · 🍗 Wingstop <span>≥2 min · 417 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.68863,-106.26478" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Tyler, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>+14</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.68863,-106.26478" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Tyler, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">16243 U.S. 271, Tyler, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 95 ft</span></b> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.44058,-95.13706" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Honolulu International Airport</span><small>350 kW · 5 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🥪 Subway ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.44058,-95.13706" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Honolulu International Airport</span><small>350 kW · 5 stalls</small></div>
 <div class="a">300 Rogers Blvd, Honolulu, HI</div><div class="host">Synergev</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 98 ft</span></b> · 👑 Burger King <span>≥1 min · 112 ft</span> · 🐼 Panda Express <span>≥1 min · 148 ft</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=21.33374,-157.92387" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=HI">Show on map</a></div></div><div class="card"><div class="n"><span>North Bend, WA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=21.33374,-157.92387" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>North Bend, WA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">46600 SE North Bend Way, North Bend, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>☕ Starbucks <span>≥1 min · 102 ft</span></b> · 🍗 Popeyes <span>≥1 min · 141 ft</span> · ⛽ TA Travel Center <span>≥1 min · 223 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46807,-121.71644" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Starbucks&amp;state=WA">Show on map</a></div></div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46807,-121.71644" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor W Gardiner</span><small>200 kW · 1 stalls</small></div>
+<div class="a">102 Maine Turnpike, West Gardiner, ME</div><div class="host">ChargePoint</div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.20741,-69.82712" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Oneida Travel Plaza</span><small>400 kW · 4 stalls</small></div>
+<div class="a">5365 NY State Thruway #233, Westmoreland, NY</div><div class="host">Applegreen</div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥖 Panera Bread ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.12505,-75.41521" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Market West (Sacramento, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">3270 Arena Blvd., Sacramento, CA</div><div class="host">Electrify America</div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.64163,-121.53259" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Wheat Ridge</span><small>200 kW · 1 stalls</small></div>
+<div class="a">5071 Kipling Street, Wheat Ridge, CO</div><div class="host">ChargePoint</div>
+<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.78733,-105.11253" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

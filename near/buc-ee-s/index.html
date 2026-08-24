@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Buc-ee&#x27;s (67 locations) | Charge & Chew</title>
-<meta name="description" content="67 EV DC fast chargers within a 10-minute walk of a Buc-ee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Buc-ee&#x27;s (66 locations) | Charge & Chew</title>
+<meta name="description" content="66 EV DC fast chargers within a 10-minute walk of a Buc-ee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/buc-ee-s/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Buc-ee&#x27;s (67 locations)">
-<meta property="og:description" content="67 EV DC fast chargers within a 10-minute walk of a Buc-ee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Buc-ee&#x27;s (66 locations)">
+<meta property="og:description" content="66 EV DC fast chargers within a 10-minute walk of a Buc-ee&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/buc-ee-s/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🦫 EV fast chargers near Buc-ee&#x27;s</h1>
-<p class="lead">We found <b>67 DC fast chargers</b> in the US — across all networks — with a Buc-ee&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>66 DC fast chargers</b> in the US — across all networks — with a Buc-ee&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Buc-ee&#x27;s">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>41</small></a><a href="al/">Alabama <small>8</small></a><a href="tn/">Tennessee <small>5</small></a><a href="fl/">Florida <small>3</small></a><a href="ga/">Georgia <small>3</small></a><a href="ky/">Kentucky <small>2</small></a><a href="mo/">Missouri <small>2</small></a><a href="ms/">Mississippi <small>1</small></a><a href="co/">Colorado <small>1</small></a><a href="sc/">South Carolina <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Buc-ee&#x27;s</span><small>150 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>41</small></a><a href="al/">Alabama <small>7</small></a><a href="tn/">Tennessee <small>5</small></a><a href="fl/">Florida <small>3</small></a><a href="ga/">Georgia <small>3</small></a><a href="ky/">Kentucky <small>2</small></a><a href="mo/">Missouri <small>2</small></a><a href="ms/">Mississippi <small>1</small></a><a href="co/">Colorado <small>1</small></a><a href="sc/">South Carolina <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Buc-ee&#x27;s</span><small>150 kW · 6 stalls</small></div>
 <div class="a">1700 Highway 71 E, Bastrop, TX</div><div class="host">Non-networked</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 46 ft</span></b> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · ⛽ QuikTrip <span>≥4 min · 0.2 mi</span> · 🍗 KFC <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥5 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.10698,-97.30638" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pearland, TX - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍗 Popeyes ≥3 min</span><span>⛽ QuikTrip ≥4 min</span><span>🍗 KFC ≥4 min</span><span>💊 CVS ≥5 min</span><span>🤡 Jack in the Box ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.10698,-97.30638" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pearland, TX - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">11151 Shadow Creek Pkwy, Pearland, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 46 ft</span></b> · 🥪 Subway <span>≥1 min · 318 ft</span> · 🍕 Little Caesars <span>≥1 min · 348 ft</span> · 🍗 Wingstop <span>≥1 min · 348 ft</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span> · 🛒 Kroger <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.58096,-95.39191" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Buc-ee&#x27;s</span><small>150 kW · 6 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🚗 Sonic ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.58096,-95.39191" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Buc-ee&#x27;s</span><small>150 kW · 6 stalls</small></div>
 <div class="a">27700 Katy Fwy, Katy, TX</div><div class="host">Non-networked</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 72 ft</span></b> · 💊 CVS <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.77835,-95.84764" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>St. Augustine, FL - World Commerce Pkwy - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>🐼 Panda Express ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.77835,-95.84764" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>St. Augustine, FL - World Commerce Pkwy - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">200 World Commerce Parkway, Saint Augustine, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 125 ft</span></b> · 📦 Costco <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.98459,-81.46416" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Ennis MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>📦 Costco ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.98459,-81.46416" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Ennis MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">1181 Creechville Road, Ennis, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 171 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.32381,-96.6057" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Hillsboro MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.32381,-96.6057" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Hillsboro MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">165 State Highway 77, Hillsboro, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 187 ft</span></b> · ⛽ TA Travel Center <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.04775,-97.08988" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Sevierville MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>⛽ TA Travel Center ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>👑 Burger King ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.04775,-97.08988" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Sevierville MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">170 Buc-ee&#x27;s Boulevard, Kodak, TN</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 190 ft</span></b> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.3 mi</span> · 🪵 Cracker Barrel <span>≥7 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.3 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.98117,-83.6059" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Baytown MB.HPC</span><small>400 kW · 11 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🪵 Cracker Barrel ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🥪 Subway ≥8 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.98117,-83.6059" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Baytown MB.HPC</span><small>400 kW · 11 stalls</small></div>
 <div class="a">4080 East Fwy, Baytown, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 203 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.80126,-95.00019" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Adairsville, GA - Union Grove Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.80126,-95.00019" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Adairsville, GA - Union Grove Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">601 Union Grove Road, Adairsville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 217 ft</span></b> · 👑 Burger King <span>≥5 min · 0.3 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.43981,-84.91702" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Wharton, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥5 min</span><span>👑 Burger King ≥5 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.43981,-84.91702" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wharton, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">10484 US-59, Wharton, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 233 ft</span></b> · 🛒 Walmart <span>≥5 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥6 min · 0.3 mi</span> · 🍔 Whataburger <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.32515,-96.12431" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Terrell MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥5 min</span><span>🍳 Denny&#x27;s ≥6 min</span><span>🍔 Whataburger ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.32515,-96.12431" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Terrell MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">506  W. IH 20, Terrell, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 236 ft</span></b> · ☕ Starbucks <span>≥1 min · 285 ft</span> · 🍔 Whataburger <span>≥2 min · 400 ft</span> · 🐔 Chick-fil-A <span>≥3 min · 0.1 mi</span> · 🐕 Raising Cane&#x27;s <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.71725,-96.32174" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>New Braunfels, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Whataburger ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🐼 Panda Express ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.71725,-96.32174" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Braunfels, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">2760 I-35, New Braunfels, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 256 ft</span></b> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span> · 🍔 Whataburger <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.72699,-98.07964" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Daytona Beach, FL - Gateway North Drive - Tesla Supercharger</span><small>250 kW · 32 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>👑 Burger King ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>🍔 Whataburger ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.72699,-98.07964" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Daytona Beach, FL - Gateway North Drive - Tesla Supercharger</span><small>250 kW · 32 stalls</small></div>
 <div class="a">2330 Gateway N Dr, Daytona Beach, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 276 ft</span></b> · 🏪 Sam&#x27;s Club <span>≥7 min · 0.3 mi</span> · 🍔 Wendy&#x27;s <span>≥8 min · 0.4 mi</span> · 🍦 Culver&#x27;s <span>≥9 min · 0.4 mi</span> · 🌯 Chipotle <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.22371,-81.10227" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Madisonville, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🏪 Sam&#x27;s Club ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>🍦 Culver&#x27;s ≥9 min</span><span>🌯 Chipotle ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.22371,-81.10227" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Madisonville, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">205 I-45, Madisonville, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 282 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥8 min · 0.4 mi</span> · 🍕 Pizza Hut <span>≥8 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.9661,-95.87951" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Ennis, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>☕ Starbucks ≥6 min</span><span>🌮 Taco Bell ≥8 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.9661,-95.87951" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ennis, TX - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">1181 Creechville Rd, Ennis, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 282 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.32258,-96.60509" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Waller MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.32258,-96.60509" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Waller MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">40900 U.S. 290, Waller, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 308 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.07101,-95.93284" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Melissa, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.07101,-95.93284" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Melissa, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">1550 Central Expressway, Melissa, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 312 ft</span></b> · 🛒 H-E-B <span>≥3 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥7 min · 0.4 mi</span> · ⛽ RaceTrac <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.27059,-96.59293" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Wharton MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🛒 H-E-B ≥3 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>⛽ RaceTrac ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.27059,-96.59293" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Wharton MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">10484 U.S. 59, Wharton, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 335 ft</span></b> · 🍳 Denny&#x27;s <span>≥4 min · 0.2 mi</span> · 🍔 Whataburger <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.32584,-96.12266" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Royse City, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🍔 Whataburger ≥4 min</span><span>🛒 Walmart ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.32584,-96.12266" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Royse City, TX - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">5005 I-30, Royse City, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 338 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.97914,-96.29636" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Denton, TX - South Interstate 35 - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.97914,-96.29636" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Denton, TX - South Interstate 35 - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">2800 S I- 35, Denton, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 338 ft</span></b> · 🤠 Texas Roadhouse <span>≥6 min · 0.3 mi</span> · 🍝 Olive Garden <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.17859,-97.10153" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Sevierville, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🤠 Texas Roadhouse ≥6 min</span><span>🍝 Olive Garden ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.17859,-97.10153" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sevierville, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">170 Buc-ee&#x27;s Blvd, Kodak, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 348 ft</span></b> · 🪵 Cracker Barrel <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥7 min · 0.3 mi</span> · 🥪 Subway <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.98229,-83.60483" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Robertsdale, AL - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🪵 Cracker Barrel ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🌮 Taco Bell ≥7 min</span><span>🥪 Subway ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.98229,-83.60483" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Robertsdale, AL - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">20403 Co Road 68, Robertsdale, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 358 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.63364,-87.67547" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Denton MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.63364,-87.67547" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Denton MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">2800 South Interstate 35 East, Denton, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 361 ft</span></b> · 🍝 Olive Garden <span>≥4 min · 0.2 mi</span> · 🤠 Texas Roadhouse <span>≥4 min · 0.2 mi</span> · 🍗 Wingstop <span>≥8 min · 0.4 mi</span> · 🌶️ Chili&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.18043,-97.10269" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pass Christian, MS - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍝 Olive Garden ≥4 min</span><span>🤠 Texas Roadhouse ≥4 min</span><span>🍗 Wingstop ≥8 min</span><span>🌶️ Chili&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.18043,-97.10269" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pass Christian, MS - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">8245 Firetower Rd, Pass Christian, MS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 364 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.40435,-89.25112" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=MS">Show on map</a></div></div><div class="card"><div class="n"><span>Johnstown, CO - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.40435,-89.25112" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Johnstown, CO - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">5201 Nugget Rd, Johnstown, CO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 377 ft</span></b> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.33411,-104.98513" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Madisonville MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.33411,-104.98513" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Madisonville MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">209 Interstate 45, Madisonville, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 381 ft</span></b> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥7 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥8 min · 0.4 mi</span> · 🍕 Pizza Hut <span>≥9 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.96476,-95.87894" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Smiths Grove, KY - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥4 min</span><span>☕ Starbucks ≥7 min</span><span>🌮 Taco Bell ≥8 min</span><span>🍕 Pizza Hut ≥9 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.96476,-95.87894" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Smiths Grove, KY - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">4001 Smiths Grove- Scottsville Rd, Smiths Grove, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥1 min · 387 ft</span></b> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · 🥪 Subway <span>≥6 min · 0.3 mi</span> · ⛽ Speedway <span>≥7 min · 0.3 mi</span> · ⛽ TA Travel Center <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.03967,-86.2115" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Fort Valley, GA - Tesla Supercharger</span><small>325 kW · 44 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥪 Subway ≥6 min</span><span>⛽ Speedway ≥7 min</span><span>⛽ TA Travel Center ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.03967,-86.2115" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Fort Valley, GA - Tesla Supercharger</span><small>325 kW · 44 stalls</small></div>
 <div class="a">7001 Russell Parkway, Fort Valley, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 394 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.58337,-83.74096" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Crossville, TN - Genesis Road - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.58337,-83.74096" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Crossville, TN - Genesis Road - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">2045 Genesis Rd, Crossville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 400 ft</span></b> · ⛽ Speedway <span>≥3 min · 0.1 mi</span> · ⛽ Pilot <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.9795,-85.01541" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Springfield MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>⛽ Speedway ≥3 min</span><span>⛽ Pilot ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.9795,-85.01541" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Springfield MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">3284 North Mulroy Road, Springfield, MO</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 404 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.25211,-93.17956" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Amarillo, TX - I-40 - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.25211,-93.17956" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Amarillo, TX - I-40 - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">9900 I-40, Amarillo, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 404 ft</span></b> · ⛽ Flying J <span>≥3 min · 0.2 mi</span> · 🦬 Buffalo Wild Wings <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.19179,-101.72221" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Texas City, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>⛽ Flying J ≥3 min</span><span>🦬 Buffalo Wild Wings ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.19179,-101.72221" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Texas City, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">6201 Gulf Fwy, Texas City, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 407 ft</span></b> · ☕ Starbucks <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.4289,-95.0644" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bastrop, TX - Tesla Supercharger</span><small>325 kW · 32 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>☕ Starbucks ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.4289,-95.0644" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Bastrop, TX - Tesla Supercharger</span><small>325 kW · 32 stalls</small></div>
 <div class="a">1700 TX-71, Bastrop, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 410 ft</span></b> · ⛽ QuikTrip <span>≥3 min · 0.2 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.2 mi</span> · 🍗 KFC <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.10595,-97.30549" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Fort Worth, TX - North Freeway - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>⛽ QuikTrip ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>💊 CVS ≥4 min</span><span>🤡 Jack in the Box ≥5 min</span><span>🍗 KFC ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.10595,-97.30549" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Fort Worth, TX - North Freeway - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
 <div class="a">15901 N Fwy, Fort Worth, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍝 Olive Garden <span>≥1 min · 367 ft</span> · <b>🦫 Buc-ee&#x27;s <span>≥2 min · 420 ft</span></b> · 🐔 Chick-fil-A <span>≥3 min · 0.2 mi</span> · 🍔 Whataburger <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.02319,-97.27912" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Athens, AL - Lindsay Lane South - Tesla Supercharger</span><small>325 kW · 19 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>🍝 Olive Garden ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍔 Whataburger ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>👑 Burger King ≥5 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.02319,-97.27912" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Athens, AL - Lindsay Lane South - Tesla Supercharger</span><small>325 kW · 19 stalls</small></div>
 <div class="a">2328 Lindsay Ln S, Athens, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 420 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.72747,-86.9332" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=AL">Show on map</a></div></div><div class="card"><div class="n"><span>Terrell, TX - Tesla Supercharger</span><small>325 kW · 36 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.72747,-86.9332" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Terrell, TX - Tesla Supercharger</span><small>325 kW · 36 stalls</small></div>
 <div class="a">506 I-20, Terrell, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 305 ft</span> · 🐕 Raising Cane&#x27;s <span>≥1 min · 351 ft</span> · <b>🦫 Buc-ee&#x27;s <span>≥2 min · 423 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 509 ft</span> · 🍔 Whataburger <span>≥2 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.71736,-96.32314" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Katy, TX - Katy Freeway - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍔 Whataburger ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.71736,-96.32314" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Katy, TX - Katy Freeway - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">27700 Katy Freeway, Katy, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">💊 CVS <span>≥1 min · 289 ft</span> · <b>🦫 Buc-ee&#x27;s <span>≥2 min · 436 ft</span></b> · 🐼 Panda Express <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.77907,-95.84886" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Richmond, KY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>💊 CVS ≥1 min</span><span>🐼 Panda Express ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.77907,-95.84886" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Richmond, KY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1013 Buc-ee&#x27;s Blvd, Richmond, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 436 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.67175,-84.30826" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Katy MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.67175,-84.30826" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Katy MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">27700 Katy Freeway, Katy, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 443 ft</span></b> · 🐼 Panda Express <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.77803,-95.8453" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Melissa MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>💊 CVS ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.77803,-95.8453" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Melissa MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">1550 Central Expressway, Melissa, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🦫 Buc-ee&#x27;s <span>≥2 min · 472 ft</span></b> · 🛒 H-E-B <span>≥4 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥6 min · 0.3 mi</span> · ⛽ RaceTrac <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.27008,-96.59174" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a></div></div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span><span>🛒 H-E-B ≥4 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>⛽ RaceTrac ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.27008,-96.59174" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Target (1484 locations) | Charge & Chew</title>
-<meta name="description" content="1484 EV DC fast chargers within a 10-minute walk of a Target, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Target (1423 locations) | Charge & Chew</title>
+<meta name="description" content="1423 EV DC fast chargers within a 10-minute walk of a Target, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/target/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Target (1484 locations)">
-<meta property="og:description" content="1484 EV DC fast chargers within a 10-minute walk of a Target, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Target (1423 locations)">
+<meta property="og:description" content="1423 EV DC fast chargers within a 10-minute walk of a Target, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/target/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🎯 EV fast chargers near Target</h1>
-<p class="lead">We found <b>1484 DC fast chargers</b> in the US — across all networks — with a Target within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1423 DC fast chargers</b> in the US — across all networks — with a Target within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Target">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>417</small></a><a href="fl/">Florida <small>86</small></a><a href="il/">Illinois <small>74</small></a><a href="ny/">New York <small>70</small></a><a href="tx/">Texas <small>66</small></a><a href="wa/">Washington <small>52</small></a><a href="mi/">Michigan <small>46</small></a><a href="co/">Colorado <small>45</small></a><a href="va/">Virginia <small>44</small></a><a href="ga/">Georgia <small>42</small></a><a href="ma/">Massachusetts <small>42</small></a><a href="nj/">New Jersey <small>42</small></a><a href="pa/">Pennsylvania <small>40</small></a><a href="md/">Maryland <small>38</small></a><a href="mn/">Minnesota <small>30</small></a><a href="oh/">Ohio <small>25</small></a><a href="or/">Oregon <small>21</small></a><a href="ut/">Utah <small>21</small></a><a href="ct/">Connecticut <small>20</small></a><a href="ok/">Oklahoma <small>20</small></a><a href="nc/">North Carolina <small>19</small></a><a href="tn/">Tennessee <small>19</small></a><a href="wi/">Wisconsin <small>18</small></a><a href="mo/">Missouri <small>17</small></a><a href="az/">Arizona <small>16</small></a><a href="al/">Alabama <small>13</small></a><a href="ia/">Iowa <small>12</small></a><a href="nv/">Nevada <small>11</small></a><a href="sc/">South Carolina <small>11</small></a><a href="me/">Maine <small>9</small></a><a href="in/">Indiana <small>9</small></a><a href="la/">Louisiana <small>9</small></a><a href="nm/">New Mexico <small>9</small></a><a href="hi/">Hawaii <small>8</small></a><a href="ky/">Kentucky <small>7</small></a><a href="wy/">Wyoming <small>6</small></a><a href="nh/">New Hampshire <small>6</small></a><a href="mt/">Montana <small>6</small></a><a href="ne/">Nebraska <small>6</small></a><a href="wv/">West Virginia <small>6</small></a><a href="ks/">Kansas <small>5</small></a><a href="nd/">North Dakota <small>5</small></a><a href="sd/">South Dakota <small>4</small></a><a href="ms/">Mississippi <small>4</small></a><a href="vt/">Vermont <small>2</small></a><a href="de/">Delaware <small>2</small></a><a href="ar/">Arkansas <small>2</small></a><a href="ri/">Rhode Island <small>1</small></a><a href="id/">Idaho <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Pie Ae Saltillo</span><small>125 kW · 1 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>393</small></a><a href="fl/">Florida <small>85</small></a><a href="il/">Illinois <small>72</small></a><a href="ny/">New York <small>65</small></a><a href="tx/">Texas <small>64</small></a><a href="wa/">Washington <small>50</small></a><a href="va/">Virginia <small>42</small></a><a href="ga/">Georgia <small>41</small></a><a href="mi/">Michigan <small>41</small></a><a href="nj/">New Jersey <small>41</small></a><a href="co/">Colorado <small>40</small></a><a href="ma/">Massachusetts <small>40</small></a><a href="pa/">Pennsylvania <small>38</small></a><a href="md/">Maryland <small>38</small></a><a href="mn/">Minnesota <small>30</small></a><a href="oh/">Ohio <small>25</small></a><a href="ct/">Connecticut <small>20</small></a><a href="ok/">Oklahoma <small>20</small></a><a href="or/">Oregon <small>19</small></a><a href="nc/">North Carolina <small>19</small></a><a href="tn/">Tennessee <small>19</small></a><a href="ut/">Utah <small>18</small></a><a href="wi/">Wisconsin <small>18</small></a><a href="mo/">Missouri <small>17</small></a><a href="az/">Arizona <small>16</small></a><a href="al/">Alabama <small>13</small></a><a href="ia/">Iowa <small>12</small></a><a href="sc/">South Carolina <small>11</small></a><a href="nv/">Nevada <small>10</small></a><a href="me/">Maine <small>9</small></a><a href="in/">Indiana <small>9</small></a><a href="la/">Louisiana <small>9</small></a><a href="hi/">Hawaii <small>8</small></a><a href="nm/">New Mexico <small>8</small></a><a href="ky/">Kentucky <small>7</small></a><a href="wy/">Wyoming <small>6</small></a><a href="nh/">New Hampshire <small>6</small></a><a href="mt/">Montana <small>6</small></a><a href="ne/">Nebraska <small>6</small></a><a href="wv/">West Virginia <small>6</small></a><a href="ks/">Kansas <small>5</small></a><a href="nd/">North Dakota <small>5</small></a><a href="sd/">South Dakota <small>4</small></a><a href="ms/">Mississippi <small>4</small></a><a href="vt/">Vermont <small>2</small></a><a href="de/">Delaware <small>2</small></a><a href="ar/">Arkansas <small>2</small></a><a href="ri/">Rhode Island <small>1</small></a><a href="id/">Idaho <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pie Ae Saltillo</span><small>125 kW · 1 stalls</small></div>
 <div class="a">901 E 5th St, Austin, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 0 ft</span></b> · 🥬 Whole Foods <span>≥1 min · 118 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🥞 IHOP <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.26422,-97.73381" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pie Ae Saltillo</span><small>125 kW · 1 stalls</small></div>
-<div class="a">901 E 5th St, Austin, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 0 ft</span></b> · 🥬 Whole Foods <span>≥1 min · 118 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🥞 IHOP <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.26424,-97.73386" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1453 (Athens, GA)</span><small>350 kW · 12 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🥬 Whole Foods ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>☕ Starbucks ≥6 min</span><span>🥞 IHOP ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.26422,-97.73381" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1453 (Athens, GA)</span><small>350 kW · 12 stalls</small></div>
 <div class="a">3065 Atlanta Hwy, Athens, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 0 ft</span></b> · ☕ Starbucks <span>≥1 min · 184 ft</span> · ☕ Dutch Bros <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🍗 Popeyes <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.94135,-83.44118" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Pie Ae Saltillo</span><small>102 kW · 1 stalls</small></div>
-<div class="a">901 E 5th St, Austin, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 30 ft</span></b> · 🥬 Whole Foods <span>≥1 min · 171 ft</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🥞 IHOP <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.26419,-97.73369" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>San Francisco, CA - Geary Boulevard - Tesla Supercharger</span><small>250 kW · 34 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>☕ Dutch Bros ≥2 min</span><span>🛒 Walmart ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>🍗 Popeyes ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.94135,-83.44118" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Francisco, CA - Geary Boulevard - Tesla Supercharger</span><small>250 kW · 34 stalls</small></div>
 <div class="a">2675 Geary Blvd, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 56 ft</span></b> · ☕ Starbucks <span>≥1 min · 66 ft</span> · 🌯 Chipotle <span>≥1 min · 381 ft</span> · 🥪 Subway <span>≥2 min · 443 ft</span> · 🛍️ Trader Joe&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Peet&#x27;s Coffee <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.78206,-122.44697" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1769 (Superior, CO)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78206,-122.44697" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1769 (Superior, CO)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">400 Marshall Road, Superior, CO</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 92 ft</span></b> · 📦 Costco <span>≥4 min · 0.2 mi</span> · 🥞 IHOP <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥5 min · 0.3 mi</span> · 🥖 Panera Bread <span>≥6 min · 0.3 mi</span> · 🥬 Whole Foods <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.95662,-105.17413" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Philadelphia, PA - North 20th Street - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>📦 Costco ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🥖 Panera Bread ≥6 min</span><span>🥬 Whole Foods ≥7 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.95662,-105.17413" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Philadelphia, PA - North 20th Street - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
 <div class="a">420 North 20th Street, Philadelphia, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 108 ft</span></b> · 🍕 Domino&#x27;s <span>≥1 min · 184 ft</span> · ☕ Starbucks <span>≥2 min · 443 ft</span> · 🥬 Whole Foods <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.96187,-75.17239" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Target Glen Allen #T1049</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥬 Whole Foods ≥3 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.96187,-75.17239" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target Glen Allen #T1049</span><small>350 kW · 4 stalls</small></div>
 <div class="a">11290 W Broad St., Glen Allen, VA</div><div class="host">EVgo</div>
-<div class="c">💊 CVS <span>≥1 min · 26 ft</span> · <b>🎯 Target <span>≥1 min · 144 ft</span></b> · 🐼 Panda Express <span>≥2 min · 515 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🔨 Home Depot <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.65214,-77.60566" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1462 (Las Vegas, NV)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>+12</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.65214,-77.60566" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1462 (Las Vegas, NV)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">6480 Sky Pointe Dr, Las Vegas, NV</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 144 ft</span></b> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥10 min · 0.5 mi</span> · 🌮 Del Taco <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.28015,-115.26441" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=NV">Show on map</a></div></div><div class="card"><div class="n"><span>Boston, MA - Richard B. Ross Way - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🥪 Subway ≥3 min</span><span>☕ Starbucks ≥10 min</span><span>🌮 Del Taco ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.28015,-115.26441" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Boston, MA - Richard B. Ross Way - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
 <div class="a">1341 Boylston Street, Boston, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 151 ft</span></b> · 💊 CVS <span>≥1 min · 236 ft</span> · ☕ Starbucks <span>≥1 min · 269 ft</span> · 🍩 Dunkin&#x27; <span>≥1 min · 377 ft</span> · 🥖 Panera Bread <span>≥2 min · 440 ft</span> · 🌯 Chipotle <span>≥2 min · 443 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.34487,-71.09921" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Target Lynchburg</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34487,-71.09921" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target Lynchburg</span><small>50 kW · 2 stalls</small></div>
 <div class="a">4028 Wards Rd, Lynchburg, VA</div><div class="host">EVgo</div>
-<div class="c">💊 CVS <span>≥1 min · 92 ft</span> · <b>🎯 Target <span>≥1 min · 177 ft</span></b> · ☕ Starbucks <span>≥1 min · 200 ft</span> · 🍝 Olive Garden <span>≥2 min · 0.1 mi</span> · 🌯 Chipotle <span>≥2 min · 0.1 mi</span> · 🍗 Wingstop <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.34578,-79.19088" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Sunnyvale, CA - West McKinley Avenue - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.34578,-79.19088" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sunnyvale, CA - West McKinley Avenue - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">298 W. McKinley Ave., Sunnyvale, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">💊 CVS <span>≥1 min · 112 ft</span> · <b>🎯 Target <span>≥1 min · 184 ft</span></b> · ☕ Starbucks <span>≥1 min · 367 ft</span> · 🥬 Whole Foods <span>≥2 min · 486 ft</span> · 🍔 Shake Shack <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.37335,-122.03274" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Honolulu, HI - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥬 Whole Foods ≥2 min</span><span>🍔 Shake Shack ≥3 min</span><span>💊 Walgreens ≥7 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.37335,-122.03274" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Honolulu, HI - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">2330 Kalākaua Ave, Honolulu, HI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 184 ft</span></b> · ☕ Starbucks <span>≥1 min · 325 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥5 min · 0.2 mi</span> · 🥪 Subway <span>≥7 min · 0.3 mi</span> · 🍳 Denny&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=21.2786,-157.82618" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=HI">Show on map</a></div></div><div class="card"><div class="n"><span>Target T2613 (Chicago, IL)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥞 IHOP ≥5 min</span><span>🥪 Subway ≥7 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=21.2786,-157.82618" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T2613 (Chicago, IL)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1200 N Larrabee St, Chicago, IL</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 190 ft</span></b> · 🍕 Domino&#x27;s <span>≥3 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.2 mi</span> · 🛒 Aldi <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.90421,-87.64352" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Target T2781 (Chicago, IL)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>☕ Starbucks ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🛒 Aldi ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.90421,-87.64352" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T2781 (Chicago, IL)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">1101 W Jackson Blvd., Chicago, IL</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 197 ft</span></b> · 🍕 Pizza Hut <span>≥1 min · 325 ft</span> · ☕ Starbucks <span>≥1 min · 325 ft</span> · 🍕 Domino&#x27;s <span>≥8 min · 0.4 mi</span> · 💊 Walgreens <span>≥9 min · 0.5 mi</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.87757,-87.65601" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Volvo Car Usa Silverthorn</span><small>120 kW · 1 stalls</small></div>
-<div class="a">715 Blue River Parkway, Silverthorne, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 200 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.63744,-106.07756" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Annapolis, MD - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥8 min</span><span>💊 Walgreens ≥9 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.87757,-87.65601" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Annapolis, MD - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">1906 Towne Centre Boulevard, Annapolis, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 203 ft</span></b> · 🥬 Whole Foods <span>≥3 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.98006,-76.5404" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>1301 2Nd Ave</span><small>180 kW · 2 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🥬 Whole Foods ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.98006,-76.5404" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>1301 2Nd Ave</span><small>180 kW · 2 stalls</small></div>
 <div class="a">1301 Second Ave, Suite 400, Seattle, WA</div><div class="host">Abm</div>
-<div class="c">☕ Starbucks <span>≥1 min · 144 ft</span> · <b>🎯 Target <span>≥1 min · 207 ft</span></b> · 💊 CVS <span>≥1 min · 262 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥2 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.60794,-122.33825" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Azusa, CA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🥪 Subway ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.60794,-122.33825" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Azusa, CA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">809 N Azusa Ave, Azusa, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 217 ft</span></b> · ☕ Starbucks <span>≥1 min · 358 ft</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.13681,-117.90853" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Plaza Del Obispo</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>💊 CVS ≥4 min</span><span>🥪 Subway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.13681,-117.90853" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Plaza Del Obispo</span><small>350 kW · 8 stalls</small></div>
 <div class="a">31874 Del Obispo St, San Juan Capistrano, CA</div><div class="host">EVgo</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 187 ft</span> · <b>🎯 Target <span>≥1 min · 220 ft</span></b> · 🍔 In-N-Out <span>≥2 min · 453 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥2 min · 472 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Del Taco <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.49904,-117.65957" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target South Setauket #T1191</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Del Taco ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.49904,-117.65957" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target South Setauket #T1191</span><small>350 kW · 6 stalls</small></div>
 <div class="a">255 Pond Path Rd, South Setauket, NY</div><div class="host">EVgo</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 223 ft</span></b> · 💻 Best Buy <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.88579,-73.09944" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Orlando, FL - West Grant Street - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💻 Best Buy ≥2 min</span><span>🔨 Home Depot ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.88579,-73.09944" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Orlando, FL - West Grant Street - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">120 W Grant S, Orlando, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 226 ft</span></b> · 💊 CVS <span>≥1 min · 262 ft</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · 🌯 Chipotle <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span> · 🍔 Five Guys <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.51628,-81.37999" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>PREIT Mall at Prince George&#x27;s (Hyattsville, MD)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🌮 Taco Bell ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍔 Five Guys ≥5 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.51628,-81.37999" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>PREIT Mall at Prince George&#x27;s (Hyattsville, MD)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3500 East-West Hwy, Hyattsville, MD</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 249 ft</span></b> · ☕ Starbucks <span>≥2 min · 423 ft</span> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.96909,-76.95425" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Chico, CA - Tesla Supercharger</span><small>150 kW · 18 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍗 Popeyes ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96909,-76.95425" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chico, CA - Tesla Supercharger</span><small>150 kW · 18 stalls</small></div>
 <div class="a">1951 East 20th Street, Chico, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🤡 Jack in the Box <span>≥1 min · 121 ft</span> · 🌮 Del Taco <span>≥1 min · 200 ft</span> · <b>🎯 Target <span>≥1 min · 253 ft</span></b> · 🥪 Subway <span>≥1 min · 289 ft</span> · 🐕 Raising Cane&#x27;s <span>≥1 min · 364 ft</span> · 🍗 KFC <span>≥2 min · 413 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.72664,-121.80255" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>South Shore Plaza (Braintree, MA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🌮 Del Taco ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🍗 KFC ≥2 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.72664,-121.80255" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>South Shore Plaza (Braintree, MA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">250 Granite Street, Braintree, MA</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 253 ft</span></b> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥9 min · 0.4 mi</span> · 🍔 Five Guys <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.22253,-71.02225" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T0612 (Springfield, OR)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍗 Popeyes ≥4 min</span><span>☕ Starbucks ≥9 min</span><span>🍔 Five Guys ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.22253,-71.02225" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T0612 (Springfield, OR)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2750 Gateway St, Springfield, OR</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 253 ft</span></b> · 🛒 Walmart <span>≥2 min · 0.1 mi</span> · 🦬 Buffalo Wild Wings <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🚒 Firehouse Subs <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.07104,-123.04522" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Redstone Shopping Center (Stoneham, MA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.07104,-123.04522" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Redstone Shopping Center (Stoneham, MA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">65 Main Street, Stoneham, MA</div><div class="host">Electrify America</div>
-<div class="c">💊 CVS <span>≥1 min · 217 ft</span> · <b>🎯 Target <span>≥1 min · 253 ft</span></b> · ☕ Starbucks <span>≥1 min · 377 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.2 mi</span> · 🍔 Five Guys <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.49453,-71.10252" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Mission Valley (San Diego, CA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49453,-71.10252" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mission Valley (San Diego, CA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1640 Camino Del Rio N, San Diego, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 256 ft</span></b> · 🐼 Panda Express <span>≥1 min · 345 ft</span> · 🍦 Dairy Queen <span>≥4 min · 0.2 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.76738,-117.14993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Wynnewood Village</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍦 Dairy Queen ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>💻 Best Buy ≥4 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.76738,-117.14993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wynnewood Village</span><small>350 kW · 6 stalls</small></div>
 <div class="a">655 W Illinois Ave, Dallas, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 256 ft</span></b> · 🛒 Kroger <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.72302,-96.83301" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>El Centro, CA - North Imperial Avenue - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🛒 Kroger ≥4 min</span><span>🌮 Taco Bell ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.72302,-96.83301" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>El Centro, CA - North Imperial Avenue - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">2295 N Imperial Ave, El Centro, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">💊 CVS <span>≥1 min · 217 ft</span> · <b>🎯 Target <span>≥1 min · 266 ft</span></b> · ☕ Starbucks <span>≥1 min · 328 ft</span> · 🐕 Raising Cane&#x27;s <span>≥2 min · 443 ft</span> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🔧 Lowe&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.81409,-115.56788" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T0346 (Clackamas, OR)</span><small>150 kW · 3 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.81409,-115.56788" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T0346 (Clackamas, OR)</span><small>150 kW · 3 stalls</small></div>
 <div class="a">9000 SE Sunny-side Road, Clackamas, OR</div><div class="host">Electrify America</div>
-<div class="c">💊 CVS <span>≥1 min · 128 ft</span> · ☕ Starbucks <span>≥1 min · 253 ft</span> · <b>🎯 Target <span>≥1 min · 272 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🐦 Red Robin <span>≥2 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.43203,-122.57103" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Fremont, CA - Pacific Commons Boulevard - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🐦 Red Robin ≥2 min</span><span>🍝 Olive Garden ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.43203,-122.57103" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fremont, CA - Pacific Commons Boulevard - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">43950 Pacific Commons Boulevard, Fremont, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 144 ft</span> · <b>🎯 Target <span>≥1 min · 272 ft</span></b> · 💊 CVS <span>≥2 min · 453 ft</span> · 🔧 Lowe&#x27;s <span>≥4 min · 0.2 mi</span> · 🍔 Five Guys <span>≥5 min · 0.2 mi</span> · 📦 Costco <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.50221,-121.96745" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Target H</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥2 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>🍔 Five Guys ≥5 min</span><span>📦 Costco ≥6 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.50221,-121.96745" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Target H</span><small>102 kW · 1 stalls</small></div>
 <div class="a">1790 Airline HWY, Hollister, CA</div><div class="host">ChargePoint</div>
-<div class="c">☕ Starbucks <span>≥1 min · 184 ft</span> · <b>🎯 Target <span>≥1 min · 272 ft</span></b> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🍗 Wingstop <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.83487,-121.39017" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Michael Bates Chevrolet Woodhaven</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.83487,-121.39017" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Michael Bates Chevrolet Woodhaven</span><small>180 kW · 4 stalls</small></div>
 <div class="a">23755 Allen Rd, Woodhaven, MI</div><div class="host">EV Connect</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 272 ft</span></b> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥4 min · 0.2 mi</span> · 🚒 Firehouse Subs <span>≥5 min · 0.2 mi</span> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.13677,-83.22543" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Mount Dora, FL - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍔 Five Guys ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🚒 Firehouse Subs ≥5 min</span><span>🍕 Pizza Hut ≥5 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.13677,-83.22543" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mount Dora, FL - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">17450 US-441, Mt Dora, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c">💊 CVS <span>≥1 min · 220 ft</span> · 🐼 Panda Express <span>≥1 min · 220 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 266 ft</span> · <b>🎯 Target <span>≥1 min · 272 ft</span></b> · ☕ Starbucks <span>≥1 min · 292 ft</span> · 🐔 Chick-fil-A <span>≥1 min · 390 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.81991,-81.66865" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1485 (Santee, CA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.81991,-81.66865" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1485 (Santee, CA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">9846 Mission Gorge Rd., Santee, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 276 ft</span></b> · 🔨 Home Depot <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.1 mi</span> · 🦬 Buffalo Wild Wings <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.84225,-116.98332" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Abn Target</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🔨 Home Depot ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>💊 CVS ≥4 min</span><span>+15</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.84225,-116.98332" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Abn Target</span><small>125 kW · 1 stalls</small></div>
 <div class="a">2700 E Bell Rd, Auburn, CA</div><div class="host">ChargePoint</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 256 ft</span> · <b>🎯 Target <span>≥1 min · 276 ft</span></b> · 👑 Burger King <span>≥1 min · 312 ft</span> · 🥖 Panera Bread <span>≥2 min · 479 ft</span> · 🌯 Chipotle <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.94256,-121.09592" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Abn Target</span><small>102 kW · 1 stalls</small></div>
-<div class="a">2700 Bell Rd, Auburn, CA</div><div class="host">ChargePoint</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 256 ft</span> · <b>🎯 Target <span>≥1 min · 276 ft</span></b> · 👑 Burger King <span>≥1 min · 312 ft</span> · 🥖 Panera Bread <span>≥2 min · 443 ft</span> · 🌯 Chipotle <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.94253,-121.09591" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.94256,-121.09592" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">430 Mariner Way, Biddeford, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🎯 Target <span>≥1 min · 276 ft</span></b> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.47317,-70.5146" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=ME">Show on map</a></div></div><div class="card"><div class="n"><span>DC Corridor Lodi Target</span><small>80 kW · 1 stalls</small></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🥖 Panera Bread ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.47317,-70.5146" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Corridor Lodi Target</span><small>80 kW · 1 stalls</small></div>
 <div class="a">2355 W Kettleman Ln, Lodi, CA</div><div class="host">ChargePoint</div>
-<div class="c">🌯 Chipotle <span>≥1 min · 161 ft</span> · <b>🎯 Target <span>≥1 min · 279 ft</span></b> · 🤡 Jack in the Box <span>≥2 min · 0.1 mi</span> · 🐕 Raising Cane&#x27;s <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🛒 Safeway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.11691,-121.30301" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Target&amp;state=CA">Show on map</a></div></div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Safeway ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.11691,-121.30301" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T2359 (Los Banos, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">1405 W Pacheco Blvd, Los Banos, CA</div><div class="host">Electrify America</div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.05477,-120.87648" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Plattsburgh, NY - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="a">60 Smithfield Blvd., Plattsburgh, NY</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🍕 Little Caesars ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.70456,-73.49182" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Marlborough, MA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="a">423 Donald Lynch Blvd, Marlborough, MA</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.35953,-71.6061" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Trumbull, CT - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="a">120 Hawley Ln, Trumbull, CT</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>💻 Best Buy ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.23391,-73.15085" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Whataburger (286 locations) | Charge & Chew</title>
-<meta name="description" content="286 EV DC fast chargers within a 10-minute walk of a Whataburger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Whataburger (280 locations) | Charge & Chew</title>
+<meta name="description" content="280 EV DC fast chargers within a 10-minute walk of a Whataburger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/whataburger/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Whataburger (286 locations)">
-<meta property="og:description" content="286 EV DC fast chargers within a 10-minute walk of a Whataburger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Whataburger (280 locations)">
+<meta property="og:description" content="280 EV DC fast chargers within a 10-minute walk of a Whataburger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/whataburger/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍔 EV fast chargers near Whataburger</h1>
-<p class="lead">We found <b>286 DC fast chargers</b> in the US — across all networks — with a Whataburger within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>280 DC fast chargers</b> in the US — across all networks — with a Whataburger within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Whataburger">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>180</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="fl/">Florida <small>15</small></a><a href="ga/">Georgia <small>15</small></a><a href="az/">Arizona <small>15</small></a><a href="al/">Alabama <small>8</small></a><a href="sc/">South Carolina <small>6</small></a><a href="nm/">New Mexico <small>5</small></a><a href="ar/">Arkansas <small>5</small></a><a href="tn/">Tennessee <small>5</small></a><a href="ms/">Mississippi <small>5</small></a><a href="nc/">North Carolina <small>4</small></a><a href="la/">Louisiana <small>3</small></a><a href="co/">Colorado <small>3</small></a><a href="mo/">Missouri <small>2</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Whataburger-Exxon</span><small>350 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>177</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="fl/">Florida <small>15</small></a><a href="az/">Arizona <small>15</small></a><a href="ga/">Georgia <small>13</small></a><a href="al/">Alabama <small>8</small></a><a href="sc/">South Carolina <small>6</small></a><a href="nm/">New Mexico <small>5</small></a><a href="ar/">Arkansas <small>5</small></a><a href="tn/">Tennessee <small>5</small></a><a href="ms/">Mississippi <small>5</small></a><a href="nc/">North Carolina <small>4</small></a><a href="la/">Louisiana <small>3</small></a><a href="co/">Colorado <small>2</small></a><a href="mo/">Missouri <small>2</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Whataburger-Exxon</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3799 N Houston School Rd, Lancaster, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 79 ft</span></b> · ⛽ QuikTrip <span>≥2 min · 423 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.64061,-96.80664" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Tulsa, OK - East 41st Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>⛽ QuikTrip ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64061,-96.80664" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Tulsa, OK - East 41st Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
 <div class="a">5726 E 41st St, Tulsa, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 95 ft</span></b> · 🌯 Chipotle <span>≥1 min · 190 ft</span> · ☕ Starbucks <span>≥1 min · 217 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🦬 Buffalo Wild Wings <span>≥6 min · 0.3 mi</span> · 💻 Best Buy <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.10378,-95.91209" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Pie Ae Aus Airport</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🦬 Buffalo Wild Wings ≥6 min</span><span>💻 Best Buy ≥6 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.10378,-95.91209" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pie Ae Aus Airport</span><small>125 kW · 1 stalls</small></div>
 <div class="a">2901 Spirit of Texas Dr, Austin, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 125 ft</span></b> · 🥪 Subway <span>≥1 min · 184 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.21122,-97.66726" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Heritage Square Shopping Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.21122,-97.66726" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Heritage Square Shopping Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">8244 Marbach Rd, San Antonio, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 131 ft</span></b> · 🥪 Subway <span>≥1 min · 256 ft</span> · 🛒 H-E-B <span>≥1 min · 256 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 407 ft</span> · 🍗 KFC <span>≥2 min · 509 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.41754,-98.65178" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pie Ae Aus Airport</span><small>125 kW · 1 stalls</small></div>
-<div class="a">2901 Spirit of Texas Dr, Austin, TX</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 144 ft</span></b> · 🥪 Subway <span>≥1 min · 184 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.21121,-97.66742" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Fairfield, TX - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 H-E-B ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.41754,-98.65178" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fairfield, TX - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
 <div class="a">1015 W Commerce St, Fairfield, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">⛽ TA Travel Center <span>≥1 min · 72 ft</span> · <b>🍔 Whataburger <span>≥1 min · 144 ft</span></b> · 👑 Burger King <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.72536,-96.17763" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>1001 Fm</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span><span>⛽ Love&#x27;s ≥7 min</span><span>👑 Burger King ≥7 min</span><span>🚗 Sonic ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.72536,-96.17763" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>1001 Fm</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1001 FM 1764, La Marque, TX</div><div class="host">Shell Recharge</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 144 ft</span></b> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 🛒 Walmart <span>≥5 min · 0.3 mi</span> · 🐼 Panda Express <span>≥6 min · 0.3 mi</span> · 🤡 Jack in the Box <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.40165,-95.03321" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>FPL EVolution - Hancock Whitney Bank</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🛒 Walmart ≥5 min</span><span>🐼 Panda Express ≥6 min</span><span>🤡 Jack in the Box ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.40165,-95.03321" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FPL EVolution - Hancock Whitney Bank</span><small>240 kW · 4 stalls</small></div>
 <div class="a">11701 Panama City Beach Pkwy, Panama City Beach, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 190 ft</span></b> · ⭐ Hardee&#x27;s <span>≥2 min · 404 ft</span> · 🔧 Lowe&#x27;s <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🍦 Culver&#x27;s <span>≥5 min · 0.3 mi</span> · 🐔 Chick-fil-A <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.19888,-85.81818" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Winston-Salem, NC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>💊 CVS ≥4 min</span><span>🍦 Culver&#x27;s ≥5 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.19888,-85.81818" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Winston-Salem, NC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">240 Harvey St, Winston-Salem, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 180 ft</span> · <b>🍔 Whataburger <span>≥1 min · 220 ft</span></b> · 🥪 Subway <span>≥1 min · 381 ft</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥7 min · 0.3 mi</span> · ⛽ Speedway <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.0844,-80.29532" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House - Crestview</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Walmart ≥3 min</span><span>🍕 Pizza Hut ≥7 min</span><span>⛽ Speedway ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.0844,-80.29532" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House - Crestview</span><small>184 kW · 4 stalls</small></div>
 <div class="a">3804 South Ferdon Boulevard, Crestview, FL</div><div class="host">Blink</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 36 ft</span> · <b>🍔 Whataburger <span>≥1 min · 220 ft</span></b> · 🍗 Popeyes <span>≥2 min · 476 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.72243,-86.56967" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Robstown, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.72243,-86.56967" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Robstown, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">500 US-77, Robstown, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 240 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.79327,-97.65125" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Austin, TX - Spirit of Texas Drive - Tesla Supercharger</span><small>325 kW · 19 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.79327,-97.65125" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Austin, TX - Spirit of Texas Drive - Tesla Supercharger</span><small>325 kW · 19 stalls</small></div>
 <div class="a">2901 Spirit of Texas Dr, Austin, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 240 ft</span></b> · 🥪 Subway <span>≥1 min · 230 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.21052,-97.66662" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Hutto, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.21052,-97.66662" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hutto, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">5000 Gattis School Road, Hutto, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🛒 H-E-B <span>≥1 min · 72 ft</span> · <b>🍔 Whataburger <span>≥1 min · 249 ft</span></b> · 🍕 Little Caesars <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.50283,-97.58093" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Cumming, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🛒 H-E-B ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍳 Denny&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.50283,-97.58093" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cumming, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">501 Lakeland Plaza, Cumming, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 249 ft</span></b> · 🍎 Applebee&#x27;s <span>≥1 min · 308 ft</span> · 🥖 Panera Bread <span>≥2 min · 482 ft</span> · 🤠 Texas Roadhouse <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.18502,-84.14234" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Grapevine, TX - East Northwest Highway - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18502,-84.14234" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Grapevine, TX - East Northwest Highway - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">477 E Northwest Hwy, Grapevine, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Subway <span>≥1 min · 141 ft</span> · <b>🍔 Whataburger <span>≥1 min · 276 ft</span></b> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span> · ☕ Dutch Bros <span>≥6 min · 0.3 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.94127,-97.07371" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Murphy Marketplace</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>☕ Dutch Bros ≥6 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.94127,-97.07371" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Murphy Marketplace</span><small>350 kW · 4 stalls</small></div>
 <div class="a">231 FM 544, Murphy, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 282 ft</span></b> · 🚒 Firehouse Subs <span>≥1 min · 282 ft</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span> · 🥪 Subway <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.01258,-96.60481" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Mac Haik CDJR</span><small>180 kW · 2 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🚒 Firehouse Subs ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🌯 Chipotle ≥5 min</span><span>🥪 Subway ≥6 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.01258,-96.60481" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mac Haik CDJR</span><small>180 kW · 2 stalls</small></div>
 <div class="a">12111 Katy Fwy, Houston, TX</div><div class="host">EV Connect</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 289 ft</span></b> · 🌶️ Chili&#x27;s <span>≥2 min · 522 ft</span> · 🐕 Raising Cane&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.7833,-95.5994" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 5987 (Royse City, TX)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.7833,-95.5994" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 5987 (Royse City, TX)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">494 I-30, Royse City, TX</div><div class="host">Electrify America</div>
-<div class="c">🛒 Walmart <span>≥1 min · 236 ft</span> · 🐼 Panda Express <span>≥1 min · 266 ft</span> · <b>🍔 Whataburger <span>≥1 min · 292 ft</span></b> · 💊 CVS <span>≥3 min · 0.2 mi</span> · 🍗 Wingstop <span>≥3 min · 0.2 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.96482,-96.34252" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees New Braunfels MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>💊 CVS ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.96482,-96.34252" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees New Braunfels MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">2760 Interstate 35, New Braunfels, TX</div><div class="host">Mercedes Benz</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 292 ft</span></b> · 🐼 Panda Express <span>≥1 min · 282 ft</span> · 🥪 Subway <span>≥2 min · 525 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🦫 Buc-ee&#x27;s <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.72747,-98.07697" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Lavonia</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🦫 Buc-ee&#x27;s ≥2 min</span><span>👑 Burger King ≥4 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.72747,-98.07697" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Lavonia</span><small>125 kW · 1 stalls</small></div>
 <div class="a">14177 Jones St, Lavonia, GA</div><div class="host">ChargePoint</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 59 ft</span> · <b>🍔 Whataburger <span>≥1 min · 295 ft</span></b> · 🍕 Pizza Hut <span>≥2 min · 397 ft</span> · 👑 Burger King <span>≥2 min · 472 ft</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.44784,-83.126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Lavonia</span><small>125 kW · 1 stalls</small></div>
-<div class="a">14177 Jones St, Lavonia, GA</div><div class="host">ChargePoint</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 59 ft</span> · <b>🍔 Whataburger <span>≥1 min · 295 ft</span></b> · 🍕 Pizza Hut <span>≥2 min · 427 ft</span> · 👑 Burger King <span>≥2 min · 463 ft</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.44788,-83.12599" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 4617 Fast Market Valero Albuquerque</span><small>160 kW · 2 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>👑 Burger King ≥2 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.44784,-83.126" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 4617 Fast Market Valero Albuquerque</span><small>160 kW · 2 stalls</small></div>
 <div class="a">4221 Osuna Rd NE, Albuquerque, NM</div><div class="host">Red E</div>
-<div class="c">☕ Starbucks <span>≥1 min · 226 ft</span> · <b>🍔 Whataburger <span>≥1 min · 315 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🪵 Cracker Barrel <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.15649,-106.59398" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=NM">Show on map</a></div></div><div class="card"><div class="n"><span>Bryan, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.15649,-106.59398" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bryan, TX - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">725 E Villa Maria Rd, Bryan, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 322 ft</span></b> · 🛒 H-E-B <span>≥2 min · 420 ft</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.64266,-96.35028" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Gpm Investments</span><small>160 kW · 1 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🛒 H-E-B ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 KFC ≥3 min</span><span>💊 CVS ≥4 min</span><span>🤡 Jack in the Box ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.64266,-96.35028" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gpm Investments</span><small>160 kW · 1 stalls</small></div>
 <div class="a">5005 N La Cañada Dr, Tucson, AZ</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 338 ft</span></b> · 🥪 Subway <span>≥2 min · 400 ft</span> · 💊 Walgreens <span>≥2 min · 436 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.29792,-110.99582" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Gpm Investments 4610 DC</span><small>160 kW · 1 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>💊 Walgreens ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.29792,-110.99582" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gpm Investments 4610 DC</span><small>160 kW · 1 stalls</small></div>
 <div class="a">5005 N La Cañada Dr, Tucson, AZ</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍔 Whataburger <span>≥1 min · 338 ft</span></b> · 💊 Walgreens <span>≥2 min · 400 ft</span> · 🥪 Subway <span>≥2 min · 436 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.29783,-110.99581" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Target Greenville #T1182</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.29783,-110.99581" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target Greenville #T1182</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1112 Woodruff Rd, Greenville, SC</div><div class="host">EVgo</div>
-<div class="c">🎯 Target <span>≥1 min · 328 ft</span> · <b>🍔 Whataburger <span>≥1 min · 348 ft</span></b> · 🛍️ Trader Joe&#x27;s <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.82999,-82.30725" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Pursch Motors Inc</span><small>60 kW · 2 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.82999,-82.30725" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pursch Motors Inc</span><small>60 kW · 2 stalls</small></div>
 <div class="a">2207 West Oaklawn Road, Pleasanton, TX</div><div class="host">Blink</div>
-<div class="c">🌶️ Chili&#x27;s <span>≥1 min · 338 ft</span> · <b>🍔 Whataburger <span>≥1 min · 361 ft</span></b> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥6 min · 0.3 mi</span> · 💊 Walgreens <span>≥6 min · 0.3 mi</span> · 🍗 Wingstop <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.93768,-98.51569" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Converse, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🛒 Walmart ≥4 min</span><span>👑 Burger King ≥6 min</span><span>💊 Walgreens ≥6 min</span><span>🍗 Wingstop ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.93768,-98.51569" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Converse, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">3835 E Loop 1604 N, Converse, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 102 ft</span> · <b>🍔 Whataburger <span>≥1 min · 364 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.46415,-98.28906" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>12121 Katy Fwy</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.46415,-98.28906" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>12121 Katy Fwy</span><small>400 kW · 8 stalls</small></div>
 <div class="a">12121 Katy Fwy, Houston, TX</div><div class="host">Hyperfuel</div>
-<div class="c">🌶️ Chili&#x27;s <span>≥1 min · 148 ft</span> · <b>🍔 Whataburger <span>≥1 min · 364 ft</span></b> · 🐕 Raising Cane&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.78341,-95.60096" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Target Pflugerville #T2495</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.78341,-95.60096" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target Pflugerville #T2495</span><small>350 kW · 4 stalls</small></div>
 <div class="a">18700 Limestone Commercial Dr, Pflugerville, TX</div><div class="host">EVgo</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 262 ft</span> · 🥖 Panera Bread <span>≥1 min · 312 ft</span> · 🍕 Domino&#x27;s <span>≥1 min · 348 ft</span> · <b>🍔 Whataburger <span>≥1 min · 384 ft</span></b> · 🐼 Panda Express <span>≥2 min · 413 ft</span> · 🥞 IHOP <span>≥2 min · 502 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.46639,-97.59718" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Bucees Terrell MB.HPC</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.46639,-97.59718" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Bucees Terrell MB.HPC</span><small>400 kW · 10 stalls</small></div>
 <div class="a">506  W. IH 20, Terrell, TX</div><div class="host">Mercedes Benz</div>
-<div class="c">🦫 Buc-ee&#x27;s <span>≥1 min · 236 ft</span> · ☕ Starbucks <span>≥1 min · 285 ft</span> · <b>🍔 Whataburger <span>≥2 min · 400 ft</span></b> · 🐔 Chick-fil-A <span>≥3 min · 0.1 mi</span> · 🐕 Raising Cane&#x27;s <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.71725,-96.32174" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Katy, TX - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🦫 Buc-ee&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🐼 Panda Express ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.71725,-96.32174" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Katy, TX - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
 <div class="a">25675 Nelson Way, Katy, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍔 Whataburger <span>≥2 min · 443 ft</span></b> · 🛒 H-E-B <span>≥2 min · 499 ft</span> · 🐔 Chick-fil-A <span>≥3 min · 0.2 mi</span> · 💊 Walgreens <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥5 min · 0.2 mi</span> · 🍗 Popeyes <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.7747,-95.82191" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🛒 H-E-B ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>👑 Burger King ≥5 min</span><span>🍗 Popeyes ≥6 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.7747,-95.82191" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4105 S. Loop 1604, San Antonio, TX</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 194 ft</span> · <b>🍔 Whataburger <span>≥2 min · 446 ft</span></b> · ⛽ QuikTrip <span>≥3 min · 0.1 mi</span> · 👑 Burger King <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.21937,-98.41575" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>La Quinta Inn (Seguin, TX)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>⛽ Pilot ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>⛽ QuikTrip ≥3 min</span><span>👑 Burger King ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.21937,-98.41575" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>La Quinta Inn (Seguin, TX)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1501 N State Highway 46, Seguin, TX</div><div class="host">Electrify America</div>
-<div class="c"><b>🍔 Whataburger <span>≥2 min · 456 ft</span></b> · 🥪 Subway <span>≥2 min · 482 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 479 ft</span> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.5816,-97.99286" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Seville Commons</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🤡 Jack in the Box ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.5816,-97.99286" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Seville Commons</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2151 North Collins St., Arlington, TX</div><div class="host">EVgo</div>
-<div class="c">🥪 Subway <span>≥1 min · 0 ft</span> · 🌯 Chipotle <span>≥1 min · 59 ft</span> · <b>🍔 Whataburger <span>≥2 min · 469 ft</span></b> · 🛒 Walmart <span>≥2 min · 492 ft</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🥬 Whole Foods <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.769,-97.09657" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>110 E Louetta Unit A</span><small>350 kW · 7 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🥬 Whole Foods ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.769,-97.09657" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>110 E Louetta Unit A</span><small>350 kW · 7 stalls</small></div>
 <div class="a">110 E Louetta Unit A, Spring, TX</div><div class="host">Shell Recharge</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 200 ft</span> · 🐔 Chick-fil-A <span>≥1 min · 331 ft</span> · <b>🍔 Whataburger <span>≥2 min · 472 ft</span></b> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🍗 Zaxby&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.06586,-95.43308" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 5260 (Rogers, AR)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🍗 Zaxby&#x27;s ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.06586,-95.43308" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 5260 (Rogers, AR)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4280 S Pleasant Crossing Blvd., Rogers, AR</div><div class="host">Electrify America</div>
-<div class="c">🛒 Walmart <span>≥1 min · 69 ft</span> · <b>🍔 Whataburger <span>≥2 min · 482 ft</span></b> · 🍗 Zaxby&#x27;s <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.28078,-94.15126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=AR">Show on map</a></div></div><div class="card"><div class="n"><span>Jc Hyundai Sales Level</span><small>40 kW · 1 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🛒 Walmart ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>💊 Walgreens ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.28078,-94.15126" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Jc Hyundai Sales Level</span><small>40 kW · 1 stalls</small></div>
 <div class="a">6420 East 22nd Street, Tucson, AZ</div><div class="host">ChargePoint</div>
-<div class="c">🍔 Wendy&#x27;s <span>≥1 min · 328 ft</span> · <b>🍔 Whataburger <span>≥2 min · 492 ft</span></b> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.20613,-110.855" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Kyle Marketplace (Kyle, TX)</span><small>350 kW · 10 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🌮 Taco Bell ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.20613,-110.855" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Kyle Marketplace (Kyle, TX)</span><small>350 kW · 10 stalls</small></div>
 <div class="a">5401 Farm to Market 1626, Kyle, TX</div><div class="host">Electrify America</div>
-<div class="c">☕ Starbucks <span>≥1 min · 377 ft</span> · 🛒 H-E-B <span>≥2 min · 404 ft</span> · <b>🍔 Whataburger <span>≥2 min · 492 ft</span></b> · 🍗 Wingstop <span>≥2 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥2 min · 0.1 mi</span> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.01478,-97.8628" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Palace inn hwy 6 and westpark</span><small>40 kW · 2 stalls</small></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 H-E-B ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>+20</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.01478,-97.8628" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Palace inn hwy 6 and westpark</span><small>40 kW · 2 stalls</small></div>
 <div class="a">3584, Houston, TX</div><div class="host">Graviti Energy</div>
-<div class="c"><b>🍔 Whataburger <span>≥2 min · 522 ft</span></b> · 🛒 Aldi <span>≥3 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.71833,-95.64577" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Whataburger&amp;state=TX">Show on map</a></div></div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>🛒 Walmart ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.71833,-95.64577" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Corsicana, TX - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="a">2035 Interstate 45 Frontage Road, Corsicana, TX</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🔨 Home Depot ≥5 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.06863,-96.44819" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Humble TX</span><small>350 kW · 7 stalls</small></div>
+<div class="a">18040 Highway 59 N, Humble, TX</div><div class="host">Shell Recharge</div>
+<div class="c"><span>🍔 <b>Whataburger</b> ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🧇 Waffle House ≥6 min</span><span>🚗 Sonic ≥7 min</span><span>🤡 Jack in the Box ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.98163,-95.27558" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

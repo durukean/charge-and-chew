@@ -20,85 +20,129 @@
 <meta name="theme-color" content="#0d1117">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Chains", "item": "https://chargeandchew.com/near/"}, {"@type": "ListItem", "position": 2, "name": "Speedway", "item": "https://chargeandchew.com/near/speedway/"}, {"@type": "ListItem", "position": 3, "name": "Washington", "item": "https://chargeandchew.com/near/speedway/wa/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Fast chargers near Speedway in Washington", "numberOfItems": 11, "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "Place", "name": "ChargePoint \u2014 DC Burlington", "address": {"@type": "PostalAddress", "streetAddress": "1920 Marketplace Dr", "addressLocality": "Burlington", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.45023, "longitude": -122.33708}}}, {"@type": "ListItem", "position": 2, "item": {"@type": "Place", "name": "ChargePoint \u2014 Soundfordelec25 Sound Ford Link", "address": {"@type": "PostalAddress", "streetAddress": "101 Southwest Grady Way", "addressLocality": "Renton", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 47.46975, "longitude": -122.21949}}}, {"@type": "ListItem", "position": 3, "item": {"@type": "Place", "name": "Tesla Supercharger \u2014 Burlington, WA - Marketplace Drive - Tesla Supercharger", "address": {"@type": "PostalAddress", "streetAddress": "1829 Marketplace Dr", "addressLocality": "Burlington", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.45128, "longitude": -122.33982}}}, {"@type": "ListItem", "position": 4, "item": {"@type": "Place", "name": "ChargePoint \u2014 City Light Burien", "address": {"@type": "PostalAddress", "streetAddress": "15135 4th Ave SW", "addressLocality": "Burien", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 47.46737, "longitude": -122.33941}}}, {"@type": "ListItem", "position": 5, "item": {"@type": "Place", "name": "Blink \u2014 Brotherton Cadillac Buick GMC.", "address": {"@type": "PostalAddress", "streetAddress": "215 Southwest 12th Street", "addressLocality": "Renton", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 47.46917, "longitude": -122.21964}}}, {"@type": "ListItem", "position": 6, "item": {"@type": "Place", "name": "Opconnect \u2014 Starbucks Pasco", "address": {"@type": "PostalAddress", "streetAddress": "2411 W Court Street", "addressLocality": "Pasco", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 46.24182, "longitude": -119.12418}}}, {"@type": "ListItem", "position": 7, "item": {"@type": "Place", "name": "EVCS \u2014 WCEH Burlington", "address": {"@type": "PostalAddress", "streetAddress": "448 Fashion Way", "addressLocality": "Burlington", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.45548, "longitude": -122.34079}}}, {"@type": "ListItem", "position": 8, "item": {"@type": "Place", "name": "In Charge \u2014 Karmart Nissan", "address": {"@type": "PostalAddress", "streetAddress": "655 Auto Blvd", "addressLocality": "Burlington", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.45009, "longitude": -122.34423}}}, {"@type": "ListItem", "position": 9, "item": {"@type": "Place", "name": "Walmart Charge \u2014 Walmart EV Charging", "address": {"@type": "PostalAddress", "streetAddress": "19205 State Route 410 E", "addressLocality": "Bonney Lake", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 47.16774, "longitude": -122.17184}}}, {"@type": "ListItem", "position": 10, "item": {"@type": "Place", "name": "ChargePoint \u2014 Prprd EV", "address": {"@type": "PostalAddress", "streetAddress": "1437 Gulf Rd", "addressLocality": "Point Roberts", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.9845, "longitude": -123.07671}}}, {"@type": "ListItem", "position": 11, "item": {"@type": "Place", "name": "ChargePoint \u2014 Prprd EV Prprd", "address": {"@type": "PostalAddress", "streetAddress": "1437 Gulf Road", "addressLocality": "Point Roberts", "addressRegion": "WA", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 48.98436, "longitude": -123.07694}}}]}</script>
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../../">Map</a><a href="../../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Speedway in Washington</h1>
 <p class="lead"><b>11 DC fast chargers</b> in Washington have a Speedway within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Speedway&amp;state=WA">Open on the map →</a>
-<div class="card"><div class="n"><span>DC Burlington</span><small>125 kW · 1 stalls</small></div>
+<div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>DC Burlington</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1920 Marketplace Dr, Burlington, WA</div><div class="host">ChargePoint</div>
-<div class="c">🍔 Five Guys <span>≥1 min · 348 ft</span> · 🍝 Olive Garden <span>≥2 min · 0.1 mi</span> · <b>⛽ Speedway <span>≥2 min · 0.1 mi</span></b> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 💻 Best Buy <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.45023,-122.33708" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Soundfordelec25 Sound Ford Link</span><small>120 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🍔 Five Guys ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>💻 Best Buy ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.45023,-122.33708" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
+<div class="n"><span>Soundfordelec25 Sound Ford Link</span><small>120 kW · 2 stalls</small></div>
 <div class="a">101 Southwest Grady Way, Renton, WA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥3 min · 0.2 mi</span></b> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · ☕ Dutch Bros <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥5 min · 0.2 mi</span> · 🍎 Applebee&#x27;s <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46975,-122.21949" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Burlington, WA - Marketplace Drive - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🚗 Sonic ≥4 min</span><span>☕ Dutch Bros ≥4 min</span><span>🍗 Popeyes ≥5 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46975,-122.21949" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
+<div class="n"><span>Burlington, WA - Marketplace Drive - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">1829 Marketplace Dr, Burlington, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c">💻 Best Buy <span>≥1 min · 180 ft</span> · 🍝 Olive Garden <span>≥1 min · 377 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span> · 📦 Costco <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · <b>⛽ Speedway <span>≥4 min · 0.2 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.45128,-122.33982" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>City Light Burien</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>💻 Best Buy ≥1 min</span><span>🍝 Olive Garden ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>📦 Costco ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.45128,-122.33982" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
+<div class="n"><span>City Light Burien</span><small>62 kW · 1 stalls</small></div>
 <div class="a">15135 4th Ave SW, Burien, WA</div><div class="host">ChargePoint</div>
-<div class="c">🥪 Subway <span>≥2 min · 0.1 mi</span> · 💊 CVS <span>≥2 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.1 mi</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · <b>⛽ Speedway <span>≥4 min · 0.2 mi</span></b> · 🍗 KFC <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46737,-122.33941" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Brotherton Cadillac Buick GMC.</span><small>60 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🥪 Subway ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍗 KFC ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46737,-122.33941" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
+<div class="n"><span>Brotherton Cadillac Buick GMC.</span><small>60 kW · 2 stalls</small></div>
 <div class="a">215 Southwest 12th Street, Renton, WA</div><div class="host">Blink</div>
-<div class="c"><b>⛽ Speedway <span>≥4 min · 0.2 mi</span></b> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · ☕ Dutch Bros <span>≥5 min · 0.3 mi</span> · 🍗 Popeyes <span>≥6 min · 0.3 mi</span> · 🍎 Applebee&#x27;s <span>≥7 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.46917,-122.21964" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>🚗 Sonic ≥5 min</span><span>☕ Dutch Bros ≥5 min</span><span>🍗 Popeyes ≥6 min</span><span>🍎 Applebee&#x27;s ≥7 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46917,-122.21964" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
 <div class="a">2411 W Court Street, Pasco, WA</div><div class="host">Opconnect</div>
-<div class="c">☕ Starbucks <span>≥1 min · 0 ft</span> · 👑 Burger King <span>≥1 min · 125 ft</span> · 🌮 Taco Bell <span>≥2 min · 394 ft</span> · ☕ Dutch Bros <span>≥2 min · 453 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 502 ft</span> · 🍗 KFC <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.24182,-119.12418" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>WCEH Burlington</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Dutch Bros ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.24182,-119.12418" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
+<div class="n"><span>WCEH Burlington</span><small>50 kW · 1 stalls</small></div>
 <div class="a">448 Fashion Way, Burlington, WA</div><div class="host">EVCS</div>
-<div class="c">📦 Costco <span>≥3 min · 0.2 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥5 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span> · 🍗 Wingstop <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.45548,-122.34079" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Karmart Nissan</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥7 min</span><span>📦 Costco ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.45548,-122.34079" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
+<div class="n"><span>Karmart Nissan</span><small>50 kW · 1 stalls</small></div>
 <div class="a">655 Auto Blvd, Burlington, WA</div><div class="host">In Charge</div>
-<div class="c">💻 Best Buy <span>≥4 min · 0.2 mi</span> · 🍝 Olive Garden <span>≥6 min · 0.3 mi</span> · 🔨 Home Depot <span>≥6 min · 0.3 mi</span> · 🍔 Five Guys <span>≥6 min · 0.3 mi</span> · 📦 Costco <span>≥7 min · 0.3 mi</span> · ☕ Starbucks <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.45009,-122.34423" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>💻 Best Buy ≥4 min</span><span>🍝 Olive Garden ≥6 min</span><span>🔨 Home Depot ≥6 min</span><span>🍔 Five Guys ≥6 min</span><span>📦 Costco ≥7 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.45009,-122.34423" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
 <div class="a">19205 State Route 410 E, Bonney Lake, WA</div><div class="host">Walmart Charge</div>
-<div class="c">🛒 Walmart <span>≥1 min · 43 ft</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 🐼 Panda Express <span>≥3 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.16774,-122.17184" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Prprd EV</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>🛒 Walmart ≥1 min</span><span>🥪 Subway ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.16774,-122.17184" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
+<div class="n"><span>Prprd EV</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1437 Gulf Rd, Point Roberts, WA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥9 min · 0.4 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.9845,-123.07671" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Prprd EV Prprd</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.9845,-123.07671" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
+<div class="n"><span>Prprd EV Prprd</span><small>125 kW · 1 stalls</small></div>
 <div class="a">1437 Gulf Road, Point Roberts, WA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Speedway <span>≥9 min · 0.4 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.98436,-123.07694" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Speedway&amp;state=WA">Show on map</a></div></div>
-<h2>Other chains near fast chargers in Washington</h2><div class="chips"><a href="../../starbucks/wa/">☕ Starbucks <small>260</small></a><a href="../../subway/wa/">🥪 Subway <small>232</small></a><a href="../../mcdonald-s/wa/">🍟 McDonald&#x27;s <small>188</small></a><a href="../../taco-bell/wa/">🌮 Taco Bell <small>105</small></a><a href="../../safeway/wa/">🛒 Safeway <small>103</small></a><a href="../../chipotle/wa/">🌯 Chipotle <small>97</small></a><a href="../../domino-s/wa/">🍕 Domino&#x27;s <small>96</small></a><a href="../../jack-in-the-box/wa/">🤡 Jack in the Box <small>92</small></a><a href="../../burger-king/wa/">👑 Burger King <small>82</small></a><a href="../../walgreens/wa/">💊 Walgreens <small>80</small></a><a href="../../wendy-s/wa/">🍔 Wendy&#x27;s <small>79</small></a><a href="../../arby-s/wa/">🥩 Arby&#x27;s <small>62</small></a><a href="../../five-guys/wa/">🍔 Five Guys <small>58</small></a><a href="../../panda-express/wa/">🐼 Panda Express <small>56</small></a><a href="../../target/wa/">🎯 Target <small>52</small></a><a href="../../kfc/wa/">🍗 KFC <small>51</small></a><a href="../../ihop/wa/">🥞 IHOP <small>48</small></a><a href="../../dutch-bros/wa/">☕ Dutch Bros <small>47</small></a><a href="../../jersey-mike-s/wa/">🥪 Jersey Mike&#x27;s <small>45</small></a><a href="../../panera-bread/wa/">🥖 Panera Bread <small>44</small></a><a href="../../walmart/wa/">🛒 Walmart <small>44</small></a><a href="../../little-caesars/wa/">🍕 Little Caesars <small>44</small></a><a href="../../trader-joe-s/wa/">🛍️ Trader Joe&#x27;s <small>43</small></a><a href="../../pizza-hut/wa/">🍕 Pizza Hut <small>43</small></a><a href="../../cvs/wa/">💊 CVS <small>42</small></a><a href="../../applebee-s/wa/">🍎 Applebee&#x27;s <small>40</small></a><a href="../../costco/wa/">📦 Costco <small>38</small></a><a href="../../home-depot/wa/">🔨 Home Depot <small>38</small></a><a href="../../red-robin/wa/">🐦 Red Robin <small>36</small></a><a href="../../denny-s/wa/">🍳 Denny&#x27;s <small>34</small></a><a href="../../olive-garden/wa/">🍝 Olive Garden <small>33</small></a><a href="../../carl-s-jr/wa/">⭐ Carl&#x27;s Jr. <small>33</small></a><a href="../../best-buy/wa/">💻 Best Buy <small>31</small></a><a href="../../buffalo-wild-wings/wa/">🦬 Buffalo Wild Wings <small>28</small></a><a href="../../lowe-s/wa/">🔧 Lowe&#x27;s <small>28</small></a><a href="../../chick-fil-a/wa/">🐔 Chick-fil-A <small>26</small></a><a href="../../wingstop/wa/">🍗 Wingstop <small>25</small></a><a href="../../popeyes/wa/">🍗 Popeyes <small>18</small></a><a href="../../firehouse-subs/wa/">🚒 Firehouse Subs <small>14</small></a><a href="../../whole-foods/wa/">🥬 Whole Foods <small>13</small></a><a href="../../shake-shack/wa/">🍔 Shake Shack <small>10</small></a><a href="../../peet-s-coffee/wa/">☕ Peet&#x27;s Coffee <small>10</small></a><a href="../../in-n-out/wa/">🍔 In-N-Out <small>9</small></a><a href="../../dairy-queen/wa/">🍦 Dairy Queen <small>7</small></a><a href="../../raising-cane-s/wa/">🐕 Raising Cane&#x27;s <small>6</small></a><a href="../../pilot/wa/">⛽ Pilot <small>6</small></a><a href="../../flying-j/wa/">⛽ Flying J <small>4</small></a><a href="../../del-taco/wa/">🌮 Del Taco <small>3</small></a><a href="../../ikea/wa/">🪑 IKEA <small>3</small></a><a href="../../chili-s/wa/">🌶️ Chili&#x27;s <small>2</small></a><a href="../../texas-roadhouse/wa/">🤠 Texas Roadhouse <small>2</small></a><a href="../../ta-travel-center/wa/">⛽ TA Travel Center <small>2</small></a></div>
+<div class="c"><span>⛽ <b>Speedway</b> ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.98436,-123.07694" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
+<h2>Other chains near fast chargers in Washington</h2><div class="chips"><a href="../../starbucks/wa/">☕ Starbucks <small>241</small></a><a href="../../subway/wa/">🥪 Subway <small>220</small></a><a href="../../mcdonald-s/wa/">🍟 McDonald&#x27;s <small>173</small></a><a href="../../taco-bell/wa/">🌮 Taco Bell <small>100</small></a><a href="../../safeway/wa/">🛒 Safeway <small>96</small></a><a href="../../chipotle/wa/">🌯 Chipotle <small>91</small></a><a href="../../jack-in-the-box/wa/">🤡 Jack in the Box <small>86</small></a><a href="../../domino-s/wa/">🍕 Domino&#x27;s <small>86</small></a><a href="../../burger-king/wa/">👑 Burger King <small>75</small></a><a href="../../walgreens/wa/">💊 Walgreens <small>75</small></a><a href="../../wendy-s/wa/">🍔 Wendy&#x27;s <small>74</small></a><a href="../../arby-s/wa/">🥩 Arby&#x27;s <small>60</small></a><a href="../../panda-express/wa/">🐼 Panda Express <small>55</small></a><a href="../../five-guys/wa/">🍔 Five Guys <small>52</small></a><a href="../../target/wa/">🎯 Target <small>50</small></a><a href="../../kfc/wa/">🍗 KFC <small>48</small></a><a href="../../ihop/wa/">🥞 IHOP <small>46</small></a><a href="../../dutch-bros/wa/">☕ Dutch Bros <small>46</small></a><a href="../../panera-bread/wa/">🥖 Panera Bread <small>44</small></a><a href="../../walmart/wa/">🛒 Walmart <small>44</small></a><a href="../../jersey-mike-s/wa/">🥪 Jersey Mike&#x27;s <small>44</small></a><a href="../../pizza-hut/wa/">🍕 Pizza Hut <small>42</small></a><a href="../../trader-joe-s/wa/">🛍️ Trader Joe&#x27;s <small>40</small></a><a href="../../little-caesars/wa/">🍕 Little Caesars <small>40</small></a><a href="../../cvs/wa/">💊 CVS <small>39</small></a><a href="../../home-depot/wa/">🔨 Home Depot <small>37</small></a><a href="../../applebee-s/wa/">🍎 Applebee&#x27;s <small>35</small></a><a href="../../red-robin/wa/">🐦 Red Robin <small>35</small></a><a href="../../costco/wa/">📦 Costco <small>34</small></a><a href="../../denny-s/wa/">🍳 Denny&#x27;s <small>32</small></a><a href="../../olive-garden/wa/">🍝 Olive Garden <small>32</small></a><a href="../../carl-s-jr/wa/">⭐ Carl&#x27;s Jr. <small>31</small></a><a href="../../best-buy/wa/">💻 Best Buy <small>30</small></a><a href="../../chick-fil-a/wa/">🐔 Chick-fil-A <small>26</small></a><a href="../../buffalo-wild-wings/wa/">🦬 Buffalo Wild Wings <small>26</small></a><a href="../../lowe-s/wa/">🔧 Lowe&#x27;s <small>26</small></a><a href="../../wingstop/wa/">🍗 Wingstop <small>25</small></a><a href="../../popeyes/wa/">🍗 Popeyes <small>16</small></a><a href="../../sonic/wa/">🚗 Sonic <small>15</small></a><a href="../../firehouse-subs/wa/">🚒 Firehouse Subs <small>13</small></a><a href="../../whole-foods/wa/">🥬 Whole Foods <small>11</small></a><a href="../../shake-shack/wa/">🍔 Shake Shack <small>10</small></a><a href="../../peet-s-coffee/wa/">☕ Peet&#x27;s Coffee <small>9</small></a><a href="../../dairy-queen/wa/">🍦 Dairy Queen <small>7</small></a><a href="../../love-s/wa/">⛽ Love&#x27;s <small>7</small></a><a href="../../pilot/wa/">⛽ Pilot <small>6</small></a><a href="../../in-n-out/wa/">🍔 In-N-Out <small>5</small></a><a href="../../flying-j/wa/">⛽ Flying J <small>4</small></a><a href="../../del-taco/wa/">🌮 Del Taco <small>3</small></a><a href="../../ikea/wa/">🪑 IKEA <small>3</small></a><a href="../../raising-cane-s/wa/">🐕 Raising Cane&#x27;s <small>2</small></a><a href="../../chili-s/wa/">🌶️ Chili&#x27;s <small>2</small></a><a href="../../texas-roadhouse/wa/">🤠 Texas Roadhouse <small>2</small></a><a href="../../ta-travel-center/wa/">⛽ TA Travel Center <small>2</small></a></div>
 <h2>Speedway in other states</h2><div class="chips"><a href="../">All states</a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>

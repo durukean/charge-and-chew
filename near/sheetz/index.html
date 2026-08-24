@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Sheetz (278 locations) | Charge & Chew</title>
-<meta name="description" content="278 EV DC fast chargers within a 10-minute walk of a Sheetz, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Sheetz (274 locations) | Charge & Chew</title>
+<meta name="description" content="274 EV DC fast chargers within a 10-minute walk of a Sheetz, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/sheetz/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Sheetz (278 locations)">
-<meta property="og:description" content="278 EV DC fast chargers within a 10-minute walk of a Sheetz, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Sheetz (274 locations)">
+<meta property="og:description" content="274 EV DC fast chargers within a 10-minute walk of a Sheetz, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/sheetz/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Sheetz</h1>
-<p class="lead">We found <b>278 DC fast chargers</b> in the US — across all networks — with a Sheetz within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>274 DC fast chargers</b> in the US — across all networks — with a Sheetz within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Sheetz">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="pa/">Pennsylvania <small>101</small></a><a href="va/">Virginia <small>54</small></a><a href="oh/">Ohio <small>42</small></a><a href="nc/">North Carolina <small>33</small></a><a href="wv/">West Virginia <small>24</small></a><a href="md/">Maryland <small>23</small></a><a href="mi/">Michigan <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Sheetz Moon Township #379</span><small>350 kW · 4 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="pa/">Pennsylvania <small>100</small></a><a href="va/">Virginia <small>54</small></a><a href="oh/">Ohio <small>41</small></a><a href="nc/">North Carolina <small>33</small></a><a href="wv/">West Virginia <small>24</small></a><a href="md/">Maryland <small>21</small></a><a href="mi/">Michigan <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Moon Township #379</span><small>350 kW · 4 stalls</small></div>
 <div class="a">9002 University Blvd, Moon Township, PA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 0 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 312 ft</span> · 🥖 Panera Bread <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.50326,-80.22303" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Massillon, OH Rechargery @ Sheetz - Erie Ave SW</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.50326,-80.22303" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Massillon, OH Rechargery @ Sheetz - Erie Ave SW</span><small>400 kW · 8 stalls</small></div>
 <div class="a">3544 Erie Ave SW, Massillon, OH</div><div class="host">IONNA</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 0 ft</span></b> · 🛒 Aldi <span>≥1 min · 322 ft</span> · 🌮 Taco Bell <span>≥2 min · 446 ft</span> · 🔧 Lowe&#x27;s <span>≥9 min · 0.5 mi</span> · 🍩 Dunkin&#x27; <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.75743,-81.51579" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Pittsburgh #619</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🔧 Lowe&#x27;s ≥9 min</span><span>🍩 Dunkin&#x27; ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75743,-81.51579" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Pittsburgh #619</span><small>350 kW · 8 stalls</small></div>
 <div class="a">2871 Freeport Rd, Pittsburgh, PA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 0 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 305 ft</span> · 🍗 KFC <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.53928,-79.83123" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Muncy, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 KFC ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.53928,-79.83123" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Muncy, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
 <div class="a">45 Muncy Creek Blvd., Muncy, PA</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 0 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 272 ft</span> · 💊 CVS <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.21253,-76.76295" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Herndon #726</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>💊 CVS ≥3 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.21253,-76.76295" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Herndon #726</span><small>200 kW · 4 stalls</small></div>
 <div class="a">13850 McLearen Rd, Herndon, VA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 26 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.92982,-77.42521" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz #304</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.92982,-77.42521" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz #304</span><small>200 kW · 4 stalls</small></div>
 <div class="a">25224 Poland Rd, Chantilly, VA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 46 ft</span></b> · 🍦 Dairy Queen <span>≥9 min · 0.5 mi</span> · ☕ Starbucks <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.91937,-77.49622" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍦 Dairy Queen ≥9 min</span><span>☕ Starbucks ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.91937,-77.49622" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz</span><small>50 kW · 1 stalls</small></div>
 <div class="a">600 Corporate Center Dr, Raleigh, NC</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 46 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 456 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.78973,-78.7393" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Store 248 (Girard, OH)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.78973,-78.7393" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Store 248 (Girard, OH)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2721 Salt Springs Road, Girard, OH</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 52 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 486 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · ⛽ Pilot <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.14364,-80.72128" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Pittsburgh #253</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>⛽ Pilot ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.14364,-80.72128" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Pittsburgh #253</span><small>350 kW · 4 stalls</small></div>
 <div class="a">251 Curry Hollow Road, Pittsburgh, PA</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 52 ft</span></b> · 🍩 Dunkin&#x27; <span>≥7 min · 0.3 mi</span> · 💊 Walgreens <span>≥8 min · 0.4 mi</span> · 💊 CVS <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.33624,-79.97085" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Obetz, OH Rechargery @ Sheetz - Alum Creek Dr</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>💊 Walgreens ≥8 min</span><span>💊 CVS ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.33624,-79.97085" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Obetz, OH Rechargery @ Sheetz - Alum Creek Dr</span><small>400 kW · 8 stalls</small></div>
 <div class="a">4375 Alum Creek Dr, Obetz, OH</div><div class="host">IONNA</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 56 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.87848,-82.93163" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍗 KFC ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.87848,-82.93163" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz</span><small>50 kW · 1 stalls</small></div>
 <div class="a">4010 Convenience Lane, Cary, NC</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 59 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.86046,-78.89462" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz #132 - Taneytown</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.86046,-78.89462" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz #132 - Taneytown</span><small>400 kW · 4 stalls</small></div>
 <div class="a">40 Antrim Blvd, Taneytown, MD</div><div class="host">Francis Energy</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 66 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 404 ft</span> · 🍕 Pizza Hut <span>≥3 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.648,-77.15645" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Store 504 (Rocky Mount, NC)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>💊 CVS ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.648,-77.15645" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Store 504 (Rocky Mount, NC)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">157 N Old Carriage Road, Rocky Mount, NC</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 72 ft</span></b> · ⭐ Hardee&#x27;s <span>≥2 min · 400 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.97208,-77.89565" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Hagerstown, MD - Venture Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.97208,-77.89565" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Hagerstown, MD - Venture Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">17803 Venture Drive, Hagerstown, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b> · 🍩 Dunkin&#x27; <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.6086,-77.75045" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Mebane, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.6086,-77.75045" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mebane, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">1237 Mebane Oaks Road, Mebane, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 217 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 404 ft</span> · ☕ Starbucks <span>≥2 min · 472 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.06987,-79.27" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Woodstock, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.06987,-79.27" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Woodstock, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">111 West Resevoir Road, Woodstock, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b> · 💊 CVS <span>≥5 min · 0.3 mi</span> · 🍗 KFC <span>≥7 min · 0.3 mi</span> · 🍕 Pizza Hut <span>≥8 min · 0.4 mi</span> · 🥩 Arby&#x27;s <span>≥8 min · 0.4 mi</span> · 🍔 Wendy&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.86674,-78.51918" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>North Huntingdon, PA - Ronda Court - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>💊 CVS ≥5 min</span><span>🍗 KFC ≥7 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.86674,-78.51918" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>North Huntingdon, PA - Ronda Court - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">101 Ronda Ct, North Huntingdon, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥5 min · 0.3 mi</span> · 💊 Walgreens <span>≥8 min · 0.4 mi</span> · 🎯 Target <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.31679,-79.68379" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Altoona, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>💊 Walgreens ≥8 min</span><span>🎯 Target ≥8 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.31679,-79.68379" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Altoona, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
 <div class="a">678 Frankstown Road, Altoona, PA</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.47646,-78.3907" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz Sewickley, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.47646,-78.3907" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz Sewickley, powered by Electrify America</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1910 Mt Nebo Rd, Sewickley, PA</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 75 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.55375,-80.11464" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Goldsboro, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.55375,-80.11464" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Goldsboro, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">1001 North Spence Avenue, Goldsboro, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 79 ft</span></b> · 🍗 Bojangles <span>≥1 min · 295 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🌶️ Chili&#x27;s <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.38645,-77.94838" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>South Boston, VA - Philpott Road - Tesla Supercharger</span><small>250 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍗 Bojangles ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🌶️ Chili&#x27;s ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.38645,-77.94838" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>South Boston, VA - Philpott Road - Tesla Supercharger</span><small>250 kW · 4 stalls</small></div>
 <div class="a">1007 Philpott Road, South Boston, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 85 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 348 ft</span> · ⭐ Hardee&#x27;s <span>≥2 min · 433 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🍕 Domino&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.68666,-78.90087" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Madison Heights, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.68666,-78.90087" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Madison Heights, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">4089 S Amherst Hwy, Madison Heights, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 85 ft</span></b> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span> · 🛒 Walmart <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.46601,-79.11777" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheffield, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🛒 Walmart ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.46601,-79.11777" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheffield, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">5295 Detroit Road, Sheffield, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 89 ft</span></b> · 🍕 Pizza Hut <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · ⛽ Speedway <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.42699,-82.07635" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Mifflintown, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42699,-82.07635" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mifflintown, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">24578 Rte 35 N, Mifflintown, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 89 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.58284,-77.36943" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Scranton, PA Rechargery @ Sheetz - Scranton Carbondale Hwy</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.58284,-77.36943" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Scranton, PA Rechargery @ Sheetz - Scranton Carbondale Hwy</span><small>400 kW · 10 stalls</small></div>
 <div class="a">610 Scranton Carbondale Highway, Scranton, PA</div><div class="host">IONNA</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 89 ft</span></b> · 👑 Burger King <span>≥2 min · 413 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 446 ft</span> · 🍳 Denny&#x27;s <span>≥5 min · 0.3 mi</span> · 🦬 Buffalo Wild Wings <span>≥6 min · 0.3 mi</span> · 🔨 Home Depot <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.46335,-75.65074" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Haymarket, VA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍳 Denny&#x27;s ≥5 min</span><span>🦬 Buffalo Wild Wings ≥6 min</span><span>🔨 Home Depot ≥7 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.46335,-75.65074" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Haymarket, VA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">15315 Washington Street, Haymarket, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 92 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 315 ft</span> · 💊 CVS <span>≥1 min · 361 ft</span> · 🥪 Subway <span>≥1 min · 364 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 456 ft</span> · 🍕 Little Caesars <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.81512,-77.6427" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Mt Airy, NC - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>💊 CVS ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81512,-77.6427" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mt Airy, NC - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">2905 Rockford Street, Mt Airy, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 92 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.45885,-80.63667" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz 491 - Zion Crossroads, VA</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.45885,-80.63667" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz 491 - Zion Crossroads, VA</span><small>350 kW · 4 stalls</small></div>
 <div class="a">135 Market Street, Zion Crossroads, VA</div><div class="host">Electrify America</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 92 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 190 ft</span> · 🥪 Subway <span>≥2 min · 472 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 482 ft</span> · ☕ Starbucks <span>≥2 min · 489 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.97972,-78.21062" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Ashland, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97972,-78.21062" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ashland, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">12341 Washington Highway Washington Highway, Ashland, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 92 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.74577,-77.47241" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Cumberland, MD - Tesla Supercharger</span><small>250 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.74577,-77.47241" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cumberland, MD - Tesla Supercharger</span><small>250 kW · 4 stalls</small></div>
 <div class="a">210 Greene St, Cumberland, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 92 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.64972,-78.77016" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Weston, WV - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.64972,-78.77016" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Weston, WV - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">39 Berlin Rd, Weston, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🛒 Walmart <span>≥1 min · 236 ft</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · 🍕 Little Caesars <span>≥3 min · 0.2 mi</span> · 🍦 Dairy Queen <span>≥4 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.01884,-80.41718" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Altoona, PA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🍕 Little Caesars ≥3 min</span><span>🍦 Dairy Queen ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.01884,-80.41718" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Altoona, PA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">1915 Pleasant Valley Boulevard, Altoona, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🔧 Lowe&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.49921,-78.3909" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Sheetz 213 Bloomsburg PA</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49921,-78.3909" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sheetz 213 Bloomsburg PA</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2511 New Berwick Hwy, Bloomsburg, PA</div><div class="host">Electrify America</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 108 ft</span> · <b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 308 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.01228,-76.4116" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Franklin Park, PA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.01228,-76.4116" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Franklin Park, PA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">2615 Nicholson Road &amp; Wexford Bayne Road, Franklin Park, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · ☕ Starbucks <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.61265,-80.10014" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Lynchburg, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>☕ Starbucks ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.61265,-80.10014" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Lynchburg, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">14480 Wards Road, Lynchburg, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🦆 Wawa <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.3248,-79.19054" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Williamsport, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🦆 Wawa ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.3248,-79.19054" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Williamsport, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">105 Maynard Street, Williamsport, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 312 ft</span> · 👑 Burger King <span>≥2 min · 397 ft</span> · 🦆 Wawa <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.23241,-77.02022" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Gettysburg, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🦆 Wawa ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.23241,-77.02022" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gettysburg, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">30 Camp Letterman Drive, Gettysburg, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🥪 Subway <span>≥1 min · 325 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 💊 CVS <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.844,-77.19856" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>State College, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>💊 CVS ≥2 min</span><span>🥖 Panera Bread ≥4 min</span><span>👑 Burger King ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.844,-77.19856" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>State College, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">223 Colonnade Boulevard, State College, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🪵 Cracker Barrel <span>≥2 min · 466 ft</span> · 🍝 Olive Garden <span>≥3 min · 0.2 mi</span> · 🤠 Texas Roadhouse <span>≥4 min · 0.2 mi</span> · 🎯 Target <span>≥6 min · 0.3 mi</span> · ☕ Starbucks <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.81559,-77.90171" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Archdale, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍝 Olive Garden ≥3 min</span><span>🤠 Texas Roadhouse ≥4 min</span><span>🎯 Target ≥6 min</span><span>☕ Starbucks ≥7 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.81559,-77.90171" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Archdale, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">10206 S Main St, Archdale, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🍗 Zaxby&#x27;s <span>≥1 min · 262 ft</span> · 🛒 Walmart <span>≥2 min · 486 ft</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🍗 Bojangles <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.89945,-79.94648" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Triadelphia, WV - Gantzer Ridge Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍗 Bojangles ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.89945,-79.94648" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Triadelphia, WV - Gantzer Ridge Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">25 Gantzer Ridge Road, Triadelphia, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>⛽ Sheetz <span>≥1 min · 108 ft</span></b> · 🤠 Texas Roadhouse <span>≥8 min · 0.4 mi</span> · 🐔 Chick-fil-A <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.06025,-80.58895" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Sheetz&amp;state=WV">Show on map</a></div></div>
+<div class="c"><span>⛽ <b>Sheetz</b> ≥1 min</span><span>🤠 Texas Roadhouse ≥8 min</span><span>🐔 Chick-fil-A ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Sheetz&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.06025,-80.58895" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

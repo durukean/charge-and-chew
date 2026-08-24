@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Dairy Queen (294 locations) | Charge & Chew</title>
-<meta name="description" content="294 EV DC fast chargers within a 10-minute walk of a Dairy Queen, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Dairy Queen (286 locations) | Charge & Chew</title>
+<meta name="description" content="286 EV DC fast chargers within a 10-minute walk of a Dairy Queen, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/dairy-queen/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Dairy Queen (294 locations)">
-<meta property="og:description" content="294 EV DC fast chargers within a 10-minute walk of a Dairy Queen, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Dairy Queen (286 locations)">
+<meta property="og:description" content="286 EV DC fast chargers within a 10-minute walk of a Dairy Queen, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/dairy-queen/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍦 EV fast chargers near Dairy Queen</h1>
-<p class="lead">We found <b>294 DC fast chargers</b> in the US — across all networks — with a Dairy Queen within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>286 DC fast chargers</b> in the US — across all networks — with a Dairy Queen within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Dairy Queen">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>30</small></a><a href="il/">Illinois <small>26</small></a><a href="mi/">Michigan <small>24</small></a><a href="fl/">Florida <small>23</small></a><a href="oh/">Ohio <small>17</small></a><a href="mn/">Minnesota <small>17</small></a><a href="co/">Colorado <small>17</small></a><a href="az/">Arizona <small>16</small></a><a href="va/">Virginia <small>14</small></a><a href="nj/">New Jersey <small>13</small></a><a href="tx/">Texas <small>10</small></a><a href="nc/">North Carolina <small>8</small></a><a href="wa/">Washington <small>7</small></a><a href="sc/">South Carolina <small>7</small></a><a href="ny/">New York <small>6</small></a><a href="pa/">Pennsylvania <small>5</small></a><a href="me/">Maine <small>4</small></a><a href="ks/">Kansas <small>4</small></a><a href="md/">Maryland <small>4</small></a><a href="ga/">Georgia <small>4</small></a><a href="ma/">Massachusetts <small>4</small></a><a href="nh/">New Hampshire <small>3</small></a><a href="sd/">South Dakota <small>3</small></a><a href="or/">Oregon <small>3</small></a><a href="hi/">Hawaii <small>3</small></a><a href="tn/">Tennessee <small>2</small></a><a href="nv/">Nevada <small>2</small></a><a href="ct/">Connecticut <small>2</small></a><a href="ia/">Iowa <small>2</small></a><a href="in/">Indiana <small>2</small></a><a href="nm/">New Mexico <small>2</small></a><a href="wi/">Wisconsin <small>2</small></a><a href="ok/">Oklahoma <small>2</small></a><a href="mo/">Missouri <small>1</small></a><a href="de/">Delaware <small>1</small></a><a href="wv/">West Virginia <small>1</small></a><a href="nd/">North Dakota <small>1</small></a><a href="ky/">Kentucky <small>1</small></a><a href="al/">Alabama <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Springstowne Center</span><small>350 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>29</small></a><a href="il/">Illinois <small>26</small></a><a href="mi/">Michigan <small>24</small></a><a href="fl/">Florida <small>23</small></a><a href="oh/">Ohio <small>17</small></a><a href="mn/">Minnesota <small>17</small></a><a href="az/">Arizona <small>15</small></a><a href="va/">Virginia <small>14</small></a><a href="co/">Colorado <small>14</small></a><a href="nj/">New Jersey <small>13</small></a><a href="nc/">North Carolina <small>8</small></a><a href="tx/">Texas <small>8</small></a><a href="wa/">Washington <small>7</small></a><a href="sc/">South Carolina <small>7</small></a><a href="ny/">New York <small>5</small></a><a href="pa/">Pennsylvania <small>5</small></a><a href="me/">Maine <small>4</small></a><a href="ks/">Kansas <small>4</small></a><a href="md/">Maryland <small>4</small></a><a href="ga/">Georgia <small>4</small></a><a href="ma/">Massachusetts <small>4</small></a><a href="nh/">New Hampshire <small>3</small></a><a href="sd/">South Dakota <small>3</small></a><a href="or/">Oregon <small>3</small></a><a href="hi/">Hawaii <small>3</small></a><a href="tn/">Tennessee <small>2</small></a><a href="nv/">Nevada <small>2</small></a><a href="ct/">Connecticut <small>2</small></a><a href="ia/">Iowa <small>2</small></a><a href="in/">Indiana <small>2</small></a><a href="nm/">New Mexico <small>2</small></a><a href="wi/">Wisconsin <small>2</small></a><a href="ok/">Oklahoma <small>2</small></a><a href="mo/">Missouri <small>1</small></a><a href="de/">Delaware <small>1</small></a><a href="wv/">West Virginia <small>1</small></a><a href="nd/">North Dakota <small>1</small></a><a href="ky/">Kentucky <small>1</small></a><a href="al/">Alabama <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Springstowne Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">2120 Springs Rd, Vallejo, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 26 ft</span></b> · 🍟 McDonald&#x27;s <span>≥8 min · 0.4 mi</span> · 🍗 Popeyes <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.10627,-122.21684" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Needles, CA - Tesla Supercharger</span><small>150 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍗 Popeyes ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.10627,-122.21684" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Needles, CA - Tesla Supercharger</span><small>150 kW · 4 stalls</small></div>
 <div class="a">2451 Needles HWY, Needles, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 30 ft</span></b> · 🥪 Subway <span>≥1 min · 95 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.85086,-114.62433" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>7Charge - Stuart</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.85086,-114.62433" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7Charge - Stuart</span><small>180 kW · 4 stalls</small></div>
 <div class="a">8100 SW Jack James Dr, Stuart, FL</div><div class="host">7Charge</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 135 ft</span></b> · 🍩 Dunkin&#x27; <span>≥8 min · 0.4 mi</span> · 🍔 Wendy&#x27;s <span>≥8 min · 0.4 mi</span> · 🪵 Cracker Barrel <span>≥9 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.10562,-80.26308" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Wells, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>🪵 Cracker Barrel ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.10562,-80.26308" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Wells, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">1517 Post Rd, Wells, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 151 ft</span></b> · 🍩 Dunkin&#x27; <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.32075,-70.5806" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks</span><small>400 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.32075,-70.5806" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks</span><small>400 kW · 1 stalls</small></div>
 <div class="a">925 Kings Hwy, Port Charlotte, FL</div><div class="host">FPL EVolution</div>
-<div class="c">🍕 Pizza Hut <span>≥1 min · 95 ft</span> · ☕ Starbucks <span>≥1 min · 135 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 157 ft</span></b> · 👑 Burger King <span>≥2 min · 413 ft</span> · 💊 CVS <span>≥2 min · 525 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.01625,-82.05254" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>KS Turnpike – Matfield Green</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.01625,-82.05254" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>KS Turnpike – Matfield Green</span><small>350 kW · 4 stalls</small></div>
 <div class="a">Milepost 97 Kansas Turnpike, Matfield Green, KS</div><div class="host">Francis Energy</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 184 ft</span></b> · 🥪 Subway <span>≥1 min · 180 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.09468,-96.58017" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a></div></div><div class="card"><div class="n"><span>Saddle Brook, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.09468,-96.58017" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Saddle Brook, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">419 Market St, Saddle Brook, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 108 ft</span> · 👑 Burger King <span>≥1 min · 203 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 220 ft</span></b> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🍗 KFC <span>≥4 min · 0.2 mi</span> · 🍕 Pizza Hut <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.89723,-74.09751" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Union Gap, WA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍗 KFC ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.89723,-74.09751" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Union Gap, WA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">2425 Longfibre Rd, Union Gap, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 220 ft</span></b> · 📦 Costco <span>≥1 min · 367 ft</span> · ☕ Starbucks <span>≥2 min · 400 ft</span> · 🔧 Lowe&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.56209,-120.49605" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Vintage Faire Mall</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>📦 Costco ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🔧 Lowe&#x27;s ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.56209,-120.49605" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Vintage Faire Mall</span><small>50 kW · 2 stalls</small></div>
 <div class="a">3401 Dale Rd, Modesto, CA</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 157 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 246 ft</span></b> · 🦬 Buffalo Wild Wings <span>≥2 min · 0.1 mi</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.68798,-121.05525" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Evergy @Kta Svc -404B</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.68798,-121.05525" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc -404B</span><small>62 kW · 1 stalls</small></div>
 <div class="a">7225 Kansas Tpke, El Dorado, KS</div><div class="host">ChargePoint</div>
-<div class="c">🥪 Subway <span>≥1 min · 213 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 253 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.76609,-96.98192" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a></div></div><div class="card"><div class="n"><span>Townhouse Cafe - Goldendale</span><small>100 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76609,-96.98192" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Townhouse Cafe - Goldendale</span><small>100 kW · 1 stalls</small></div>
 <div class="a">1040 E Broadway Street, Goldendale, WA</div><div class="host">FLO</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 266 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.82562,-120.80551" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Mobil - Coral Charge</span><small>180 kW · 2 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.82562,-120.80551" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Mobil - Coral Charge</span><small>180 kW · 2 stalls</small></div>
 <div class="a">2511 Needles Hwy, Needles, CA</div><div class="host">Non-networked</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 279 ft</span></b> · 🥪 Subway <span>≥1 min · 348 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.85125,-114.62506" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.85125,-114.62506" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">820 Edwardsville Road, Troy, IL</div><div class="host">EVgo</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 174 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 285 ft</span></b> · ⛽ Pilot <span>≥1 min · 312 ft</span> · 🤡 Jack in the Box <span>≥2 min · 427 ft</span> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.73165,-89.90802" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Jeff Wyler Nissan - Fairfield</span><small>44 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.73165,-89.90802" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jeff Wyler Nissan - Fairfield</span><small>44 kW · 1 stalls</small></div>
 <div class="a">5829 Dixie Hwy, Fairfield, OH</div><div class="host">Non-networked</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 289 ft</span></b> · 🥖 Panera Bread <span>≥2 min · 459 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.32922,-84.51715" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Orlando, FL - International Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🥖 Panera Bread ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.32922,-84.51715" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Orlando, FL - International Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">6315 International Dr, Orlando, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 253 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 289 ft</span></b> · 🍎 Applebee&#x27;s <span>≥2 min · 476 ft</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 🥞 IHOP <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.46148,-81.46731" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 630 (Florence, SC)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🥞 IHOP ≥6 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.46148,-81.46731" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 630 (Florence, SC)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">230 N Beltline Drive, Florence, SC</div><div class="host">Electrify America</div>
-<div class="c">🏪 Sam&#x27;s Club <span>≥1 min · 262 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 292 ft</span></b> · 🍗 Wingstop <span>≥1 min · 328 ft</span> · 🛒 Walmart <span>≥2 min · 404 ft</span> · 🛒 Aldi <span>≥4 min · 0.2 mi</span> · 🥩 Arby&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.19281,-79.82282" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=SC">Show on map</a></div></div><div class="card"><div class="n"><span>Irvine Company Tmp Dcfc E</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🏪 Sam&#x27;s Club ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.19281,-79.82282" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Irvine Company Tmp Dcfc E</span><small>62 kW · 1 stalls</small></div>
 <div class="a">2993 El Camino Real, Tustin, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 292 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 351 ft</span> · 🍔 In-N-Out <span>≥1 min · 374 ft</span> · ☕ Starbucks <span>≥2 min · 466 ft</span> · 🍔 Shake Shack <span>≥3 min · 0.1 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.72369,-117.7931" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Somers Point, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 In-N-Out ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Shake Shack ≥3 min</span><span>🔨 Home Depot ≥4 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.72369,-117.7931" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Somers Point, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">502 Shore Rd, Somers Point, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c">🦆 Wawa <span>≥1 min · 121 ft</span> · <b>🍦 Dairy Queen <span>≥1 min · 295 ft</span></b> · 🎯 Target <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.31908,-74.59152" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Ashburn Village Shopping Center</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🎯 Target ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.31908,-74.59152" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ashburn Village Shopping Center</span><small>50 kW · 2 stalls</small></div>
 <div class="a">44110 Ashburn Shopping Plz, Ashburn, VA</div><div class="host">EVgo</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 302 ft</span></b> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.04495,-77.47506" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Simon Opry Mills (Nashville, TN)</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.04495,-77.47506" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Simon Opry Mills (Nashville, TN)</span><small>350 kW · 8 stalls</small></div>
 <div class="a">433 Opry Mills Dr, Nashville, TN</div><div class="host">Electrify America</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥1 min · 358 ft</span></b> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 🍝 Olive Garden <span>≥4 min · 0.2 mi</span> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥5 min · 0.2 mi</span> · 👑 Burger King <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.19967,-86.69252" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Riverside Auto Sales of Marinette</span><small>180 kW · 2 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍗 Popeyes ≥4 min</span><span>🍝 Olive Garden ≥4 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.19967,-86.69252" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Riverside Auto Sales of Marinette</span><small>180 kW · 2 stalls</small></div>
 <div class="a">3330 U.S. 41, Marquette, MI</div><div class="host">Blink</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥2 min · 404 ft</span></b> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🤠 Texas Roadhouse <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🛒 Walmart <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=46.5504,-87.46161" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Needles, CA - W Broadway St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.5504,-87.46161" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Needles, CA - W Broadway St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">2410 West Broadway Street, Needles, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Subway <span>≥1 min · 335 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 420 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.85092,-114.62289" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Pheasant Lane Mall</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.85092,-114.62289" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Pheasant Lane Mall</span><small>50 kW · 2 stalls</small></div>
 <div class="a">310 Daniel Webster Hwy, Nashua, NH</div><div class="host">EVgo</div>
-<div class="c">🦬 Buffalo Wild Wings <span>≥1 min · 135 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 436 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 449 ft</span> · 🐦 Red Robin <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🎯 Target <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.69979,-71.43675" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=NH">Show on map</a></div></div><div class="card"><div class="n"><span>Joplin, MO - Highway 43 - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🐦 Red Robin ≥4 min</span><span>💊 CVS ≥4 min</span><span>🎯 Target ≥4 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=NH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.69979,-71.43675" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Joplin, MO - Highway 43 - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">4240 Hwy 43, Joplin, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 364 ft</span> · 🍕 Pizza Hut <span>≥2 min · 410 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 446 ft</span></b> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.00809,-94.55126" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=MO">Show on map</a></div></div><div class="card"><div class="n"><span>Tucson Premium Outlets (Tucson, AZ)</span><small>350 kW · 10 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.00809,-94.55126" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Tucson Premium Outlets (Tucson, AZ)</span><small>350 kW · 10 stalls</small></div>
 <div class="a">6401 W. Marana Center Blvd, Tucson, AZ</div><div class="host">Electrify America</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥2 min · 449 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.37409,-111.10011" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>San Ramon, CA - San Ramon Valley Boulevard - Tesla Superchar</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.37409,-111.10011" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>San Ramon, CA - San Ramon Valley Boulevard - Tesla Superchar</span><small>250 kW · 16 stalls</small></div>
 <div class="a">21001  San Ramon Valley Boulevard, San Ramon, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 390 ft</span> · 🥪 Subway <span>≥2 min · 433 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 453 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.72313,-121.94433" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Evergy @Kta Svc -404A</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.72313,-121.94433" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc -404A</span><small>62 kW · 1 stalls</small></div>
 <div class="a">7225 Kansas Turnpike @ KS Turnpike - Towanda, El Dorado OCL, KS</div><div class="host">ChargePoint</div>
-<div class="c">🥪 Subway <span>≥2 min · 417 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 456 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.76579,-96.9825" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a></div></div><div class="card"><div class="n"><span>P66 Casey (Casey, IL)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76579,-96.9825" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>P66 Casey (Casey, IL)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">939 N RTE 49, Casey, IL</div><div class="host">Electrify America</div>
-<div class="c">🥪 Subway <span>≥1 min · 154 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 367 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 469 ft</span></b> · 🍕 Pizza Hut <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.31627,-87.98512" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Raju Countryside Market (Lost Hills, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.31627,-87.98512" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Raju Countryside Market (Lost Hills, CA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">21959 CA-46, Lost Hills, CA</div><div class="host">Electrify America</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 69 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 118 ft</span> · ⛽ Pilot <span>≥1 min · 112 ft</span> · 🍕 Pizza Hut <span>≥1 min · 115 ft</span> · 🥪 Subway <span>≥1 min · 151 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 479 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.61541,-119.65834" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Rapid City, SD - Tesla Supercharger</span><small>120 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.61541,-119.65834" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Rapid City, SD - Tesla Supercharger</span><small>120 kW · 4 stalls</small></div>
 <div class="a">2200 N. Maple Ave., Rapid City, SD</div><div class="host">Tesla Supercharger</div>
-<div class="c">🤠 Texas Roadhouse <span>≥1 min · 367 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 482 ft</span></b> · ☕ Starbucks <span>≥2 min · 492 ft</span> · 🍝 Olive Garden <span>≥2 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥9 min · 0.4 mi</span> · 💻 Best Buy <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.10561,-103.21252" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=SD">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>🍎 Applebee&#x27;s ≥9 min</span><span>💻 Best Buy ≥9 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=SD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.10561,-103.21252" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">23866 Rogers Clark Blvd, Ruther Glen, VA</div><div class="host">EVgo</div>
-<div class="c">⛽ Flying J <span>≥1 min · 167 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 174 ft</span> · 🥪 Subway <span>≥2 min · 482 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 482 ft</span></b> · ⛽ Pilot <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.93837,-77.46735" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Friendly Ford</span><small>120 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>⛽ Flying J ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Pilot ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.93837,-77.46735" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Friendly Ford</span><small>120 kW · 4 stalls</small></div>
 <div class="a">333 E Irving Park Rd, Roselle, IL</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥2 min · 489 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥5 min · 0.2 mi</span> · ☕ Starbucks <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.98334,-88.0718" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Target T0687 (Gainesville, FL)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 Walgreens ≥5 min</span><span>☕ Starbucks ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.98334,-88.0718" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T0687 (Gainesville, FL)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3970 SW Archer Road, Gainesville, FL</div><div class="host">Electrify America</div>
-<div class="c">💊 CVS <span>≥1 min · 144 ft</span> · ☕ Starbucks <span>≥1 min · 236 ft</span> · 🎯 Target <span>≥1 min · 338 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 472 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 492 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.62058,-82.38437" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Cadillac Fairfi Cpe250R- Cust</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+15</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.62058,-82.38437" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Cadillac Fairfi Cpe250R- Cust</span><small>125 kW · 1 stalls</small></div>
 <div class="a">5815 Dixie Hwy, Fairfield, OH</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥2 min · 499 ft</span></b> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.3294,-84.51788" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Quirk Ford of Augusta</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🥖 Panera Bread ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.3294,-84.51788" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Quirk Ford of Augusta</span><small>240 kW · 4 stalls</small></div>
 <div class="a">7 Water St, Hallowell, ME</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🍦 Dairy Queen <span>≥2 min · 509 ft</span></b> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.2952,-69.78581" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a></div></div><div class="card"><div class="n"><span>Jc Hyundai Gv</span><small>62 kW · 1 stalls</small></div>
-<div class="a">1030 W Duval Rd, Green Valley, AZ</div><div class="host">ChargePoint</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 328 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 512 ft</span></b> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🛒 Safeway <span>≥7 min · 0.4 mi</span> · 🌮 Taco Bell <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.90027,-110.98658" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Saco, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🥪 Subway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.2952,-69.78581" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Saco, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">532 Main Street, Saco, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍔 Wendy&#x27;s <span>≥1 min · 187 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 266 ft</span> · 🍕 Little Caesars <span>≥1 min · 299 ft</span> · 🥪 Subway <span>≥2 min · 482 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 512 ft</span></b> · 🥞 IHOP <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.51091,-70.43444" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a></div></div><div class="card"><div class="n"><span>Waffle House Madison</span><small>184 kW · 4 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.51091,-70.43444" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Waffle House Madison</span><small>184 kW · 4 stalls</small></div>
 <div class="a">145 SE Bandit St Madison, Madison, FL</div><div class="host">Blink</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 36 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 299 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 502 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 518 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.39885,-83.3578" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Ontario, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🧇 Waffle House ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.39885,-83.3578" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Ontario, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">203 East Street West, Ontario, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍗 KFC <span>≥1 min · 187 ft</span> · 🌯 Chipotle <span>≥1 min · 223 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 256 ft</span> · 🍳 Denny&#x27;s <span>≥1 min · 269 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 0.1 mi</span></b> · 🍕 Pizza Hut <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.02561,-116.9421" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Las Vegas, NV - East Windmill Lane - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🍗 KFC ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.02561,-116.9421" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Las Vegas, NV - East Windmill Lane - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">500 E Windmill Ln, Las Vegas, NV</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥2 min · 410 ft</span> · 🍕 Pizza Hut <span>≥2 min · 436 ft</span> · 🌮 Taco Bell <span>≥2 min · 505 ft</span> · <b>🍦 Dairy Queen <span>≥2 min · 0.1 mi</span></b> · ☕ Dutch Bros <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.04255,-115.15264" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Dairy Queen&amp;state=NV">Show on map</a></div></div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Dutch Bros ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.04255,-115.15264" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Santa Maria, CA - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<div class="a">371 Town Center East, Santa Maria, CA</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>💊 CVS ≥5 min</span><span>🍕 Little Caesars ≥8 min</span><span>🍕 Domino&#x27;s ≥10 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.95288,-120.43471" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

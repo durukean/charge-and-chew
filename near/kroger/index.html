@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Kroger (266 locations) | Charge & Chew</title>
-<meta name="description" content="266 EV DC fast chargers within a 10-minute walk of a Kroger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Kroger (257 locations) | Charge & Chew</title>
+<meta name="description" content="257 EV DC fast chargers within a 10-minute walk of a Kroger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/kroger/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Kroger (266 locations)">
-<meta property="og:description" content="266 EV DC fast chargers within a 10-minute walk of a Kroger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Kroger (257 locations)">
+<meta property="og:description" content="257 EV DC fast chargers within a 10-minute walk of a Kroger, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/kroger/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🛒 EV fast chargers near Kroger</h1>
-<p class="lead">We found <b>266 DC fast chargers</b> in the US — across all networks — with a Kroger within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>257 DC fast chargers</b> in the US — across all networks — with a Kroger within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Kroger">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="oh/">Ohio <small>47</small></a><a href="ga/">Georgia <small>38</small></a><a href="mi/">Michigan <small>30</small></a><a href="tx/">Texas <small>28</small></a><a href="va/">Virginia <small>21</small></a><a href="in/">Indiana <small>19</small></a><a href="tn/">Tennessee <small>17</small></a><a href="ky/">Kentucky <small>16</small></a><a href="il/">Illinois <small>13</small></a><a href="co/">Colorado <small>8</small></a><a href="ms/">Mississippi <small>6</small></a><a href="wv/">West Virginia <small>6</small></a><a href="sc/">South Carolina <small>6</small></a><a href="ar/">Arkansas <small>5</small></a><a href="al/">Alabama <small>3</small></a><a href="la/">Louisiana <small>2</small></a><a href="or/">Oregon <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Georgia Power Johns Crk DC</span><small>62 kW · 1 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="oh/">Ohio <small>45</small></a><a href="ga/">Georgia <small>36</small></a><a href="tx/">Texas <small>28</small></a><a href="mi/">Michigan <small>28</small></a><a href="va/">Virginia <small>21</small></a><a href="in/">Indiana <small>18</small></a><a href="tn/">Tennessee <small>17</small></a><a href="ky/">Kentucky <small>16</small></a><a href="il/">Illinois <small>13</small></a><a href="co/">Colorado <small>7</small></a><a href="wv/">West Virginia <small>6</small></a><a href="sc/">South Carolina <small>6</small></a><a href="ms/">Mississippi <small>5</small></a><a href="ar/">Arkansas <small>5</small></a><a href="al/">Alabama <small>3</small></a><a href="la/">Louisiana <small>2</small></a><a href="or/">Oregon <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Johns Crk DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">8465 Holcomb Bridge Road, Johns Creek, GA</div><div class="host">ChargePoint</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 69 ft</span> · <b>🛒 Kroger <span>≥1 min · 92 ft</span></b> · 💊 CVS <span>≥2 min · 509 ft</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.98652,-84.27017" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Canton</span><small>160 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>💊 CVS ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.98652,-84.27017" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Canton</span><small>160 kW · 1 stalls</small></div>
 <div class="a">4045 Marietta Hwy, Canton, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 118 ft</span></b> · 🛒 Publix <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.193,-84.50763" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger 672 (Atlanta, GA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🛒 Publix ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.193,-84.50763" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger 672 (Atlanta, GA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">800 Glenwood Ave SE, Atlanta, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 187 ft</span></b> · 🧇 Waffle House <span>≥2 min · 0.1 mi</span> · 🛒 Publix <span>≥7 min · 0.3 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span> · 💊 CVS <span>≥8 min · 0.4 mi</span> · 🍕 Domino&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.74184,-84.36063" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger 636 (Duluth, GA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🛒 Publix ≥7 min</span><span>🥪 Subway ≥8 min</span><span>💊 CVS ≥8 min</span><span>🍕 Domino&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.74184,-84.36063" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger 636 (Duluth, GA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3093 Steve Reynolds Blvd, Duluth, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 194 ft</span></b> · ☕ Starbucks <span>≥1 min · 364 ft</span> · 🥩 Arby&#x27;s <span>≥5 min · 0.2 mi</span> · 🥞 IHOP <span>≥9 min · 0.4 mi</span> · ⛽ QuikTrip <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.96082,-84.14242" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Ford of Franklin</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🥞 IHOP ≥9 min</span><span>⛽ QuikTrip ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.96082,-84.14242" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ford of Franklin</span><small>240 kW · 4 stalls</small></div>
 <div class="a">1129 Murfreesboro Rd, Franklin, TN</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 217 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 436 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 413 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.91621,-86.83295" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger 699 (Smyrna, GA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥪 Subway ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.91621,-86.83295" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger 699 (Smyrna, GA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3240 S Cobb Dr SE, Smyrna, GA</div><div class="host">Electrify America</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 141 ft</span> · <b>🛒 Kroger <span>≥1 min · 226 ft</span></b> · 🍗 Wingstop <span>≥1 min · 282 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 282 ft</span> · 🐔 Chick-fil-A <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.8757,-84.5326" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8757,-84.5326" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
 <div class="a">4752 Atlanta Hwy, Loganville, GA</div><div class="host">ChargePoint</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 210 ft</span> · <b>🛒 Kroger <span>≥1 min · 266 ft</span></b> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥2 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.8334,-83.88376" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Nashville, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🍕 Pizza Hut ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8334,-83.88376" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Nashville, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
 <div class="a">61 East Thompson Lane, Nashville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 276 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.11052,-86.72383" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Glenwood DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11052,-86.72383" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Glenwood DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">800 Glenwood Ave SE, Atlanta, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 282 ft</span></b> · 🧇 Waffle House <span>≥3 min · 0.2 mi</span> · 🛒 Publix <span>≥6 min · 0.3 mi</span> · 🥪 Subway <span>≥9 min · 0.5 mi</span> · 💊 CVS <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.74186,-84.3595" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Loganville</span><small>102 kW · 1 stalls</small></div>
-<div class="a">4752 Atlanta Hwy, Loganville, GA</div><div class="host">ChargePoint</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 184 ft</span> · <b>🛒 Kroger <span>≥1 min · 282 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.83347,-83.88383" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Houston, TX - Telephone Road - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🧇 Waffle House ≥3 min</span><span>🛒 Publix ≥6 min</span><span>🥪 Subway ≥9 min</span><span>💊 CVS ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.74186,-84.3595" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Houston, TX - Telephone Road - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
 <div class="a">6300 Telephone Rd, Houston, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 282 ft</span></b> · 🍕 Little Caesars <span>≥2 min · 463 ft</span> · 🍔 Whataburger <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.67556,-95.29067" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Fishbones St Clair Shores</span><small>180 kW · 2 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🚗 Sonic ≥4 min</span><span>🍔 Whataburger ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.67556,-95.29067" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fishbones St Clair Shores</span><small>180 kW · 2 stalls</small></div>
 <div class="a">23722 Jefferson Ave, St Clair Shores, MI</div><div class="host">Red E</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 282 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.46487,-82.88512" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Don Franklin Bardstown Chevrolet Buick</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.46487,-82.88512" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Don Franklin Bardstown Chevrolet Buick</span><small>50 kW · 1 stalls</small></div>
 <div class="a">120 W John Rowan Blvd, Bardstown, KY</div><div class="host">EV Connect</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 289 ft</span></b> · 🍕 Pizza Hut <span>≥2 min · 509 ft</span> · 👑 Burger King <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 💊 Walgreens <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.8276,-85.4662" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>The Shops at Timberland Crossing</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>💊 Walgreens ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.8276,-85.4662" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>The Shops at Timberland Crossing</span><small>350 kW · 6 stalls</small></div>
 <div class="a">12600 N Beach St, Fort Worth, TX</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 125 ft</span> · 🍕 Pizza Hut <span>≥1 min · 256 ft</span> · <b>🛒 Kroger <span>≥1 min · 295 ft</span></b> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥4 min · 0.2 mi</span> · 💊 Walgreens <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.95601,-97.27905" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Community Plaza</span><small>160 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍕 Little Caesars ≥4 min</span><span>💊 Walgreens ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.95601,-97.27905" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Community Plaza</span><small>160 kW · 4 stalls</small></div>
 <div class="a">210 S Main St, East Peoria, IL</div><div class="host">Red E</div>
-<div class="c">🍔 Wendy&#x27;s <span>≥1 min · 289 ft</span> · <b>🛒 Kroger <span>≥1 min · 302 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 345 ft</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.1 mi</span> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · 📦 Costco <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.66525,-89.58144" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Economy Inn</span><small>90 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>📦 Costco ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.66525,-89.58144" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Economy Inn</span><small>90 kW · 4 stalls</small></div>
 <div class="a">328 S 4th St, Chillicothe, IL</div><div class="host">Universal</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 312 ft</span></b> · 💊 CVS <span>≥2 min · 420 ft</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · ⭐ Hardee&#x27;s <span>≥7 min · 0.3 mi</span> · 🥪 Subway <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.90323,-89.49363" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Atlanta, GA - Caroline Street Northeast - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⭐ Hardee&#x27;s ≥7 min</span><span>🥪 Subway ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.90323,-89.49363" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Atlanta, GA - Caroline Street Northeast - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">1275 Caroline St NE, Atlanta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🎯 Target <span>≥1 min · 328 ft</span> · <b>🛒 Kroger <span>≥1 min · 312 ft</span></b> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🔧 Lowe&#x27;s <span>≥5 min · 0.2 mi</span> · 💻 Best Buy <span>≥5 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.75625,-84.34699" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Horn Lake, MS - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>🥪 Subway ≥4 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>💻 Best Buy ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.75625,-84.34699" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Horn Lake, MS - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">7255 Interstate Blvd, Horn Lake, MS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 322 ft</span></b> · 🎯 Target <span>≥2 min · 440 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🔨 Home Depot <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span> · 🤠 Texas Roadhouse <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.96494,-90.00495" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=MS">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Lavista DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.96494,-90.00495" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Lavista DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">3959 LaVista Rd, Tucker, GA</div><div class="host">ChargePoint</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 157 ft</span> · <b>🛒 Kroger <span>≥1 min · 325 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 417 ft</span> · 🍗 Popeyes <span>≥2 min · 453 ft</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.84398,-84.25663" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger 298 (Atlanta, GA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.84398,-84.25663" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger 298 (Atlanta, GA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1700 Monroe Dr NE, Atlanta, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 331 ft</span></b> · 🛒 Publix <span>≥3 min · 0.2 mi</span> · 💊 CVS <span>≥6 min · 0.3 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.80123,-84.37239" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger Brewers Yard</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🛒 Publix ≥3 min</span><span>💊 CVS ≥6 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.80123,-84.37239" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger Brewers Yard</span><small>350 kW · 4 stalls</small></div>
 <div class="a">150 W Sycamore St, Columbus, OH</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 285 ft</span> · <b>🛒 Kroger <span>≥1 min · 338 ft</span></b> · 🌯 Chipotle <span>≥5 min · 0.3 mi</span> · 🍔 Wendy&#x27;s <span>≥6 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥6 min · 0.3 mi</span> · 🥪 Subway <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.9489,-83.00089" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Macon, GA - Tom Hill Senior Boulevard - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>🥪 Subway ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.9489,-83.00089" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Macon, GA - Tom Hill Senior Boulevard - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">121 Tom Hill Senior Boulevard, Macon, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥖 Panera Bread <span>≥1 min · 95 ft</span> · <b>🛒 Kroger <span>≥1 min · 361 ft</span></b> · 🦬 Buffalo Wild Wings <span>≥2 min · 394 ft</span> · 🍦 Culver&#x27;s <span>≥2 min · 0.1 mi</span> · 🥞 IHOP <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.89718,-83.6892" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Marmet, WV - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.89718,-83.6892" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Marmet, WV - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">10410 MacCorkle Ave, Marmet, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Subway <span>≥1 min · 157 ft</span> · <b>🛒 Kroger <span>≥1 min · 361 ft</span></b> · ⛽ Sheetz <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.24142,-81.55993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=WV">Show on map</a></div></div><div class="card"><div class="n"><span>Gainesville, GA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Sheetz ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.24142,-81.55993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gainesville, GA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">1943 Jesse Jewell NE Pkwy, Gainesville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 371 ft</span></b> · 🌯 Chipotle <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🍗 Zaxby&#x27;s <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span> · ⛽ QuikTrip <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.3161,-83.79727" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>RaceTrac Gas Station</span><small>180 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🌯 Chipotle ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ QuikTrip ≥5 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.3161,-83.79727" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>RaceTrac Gas Station</span><small>180 kW · 1 stalls</small></div>
 <div class="a">4055 S Great Southwest Pkwy, Grand Prairie, TX</div><div class="host">Non-networked</div>
-<div class="c">⛽ RaceTrac <span>≥1 min · 144 ft</span> · 💊 Walgreens <span>≥1 min · 305 ft</span> · <b>🛒 Kroger <span>≥1 min · 381 ft</span></b> · 🥩 Arby&#x27;s <span>≥2 min · 518 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🛒 Aldi <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.67261,-97.04343" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Western Hills Plaza</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>⛽ RaceTrac ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67261,-97.04343" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Western Hills Plaza</span><small>350 kW · 4 stalls</small></div>
 <div class="a">6000 Glenway Ave, Cincinnati, OH</div><div class="host">EVgo</div>
-<div class="c">🐼 Panda Express <span>≥1 min · 112 ft</span> · <b>🛒 Kroger <span>≥1 min · 381 ft</span></b> · 🍗 Popeyes <span>≥2 min · 509 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.14455,-84.62214" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>New Caney, TX - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🎯 Target ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.14455,-84.62214" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Caney, TX - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
 <div class="a">22118.5 Market Pl Dr, New Caney, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🛒 Kroger <span>≥1 min · 384 ft</span></b> · 🐔 Chick-fil-A <span>≥2 min · 459 ft</span> · 🐼 Panda Express <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.13157,-95.23726" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Windward Commons - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.13157,-95.23726" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Windward Commons - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
 <div class="a">12850 Alpharetta Hwy, Alpharetta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Jersey Mike&#x27;s <span>≥1 min · 331 ft</span> · 🍕 Little Caesars <span>≥1 min · 351 ft</span> · ⛽ QuikTrip <span>≥1 min · 367 ft</span> · <b>🛒 Kroger <span>≥2 min · 427 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.09531,-84.27925" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Cave Spring Corners</span><small>100 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>⛽ QuikTrip ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.09531,-84.27925" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Cave Spring Corners</span><small>100 kW · 4 stalls</small></div>
 <div class="a">3971 Brambleton Ave, Roanoke, VA</div><div class="host">EVgo</div>
-<div class="c">🌮 Taco Bell <span>≥1 min · 279 ft</span> · <b>🛒 Kroger <span>≥2 min · 430 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🍕 Little Caesars <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span> · ⭐ Hardee&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.2337,-80.00772" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power August DC Krogr</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍕 Little Caesars ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.2337,-80.00772" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power August DC Krogr</span><small>62 kW · 1 stalls</small></div>
 <div class="a">2801 Washington Rd, Augusta, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🛒 Kroger <span>≥2 min · 433 ft</span></b> · 🍕 Little Caesars <span>≥2 min · 0.1 mi</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.2 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥5 min · 0.2 mi</span> · 🛒 Publix <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.5111,-82.02814" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Spring, TX - Spring Stuebner Road - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>🛒 Publix ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.5111,-82.02814" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Spring, TX - Spring Stuebner Road - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
 <div class="a">2102-2180 Spring Stuebner Road, Spring, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 331 ft</span> · <b>🛒 Kroger <span>≥2 min · 443 ft</span></b> · 🐔 Chick-fil-A <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.08548,-95.44986" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Ben Davis Ford</span><small>120 kW · 2 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.08548,-95.44986" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Ben Davis Ford</span><small>120 kW · 2 stalls</small></div>
 <div class="a">400 S Grandstaff Dr, Auburn, IN</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🛒 Kroger <span>≥2 min · 443 ft</span></b> · 💊 CVS <span>≥3 min · 0.2 mi</span> · ⛽ Speedway <span>≥3 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍕 Little Caesars <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.36477,-85.07078" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=IN">Show on map</a></div></div><div class="card"><div class="n"><span>Polaris, OH - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>💊 CVS ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>🥪 Subway ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🍕 Little Caesars ≥5 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.36477,-85.07078" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Polaris, OH - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">1177 Polaris Parkway, Columbus, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c">🧇 Waffle House <span>≥1 min · 177 ft</span> · ☕ Starbucks <span>≥1 min · 377 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 400 ft</span> · <b>🛒 Kroger <span>≥2 min · 446 ft</span></b> · 🐔 Chick-fil-A <span>≥3 min · 0.1 mi</span> · 🍝 Olive Garden <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.14105,-82.98897" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=OH">Show on map</a></div></div><div class="card"><div class="n"><span>Athens North MB.HPC</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🧇 Waffle House ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.14105,-82.98897" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Athens North MB.HPC</span><small>400 kW · 8 stalls</small></div>
 <div class="a">660 US-29, Athens, GA</div><div class="host">Mercedes Benz</div>
-<div class="c">🍕 Pizza Hut <span>≥1 min · 141 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 390 ft</span> · 🌮 Taco Bell <span>≥2 min · 453 ft</span> · <b>🛒 Kroger <span>≥2 min · 453 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.99502,-83.33519" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Starbucks Bridgeport</span><small>200 kW · 4 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.99502,-83.33519" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Starbucks Bridgeport</span><small>200 kW · 4 stalls</small></div>
 <div class="a">6301 Dixie Hwy, Bridgeport, MI</div><div class="host">Non-networked</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 197 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 276 ft</span> · <b>🛒 Kroger <span>≥2 min · 456 ft</span></b> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.35458,-83.87178" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Frandor</span><small>62 kW · 1 stalls</small></div>
-<div class="a">300 Frandor Avenue, Lansing, MI</div><div class="host">ChargePoint</div>
-<div class="c">🍔 Shake Shack <span>≥1 min · 331 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 325 ft</span> · <b>🛒 Kroger <span>≥2 min · 472 ft</span></b> · ⛽ Speedway <span>≥2 min · 499 ft</span> · 👑 Burger King <span>≥2 min · 515 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.73979,-84.5071" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Parkway Village</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🥪 Subway ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.35458,-83.87178" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Parkway Village</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1560 Eldridge Parkway, Houston, TX</div><div class="host">EVgo</div>
-<div class="c">🐔 Chick-fil-A <span>≥1 min · 335 ft</span> · <b>🛒 Kroger <span>≥2 min · 472 ft</span></b> · 💊 Walgreens <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.75616,-95.62758" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Frandor</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🤡 Jack in the Box ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.75616,-95.62758" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Frandor</span><small>62 kW · 1 stalls</small></div>
 <div class="a">300 Frandor Avenue, Lansing, MI</div><div class="host">ChargePoint</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 325 ft</span> · 🍔 Shake Shack <span>≥1 min · 351 ft</span> · <b>🛒 Kroger <span>≥2 min · 476 ft</span></b> · ⛽ Speedway <span>≥2 min · 492 ft</span> · 👑 Burger King <span>≥2 min · 515 ft</span> · 🥩 Arby&#x27;s <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.7398,-84.50702" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Marietta, GA - Dallas Highway - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.7398,-84.50702" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Marietta, GA - Dallas Highway - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">3625 Dallas Hwy, Marietta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🌶️ Chili&#x27;s <span>≥2 min · 453 ft</span> · <b>🛒 Kroger <span>≥2 min · 492 ft</span></b> · 🥖 Panera Bread <span>≥4 min · 0.2 mi</span> · 🍗 Zaxby&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.95323,-84.65743" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Cyfair Town Center</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥4 min</span><span>🍗 Zaxby&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.95323,-84.65743" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Cyfair Town Center</span><small>350 kW · 6 stalls</small></div>
 <div class="a">17445 Spring Cypress Rd, Cypress, TX</div><div class="host">EVgo</div>
-<div class="c"><b>🛒 Kroger <span>≥2 min · 509 ft</span></b> · 🔨 Home Depot <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥4 min · 0.2 mi</span> · 🍔 Five Guys <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · 🐔 Chick-fil-A <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=29.97234,-95.69024" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Kroger&amp;state=TX">Show on map</a></div></div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍔 Five Guys ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.97234,-95.69024" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Morgantown, WV - Earl L Core Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="a">1901 Earl L Core Road, Morgantown, WV</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.62012,-79.92373" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Imlay City Ford</span><small>240 kW · 4 stalls</small></div>
+<div class="a">1788 S Cedar St, Imlay City, MI</div><div class="host">Ford BlueOval</div>
+<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>👑 Burger King ≥5 min</span><span>⛽ Speedway ≥8 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01275,-83.07238" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

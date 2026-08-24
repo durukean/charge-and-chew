@@ -20,69 +20,109 @@
 <meta name="theme-color" content="#0d1117">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Chains", "item": "https://chargeandchew.com/near/"}, {"@type": "ListItem", "position": 2, "name": "Flying J", "item": "https://chargeandchew.com/near/flying-j/"}, {"@type": "ListItem", "position": 3, "name": "Oklahoma", "item": "https://chargeandchew.com/near/flying-j/ok/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Fast chargers near Flying J in Oklahoma", "numberOfItems": 7, "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J", "address": {"@type": "PostalAddress", "streetAddress": "121 North 129 E Ave", "addressLocality": "Tulsa", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 36.16264, "longitude": -95.83236}}}, {"@type": "ListItem", "position": 2, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J", "address": {"@type": "PostalAddress", "streetAddress": "4801 NE 122nd St", "addressLocality": "Edmond", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 35.59579, "longitude": -97.43648}}}, {"@type": "ListItem", "position": 3, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J", "address": {"@type": "PostalAddress", "streetAddress": "1255 Gentry", "addressLocality": "Checotah", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 35.47544, "longitude": -95.53805}}}, {"@type": "ListItem", "position": 4, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J", "address": {"@type": "PostalAddress", "streetAddress": "701 South Morgan Road", "addressLocality": "Oklahoma City", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 35.45831, "longitude": -97.69012}}}, {"@type": "ListItem", "position": 5, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J 705 - eXtend", "address": {"@type": "PostalAddress", "streetAddress": "2400 So 4th Route", "addressLocality": "Sayre", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 35.26511, "longitude": -99.64137}}}, {"@type": "ListItem", "position": 6, "item": {"@type": "Place", "name": "EVgo \u2014 Flying J", "address": {"@type": "PostalAddress", "streetAddress": "2450 Cooper Dr.", "addressLocality": "Ardmore", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 34.20139, "longitude": -97.1679}}}, {"@type": "ListItem", "position": 7, "item": {"@type": "Place", "name": "Walmart Charge \u2014 Walmart EV Charging", "address": {"@type": "PostalAddress", "streetAddress": "131 Paul Carr Dr", "addressLocality": "Checotah", "addressRegion": "OK", "addressCountry": "US"}, "geo": {"@type": "GeoCoordinates", "latitude": 35.47004, "longitude": -95.53434}}}]}</script>
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../../">Map</a><a href="../../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Flying J in Oklahoma</h1>
 <p class="lead"><b>7 DC fast chargers</b> in Oklahoma have a Flying J within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Flying J&amp;state=OK">Open on the map →</a>
-<div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">121 North 129 E Ave, Tulsa, OK</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Flying J <span>≥1 min · 36 ft</span></b> · 🍳 Denny&#x27;s <span>≥1 min · 312 ft</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.16264,-95.83236" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16264,-95.83236" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4801 NE 122nd St, Edmond, OK</div><div class="host">EVgo</div>
-<div class="c">⛽ Pilot <span>≥1 min · 112 ft</span> · <b>⛽ Flying J <span>≥1 min · 148 ft</span></b> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.59579,-97.43648" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.59579,-97.43648" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1255 Gentry, Checotah, OK</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Flying J <span>≥1 min · 161 ft</span></b> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · 🌮 Taco Bell <span>≥7 min · 0.3 mi</span> · 🛒 Walmart <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.47544,-95.53805" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥7 min</span><span>🛒 Walmart ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.47544,-95.53805" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">701 South Morgan Road, Oklahoma City, OK</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Flying J <span>≥1 min · 233 ft</span></b> · ⛽ TA Travel Center <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.3 mi</span> · ⛽ Pilot <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.45831,-97.69012" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J 705 - eXtend</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>⛽ TA Travel Center ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ Pilot ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.45831,-97.69012" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J 705 - eXtend</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2400 So 4th Route, Sayre, OK</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Flying J <span>≥1 min · 358 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.26511,-99.64137" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.26511,-99.64137" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2450 Cooper Dr., Ardmore, OK</div><div class="host">EVgo</div>
-<div class="c"><b>⛽ Flying J <span>≥2 min · 404 ft</span></b> · 🥞 IHOP <span>≥7 min · 0.3 mi</span> · 💻 Best Buy <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.20139,-97.1679" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥2 min</span><span>🥞 IHOP ≥7 min</span><span>💻 Best Buy ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.20139,-97.1679" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
 <div class="a">131 Paul Carr Dr, Checotah, OK</div><div class="host">Walmart Charge</div>
-<div class="c">🛒 Walmart <span>≥1 min · 46 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span> · <b>⛽ Flying J <span>≥9 min · 0.5 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.47004,-95.53434" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../../?chain=Flying J&amp;state=OK">Show on map</a></div></div>
-<h2>Other chains near fast chargers in Oklahoma</h2><div class="chips"><a href="../../walmart/ok/">🛒 Walmart <small>41</small></a><a href="../../mcdonald-s/ok/">🍟 McDonald&#x27;s <small>40</small></a><a href="../../arby-s/ok/">🥩 Arby&#x27;s <small>33</small></a><a href="../../taco-bell/ok/">🌮 Taco Bell <small>30</small></a><a href="../../starbucks/ok/">☕ Starbucks <small>27</small></a><a href="../../subway/ok/">🥪 Subway <small>24</small></a><a href="../../quiktrip/ok/">⛽ QuikTrip <small>23</small></a><a href="../../wendy-s/ok/">🍔 Wendy&#x27;s <small>20</small></a><a href="../../target/ok/">🎯 Target <small>20</small></a><a href="../../panda-express/ok/">🐼 Panda Express <small>18</small></a><a href="../../pizza-hut/ok/">🍕 Pizza Hut <small>16</small></a><a href="../../lowe-s/ok/">🔧 Lowe&#x27;s <small>16</small></a><a href="../../walgreens/ok/">💊 Walgreens <small>16</small></a><a href="../../cvs/ok/">💊 CVS <small>16</small></a><a href="../../chick-fil-a/ok/">🐔 Chick-fil-A <small>15</small></a><a href="../../whataburger/ok/">🍔 Whataburger <small>15</small></a><a href="../../burger-king/ok/">👑 Burger King <small>15</small></a><a href="../../kfc/ok/">🍗 KFC <small>15</small></a><a href="../../jersey-mike-s/ok/">🥪 Jersey Mike&#x27;s <small>14</small></a><a href="../../chili-s/ok/">🌶️ Chili&#x27;s <small>14</small></a><a href="../../five-guys/ok/">🍔 Five Guys <small>13</small></a><a href="../../ihop/ok/">🥞 IHOP <small>10</small></a><a href="../../olive-garden/ok/">🍝 Olive Garden <small>10</small></a><a href="../../jack-in-the-box/ok/">🤡 Jack in the Box <small>10</small></a><a href="../../carl-s-jr/ok/">⭐ Carl&#x27;s Jr. <small>10</small></a><a href="../../cracker-barrel/ok/">🪵 Cracker Barrel <small>9</small></a><a href="../../chipotle/ok/">🌯 Chipotle <small>9</small></a><a href="../../aldi/ok/">🛒 Aldi <small>9</small></a><a href="../../raising-cane-s/ok/">🐕 Raising Cane&#x27;s <small>8</small></a><a href="../../dutch-bros/ok/">☕ Dutch Bros <small>8</small></a><a href="../../firehouse-subs/ok/">🚒 Firehouse Subs <small>7</small></a><a href="../../best-buy/ok/">💻 Best Buy <small>7</small></a><a href="../../waffle-house/ok/">🧇 Waffle House <small>6</small></a><a href="../../dunkin/ok/">🍩 Dunkin&#x27; <small>6</small></a><a href="../../wingstop/ok/">🍗 Wingstop <small>6</small></a><a href="../../buffalo-wild-wings/ok/">🦬 Buffalo Wild Wings <small>6</small></a><a href="../../little-caesars/ok/">🍕 Little Caesars <small>6</small></a><a href="../../home-depot/ok/">🔨 Home Depot <small>6</small></a><a href="../../pilot/ok/">⛽ Pilot <small>6</small></a><a href="../../panera-bread/ok/">🥖 Panera Bread <small>5</small></a><a href="../../popeyes/ok/">🍗 Popeyes <small>5</small></a><a href="../../del-taco/ok/">🌮 Del Taco <small>5</small></a><a href="../../sam-s-club/ok/">🏪 Sam&#x27;s Club <small>5</small></a><a href="../../costco/ok/">📦 Costco <small>4</small></a><a href="../../domino-s/ok/">🍕 Domino&#x27;s <small>4</small></a><a href="../../ta-travel-center/ok/">⛽ TA Travel Center <small>4</small></a><a href="../../whole-foods/ok/">🥬 Whole Foods <small>2</small></a><a href="../../trader-joe-s/ok/">🛍️ Trader Joe&#x27;s <small>2</small></a><a href="../../dairy-queen/ok/">🍦 Dairy Queen <small>2</small></a><a href="../../texas-roadhouse/ok/">🤠 Texas Roadhouse <small>2</small></a><a href="../../red-robin/ok/">🐦 Red Robin <small>2</small></a><a href="../../denny-s/ok/">🍳 Denny&#x27;s <small>1</small></a><a href="../../zaxby-s/ok/">🍗 Zaxby&#x27;s <small>1</small></a><a href="../../applebee-s/ok/">🍎 Applebee&#x27;s <small>1</small></a><a href="../../caribou-coffee/ok/">☕ Caribou Coffee <small>1</small></a><a href="../../ikea/ok/">🪑 IKEA <small>1</small></a></div>
+<div class="c"><span>⛽ <b>Flying J</b> ≥9 min</span><span>🛒 Walmart ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.47004,-95.53434" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
+<h2>Other chains near fast chargers in Oklahoma</h2><div class="chips"><a href="../../walmart/ok/">🛒 Walmart <small>41</small></a><a href="../../mcdonald-s/ok/">🍟 McDonald&#x27;s <small>40</small></a><a href="../../sonic/ok/">🚗 Sonic <small>33</small></a><a href="../../arby-s/ok/">🥩 Arby&#x27;s <small>33</small></a><a href="../../taco-bell/ok/">🌮 Taco Bell <small>30</small></a><a href="../../starbucks/ok/">☕ Starbucks <small>27</small></a><a href="../../subway/ok/">🥪 Subway <small>24</small></a><a href="../../love-s/ok/">⛽ Love&#x27;s <small>24</small></a><a href="../../quiktrip/ok/">⛽ QuikTrip <small>23</small></a><a href="../../wendy-s/ok/">🍔 Wendy&#x27;s <small>20</small></a><a href="../../target/ok/">🎯 Target <small>20</small></a><a href="../../panda-express/ok/">🐼 Panda Express <small>18</small></a><a href="../../pizza-hut/ok/">🍕 Pizza Hut <small>16</small></a><a href="../../lowe-s/ok/">🔧 Lowe&#x27;s <small>16</small></a><a href="../../walgreens/ok/">💊 Walgreens <small>16</small></a><a href="../../cvs/ok/">💊 CVS <small>16</small></a><a href="../../chick-fil-a/ok/">🐔 Chick-fil-A <small>15</small></a><a href="../../whataburger/ok/">🍔 Whataburger <small>15</small></a><a href="../../burger-king/ok/">👑 Burger King <small>15</small></a><a href="../../kfc/ok/">🍗 KFC <small>15</small></a><a href="../../jersey-mike-s/ok/">🥪 Jersey Mike&#x27;s <small>14</small></a><a href="../../chili-s/ok/">🌶️ Chili&#x27;s <small>14</small></a><a href="../../five-guys/ok/">🍔 Five Guys <small>13</small></a><a href="../../ihop/ok/">🥞 IHOP <small>10</small></a><a href="../../olive-garden/ok/">🍝 Olive Garden <small>10</small></a><a href="../../jack-in-the-box/ok/">🤡 Jack in the Box <small>10</small></a><a href="../../carl-s-jr/ok/">⭐ Carl&#x27;s Jr. <small>10</small></a><a href="../../cracker-barrel/ok/">🪵 Cracker Barrel <small>9</small></a><a href="../../chipotle/ok/">🌯 Chipotle <small>9</small></a><a href="../../aldi/ok/">🛒 Aldi <small>9</small></a><a href="../../raising-cane-s/ok/">🐕 Raising Cane&#x27;s <small>8</small></a><a href="../../dutch-bros/ok/">☕ Dutch Bros <small>8</small></a><a href="../../firehouse-subs/ok/">🚒 Firehouse Subs <small>7</small></a><a href="../../best-buy/ok/">💻 Best Buy <small>7</small></a><a href="../../waffle-house/ok/">🧇 Waffle House <small>6</small></a><a href="../../dunkin/ok/">🍩 Dunkin&#x27; <small>6</small></a><a href="../../wingstop/ok/">🍗 Wingstop <small>6</small></a><a href="../../buffalo-wild-wings/ok/">🦬 Buffalo Wild Wings <small>6</small></a><a href="../../little-caesars/ok/">🍕 Little Caesars <small>6</small></a><a href="../../home-depot/ok/">🔨 Home Depot <small>6</small></a><a href="../../pilot/ok/">⛽ Pilot <small>6</small></a><a href="../../panera-bread/ok/">🥖 Panera Bread <small>5</small></a><a href="../../popeyes/ok/">🍗 Popeyes <small>5</small></a><a href="../../del-taco/ok/">🌮 Del Taco <small>5</small></a><a href="../../sam-s-club/ok/">🏪 Sam&#x27;s Club <small>5</small></a><a href="../../costco/ok/">📦 Costco <small>4</small></a><a href="../../domino-s/ok/">🍕 Domino&#x27;s <small>4</small></a><a href="../../ta-travel-center/ok/">⛽ TA Travel Center <small>4</small></a><a href="../../whole-foods/ok/">🥬 Whole Foods <small>2</small></a><a href="../../trader-joe-s/ok/">🛍️ Trader Joe&#x27;s <small>2</small></a><a href="../../dairy-queen/ok/">🍦 Dairy Queen <small>2</small></a><a href="../../texas-roadhouse/ok/">🤠 Texas Roadhouse <small>2</small></a><a href="../../red-robin/ok/">🐦 Red Robin <small>2</small></a><a href="../../denny-s/ok/">🍳 Denny&#x27;s <small>1</small></a><a href="../../zaxby-s/ok/">🍗 Zaxby&#x27;s <small>1</small></a><a href="../../applebee-s/ok/">🍎 Applebee&#x27;s <small>1</small></a><a href="../../caribou-coffee/ok/">☕ Caribou Coffee <small>1</small></a><a href="../../ikea/ok/">🪑 IKEA <small>1</small></a></div>
 <h2>Flying J in other states</h2><div class="chips"><a href="../">All states</a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>

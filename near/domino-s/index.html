@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Domino&#x27;s (1180 locations) | Charge & Chew</title>
-<meta name="description" content="1180 EV DC fast chargers within a 10-minute walk of a Domino&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Domino&#x27;s (1120 locations) | Charge & Chew</title>
+<meta name="description" content="1120 EV DC fast chargers within a 10-minute walk of a Domino&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/domino-s/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Domino&#x27;s (1180 locations)">
-<meta property="og:description" content="1180 EV DC fast chargers within a 10-minute walk of a Domino&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Domino&#x27;s (1120 locations)">
+<meta property="og:description" content="1120 EV DC fast chargers within a 10-minute walk of a Domino&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/domino-s/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🍕 EV fast chargers near Domino&#x27;s</h1>
-<p class="lead">We found <b>1180 DC fast chargers</b> in the US — across all networks — with a Domino&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1120 DC fast chargers</b> in the US — across all networks — with a Domino&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Domino&#x27;s">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>224</small></a><a href="wa/">Washington <small>96</small></a><a href="va/">Virginia <small>63</small></a><a href="tx/">Texas <small>61</small></a><a href="fl/">Florida <small>54</small></a><a href="ga/">Georgia <small>47</small></a><a href="md/">Maryland <small>46</small></a><a href="co/">Colorado <small>43</small></a><a href="il/">Illinois <small>41</small></a><a href="pa/">Pennsylvania <small>41</small></a><a href="nj/">New Jersey <small>39</small></a><a href="or/">Oregon <small>30</small></a><a href="ny/">New York <small>30</small></a><a href="ma/">Massachusetts <small>29</small></a><a href="ut/">Utah <small>29</small></a><a href="nc/">North Carolina <small>24</small></a><a href="oh/">Ohio <small>22</small></a><a href="mi/">Michigan <small>21</small></a><a href="nm/">New Mexico <small>19</small></a><a href="tn/">Tennessee <small>18</small></a><a href="al/">Alabama <small>18</small></a><a href="az/">Arizona <small>14</small></a><a href="mo/">Missouri <small>14</small></a><a href="mn/">Minnesota <small>12</small></a><a href="id/">Idaho <small>10</small></a><a href="nv/">Nevada <small>10</small></a><a href="in/">Indiana <small>10</small></a><a href="de/">Delaware <small>10</small></a><a href="wi/">Wisconsin <small>8</small></a><a href="ky/">Kentucky <small>8</small></a><a href="sc/">South Carolina <small>8</small></a><a href="hi/">Hawaii <small>7</small></a><a href="dc/">Washington DC <small>7</small></a><a href="mt/">Montana <small>6</small></a><a href="ia/">Iowa <small>6</small></a><a href="ms/">Mississippi <small>6</small></a><a href="nd/">North Dakota <small>5</small></a><a href="ct/">Connecticut <small>5</small></a><a href="ok/">Oklahoma <small>4</small></a><a href="vt/">Vermont <small>4</small></a><a href="nh/">New Hampshire <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="ri/">Rhode Island <small>4</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="la/">Louisiana <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="wv/">West Virginia <small>3</small></a><a href="sd/">South Dakota <small>3</small></a><a href="me/">Maine <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Belmont Plaza</span><small>120 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>211</small></a><a href="wa/">Washington <small>86</small></a><a href="va/">Virginia <small>62</small></a><a href="tx/">Texas <small>59</small></a><a href="fl/">Florida <small>54</small></a><a href="md/">Maryland <small>42</small></a><a href="ga/">Georgia <small>42</small></a><a href="il/">Illinois <small>40</small></a><a href="pa/">Pennsylvania <small>40</small></a><a href="co/">Colorado <small>38</small></a><a href="nj/">New Jersey <small>38</small></a><a href="ny/">New York <small>30</small></a><a href="ma/">Massachusetts <small>28</small></a><a href="or/">Oregon <small>27</small></a><a href="ut/">Utah <small>27</small></a><a href="nc/">North Carolina <small>24</small></a><a href="oh/">Ohio <small>21</small></a><a href="mi/">Michigan <small>20</small></a><a href="nm/">New Mexico <small>17</small></a><a href="tn/">Tennessee <small>15</small></a><a href="al/">Alabama <small>15</small></a><a href="az/">Arizona <small>14</small></a><a href="mo/">Missouri <small>14</small></a><a href="mn/">Minnesota <small>12</small></a><a href="id/">Idaho <small>10</small></a><a href="nv/">Nevada <small>10</small></a><a href="in/">Indiana <small>10</small></a><a href="de/">Delaware <small>10</small></a><a href="wi/">Wisconsin <small>8</small></a><a href="ky/">Kentucky <small>8</small></a><a href="sc/">South Carolina <small>8</small></a><a href="hi/">Hawaii <small>7</small></a><a href="dc/">Washington DC <small>7</small></a><a href="mt/">Montana <small>6</small></a><a href="ia/">Iowa <small>6</small></a><a href="nd/">North Dakota <small>5</small></a><a href="ct/">Connecticut <small>5</small></a><a href="ms/">Mississippi <small>5</small></a><a href="ok/">Oklahoma <small>4</small></a><a href="vt/">Vermont <small>4</small></a><a href="nh/">New Hampshire <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="ri/">Rhode Island <small>4</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="la/">Louisiana <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="wv/">West Virginia <small>3</small></a><a href="sd/">South Dakota <small>3</small></a><a href="me/">Maine <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Belmont Plaza</span><small>120 kW · 6 stalls</small></div>
 <div class="a">276 Turnpike Rd, Westborough, MA</div><div class="host">Quickcharge</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 0 ft</span></b> · 🐔 Chick-fil-A <span>≥1 min · 272 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🔧 Lowe&#x27;s <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.28237,-71.64452" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>FasCharge 4589 Fastmarket Valero Colorado Springs</span><small>240 kW · 2 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.28237,-71.64452" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FasCharge 4589 Fastmarket Valero Colorado Springs</span><small>240 kW · 2 stalls</small></div>
 <div class="a">205 W Rockrimmon Blvd, Colorado Springs, CO</div><div class="host">Red E</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 75 ft</span></b> · 🥪 Subway <span>≥1 min · 167 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.92817,-104.83116" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>New Seasons Palisades</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.92817,-104.83116" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>New Seasons Palisades</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1377 Mcvey Ave, Lake Oswego, OR</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 89 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 105 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.4061,-122.67747" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Arlington, TX - East Bardin Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.4061,-122.67747" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Arlington, TX - East Bardin Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">130 E Bardin Rd, Arlington, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 108 ft</span></b> · ☕ Starbucks <span>≥1 min · 374 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.67022,-97.11348" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Light Street Library</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67022,-97.11348" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Light Street Library</span><small>50 kW · 1 stalls</small></div>
 <div class="a">1251 Light St, Baltimore, MD</div><div class="host">Non-networked</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 112 ft</span></b> · 🍩 Dunkin&#x27; <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.27507,-76.61191" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Jarrell, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>💊 CVS ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.27507,-76.61191" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jarrell, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">11810 I-35, Jarrell, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 112 ft</span></b> · 🥪 Subway <span>≥1 min · 217 ft</span> · 🌮 Taco Bell <span>≥2 min · 397 ft</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🍳 Denny&#x27;s <span>≥5 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.81437,-97.61037" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Pompton Lakes, NJ - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥4 min</span><span>🍳 Denny&#x27;s ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.81437,-97.61037" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pompton Lakes, NJ - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">1-55 Wanaque Ave, Pompton Lakes, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 121 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 223 ft</span> · ☕ Starbucks <span>≥1 min · 331 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.00765,-74.29407" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Kingman, AZ</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.00765,-74.29407" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kingman, AZ</span><small>300 kW · 6 stalls</small></div>
 <div class="a">3320 Stockton Hill Road, Kingman, AZ</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 121 ft</span></b> · 🥪 Subway <span>≥1 min · 184 ft</span> · 🌮 Taco Bell <span>≥2 min · 446 ft</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.2 mi</span> · 🍔 In-N-Out <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.21955,-114.03392" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Albertsons Kenmore #3500 - 6850 N E Bothell Way</span><small>350 kW · 7 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🍔 In-N-Out ≥4 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.21955,-114.03392" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Albertsons Kenmore #3500 - 6850 N E Bothell Way</span><small>350 kW · 7 stalls</small></div>
 <div class="a">6850 N E Bothell Way, Kenmore, WA</div><div class="host">EVgo</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 125 ft</span></b> · 🛒 Safeway <span>≥1 min · 197 ft</span> · 🥪 Subway <span>≥1 min · 381 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.75833,-122.24799" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Madras, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.75833,-122.24799" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Madras, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">1537 Northeast Highway 97, Madras, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 144 ft</span></b> · 👑 Burger King <span>≥1 min · 351 ft</span> · 🍗 KFC <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.61409,-121.13491" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=OR">Show on map</a></div></div><div class="card"><div class="n"><span>Marketplace at Bergen Park (Evergreen, CO)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🍗 KFC ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.61409,-121.13491" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Marketplace at Bergen Park (Evergreen, CO)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1173 Bergen Pkwy, Evergreen, CO</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 148 ft</span></b> · ☕ Starbucks <span>≥1 min · 315 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.69335,-105.35702" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Sunshine Gardens</span><small>50 kW · 12 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.69335,-105.35702" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Sunshine Gardens</span><small>50 kW · 12 stalls</small></div>
 <div class="a">1170 Mission Rd, South San Francisco, CA</div><div class="host">Non-networked</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 157 ft</span></b> · ☕ Starbucks <span>≥8 min · 0.4 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.66201,-122.43898" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>UBP Pompton Lakes (Pompton Lakes, NJ)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥8 min</span><span>🛍️ Trader Joe&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.66201,-122.43898" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>UBP Pompton Lakes (Pompton Lakes, NJ)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">55 Wanaque Ave, Pompton Lakes, NJ</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 167 ft</span></b> · ☕ Starbucks <span>≥1 min · 243 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 335 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.00746,-74.29366" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>ToGo BP Richton Park</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.00746,-74.29366" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>ToGo BP Richton Park</span><small>240 kW · 4 stalls</small></div>
 <div class="a">4769 Sauk Trail, Richton Park, IL</div><div class="host">Red E</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 167 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 410 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.48382,-87.732" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Philadelphia, PA - North 20th Street - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.48382,-87.732" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Philadelphia, PA - North 20th Street - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
 <div class="a">420 North 20th Street, Philadelphia, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🎯 Target <span>≥1 min · 108 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 184 ft</span></b> · ☕ Starbucks <span>≥2 min · 443 ft</span> · 🥬 Whole Foods <span>≥3 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.96187,-75.17239" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Barcroft Plaza</span><small>100 kW · 2 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥬 Whole Foods ≥3 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.96187,-75.17239" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Barcroft Plaza</span><small>100 kW · 2 stalls</small></div>
 <div class="a">6345 Columbia Pike, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 92 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 184 ft</span></b> · 🥪 Subway <span>≥1 min · 302 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.83619,-77.15616" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>FPC Trowbridge-Trowbridge Crossing (Sandy Springs, GA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.83619,-77.15616" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>FPC Trowbridge-Trowbridge Crossing (Sandy Springs, GA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">7531 Roswell Rd, Sandy Springs, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 187 ft</span></b> · 🛒 Publix <span>≥2 min · 407 ft</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.96184,-84.36469" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Quality Inn &amp; Suites Caseyville - St. Louis</span><small>90 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🛒 Publix ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>💊 CVS ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.96184,-84.36469" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Quality Inn &amp; Suites Caseyville - St. Louis</span><small>90 kW · 4 stalls</small></div>
 <div class="a">2180 Patricia Ct, Caseyville, IL</div><div class="host">Universal</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 190 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 436 ft</span> · 🪵 Cracker Barrel <span>≥2 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · ⭐ Hardee&#x27;s <span>≥5 min · 0.2 mi</span> · 🍗 KFC <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.61195,-90.04596" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>San Jose, CA Rechargery Relay - Cahalan Ave</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>⭐ Hardee&#x27;s ≥5 min</span><span>🍗 KFC ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.61195,-90.04596" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>San Jose, CA Rechargery Relay - Cahalan Ave</span><small>400 kW · 8 stalls</small></div>
 <div class="a">6059 Cahalan Ave, San Jose, CA</div><div class="host">IONNA</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 190 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.2396,-121.85111" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>BOA Arlington Financial MA6-167 (Arlington, MA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.2396,-121.85111" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>BOA Arlington Financial MA6-167 (Arlington, MA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">655 Massachusetts Ave, Arlington, MA</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 197 ft</span></b> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🥬 Whole Foods <span>≥6 min · 0.3 mi</span> · 💊 CVS <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.41645,-71.15402" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MA">Show on map</a></div></div><div class="card"><div class="n"><span>Camp Springs, MD - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🥬 Whole Foods ≥6 min</span><span>💊 CVS ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.41645,-71.15402" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Camp Springs, MD - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">6101 Allentown Rd, Camp Springs, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c">🦆 Wawa <span>≥1 min · 92 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 200 ft</span></b> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.80721,-76.90398" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Pacific Grove, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍔 Wendy&#x27;s ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.80721,-76.90398" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Pacific Grove, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">200 Country Club Gate Center, Pacific Grove, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🥪 Subway <span>≥1 min · 207 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 217 ft</span></b> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🛍️ Trader Joe&#x27;s <span>≥5 min · 0.2 mi</span> · 🛒 Safeway <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.60803,-121.9251" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Raleigh, NC Rechargery Relay - Louisburg Rd</span><small>400 kW · 10 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🛒 Safeway ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.60803,-121.9251" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Raleigh, NC Rechargery Relay - Louisburg Rd</span><small>400 kW · 10 stalls</small></div>
 <div class="a">4237 Louisburg Rd, Raleigh, NC</div><div class="host">IONNA</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 217 ft</span></b> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥7 min · 0.3 mi</span> · 🔧 Lowe&#x27;s <span>≥7 min · 0.4 mi</span> · 🍕 Little Caesars <span>≥8 min · 0.4 mi</span> · 🐔 Chick-fil-A <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.84181,-78.57743" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>Kingsland, GA Rechargery Relay @ Circle K - HWY 40 EAST</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>🍕 Little Caesars ≥8 min</span><span>🐔 Chick-fil-A ≥9 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.84181,-78.57743" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kingsland, GA Rechargery Relay @ Circle K - HWY 40 EAST</span><small>400 kW · 4 stalls</small></div>
 <div class="a">1351 HWY 40 EAST, Kingsland, GA</div><div class="host">IONNA</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 220 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 289 ft</span> · 🐔 Chick-fil-A <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 👑 Burger King <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.79029,-81.65403" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Conifer, CO - Conifer Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.79029,-81.65403" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Conifer, CO - Conifer Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">25637 Conifer Road, Conifer, CO</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍔 Wendy&#x27;s <span>≥1 min · 200 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 223 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.54408,-105.28993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>WCEH Bellingham</span><small>175 kW · 2 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.54408,-105.28993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>WCEH Bellingham</span><small>175 kW · 2 stalls</small></div>
 <div class="a">222 36th St, Bellingham, WA</div><div class="host">EVCS</div>
-<div class="c">☕ Starbucks <span>≥1 min · 0 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 230 ft</span></b> · 💊 CVS <span>≥1 min · 299 ft</span> · 🍔 Wendy&#x27;s <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span> · 💊 Walgreens <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=48.73118,-122.47123" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger-Fred Meyer 657 (Spokane, WA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>💊 Walgreens ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.73118,-122.47123" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger-Fred Meyer 657 (Spokane, WA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">400 S Thor Street, Spokane, WA</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 230 ft</span></b> · ☕ Dutch Bros <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=47.65198,-117.36062" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a></div></div><div class="card"><div class="n"><span>McDonalds #12407, Maple Grove</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>☕ Dutch Bros ≥3 min</span><span>🥪 Subway ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.65198,-117.36062" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McDonalds #12407, Maple Grove</span><small>350 kW · 4 stalls</small></div>
 <div class="a">13595 83rd Way, Maple Grove, MN</div><div class="host">EVgo</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 72 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 230 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 223 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 243 ft</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · ⛽ Speedway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=45.10532,-93.45243" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>EVsmart - BGE - Randallstown</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.10532,-93.45243" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>EVsmart - BGE - Randallstown</span><small>50 kW · 2 stalls</small></div>
 <div class="a">3525 Resource Dr, Randallstown, MD</div><div class="host">Swtch</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 233 ft</span></b> · 🔨 Home Depot <span>≥3 min · 0.1 mi</span> · 🍗 KFC <span>≥7 min · 0.4 mi</span> · 🛒 Walmart <span>≥7 min · 0.4 mi</span> · 🛒 Aldi <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.36315,-76.78741" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Celebration, FL - Future Way - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🔨 Home Depot ≥3 min</span><span>🍗 KFC ≥7 min</span><span>🛒 Walmart ≥7 min</span><span>🛒 Aldi ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.36315,-76.78741" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Celebration, FL - Future Way - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">1725 Future Way, Celebration, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 236 ft</span></b> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 🛒 Publix <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=28.3029,-81.5687" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Kroger King Soopers 129 (Erie, CO)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🛒 Publix ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.3029,-81.5687" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Kroger King Soopers 129 (Erie, CO)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">1891 State Hwy 7, Erie, CO</div><div class="host">Electrify America</div>
-<div class="c">🥪 Jersey Mike&#x27;s <span>≥1 min · 177 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 246 ft</span></b> · 🍗 Popeyes <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥5 min · 0.3 mi</span> · 🐼 Panda Express <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.00247,-105.01135" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Belvedere Park Plaza</span><small>240 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍗 Popeyes ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🚗 Sonic ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.00247,-105.01135" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Belvedere Park Plaza</span><small>240 kW · 4 stalls</small></div>
 <div class="a">6895 N 9th Ave, Pensacola, FL</div><div class="host">FPL EVolution</div>
-<div class="c">👑 Burger King <span>≥1 min · 128 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 249 ft</span></b> · 💊 CVS <span>≥4 min · 0.2 mi</span> · 🍗 Zaxby&#x27;s <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 🛒 Walmart <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=30.49326,-87.1919" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=FL">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>💊 CVS ≥4 min</span><span>🍗 Zaxby&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🛒 Walmart ≥6 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.49326,-87.1919" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
 <div class="a">4505 E McKellips Rd, Mesa, AZ</div><div class="host">Walmart Charge</div>
-<div class="c">🛒 Walmart <span>≥1 min · 69 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 256 ft</span></b> · 🥪 Subway <span>≥2 min · 469 ft</span> · 🐼 Panda Express <span>≥2 min · 479 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.44922,-111.73375" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>EVolve NY Binghamton</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>☕ Starbucks ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.44922,-111.73375" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>EVolve NY Binghamton</span><small>350 kW · 4 stalls</small></div>
 <div class="a">33 South Washington, Binghamton, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 259 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 💊 Walgreens <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.09037,-75.91355" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Gpm Investments</span><small>160 kW · 1 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>💊 CVS ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.09037,-75.91355" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Gpm Investments</span><small>160 kW · 1 stalls</small></div>
 <div class="a">15303 E Quincy Ave, Aurora, CO</div><div class="host">ChargePoint</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 259 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.63885,-104.80949" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Jim Ellis Ford of Sandy Springs</span><small>120 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.63885,-104.80949" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Jim Ellis Ford of Sandy Springs</span><small>120 kW · 6 stalls</small></div>
 <div class="a">7555 Roswell Rd, Atlanta, GA</div><div class="host">Ford BlueOval</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 266 ft</span></b> · 🛒 Publix <span>≥2 min · 482 ft</span> · 💊 Walgreens <span>≥3 min · 0.1 mi</span> · 💊 CVS <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.96209,-84.3648" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Whittier, NC</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🛒 Publix ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>💊 CVS ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.96209,-84.3648" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Whittier, NC</span><small>300 kW · 6 stalls</small></div>
 <div class="a">16 Cherokee Crossing Road, Whittier, NC</div><div class="host">Rivian Adventure</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 184 ft</span> · 🥩 Arby&#x27;s <span>≥1 min · 164 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 282 ft</span></b> · 🧇 Waffle House <span>≥1 min · 354 ft</span> · 🌮 Taco Bell <span>≥2 min · 0.1 mi</span> · 🍕 Pizza Hut <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.46231,-83.31522" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>SDSU Lot</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.46231,-83.31522" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>SDSU Lot</span><small>50 kW · 1 stalls</small></div>
 <div class="a">Zura Wy, San Diego, CA</div><div class="host">Dirt Road</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 285 ft</span></b> · 🤡 Jack in the Box <span>≥2 min · 407 ft</span> · ☕ Starbucks <span>≥2 min · 495 ft</span> · 🛍️ Trader Joe&#x27;s <span>≥2 min · 0.1 mi</span> · 🍩 Dunkin&#x27; <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.77307,-117.06909" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Puna Kai Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.77307,-117.06909" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Puna Kai Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
 <div class="a">15-2714 Pahoa Village Rd, Pahoa, HI</div><div class="host">Opconnect</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 36 ft</span> · 🍕 Pizza Hut <span>≥1 min · 249 ft</span> · <b>🍕 Domino&#x27;s <span>≥1 min · 289 ft</span></b> · 🍗 Popeyes <span>≥2 min · 417 ft</span> · 👑 Burger King <span>≥2 min · 449 ft</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=19.5033,-154.95597" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=HI">Show on map</a></div></div><div class="card"><div class="n"><span>BOA Union Center NJ6-241 (Union, NJ)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=19.5033,-154.95597" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>BOA Union Center NJ6-241 (Union, NJ)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">1930 Morris Ave, Union, NJ</div><div class="host">Electrify America</div>
-<div class="c"><b>🍕 Domino&#x27;s <span>≥1 min · 295 ft</span></b> · 🍩 Dunkin&#x27; <span>≥3 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.69536,-74.2665" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a></div></div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍎 Applebee&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.69536,-74.2665" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

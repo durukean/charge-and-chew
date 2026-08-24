@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Del Taco (287 locations) | Charge & Chew</title>
-<meta name="description" content="287 EV DC fast chargers within a 10-minute walk of a Del Taco, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Del Taco (269 locations) | Charge & Chew</title>
+<meta name="description" content="269 EV DC fast chargers within a 10-minute walk of a Del Taco, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/del-taco/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Del Taco (287 locations)">
-<meta property="og:description" content="287 EV DC fast chargers within a 10-minute walk of a Del Taco, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Del Taco (269 locations)">
+<meta property="og:description" content="269 EV DC fast chargers within a 10-minute walk of a Del Taco, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/del-taco/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🌮 EV fast chargers near Del Taco</h1>
-<p class="lead">We found <b>287 DC fast chargers</b> in the US — across all networks — with a Del Taco within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>269 DC fast chargers</b> in the US — across all networks — with a Del Taco within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Del Taco">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>201</small></a><a href="ut/">Utah <small>17</small></a><a href="nv/">Nevada <small>15</small></a><a href="az/">Arizona <small>13</small></a><a href="co/">Colorado <small>12</small></a><a href="ga/">Georgia <small>6</small></a><a href="mi/">Michigan <small>5</small></a><a href="ok/">Oklahoma <small>5</small></a><a href="nm/">New Mexico <small>4</small></a><a href="wa/">Washington <small>3</small></a><a href="or/">Oregon <small>2</small></a><a href="al/">Alabama <small>1</small></a><a href="fl/">Florida <small>1</small></a><a href="sc/">South Carolina <small>1</small></a><a href="id/">Idaho <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>El Norte Broadway Center - Escondido</span><small>350 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>186</small></a><a href="ut/">Utah <small>17</small></a><a href="nv/">Nevada <small>14</small></a><a href="az/">Arizona <small>13</small></a><a href="co/">Colorado <small>10</small></a><a href="ga/">Georgia <small>6</small></a><a href="mi/">Michigan <small>5</small></a><a href="ok/">Oklahoma <small>5</small></a><a href="nm/">New Mexico <small>4</small></a><a href="wa/">Washington <small>3</small></a><a href="or/">Oregon <small>2</small></a><a href="al/">Alabama <small>1</small></a><a href="fl/">Florida <small>1</small></a><a href="sc/">South Carolina <small>1</small></a><a href="id/">Idaho <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>El Norte Broadway Center - Escondido</span><small>350 kW · 6 stalls</small></div>
 <div class="a">110 W El Norte Pkwy, Escondido, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 72 ft</span></b> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 💊 CVS <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥9 min · 0.4 mi</span> · 🥞 IHOP <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.13981,-117.08992" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>North Las Vegas, NV - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>💊 CVS ≥6 min</span><span>🍕 Domino&#x27;s ≥9 min</span><span>🥞 IHOP ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.13981,-117.08992" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>North Las Vegas, NV - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">2575 E Craig Rd, North Las Vegas, NV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 108 ft</span></b> · ☕ Starbucks <span>≥1 min · 138 ft</span> · 🥪 Subway <span>≥2 min · 400 ft</span> · 🌯 Chipotle <span>≥2 min · 400 ft</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.23908,-115.11612" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=NV">Show on map</a></div></div><div class="card"><div class="n"><span>G&amp;M Oil Chevron #184</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.23908,-115.11612" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>G&amp;M Oil Chevron #184</span><small>50 kW · 1 stalls</small></div>
 <div class="a">6600 N Indian Canyon Dr, Palm Springs, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 157 ft</span></b> · ⛽ Pilot <span>≥1 min · 348 ft</span> · 🤡 Jack in the Box <span>≥2 min · 404 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 466 ft</span> · 🍳 Denny&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.90273,-116.54473" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>7Charge - Santa Maria</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍳 Denny&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.90273,-116.54473" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>7Charge - Santa Maria</span><small>180 kW · 4 stalls</small></div>
 <div class="a">1808 N Broadway, Santa Maria, CA</div><div class="host">7Charge</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 180 ft</span></b> · 🌮 Taco Bell <span>≥1 min · 299 ft</span> · 🥪 Subway <span>≥1 min · 348 ft</span> · 💊 CVS <span>≥2 min · 413 ft</span> · ☕ Starbucks <span>≥2 min · 499 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.97245,-120.43505" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Fontana, CA - Tesla Supercharger</span><small>75 kW · 24 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Subway ≥1 min</span><span>💊 CVS ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.97245,-120.43505" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fontana, CA - Tesla Supercharger</span><small>75 kW · 24 stalls</small></div>
 <div class="a">152234 Summit Avenue, Fontana, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 184 ft</span></b> · 💊 CVS <span>≥1 min · 328 ft</span> · ☕ Starbucks <span>≥2 min · 476 ft</span> · 🤡 Jack in the Box <span>≥3 min · 0.1 mi</span> · 🎯 Target <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.15101,-117.47105" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Fountain Valley, CA - Warner Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🎯 Target ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.15101,-117.47105" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fountain Valley, CA - Warner Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">9430 Warner Avenue, Fountain Valley, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 184 ft</span></b> · 🛒 Aldi <span>≥6 min · 0.3 mi</span> · ☕ Dutch Bros <span>≥6 min · 0.3 mi</span> · 💊 CVS <span>≥7 min · 0.4 mi</span> · ☕ Starbucks <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.71568,-117.96494" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>3530 West Century Blvd</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🛒 Aldi ≥6 min</span><span>☕ Dutch Bros ≥6 min</span><span>💊 CVS ≥7 min</span><span>☕ Starbucks ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.71568,-117.96494" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>3530 West Century Blvd</span><small>350 kW · 4 stalls</small></div>
 <div class="a">3530 W Century Blvd, Inglewood, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 184 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 203 ft</span> · 🌶️ Chili&#x27;s <span>≥1 min · 348 ft</span> · 📦 Costco <span>≥2 min · 400 ft</span> · 🥪 Subway <span>≥2 min · 489 ft</span> · 🍔 In-N-Out <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.94452,-118.33325" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 3465 (Glendale, AZ)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>📦 Costco ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍔 In-N-Out ≥2 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.94452,-118.33325" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 3465 (Glendale, AZ)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">5010 North 95th Avenue, Glendale, AZ</div><div class="host">Electrify America</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 187 ft</span></b> · 🛒 Walmart <span>≥1 min · 213 ft</span> · 🐼 Panda Express <span>≥1 min · 322 ft</span> · 👑 Burger King <span>≥1 min · 335 ft</span> · 🥪 Subway <span>≥2 min · 410 ft</span> · 🍔 In-N-Out <span>≥2 min · 472 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.50927,-112.26593" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=AZ">Show on map</a></div></div><div class="card"><div class="n"><span>Chico, CA - Tesla Supercharger</span><small>150 kW · 18 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍔 In-N-Out ≥2 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.50927,-112.26593" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chico, CA - Tesla Supercharger</span><small>150 kW · 18 stalls</small></div>
 <div class="a">1951 East 20th Street, Chico, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🤡 Jack in the Box <span>≥1 min · 121 ft</span> · <b>🌮 Del Taco <span>≥1 min · 200 ft</span></b> · 🎯 Target <span>≥1 min · 253 ft</span> · 🥪 Subway <span>≥1 min · 289 ft</span> · 🐕 Raising Cane&#x27;s <span>≥1 min · 364 ft</span> · 🍗 KFC <span>≥2 min · 413 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.72664,-121.80255" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T1390 (Tucker, GA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🎯 Target ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🍗 KFC ≥2 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.72664,-121.80255" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T1390 (Tucker, GA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4241 Lavista Rd, Tucker, GA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 203 ft</span></b> · 🎯 Target <span>≥2 min · 440 ft</span> · 🧇 Waffle House <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 🛒 Aldi <span>≥4 min · 0.2 mi</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.84567,-84.24504" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Whole Foods Castle Rock (CSR)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>💻 Best Buy ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.84567,-84.24504" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Whole Foods Castle Rock (CSR)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">6384 Promenade Pkwy, Castle Rock, CO</div><div class="host">EVgo</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 230 ft</span></b> · 🐔 Chick-fil-A <span>≥1 min · 266 ft</span> · 🥬 Whole Foods <span>≥2 min · 397 ft</span> · 🍔 Shake Shack <span>≥2 min · 515 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.42251,-104.87838" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CO">Show on map</a></div></div><div class="card"><div class="n"><span>Las Vegas, NV - South Fort Apache Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥬 Whole Foods ≥2 min</span><span>🍔 Shake Shack ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥4 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.42251,-104.87838" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Las Vegas, NV - South Fort Apache Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">5240 S Fort Apache Rd, Las Vegas, NV</div><div class="host">Tesla Supercharger</div>
-<div class="c">👑 Burger King <span>≥1 min · 112 ft</span> · <b>🌮 Del Taco <span>≥1 min · 246 ft</span></b> · 🥞 IHOP <span>≥2 min · 410 ft</span> · 🍕 Little Caesars <span>≥2 min · 495 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.09396,-115.29711" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=NV">Show on map</a></div></div><div class="card"><div class="n"><span>Barstow, CA</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.09396,-115.29711" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Barstow, CA</span><small>300 kW · 6 stalls</small></div>
 <div class="a">2835 Lenwood Rd, Barstow, CA</div><div class="host">Rivian Adventure</div>
-<div class="c">🥪 Jersey Mike&#x27;s <span>≥1 min · 164 ft</span> · ☕ Starbucks <span>≥1 min · 210 ft</span> · <b>🌮 Del Taco <span>≥1 min · 253 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥1 min · 289 ft</span> · 🥞 IHOP <span>≥1 min · 328 ft</span> · 🍔 In-N-Out <span>≥2 min · 512 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.85135,-117.08258" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Shopcore Northwood Town Center (Irvine, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.85135,-117.08258" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Shopcore Northwood Town Center (Irvine, CA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">4800 Irvine Blvd, Irvine, CA</div><div class="host">Electrify America</div>
-<div class="c">⭐ Carl&#x27;s Jr. <span>≥1 min · 236 ft</span> · <b>🌮 Del Taco <span>≥1 min · 272 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.71318,-117.7611" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Watsonville, CA - Tesla Supercharger</span><small>75 kW · 18 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.71318,-117.7611" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Watsonville, CA - Tesla Supercharger</span><small>75 kW · 18 stalls</small></div>
 <div class="a">1415 Main Street, Watsonville, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">💊 CVS <span>≥1 min · 272 ft</span> · <b>🌮 Del Taco <span>≥1 min · 279 ft</span></b> · 🎯 Target <span>≥1 min · 318 ft</span> · ☕ Starbucks <span>≥1 min · 328 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🍗 Wingstop <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.91558,-121.77341" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Inglewood, CA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍗 Wingstop ≥4 min</span><span>+2</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.91558,-121.77341" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Inglewood, CA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">3550 W Century Blvd, Inglewood, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">📦 Costco <span>≥1 min · 171 ft</span> · <b>🌮 Del Taco <span>≥1 min · 308 ft</span></b> · 🥪 Subway <span>≥2 min · 407 ft</span> · 🍔 Wendy&#x27;s <span>≥2 min · 430 ft</span> · 🌶️ Chili&#x27;s <span>≥2 min · 0.1 mi</span> · 🍔 In-N-Out <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.9449,-118.33438" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Inventrust Bear Creek Village Center (Wildomar, CA)</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>📦 Costco ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.9449,-118.33438" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Inventrust Bear Creek Village Center (Wildomar, CA)</span><small>350 kW · 4 stalls</small></div>
 <div class="a">36080 Hidden Springs Road, Wildomar, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌮 Del Taco <span>≥1 min · 341 ft</span></b> · 🤡 Jack in the Box <span>≥2 min · 449 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.2 mi</span> · 🍗 Wingstop <span>≥3 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.5961,-117.24781" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Fairfield, CA - Pittman Road - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.5961,-117.24781" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fairfield, CA - Pittman Road - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
 <div class="a">190 Pittman Rd, Fairfield, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">👑 Burger King <span>≥1 min · 135 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 292 ft</span> · <b>🌮 Del Taco <span>≥1 min · 341 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 377 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 400 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 446 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.22127,-122.12703" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>In-N-Out Oakdale</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.22127,-122.12703" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>In-N-Out Oakdale</span><small>125 kW · 1 stalls</small></div>
 <div class="a">3401 Oakdale Road, Modesto, CA</div><div class="host">ChargePoint</div>
-<div class="c">🍔 In-N-Out <span>≥1 min · 66 ft</span> · <b>🌮 Del Taco <span>≥1 min · 371 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.68852,-120.95886" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>In-N-Out Oakdale</span><small>125 kW · 1 stalls</small></div>
-<div class="a">3401 Oakdale Road, Modesto, CA</div><div class="host">ChargePoint</div>
-<div class="c">🍔 In-N-Out <span>≥1 min · 66 ft</span> · <b>🌮 Del Taco <span>≥1 min · 384 ft</span></b> · 👑 Burger King <span>≥2 min · 522 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.68852,-120.9588" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Walmart 2077 (Lake Elsinore, CA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥1 min</span><span>🍔 In-N-Out ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.68852,-120.95886" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Walmart 2077 (Lake Elsinore, CA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">29260 Central Avenue, Lake Elsinore, CA</div><div class="host">Electrify America</div>
-<div class="c">🍗 Popeyes <span>≥2 min · 446 ft</span> · <b>🌮 Del Taco <span>≥2 min · 443 ft</span></b> · 🐼 Panda Express <span>≥2 min · 489 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🛒 Walmart <span>≥3 min · 0.1 mi</span> · 🌶️ Chili&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.69454,-117.33339" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Holiday Inn Oceanside</span><small>95 kW · 2 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🌶️ Chili&#x27;s ≥3 min</span><span>+12</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69454,-117.33339" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Holiday Inn Oceanside</span><small>95 kW · 2 stalls</small></div>
 <div class="a">1401 Carmelo Dr, San Diego, CA</div><div class="host">EVCS</div>
-<div class="c"><b>🌮 Del Taco <span>≥2 min · 446 ft</span></b> · 🍳 Denny&#x27;s <span>≥2 min · 0.1 mi</span> · 🍔 In-N-Out <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.20739,-117.38759" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Signal Hill, CA - Tesla Supercharger</span><small>325 kW · 28 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🍔 In-N-Out ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.20739,-117.38759" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Signal Hill, CA - Tesla Supercharger</span><small>325 kW · 28 stalls</small></div>
 <div class="a">1800 E Willow St, Signal Hill, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 210 ft</span> · <b>🌮 Del Taco <span>≥2 min · 453 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span> · 📦 Costco <span>≥4 min · 0.2 mi</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 💻 Best Buy <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.80365,-118.1689" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Ontario, CA - Mills Circle - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>📦 Costco ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>💻 Best Buy ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.80365,-118.1689" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Ontario, CA - Mills Circle - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
 <div class="a">1 Mills Cir, Ontario, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🐕 Raising Cane&#x27;s <span>≥1 min · 249 ft</span> · <b>🌮 Del Taco <span>≥2 min · 453 ft</span></b> · 🥪 Subway <span>≥2 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span> · 🥞 IHOP <span>≥3 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.07171,-117.55616" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Katella Square</span><small>50 kW · 16 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+17</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07171,-117.55616" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Katella Square</span><small>50 kW · 16 stalls</small></div>
 <div class="a">7155 Katella Avenue, Stanton, CA</div><div class="host">EVCS</div>
-<div class="c"><b>🌮 Del Taco <span>≥2 min · 453 ft</span></b> · 🍔 Five Guys <span>≥3 min · 0.1 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥3 min · 0.1 mi</span> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span> · 🥪 Subway <span>≥4 min · 0.2 mi</span> · 🍝 Olive Garden <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.80339,-118.00914" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>CircleK - Perris, CA</span><small>180 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍝 Olive Garden ≥4 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.80339,-118.00914" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>CircleK - Perris, CA</span><small>180 kW · 4 stalls</small></div>
 <div class="a">1675 N Perris Blvd, Perris, CA</div><div class="host">Circle K</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥1 min · 220 ft</span> · <b>🌮 Del Taco <span>≥2 min · 472 ft</span></b> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · ⭐ Carl&#x27;s Jr. <span>≥2 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span> · 🥞 IHOP <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.80152,-117.22561" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Plaza Antonio</span><small>350 kW · 14 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🥞 IHOP ≥5 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.80152,-117.22561" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Plaza Antonio</span><small>350 kW · 14 stalls</small></div>
 <div class="a">22351 Antonio Pkwy, Rancho Santa Margarita, CA</div><div class="host">EVgo</div>
-<div class="c">💊 CVS <span>≥1 min · 236 ft</span> · ☕ Starbucks <span>≥2 min · 417 ft</span> · <b>🌮 Del Taco <span>≥2 min · 472 ft</span></b> · 🌯 Chipotle <span>≥4 min · 0.2 mi</span> · 🍗 Wingstop <span>≥5 min · 0.3 mi</span> · 🥖 Panera Bread <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.63886,-117.59101" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Montebello Plaza (Montebello , CA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥4 min</span><span>🍗 Wingstop ≥5 min</span><span>🥖 Panera Bread ≥6 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.63886,-117.59101" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Montebello Plaza (Montebello , CA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">2401 W. Via Campo, Montebello, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🌮 Del Taco <span>≥2 min · 486 ft</span></b> · 💻 Best Buy <span>≥3 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥7 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.03107,-118.12404" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Holiday Inn SNA - GRANDHI17 LLC</span><small>50 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>💻 Best Buy ≥3 min</span><span>🤡 Jack in the Box ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.03107,-118.12404" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Holiday Inn SNA - GRANDHI17 LLC</span><small>50 kW · 8 stalls</small></div>
 <div class="a">2726 S Grand Ave, Santa Ana, CA</div><div class="host">EV Gateway</div>
-<div class="c"><b>🌮 Del Taco <span>≥2 min · 489 ft</span></b> · ⭐ Carl&#x27;s Jr. <span>≥4 min · 0.2 mi</span> · 🤡 Jack in the Box <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.71037,-117.8516" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>In-N-Out Oakdale</span><small>93 kW · 1 stalls</small></div>
-<div class="a">3401 Oakdale Road, Modesto, CA</div><div class="host">ChargePoint</div>
-<div class="c">🍔 In-N-Out <span>≥1 min · 121 ft</span> · <b>🌮 Del Taco <span>≥2 min · 492 ft</span></b> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.68832,-120.95847" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Hacienda Heights, CA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>🤡 Jack in the Box ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.71037,-117.8516" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Hacienda Heights, CA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
 <div class="a">15848 Gale Ave, Hacienda Heights, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🌮 Del Taco <span>≥2 min · 495 ft</span></b> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.01008,-117.96117" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Rosecrans Plaza</span><small>50 kW · 6 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.01008,-117.96117" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Rosecrans Plaza</span><small>50 kW · 6 stalls</small></div>
 <div class="a">3156 Sports Arena Blvd, San Diego, CA</div><div class="host">EVgo</div>
-<div class="c">🥪 Subway <span>≥1 min · 213 ft</span> · 🐼 Panda Express <span>≥1 min · 276 ft</span> · ☕ Starbucks <span>≥2 min · 489 ft</span> · 🍔 In-N-Out <span>≥2 min · 492 ft</span> · <b>🌮 Del Taco <span>≥2 min · 499 ft</span></b> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=32.75287,-117.2066" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>St. George, UT - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 In-N-Out ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.75287,-117.2066" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>St. George, UT - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">1091 N Bluff St, St. George, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c">☕ Starbucks <span>≥1 min · 92 ft</span> · <b>🌮 Del Taco <span>≥2 min · 509 ft</span></b> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.12643,-113.60184" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=UT">Show on map</a></div></div><div class="card"><div class="n"><span>Manteca, CA - Spreckels Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🐼 Panda Express ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.12643,-113.60184" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Manteca, CA - Spreckels Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">280 Spreckels Avenue, Manteca, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c">🍎 Applebee&#x27;s <span>≥2 min · 492 ft</span> · <b>🌮 Del Taco <span>≥2 min · 509 ft</span></b> · 🎯 Target <span>≥2 min · 0.1 mi</span> · 🤡 Jack in the Box <span>≥2 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.1 mi</span> · 🍗 KFC <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.79597,-121.19773" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Target T0300 (Mission Viejo, CA)</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🎯 Target ≥2 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79597,-121.19773" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Target T0300 (Mission Viejo, CA)</span><small>350 kW · 6 stalls</small></div>
 <div class="a">24500 Alicia Pkwy, Mission Viejo, CA</div><div class="host">Electrify America</div>
-<div class="c">🎯 Target <span>≥1 min · 325 ft</span> · <b>🌮 Del Taco <span>≥2 min · 515 ft</span></b> · 🍳 Denny&#x27;s <span>≥2 min · 0.1 mi</span> · 🍔 Five Guys <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.2 mi</span> · 🌮 Taco Bell <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.60568,-117.68901" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Ethan Conrad_Sacramento_#26</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🎯 Target ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.60568,-117.68901" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Ethan Conrad_Sacramento_#26</span><small>350 kW · 8 stalls</small></div>
 <div class="a">4411 Elkhorn Blvd., Sacramento, CA</div><div class="host">EVgo</div>
-<div class="c">🥩 Arby&#x27;s <span>≥1 min · 292 ft</span> · <b>🌮 Del Taco <span>≥2 min · 0.1 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.69562,-121.36331" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Livonia Commons</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.69562,-121.36331" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Livonia Commons</span><small>350 kW · 4 stalls</small></div>
 <div class="a">13409 Middlebelt Road, Livonia, MI</div><div class="host">EVgo</div>
-<div class="c">📦 Costco <span>≥2 min · 410 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 472 ft</span> · 🐼 Panda Express <span>≥2 min · 0.1 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span> · <b>🌮 Del Taco <span>≥2 min · 0.1 mi</span></b> · ☕ Starbucks <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.38095,-83.33426" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Venice Crossroads</span><small>50 kW · 2 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>📦 Costco ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.38095,-83.33426" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Venice Crossroads</span><small>50 kW · 2 stalls</small></div>
 <div class="a">8985 Venice Blvd, Los Angeles, CA</div><div class="host">EVgo</div>
-<div class="c">☕ Starbucks <span>≥1 min · 167 ft</span> · 💊 CVS <span>≥1 min · 210 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 249 ft</span> · 🍗 Wingstop <span>≥1 min · 348 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 348 ft</span> · <b>🌮 Del Taco <span>≥2 min · 0.1 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.02736,-118.39233" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Tom Bell Chevy</span><small>60 kW · 2 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.02736,-118.39233" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Tom Bell Chevy</span><small>60 kW · 2 stalls</small></div>
 <div class="a">800 Alabama Street, Redlands, CA</div><div class="host">Blink</div>
-<div class="c">🍟 McDonald&#x27;s <span>≥2 min · 466 ft</span> · <b>🌮 Del Taco <span>≥2 min · 0.1 mi</span></b> · 🥞 IHOP <span>≥2 min · 0.1 mi</span> · 🍳 Denny&#x27;s <span>≥6 min · 0.3 mi</span> · 🥩 Arby&#x27;s <span>≥8 min · 0.4 mi</span> · 🔧 Lowe&#x27;s <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.06398,-117.20821" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Olive Garden - Riverdale Shopping Center</span><small>50 kW · 4 stalls</small></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>🍳 Denny&#x27;s ≥6 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>👑 Burger King ≥8 min</span><span>+7</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06398,-117.20821" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Olive Garden - Riverdale Shopping Center</span><small>50 kW · 4 stalls</small></div>
 <div class="a">4087 Riverdale Rd, Ogden, UT</div><div class="host">Evpower</div>
-<div class="c">🍝 Olive Garden <span>≥1 min · 167 ft</span> · 🐼 Panda Express <span>≥2 min · 394 ft</span> · 🐔 Chick-fil-A <span>≥1 min · 387 ft</span> · ☕ Starbucks <span>≥2 min · 486 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · <b>🌮 Del Taco <span>≥2 min · 0.1 mi</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.18947,-111.98267" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Del Taco&amp;state=UT">Show on map</a></div></div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍝 Olive Garden ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.18947,-111.98267" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>Montebello, CA - N Wilcox Ave - Tesla Supercharger</span><small>325 kW · 68 stalls</small></div>
+<div class="a">855 N Wilcox Ave, Montebello, CA</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🤡 Jack in the Box ≥5 min</span><span>💻 Best Buy ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.031,-118.12593" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
+<div class="n"><span>South Salt Lake, UT - S Main Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
+<div class="a">2193 S Main Street, South Salt Lake, UT</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🌮 <b>Del Taco</b> ≥2 min</span><span>🍔 In-N-Out ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Del Taco&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72425,-111.8909" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

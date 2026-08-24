@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Love&#x27;s (4 locations) | Charge & Chew</title>
-<meta name="description" content="4 EV DC fast chargers within a 10-minute walk of a Love&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Love&#x27;s (236 locations) | Charge & Chew</title>
+<meta name="description" content="236 EV DC fast chargers within a 10-minute walk of a Love&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/love-s/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Love&#x27;s (4 locations)">
-<meta property="og:description" content="4 EV DC fast chargers within a 10-minute walk of a Love&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Love&#x27;s (236 locations)">
+<meta property="og:description" content="236 EV DC fast chargers within a 10-minute walk of a Love&#x27;s, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/love-s/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,57 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>⛽ EV fast chargers near Love&#x27;s</h1>
-<p class="lead">We found <b>4 DC fast chargers</b> in the US — across all networks — with a Love&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>236 DC fast chargers</b> in the US — across all networks — with a Love&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Love&#x27;s">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>4</small></a></div>
-<h2>Closest 4 nationwide</h2><div class="card"><div class="n"><span>Love&#x27;S 898 - Ca #898</span><small>125 kW · 1 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="tx/">Texas <small>27</small></a><a href="ok/">Oklahoma <small>24</small></a><a href="ca/">California <small>18</small></a><a href="co/">Colorado <small>11</small></a><a href="ks/">Kansas <small>11</small></a><a href="nm/">New Mexico <small>11</small></a><a href="az/">Arizona <small>11</small></a><a href="oh/">Ohio <small>11</small></a><a href="fl/">Florida <small>10</small></a><a href="il/">Illinois <small>10</small></a><a href="ga/">Georgia <small>8</small></a><a href="wa/">Washington <small>7</small></a><a href="ky/">Kentucky <small>6</small></a><a href="nv/">Nevada <small>6</small></a><a href="ny/">New York <small>5</small></a><a href="va/">Virginia <small>5</small></a><a href="pa/">Pennsylvania <small>4</small></a><a href="al/">Alabama <small>4</small></a><a href="or/">Oregon <small>4</small></a><a href="nd/">North Dakota <small>3</small></a><a href="nc/">North Carolina <small>3</small></a><a href="in/">Indiana <small>3</small></a><a href="ms/">Mississippi <small>3</small></a><a href="mo/">Missouri <small>3</small></a><a href="ia/">Iowa <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="wi/">Wisconsin <small>3</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ut/">Utah <small>2</small></a><a href="la/">Louisiana <small>2</small></a><a href="sc/">South Carolina <small>2</small></a><a href="id/">Idaho <small>2</small></a><a href="ar/">Arkansas <small>2</small></a><a href="mt/">Montana <small>2</small></a><a href="tn/">Tennessee <small>1</small></a><a href="mn/">Minnesota <small>1</small></a><a href="ct/">Connecticut <small>1</small></a><a href="mi/">Michigan <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s 581 (Salina, UT)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">1915 South State Street, Salina, UT</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ TA Travel Center ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>🥪 Subway ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.93144,-111.85365" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Electric Era Charging Station</span><small>200 kW · 8 stalls</small></div>
+<div class="a">115 Harrison Ave, Buena Vista, CO</div><div class="host">Electric Era</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.85083,-106.13924" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 238 - Ky #238</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1090 Cedar Grove Road, Shepherdsville, KY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ RaceTrac ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97925,-85.69377" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 287 - Tx #287</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1221 S Oak St, Van, TX</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍦 Dairy Queen ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.50836,-95.64208" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 223 - Ca #223</span><small>375 kW · 2 stalls</small></div>
+<div class="a">1553 W Colony Rd, Ripon, CA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>⛽ Flying J ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75561,-121.14154" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 647 - Ks #647</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1356 US-81, Belleville, KS</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.83499,-97.63796" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 360 - Ky #360</span><small>320 kW · 2 stalls</small></div>
+<div class="a">4000 L and North Turnpike Road, Horse Cave, KY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.20141,-85.93518" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s Travel Stop #86</span><small>50 kW · 12 stalls</small></div>
+<div class="a">1326 S 4th St, Chickasha, OK</div><div class="host">Non-networked</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🌮 Taco Bell ≥8 min</span><span>🥩 Arby&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.03731,-97.93717" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 653 - Co #653</span><small>320 kW · 2 stalls</small></div>
+<div class="a">15596 US-287, Eads, CO</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.4887,-102.78484" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s Travel #285 (Santa Rosa, NM)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">1028 State Hwy 156, Santa Rosa, NM</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥5 min</span><span>🍗 Popeyes ≥5 min</span><span>⛽ TA Travel Center ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.94721,-104.63823" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s Travel #286 (Quartzsite, AZ)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">760 S Quartzsite Blvd, Quartzsite, AZ</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>👑 Burger King ≥5 min</span><span>☕ Starbucks ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>⛽ Pilot ≥8 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.65756,-114.24142" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 898 - Ca #898</span><small>142 kW · 1 stalls</small></div>
 <div class="a">1264 De la Torre St, Salinas, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Love&#x27;s <span>≥1 min · 167 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 217 ft</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.65885,-121.61892" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 898 - Ca #898</span><small>142 kW · 1 stalls</small></div>
-<div class="a">1264 De la Torre St, Salinas, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Love&#x27;s <span>≥1 min · 187 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 230 ft</span> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.65901,-121.61926" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 898 - Ca #898</span><small>142 kW · 1 stalls</small></div>
-<div class="a">1264 De la Torre St, Salinas, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Love&#x27;s <span>≥1 min · 207 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 243 ft</span> · 🤡 Jack in the Box <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.65911,-121.61939" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Love&#x27;S 898 - Ca #898</span><small>125 kW · 1 stalls</small></div>
-<div class="a">1264 De la Torre St, Salinas, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>⛽ Love&#x27;s <span>≥1 min · 253 ft</span></b> · 🥩 Arby&#x27;s <span>≥1 min · 299 ft</span> · 🤡 Jack in the Box <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.65874,-121.61922" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a></div></div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.65901,-121.61926" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 382 - Ca #382</span><small>375 kW · 2 stalls</small></div>
+<div class="a">2700 South Blackstone Street, Tulare, CA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⛽ Flying J ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.18152,-119.33012" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 833 - Ny #833</span><small>400 kW · 2 stalls</small></div>
+<div class="a">6204 Shortman Rd, Ripley, NY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.25913,-79.74317" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc -404B</span><small>62 kW · 1 stalls</small></div>
+<div class="a">7225 Kansas Tpke, El Dorado, KS</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍦 Dairy Queen ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76609,-96.98192" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc -406B</span><small>62 kW · 1 stalls</small></div>
+<div class="a">209 Kansas Turnpike @ KS Turnpike - Lawrence, Lawrence OCL, KS</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.02036,-95.13467" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 829 - Pa #829</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1373 PA-28, Brookville, PA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.17119,-79.04579" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Topeka, KS - Topeka Service Area - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="a">8000 I-70, Topeka, KS</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.01949,-95.50792" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>KS Turnpike – Belle Plaine</span><small>350 kW · 4 stalls</small></div>
+<div class="a">Mile 26 Kansas Turnpike, Belle Plaine, KS</div><div class="host">Francis Energy</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.36673,-97.3224" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc-406A</span><small>62 kW · 1 stalls</small></div>
+<div class="a">209 Kansas Tpke @Kansas Turnpike Lawrence Eas, Lawrence OCL, KS</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.02051,-95.13476" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 736 - Ca #736</span><small>375 kW · 2 stalls</small></div>
+<div class="a">3174 Avenue 17, Madera, CA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.99572,-120.09723" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 374 - Ca #374</span><small>62 kW · 1 stalls</small></div>
+<div class="a">2974 Lenwood Rd, Barstow, CA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>⛽ TA Travel Center ≥5 min</span><span>🥪 Subway ≥6 min</span><span>⛽ Pilot ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.85683,-117.09191" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Evergy @Kta Svc -408A</span><small>125 kW · 1 stalls</small></div>
+<div class="a">8000 SE I-70 Hwy @ KS Turnpike - Topeka East, Topeka OCL, KS</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.01963,-95.50789" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 755 - Ca #755</span><small>50 kW · 1 stalls</small></div>
+<div class="a">27201 Boron Frontage Rd N, Boron, CA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.01161,-117.64418" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Steele, AL - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="a">905 Steele Station Road, Steele, AL</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Speedway ≥3 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.93385,-86.19158" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 383 - Ky #383</span><small>320 kW · 2 stalls</small></div>
+<div class="a">499 Loves Dr, Sparta, KY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.6938,-84.93871" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 366 - Pa #366</span><small>320 kW · 2 stalls</small></div>
+<div class="a">22 Old Forge Rd, Jonestown, PA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>⛽ Speedway ≥5 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.44997,-76.51512" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 448 - Wa #448</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1501 33rd Avenue East, Tacoma, WA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🤡 Jack in the Box ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.24574,-122.38505" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s 627 (Davenport, FL)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">Love’s Travel Shop 45000 US-27, Davenport, FL</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ RaceTrac ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍔 Wendy&#x27;s ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.24366,-81.65724" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s 403 (Binghamton, NY)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">2 Industrial Park Drive, Binghamton, NY</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>⛽ TA Travel Center ≥6 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.10126,-75.83634" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 418 - Ky #418</span><small>320 kW · 2 stalls</small></div>
+<div class="a">750 Carol Malone Blvd, Grayson, KY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.34079,-82.94225" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 298 - Tx #298</span><small>320 kW · 2 stalls</small></div>
+<div class="a">28527 Interstate 35, Encinal, TX</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.04594,-99.34892" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 324 - Pa #324</span><small>320 kW · 2 stalls</small></div>
+<div class="a">440 W 3rd St, Mifflinville, PA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥2 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.02695,-76.31823" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Italy, TX - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="a">1021 Dale Evans Drive, Italy, TX</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🤡 Jack in the Box ≥3 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.19495,-96.89878" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Midland, TX - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="a">3001 Antelope Trail, Midland, TX</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.9474,-102.14123" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;s 253 (Erick, OK)</span><small>350 kW · 4 stalls</small></div>
+<div class="a">901 N Sheb Wooley Ave., Erick, OK</div><div class="host">Electrify America</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.22442,-99.86956" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 774 - Al #774</span><small>200 kW · 2 stalls</small></div>
+<div class="a">747 Lee Road 248, Smiths Station, AL</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.53722,-85.08325" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 731 - Pa #731</span><small>320 kW · 2 stalls</small></div>
+<div class="a">1011 New Castle Rd, Slippery Rock, PA</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.03633,-80.1284" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 820 - Ny #820</span><small>400 kW · 2 stalls</small></div>
+<div class="a">1262 New York 414, Waterloo, NY</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.96395,-76.84749" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Love&#x27;S 471 - Tx #471</span><small>320 kW · 2 stalls</small></div>
+<div class="a">21548 Farm to Market Road 471, Natalia, TX</div><div class="host">ChargePoint</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.18464,-98.8457" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

@@ -4,15 +4,15 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f5f7">
-<title>EV fast chargers near Chick-fil-A (1574 locations) | Charge & Chew</title>
-<meta name="description" content="1574 EV DC fast chargers within a 10-minute walk of a Chick-fil-A, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<title>EV fast chargers near Chick-fil-A (1500 locations) | Charge & Chew</title>
+<meta name="description" content="1500 EV DC fast chargers within a 10-minute walk of a Chick-fil-A, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <link rel="canonical" href="https://chargeandchew.com/near/chick-fil-a/">
 
 <link rel="icon" href="https://chargeandchew.com/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Charge & Chew">
-<meta property="og:title" content="EV fast chargers near Chick-fil-A (1574 locations)">
-<meta property="og:description" content="1574 EV DC fast chargers within a 10-minute walk of a Chick-fil-A, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
+<meta property="og:title" content="EV fast chargers near Chick-fil-A (1500 locations)">
+<meta property="og:description" content="1500 EV DC fast chargers within a 10-minute walk of a Chick-fil-A, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance.">
 <meta property="og:url" content="https://chargeandchew.com/near/chick-fil-a/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -20,201 +20,274 @@
 <meta name="theme-color" content="#0d1117">
 
 <style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#2b333d;--txt:#e6edf3;--dim:#8b949e;--red:#e82127;--amber:#d29922;--blue:#58a6ff}
+:root{
+  --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
+  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 2px 10px rgba(0,0,0,.35);
+}}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-.wrap{max-width:860px;margin:0 auto;padding:18px 16px 60px}
-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-header .logo{font-weight:800;letter-spacing:1px;font-size:18px;color:var(--txt);text-decoration:none}
-header .logo span{color:var(--red)}
-header nav a{color:var(--dim);font-size:13px;text-decoration:none;margin-left:12px}
-h1{font-size:24px;line-height:1.25;margin-bottom:8px}
-.lead{color:var(--dim);margin-bottom:14px;font-size:15px}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:8px;margin-bottom:22px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
-.card .n{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:8px}
-.card .n small{color:var(--dim);font-weight:400;font-size:12px;white-space:nowrap}
-.card .a{color:var(--dim);font-size:12px}
-.card .host{color:var(--amber);font-size:12px}
-.card .c{font-size:13px;margin-top:4px}
-.card .c b{font-weight:600}
-.card .c span{color:var(--dim)}
-.card .l{margin-top:6px;font-size:12px}
-.card .l a{color:var(--blue);text-decoration:none;margin-right:12px}
-h2{font-size:17px;margin:26px 0 8px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips a{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-size:13px;padding:5px 10px;border-radius:16px;text-decoration:none}
-.chips a small{color:var(--dim)}
-footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
-footer a{color:var(--blue)}
+body{background:var(--bg);color:var(--txt);line-height:1.5;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
+  color:var(--txt);text-decoration:none}
+header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:15px}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header nav{margin-left:auto;display:flex;gap:14px}
+header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
+h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead b{color:var(--txt)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
+  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
+.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
+.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .body{flex:1;min-width:0}
+.card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
+  align-items:baseline;letter-spacing:-.2px}
+.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
+  background:var(--surface2);border-radius:7px;padding:3px 8px}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
+.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
+.card .c b{color:var(--txt);font-weight:700}
+.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
+.card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
+  padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
+.chips a small{color:var(--dim2);font-weight:500}
+footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
+  line-height:1.6}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 </style></head><body><div class="wrap">
-<header><a class="logo" href="../../">CHARGE <span>&amp;</span> CHEW</a>
+<header><a class="logo" href="../../"><span class="mk">⚡</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a></nav></header>
 <h1>🐔 EV fast chargers near Chick-fil-A</h1>
-<p class="lead">We found <b>1574 DC fast chargers</b> in the US — across all networks — with a Chick-fil-A within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>1500 DC fast chargers</b> in the US — across all networks — with a Chick-fil-A within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Chick-fil-A">Open on the map →</a>
-<h2>By state</h2><div class="chips"><a href="ca/">California <small>262</small></a><a href="tx/">Texas <small>147</small></a><a href="ga/">Georgia <small>141</small></a><a href="fl/">Florida <small>117</small></a><a href="va/">Virginia <small>82</small></a><a href="nc/">North Carolina <small>67</small></a><a href="md/">Maryland <small>58</small></a><a href="il/">Illinois <small>56</small></a><a href="pa/">Pennsylvania <small>50</small></a><a href="nj/">New Jersey <small>40</small></a><a href="co/">Colorado <small>40</small></a><a href="ny/">New York <small>39</small></a><a href="al/">Alabama <small>35</small></a><a href="sc/">South Carolina <small>34</small></a><a href="ma/">Massachusetts <small>26</small></a><a href="wa/">Washington <small>26</small></a><a href="mo/">Missouri <small>26</small></a><a href="oh/">Ohio <small>26</small></a><a href="tn/">Tennessee <small>24</small></a><a href="mi/">Michigan <small>24</small></a><a href="ut/">Utah <small>23</small></a><a href="in/">Indiana <small>22</small></a><a href="az/">Arizona <small>17</small></a><a href="or/">Oregon <small>17</small></a><a href="ky/">Kentucky <small>16</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="wi/">Wisconsin <small>14</small></a><a href="la/">Louisiana <small>13</small></a><a href="wv/">West Virginia <small>13</small></a><a href="ia/">Iowa <small>12</small></a><a href="ms/">Mississippi <small>11</small></a><a href="mn/">Minnesota <small>10</small></a><a href="ar/">Arkansas <small>10</small></a><a href="nh/">New Hampshire <small>8</small></a><a href="ks/">Kansas <small>8</small></a><a href="de/">Delaware <small>8</small></a><a href="nv/">Nevada <small>8</small></a><a href="ct/">Connecticut <small>8</small></a><a href="me/">Maine <small>6</small></a><a href="nm/">New Mexico <small>5</small></a><a href="dc/">Washington DC <small>2</small></a><a href="mt/">Montana <small>2</small></a><a href="hi/">Hawaii <small>2</small></a><a href="nd/">North Dakota <small>1</small></a><a href="ne/">Nebraska <small>1</small></a><a href="id/">Idaho <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="n"><span>Applegreen Electric - Clifton Springs Travel Plaza</span><small>350 kW · 6 stalls</small></div>
+<h2>By state</h2><div class="chips"><a href="ca/">California <small>237</small></a><a href="tx/">Texas <small>146</small></a><a href="ga/">Georgia <small>130</small></a><a href="fl/">Florida <small>115</small></a><a href="va/">Virginia <small>79</small></a><a href="nc/">North Carolina <small>66</small></a><a href="md/">Maryland <small>56</small></a><a href="il/">Illinois <small>54</small></a><a href="pa/">Pennsylvania <small>46</small></a><a href="nj/">New Jersey <small>40</small></a><a href="ny/">New York <small>38</small></a><a href="co/">Colorado <small>38</small></a><a href="sc/">South Carolina <small>33</small></a><a href="al/">Alabama <small>29</small></a><a href="wa/">Washington <small>26</small></a><a href="mo/">Missouri <small>26</small></a><a href="ma/">Massachusetts <small>25</small></a><a href="oh/">Ohio <small>25</small></a><a href="tn/">Tennessee <small>24</small></a><a href="mi/">Michigan <small>22</small></a><a href="ut/">Utah <small>20</small></a><a href="in/">Indiana <small>19</small></a><a href="az/">Arizona <small>17</small></a><a href="or/">Oregon <small>17</small></a><a href="ky/">Kentucky <small>16</small></a><a href="ok/">Oklahoma <small>15</small></a><a href="wi/">Wisconsin <small>14</small></a><a href="la/">Louisiana <small>13</small></a><a href="wv/">West Virginia <small>13</small></a><a href="ia/">Iowa <small>12</small></a><a href="mn/">Minnesota <small>10</small></a><a href="ms/">Mississippi <small>10</small></a><a href="ar/">Arkansas <small>10</small></a><a href="ks/">Kansas <small>8</small></a><a href="de/">Delaware <small>8</small></a><a href="nv/">Nevada <small>8</small></a><a href="ct/">Connecticut <small>8</small></a><a href="nh/">New Hampshire <small>7</small></a><a href="me/">Maine <small>5</small></a><a href="nm/">New Mexico <small>5</small></a><a href="dc/">Washington DC <small>2</small></a><a href="mt/">Montana <small>2</small></a><a href="hi/">Hawaii <small>2</small></a><a href="nd/">North Dakota <small>1</small></a><a href="ne/">Nebraska <small>1</small></a><a href="id/">Idaho <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Applegreen Electric - Clifton Springs Travel Plaza</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3236 NY-96, Clifton Springs, NY</div><div class="host">Applegreen</div>
-<div class="c">👑 Burger King <span>≥1 min · 62 ft</span> · ☕ Starbucks <span>≥1 min · 62 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 62 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.97276,-77.17345" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Augusta, GA - Belair Frontage Road - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.97276,-77.17345" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Augusta, GA - Belair Frontage Road - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
 <div class="a">4329 Belair Frontage Road, Augusta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 69 ft</span></b> · 🍟 McDonald&#x27;s <span>≥2 min · 407 ft</span> · 🪵 Cracker Barrel <span>≥3 min · 0.1 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span> · 🧇 Waffle House <span>≥4 min · 0.2 mi</span> · 🍗 Popeyes <span>≥5 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.48166,-82.13027" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Westfield Century City (Los Angeles, CA)</span><small>350 kW · 3 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🧇 Waffle House ≥4 min</span><span>🍗 Popeyes ≥5 min</span><span>+4</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.48166,-82.13027" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Westfield Century City (Los Angeles, CA)</span><small>350 kW · 3 stalls</small></div>
 <div class="a">10250 Santa Monica Blvd, Los Angeles, CA</div><div class="host">Electrify America</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 69 ft</span></b> · 🐼 Panda Express <span>≥1 min · 115 ft</span> · 🌯 Chipotle <span>≥1 min · 125 ft</span> · 🍔 Shake Shack <span>≥1 min · 154 ft</span> · 💊 Walgreens <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.05794,-118.41993" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Johns Crk DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>💊 Walgreens ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.05794,-118.41993" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Johns Crk DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">8465 Holcomb Bridge Road, Johns Creek, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 69 ft</span></b> · 🛒 Kroger <span>≥1 min · 92 ft</span> · 💊 CVS <span>≥2 min · 509 ft</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.98652,-84.27017" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>El Paso, TX - Eastlake Boulevard - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🛒 Kroger ≥1 min</span><span>💊 CVS ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.98652,-84.27017" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>El Paso, TX - Eastlake Boulevard - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
 <div class="a">12161 Eastlake Blvd, El Paso, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 69 ft</span></b> · ☕ Starbucks <span>≥1 min · 95 ft</span> · 🍟 McDonald&#x27;s <span>≥1 min · 308 ft</span> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 289 ft</span> · 🐼 Panda Express <span>≥1 min · 387 ft</span> · 🍗 Wingstop <span>≥2 min · 417 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=31.68863,-106.26478" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Ankeny Iowa</span><small>150 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>+14</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.68863,-106.26478" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ankeny Iowa</span><small>150 kW · 4 stalls</small></div>
 <div class="a">1010 National Road, Ankeny, IA</div><div class="host">ChargeLab</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 75 ft</span></b> · 🥞 IHOP <span>≥1 min · 328 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 328 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 400 ft</span> · 🥖 Panera Bread <span>≥2 min · 512 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.70536,-93.58187" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div></div><div class="card"><div class="n"><span>Plattekill Service Area</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+17</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.70536,-93.58187" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Plattekill Service Area</span><small>350 kW · 6 stalls</small></div>
 <div class="a">I-87 - NYS Thruway NB, Plattekill, NY</div><div class="host">Applegreen</div>
-<div class="c">👑 Burger King <span>≥1 min · 0 ft</span> · ☕ Starbucks <span>≥1 min · 89 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 89 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.57765,-74.08539" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>City Of Wilson Chicfila2Dcfast</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.57765,-74.08539" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>City Of Wilson Chicfila2Dcfast</span><small>125 kW · 1 stalls</small></div>
 <div class="a">5100 Raleigh Rd Pkwy W, Wilson, NC</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 95 ft</span></b> · 🍗 Bojangles <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.1 mi</span> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=35.76444,-78.01002" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NC">Show on map</a></div></div><div class="card"><div class="n"><span>EVolve NY Commack</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.76444,-78.01002" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>EVolve NY Commack</span><small>350 kW · 4 stalls</small></div>
 <div class="a">656 Commack Rd, Commack, NY</div><div class="host">Electrify America</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 108 ft</span></b> · 🔧 Lowe&#x27;s <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥6 min · 0.3 mi</span> · 🛒 Walmart <span>≥7 min · 0.4 mi</span> · 🎯 Target <span>≥8 min · 0.4 mi</span> · 📦 Costco <span>≥9 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.80751,-73.29381" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Applegreen Electric - Connie Chung Service Area</span><small>350 kW · 2 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>☕ Starbucks ≥6 min</span><span>🛒 Walmart ≥7 min</span><span>🎯 Target ≥8 min</span><span>📦 Costco ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.80751,-73.29381" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Applegreen Electric - Connie Chung Service Area</span><small>350 kW · 2 stalls</small></div>
 <div class="a">1339 Broad St, Bloomfield, NJ</div><div class="host">Applegreen</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 108 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.83629,-74.18092" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Paramus, NJ</span><small>300 kW · 6 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.83629,-74.18092" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Paramus, NJ</span><small>300 kW · 6 stalls</small></div>
 <div class="a">700 Paramus Park, Paramus, NJ</div><div class="host">Rivian Adventure</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 112 ft</span></b> · 🥖 Panera Bread <span>≥1 min · 318 ft</span> · 🔨 Home Depot <span>≥4 min · 0.2 mi</span> · 🍩 Dunkin&#x27; <span>≥5 min · 0.3 mi</span> · 🍗 Wingstop <span>≥6 min · 0.3 mi</span> · 🌯 Chipotle <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=40.95658,-74.06865" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Riverdale DC</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🔨 Home Depot ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🍗 Wingstop ≥6 min</span><span>🌯 Chipotle ≥6 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.95658,-74.06865" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Riverdale DC</span><small>125 kW · 1 stalls</small></div>
 <div class="a">6549 GA-85, Riverdale, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 121 ft</span></b> · 🍗 Popeyes <span>≥6 min · 0.3 mi</span> · 🍕 Domino&#x27;s <span>≥6 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥6 min · 0.3 mi</span> · 🍔 Wendy&#x27;s <span>≥10 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.5756,-84.41338" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Market Basket Westbrook #85</span><small>100 kW · 2 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍗 Popeyes ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍔 Wendy&#x27;s ≥10 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.5756,-84.41338" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Market Basket Westbrook #85</span><small>100 kW · 2 stalls</small></div>
 <div class="a">90 Rock Row, Westbrook, ME</div><div class="host">EVgo</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 121 ft</span></b> · 🍩 Dunkin&#x27; <span>≥1 min · 276 ft</span> · 🚒 Firehouse Subs <span>≥2 min · 469 ft</span> · 🌯 Chipotle <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.67728,-70.33226" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=ME">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Jonesboro</span><small>62 kW · 1 stalls</small></div>
-<div class="a">7348 Tara Blvd, Jonesboro, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 125 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.55424,-84.36988" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Corpus Christi, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.67728,-70.33226" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Corpus Christi, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
 <div class="a">4938 South Staples Street, Corpus Christi, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 125 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 184 ft</span> · 🌯 Chipotle <span>≥1 min · 184 ft</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.2 mi</span> · 🌶️ Chili&#x27;s <span>≥4 min · 0.2 mi</span> · ☕ Starbucks <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=27.71034,-97.36851" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=TX">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Jonesboro</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.71034,-97.36851" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Jonesboro</span><small>62 kW · 1 stalls</small></div>
 <div class="a">7348 Tara Blvd, Jonesboro, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 141 ft</span></b></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.55425,-84.36992" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Casey&#x27;s General</span><small>150 kW · 2 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.55425,-84.36992" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Casey&#x27;s General</span><small>150 kW · 2 stalls</small></div>
 <div class="a">1010 SE National Dr, Ankeny, IA</div><div class="host">Non-networked</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 144 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 328 ft</span> · 🍔 Wendy&#x27;s <span>≥1 min · 381 ft</span> · 🥞 IHOP <span>≥1 min · 364 ft</span> · 👑 Burger King <span>≥2 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=41.7052,-93.58201" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div></div><div class="card"><div class="n"><span>Elizabethtown, KY - North Mulberry Street - Tesla Supercharg</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>+17</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.7052,-93.58201" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Elizabethtown, KY - North Mulberry Street - Tesla Supercharg</span><small>325 kW · 8 stalls</small></div>
 <div class="a">1036 N Mulberry St, Elizabethtown, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c">👑 Burger King <span>≥1 min · 92 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 161 ft</span></b> · 🍔 Wendy&#x27;s <span>≥1 min · 341 ft</span> · ⛽ Speedway <span>≥2 min · 436 ft</span> · 🪵 Cracker Barrel <span>≥3 min · 0.2 mi</span> · 🛒 Kroger <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.71069,-85.83403" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=KY">Show on map</a></div></div><div class="card"><div class="n"><span>Iroquois Travel Plaza</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🛒 Kroger ≥3 min</span><span>+10</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.71069,-85.83403" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Iroquois Travel Plaza</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2576 State Route 5S Mile Post 210W, Little Falls, NY</div><div class="host">Applegreen</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 164 ft</span></b> · ☕ Starbucks <span>≥1 min · 180 ft</span> · 👑 Burger King <span>≥1 min · 217 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.01676,-74.80228" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Chittenango Travel Plaza</span><small>350 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01676,-74.80228" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chittenango Travel Plaza</span><small>350 kW · 4 stalls</small></div>
 <div class="a">2188 Tag Rd NY State Thruway, Chittenango, NY</div><div class="host">Applegreen</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 171 ft</span></b> · ☕ Starbucks <span>≥1 min · 171 ft</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=43.09577,-75.84111" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a></div></div><div class="card"><div class="n"><span>Cfa 02749 Lafayette Par#1</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.09577,-75.84111" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Cfa 02749 Lafayette Par#1</span><small>62 kW · 1 stalls</small></div>
 <div class="a">1574 Lafayette Pkwy, LaGrange, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 171 ft</span></b> · 👑 Burger King <span>≥1 min · 233 ft</span> · 🧇 Waffle House <span>≥1 min · 279 ft</span> · 🍎 Applebee&#x27;s <span>≥2 min · 423 ft</span> · 🪵 Cracker Barrel <span>≥2 min · 0.1 mi</span> · ⛽ RaceTrac <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.04116,-84.97483" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>University of Virginia - Central Grounds Garage</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>⛽ RaceTrac ≥3 min</span><span>+9</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.04116,-84.97483" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>University of Virginia - Central Grounds Garage</span><small>50 kW · 1 stalls</small></div>
 <div class="a">400 Emmet St S, Charlottesville, VA</div><div class="host">Non-networked</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 180 ft</span></b> · 🥪 Subway <span>≥1 min · 223 ft</span> · ☕ Starbucks <span>≥1 min · 295 ft</span> · 🐕 Raising Cane&#x27;s <span>≥7 min · 0.3 mi</span> · 🌯 Chipotle <span>≥7 min · 0.4 mi</span> · 💊 CVS <span>≥8 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=38.03632,-78.50659" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=VA">Show on map</a></div></div><div class="card"><div class="n"><span>Carroll Emc HQ Chick-Fil-A-Dc2</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥7 min</span><span>🌯 Chipotle ≥7 min</span><span>💊 CVS ≥8 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.03632,-78.50659" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Carroll Emc HQ Chick-Fil-A-Dc2</span><small>125 kW · 1 stalls</small></div>
 <div class="a">89 US Highway 27 Bypass, Bremen, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 180 ft</span></b> · 🧇 Waffle House <span>≥1 min · 292 ft</span> · 🍗 Popeyes <span>≥2 min · 404 ft</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🥩 Arby&#x27;s <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.68825,-85.15021" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Btes Station 4 (Rr)</span><small>125 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.68825,-85.15021" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Btes Station 4 (Rr)</span><small>125 kW · 1 stalls</small></div>
 <div class="a">392 Pinnacle Pkwy, Bristol, TN</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 180 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 299 ft</span> · 🍗 Zaxby&#x27;s <span>≥2 min · 417 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 440 ft</span> · 🌯 Chipotle <span>≥2 min · 456 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.59189,-82.26161" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Btes Station 2 (Lm)</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.59189,-82.26161" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Btes Station 2 (Lm)</span><small>102 kW · 1 stalls</small></div>
 <div class="a">392 Pinnacle Pkwy, Bristol, TN</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 180 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 299 ft</span> · 🍗 Zaxby&#x27;s <span>≥1 min · 384 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 440 ft</span> · 🌯 Chipotle <span>≥2 min · 436 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.59183,-82.26156" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Lakepoint</span><small>125 kW · 1 stalls</small></div>
-<div class="a">185 LakePoint Pkwy, Cartersville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 180 ft</span></b> · 🍔 Wendy&#x27;s <span>≥2 min · 505 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · ⛽ QuikTrip <span>≥2 min · 0.1 mi</span> · 🍟 McDonald&#x27;s <span>≥3 min · 0.1 mi</span> · 🌮 Taco Bell <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.11977,-84.74586" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Grand Rapids, MI - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.59183,-82.26156" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Grand Rapids, MI - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
 <div class="a">5531 28th Street SE, Grand Rapids, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 184 ft</span></b> · 🚒 Firehouse Subs <span>≥2 min · 0.1 mi</span> · ☕ Caribou Coffee <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🛒 Aldi <span>≥8 min · 0.4 mi</span> · 🍟 McDonald&#x27;s <span>≥9 min · 0.5 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.91421,-85.53299" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=MI">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Hapeville</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>☕ Caribou Coffee ≥3 min</span><span>🥖 Panera Bread ≥5 min</span><span>🛒 Aldi ≥8 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>+1</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.91421,-85.53299" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Hapeville</span><small>102 kW · 1 stalls</small></div>
 <div class="a">461 North Central Ave, Hapeville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 184 ft</span></b> · 🍕 Domino&#x27;s <span>≥3 min · 0.1 mi</span> · 🥪 Subway <span>≥3 min · 0.2 mi</span> · 🍔 Wendy&#x27;s <span>≥5 min · 0.3 mi</span> · 🍟 McDonald&#x27;s <span>≥7 min · 0.4 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.65647,-84.40343" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Bridgepointe Shopping Center</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.65647,-84.40343" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Bridgepointe Shopping Center</span><small>350 kW · 8 stalls</small></div>
 <div class="a">3010 Bridgepointe Parkway, San Mateo, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 184 ft</span></b> · 🎯 Target <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥4 min · 0.2 mi</span> · 🐼 Panda Express <span>≥5 min · 0.2 mi</span> · 🌯 Chipotle <span>≥5 min · 0.2 mi</span> · 🔨 Home Depot <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=37.5602,-122.28372" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Saint Louis Park, MN - Texas Avenue South - Tesla Supercharg</span><small>325 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>🔨 Home Depot ≥6 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.5602,-122.28372" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Saint Louis Park, MN - Texas Avenue South - Tesla Supercharg</span><small>325 kW · 8 stalls</small></div>
 <div class="a">3620 Texas Ave S, St Louis Park, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 184 ft</span></b> · ☕ Caribou Coffee <span>≥3 min · 0.1 mi</span> · 🍎 Applebee&#x27;s <span>≥4 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥5 min · 0.2 mi</span> · 🍔 Five Guys <span>≥5 min · 0.3 mi</span> · 🍗 Wingstop <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=44.93758,-93.38121" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=MN">Show on map</a></div></div><div class="card"><div class="n"><span>Irvine Company Woodbury</span><small>50 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>☕ Caribou Coffee ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>🍔 Five Guys ≥5 min</span><span>🍗 Wingstop ≥6 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.93758,-93.38121" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Irvine Company Woodbury</span><small>50 kW · 1 stalls</small></div>
 <div class="a">6428 Irvine Blvd, Irvine, CA</div><div class="host">ChargePoint</div>
-<div class="c">🌯 Chipotle <span>≥1 min · 187 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 187 ft</span></b> · 🥪 Subway <span>≥1 min · 315 ft</span> · 🥖 Panera Bread <span>≥2 min · 495 ft</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span> · 🔨 Home Depot <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.69885,-117.74054" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Georgia Power Ptree Cfa DC</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69885,-117.74054" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Georgia Power Ptree Cfa DC</span><small>62 kW · 1 stalls</small></div>
 <div class="a">2720 GA-54, Peachtree City, GA</div><div class="host">ChargePoint</div>
-<div class="c">⛽ RaceTrac <span>≥1 min · 154 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 187 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥2 min · 0.1 mi</span> · 🐼 Panda Express <span>≥3 min · 0.2 mi</span> · 🍔 Five Guys <span>≥4 min · 0.2 mi</span> · 🛒 Aldi <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.39592,-84.60065" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a></div></div><div class="card"><div class="n"><span>Plaza Del Obispo</span><small>350 kW · 8 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>⛽ RaceTrac ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🍔 Five Guys ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.39592,-84.60065" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Plaza Del Obispo</span><small>350 kW · 8 stalls</small></div>
 <div class="a">31874 Del Obispo St, San Juan Capistrano, CA</div><div class="host">EVgo</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 187 ft</span></b> · 🎯 Target <span>≥1 min · 220 ft</span> · 🍔 In-N-Out <span>≥2 min · 453 ft</span> · ⭐ Carl&#x27;s Jr. <span>≥2 min · 472 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 0.1 mi</span> · 🌮 Del Taco <span>≥3 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.49904,-117.65957" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>McHenry, IL Rechargery Relay @ Casey&#x27;s - N Richmond Rd</span><small>400 kW · 6 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🎯 Target ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Del Taco ≥3 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.49904,-117.65957" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>McHenry, IL Rechargery Relay @ Casey&#x27;s - N Richmond Rd</span><small>400 kW · 6 stalls</small></div>
 <div class="a">1901 N Richmond Rd, McHenry, IL</div><div class="host">IONNA</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 187 ft</span></b> · 🍟 McDonald&#x27;s <span>≥1 min · 361 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🍗 Popeyes <span>≥4 min · 0.2 mi</span> · 👑 Burger King <span>≥5 min · 0.2 mi</span> · 🍕 Domino&#x27;s <span>≥6 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=42.35524,-88.26772" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=IL">Show on map</a></div></div><div class="card"><div class="n"><span>Btes Station 1 (Ll)</span><small>102 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍗 Popeyes ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>+6</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.35524,-88.26772" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Btes Station 1 (Ll)</span><small>102 kW · 1 stalls</small></div>
 <div class="a">392 Pinnacle Pkwy, Bristol, TN</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 190 ft</span></b> · 🥪 Jersey Mike&#x27;s <span>≥1 min · 295 ft</span> · 🍗 Zaxby&#x27;s <span>≥1 min · 338 ft</span> · 🍟 McDonald&#x27;s <span>≥2 min · 410 ft</span> · 🌯 Chipotle <span>≥2 min · 413 ft</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=36.59176,-82.26151" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a></div></div><div class="card"><div class="n"><span>Shops at Canton Crossing</span><small>350 kW · 6 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>+5</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.59176,-82.26151" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Shops at Canton Crossing</span><small>350 kW · 6 stalls</small></div>
 <div class="a">3800 Boston St, Baltimore, MD</div><div class="host">EVgo</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 190 ft</span></b> · 🍔 Shake Shack <span>≥1 min · 315 ft</span> · ☕ Starbucks <span>≥2 min · 512 ft</span> · 🍩 Dunkin&#x27; <span>≥3 min · 0.2 mi</span> · 🍔 Five Guys <span>≥3 min · 0.2 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.27733,-76.56324" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=MD">Show on map</a></div></div><div class="card"><div class="n"><span>Ontario, CA - Ontario Mills Pkwy - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+3</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.27733,-76.56324" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ontario, CA - Ontario Mills Pkwy - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
 <div class="a">4410 Ontario Mills Pkwy, Ontario, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 190 ft</span></b> · 🍔 In-N-Out <span>≥1 min · 348 ft</span> · 🥞 IHOP <span>≥2 min · 423 ft</span> · 🤡 Jack in the Box <span>≥2 min · 512 ft</span> · 🐕 Raising Cane&#x27;s <span>≥4 min · 0.2 mi</span> · 🌮 Del Taco <span>≥5 min · 0.3 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=34.06896,-117.55629" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div><div class="card"><div class="n"><span>Clara Barton Service Area</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍔 In-N-Out ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥4 min</span><span>🌮 Del Taco ≥5 min</span><span>+13</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06896,-117.55629" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Clara Barton Service Area</span><small>400 kW · 4 stalls</small></div>
 <div class="a">N Stumpy Rd, Pedricktown, NJ</div><div class="host">Applegreen</div>
-<div class="c">🍩 Dunkin&#x27; <span>≥1 min · 197 ft</span> · <b>🐔 Chick-fil-A <span>≥1 min · 197 ft</span></b> · ☕ Starbucks <span>≥3 min · 0.2 mi</span> · 👑 Burger King <span>≥4 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.69803,-75.39597" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a></div></div><div class="card"><div class="n"><span>Chambersburg Square</span><small>400 kW · 4 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥4 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.69803,-75.39597" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chambersburg Square</span><small>400 kW · 4 stalls</small></div>
 <div class="a">986 Norland Ave, Chambersburg, PA</div><div class="host">Francis Energy</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 200 ft</span></b> · 🍝 Olive Garden <span>≥2 min · 417 ft</span> · 🌯 Chipotle <span>≥2 min · 433 ft</span> · 🥖 Panera Bread <span>≥2 min · 0.1 mi</span> · 🍔 Five Guys <span>≥2 min · 0.1 mi</span> · ☕ Starbucks <span>≥2 min · 0.1 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=39.93961,-77.62914" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=PA">Show on map</a></div></div><div class="card"><div class="n"><span>Ampm Arco Central</span><small>62 kW · 1 stalls</small></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+8</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.93961,-77.62914" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Ampm Arco Central</span><small>62 kW · 1 stalls</small></div>
 <div class="a">3659 Central Ave, Riverside, CA</div><div class="host">ChargePoint</div>
-<div class="c"><b>🐔 Chick-fil-A <span>≥1 min · 203 ft</span></b> · ⛽ Speedway <span>≥3 min · 0.1 mi</span> · 🍔 Wendy&#x27;s <span>≥3 min · 0.1 mi</span> · 🥖 Panera Bread <span>≥3 min · 0.1 mi</span> · 🍔 Five Guys <span>≥3 min · 0.2 mi</span> · 🥪 Jersey Mike&#x27;s <span>≥3 min · 0.2 mi</span></div>
-<div class="l"><a href="https://www.google.com/maps/search/?api=1&query=33.95381,-117.39264" target="_blank" rel="noopener">Google Maps</a>
-<a href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a></div></div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>⛽ Speedway ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>+11</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.95381,-117.39264" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Chapel Hill, NC - Tesla Supercharger</span><small>250 kW · 10 stalls</small></div>
+<div class="a">100 Village Center Drive, Chapel Hill, NC</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.97015,-79.06402" target="_blank" rel="noopener">Directions</a></div>
+</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
+<div class="n"><span>Fullerton, CA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
+<div class="a">220 East Orangethorpe Avenue, Fullerton, CA</div><div class="host">Tesla Supercharger</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>+15</span></div>
+<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.85977,-117.9217" target="_blank" rel="noopener">Directions</a></div>
+</div></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>
