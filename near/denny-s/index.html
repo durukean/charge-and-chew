@@ -77,6 +77,17 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
   padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
 .chips a small{color:var(--dim2);font-weight:500}
+.stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
+.stats b{color:var(--txt)}
+.faq{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
+  box-shadow:var(--sh)}
+.faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--accent);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
@@ -86,6 +97,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <h1>🍳 EV fast chargers near Denny&#x27;s</h1>
 <p class="lead">We found <b>839 DC fast chargers</b> in the US — across all networks — with a Denny&#x27;s within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Denny&#x27;s">Open on the map →</a>
+<p class="stats">Of the 839 fast chargers with a Denny&#x27;s nearby across the US: The typical stop here delivers <b>250 kW</b>, and 589 of them do 150 kW or more; <b>211</b> are close enough that the Denny&#x27;s is a two-minute walk or less; <b>748</b> are listed as open 24 hours. The fastest is <b>10433 N Central Expy</b> in Dallas at 400 kW; the closest walk is 1 min at <b>Denny&#x27;s Delano</b>. Most are on Tesla Supercharger (240), ChargePoint (117), EVgo (113).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>291</small></a><a href="tx/">Texas <small>78</small></a><a href="fl/">Florida <small>47</small></a><a href="il/">Illinois <small>43</small></a><a href="wa/">Washington <small>32</small></a><a href="ny/">New York <small>29</small></a><a href="az/">Arizona <small>28</small></a><a href="or/">Oregon <small>25</small></a><a href="ga/">Georgia <small>23</small></a><a href="nm/">New Mexico <small>17</small></a><a href="ut/">Utah <small>17</small></a><a href="pa/">Pennsylvania <small>17</small></a><a href="wi/">Wisconsin <small>16</small></a><a href="nc/">North Carolina <small>15</small></a><a href="co/">Colorado <small>14</small></a><a href="oh/">Ohio <small>12</small></a><a href="nv/">Nevada <small>12</small></a><a href="md/">Maryland <small>12</small></a><a href="mo/">Missouri <small>11</small></a><a href="in/">Indiana <small>10</small></a><a href="va/">Virginia <small>8</small></a><a href="sc/">South Carolina <small>7</small></a><a href="mi/">Michigan <small>7</small></a><a href="ma/">Massachusetts <small>6</small></a><a href="ct/">Connecticut <small>6</small></a><a href="la/">Louisiana <small>5</small></a><a href="mn/">Minnesota <small>5</small></a><a href="nd/">North Dakota <small>5</small></a><a href="ar/">Arkansas <small>4</small></a><a href="wy/">Wyoming <small>4</small></a><a href="nj/">New Jersey <small>4</small></a><a href="hi/">Hawaii <small>3</small></a><a href="ms/">Mississippi <small>3</small></a><a href="me/">Maine <small>3</small></a><a href="id/">Idaho <small>3</small></a><a href="nh/">New Hampshire <small>3</small></a><a href="ia/">Iowa <small>3</small></a><a href="ky/">Kentucky <small>2</small></a><a href="sd/">South Dakota <small>2</small></a><a href="al/">Alabama <small>2</small></a><a href="tn/">Tennessee <small>2</small></a><a href="ok/">Oklahoma <small>1</small></a><a href="ks/">Kansas <small>1</small></a><a href="wv/">West Virginia <small>1</small></a></div>
 <h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
 <div class="n"><span>Denny&#x27;s Delano</span><small>50 kW · 2 stalls</small></div>
@@ -288,6 +300,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <div class="c"><span>🍳 <b>Denny&#x27;s</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 Walgreens ≥6 min</span></div>
 <div class="l"><a class="pri" href="../../?chain=Denny&#x27;s&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.27196,-107.88342" target="_blank" rel="noopener">Directions</a></div>
 </div></div>
+<h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Denny&#x27;s within walking distance in the US?</summary><p>839 public DC fast chargers in the US have a Denny&#x27;s within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Denny&#x27;s charging stop is fastest in the US?</summary><p>10433 N Central Expy in Dallas at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

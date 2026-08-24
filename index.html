@@ -340,6 +340,9 @@ svg{display:block}
   background:var(--surface3);color:var(--dim)}
 .tag.free{background:var(--good-bg);color:var(--good)}
 .tag.dlr{background:var(--warn-bg);color:var(--warn)}
+.tag.iso{background:var(--surface3);color:var(--dim)}
+.pp-warn{color:var(--warn);font-size:11.5px;margin:8px 0;padding:8px 10px;background:var(--warn-bg);
+  border-radius:10px;line-height:1.45}
 .pkfoot{display:flex;gap:9px;padding:13px 16px;border-top:1px solid var(--line);flex-shrink:0}
 .pkfoot button{flex:1;height:46px;border-radius:13px;font-weight:700;font-size:14.5px}
 .pkfoot .clear{background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
@@ -587,6 +590,7 @@ svg{display:block}
         <button class="ftog" data-f="h24">🕒 Open 24 hours</button>
         <button class="ftog" data-f="free">💸 Free to charge</button>
         <button class="ftog" data-f="nodlr">🏢 Hide dealership lots</button>
+        <button class="ftog" data-f="noiso">🌙 Hide isolated stops (nothing walkable)</button>
       </div>
       <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
     </div>
@@ -618,6 +622,7 @@ svg{display:block}
   <p><b>How to use it:</b> set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Chargers are colour-coded by network on the map (Tesla red, Electrify America green, EVgo teal, ChargePoint orange…). We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
   <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
+  <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
   <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
@@ -652,7 +657,7 @@ let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
 let netFilter = localStorage.getItem('cc_net') || 'all';  // all | tesla | other
-const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0 };
+const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
 let F = Object.assign({}, FDEF, JSON.parse(localStorage.getItem('cc_filters') || '{}'));
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
@@ -751,6 +756,7 @@ function popupHtml(s) {
     <div class="pp-meta">${s.stalls ? s.stalls + ' stalls · ' : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
     ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
+    ${!Object.keys(m).length ? '<div class="pp-warn">🌙 Nothing we track within a 10-minute walk — likely an isolated stop, worth checking before a night charge.</div>' : ''}
     ${carLine}
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
@@ -869,6 +875,7 @@ function passesSpec(s) {
   if (F.h24 && !s.h24) return false;
   if (F.free && s.price !== 'free') return false;
   if (F.nodlr && s.dlr) return false;
+  if (F.noiso && !(MATCH[s.id] && Object.keys(MATCH[s.id]).length)) return false;
   return true;
 }
 function passesChain(s) {
@@ -997,7 +1004,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><b>${esc(s.name)}</b><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
-        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}</div>
+        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
       <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
@@ -1356,6 +1363,7 @@ function syncUrl() {
   F.stalls ? p.set('minstalls', F.stalls) : p.delete('minstalls');
   F.h24 ? p.set('h24', '1') : p.delete('h24');
   F.free ? p.set('free', '1') : p.delete('free');
+  F.noiso ? p.set('noiso', '1') : p.delete('noiso');
   p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
@@ -1477,6 +1485,7 @@ if (q.get('minkw')) F.kw = +q.get('minkw') || 0;
 if (q.get('minstalls')) F.stalls = +q.get('minstalls') || 0;
 if (q.get('h24')) F.h24 = 1;
 if (q.get('free')) F.free = 1;
+if (q.get('noiso')) F.noiso = 1;
 syncFilterUI();
 if (q.get('r')) {
   radiusMi = +q.get('r') || 25;

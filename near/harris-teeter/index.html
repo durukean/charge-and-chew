@@ -77,6 +77,17 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
   padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
 .chips a small{color:var(--dim2);font-weight:500}
+.stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
+.stats b{color:var(--txt)}
+.faq{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
+  box-shadow:var(--sh)}
+.faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--accent);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
@@ -86,6 +97,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <h1>🛒 EV fast chargers near Harris Teeter</h1>
 <p class="lead">We found <b>55 DC fast chargers</b> in the US — across all networks — with a Harris Teeter within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=Harris Teeter">Open on the map →</a>
+<p class="stats">Of the 55 fast chargers with a Harris Teeter nearby across the US: The typical stop here delivers <b>200 kW</b>, and 35 of them do 150 kW or more; <b>17</b> are close enough that the Harris Teeter is a two-minute walk or less; <b>51</b> are listed as open 24 hours. The fastest is <b>Friendly Center Greensboro MB.HPC</b> in Greensboro at 400 kW; the closest walk is 1 min at <b>Harris Teeter 373 (Potomac, MD)</b>. Most are on Tesla Supercharger (21), EVgo (13), ChargePoint (10).</p>
 <h2>By state</h2><div class="chips"><a href="nc/">North Carolina <small>25</small></a><a href="md/">Maryland <small>17</small></a><a href="va/">Virginia <small>9</small></a><a href="sc/">South Carolina <small>3</small></a><a href="dc/">Washington DC <small>1</small></a></div>
 <h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
 <div class="n"><span>Harris Teeter 373 (Potomac, MD)</span><small>350 kW · 4 stalls</small></div>
@@ -288,6 +300,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <div class="c"><span>🛒 <b>Harris Teeter</b> ≥7 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>🪑 IKEA ≥4 min</span><span>🌯 Chipotle ≥5 min</span></div>
 <div class="l"><a class="pri" href="../../?chain=Harris Teeter&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.11816,-77.20226" target="_blank" rel="noopener">Directions</a></div>
 </div></div>
+<h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Harris Teeter within walking distance in the US?</summary><p>55 public DC fast chargers in the US have a Harris Teeter within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Harris Teeter charging stop is fastest in the US?</summary><p>Friendly Center Greensboro MB.HPC in Greensboro at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

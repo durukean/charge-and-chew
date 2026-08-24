@@ -77,6 +77,17 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
   padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
 .chips a small{color:var(--dim2);font-weight:500}
+.stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
+.stats b{color:var(--txt)}
+.faq{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
+  box-shadow:var(--sh)}
+.faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--accent);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
@@ -86,6 +97,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <h1>🪑 EV fast chargers near IKEA</h1>
 <p class="lead">We found <b>67 DC fast chargers</b> in the US — across all networks — with an IKEA within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain=IKEA">Open on the map →</a>
+<p class="stats">Of the 67 fast chargers with an IKEA nearby across the US: The typical stop here delivers <b>250 kW</b>, and 57 of them do 150 kW or more; <b>29</b> are close enough that the IKEA is a two-minute walk or less; <b>58</b> are listed as open 24 hours. The fastest is <b>Frisco, TX Rechargery Relay - State Hwy</b> in Frisco at 400 kW; the closest walk is 1 min at <b>IKEA Store 153 (Pittsburgh, PA)</b>. Most are on Electrify America (25), Tesla Supercharger (22), EVgo (6).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>20</small></a><a href="tx/">Texas <small>8</small></a><a href="va/">Virginia <small>6</small></a><a href="pa/">Pennsylvania <small>5</small></a><a href="md/">Maryland <small>4</small></a><a href="il/">Illinois <small>4</small></a><a href="oh/">Ohio <small>3</small></a><a href="wa/">Washington <small>3</small></a><a href="fl/">Florida <small>2</small></a><a href="or/">Oregon <small>2</small></a><a href="ny/">New York <small>1</small></a><a href="mo/">Missouri <small>1</small></a><a href="ct/">Connecticut <small>1</small></a><a href="ok/">Oklahoma <small>1</small></a><a href="az/">Arizona <small>1</small></a><a href="co/">Colorado <small>1</small></a><a href="in/">Indiana <small>1</small></a><a href="ga/">Georgia <small>1</small></a><a href="nc/">North Carolina <small>1</small></a><a href="nj/">New Jersey <small>1</small></a></div>
 <h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
 <div class="n"><span>IKEA Store 153 (Pittsburgh, PA)</span><small>350 kW · 6 stalls</small></div>
@@ -288,6 +300,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 <div class="c"><span>🪑 <b>IKEA</b> ≥4 min</span><span>🌯 Chipotle ≥9 min</span><span>🔨 Home Depot ≥9 min</span><span>👑 Burger King ≥9 min</span></div>
 <div class="l"><a class="pri" href="../../?chain=IKEA&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.20679,-98.20306" target="_blank" rel="noopener">Directions</a></div>
 </div></div>
+<h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have an IKEA within walking distance in the US?</summary><p>67 public DC fast chargers in the US have an IKEA within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which IKEA charging stop is fastest in the US?</summary><p>Frisco, TX Rechargery Relay - State Hwy in Frisco at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated 2026-08-24.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>

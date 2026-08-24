@@ -7,6 +7,7 @@
 Run after data/fetch_pois.py.  Usage: python3 build.py [--base https://chargeandchew.com]
 """
 import json, os, re, sys, html, shutil
+from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BRAND = "Charge & Chew"
@@ -116,6 +117,17 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
   padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
 .chips a small{color:var(--dim2);font-weight:500}
+.stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
+.stats b{color:var(--txt)}
+.faq{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
+  box-shadow:var(--sh)}
+.faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;color:var(--accent);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
@@ -159,7 +171,85 @@ Walk times are minimums from straight-line distance at ~3 mph; the real walk is 
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, "w").write(out)
 
-def jsonld_state(key, st, sn, sites_list, canonical):
+
+def page_stats(key, rows):
+    """Real numbers pulled from the actual result set, so no two pages read alike.
+    Templated stubs are exactly why Google logged these as 'crawled, not indexed'."""
+    if not rows:
+        return {}
+    kws = [sites[sid]["kw"] for _, sid in rows if sites[sid].get("kw")]
+    stalls = [sites[sid]["stalls"] for _, sid in rows if sites[sid].get("stalls")]
+    nets = Counter(sites[sid].get("net", "") for _, sid in rows if sites[sid].get("net"))
+    walk1 = sum(1 for d, _ in rows if mins(d) <= 2)
+    h24 = sum(1 for _, sid in rows if sites[sid].get("h24"))
+    fastest = max(rows, key=lambda r: sites[r[1]].get("kw") or 0)
+    closest = min(rows, key=lambda r: r[0])
+    return {
+        "n": len(rows),
+        "median_kw": sorted(kws)[len(kws) // 2] if kws else None,
+        "max_kw": max(kws) if kws else None,
+        "big": sum(1 for k in kws if k >= 150),
+        "median_stalls": sorted(stalls)[len(stalls) // 2] if stalls else None,
+        "top_nets": nets.most_common(3),
+        "walk1": walk1, "h24": h24,
+        "fastest": sites[fastest[1]], "fastest_kw": sites[fastest[1]].get("kw"),
+        "closest": sites[closest[1]], "closest_min": mins(closest[0]),
+    }
+
+
+def stats_para(key, st_name, sx):
+    """A short, factual paragraph unique to this page."""
+    if not sx:
+        return ""
+    where = f"in {st_name}" if st_name else "across the US"
+    bits = []
+    if sx["median_kw"]:
+        bits.append(f"The typical stop here delivers <b>{sx['median_kw']} kW</b>"
+                    + (f", and {sx['big']} of them do 150 kW or more" if sx["big"] else ""))
+    if sx["walk1"]:
+        bits.append(f"<b>{sx['walk1']}</b> are close enough that the {esc(key)} is a two-minute walk or less")
+    if sx["h24"]:
+        bits.append(f"<b>{sx['h24']}</b> are listed as open 24 hours")
+    lead = f"Of the {sx['n']} fast chargers with {art(key)} {esc(key)} nearby {where}: " + "; ".join(bits) + "."
+    fast = sx["fastest"]
+    extra = (f" The fastest is <b>{esc(fast['name'])}</b> in {esc(fast['city'])} at "
+             f"{sx['fastest_kw']} kW; the closest walk is {sx['closest_min']} min at "
+             f"<b>{esc(sx['closest']['name'])}</b>.") if sx.get("fastest_kw") else ""
+    nets = ", ".join(f"{n} ({c})" for n, c in sx["top_nets"] if n)
+    netline = f" Most are on {nets}." if nets else ""
+    return f'<p class="stats">{lead}{extra}{netline}</p>'
+
+
+def faq_block(key, st_name, sx):
+    """Visible FAQ + FAQPage schema — real questions, answered from this page's data."""
+    if not sx:
+        return "", None
+    where = f"in {st_name}" if st_name else "in the US"
+    qa = [
+        (f"How many EV chargers have {art(key)} {esc(key)} within walking distance {where}?",
+         f"{sx['n']} public DC fast chargers {where} have {art(key)} {esc(key)} within a 10-minute "
+         f"walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap "
+         f"locations."),
+        (f"Which {esc(key)} charging stop is fastest {where}?",
+         f"{esc(sx['fastest']['name'])} in {esc(sx['fastest']['city'])} at {sx['fastest_kw']} kW."
+         if sx.get("fastest_kw") else "Power ratings are not published for these stops."),
+        (f"Can I charge a non-Tesla EV at these stops?",
+         "Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show "
+         "connector compatibility and an estimated charge time for each stop. Tesla Supercharger "
+         "sites additionally have to be open to your brand."),
+        ("How accurate are the walk times?",
+         "They are minimums: straight-line distance at about 3 mph. The real walk is usually longer "
+         "because you have to follow paths and crossings."),
+    ]
+    html = '<h2>Common questions</h2><div class="faq">' + "".join(
+        f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in qa) + "</div>"
+    schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q,
+         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in qa]}
+    return html, schema
+
+
+def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
     items = []
     for i, (d, sid) in enumerate(sites_list[:25], 1):
         s = sites[sid]
@@ -176,6 +266,8 @@ def jsonld_state(key, st, sn, sites_list, canonical):
         {"@context": "https://schema.org", "@type": "ItemList",
          "name": f"Fast chargers near {key} in {sn}",
          "numberOfItems": len(sites_list), "itemListElement": items}]
+    if faq_schema:
+        blocks.append(faq_schema)
     return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
 
 
@@ -221,14 +313,19 @@ for key, b in brands.items():
     state_links = "".join(f'<a href="{st.lower()}/">{STATES.get(st, st)} <small>{len(v)}</small></a>'
                           for st, v in sorted(by_state.items(), key=lambda x: -len(x[1])))
     # national page: top 40 closest, then state links
+    sx = page_stats(key, hits)
+    stats_html = stats_para(key, "", sx)
+    faq_html, faq_schema = faq_block(key, "", sx)
     top = "".join(site_card(sites[sid], key, "../../") for d, sid in hits[:40])
     title = f"EV fast chargers near {key} ({n} locations)"
     desc = f"{n} EV DC fast chargers within a 10-minute walk of a {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
     body = f"""<h1>{b['e']} EV fast chargers near {esc(key)}</h1>
 <p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
+{stats_html}
 <h2>By state</h2><div class="chips">{state_links}</div>
-<h2>Closest {min(40, n)} nationwide</h2>{top}"""
+<h2>Closest {min(40, n)} nationwide</h2>{top}
+{faq_html}"""
     path = f"near/{cs}/index.html"; page(path, title, desc, body, f"near/{cs}/"); add(path)
 
 
@@ -241,6 +338,9 @@ for key, b in brands.items():
     for d, sid in sorted(hits): by_state.setdefault(sites[sid]["st"], []).append((d, sid))
     for st, v in by_state.items():
         sn = STATES.get(st, st)
+        sx = page_stats(key, v)
+        stats_html = stats_para(key, sn, sx)
+        faq_html, faq_schema = faq_block(key, sn, sx)
         cards = "".join(site_card(sites[sid], key, "../../../") for d, sid in v)
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
@@ -249,13 +349,15 @@ for key, b in brands.items():
         body = f"""<h1>{b['e']} EV fast chargers near {esc(key)} in {sn}</h1>
 <p class="lead"><b>{len(v)} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
+{stats_html}
 {cards}
 <h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
-<h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>"""
+<h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>
+{faq_html}"""
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
         thin = len(v) < 3          # near-duplicate stubs hurt indexing; keep linked, drop from index
-        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can), thin=thin)
+        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can, faq_schema), thin=thin)
         if not thin: add(path)
 
 # ---- near/index.html ----
