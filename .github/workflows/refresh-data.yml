@@ -37,7 +37,9 @@ jobs:
           AFDC_API_KEY: ${{ secrets.AFDC_API_KEY }}
         run: |
           python3 data/fetch_chargers.py
+          # POIs and highway geometry are committed caches; these only fill gaps
           [ -f data/pois.json ] && python3 data/fetch_pois.py || true
+          [ -f data/highways.json ] && python3 data/fetch_highways.py || true
           python3 data/build_data.py
           python3 build.py --base https://chargeandchew.com
 
