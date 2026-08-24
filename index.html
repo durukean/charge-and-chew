@@ -116,7 +116,16 @@ svg{display:block}
 #carBar .mine.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
 
 /* tabs + chips */
-.filterrow{display:flex}
+.filterrow{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.filterrow::-webkit-scrollbar{display:none}
+.netseg button.on{background:var(--surface3);color:var(--txt)}
+.netseg button[data-net="tesla"].on{background:var(--red);color:#fff}
+.poi-div{background:none!important;border:none!important}
+.poi-div span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--amber);font-size:15px;box-shadow:0 3px 12px rgba(0,0,0,.55)}
+.leaflet-tooltip{background:var(--surface3);border:1px solid var(--line2);color:var(--txt);
+  font-size:11.5px;font-weight:600;border-radius:8px;box-shadow:var(--sh2)}
+.leaflet-tooltip-top:before{border-top-color:var(--line2)}
 .tabs{display:inline-flex;gap:3px;padding:3px;border-radius:12px;background:var(--glass2);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh2)}
 .tab{padding:6px 12px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap;transition:.15s}
@@ -382,6 +391,11 @@ svg{display:block}
           <button class="tab" data-cat="store">🛒 Stores</button>
           <button class="tab" data-cat="fav">⭐<span class="n" id="favN"></span></button>
         </div>
+        <div class="tabs netseg" id="netSeg">
+          <button data-net="all" class="on">All</button>
+          <button data-net="tesla">⚡ Tesla</button>
+          <button data-net="other">Other</button>
+        </div>
       </div>
 
       <div id="chips"></div>
@@ -489,7 +503,7 @@ svg{display:block}
 
 <div id="toast"></div>
 
-<script src="data.js"></script>
+<script src="data.js?v=2"></script>
 <script>
 (() => {
 'use strict';
@@ -512,6 +526,7 @@ let route = null;
 let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
+let netFilter = localStorage.getItem('cc_net') || 'all';  // all | tesla | other
 let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
 const CARS = D.cars || {};
 let car = localStorage.getItem('cc_car') || '';   // model name or '' for none
@@ -525,6 +540,10 @@ const hav = (a1, o1, a2, o2) => {
   return 2 * R * Math.asin(Math.sqrt(x));
 };
 const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
+// match value is [dLat,dLon] integer deltas x1e4 from the charger
+const mLatLng = (s, v) => Array.isArray(v) ? [s.lat + v[0] / 1e4, s.lon + v[1] / 1e4] : null;
+const mDist = (s, v) => { if (typeof v === 'number') return v; const p = mLatLng(s, v); return p ? hav(s.lat, s.lon, p[0], p[1]) : 9e9; };
+const isTesla = s => /tesla/i.test(s.net);
 const CONN_NAME = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO' };
 function connList(bits) {
   return [1, 2, 4].filter(b => bits & b).map(b => CONN_NAME[b]).join(' · ');
@@ -576,13 +595,14 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
 
 const canvas = L.canvas({ padding: .6 });
 const mk = {};
+const poiLayer = L.layerGroup().addTo(map);
 let centerLayer = null, radiusLayer = null, routeLayer = null, routeCase = null;
 
 function popupHtml(s) {
   const m = MATCH[s.id] || {};
-  const rows = Object.entries(m).map(([k, d]) =>
-    `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
-     <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span></div>`).join('')
+  const rows = Object.entries(m).map(([k, v]) => { const d = mDist(s, v);
+    return `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
+     <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span></div>`; }).join('')
     || '<div class="pp-chain" style="color:var(--dim2)">No tracked chains within a 10-min walk</div>';
   const cm = chargeMin(s), cp = compat(s);
   const carLine = cm != null
@@ -606,8 +626,41 @@ SITES.forEach(s => {
   const m = L.circleMarker([s.lat, s.lon], { renderer: canvas, radius: 3.5, weight: 1,
     color: '#6b7482', fillColor: '#6b7482', fillOpacity: .6 }).addTo(map);
   m.bindPopup(() => popupHtml(s), { maxWidth: 300, autoPanPadding: [24, 24] });
+  m._sid = s.id;
   mk[s.id] = m;
 });
+
+/* show the matched chain POIs around a charger so distance is visible */
+function clearPOIs() { poiLayer.clearLayers(); }
+function showPOIs(s) {
+  clearPOIs();
+  const m = MATCH[s.id]; if (!m) return;
+  let keys = Object.keys(m);
+  if (active.size) keys = keys.filter(k => active.has(k));
+  keys = keys.slice(0, 16);
+  const pts = [[s.lat, s.lon]];
+  for (const k of keys) {
+    const ll = mLatLng(s, m[k]);
+    if (!ll) continue;
+    pts.push(ll);
+    L.polyline([[s.lat, s.lon], ll], { color: '#ff9f43', weight: 1.7, opacity: .75,
+      dashArray: '3 5', interactive: false }).addTo(poiLayer);
+    L.marker(ll, { icon: L.divIcon({ className: 'poi-div',
+      html: `<span>${BRANDS[k].e}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] }), keyboard: false })
+      .bindTooltip(`${esc(k)} · ${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
+      .addTo(poiLayer);
+  }
+  // frame the charger + its POIs so the walking distance is visible (popup sits top, so pad it).
+  // Guard: skip when the map is too short for the padding (fitBounds -> NaN center otherwise).
+  const sz = map.getSize();
+  if (pts.length > 1 && sz.y > 320 && sz.x > 120) {
+    const padTop = Math.min(200, Math.round(sz.y * 0.42));
+    try {
+      map.fitBounds(L.latLngBounds(pts),
+        { paddingTopLeft: [40, padTop], paddingBottomRight: [40, 50], maxZoom: 16, animate: false });
+    } catch (e) { /* transient sizing race — leave the view as-is */ }
+  }
+}
 
 map.on('popupopen', e => {
   const el = e.popup.getElement();
@@ -617,7 +670,10 @@ map.on('popupopen', e => {
     const on = favs.has(+b.dataset.fav);
     b.classList.toggle('on', on); b.textContent = on ? '★' : '☆';
   };
+  const src = e.popup._source;
+  if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
+map.on('popupclose', clearPOIs);
 
 function toggleFav(id) {
   const had = favs.has(id);
@@ -627,7 +683,12 @@ function toggleFav(id) {
 }
 
 /* ───────── filtering ───────── */
+function passesNet(s) {
+  if (netFilter === 'all') return true;
+  return netFilter === 'tesla' ? isTesla(s) : !isTesla(s);
+}
 function passesChain(s) {
+  if (!passesNet(s)) return false;
   if (onlyMine && carInfo() && compat(s) === null) return false;
   if (cat === 'fav') return favs.has(s.id);
   if (!active.size) return true;
@@ -643,7 +704,7 @@ function inScope(s) {
 function bestWalk(s) {
   const m = MATCH[s.id] || {};
   const keys = active.size ? [...active].filter(k => k in m) : Object.keys(m);
-  return keys.length ? Math.min(...keys.map(k => m[k])) : 9e9;
+  return keys.length ? Math.min(...keys.map(k => mDist(s, m[k]))) : 9e9;
 }
 function visibleSites() {
   const out = [];
@@ -663,7 +724,7 @@ function render() {
   const filtering = active.size > 0 || cat === 'fav';
   for (const s of SITES) {
     const m = mk[s.id];
-    if (!inScope(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
+    if (!inScope(s) || !passesNet(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
     if (visIds.has(s.id)) {
       m.setStyle({ radius: filtering ? 6.5 : 4, weight: filtering ? 1.8 : 1,
         color: filtering ? '#0c0d0b' : '#7d8794', fillColor: filtering ? '#bff23f' : '#7d8794',
@@ -727,9 +788,9 @@ function renderList(vis) {
   $('list').innerHTML = vis.slice(0, 300).map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
-    ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || a[1] - b[1]);
-    const chains = ent.slice(0, 4).map(([k, d]) =>
-      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ${walkMin(d)}m</span>`).join('');
+    ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+    const chains = ent.slice(0, 4).map(([k, v]) =>
+      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ${walkMin(mDist(s, v))}m</span>`).join('');
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
     const cm = chargeMin(s), cp = compat(s);
@@ -1072,7 +1133,8 @@ function applyCorridor(verts, mi, hr) {
     if (best <= maxM) { ids.add(s.id); order.set(s.id, bi); }
   }
   route = { verts, ids, order, mi, hr };
-  map.fitBounds(routeLayer.getBounds(), { padding: [28, 28], animate: false });
+  const rsz = map.getSize();
+  if (rsz.x > 60 && rsz.y > 60) { try { map.fitBounds(routeLayer.getBounds(), { padding: [28, 28], animate: false }); } catch (e) {} }
   const trip = `${$('fromIn').value.trim()} → ${$('toIn').value.trim()}`;
   $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
     `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · ${ids.size} chargers ≤${corridorMi}mi</i></span>` +
@@ -1090,6 +1152,7 @@ function applyCorridor(verts, mi, hr) {
 function syncUrl() {
   const u = new URL(location.href), p = u.searchParams;
   active.size ? p.set('chain', [...active].join(',')) : p.delete('chain');
+  netFilter !== 'all' ? p.set('net', netFilter) : p.delete('net');
   p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
@@ -1112,10 +1175,12 @@ function settleFit(getBounds, padding, maxZoom) {
     map.invalidateSize({ pan: false });
     setTimeout(() => {
       const b = getBounds();
-      if (!b) return;
+      if (!b || !b.isValid || !b.isValid()) return;
+      const sz = map.getSize();
+      if (sz.x < 60 || sz.y < 60) return;   // map not laid out yet -> fitBounds would NaN
       const o = { padding, animate: false };
       if (maxZoom) o.maxZoom = maxZoom;
-      map.fitBounds(b, o);
+      try { map.fitBounds(b, o); } catch (e) { /* transient sizing race */ }
     }, 80);
   }, 340);
 }
@@ -1126,6 +1191,18 @@ function fitToResults() {
   const b = L.latLngBounds(v.map(s => [s.lat, s.lon]));
   settleFit(() => b, [26, 26], 11);
 }
+
+/* ───────── network filter ───────── */
+$('netSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
+  $('netSeg').querySelectorAll('button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); netFilter = b.dataset.net;
+  localStorage.setItem('cc_net', netFilter);
+  render(); syncUrl();
+});
+function syncNetSeg() {
+  $('netSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.net === netFilter));
+}
+syncNetSeg();
 
 /* ───────── hero (first-run quick pick) ───────── */
 const HERO_PICKS = ['IHOP', 'Starbucks', 'In-N-Out', 'Chick-fil-A', "Buc-ee's", 'Walmart', 'Chipotle', 'Target'];
@@ -1160,6 +1237,7 @@ const q = new URLSearchParams(location.search);
   const key = CHAIN_KEYS.find(b => b.toLowerCase() === k.toLowerCase());
   if (key) active.add(key);
 });
+if (['tesla', 'other'].includes(q.get('net'))) { netFilter = q.get('net'); syncNetSeg(); }
 if (q.get('r')) {
   radiusMi = +q.get('r') || 25;
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));

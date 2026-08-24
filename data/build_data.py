@@ -82,15 +82,20 @@ def main():
     for s in chargers:
         lat, lon = s["lat"], s["lon"]
         c0 = (int(lat / 0.02), int(lon / 0.02))
-        found = {}
+        found = {}   # bkey -> (dist, plat, plon) of nearest POI of that brand
         for di in (-1, 0, 1):
             for dj in (-1, 0, 1):
                 for (bkey, plat, plon) in grid.get((c0[0] + di, c0[1] + dj), []):
                     d = hav(lat, lon, plat, plon)
-                    if d <= WALK_M and (bkey not in found or d < found[bkey]):
-                        found[bkey] = d
+                    if d <= WALK_M and (bkey not in found or d < found[bkey][0]):
+                        found[bkey] = (d, plat, plon)
         if found:
-            matches[s["id"]] = {k: int(v) for k, v in sorted(found.items(), key=lambda x: x[1])}
+            # store nearest POI as integer deltas x1e4 from the charger (~11 m precision),
+            # ordered by distance; the app reconstructs lat/lon and recomputes walk distance.
+            matches[s["id"]] = {
+                k: [round((plat - lat) * 1e4), round((plon - lon) * 1e4)]
+                for k, (d, plat, plon) in sorted(found.items(), key=lambda x: x[1][0])
+            }
 
     brands_out = {k: {"e": v[0], "cat": v[1], "n": len(pois.get(k, []))}
                   for k, v in RAW_BRANDS.items() if k in pois}

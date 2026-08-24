@@ -27,6 +27,22 @@ raw = open(os.path.join(HERE, "data.js")).read()
 D = json.loads(raw[raw.index("{"): raw.rindex("}") + 1])
 sites = {s["id"]: s for s in D["sites"]}
 brands, matches = D["brands"], {int(k): v for k, v in D["matches"].items()}
+
+# match values are [dLat,dLon] integer deltas x1e4 from the charger; convert to metres
+# so the rest of this generator (which expects a distance) works unchanged.
+def _hav(a1, o1, a2, o2):
+    import math
+    R = 6371000; p = math.pi / 180
+    dla = (a2 - a1) * p; dlo = (o2 - o1) * p
+    x = math.sin(dla/2)**2 + math.cos(a1*p)*math.cos(a2*p)*math.sin(dlo/2)**2
+    return 2 * R * math.asin(math.sqrt(x))
+for _sid, _m in matches.items():
+    _s = sites.get(_sid)
+    if not _s: continue
+    for _k, _v in list(_m.items()):
+        if isinstance(_v, list):
+            _plat = _s["lat"] + _v[0] / 1e4; _plon = _s["lon"] + _v[1] / 1e4
+            _m[_k] = int(_hav(_s["lat"], _s["lon"], _plat, _plon))
 WALK = 80
 
 def slug(s): return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
