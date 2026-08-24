@@ -378,6 +378,7 @@ states_html = "".join(
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 <p class="lead">{len(matches)} of {len(sites)} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <a class="cta" href="../">Open the interactive map →</a>
+<p><a class="cta" href="../along/">Browse by interstate instead →</a></p>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
 {states_html}"""
 page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
@@ -480,7 +481,9 @@ left out — on an interstate run they cost more time than they save.</p>
         body = f'''<h1>EV fast chargers by interstate</h1>
 <p class="lead">Pick an interstate to see every fast charger within {CORRIDOR_MI:g} miles of it, in order
 along the route, with the restaurants and stores within a 10-minute walk of each stop.</p>
-<div class="chips">{idx_chips}</div>'''
+<div class="chips">{idx_chips}</div>
+<h2>Or browse by chain</h2>
+<p class="lead">After a specific brand instead? <a href="../near/">All 90 chains, state by state →</a></p>'''
         page("along/index.html", "EV fast chargers along the interstates",
              "Fast chargers along I-95, I-10, I-5, I-80 and other major US interstates, in route "
              "order, with nearby food and shopping for each stop.", body, "along/")
