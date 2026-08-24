@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Charge &amp; Chew — Tesla Superchargers near your favorite restaurants &amp; stores</title>
+<title>Charge &amp; Chew — Fast EV chargers near your favorite restaurants &amp; stores</title>
 <meta name="description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://chargeandchew.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Charge &amp; Chew">
-<meta property="og:title" content="Charge &amp; Chew — Superchargers near your favorite chains">
+<meta property="og:title" content="Charge &amp; Chew — Fast EV chargers near your favorite chains">
 <meta property="og:description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Plan road trip charging stops around where you actually want to eat.">
 <meta property="og:url" content="https://chargeandchew.com/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
@@ -25,351 +25,413 @@
 </script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0d12; --surface:#12161d; --surface2:#1a1f28; --line:#252c37; --line2:#323b48;
-  --txt:#eef2f7; --dim:#8892a0; --dim2:#5f6875;
-  --red:#ff3b3f; --amber:#ffb020; --green:#31c46b; --blue:#4c9dff;
-  --glass:rgba(18,22,29,.82);
-  --sh:0 8px 32px rgba(0,0,0,.5);
+  --bg:#0c0d0b; --surface:#161814; --surface2:#1f221d; --surface3:#262a22;
+  --line:#2c302a; --line2:#3d4338;
+  --txt:#f2f5ef; --dim:#9aa39a; --dim2:#6a7265;
+  --lime:#bff23f; --lime2:#a6e02a; --amber:#ff9f43; --blue:#5aa9ff;
+  --red:#ff5a5f; --ink:#0c0d0b;
+  --glass:rgba(20,23,18,.72); --glass2:rgba(20,23,18,.9);
+  --sh:0 10px 34px rgba(0,0,0,.55); --sh2:0 4px 16px rgba(0,0,0,.4);
+  --dsp:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --r:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
-  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
 button,input{font:inherit;color:inherit}
 button{background:none;border:none;cursor:pointer}
+svg{display:block}
 #app{display:flex;flex-direction:column;height:100%;position:relative}
 
-/* ══════════ splash ══════════ */
-#splash{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;
-  flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .4s}
+/* ═══ splash ═══ */
+#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 90% at 50% 0%,#141812 0%,var(--bg) 60%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .45s}
 #splash.gone{opacity:0;pointer-events:none}
-.splash-logo{font-size:clamp(28px,7vw,42px);font-weight:800;letter-spacing:-.5px}
-.splash-logo .amp{color:var(--red)}
-.splash-bar{width:160px;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
-.splash-bar i{display:block;height:100%;width:40%;background:var(--red);border-radius:2px;
-  animation:slide 1.1s ease-in-out infinite}
-@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+.splash-logo{font-family:var(--dsp);font-size:clamp(30px,8vw,46px);font-weight:700;letter-spacing:-1px}
+.splash-logo .c{color:var(--lime)}.splash-logo .h{color:var(--amber)}.splash-logo .amp{color:var(--txt);opacity:.5;margin:0 .12em}
+.splash-bar{width:150px;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.splash-bar i{display:block;height:100%;width:38%;background:var(--lime);border-radius:2px;animation:slide 1.1s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-120%)}100%{transform:translateX(370%)}}
 #splash small{color:var(--dim);font-size:13px}
 
-/* ══════════ header ══════════ */
-header{position:relative;z-index:900;background:var(--surface);
-  border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 10px) 12px 0}
-.brandrow{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:0 2px}
-.logo{font-size:17px;font-weight:800;letter-spacing:-.3px;white-space:nowrap}
-.logo .amp{color:var(--red)}
-.tagline{font-size:11px;color:var(--dim2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.iconbtn{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);
-  background:var(--surface2);color:var(--dim);display:grid;place-items:center;font-size:14px;
-  flex-shrink:0;transition:.15s;text-decoration:none}
-.iconbtn:hover{color:var(--txt);border-color:var(--line2)}
-.iconbtn.on{background:var(--red);border-color:var(--red);color:#fff}
-
-.searchrow{display:flex;gap:8px;margin-bottom:10px}
-header.routing .searchrow{display:none}
-header.routing .tagline{display:none}
-.searchbox{flex:1;display:flex;align-items:center;gap:8px;background:var(--surface2);
-  border:1px solid var(--line);border-radius:12px;padding:0 12px;height:40px;transition:.15s;min-width:0}
-.searchbox:focus-within{border-color:var(--line2);background:#1e242e}
-.searchbox svg{flex-shrink:0;opacity:.5}
-.searchbox input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
-.searchbox input::placeholder{color:var(--dim2)}
-.searchbox .clr{color:var(--dim2);font-size:15px;padding:4px;display:none}
-.searchbox.has .clr{display:block}
-
-#carBar{display:none;margin:0 2px 10px}
-#carBar.show{display:flex;gap:7px;align-items:center}
-#carBar .cartag{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--line);
-  border-radius:11px;padding:7px 11px;font-size:12.5px;font-weight:600;flex:1;min-width:0}
-#carBar .cartag .m{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#carBar .cartag .spec{color:var(--dim);font-weight:500;font-size:11px}
-#carBar .mine{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);
-  border-radius:11px;padding:7px 11px;font-size:12px;font-weight:600;color:var(--dim);white-space:nowrap}
-#carBar .mine.on{background:var(--blue);border-color:var(--blue);color:#fff}
-#carPicker{position:fixed;inset:0;z-index:2000;background:rgba(5,7,10,.75);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;
-  align-items:flex-end;justify-content:center}
-#carPicker.show{display:flex;animation:fade .18s}
-.caritem{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;
-  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left;transition:.12s}
-.caritem:active{transform:scale(.99)}
-.caritem.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.caritem .m{flex:1}
-.caritem .spec{font-size:11px;color:var(--dim2);font-weight:500}
-.caritem.on .spec{color:rgba(255,255,255,.75)}
-.tabs{display:flex;gap:4px;padding:0 2px 8px}
-.tab{padding:6px 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--dim);transition:.15s}
-.tab.on{background:var(--surface2);color:var(--txt)}
-.tab .n{font-size:10px;opacity:.6;margin-left:3px}
-
-#chips{display:flex;gap:7px;overflow-x:auto;padding:0 12px 11px;margin:0 -12px;scrollbar-width:none}
-#chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;display:flex;align-items:center;gap:6px;height:34px;padding:0 13px;
-  border-radius:11px;border:1px solid var(--line);background:var(--surface2);
-  font-size:13px;font-weight:600;white-space:nowrap;transition:transform .12s,background .15s,border-color .15s}
-.chip:active{transform:scale(.94)}
-.chip .cnt{font-size:10px;color:var(--dim2);font-weight:500}
-.chip.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 2px 12px rgba(255,59,63,.3)}
-.chip.on .cnt{color:rgba(255,255,255,.75)}
-.chip.more{background:none;border-style:dashed;color:var(--dim)}
-
-/* ══════════ route panel ══════════ */
-#routePanel{display:none;padding:0 12px 11px}
-#routePanel.show{display:block;animation:drop .2s ease}
-@keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.rfield{display:flex;align-items:center;gap:9px;background:var(--surface2);border:1px solid var(--line);
-  border-radius:12px;padding:0 12px;height:40px;margin-bottom:7px}
-.rfield .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.rfield .dot.a{background:var(--green)}
-.rfield .dot.b{background:var(--red)}
-.rfield input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
-.rfield input::placeholder{color:var(--dim2)}
-.rfield .mini{font-size:15px;color:var(--dim);padding:4px}
-.rrow2{display:flex;gap:8px;align-items:center}
-#goBtn{flex:1;height:40px;border-radius:12px;background:var(--red);color:#fff;font-weight:700;
-  font-size:14px;box-shadow:0 3px 14px rgba(255,59,63,.28);transition:.15s}
-#goBtn:disabled{opacity:.45;box-shadow:none}
-.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;
-  padding:3px;gap:2px;height:40px;align-items:center}
-.seg button{padding:0 11px;height:32px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim)}
-.seg button.on{background:var(--line2);color:var(--txt)}
-#routeInfo{font-size:12.5px;color:var(--amber);margin-top:7px;min-height:17px}
-#routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
-#routePanel.collapsed #routeInfo{margin-top:0;display:flex;align-items:center;gap:9px;
-  background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:9px 12px;
-  color:var(--txt);font-size:13px;font-weight:600;cursor:pointer}
-#routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--amber)}
-#routePanel.collapsed #routeInfo .ed{color:var(--dim);font-size:12px;font-weight:600;flex-shrink:0}
-
-/* ══════════ map ══════════ */
+/* ═══ map fills everything ═══ */
 #mapWrap{flex:1;position:relative;min-height:0}
-#map{position:absolute;inset:0;background:#0a0d12}
-.leaflet-container{font:inherit;background:#0a0d12}
-.leaflet-control-attribution{background:rgba(10,13,18,.75)!important;color:var(--dim2)!important;
-  font-size:10px!important;padding:2px 6px!important}
+#map{position:absolute;inset:0;background:#0c0d0b}
+.leaflet-container{font:inherit;background:#0c0d0b}
+.leaflet-control-attribution{background:rgba(12,13,11,.72)!important;color:var(--dim2)!important;
+  font-size:10px!important;padding:2px 6px!important;border-radius:6px 0 0 0}
 .leaflet-control-attribution a{color:var(--dim)!important}
 
-.mapctl{position:absolute;right:12px;bottom:14px;z-index:600;display:flex;flex-direction:column;gap:8px}
-.mbtn{width:42px;height:42px;border-radius:13px;background:var(--glass);backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);border:1px solid var(--line);color:var(--txt);
-  display:grid;place-items:center;font-size:17px;box-shadow:var(--sh);transition:.15s}
-.mbtn:active{transform:scale(.93)}
-.mbtn.on{background:var(--red);border-color:var(--red);color:#fff}
-.mbtn.busy{animation:pulse 1s infinite}
-@keyframes pulse{50%{opacity:.45}}
+/* ═══ floating overlay controls ═══ */
+.overlay-top{position:absolute;top:0;left:0;right:0;z-index:600;pointer-events:none;
+  padding:calc(env(safe-area-inset-top) + 10px) 10px 0;display:flex;flex-direction:column;gap:9px}
+.overlay-top>*{pointer-events:auto}
+.overlay-top::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(12,13,11,.82) 0%,rgba(12,13,11,.4) 55%,transparent 100%);
+  -webkit-mask:linear-gradient(180deg,#000 60%,transparent)}
 
-#centerCard{position:absolute;left:12px;top:12px;right:66px;z-index:600;display:none;
-  background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid var(--line);border-radius:13px;padding:9px 11px;box-shadow:var(--sh);
-  align-items:center;gap:10px}
-#centerCard.show{display:flex;animation:drop .2s}
-#centerCard .ic{font-size:15px}
+.topbar{display:flex;align-items:center;gap:8px}
+.brand{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px 0 10px;border-radius:13px;
+  background:var(--glass2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);box-shadow:var(--sh2);text-decoration:none;flex-shrink:0}
+.brand .bolt{color:var(--lime)}
+.brand .wm{font-family:var(--dsp);font-weight:700;font-size:15px;letter-spacing:-.4px;white-space:nowrap}
+.brand .wm .c{color:var(--lime)}.brand .wm .h{color:var(--amber)}.brand .wm i{color:var(--dim);font-style:normal;margin:0 1px}
+@media(max-width:560px){.brand .wm{display:none}.brand{padding:0 10px}}
+
+.searchbox{flex:1;display:flex;align-items:center;gap:9px;height:42px;padding:0 13px;border-radius:13px;
+  background:var(--glass2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);box-shadow:var(--sh2);min-width:0;transition:border-color .15s}
+.searchbox:focus-within{border-color:var(--line2)}
+.searchbox svg{flex-shrink:0;color:var(--dim2)}
+.searchbox input{flex:1;background:none;border:none;outline:none;font-size:14.5px;min-width:0}
+.searchbox input::placeholder{color:var(--dim2)}
+.searchbox .clr{color:var(--dim2);padding:4px;display:none}
+.searchbox.has .clr{display:block}
+
+.iconbtn{width:42px;height:42px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;
+  color:var(--dim);background:var(--glass2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);box-shadow:var(--sh2);transition:.15s;text-decoration:none}
+.iconbtn:hover{color:var(--txt);border-color:var(--line2)}
+.iconbtn.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.iconbtn.sm{width:34px;height:34px;border-radius:10px;box-shadow:none;background:var(--surface2)}
+
+/* car bar */
+#carBar{display:none}
+#carBar.show{display:flex;gap:7px;align-items:center}
+#carBar .cartag{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:11px;
+  background:var(--glass2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:var(--sh2);font-size:12.5px;font-weight:600;flex:1;min-width:0}
+#carBar .cartag .m{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#carBar .cartag .spec{color:var(--dim);font-weight:500;font-size:11px}
+#carBar .mine{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:11px;
+  background:var(--glass2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:var(--sh2);font-size:12px;font-weight:700;color:var(--dim);white-space:nowrap}
+#carBar .mine.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+
+/* tabs + chips */
+.filterrow{display:flex}
+.tabs{display:inline-flex;gap:3px;padding:3px;border-radius:12px;background:var(--glass2);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh2)}
+.tab{padding:6px 12px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap;transition:.15s}
+.tab.on{background:var(--surface3);color:var(--txt)}
+.tab .n{font-size:10px;color:var(--lime);margin-left:3px;font-weight:700}
+
+#chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:1px 0 2px}
+#chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:12px;
+  background:var(--glass2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:var(--sh2);font-size:13px;font-weight:600;white-space:nowrap;
+  transition:transform .12s,background .15s,border-color .15s,color .15s}
+.chip:active{transform:scale(.93)}
+.chip .cnt{font-size:10px;color:var(--dim2);font-weight:600}
+.chip.on{background:var(--lime);border-color:var(--lime);color:var(--ink);box-shadow:0 3px 16px rgba(191,242,63,.34)}
+.chip.on .cnt{color:rgba(12,13,11,.6)}
+.chip.more{border-style:dashed;color:var(--lime);background:var(--glass)}
+
+/* route panel */
+#routePanel{display:none}
+#routePanel.show{display:block;animation:drop .2s ease}
+@keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+#overlayTop.routing .topbar .searchbox,#overlayTop.routing .filterrow,#overlayTop.routing #chips{display:none}
+.rcard{background:var(--glass2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:11px}
+.rfield{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--line);
+  border-radius:12px;padding:0 12px;height:42px;margin-bottom:8px}
+.rfield .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.rfield .dot.a{background:var(--lime)}.rfield .dot.b{background:var(--amber)}
+.rfield input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
+.rfield input::placeholder{color:var(--dim2)}
+.rfield .mini{color:var(--dim);padding:4px;display:grid;place-items:center}
+.rrow2{display:flex;gap:8px;align-items:center}
+#goBtn{flex:1;height:44px;border-radius:12px;background:var(--lime);color:var(--ink);font-weight:700;
+  font-size:14.5px;box-shadow:0 3px 16px rgba(191,242,63,.3);transition:.15s}
+#goBtn:disabled{opacity:.5;box-shadow:none}
+.seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px;height:44px;align-items:center}
+.seg button{padding:0 12px;height:36px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--dim)}
+.seg button.on{background:var(--surface3);color:var(--txt)}
+#routeInfo{font-size:12.5px;color:var(--amber);margin-top:8px;min-height:16px;padding:0 2px}
+#routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
+#routePanel.collapsed #routeInfo{margin:0;display:flex;align-items:center;gap:10px;padding:12px 13px;color:var(--txt);
+  font-size:13px;font-weight:600;cursor:pointer}
+#routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--amber);font-weight:500}
+#routePanel.collapsed #routeInfo .ed{color:var(--lime);font-size:12px;font-weight:700;flex-shrink:0}
+
+/* center card */
+#centerCard{display:none}
+#centerCard.show{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 12px;border-radius:14px;
+  background:var(--glass2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);box-shadow:var(--sh);animation:drop .2s}
+#centerCard .ic{color:var(--blue);flex-shrink:0}
 #centerCard .txt{flex:1;min-width:0}
-#centerCard .lbl{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#centerCard .lbl{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #centerCard .sub{font-size:11px;color:var(--dim)}
-#centerCard .rad{display:flex;gap:3px}
-#centerCard .rad button{font-size:11px;font-weight:600;color:var(--dim);padding:3px 7px;border-radius:7px;
-  background:var(--surface2)}
-#centerCard .rad button.on{background:var(--red);color:#fff}
-#centerCard .x{font-size:14px;color:var(--dim2);padding:2px 4px}
+#centerCard .rad{display:flex;gap:3px;background:var(--surface2);border-radius:9px;padding:3px}
+#centerCard .rad button{font-size:11px;font-weight:700;color:var(--dim);padding:4px 8px;border-radius:6px}
+#centerCard .rad button.on{background:var(--lime);color:var(--ink)}
+#centerCard .x{color:var(--dim2);padding:3px;display:grid;place-items:center}
 
-#pinHint{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:601;
-  background:var(--red);color:#fff;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:11px;
+#pinHint{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 16px);transform:translateX(-50%);z-index:601;
+  background:var(--lime);color:var(--ink);font-size:12.5px;font-weight:700;padding:9px 15px;border-radius:12px;
   box-shadow:var(--sh);display:none;white-space:nowrap}
 #pinHint.show{display:block;animation:drop .2s}
 
-.leaflet-popup-content-wrapper{background:var(--surface);color:var(--txt);border-radius:14px;
-  border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.6)}
-.leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
-.leaflet-popup-content{margin:13px 15px;font-size:13px}
-.leaflet-popup-close-button{color:var(--dim2)!important;padding:8px 8px 0 0!important}
-.pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:3px}
-.pp-name{font-weight:700;font-size:14.5px;flex:1;padding-right:14px}
-.pp-fav{font-size:15px;color:var(--dim2);flex-shrink:0;line-height:1}
-.pp-fav.on{color:var(--amber)}
-.pp-net{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-bottom:5px}
-.pp-net .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:4px}
-.pp-car{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:11.5px;color:var(--dim);
-  margin:6px 0 8px;padding:6px 8px;background:var(--surface2);border-radius:9px}
-.pp-car .cc{font-weight:700;font-size:11px}
-.pp-car .cc.native{color:var(--green)}
-.pp-car .cc.adapter{color:var(--amber)}
-.pp-car .cc.null{color:var(--dim2)}
-.pp-host{color:var(--amber);font-size:11.5px;margin-bottom:8px}
-.pp-list{max-height:168px;overflow-y:auto}
-.pp-chain{display:flex;justify-content:space-between;gap:12px;padding:2.5px 0;font-size:12.5px}
-.pp-chain .d{color:var(--dim);font-size:11.5px;white-space:nowrap}
-.pp-links{margin-top:9px;padding-top:9px;border-top:1px solid var(--line);display:flex;gap:14px}
-.pp-links a{color:var(--blue);font-size:12px;text-decoration:none;font-weight:600}
+/* FAB stack */
+.mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
+  display:flex;flex-direction:column;gap:9px}
+.mbtn{width:46px;height:46px;border-radius:15px;background:var(--glass2);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);border:1px solid var(--line);color:var(--txt);
+  display:grid;place-items:center;box-shadow:var(--sh);transition:.15s}
+.mbtn:active{transform:scale(.92)}
+.mbtn.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.mbtn.primary{background:var(--lime);border-color:var(--lime);color:var(--ink);box-shadow:0 6px 20px rgba(191,242,63,.32)}
+.mbtn.busy{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
 
-/* ══════════ sheet ══════════ */
+/* popup */
+.leaflet-popup-content-wrapper{background:var(--surface);color:var(--txt);border-radius:16px;
+  border:1px solid var(--line);box-shadow:0 16px 44px rgba(0,0,0,.6)}
+.leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
+.leaflet-popup-content{margin:14px 16px;font-size:13px}
+.leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
+.pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.pp-name{font-family:var(--dsp);font-weight:700;font-size:15px;flex:1;padding-right:14px;line-height:1.25}
+.pp-fav{font-size:17px;color:var(--dim2);flex-shrink:0;line-height:1}
+.pp-fav.on{color:var(--amber)}
+.pp-net{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;margin-bottom:6px}
+.pp-net .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:4px}
+.pp-car{display:flex;flex-wrap:wrap;gap:5px 10px;align-items:center;font-size:11.5px;color:var(--dim);
+  margin:8px 0;padding:8px 10px;background:var(--surface2);border-radius:11px}
+.pp-car .cc{font-weight:700;font-size:11px}
+.pp-car .cc.native{color:var(--lime)}.pp-car .cc.adapter{color:var(--amber)}.pp-car .cc.null{color:var(--red)}
+.pp-host{color:var(--amber);font-size:11.5px;margin-bottom:8px}
+.pp-list{max-height:170px;overflow-y:auto;margin-top:6px}
+.pp-chain{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:12.5px}
+.pp-chain .d{color:var(--dim);font-size:11.5px;white-space:nowrap}
+.pp-links{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;gap:8px}
+.pp-links a{flex:1;text-align:center;color:var(--txt);font-size:12px;text-decoration:none;font-weight:700;
+  padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
+.pp-links a:last-child{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+
+/* ═══ bottom sheet ═══ */
 #sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
-  box-shadow:0 -6px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;flex-shrink:0;
-  height:52px;transition:height .28s cubic-bezier(.32,.72,0,1);
-  padding-bottom:env(safe-area-inset-bottom)}
-.handle{padding:7px 0 3px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
-.handle i{width:34px;height:4px;border-radius:2px;background:var(--line2);display:block}
-.sheethead{display:flex;align-items:center;gap:10px;padding:0 14px 9px;flex-shrink:0}
-.sheethead .t{flex:1;font-size:13.5px;font-weight:600;min-width:0;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
+  border-radius:20px 20px 0 0;box-shadow:0 -8px 34px rgba(0,0,0,.5);display:flex;flex-direction:column;
+  flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
+.handle{padding:9px 0 5px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
+.handle i{width:38px;height:4px;border-radius:2px;background:var(--line2);display:block}
+.sheethead{display:flex;align-items:center;gap:9px;padding:0 15px 10px;flex-shrink:0}
+.sheethead .t{flex:1;font-size:14px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sheethead .t em{font-style:normal;color:var(--dim);font-weight:500}
-.sortbtn{font-size:11.5px;color:var(--dim);background:var(--surface2);border:1px solid var(--line);
-  padding:4px 9px;border-radius:8px;font-weight:600;flex-shrink:0}
-#list{overflow-y:auto;overscroll-behavior:contain;padding:0 14px 14px;flex:1}
-.row{display:flex;gap:11px;padding:11px 0;border-top:1px solid var(--line);cursor:pointer}
-.row:active{opacity:.6}
-.row .idx{width:22px;height:22px;border-radius:7px;background:var(--surface2);color:var(--dim);
-  font-size:11px;font-weight:700;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.sortbtn{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);background:var(--surface2);
+  border:1px solid var(--line);padding:6px 10px;border-radius:9px;font-weight:700;flex-shrink:0}
+.sortbtn .ci{color:var(--dim2)}
+#list{overflow-y:auto;overscroll-behavior:contain;padding:0 10px 16px;flex:1}
+.row{display:flex;gap:11px;padding:12px;border-radius:14px;margin-bottom:5px;background:var(--surface2);
+  border:1px solid transparent;cursor:pointer;transition:.12s}
+.row:active{transform:scale(.99)}
+.row:hover{border-color:var(--line)}
+.row .idx{width:24px;height:24px;border-radius:8px;background:var(--lime);color:var(--ink);
+  font-size:12px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
 .row .body{flex:1;min-width:0}
 .row .n{display:flex;gap:8px;align-items:baseline}
-.row .n b{font-size:14px;font-weight:600;flex:1;min-width:0;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
-.row .n s{text-decoration:none;color:var(--dim);font-size:11.5px;white-space:nowrap}
-.row .sub{color:var(--dim2);font-size:11.5px;margin-top:2px;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
-.row .sub .netdot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
-.row .cbadge{margin-left:6px;padding:1px 6px;border-radius:6px;font-weight:700;font-size:10.5px;
-  background:rgba(76,157,255,.14);color:var(--blue)}
-.row .cbadge.adapter{background:rgba(255,176,32,.14);color:var(--amber)}
-.row .cbadge.null{background:rgba(136,146,160,.14);color:var(--dim2)}
-.row .ch{font-size:12px;margin-top:4px;color:var(--dim);display:flex;flex-wrap:wrap;gap:3px 10px}
-.row .ch b{color:var(--txt);font-weight:600}
-.row .star{font-size:14px;color:var(--dim2);padding:2px 0 0 2px;flex-shrink:0;align-self:flex-start}
+.row .n b{font-size:14px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .n s{text-decoration:none;color:var(--dim);font-size:11.5px;white-space:nowrap;font-weight:600}
+.row .sub{color:var(--dim2);font-size:11.5px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .sub .netdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:10.5px;
+  background:rgba(191,242,63,.16);color:var(--lime)}
+.row .cbadge.adapter{background:rgba(255,159,67,.16);color:var(--amber)}
+.row .cbadge.null{background:rgba(255,90,95,.16);color:var(--red)}
+.row .ch{font-size:12px;margin-top:6px;color:var(--dim);display:flex;flex-wrap:wrap;gap:4px 10px}
+.row .ch b{color:var(--txt);font-weight:700}
+.row .star{font-size:16px;color:var(--dim2);padding:2px 0 0 2px;flex-shrink:0;align-self:flex-start}
 .row .star.on{color:var(--amber)}
-.empty{text-align:center;color:var(--dim);font-size:13px;padding:28px 20px;line-height:1.6}
-.empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14px}
+.empty{text-align:center;color:var(--dim);font-size:13px;padding:30px 20px;line-height:1.6}
+.empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14.5px;font-family:var(--dsp)}
 
-/* ══════════ chain picker ══════════ */
-#picker{position:fixed;inset:0;z-index:2000;background:rgba(5,7,10,.75);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;
-  align-items:flex-end;justify-content:center}
-#picker.show{display:flex;animation:fade .18s}
+/* ═══ modals (chain / car pickers) ═══ */
+.modal{position:fixed;inset:0;z-index:2000;background:rgba(6,7,5,.72);backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);display:none;align-items:flex-end;justify-content:center}
+.modal.show{display:flex;animation:fade .18s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.pk{background:var(--surface);width:100%;max-width:620px;max-height:86vh;border-radius:22px 22px 0 0;
+.pk{background:var(--surface);width:100%;max-width:640px;max-height:86vh;border-radius:24px 24px 0 0;
   border:1px solid var(--line);border-bottom:none;display:flex;flex-direction:column;
-  animation:up .26s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
+  animation:up .28s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
 @keyframes up{from{transform:translateY(100%)}to{transform:none}}
-.pk h3{font-size:16px;padding:16px 16px 11px;display:flex;align-items:center;gap:10px}
+.pk h3{font-family:var(--dsp);font-size:18px;font-weight:700;padding:18px 16px 12px;display:flex;align-items:center;gap:10px}
 .pk h3 span{flex:1}
-.pk .searchbox{margin:0 16px 11px}
-.pkcats{display:flex;gap:5px;padding:0 16px 11px;overflow-x:auto;scrollbar-width:none}
+.pk .subnote{padding:0 16px 12px;color:var(--dim);font-size:12.5px;line-height:1.5}
+.pk .searchbox{margin:0 16px 12px;box-shadow:none;background:var(--surface2);height:44px}
+.pkcats{display:flex;gap:5px;padding:0 16px 12px;overflow-x:auto;scrollbar-width:none}
 .pkcats::-webkit-scrollbar{display:none}
-.pkgrid{overflow-y:auto;padding:0 16px 16px;display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:7px;align-content:start}
-.pkitem{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:11px;
-  background:var(--surface2);border:1px solid var(--line);font-size:13px;font-weight:600;
-  text-align:left;transition:.12s}
+.pkcats .tab{background:var(--surface2);box-shadow:none;border:1px solid var(--line)}
+.pkcats .tab.on{background:var(--surface3);color:var(--txt)}
+.pkgrid{overflow-y:auto;padding:0 16px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;align-content:start}
+.pkitem{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface2);
+  border:1px solid var(--line);font-size:13px;font-weight:600;text-align:left;transition:.12s}
 .pkitem:active{transform:scale(.97)}
-.pkitem.on{background:var(--red);border-color:var(--red);color:#fff}
-.pkitem .e{font-size:15px;flex-shrink:0}
-.pkitem .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pkitem .c{font-size:10px;color:var(--dim2);font-weight:500}
-.pkitem.on .c{color:rgba(255,255,255,.7)}
-.pkfoot{display:flex;gap:9px;padding:12px 16px;border-top:1px solid var(--line);flex-shrink:0}
-.pkfoot button{flex:1;height:42px;border-radius:12px;font-weight:700;font-size:14px}
+.pkitem.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.pkitem .e{font-size:17px;flex-shrink:0}
+.pkitem .nm,.pkitem .m{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pkitem .c,.pkitem .spec{font-size:10.5px;color:var(--dim2);font-weight:600}
+.pkitem.on .c,.pkitem.on .spec{color:rgba(12,13,11,.6)}
+.caritem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:var(--surface2);
+  border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left;transition:.12s}
+.caritem.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.caritem .m{flex:1}.caritem .spec{font-size:11px;color:var(--dim2);font-weight:600}
+.caritem.on .spec{color:rgba(255,255,255,.8)}
+.pkfoot{display:flex;gap:9px;padding:13px 16px;border-top:1px solid var(--line);flex-shrink:0}
+.pkfoot button{flex:1;height:46px;border-radius:13px;font-weight:700;font-size:14.5px}
 .pkfoot .clear{background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
-.pkfoot .done{background:var(--red);color:#fff}
+.pkfoot .done{background:var(--lime);color:var(--ink)}
 
-/* ══════════ about ══════════ */
-#about{position:fixed;inset:0;z-index:3000;background:rgba(5,7,10,.8);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;padding:20px}
+/* ═══ hero (first run) ═══ */
+#hero{position:absolute;inset:0;z-index:1500;display:none;align-items:center;justify-content:center;padding:18px;
+  background:radial-gradient(130% 80% at 50% 8%,rgba(20,24,16,.5),rgba(8,9,7,.86));
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+#hero.show{display:flex;animation:fade .25s}
+.herocard{width:100%;max-width:460px;background:var(--glass2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--line2);border-radius:24px;box-shadow:0 24px 64px rgba(0,0,0,.6);padding:22px 20px;
+  position:relative;animation:up .3s cubic-bezier(.32,.72,0,1)}
+.herocard .x{position:absolute;top:14px;right:14px;color:var(--dim2);padding:4px}
+.herocard .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--lime);
+  background:rgba(191,242,63,.12);border:1px solid rgba(191,242,63,.25);padding:5px 11px;border-radius:20px;margin-bottom:14px}
+.herocard h1{font-family:var(--dsp);font-size:27px;font-weight:700;letter-spacing:-.8px;line-height:1.12;margin-bottom:8px}
+.herocard h1 .c{color:var(--lime)}.herocard h1 .h{color:var(--amber)}.herocard h1 i{color:var(--dim);font-style:normal;margin:0 2px}
+.herocard p{color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:16px}
+.herogrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.heropick{display:flex;align-items:center;gap:9px;padding:12px 13px;border-radius:13px;background:var(--surface2);
+  border:1px solid var(--line);font-size:13.5px;font-weight:700;text-align:left;transition:.12s}
+.heropick:hover{border-color:var(--lime);background:var(--surface3)}
+.heropick:active{transform:scale(.97)}
+.heropick .e{font-size:19px;flex-shrink:0}
+.heropick>span:nth-child(2){flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600}
+#heroAll{width:100%;height:46px;border-radius:13px;background:var(--lime);color:var(--ink);font-weight:700;font-size:14.5px;margin-bottom:9px}
+#heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
+
+/* ═══ about ═══ */
+#about{position:fixed;inset:0;z-index:3000;background:rgba(6,7,5,.82);backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px}
 #about:target{display:flex}
-#about .box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;
-  max-width:460px;max-height:80vh;overflow-y:auto;font-size:13.5px;color:var(--dim);line-height:1.6}
-#about h2{color:var(--txt);font-size:18px;margin-bottom:11px}
-#about p{margin-bottom:11px}
-#about a{color:var(--blue);text-decoration:none}
-#about .close{display:block;text-align:center;margin-top:6px;padding:11px;background:var(--surface2);
-  border-radius:11px;color:var(--txt);font-weight:600;text-decoration:none}
+#about .box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;
+  max-width:470px;max-height:82vh;overflow-y:auto;font-size:13.5px;color:var(--dim);line-height:1.6}
+#about h2{font-family:var(--dsp);color:var(--txt);font-size:20px;margin-bottom:12px}
+#about h2 .c{color:var(--lime)}#about h2 .h{color:var(--amber)}
+#about p{margin-bottom:12px}
+#about b{color:var(--txt)}
+#about a{color:var(--lime);text-decoration:none}
+#about .close{display:block;text-align:center;margin-top:6px;padding:12px;background:var(--surface2);
+  border-radius:12px;color:var(--txt);font-weight:700;text-decoration:none}
 
-#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 76px);
-  transform:translateX(-50%) translateY(14px);
-  background:var(--surface2);border:1px solid var(--line2);color:var(--txt);font-size:13px;
-  font-weight:600;padding:10px 18px;border-radius:12px;box-shadow:var(--sh);z-index:4000;
-  opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90vw;
-  overflow:hidden;text-overflow:ellipsis}
+/* toast */
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);transform:translateX(-50%) translateY(14px);
+  background:var(--surface3);border:1px solid var(--line2);color:var(--txt);font-size:13px;font-weight:600;
+  padding:11px 19px;border-radius:13px;box-shadow:var(--sh);z-index:4000;opacity:0;pointer-events:none;
+  transition:.25s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 @media(min-width:760px){
-  header{padding-left:18px;padding-right:18px}
-  #chips{padding-left:18px;padding-right:18px;margin:0 -18px}
-  .tagline{font-size:12px}
+  .overlay-top{padding-left:14px;padding-right:14px;max-width:760px}
+  .mapctl{bottom:calc(env(safe-area-inset-bottom) + 70px)}
 }
+
 </style>
 </head>
 <body>
-
 <div id="splash">
-  <div class="splash-logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
+  <div class="splash-logo"><span class="c">Charge</span><span class="amp">&amp;</span><span class="h">Chew</span></div>
   <div class="splash-bar"><i></i></div>
   <small>Loading fast chargers…</small>
 </div>
 
 <div id="app">
-  <header>
-    <div class="brandrow">
-      <div class="logo">CHARGE <span class="amp">&amp;</span> CHEW</div>
-      <div class="tagline">Fast chargers near the places you actually stop</div>
-      <button class="iconbtn" id="carBtn" title="Set your EV">🚗</button>
-      <button class="iconbtn" id="routeToggle" title="Plan a road trip">🛣️</button>
-      <a class="iconbtn" href="#about" title="About">?</a>
-    </div>
-    <div id="carBar"></div>
-
-    <div class="searchrow">
-      <div class="searchbox" id="placeBox">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input id="placeIn" placeholder="Search a city, address or area…" autocomplete="off" enterkeyhint="search">
-        <button class="clr" id="placeClr">✕</button>
-      </div>
-      <button class="iconbtn" id="locBtn" title="Use my location" style="width:40px;height:40px">📍</button>
-    </div>
-
-    <div id="routePanel">
-      <div class="rfield"><span class="dot a"></span>
-        <input id="fromIn" placeholder="Start — city or address" autocomplete="off">
-        <button class="mini" id="useLoc" title="Use my location">📍</button></div>
-      <div class="rfield"><span class="dot b"></span>
-        <input id="toIn" placeholder="Destination" autocomplete="off"></div>
-      <div class="rrow2">
-        <button id="goBtn">Find stops along route</button>
-        <div class="seg" id="corridorSeg">
-          <button data-mi="2">2mi</button>
-          <button data-mi="5" class="on">5mi</button>
-          <button data-mi="10">10mi</button>
-        </div>
-      </div>
-      <div id="routeInfo"></div>
-    </div>
-
-    <div class="tabs">
-      <button class="tab on" data-cat="all">All</button>
-      <button class="tab" data-cat="food">🍔 Food</button>
-      <button class="tab" data-cat="store">🛒 Stores</button>
-      <button class="tab" data-cat="fav">⭐ Saved <span class="n" id="favN"></span></button>
-    </div>
-
-    <div id="chips"></div>
-  </header>
-
   <div id="mapWrap">
     <div id="map"></div>
-    <div id="centerCard">
-      <span class="ic" id="ccIcon">📍</span>
-      <div class="txt"><div class="lbl" id="ccLabel"></div><div class="sub" id="ccSub"></div></div>
-      <div class="rad" id="ccRad">
-        <button data-mi="10">10</button><button data-mi="25" class="on">25</button><button data-mi="50">50</button>
+
+    <div class="overlay-top" id="overlayTop">
+      <div class="topbar">
+        <a class="brand" href="#about" aria-label="About">
+          <svg class="bolt" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.4a.6.6 0 0 0 .5 1H10l-1 7.2a.5.5 0 0 0 .9.4L19.6 10a.6.6 0 0 0-.5-1H14l1-6.4a.5.5 0 0 0-.9-.4z"/></svg>
+          <span class="wm"><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span></span>
+        </a>
+        <div class="searchbox" id="placeBox">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="placeIn" placeholder="Search a city, address or area…" autocomplete="off" enterkeyhint="search">
+          <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </div>
+        <button class="iconbtn" id="carBtn" title="Set your EV" aria-label="Set your EV">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l1.6-4.3A2 2 0 0 1 8.5 5.3h7A2 2 0 0 1 17.4 6.7L19 11"/><path d="M4 11h16a1 1 0 0 1 1 1v4.5a.5.5 0 0 1-.5.5H19a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H3.5a.5.5 0 0 1-.5-.5V12a1 1 0 0 1 1-1z"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/></svg>
+        </button>
       </div>
-      <button class="x" id="ccX">✕</button>
+
+      <div id="carBar"></div>
+
+      <div class="filterrow">
+        <div class="tabs">
+          <button class="tab on" data-cat="all">All</button>
+          <button class="tab" data-cat="food">🍔 Food</button>
+          <button class="tab" data-cat="store">🛒 Stores</button>
+          <button class="tab" data-cat="fav">⭐<span class="n" id="favN"></span></button>
+        </div>
+      </div>
+
+      <div id="chips"></div>
+
+      <div id="routePanel">
+        <div class="rcard">
+          <div class="rfield"><span class="dot a"></span>
+            <input id="fromIn" placeholder="Start — city or address" autocomplete="off">
+            <button class="mini" id="useLoc" title="Use my location"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></button>
+          </div>
+          <div class="rfield"><span class="dot b"></span>
+            <input id="toIn" placeholder="Destination" autocomplete="off"></div>
+          <div class="rrow2">
+            <button id="goBtn">Find stops along route</button>
+            <div class="seg" id="corridorSeg">
+              <button data-mi="2">2mi</button><button data-mi="5" class="on">5mi</button><button data-mi="10">10mi</button>
+            </div>
+          </div>
+          <div id="routeInfo"></div>
+        </div>
+      </div>
+
+      <div id="centerCard">
+        <span class="ic" id="ccIcon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></span>
+        <div class="txt"><div class="lbl" id="ccLabel"></div><div class="sub" id="ccSub"></div></div>
+        <div class="rad" id="ccRad">
+          <button data-mi="10">10</button><button data-mi="25" class="on">25</button><button data-mi="50">50</button>
+        </div>
+        <button class="x" id="ccX" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
     </div>
+
     <div id="pinHint">Tap the map to search that area</div>
+
     <div class="mapctl">
-      <button class="mbtn" id="pinBtn" title="Drop a pin to search an area">📌</button>
-      <button class="mbtn" id="shareBtn" title="Copy link to this view">🔗</button>
+      <button class="mbtn" id="routeToggle" title="Plan a road trip" aria-label="Plan a road trip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="5.5" r="2.2"/><path d="M8.7 18.5H13a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h4.3"/></svg></button>
+      <button class="mbtn" id="pinBtn" title="Drop a pin to search an area" aria-label="Drop a pin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s6.5-6 6.5-10.5a6.5 6.5 0 0 0-13 0C5.5 15.5 12 21.5 12 21.5z"/><circle cx="12" cy="11" r="2.4"/></svg></button>
+      <button class="mbtn primary" id="locBtn" title="Use my location" aria-label="Use my location"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2"/></svg></button>
+    </div>
+
+    <div id="hero">
+      <div class="herocard">
+        <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <span class="badge">⚡ Free · Every US fast charger</span>
+        <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
+        <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
+        <div class="herogrid" id="heroGrid"></div>
+        <button id="heroAll">Browse all chains</button>
+        <button id="heroSkip">Just explore the map</button>
+      </div>
     </div>
   </div>
 
@@ -377,17 +439,18 @@ header.routing .tagline{display:none}
     <div class="handle" id="handle"><i></i></div>
     <div class="sheethead">
       <div class="t" id="sheetTitle">…</div>
-      <button class="sortbtn" id="sortBtn">Sort</button>
+      <button class="sortbtn" id="sortBtn"><svg class="ci" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l-3 3M17 20l3-3"/></svg><span id="sortLbl">Sort</span></button>
+      <button class="iconbtn sm" id="shareBtn" title="Copy link to this view" aria-label="Share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="17" cy="18" r="2.4"/><path d="M8.1 10.9l6.8-3.8M8.1 13.1l6.8 3.8"/></svg></button>
     </div>
     <div id="list"></div>
   </section>
 </div>
 
-<div id="picker">
+<div id="picker" class="modal">
   <div class="pk">
-    <h3><span>Pick chains</span><button class="iconbtn" id="pkClose">✕</button></h3>
+    <h3><span>Pick chains</span><button class="iconbtn sm" id="pkClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="searchbox" id="pkSearchBox">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input id="pkSearch" placeholder="Filter chains…" autocomplete="off">
     </div>
     <div class="pkcats" id="pkCats"></div>
@@ -399,14 +462,12 @@ header.routing .tagline{display:none}
   </div>
 </div>
 
-<div id="carPicker">
+<div id="carPicker" class="modal">
   <div class="pk">
-    <h3><span>Your EV</span><button class="iconbtn" id="carClose">✕</button></h3>
-    <p style="padding:0 16px 10px;color:var(--dim);font-size:12.5px;line-height:1.5">
-      Pick your car for connector compatibility and an estimated charge time at each stop.
-      Stored on this device only.</p>
-    <div class="searchbox" id="carSearchBox" style="margin:0 16px 11px">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <h3><span>Your EV</span><button class="iconbtn sm" id="carClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Stored on this device only.</p>
+    <div class="searchbox" id="carSearchBox">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input id="carSearch" placeholder="Search your model…" autocomplete="off">
     </div>
     <div class="pkgrid" id="carGrid" style="grid-template-columns:1fr"></div>
@@ -417,9 +478,9 @@ header.routing .tagline{display:none}
 </div>
 
 <div id="about"><div class="box">
-  <h2>Charge &amp; Chew</h2>
+  <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
   <p>Every public DC fast charger in the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
-  <p><b style="color:var(--txt)">How to use it:</b> set your 🚗 car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a 📌 pin to explore an area, or hit 🛣️ to plan a route and see every matching stop along the way. Tap ⭐ to save a stop.</p>
+  <p><b>How to use it:</b> set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="near/">Browse all chains &amp; states →</a></p>
@@ -435,7 +496,7 @@ header.routing .tagline{display:none}
 const D = window.PITSTOP_DATA;
 const $ = id => document.getElementById(id);
 if (!D) { document.getElementById('splash').innerHTML =
-  '<div style="color:#ff3b3f;font-size:14px">data.js failed to load</div>'; return; }
+  '<div style="color:#ff5a5f;font-size:14px">data.js failed to load</div>'; return; }
 
 const WALK_MPM = 80, MI = 1609.34;
 const SITES = D.sites, BRANDS = D.brands;
@@ -605,8 +666,8 @@ function render() {
     if (!inScope(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
     if (visIds.has(s.id)) {
       m.setStyle({ radius: filtering ? 6.5 : 4, weight: filtering ? 1.8 : 1,
-        color: filtering ? '#fff' : '#7d8794', fillColor: filtering ? '#ff3b3f' : '#7d8794',
-        fillOpacity: filtering ? .95 : .62, opacity: 1 });
+        color: filtering ? '#0c0d0b' : '#7d8794', fillColor: filtering ? '#bff23f' : '#7d8794',
+        fillOpacity: filtering ? .96 : .6, opacity: 1 });
       if (filtering) m.bringToFront();
     } else {
       m.setStyle({ radius: 2.2, weight: 0, fillColor: '#39414d', fillOpacity: .5, opacity: 1 });
@@ -745,7 +806,7 @@ $('sortBtn').onclick = () => {
   opts.push('stalls', 'power');
   sortBy = opts[(opts.indexOf(sortBy) + 1) % opts.length];
   if (sortBy === undefined || opts.indexOf(sortBy) < 0) sortBy = opts[0];
-  $('sortBtn').textContent = SORT_LABEL[sortBy];
+  $('sortLbl').textContent = SORT_LABEL[sortBy];
   render();
 };
 
@@ -853,7 +914,7 @@ function setCenter(lat, lon, label, kind) {
   $('centerCard').classList.add('show');
   $('ccIcon').textContent = kind === 'me' ? '🔵' : kind === 'pin' ? '📌' : '🔎';
   $('ccLabel').textContent = label;
-  sortBy = 'dist'; $('sortBtn').textContent = SORT_LABEL.dist;
+  sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
   render(); setSheet('mid'); syncUrl();
   settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
 }
@@ -865,7 +926,7 @@ function clearCenter() {
   if (centerLayer) { map.removeLayer(centerLayer); centerLayer = null; }
   if (radiusLayer) { map.removeLayer(radiusLayer); radiusLayer = null; }
   $('centerCard').classList.remove('show');
-  sortBy = 'walk'; $('sortBtn').textContent = SORT_LABEL.walk;
+  sortBy = 'walk'; $('sortLbl').textContent = SORT_LABEL.walk;
   render(); syncUrl();
 }
 $('ccX').onclick = clearCenter;
@@ -957,7 +1018,7 @@ $('placeIn').addEventListener('keydown', async e => {
 /* ───────── route ───────── */
 $('routeToggle').onclick = () => {
   const on = $('routePanel').classList.toggle('show');
-  document.querySelector('header').classList.toggle('routing', on);
+  $('overlayTop').classList.toggle('routing', on);
   $('routeToggle').classList.toggle('on', on);
   if (!on) { clearRoute(); route = null; render(); syncUrl(); }
   setTimeout(() => map.invalidateSize({ pan: false }), 220);
@@ -1066,10 +1127,33 @@ function fitToResults() {
   settleFit(() => b, [26, 26], 11);
 }
 
+/* ───────── hero (first-run quick pick) ───────── */
+const HERO_PICKS = ['IHOP', 'Starbucks', 'In-N-Out', 'Chick-fil-A', "Buc-ee's", 'Walmart', 'Chipotle', 'Target'];
+function buildHero() {
+  const g = $('heroGrid');
+  const picks = HERO_PICKS.filter(k => BRANDS[k]);
+  g.innerHTML = picks.map(k =>
+    `<button class="heropick" data-k="${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${esc(k)}</span><span class="c">${counts[k]}</span></button>`).join('');
+  g.querySelectorAll('[data-k]').forEach(b => b.onclick = () => selectChain(b.dataset.k));
+}
+function selectChain(k) {
+  active.add(k); hideHero();
+  cat = 'all';
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x.dataset.cat === 'all'));
+  render(); syncUrl(); setSheet('mid'); fitToResults();
+}
+function showHero() { buildHero(); $('hero').classList.add('show'); }
+function hideHero() { $('hero').classList.remove('show'); localStorage.setItem('cc_hero', '0'); }
+$('heroAll').onclick = () => { hideHero(); openPicker(); };
+$('heroSkip').onclick = hideHero;
+$('heroClose').onclick = hideHero;
+$('hero').addEventListener('click', e => { if (e.target.id === 'hero') hideHero(); });
+
+
 /* ───────── boot ───────── */
 saveFavs();
 renderCarBar();
-$('sortBtn').textContent = SORT_LABEL.walk;
+$('sortLbl').textContent = SORT_LABEL.walk;
 
 const q = new URLSearchParams(location.search);
 (q.get('chain') || '').split(',').map(x => x.trim()).filter(Boolean).forEach(k => {
@@ -1103,12 +1187,13 @@ if (q.get('at')) {
 }
 if (q.get('from') && q.get('to')) {
   $('routePanel').classList.add('show'); $('routeToggle').classList.add('on');
-  document.querySelector('header').classList.add('routing');
+  $('overlayTop').classList.add('routing');
   $('fromIn').value = q.get('from'); $('toIn').value = q.get('to');
   boot = () => $('goBtn').click();
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size) { setSheet('mid'); fitToResults(); }
+else if (localStorage.getItem('cc_hero') !== '0') showHero();
 
 setTimeout(() => {
   $('splash').classList.add('gone');
