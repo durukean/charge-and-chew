@@ -48,6 +48,12 @@ WALK = 80
 def slug(s): return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 def esc(s): return html.escape(str(s))
 def mins(m): return max(1, round(m / WALK))
+def art(name):
+    """'a IHOP' reads wrong; pick a/an by how the name is actually said."""
+    n = (name or "").strip()
+    if not n: return "a"
+    if re.match(r'^(IHOP|IKEA|IN-N-OUT|H-E-B)\b', n, re.I): return "an"
+    return "an" if n[0].lower() in "aeiou" else "a"
 def fmt_d(m):
     mi = m / 1609.34
     return f"{round(m*3.281)} ft" if mi < .1 else f"{mi:.1f} mi"
@@ -82,7 +88,8 @@ footer{margin-top:40px;color:var(--dim);font-size:12px;border-top:1px solid var(
 footer a{color:var(--blue)}
 """
 
-def page(path, title, desc, body, canonical, jsonld=""):
+def page(path, title, desc, body, canonical, jsonld="", thin=False):
+    robots = '<meta name="robots" content="noindex,follow">' if thin else ''
     depth = path.count("/")
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
@@ -90,6 +97,7 @@ def page(path, title, desc, body, canonical, jsonld=""):
 <title>{esc(title)} | {BRAND}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{BASE}/{canonical}">
+{robots}
 <link rel="icon" href="{BASE}/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="{BRAND}">
@@ -172,7 +180,7 @@ for key, b in brands.items():
     title = f"EV fast chargers near {key} ({n} locations)"
     desc = f"{n} EV DC fast chargers within a 10-minute walk of a {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
     body = f"""<h1>{b['e']} EV fast chargers near {esc(key)}</h1>
-<p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with a {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+<p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
 <h2>By state</h2><div class="chips">{state_links}</div>
 <h2>Closest {min(40, n)} nationwide</h2>{top}"""
@@ -192,16 +200,18 @@ for key, b in brands.items():
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
         title = f"EV fast chargers near {key} in {sn} ({len(v)})"
-        desc = f"All {len(v)} EV DC fast chargers in {sn} with a {key} within walking distance — network, power, walk time and directions."
+        desc = f"All {len(v)} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
         body = f"""<h1>{b['e']} EV fast chargers near {esc(key)} in {sn}</h1>
-<p class="lead"><b>{len(v)} DC fast chargers</b> in {sn} have a {esc(key)} within a 10-minute walk. Sorted closest first.</p>
+<p class="lead"><b>{len(v)} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {cards}
 <h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
 <h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>"""
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
-        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can)); add(path)
+        thin = len(v) < 3          # near-duplicate stubs hurt indexing; keep linked, drop from index
+        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can), thin=thin)
+        if not thin: add(path)
 
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)

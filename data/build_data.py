@@ -60,6 +60,68 @@ CARS = {
 }
 
 
+# ── data cleaning (applies on every rebuild, incl. the monthly refresh) ──
+import re as _re
+
+DEALER_RE = _re.compile(r'\b(nissan|bmw|mini of|mercedes|chevrolet|chevy|ford of|toyota|honda|kia|'
+                        r'hyundai|audi|volkswagen|vw of|subaru|lexus|cadillac|buick|gmc|dodge|chrysler|'
+                        r'jeep|ram|volvo|porsche|mazda|dealer|auto group|automotive)\b', _re.I)
+PRIVATE_RE = _re.compile(r'not for public|private|employees? only|staff only|test (evse|site)|for testing', _re.I)
+TRUCK_NETS = {"Watt Ev"}          # WattEV = heavy-truck megawatt depots, not for cars
+MIN_KW = 24                        # below this it is not DC fast (AFDC miscategorisation)
+
+_CODE_TAIL = _re.compile(r'\s+(?:DCFC|DC\s?FAST|EVSE|STATION|CHARGER|PORT)?\s*'
+                         r'[A-Z]{0,5}\d{1,6}[A-Z0-9]{0,4}$', _re.I)
+
+def pretty_name(name, host=""):
+    """Machine names like 'PIE AE HEB E51ST DCFC1' are what the user reads. Tidy them."""
+    n = (name or "").strip()
+    n = _re.sub(r'\s+', ' ', n)
+    prev = None
+    while prev != n:                       # strip repeated trailing unit codes
+        prev = n
+        n = _CODE_TAIL.sub('', n).strip(' -–—·,')
+    if not n:
+        n = host or name or "Charging station"
+    letters = [c for c in n if c.isalpha()]
+    if letters and sum(c.isupper() for c in letters) / len(letters) > 0.85 and len(n) > 6:
+        n = n.title()                       # ALL CAPS -> Title Case
+        n = _re.sub(r'\b(Ev|Dc|Ac|Hq|Us|Ii|Iii|Iv)\b', lambda m: m.group(0).upper(), n)
+    return n[:60]
+
+def clean(sites):
+    """Drop unusable rows, de-duplicate co-located listings, tidy names, flag dealerships."""
+    stats = dict(start=len(sites), low_kw=0, truck=0, private=0, dup=0, renamed=0, dealer=0)
+    kept = []
+    for s in sites:
+        if s.get("net") in TRUCK_NETS:
+            stats["truck"] += 1; continue
+        if s.get("kw") and s["kw"] < MIN_KW:
+            stats["low_kw"] += 1; continue
+        if PRIVATE_RE.search(s.get("name", "")):
+            stats["private"] += 1; continue
+        kept.append(s)
+
+    # de-duplicate: same ~11 m spot, keep the richest record
+    best = {}
+    for s in kept:
+        key = (round(s["lat"], 4), round(s["lon"], 4))
+        score = (s.get("kw") or 0, s.get("stalls") or 0, len(s.get("name") or ""))
+        if key not in best or score > best[key][0]:
+            best[key] = (score, s)
+    deduped = [v[1] for v in best.values()]
+    stats["dup"] = len(kept) - len(deduped)
+
+    for s in deduped:
+        pn = pretty_name(s.get("name", ""))
+        if pn != s.get("name"):
+            s["name"] = pn; stats["renamed"] += 1
+        if DEALER_RE.search(s["name"]):
+            s["dlr"] = 1; stats["dealer"] += 1
+    stats["end"] = len(deduped)
+    return deduped, stats
+
+
 def hav(a1, o1, a2, o2):
     R = 6371000
     p1, p2 = math.radians(a1), math.radians(a2)
@@ -70,6 +132,11 @@ def hav(a1, o1, a2, o2):
 
 def main():
     chargers = json.load(open(os.path.join(HERE, "chargers.json")))
+    chargers, cstats = clean(chargers)
+    print(f"Cleaned: {cstats['start']} -> {cstats['end']}  "
+          f"(dropped {cstats['low_kw']} sub-{MIN_KW}kW, {cstats['truck']} truck-only, "
+          f"{cstats['private']} private/test, {cstats['dup']} duplicates; "
+          f"renamed {cstats['renamed']}, flagged {cstats['dealer']} dealerships)")
     pois = json.load(open(os.path.join(HERE, "pois.json")))
 
     # grid-bucket POIs (0.02deg ~ 2km)

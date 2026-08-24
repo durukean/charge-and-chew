@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Charge &amp; Chew — Fast EV chargers near your favorite restaurants &amp; stores</title>
-<meta name="description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
+<meta name="description" content="Find EV fast chargers — Tesla, Electrify America, EVgo and more — within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://chargeandchew.com/">
 <meta property="og:type" content="website">
@@ -55,6 +55,12 @@
   --scrim:linear-gradient(180deg,rgba(14,17,22,.9) 0%,rgba(14,17,22,.42) 55%,transparent 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
   font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
 button,input{font:inherit;color:inherit}
@@ -198,8 +204,8 @@ svg{display:block}
 .leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
 .leaflet-popup-content{margin:14px 16px;font-size:13px}
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
-.pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
-.pp-name{font-weight:700;font-size:15px;flex:1;padding-right:14px;line-height:1.25;letter-spacing:-.2px}
+.pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;padding-right:22px}
+.pp-name{font-weight:700;font-size:15px;flex:1;line-height:1.25;letter-spacing:-.2px}
 .pp-fav{font-size:17px;color:var(--dim2);flex-shrink:0;line-height:1}
 .pp-fav.on{color:var(--amber)}
 .pp-net{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;margin-bottom:6px}
@@ -315,6 +321,20 @@ svg{display:block}
 .caritem .m{flex:1}
 .caritem .spec{font-size:11px;color:var(--dim2);font-weight:600;font-family:var(--mono)}
 .caritem.on .spec{color:var(--accent-ink);opacity:.75}
+.fgroup{padding:0 16px 14px}
+.fgroup label{display:block;font-size:12px;font-weight:700;color:var(--dim);margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:.04em}
+.seg.wide{height:44px;width:100%}
+.seg.wide button{flex:1;padding:0}
+.fhint{font-size:11.5px;color:var(--dim2);margin-top:7px;line-height:1.45}
+.ftoggles{display:flex;flex-direction:column;gap:7px}
+.ftog{display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left}
+.ftog.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700;
+  background:var(--surface3);color:var(--dim)}
+.tag.free{background:var(--good-bg);color:var(--good)}
+.tag.dlr{background:var(--warn-bg);color:var(--warn)}
 .pkfoot{display:flex;gap:9px;padding:13px 16px;border-top:1px solid var(--line);flex-shrink:0}
 .pkfoot button{flex:1;height:46px;border-radius:13px;font-weight:700;font-size:14.5px}
 .pkfoot .clear{background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
@@ -384,7 +404,7 @@ svg{display:block}
 
 <div id="app">
   <div id="mapWrap">
-    <div id="map"></div>
+    <div id="map" role="application" aria-label="Map of EV fast chargers"></div>
 
     <div class="overlay-top" id="overlayTop">
       <div class="searchpill" id="placeBox">
@@ -407,6 +427,9 @@ svg{display:block}
           <button class="chip qchip" data-net="other">Other networks</button>
         </div>
         <button class="chip qchip" id="savedChip">⭐<span class="n" id="favN"></span></button>
+        <button class="chip qchip" id="filtBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
+          Filters<span class="cnt" id="filtN"></span></button>
         <div style="display:contents" id="chips"></div>
       </div>
 
@@ -450,7 +473,7 @@ svg{display:block}
     <div id="hero">
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-        <span class="badge">⚡ Free · 15,000+ US fast chargers</span>
+        <span class="badge">⚡ Free · 14,000+ US fast chargers</span>
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
         <div class="herogrid" id="heroGrid"></div>
@@ -463,7 +486,7 @@ svg{display:block}
   <section id="sheet">
     <div class="handle" id="handle"><i></i></div>
     <div class="sheethead">
-      <div class="t" id="sheetTitle">…</div>
+      <div class="t" id="sheetTitle" role="status" aria-live="polite" aria-atomic="true">…</div>
       <button class="sortbtn" id="sortBtn"><svg class="ci" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l-3 3M17 20l3-3"/></svg><span id="sortLbl">Sort</span></button>
       <button class="iconbtn sm" id="shareBtn" title="Copy link to this view" aria-label="Share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="17" cy="18" r="2.4"/><path d="M8.1 10.9l6.8-3.8M8.1 13.1l6.8 3.8"/></svg></button>
     </div>
@@ -487,6 +510,39 @@ svg{display:block}
   </div>
 </div>
 
+<div id="filters" class="modal">
+  <div class="pk">
+    <h3><span>Filters</span><button class="iconbtn sm" id="filtClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <div class="fgroup">
+      <label>Minimum charging speed</label>
+      <div class="seg wide" data-f="kw">
+        <button data-v="0" class="on">Any</button><button data-v="50">50+ kW</button><button data-v="150">150+ kW</button><button data-v="250">250+ kW</button>
+      </div>
+      <p class="fhint">Higher kW means a shorter stop — 150 kW+ is a typical road-trip charger.</p>
+    </div>
+    <div class="fgroup">
+      <label>Minimum stalls</label>
+      <div class="seg wide" data-f="stalls">
+        <button data-v="0" class="on">Any</button><button data-v="2">2+</button><button data-v="4">4+</button><button data-v="8">8+</button>
+      </div>
+      <p class="fhint">More stalls means less chance of waiting.</p>
+    </div>
+    <div class="fgroup">
+      <label>Only show</label>
+      <div class="ftoggles">
+        <button class="ftog" data-f="h24">🕒 Open 24 hours</button>
+        <button class="ftog" data-f="free">💸 Free to charge</button>
+        <button class="ftog" data-f="nodlr">🏢 Hide dealership lots</button>
+      </div>
+      <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
+    </div>
+    <div class="pkfoot">
+      <button class="clear" id="filtClear">Reset</button>
+      <button class="done" id="filtDone">Show results</button>
+    </div>
+  </div>
+</div>
+
 <div id="carPicker" class="modal">
   <div class="pk">
     <h3><span>Your EV</span><button class="iconbtn sm" id="carClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
@@ -504,8 +560,9 @@ svg{display:block}
 
 <div id="about"><div class="box">
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
-  <p>15,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
+  <p>14,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
   <p><b>How to use it:</b> set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
+  <p>Chargers are colour-coded by network on the map (Tesla red, Electrify America green, EVgo teal, ChargePoint orange…). We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
   <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
   <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
@@ -516,7 +573,7 @@ svg{display:block}
 
 <div id="toast"></div>
 
-<script src="data.js?v=3"></script>
+<script src="data.js?v=4"></script>
 <script>
 (() => {
 'use strict';
@@ -540,6 +597,9 @@ let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
 let netFilter = localStorage.getItem('cc_net') || 'all';  // all | tesla | other
+const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0 };
+let F = Object.assign({}, FDEF, JSON.parse(localStorage.getItem('cc_filters') || '{}'));
+const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
 const CARS = D.cars || {};
 let car = localStorage.getItem('cc_car') || '';   // model name or '' for none
@@ -635,6 +695,7 @@ function popupHtml(s) {
     <div class="pp-net"><span class="dot" style="background:${s.col}"></span>${esc(s.net)}</div>
     <div class="pp-meta">${s.stalls ? s.stalls + ' stalls · ' : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
+    ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
     ${carLine}
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
@@ -742,8 +803,17 @@ function passesNet(s) {
   if (netFilter === 'all') return true;
   return netFilter === 'tesla' ? isTesla(s) : !isTesla(s);
 }
+function passesSpec(s) {
+  if (F.kw && (!s.kw || s.kw < F.kw)) return false;
+  if (F.stalls && (s.stalls || 0) < F.stalls) return false;
+  if (F.h24 && !s.h24) return false;
+  if (F.free && s.price !== 'free') return false;
+  if (F.nodlr && s.dlr) return false;
+  return true;
+}
 function passesChain(s) {
   if (!passesNet(s)) return false;
+  if (!passesSpec(s)) return false;
   if (onlyMine && carInfo() && compat(s) === null) return false;
   if (cat === 'fav') return favs.has(s.id);
   if (!active.size) return true;
@@ -779,12 +849,12 @@ function render() {
   const filtering = active.size > 0 || cat === 'fav';
   for (const s of SITES) {
     const m = mk[s.id];
-    if (!inScope(s) || !passesNet(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
+    if (!inScope(s) || !passesNet(s) || !passesSpec(s)) { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
     if (visIds.has(s.id)) {
       const T = MTHEME[curDark ? 'dark' : 'light'];
-      m.setStyle({ radius: filtering ? 6.5 : 4, weight: filtering ? 1.8 : 1,
-        color: filtering ? T.hotStroke : T.base, fillColor: filtering ? T.hot : T.base,
-        fillOpacity: filtering ? .96 : .6, opacity: 1 });
+      m.setStyle({ radius: filtering ? 6.5 : 4.2, weight: filtering ? 1.8 : 1,
+        color: T.hotStroke, fillColor: s.col || T.hot,
+        fillOpacity: filtering ? .97 : .78, opacity: filtering ? 1 : .9 });
       if (filtering) m.bringToFront();
     } else {
       m.setStyle({ radius: 2.2, weight: 0, fillColor: MTHEME[curDark ? 'dark' : 'light'].ghost, fillOpacity: .55, opacity: 1 });
@@ -837,7 +907,7 @@ function renderList(vis) {
   if (!vis.length) {
     $('list').innerHTML = cat === 'fav'
       ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
-      : '<div class="empty"><b>Nothing matches</b>Try more chains, a bigger radius, or a wider route corridor.</div>';
+      : `<div class="empty"><b>Nothing matches</b>${activeFilterCount() ? 'Your filters may be too strict — hours and pricing are often missing from the data.' : 'Try more chains, a bigger radius, or a wider route corridor.'}</div>`;
     return;
   }
   const showIdx = !!route;
@@ -860,7 +930,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><b>${esc(s.name)}</b><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
-        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}</div>
+        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
       <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
@@ -1213,6 +1283,10 @@ function syncUrl() {
   const u = new URL(location.href), p = u.searchParams;
   active.size ? p.set('chain', [...active].join(',')) : p.delete('chain');
   netFilter !== 'all' ? p.set('net', netFilter) : p.delete('net');
+  F.kw ? p.set('minkw', F.kw) : p.delete('minkw');
+  F.stalls ? p.set('minstalls', F.stalls) : p.delete('minstalls');
+  F.h24 ? p.set('h24', '1') : p.delete('h24');
+  F.free ? p.set('free', '1') : p.delete('free');
   p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
@@ -1264,6 +1338,36 @@ function syncNetSeg() {
 }
 syncNetSeg();
 
+/* ───────── spec filters ───────── */
+function syncFilterUI() {
+  document.querySelectorAll('#filters .seg.wide').forEach(seg => {
+    const key = seg.dataset.f;
+    seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.v === (F[key] || 0)));
+  });
+  document.querySelectorAll('#filters .ftog').forEach(b => b.classList.toggle('on', !!F[b.dataset.f]));
+  const n = activeFilterCount();
+  $('filtN').textContent = n || '';
+  $('filtBtn').classList.toggle('on', n > 0);
+}
+document.querySelectorAll('#filters .seg.wide button').forEach(b => b.onclick = () => {
+  F[b.parentElement.dataset.f] = +b.dataset.v;
+  localStorage.setItem('cc_filters', JSON.stringify(F));
+  syncFilterUI(); render(); syncUrl();
+});
+document.querySelectorAll('#filters .ftog').forEach(b => b.onclick = () => {
+  F[b.dataset.f] = F[b.dataset.f] ? 0 : 1;
+  localStorage.setItem('cc_filters', JSON.stringify(F));
+  syncFilterUI(); render(); syncUrl();
+});
+$('filtBtn').onclick = () => { $('filters').classList.add('show'); syncFilterUI(); };
+$('filtClose').onclick = $('filtDone').onclick = () => $('filters').classList.remove('show');
+$('filters').onclick = e => { if (e.target.id === 'filters') $('filters').classList.remove('show'); };
+$('filtClear').onclick = () => {
+  F = Object.assign({}, FDEF);
+  localStorage.setItem('cc_filters', JSON.stringify(F));
+  syncFilterUI(); render(); syncUrl();
+};
+
 /* ───────── hero (first-run quick pick) ───────── */
 const HERO_PICKS = ['IHOP', 'Starbucks', 'In-N-Out', 'Chick-fil-A', "Buc-ee's", 'Walmart', 'Chipotle', 'Target'];
 function buildHero() {
@@ -1300,6 +1404,11 @@ const q = new URLSearchParams(location.search);
   if (key) active.add(key);
 });
 if (['tesla', 'other'].includes(q.get('net'))) { netFilter = q.get('net'); syncNetSeg(); }
+if (q.get('minkw')) F.kw = +q.get('minkw') || 0;
+if (q.get('minstalls')) F.stalls = +q.get('minstalls') || 0;
+if (q.get('h24')) F.h24 = 1;
+if (q.get('free')) F.free = 1;
+syncFilterUI();
 if (q.get('r')) {
   radiusMi = +q.get('r') || 25;
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));
