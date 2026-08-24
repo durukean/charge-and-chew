@@ -16,7 +16,8 @@ from fetch_pois import BRANDS as RAW_BRANDS  # (emoji, cat, regex)
 # ── car database: model -> [battery kWh usable, max DC kW, connector bit] ──
 # connector: 1=CCS1, 2=NACS  (all can use the other via adapter; native listed)
 CARS = {
-    "Tesla Model 3":        [57, 250, 2],
+    "Tesla Model 3 RWD":    [60, 170, 2],
+    "Tesla Model 3 Long Range": [79, 250, 2],
     "Tesla Model Y":        [75, 250, 2],
     "Tesla Model S":        [95, 250, 2],
     "Tesla Model X":        [95, 250, 2],

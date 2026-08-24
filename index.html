@@ -117,6 +117,7 @@ svg{display:block}
 
 /* tabs + chips */
 .filterrow{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.filterrow .tabs{flex-shrink:0}
 .filterrow::-webkit-scrollbar{display:none}
 .netseg button.on{background:var(--surface3);color:var(--txt)}
 .netseg button[data-net="tesla"].on{background:var(--red);color:#fff}
@@ -128,7 +129,7 @@ svg{display:block}
 .leaflet-tooltip-top:before{border-top-color:var(--line2)}
 .tabs{display:inline-flex;gap:3px;padding:3px;border-radius:12px;background:var(--glass2);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh2)}
-.tab{padding:6px 12px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap;transition:.15s}
+.tab{padding:6px 12px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap;flex-shrink:0;transition:.15s}
 .tab.on{background:var(--surface3);color:var(--txt)}
 .tab .n{font-size:10px;color:var(--lime);margin-left:3px;font-weight:700}
 
@@ -229,6 +230,7 @@ svg{display:block}
 .pp-links a{flex:1;text-align:center;color:var(--txt);font-size:12px;text-decoration:none;font-weight:700;
   padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
 .pp-links a:last-child{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.pp-links a.rep{flex:0 0 auto;color:var(--dim);background:none;border-color:transparent;padding:8px 4px}
 
 /* ═══ bottom sheet ═══ */
 #sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
@@ -439,7 +441,7 @@ svg{display:block}
     <div id="hero">
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-        <span class="badge">⚡ Free · Every US fast charger</span>
+        <span class="badge">⚡ Free · 15,000+ US fast chargers</span>
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
         <div class="herogrid" id="heroGrid"></div>
@@ -479,7 +481,7 @@ svg{display:block}
 <div id="carPicker" class="modal">
   <div class="pk">
     <h3><span>Your EV</span><button class="iconbtn sm" id="carClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
-    <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Stored on this device only.</p>
+    <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Specs are approximations (usable battery, typical peak DC rate). Stored on this device only.</p>
     <div class="searchbox" id="carSearchBox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input id="carSearch" placeholder="Search your model…" autocomplete="off">
@@ -493,9 +495,11 @@ svg{display:block}
 
 <div id="about"><div class="box">
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
-  <p>Every public DC fast charger in the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
+  <p>15,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
   <p><b>How to use it:</b> set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
+  <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
+  <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="near/">Browse all chains &amp; states →</a></p>
   <a class="close" href="#">Close</a>
@@ -503,7 +507,7 @@ svg{display:block}
 
 <div id="toast"></div>
 
-<script src="data.js?v=2"></script>
+<script src="data.js?v=3"></script>
 <script>
 (() => {
 'use strict';
@@ -598,16 +602,25 @@ const mk = {};
 const poiLayer = L.layerGroup().addTo(map);
 let centerLayer = null, radiusLayer = null, routeLayer = null, routeCase = null;
 
+function reportUrl(s) {
+  const body = `**Station:** ${s.name} (id ${s.id})\n**Network:** ${s.net}\n**Address:** ${s.street}, ${s.city}, ${s.st}\n**Link:** ${location.origin}${location.pathname}?at=${s.lat},${s.lon}&r=10\n\n**What's wrong?** (charger gone / wrong power / chain closed / wrong distance / other)\n\n`;
+  return 'https://github.com/durukean/charge-and-chew/issues/new?title=' +
+    encodeURIComponent(`Data issue: ${s.name}`) + '&body=' + encodeURIComponent(body);
+}
 function popupHtml(s) {
   const m = MATCH[s.id] || {};
   const rows = Object.entries(m).map(([k, v]) => { const d = mDist(s, v);
     return `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
-     <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span></div>`; }).join('')
+     <span class="d">≥${walkMin(d)} min · ${fmtFt(d)}</span></div>`; }).join('')
     || '<div class="pp-chain" style="color:var(--dim2)">No tracked chains within a 10-min walk</div>';
   const cm = chargeMin(s), cp = compat(s);
+  const teslaGate = cp === 'adapter' && isTesla(s) && !(s.conn & 1);
+  const cpTxt = cp === 'native' ? '✓ fits your car'
+    : teslaGate ? '⚠ adapter — and site must allow non-Tesla EVs'
+    : cp === 'adapter' ? '⚠ needs adapter' : '✕ incompatible';
   const carLine = cm != null
-    ? `<div class="pp-car"><span class="cc ${cp}">${cp === 'native' ? '✓ fits your car' : cp === 'adapter' ? '⚠ needs adapter' : '✕ incompatible'}</span>
-       <span>~${cm} min charge · ${dwell(cm)}</span></div>`
+    ? `<div class="pp-car"><span class="cc ${cp}">${cpTxt}</span>
+       <span>~${cm} min 10–80% · ${dwell(cm)}</span></div>`
     : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
@@ -617,6 +630,7 @@ function popupHtml(s) {
     ${carLine}
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
+      <a target="_blank" rel="noopener" href="${reportUrl(s)}" class="rep" title="Wrong info? Tell us">Report</a>
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}">Map</a>
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}">Directions</a>
     </div>`;
@@ -647,7 +661,7 @@ function showPOIs(s) {
       dashArray: '3 5', interactive: false }).addTo(poiLayer);
     L.marker(ll, { icon: L.divIcon({ className: 'poi-div',
       html: `<span>${BRANDS[k].e}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] }), keyboard: false })
-      .bindTooltip(`${esc(k)} · ${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
+      .bindTooltip(`${esc(k)} · ≥${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
       .addTo(poiLayer);
   }
   // frame the charger + its POIs so the walking distance is visible (popup sits top, so pad it).
@@ -790,7 +804,7 @@ function renderList(vis) {
     const ent = Object.entries(m);
     ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
     const chains = ent.slice(0, 4).map(([k, v]) =>
-      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ${walkMin(mDist(s, v))}m</span>`).join('');
+      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ≥${walkMin(mDist(s, v))}min</span>`).join('');
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
     const cm = chargeMin(s), cp = compat(s);

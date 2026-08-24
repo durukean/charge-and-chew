@@ -88,7 +88,13 @@ def distill(fs):
             continue  # no usable DC connector
         name, color = net_name(s.get("ev_network"))
         pricing = (s.get("ev_pricing") or "").strip().lower()
-        price = "free" if pricing == "free" else ("paid" if pricing and pricing not in ("", "call for pricing", "unknown") else "")
+        # 'Free' / 'Free; ...' -> free, but 'free for 30 min then $x' style -> unknown (safer than wrong)
+        if pricing.startswith("free") and "$" not in pricing and " then " not in pricing:
+            price = "free"
+        elif pricing and pricing not in ("call for pricing", "unknown"):
+            price = "paid"
+        else:
+            price = ""
         hours = (s.get("access_days_time") or "")
         out.append({
             "id": s["id"],

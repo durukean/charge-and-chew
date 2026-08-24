@@ -106,7 +106,7 @@ def page(path, title, desc, body, canonical, jsonld=""):
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
-Walk times are straight-line estimates at ~3 mph; verify before relying on them. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
+Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>"""
@@ -138,7 +138,7 @@ def site_card(s, focus, root):
     m = matches.get(s["id"], {})
     chains = []
     for k, d in m.items():
-        t = f"{brands[k]['e']} {esc(k)} <span>{mins(d)} min · {fmt_d(d)}</span>"
+        t = f"{brands[k]['e']} {esc(k)} <span>≥{mins(d)} min · {fmt_d(d)}</span>"
         chains.append(f"<b>{t}</b>" if k == focus else t)
     net = f'<div class="host">{esc(s.get("net",""))}</div>' if s.get("net") else ""
     spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "", f"{s['stalls']} stalls" if s.get('stalls') else ""] if x)
