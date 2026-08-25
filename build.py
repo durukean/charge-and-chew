@@ -318,12 +318,19 @@ def site_card(s, focus, root):
 <a href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a></div>
 </div></div>"""
 
-# Phase 1 indexing strategy. Google logged 246 of these as "crawled - currently not
-# indexed", which since the 2024 core update overwhelmingly means "templated, low unique
-# value" — and a large thin set drags down the whole pattern. So we only INDEX a small,
-# strong launch set and noindex,follow the rest. They stay crawlable and keep passing
-# link equity; raise STATE_INDEX_MIN once these are indexing and ranking.
-STATE_INDEX_MIN = 150      # chain x state pages need at least this many chargers to be indexed
+# Indexing threshold, corrected 2026-08-25 by actual traffic rather than general advice.
+#
+# The earlier value (150) came from SEO guidance about thin templated pages dragging down a
+# whole URL pattern. This site's own analytics contradicted it: of the eight pages Google was
+# sending traffic to, SIX were ones we had just told it to drop — /near/kfc/fl, burger-king/sc,
+# chick-fil-a/va, waffle-house/sc, costco/nj, firehouse-subs/ga. They rank because Google
+# indexed them before the noindex landed, and they would have vanished at the next crawl.
+#
+# Those are precisely the long-tail queries this site should win, and they are not thin: each
+# carries a unique data-derived stats paragraph, a FAQ, and 14-80 real results. So the cutoff
+# now excludes only genuine stubs. The smallest page that was demonstrably earning traffic had
+# 14 results; 8 leaves margin below that.
+STATE_INDEX_MIN = 8
 
 urls = []
 def add(path): urls.append(f"{BASE}/{path.replace('index.html','')}")

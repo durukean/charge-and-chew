@@ -75,7 +75,7 @@ sm = os.path.join(HERE, "sitemap.xml")
 if os.path.exists(sm):
     locs = re.findall(r"<loc>([^<]+)</loc>", open(sm).read())
     check(len(locs) > 50, f"sitemap has only {len(locs)} URLs")
-    soft(len(locs) < 800, f"sitemap has {len(locs)} URLs — the phased-indexing plan expects a small set")
+    soft(len(locs) < 2600, f"sitemap has {len(locs)} URLs — above the level real traffic has validated")
     # every sitemap URL must exist on disk and must NOT be noindex
     missing, noindexed = [], []
     for u in locs:
