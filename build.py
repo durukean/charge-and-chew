@@ -117,6 +117,9 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .chips a{background:var(--surface);border:1px solid var(--line);color:var(--txt);font-size:13.5px;
   padding:8px 13px;border-radius:100px;text-decoration:none;font-weight:600;box-shadow:var(--sh)}
 .chips a small{color:var(--dim2);font-weight:500}
+.more{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 15px;
+  margin:4px 0 8px;font-size:14px;color:var(--dim);box-shadow:var(--sh)}
+.more a{font-weight:700}
 .stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
   margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
 .stats b{color:var(--txt)}
@@ -158,7 +161,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d1117">
 {jsonld}
-<style>{CSS}</style></head><body><div class="wrap">
+<link rel="stylesheet" href="{root}assets/pages.css"></head><body><div class="wrap">
 <header><a class="logo" href="{root}"><span class="mk">\u26a1</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
@@ -348,7 +351,14 @@ for key, b in brands.items():
         sx = page_stats(key, v)
         stats_html = stats_para(key, sn, sx)
         faq_html, faq_schema = faq_block(key, sn, sx)
-        cards = "".join(site_card(sites[sid], key, "../../../") for d, sid in v)
+        # Cap the listing. near/starbucks/ca/ was 958 KB and 1,332 cards — nobody scrolls
+        # that, it loads slowly, and a giant undifferentiated list reads as low quality.
+        STATE_CARD_CAP = 60
+        shown = v[:STATE_CARD_CAP]
+        cards = "".join(site_card(sites[sid], key, "../../../") for d, sid in shown)
+        if len(v) > STATE_CARD_CAP:
+            cards += (f'<p class="more">Showing the {STATE_CARD_CAP} closest of {len(v)}. '
+                      f'<a href="../../../?chain={esc(key)}&amp;state={st}">Open the map to see them all →</a></p>')
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
         title = f"EV fast chargers near {key} in {sn} ({len(v)})"
@@ -370,10 +380,16 @@ for key, b in brands.items():
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)
 chains_html = "".join(f'<a href="{cs}/">{brands[k]["e"]} {esc(k)} <small>{n}</small></a>' for n, k, cs in chain_index_links)
+# Only the strongest few chains per state. Listing all 2,952 combinations turned this into
+# a link farm: it dilutes link equity and reads as low quality. The rest stay reachable from
+# each chain's own page.
+HUB_PER_STATE = 8
 states_html = "".join(
     f'<h2>{STATES.get(st, st)}</h2><div class="chips">' +
     "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
-            for k, c in sorted(cm.items(), key=lambda x: -x[1])) + "</div>"
+            for k, c in sorted(cm.items(), key=lambda x: -x[1])[:HUB_PER_STATE]) +
+    (f'<a href="../?state={st}"><b>all {len(cm)} in {st} →</b></a>' if len(cm) > HUB_PER_STATE else "")
+    + "</div>"
     for st, cm in sorted(state_chain.items(), key=lambda x: STATES.get(x[0], x[0])))
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 <p class="lead">{len(matches)} of {len(sites)} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
@@ -489,6 +505,10 @@ along the route, with the restaurants and stores within a 10-minute walk of each
              "order, with nearby food and shopping for each stop.", body, "along/")
         add("along/index.html")
         print(f"Interstate corridor pages: {len(hw_links)}")
+
+# ---- shared stylesheet (was inlined on every page: 4.9 KB x ~3,000 pages) ----
+os.makedirs(os.path.join(HERE, "assets"), exist_ok=True)
+open(os.path.join(HERE, "assets", "pages.css"), "w").write(CSS)
 
 # ---- sitemap / robots ----
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
