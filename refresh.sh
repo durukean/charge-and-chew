@@ -13,6 +13,7 @@ python3 data/build_data.py
 python3 build.py --base https://chargeandchew.com
 python3 verify.py
 python3 verify_ui.py
+python3 verify_search.py
 
 # 3. publish only if something actually changed
 if [[ -n "$(git status --porcelain)" ]]; then

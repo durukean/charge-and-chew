@@ -49,6 +49,9 @@ jobs:
       - name: Smoke-test the app in a headless browser
         run: python3 verify_ui.py
 
+      - name: Search parser regression tests
+        run: python3 verify_search.py
+
       - name: Commit and push if anything changed
         run: |
           git config user.name  "github-actions[bot]"

@@ -491,7 +491,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.4a.6.6 0 0 0 .5 1H10l-1 7.2a.5.5 0 0 0 .9.4L19.6 10a.6.6 0 0 0-.5-1H14l1-6.4a.5.5 0 0 0-.9-.4z"/></svg>
         </a>
-        <input id="placeIn" placeholder="Try: Tesla chargers near Costco in Irvine" autocomplete="off" enterkeyhint="search">
+        <input id="placeIn" placeholder="Try: Tesla chargers near Costco near me" autocomplete="off" enterkeyhint="search">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
         <button class="pbtn" id="carBtn" title="Set your EV" aria-label="Set your EV">
@@ -1431,8 +1431,20 @@ const CHAIN_ALIAS = (function () {
   return map;
 })();
 
+// "near me", "in my area", "around here" — these mean the user's location, not a place name.
+// Left unhandled, the leftover word ("area", "location", "here") was geocoded and landed in
+// New York.
+const HERE_RE = /\b(near me|by me|around me|close to me|my area|my location|my spot|current location|around here|near here|round here|here|nearby|near by|local|locally)\b/;
+// Words that survive stripping but are not places. Anything left made only of these is noise.
+const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot', 'zone', 'region',
+  'somewhere', 'anywhere', 'place', 'places', 'best', 'good', 'great', 'cheap', 'cheapest',
+  'closest', 'nearest', 'fastest', 'quick', 'food', 'eat', 'eats', 'lunch', 'dinner',
+  'breakfast', 'coffee', 'stop', 'stops', 'trip', 'route', 'now', 'open', 'today']);
+
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
+  const here = HERE_RE.test(t);
+  if (here) t = t.replace(new RegExp(HERE_RE.source, 'g'), ' ');
   const chains = [];
   for (const [alias, key] of CHAIN_ALIAS) {
     if (chains.indexOf(key) !== -1) continue;
@@ -1447,9 +1459,15 @@ function parseQuery(raw) {
     const re = new RegExp('(^|\\s)' + word + '(\\s|$)');
     while (re.test(t)) { if (!net) net = val; t = t.replace(re, ' '); }
   }
-  const place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
-  return { chains: chains, net: net, place: place };
+  let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
+  // Strip surviving non-place words; if nothing meaningful is left, there is no place.
+  place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
+  const isZip = /^\d{5}$/.test(place);
+  if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
+  return { chains: chains, net: net, place: place, here: here };
 }
+
+window.__parseQuery = parseQuery;   // exposed for the search test suite
 
 /* place search */
 const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
@@ -1514,10 +1532,17 @@ $('placeIn').addEventListener('keydown', async e => {
     track('search-net', p.net);
   }
 
-  if (!p.place) {                       // "chargers near costco" with no place named
-    render(); syncUrl();
+  render(); syncUrl();
+
+  if (p.here) {                          // "near me", "in my area", "around here"
+    locate('center');
+    return;
+  }
+  if (!p.place) {                        // "chargers near costco" with no place named
     if (active.size) { setSheet('mid'); if (!center) fitToResults(); }
-    toast(p.chains.length || p.net ? 'Filtered — add a city to narrow it down' : 'Try a city or address');
+    toast(p.chains.length || p.net
+      ? 'Filtered — add a city, or say "near me"'
+      : 'Try a city, a ZIP, or "near me"');
     return;
   }
 
