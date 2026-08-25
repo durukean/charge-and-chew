@@ -1399,7 +1399,7 @@ const NET_WORDS = [
   ['evcs', 'EVCS'], ['red e', 'Red E'], ['shell', 'Shell Recharge'], ['bp pulse', 'bp pulse'],
   ['flo', 'FLO'], ['non-networked', 'Non-networked']
 ];
-const NOISE = /\b(ev|electric|car|cars|charger|chargers|charging|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s)\b/g;
+const NOISE = /\b(ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s)\b/g;
 
 function normalise(t) {
   return String(t).toLowerCase().replace(/[.'\u2019]/g, '').replace(/[^a-z0-9\s-]/g, ' ')
@@ -1439,10 +1439,13 @@ function parseQuery(raw) {
     const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
   }
+  // Strip EVERY network word, not just the first. Breaking after "tesla" matched left
+  // "supercharger" in the place text, and "supercharger westwood" geocodes to a Tesla
+  // Supercharger in Augusta, Georgia rather than Westwood, Los Angeles.
   let net = null;
   for (const [word, val] of NET_WORDS) {
     const re = new RegExp('(^|\\s)' + word + '(\\s|$)');
-    if (re.test(t)) { net = val; t = t.replace(re, ' '); break; }
+    while (re.test(t)) { if (!net) net = val; t = t.replace(re, ' '); }
   }
   const place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
   return { chains: chains, net: net, place: place };
@@ -1465,13 +1468,29 @@ function placeLabel(j) {
   if (town && st) return `${town}, ${st}`;
   return (town || st || j.display_name.split(',')[0]).trim();
 }
+// Prefer an actual place/boundary over a single business that happens to share the name —
+// that is what sent "supercharger westwood" to a Tesla Supercharger in Georgia.
+//
+// Deliberately NOT biasing by the current map view. That was tried and was worse: with the
+// map on Los Angeles, "brooklyn" resolved to LA and "austin" to Austin, NEVADA. Nominatim's
+// own importance score already ranks Brooklyn NY and Austin TX far above their namesakes,
+// and proximity bias overrides an explicit place the user actually typed.
+const PLACE_CLASS_BONUS = { place: 3, boundary: 3, landuse: 1 };
+function scoreHit(h) {
+  return (PLACE_CLASS_BONUS[h.class] || 0) + (+h.importance || 0);
+}
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
-  const r = await fetchTimeout('https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=1&countrycodes=us&q=' + encodeURIComponent(q));
+
+  const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
+              '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
+  const r = await fetchTimeout(url);
   const j = await r.json();
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
-  return { lat: +j[0].lat, lon: +j[0].lon, label: placeLabel(j[0]) };
+  const ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
+  const best = ranked[0];
+  return { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
 $('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
