@@ -59,8 +59,12 @@ for f in ["index.html", "sw.js", "manifest.json", "robots.txt", "sitemap.xml",
 if os.path.exists(os.path.join(HERE, "index.html")):
     h = open(os.path.join(HERE, "index.html")).read()
     check("unpkg.com" not in h, "index.html still loads something from unpkg (CDN dependency)")
-    check("??" not in h, "index.html uses ?? — blanks the app on older in-car browsers")
-    check("?." not in h.replace("http?.", ""), "index.html uses ?. — same problem")
+    check(not re.search(r"[\w\)\]\s]\?\?[\s\w\(]", h),
+          "index.html uses nullish ?? — blanks the app on older in-car browsers")
+    # Match real optional chaining (obj?.prop / arr?.[i] / fn?.()) and not a "?." that merely
+    # appears inside a regex character class like [-\\/\\\\^$*+?.()|[\\]{}].
+    check(not re.search(r"[\w\)\]]\?\.[\w\(\[]", h),
+          "index.html uses optional chaining ?. — blanks the app on older in-car browsers")
     check('src="data.js?v=' in h, "data.js is not cache-busted")
     check("goatcounter" in h, "analytics snippet is missing")
     for token in ["#map", "sheetTitle", "filtBtn", "themeBtn"]:

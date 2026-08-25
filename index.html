@@ -193,6 +193,22 @@ svg{display:block}
   border-radius:12px;box-shadow:var(--sh);display:none;white-space:nowrap}
 #pinHint.show{display:block;animation:drop .2s}
 
+/* network key — brand colours are meaningless without one */
+#legend{position:absolute;left:12px;bottom:14px;z-index:600;background:var(--surface);
+  border:1px solid var(--line);border-radius:13px;box-shadow:var(--sh);overflow:hidden;max-width:210px}
+#legendToggle{display:flex;align-items:center;gap:8px;width:100%;padding:9px 11px;font-size:12.5px;
+  font-weight:700;color:var(--txt)}
+#legendToggle .sw{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+#legendToggle svg{margin-left:auto;color:var(--dim2);transition:transform .18s}
+#legend.collapsed #legendList{display:none}
+#legend:not(.collapsed) #legendToggle svg{transform:rotate(180deg)}
+#legendList{padding:0 11px 10px;display:flex;flex-direction:column;gap:5px;max-height:44vh;overflow-y:auto}
+#legendList div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+#legendList b{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+#legendList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#legendList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
+@media(max-width:520px){#legend{max-width:160px}#legendList{max-height:34vh}}
+
 /* FABs */
 .mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
   display:flex;flex-direction:column;gap:9px}
@@ -311,8 +327,12 @@ svg{display:block}
 .tab{padding:7px 13px;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--dim);white-space:nowrap;
   flex-shrink:0;background:var(--surface2);border:1px solid var(--line)}
 .tab.on{background:var(--surface3);color:var(--txt)}
-.pkgrid{overflow-y:auto;padding:0 16px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:8px;align-content:start}
+.pkgrid{overflow-y:auto;padding:0 16px 16px}
+.pkgroup{margin-bottom:16px}
+.pkgroup h4{font-size:11.5px;font-weight:800;color:var(--dim);text-transform:uppercase;
+  letter-spacing:.05em;margin:0 2px 8px}
+.pkgroup h4 small{color:var(--dim2);font-weight:600}
+.pkgrid-in{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .pkitem{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface2);
   border:1px solid var(--line);font-size:13px;font-weight:600;text-align:left;transition:.12s}
 .pkitem:active{transform:scale(.97)}
@@ -471,7 +491,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.4a.6.6 0 0 0 .5 1H10l-1 7.2a.5.5 0 0 0 .9.4L19.6 10a.6.6 0 0 0-.5-1H14l1-6.4a.5.5 0 0 0-.9-.4z"/></svg>
         </a>
-        <input id="placeIn" placeholder="Search a city, address or area…" autocomplete="off" enterkeyhint="search">
+        <input id="placeIn" placeholder="Try: Tesla chargers near Costco in Irvine" autocomplete="off" enterkeyhint="search">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
         <button class="pbtn" id="carBtn" title="Set your EV" aria-label="Set your EV">
@@ -525,6 +545,13 @@ svg{display:block}
     <div id="map" role="application" aria-label="Map of EV fast chargers"></div>
 
     <div id="pinHint">Tap the map to search that area</div>
+    <div id="legend" class="collapsed">
+      <button id="legendToggle" aria-expanded="false">
+        <span class="sw" style="background:#e82127"></span> Networks
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div id="legendList"></div>
+    </div>
 
     <div class="mapctl">
       <button class="mbtn" id="themeBtn" title="Theme" aria-label="Toggle theme"></button>
@@ -562,9 +589,8 @@ svg{display:block}
     <h3><span>Pick chains</span><button class="iconbtn sm" id="pkClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="searchbox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="pkSearch" placeholder="Filter chains…" autocomplete="off">
+      <input id="pkSearch" placeholder="Search 90 chains…" autocomplete="off">
     </div>
-    <div class="pkcats" id="pkCats"></div>
     <div class="pkgrid" id="pkGrid"></div>
     <div class="pkfoot">
       <button class="clear" id="pkClear">Clear all</button>
@@ -671,6 +697,7 @@ let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
 let netFilter = localStorage.getItem('cc_net') || 'all';  // all | tesla | other
+let netPick = null;   // an exact network name when the search query asked for one
 const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
 let F = Object.assign({}, FDEF, JSON.parse(localStorage.getItem('cc_filters') || '{}'));
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
@@ -914,6 +941,7 @@ $('themeBtn').onclick = () => {
 
 /* ───────── filtering ───────── */
 function passesNet(s) {
+  if (netPick) return s.net === netPick;
   if (netFilter === 'all') return true;
   return netFilter === 'tesla' ? isTesla(s) : !isTesla(s);
 }
@@ -1190,19 +1218,25 @@ $('carNone').onclick = () => {
 let pkCat = 'all';
 function openPicker() {
   $('picker').classList.add('show');
-  $('pkCats').innerHTML = ['all', 'food', 'store'].map(c =>
-    `<button class="tab ${c === pkCat ? 'on' : ''}" data-c="${c}">${{ all: 'All', food: '🍔 Food', store: '🛒 Stores' }[c]}</button>`).join('');
-  $('pkCats').querySelectorAll('[data-c]').forEach(b => b.onclick = () => { pkCat = b.dataset.c; openPicker(); });
   drawPicker();
+}
+function pkItem(k) {
+  return `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
+      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k]}</span>
+     </button>`;
 }
 function drawPicker() {
   const q = $('pkSearch').value.trim().toLowerCase();
-  let keys = CHAIN_KEYS.filter(k => pkCat === 'all' || BRANDS[k].cat === pkCat);
-  if (q) keys = keys.filter(k => k.toLowerCase().includes(q));
-  $('pkGrid').innerHTML = keys.map(k =>
-    `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
-      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k]}</span>
-     </button>`).join('') || '<div class="empty">No chains match.</div>';
+  if (q) {
+    const keys = CHAIN_KEYS.filter(k => k.toLowerCase().includes(q));
+    $('pkGrid').innerHTML = keys.length
+      ? `<div class="pkgroup"><div class="pkgrid-in">${keys.map(pkItem).join('')}</div></div>`
+      : '<div class="empty">No chains match.</div>';
+  } else {
+    $('pkGrid').innerHTML = groupedChains().map(([name, keys]) =>
+      `<div class="pkgroup"><h4>${esc(name)} <small>${keys.length}</small></h4>
+       <div class="pkgrid-in">${keys.map(pkItem).join('')}</div></div>`).join('');
+  }
   $('pkGrid').querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     active.has(k) ? active.delete(k) : active.add(k);
@@ -1299,6 +1333,121 @@ async function reverseName(lat, lon) {
   } catch (e) { /* keep the generic label */ }
 }
 
+/* ───────── chain grouping ─────────
+   90 chains in one flat grid (or a horizontal slider) is not browsable. These groups match
+   how people actually decide: how long the stop is and what they want out of it. */
+const GROUPS = [
+  ['Coffee & quick', ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee',
+    'Krispy Kreme', 'Panera Bread']],
+  ['Burgers & drive-thru', ["McDonald's", 'Burger King', "Wendy's", 'In-N-Out', 'Whataburger',
+    'Five Guys', 'Shake Shack', 'Jack in the Box', "Carl's Jr.", "Hardee's", 'Sonic', 'Cook Out',
+    'Culver’s', "Culver's", 'Dairy Queen', 'Portillo\u2019s', "Portillo's"]],
+  ['Chicken', ['Chick-fil-A', 'KFC', 'Popeyes', "Raising Cane's", "Zaxby's", 'Bojangles',
+    'Wingstop', 'Royal Farms']],
+  ['Tacos, pizza & subs', ['Taco Bell', 'Del Taco', 'Chipotle', 'Panda Express', "Domino's",
+    'Pizza Hut', 'Little Caesars', 'Subway', "Jersey Mike's", 'Firehouse Subs']],
+  ['Sit-down meals', ['IHOP', "Denny's", 'Waffle House', 'Cracker Barrel', "Applebee's", "Chili's",
+    'Texas Roadhouse', 'Olive Garden', 'Buffalo Wild Wings', 'Red Robin', "Arby's"]],
+  ['Groceries', ['Walmart', 'Target', 'Costco', "Sam's Club", 'Kroger', 'Safeway', 'Publix',
+    'H-E-B', 'Aldi', 'Whole Foods', "Trader Joe's", 'Meijer', 'Hy-Vee', 'Fred Meyer', 'Wegmans',
+    'Harris Teeter', 'Giant Eagle', 'Sprouts']],
+  ['Travel stops & fuel', ["Buc-ee's", 'Wawa', 'Sheetz', 'QuikTrip', 'RaceTrac', 'Kwik Trip',
+    'Speedway', 'Circle K', "Casey's", "Love's", 'Pilot', 'Flying J', 'TA Travel Center']],
+  ['Shops & pharmacy', ['Home Depot', "Lowe's", 'Best Buy', 'IKEA', 'Walgreens', 'CVS',
+    'Dollar General', 'Tractor Supply']]
+];
+function groupedChains() {
+  const seen = {}, out = [];
+  for (const [name, keys] of GROUPS) {
+    const present = keys.filter(k => BRANDS[k] && !seen[k]);
+    present.forEach(k => { seen[k] = 1; });
+    if (present.length) out.push([name, present.sort((a, b) => counts[b] - counts[a])]);
+  }
+  const rest = CHAIN_KEYS.filter(k => !seen[k]);
+  if (rest.length) out.push(['More', rest]);
+  return out;
+}
+
+/* ───────── network legend ───────── */
+(function () {
+  const counts = {};
+  for (const s of SITES) {
+    const k = s.net || 'Other';
+    if (!counts[k]) counts[k] = { n: 0, col: s.col };
+    counts[k].n++;
+  }
+  const top = Object.keys(counts).sort((a, b) => counts[b].n - counts[a].n).slice(0, 10);
+  $('legendList').innerHTML = top.map(k =>
+    `<div><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
+  ).join('') + `<div style="margin-top:2px"><b style="background:#8892a0"></b><span>other networks</span></div>`;
+  $('legendToggle').onclick = () => {
+    const open = $('legend').classList.toggle('collapsed');
+    $('legendToggle').setAttribute('aria-expanded', String(!open));
+  };
+})();
+
+/* ───────── smart query parsing ─────────
+   "tesla superchargers near costco in irvine" should just work. Everything is matched
+   locally against the chain and network lists; whatever is left over is the place, which is
+   the only part that needs a geocoder. */
+const NET_WORDS = [
+  ['tesla', 'tesla'], ['supercharger', 'tesla'], ['superchargers', 'tesla'],
+  ['electrify america', 'Electrify America'], ['electrify', 'Electrify America'], ['ea', 'Electrify America'],
+  ['evgo', 'EVgo'], ['chargepoint', 'ChargePoint'], ['ionna', 'IONNA'], ['rivian', 'Rivian'],
+  ['blink', 'Blink'], ['ev connect', 'EV Connect'], ['francis', 'Francis Energy'],
+  ['bluoval', 'Ford BlueOval'], ['blueoval', 'Ford BlueOval'], ['ford', 'Ford BlueOval'],
+  ['evcs', 'EVCS'], ['red e', 'Red E'], ['shell', 'Shell Recharge'], ['bp pulse', 'bp pulse'],
+  ['flo', 'FLO'], ['non-networked', 'Non-networked']
+];
+const NOISE = /\b(ev|electric|car|cars|charger|chargers|charging|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s)\b/g;
+
+function normalise(t) {
+  return String(t).toLowerCase().replace(/[.'\u2019]/g, '').replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+// Alias table so "mcdonalds", "chick fil a", "in n out", "bucees" all resolve.
+const CHAIN_ALIAS = (function () {
+  const map = [];
+  for (const k of Object.keys(BRANDS)) {
+    const n = normalise(k);
+    map.push([n, k]);
+    const squashed = n.replace(/[\s-]/g, '');
+    if (squashed !== n) map.push([squashed, k]);
+  }
+  const extra = {
+    'mcdonalds': "McDonald's", 'micky ds': "McDonald's", 'chickfila': 'Chick-fil-A',
+    'chick fil a': 'Chick-fil-A', 'innout': 'In-N-Out', 'in n out': 'In-N-Out',
+    'bucees': "Buc-ee's", 'buccees': "Buc-ee's", 'dunkin donuts': "Dunkin'",
+    'starbucks coffee': 'Starbucks', 'bk': 'Burger King', 'taco': 'Taco Bell',
+    'heb': 'H-E-B', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
+    'sams': "Sam's Club", 'sams club': "Sam's Club", 'wally world': 'Walmart',
+    'cvs pharmacy': 'CVS', 'seven eleven': 'Circle K', 'loves': "Love's",
+    'pilot flying j': 'Pilot', 'cracker barrel old country store': 'Cracker Barrel',
+    'panera': 'Panera Bread', 'cane s': "Raising Cane's", 'canes': "Raising Cane's",
+    'jack in box': 'Jack in the Box', 'dq': 'Dairy Queen', 'kfc chicken': 'KFC'
+  };
+  for (const a in extra) if (BRANDS[extra[a]]) map.push([a, extra[a]]);
+  map.sort((x, y) => y[0].length - x[0].length);      // longest match wins
+  return map;
+})();
+
+function parseQuery(raw) {
+  let t = ' ' + normalise(raw) + ' ';
+  const chains = [];
+  for (const [alias, key] of CHAIN_ALIAS) {
+    if (chains.indexOf(key) !== -1) continue;
+    const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '(\\s|$)');
+    if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
+  }
+  let net = null;
+  for (const [word, val] of NET_WORDS) {
+    const re = new RegExp('(^|\\s)' + word + '(\\s|$)');
+    if (re.test(t)) { net = val; t = t.replace(re, ' '); break; }
+  }
+  const place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
+  return { chains: chains, net: net, place: place };
+}
+
 /* place search */
 const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
 connecticut:'CT',delaware:'DE',florida:'FL',georgia:'GA',hawaii:'HI',idaho:'ID',illinois:'IL',
@@ -1328,12 +1477,40 @@ $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has
 $('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
 $('placeIn').addEventListener('keydown', async e => {
   if (e.key !== 'Enter') return;
-  const q = $('placeIn').value.trim(); if (!q) return;
-  $('placeIn').blur(); toast('Searching…');
+  const raw = $('placeIn').value.trim(); if (!raw) return;
+  $('placeIn').blur();
+  const p = parseQuery(raw);
+
+  // apply whatever the query named, before we go anywhere near the network
+  if (p.chains.length) {
+    active.clear();
+    p.chains.forEach(k => { active.add(k); track('search-chain', k); });
+    cat = 'all'; $('savedChip').classList.remove('on');
+  }
+  if (p.net) {
+    netFilter = p.net === 'tesla' ? 'tesla' : 'other';
+    netPick = p.net === 'tesla' ? null : p.net;   // exact network when they named one
+    localStorage.setItem('cc_net', netFilter);
+    syncNetSeg();
+    track('search-net', p.net);
+  }
+
+  if (!p.place) {                       // "chargers near costco" with no place named
+    render(); syncUrl();
+    if (active.size) { setSheet('mid'); if (!center) fitToResults(); }
+    toast(p.chains.length || p.net ? 'Filtered — add a city to narrow it down' : 'Try a city or address');
+    return;
+  }
+
+  toast('Searching…');
   $('placeBox').classList.add('busy');
-  try { const g = await geocode(q); setCenter(g.lat, g.lon, g.label, 'place'); }
-  catch (err) { toast(err.message); }
-  finally { $('placeBox').classList.remove('busy'); }
+  try {
+    const g = await geocode(p.place);
+    setCenter(g.lat, g.lon, g.label, 'place');
+  } catch (err) {
+    render(); syncUrl();
+    toast(err.message);
+  } finally { $('placeBox').classList.remove('busy'); }
 });
 
 /* ───────── route ───────── */
@@ -1463,6 +1640,7 @@ function fitToResults() {
 /* ───────── network filter ───────── */
 $('netSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
   netFilter = netFilter === b.dataset.net ? 'all' : b.dataset.net;
+  netPick = null;
   syncNetSeg();
   localStorage.setItem('cc_net', netFilter);
   render(); syncUrl();
