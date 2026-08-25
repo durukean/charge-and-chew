@@ -1593,7 +1593,7 @@ setOnline(navigator.onLine);
 if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') track('pwa-launch');
 if (!navigator.onLine) track('offline-use');
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && q.get('nosw') !== '1') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
       reg.addEventListener('updatefound', () => {

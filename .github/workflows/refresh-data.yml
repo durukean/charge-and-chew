@@ -46,6 +46,9 @@ jobs:
       - name: Verify the built site before publishing
         run: python3 verify.py
 
+      - name: Smoke-test the app in a headless browser
+        run: python3 verify_ui.py
+
       - name: Commit and push if anything changed
         run: |
           git config user.name  "github-actions[bot]"
