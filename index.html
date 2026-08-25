@@ -824,16 +824,34 @@ map.on('popupopen', e => {
     const on = favs.has(+b.dataset.fav);
     b.classList.toggle('on', on); b.textContent = on ? '★' : '☆';
   };
+  track('open-charger');
   const src = e.popup._source;
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
 map.on('popupclose', clearPOIs);
 
 function toggleFav(id) {
+  track('save-stop');
   const had = favs.has(id);
   had ? favs.delete(id) : favs.add(id);
   saveFavs(); render();
   toast(had ? 'Removed from saved' : 'Saved');
+}
+
+/* ───────── analytics events ─────────
+   The app is one page, so without this every session is a single "/" pageview and we learn
+   nothing about what people actually do. Only feature names and chain names are sent — never
+   a search term, coordinate, saved stop or car, which are the parts that could identify anyone. */
+const seenEvent = {};
+function track(name, detail) {
+  try {
+    const path = detail ? `${name}/${String(detail).slice(0, 40)}` : name;
+    if (seenEvent[path]) return;          // once per session: counts sessions, not clicks
+    seenEvent[path] = 1;
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: 'e-' + path, title: 'event', event: true });
+    }
+  } catch (e) { /* analytics must never break the app */ }
 }
 
 /* ───────── theme ───────── */
@@ -970,6 +988,7 @@ function renderChips() {
   el.querySelectorAll('.chip[data-k]').forEach(c => c.onclick = () => {
     const k = c.dataset.k;
     active.has(k) ? active.delete(k) : active.add(k);
+    if (active.has(k)) track('chain', k);
     render(); syncUrl();
   });
   $('moreChip').onclick = openPicker;
@@ -1129,6 +1148,7 @@ function drawCarGrid() {
       <span class="spec">${c[0]}kWh · ${c[1]}kW · ${CONN_LABEL[c[2]]}</span></button>`;
   }).join('') || '<div class="empty">No match. Pick "Other CCS EV" or "Other Tesla/NACS EV".</div>';
   $('carGrid').querySelectorAll('[data-car]').forEach(b => b.onclick = () => {
+    track('car-set');
     car = b.dataset.car; localStorage.setItem('cc_car', car);
     $('carPicker').classList.remove('show');
     renderCarBar(); render();
@@ -1166,6 +1186,7 @@ function drawPicker() {
   $('pkGrid').querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     active.has(k) ? active.delete(k) : active.add(k);
+    if (active.has(k)) track('chain', k);
     b.classList.toggle('on'); render(); syncUrl();
   });
 }
@@ -1180,6 +1201,7 @@ $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 
 /* ───────── center: locate / pin / place ───────── */
 function setCenter(lat, lon, label, kind) {
+  track('area-search', kind);            // 'me' | 'pin' | 'place' — not where
   center = { lat, lon, label, kind };
   route = null; clearRoute();
   if (centerLayer) map.removeLayer(centerLayer);
@@ -1328,6 +1350,7 @@ $('goBtn').onclick = async () => {
   $('goBtn').disabled = false;
 };
 function applyCorridor(verts, mi, hr) {
+  track('route');
   clearRoute();
   routeCase = L.polyline(verts, { color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
   routeLayer = L.polyline(verts, { color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
@@ -1382,6 +1405,7 @@ function syncUrl() {
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
 $('shareBtn').onclick = async () => {
+  track('share');
   syncUrl();
   const url = location.href;
   try {
@@ -1437,11 +1461,13 @@ function syncFilterUI() {
   $('filtBtn').classList.toggle('on', n > 0);
 }
 document.querySelectorAll('#filters .seg.wide button').forEach(b => b.onclick = () => {
+  track('filter', b.parentElement.dataset.f);
   F[b.parentElement.dataset.f] = +b.dataset.v;
   localStorage.setItem('cc_filters', JSON.stringify(F));
   syncFilterUI(); render(); syncUrl();
 });
 document.querySelectorAll('#filters .ftog').forEach(b => b.onclick = () => {
+  track('filter', b.dataset.f);
   F[b.dataset.f] = F[b.dataset.f] ? 0 : 1;
   localStorage.setItem('cc_filters', JSON.stringify(F));
   syncFilterUI(); render(); syncUrl();
@@ -1465,6 +1491,7 @@ function buildHero() {
   g.querySelectorAll('[data-k]').forEach(b => b.onclick = () => selectChain(b.dataset.k));
 }
 function selectChain(k) {
+  track('hero-pick', k);
   active.add(k); hideHero();
   cat = 'all';
   $('savedChip').classList.remove('on');
@@ -1540,6 +1567,8 @@ function setOnline(on) {
 window.addEventListener('online', () => { setOnline(true); toast('Back online'); });
 window.addEventListener('offline', () => setOnline(false));
 setOnline(navigator.onLine);
+if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') track('pwa-launch');
+if (!navigator.onLine) track('offline-use');
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
