@@ -252,6 +252,28 @@ def faq_block(key, st_name, sx):
     return html, schema
 
 
+def jsonld_chain(key, sites_list, canonical, faq_schema=None):
+    """The national chain pages carried no structured data at all — only the state pages did."""
+    items = []
+    for i, (d, sid) in enumerate(sites_list[:25], 1):
+        s = sites[sid]
+        items.append({"@type": "ListItem", "position": i, "item": {
+            "@type": "Place", "name": f"{s.get('net','DC fast charger')} — {s['name']}",
+            "address": {"@type": "PostalAddress", "streetAddress": s["street"],
+                        "addressLocality": s["city"], "addressRegion": s["st"], "addressCountry": "US"},
+            "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}})
+    blocks = [
+        {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Chains", "item": f"{BASE}/near/"},
+            {"@type": "ListItem", "position": 2, "name": key, "item": f"{BASE}/{canonical}"}]},
+        {"@context": "https://schema.org", "@type": "ItemList",
+         "name": f"EV fast chargers near {key}",
+         "numberOfItems": len(sites_list), "itemListElement": items}]
+    if faq_schema:
+        blocks.append(faq_schema)
+    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+
+
 def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
     items = []
     for i, (d, sid) in enumerate(sites_list[:25], 1):
@@ -328,7 +350,7 @@ for key, b in brands.items():
     faq_html, faq_schema = faq_block(key, "", sx)
     top = "".join(site_card(sites[sid], key, "../../") for d, sid in hits[:40])
     title = f"EV fast chargers near {key} ({n} locations)"
-    desc = f"{n} EV DC fast chargers within a 10-minute walk of a {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
+    desc = f"{n} EV DC fast chargers within a 10-minute walk of {art(key)} {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
     body = f"""<h1>{b['e']} EV fast chargers near {esc(key)}</h1>
 <p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
@@ -336,7 +358,9 @@ for key, b in brands.items():
 <h2>By state</h2><div class="chips">{state_links}</div>
 <h2>Closest {min(40, n)} nationwide</h2>{top}
 {faq_html}"""
-    path = f"near/{cs}/index.html"; page(path, title, desc, body, f"near/{cs}/"); add(path)
+    can = f"near/{cs}/"
+    path = f"near/{cs}/index.html"
+    page(path, title, desc, body, can, jsonld_chain(key, hits, can, faq_schema)); add(path)
 
 
 # ---- per chain+state (needs complete state_chain from the loop above) ----

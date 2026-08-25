@@ -43,6 +43,9 @@ jobs:
           python3 data/build_data.py
           python3 build.py --base https://chargeandchew.com
 
+      - name: Verify the built site before publishing
+        run: python3 verify.py
+
       - name: Commit and push if anything changed
         run: |
           git config user.name  "github-actions[bot]"

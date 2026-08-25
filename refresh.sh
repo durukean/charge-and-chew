@@ -11,6 +11,7 @@ python3 data/fetch_chargers.py
 # 2. rematch + rebuild
 python3 data/build_data.py
 python3 build.py --base https://chargeandchew.com
+python3 verify.py
 
 # 3. publish only if something actually changed
 if [[ -n "$(git status --porcelain)" ]]; then
