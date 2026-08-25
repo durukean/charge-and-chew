@@ -28,8 +28,8 @@
 "operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
 "description":"Find Tesla Superchargers within walking distance of specific restaurant and store chains, and plan road trip charging stops around them."}
 </script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="/vendor/leaflet.css">
+<script src="/vendor/leaflet.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -109,6 +109,7 @@ svg{display:block}
 .searchpill input::placeholder{color:var(--dim2);font-weight:400}
 .searchpill .clr{color:var(--dim2);padding:5px;display:none}
 .searchpill.has .clr{display:block}
+.searchpill.busy{opacity:.65}
 .searchpill .vdiv{width:1px;height:22px;background:var(--line2);flex-shrink:0}
 .searchpill .pbtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--dim);
   flex-shrink:0;transition:.15s}
@@ -647,6 +648,11 @@ svg{display:block}
 'use strict';
 const D = window.PITSTOP_DATA;
 const $ = id => document.getElementById(id);
+if (typeof L === 'undefined') {
+  $('splash').innerHTML = '<div style="max-width:280px;text-align:center;color:#b91c1c;font-size:14px;' +
+    'line-height:1.5">The map library didn\u2019t load.<br>Check your connection and reload.</div>';
+  return;
+}
 if (!D) { document.getElementById('splash').innerHTML =
   '<div style="color:#ff5a5f;font-size:14px">data.js failed to load</div>'; return; }
 
@@ -681,6 +687,20 @@ const hav = (a1, o1, a2, o2) => {
   return 2 * R * Math.asin(Math.sqrt(x));
 };
 const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
+// Nominatim and OSRM are free shared services — under load they hang rather than fail,
+// which left the UI stuck on "Routing…" forever with no way to tell.
+function fetchTimeout(url, ms) {
+  ms = ms || 12000;
+  if (typeof AbortController === 'undefined') return fetch(url);   // old in-car browsers
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), ms);
+  return fetch(url, { signal: c.signal }).then(function (r) { clearTimeout(t); return r; },
+    function (e) {
+      clearTimeout(t);
+      throw new Error(e && e.name === 'AbortError'
+        ? 'That service is slow right now — try again in a moment.' : 'Network problem — check your connection.');
+    });
+}
 // match value is [dLat,dLon] integer deltas x1e4 from the charger
 const mLatLng = (s, v) => Array.isArray(v) ? [s.lat + v[0] / 1e4, s.lon + v[1] / 1e4] : null;
 const mDist = (s, v) => { if (typeof v === 'number') return v; const p = mLatLng(s, v); return p ? hav(s.lat, s.lon, p[0], p[1]) : 9e9; };
@@ -1270,7 +1290,7 @@ map.on('click', e => {
 });
 async function reverseName(lat, lon) {
   try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`);
+    const r = await fetchTimeout(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`, 8000);
     const j = await r.json();
     const nm = placeLabel(j);
     if (nm && center && center.kind === 'pin') {
@@ -1299,7 +1319,7 @@ function placeLabel(j) {
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
-  const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=1&countrycodes=us&q=' + encodeURIComponent(q));
+  const r = await fetchTimeout('https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=1&countrycodes=us&q=' + encodeURIComponent(q));
   const j = await r.json();
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
   return { lat: +j[0].lat, lon: +j[0].lon, label: placeLabel(j[0]) };
@@ -1310,8 +1330,10 @@ $('placeIn').addEventListener('keydown', async e => {
   if (e.key !== 'Enter') return;
   const q = $('placeIn').value.trim(); if (!q) return;
   $('placeIn').blur(); toast('Searching…');
+  $('placeBox').classList.add('busy');
   try { const g = await geocode(q); setCenter(g.lat, g.lon, g.label, 'place'); }
   catch (err) { toast(err.message); }
+  finally { $('placeBox').classList.remove('busy'); }
 });
 
 /* ───────── route ───────── */
@@ -1337,10 +1359,11 @@ $('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
 $('goBtn').onclick = async () => {
   const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
   if (!f || !t) return toast('Enter a start and a destination');
+  if (!navigator.onLine) return toast('Route planning needs a connection');
   $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
   try {
     const [a, b] = await Promise.all([geocode(f), geocode(t)]);
-    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`);
+    const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
     const j = await r.json();
     if (!j.routes || !j.routes.length) throw new Error('No driving route found');
     const verts = j.routes[0].geometry.coordinates.map(c2 => [c2[1], c2[0]]);

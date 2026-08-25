@@ -4,13 +4,14 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v1';
+const VERSION = 'cc-v2';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 const DATA  = `${VERSION}-data`;    // data.js — big, versioned by ?v= in the URL
 const TILES = `${VERSION}-tiles`;   // map tiles for areas already viewed
 const TILE_LIMIT = 400;
 
-const SHELL_URLS = ['/', '/index.html', '/manifest.json', '/favicon.svg', '/icon-192.png'];
+const SHELL_URLS = ['/', '/index.html', '/manifest.json', '/favicon.svg', '/icon-192.png',
+                    '/vendor/leaflet.js', '/vendor/leaflet.css', '/assets/pages.css'];
 
 self.addEventListener('install', e => {
   e.waitUntil((async () => {

@@ -112,11 +112,41 @@ def distill(fs):
     return out
 
 
+# A partial API response must never reach the site. The shared DEMO_KEY is rate-limited and
+# AFDC occasionally returns short payloads; without this the pipeline would happily rebuild
+# every page from a fraction of the data and push it live.
+MIN_STATIONS = 9000          # we normally distill ~15k; well below that means something broke
+MAX_DROP_PCT = 15            # and never silently lose this much vs the previous good run
+
+
+def sanity_check(out, prev_path):
+    if len(out) < MIN_STATIONS:
+        raise SystemExit(f"ABORT: only {len(out)} stations distilled, expected >= {MIN_STATIONS}. "
+                         f"Refusing to overwrite chargers.json — the API response was probably "
+                         f"truncated or rate-limited. Nothing was changed.")
+    if os.path.exists(prev_path):
+        try:
+            prev = json.load(open(prev_path))
+        except Exception:
+            return
+        if prev and len(out) < len(prev) * (1 - MAX_DROP_PCT / 100):
+            raise SystemExit(f"ABORT: {len(out)} stations is a "
+                             f"{100 * (1 - len(out) / len(prev)):.0f}% drop from the previous "
+                             f"{len(prev)}. That is almost certainly a bad fetch, not reality. "
+                             f"Re-run, or delete chargers.json deliberately if the drop is real.")
+        # a healthy run should still have plenty of connector and power data
+        if sum(1 for x in out if x.get("kw")) < len(out) * 0.5:
+            raise SystemExit("ABORT: over half the stations have no power rating — the response "
+                             "shape probably changed. Check ev_charging_units in the API.")
+
+
 def main():
     fs = fetch()
     print(f"  {len(fs)} stations returned", flush=True)
     out = distill(fs)
-    json.dump(out, open(os.path.join(HERE, "chargers.json"), "w"), separators=(",", ":"))
+    path = os.path.join(HERE, "chargers.json")
+    sanity_check(out, path)
+    json.dump(out, open(path, "w"), separators=(",", ":"))
     import collections
     nets = collections.Counter(s["net"] for s in out)
     conn = collections.Counter()

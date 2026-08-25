@@ -198,8 +198,32 @@ def main():
         "matches": matches,
         "cars": CARS,
     }
+    # Compare against the data.js that is currently live before overwriting it. Everything
+    # downstream (13k markers, 180 generated pages, the sitemap) is derived from this file,
+    # so a bad build here silently breaks the whole site.
+    out_path = os.path.join(HERE, "..", "data.js")
+    if os.path.exists(out_path):
+        try:
+            old_raw = open(out_path).read()
+            old = json.loads(old_raw[old_raw.index("{"): old_raw.rindex("}") + 1])
+        except Exception:
+            old = None
+        if old:
+            drop_sites = 1 - len(chargers) / max(1, len(old.get("sites", [])))
+            drop_match = 1 - len(matches) / max(1, len(old.get("matches", {})))
+            lost_chains = set(old.get("brands", {})) - set(brands_out)
+            if drop_sites > 0.15:
+                raise SystemExit(f"ABORT: chargers fell {drop_sites:.0%} "
+                                 f"({len(old['sites'])} -> {len(chargers)}). data.js not written.")
+            if drop_match > 0.20:
+                raise SystemExit(f"ABORT: chain matches fell {drop_match:.0%} "
+                                 f"({len(old['matches'])} -> {len(matches)}). data.js not written.")
+            if lost_chains:
+                raise SystemExit(f"ABORT: these chains vanished entirely: {sorted(lost_chains)}. "
+                                 f"Usually a broken brand regex. data.js not written.")
+
     js = "window.PITSTOP_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n"
-    open(os.path.join(HERE, "..", "data.js"), "w").write(js)
+    open(out_path, "w").write(js)
 
     from collections import Counter
     cnt = Counter()
