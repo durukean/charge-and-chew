@@ -1289,8 +1289,15 @@ $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
   if (center) setCenter(center.lat, center.lon, center.label, center.kind);
 });
 
-function locate(target) {
-  if (!navigator.geolocation) return toast('Location not supported on this device');
+function locate(target, opts) {
+  opts = opts || {};
+  // If location is unavailable or refused we must still show the filtered results rather
+  // than leaving the user staring at an unchanged map.
+  function fallback(msg) {
+    toast(msg);
+    if (opts.silentDeny && active.size) { setSheet('mid'); fitToResults(); }
+  }
+  if (!navigator.geolocation) return fallback('Location not supported — try a city name');
   $('locBtn').classList.add('busy'); toast('Finding you…');
   navigator.geolocation.getCurrentPosition(p => {
     $('locBtn').classList.remove('busy');
@@ -1301,7 +1308,9 @@ function locate(target) {
     } else setCenter(la, lo, 'My location', 'me');
   }, err => {
     $('locBtn').classList.remove('busy');
-    toast(err.code === 1 ? 'Location permission denied' : 'Could not get your location');
+    fallback(err.code === 1
+      ? 'Location blocked — showing everywhere, or type a city'
+      : 'Could not get your location — try a city name');
   }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
 }
 $('locBtn').onclick = () => locate('center');
@@ -1538,11 +1547,16 @@ $('placeIn').addEventListener('keydown', async e => {
     locate('center');
     return;
   }
-  if (!p.place) {                        // "chargers near costco" with no place named
-    if (active.size) { setSheet('mid'); if (!center) fitToResults(); }
-    toast(p.chains.length || p.net
-      ? 'Filtered — add a city, or say "near me"'
-      : 'Try a city, a ZIP, or "near me"');
+  if (!p.place) {
+    // "tesla charger near costco" with no place: the intent is almost always "near me".
+    // If an area is already set, stay in it — the user is refining, not relocating.
+    if (center) {
+      setSheet('mid');
+      toast(`Filtered within ${center.label}`);
+      return;
+    }
+    if (p.chains.length || p.net) { locate('center', { silentDeny: true }); return; }
+    toast('Try a city, a ZIP, or "near me"');
     return;
   }
 
