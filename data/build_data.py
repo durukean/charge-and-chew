@@ -190,6 +190,12 @@ def main():
                   for k, v in RAW_BRANDS.items() if k in pois}
 
     import time
+    # Marker colour is presentation and lives in NETCOL in index.html. It used to be baked
+    # into every record here, which meant a palette change needed a full refetch and left
+    # 3,081 copies of the old Tesla red in the payload waiting to be picked up again.
+    for c in chargers:
+        c.pop("col", None)
+
     payload = {
         "generated": time.strftime("%Y-%m-%d"),
         "walkM": WALK_M,

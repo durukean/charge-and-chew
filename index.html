@@ -151,7 +151,8 @@ svg{display:block}
 #routePanel{display:none}
 #routePanel.show{display:block;animation:drop .2s ease}
 @keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-#overlayTop.routing .searchpill,#overlayTop.routing .chiprow,#overlayTop.routing #carBar{display:none}
+#overlayTop.routing .searchpill,#overlayTop.routing #carBar{display:none}
+#overlayTop.routing:not(.routed) .chiprow{display:none}
 .rcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);padding:11px}
 .rfield{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--line);
   border-radius:12px;padding:0 12px;height:42px;margin-bottom:8px}
@@ -175,6 +176,9 @@ svg{display:block}
 #routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--warn);font-weight:500}
 #routePanel.collapsed #routeInfo .ed{color:var(--accent);font-size:12px;font-weight:700;flex-shrink:0}
+#routeInfo .rclear{display:none}
+#routePanel.collapsed #routeInfo .rclear{display:inline-flex;align-items:center;justify-content:center;border:0;background:none;color:var(--dim);font-size:18px;line-height:1;cursor:pointer;width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-left:2px}
+#routePanel.collapsed #routeInfo .rclear:hover{color:var(--txt);background:var(--surface2)}
 
 /* center card */
 #centerCard{display:none}
@@ -255,6 +259,14 @@ svg{display:block}
 .leaflet-tooltip-top:before{border-top-color:var(--line2)}
 
 /* ═══ sheet ═══ */
+.clus{background:none!important;border:0!important}
+.clus i{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+  border-radius:50%;font:800 11px/1 var(--mono),ui-monospace,monospace;font-style:normal;
+  color:#fff;background:rgba(21,128,61,.86);border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 2px 8px rgba(0,0,0,.28);cursor:pointer}
+:root[data-theme="dark"] .clus i{background:rgba(74,222,128,.9);color:#08160d;
+  border-color:rgba(14,17,22,.85)}
+.clus.big i{font-size:12.5px}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
@@ -312,7 +324,7 @@ svg{display:block}
 .row .ch span{background:var(--surface2);border-radius:8px;padding:3px 8px}
 :root[data-theme="dark"] .row .ch span{background:var(--surface3)}
 .row .ch b{color:var(--txt);font-weight:700}
-.row .star{font-size:16px;color:var(--dim2);padding:2px 0 0 2px;flex-shrink:0}
+.row .star{font-size:16px;color:var(--dim2);flex-shrink:0;width:44px;height:44px;display:flex;align-items:flex-start;justify-content:center;padding-top:2px;margin:-4px -8px -4px 0;background:none;border:0;cursor:pointer}
 .row .star.on{color:var(--amber)}
 .empty{text-align:center;color:var(--dim);font-size:13px;padding:30px 20px;line-height:1.6}
 .empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14.5px}
@@ -482,7 +494,7 @@ svg{display:block}
   .rfield{height:48px}
   #goBtn{height:50px}
   .row{padding:15px 13px}
-  .row .star{font-size:20px;padding:4px 2px 4px 6px}
+  .row .star{font-size:20px;width:48px;height:48px;padding-top:4px}
   .sortbtn{padding:9px 8px;font-size:13px}
   .iconbtn.sm{width:40px;height:40px}
   #centerCard .rad button{padding:7px 11px;font-size:12.5px}
@@ -519,10 +531,10 @@ svg{display:block}
 
       <div class="chiprow" id="chiprow">
         <div class="qf" id="netSeg">
-          <button class="chip qchip" data-net="tesla">⚡ Tesla</button>
-          <button class="chip qchip" data-net="other">Other networks</button>
+          <button class="chip qchip" data-net="tesla" aria-pressed="false">⚡ Tesla</button>
+          <button class="chip qchip" data-net="other" aria-pressed="false">Other networks</button>
         </div>
-        <button class="chip qchip" id="savedChip">⭐<span class="n" id="favN"></span></button>
+        <button class="chip qchip" id="savedChip" aria-pressed="false" aria-label="Show only saved stops"><span aria-hidden="true">⭐</span><span class="n" id="favN"></span></button>
         <button class="chip qchip" id="filtBtn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
           Filters<span class="cnt" id="filtN"></span></button>
@@ -590,7 +602,7 @@ svg{display:block}
     </div>
   </div>
 
-  <section id="sheet">
+  <section id="sheet" role="main" aria-label="Charger results">
     <div class="handle" id="handle"><i></i></div>
     <div class="sheethead">
       <div class="t" id="sheetTitle" role="status" aria-live="polite" aria-atomic="true">…</div>
@@ -687,7 +699,7 @@ svg{display:block}
 <div id="offlineBar" hidden>Offline — showing saved data</div>
 <div id="toast"></div>
 
-<script src="data.js?v=6"></script>
+<script src="data.js?v=7"></script>
 <script>
 (() => {
 'use strict';
@@ -824,7 +836,8 @@ const saveFavs = () => {
 const map = L.map('map', { zoomControl: false, attributionControl: true, worldCopyJump: true })
   .setView([39.3, -96.5], 4);
 L.control.attribution({ prefix: false }).addAttribution(
-  '<a href="https://supercharge.info">supercharge.info</a> · © <a href="https://openstreetmap.org">OSM</a> · <a href="https://carto.com">CARTO</a>');
+  '<a href="https://afdc.energy.gov/fuels/electricity-locations">DOE/NREL AFDC</a> · © <a href="https://openstreetmap.org">OSM</a> · <a href="https://carto.com">CARTO</a>');
+map.on('zoomend', onZoomChanged);
 
 
 const canvas = L.canvas({ padding: .6 });
@@ -1108,12 +1121,14 @@ function render() {
   const vis = visibleSites(), visIds = new Set(vis.map(s => s.id));
   const filtering = active.size > 0 || cat === 'fav';
   const T = MTHEME[curDark ? 'dark' : 'light'];
-  const themeKey = curDark ? 'd' : 'l';
+  const clustered = drawClusters(vis);
+  const themeKey = (curDark ? 'd' : 'l') + (clustered ? 'C' : '');
   for (const s of SITES) {
     const m = mk[s.id];
     // skip markers whose appearance is unchanged — restyling all ~14.5k every keystroke
     // is what makes this feel slow on low-power hardware like an in-car browser
-    const state = (!inScope(s) || !passesNet(s) || !passesSpec(s)) ? 'h'
+    const state = clustered ? 'h'
+                : (!inScope(s) || !passesNet(s) || !passesSpec(s)) ? 'h'
                 : visIds.has(s.id) ? (filtering ? 'a' : 'b') : 'g';
     const key = state + themeKey;
     if (m._k === key) { if (state === 'a') m.bringToFront(); continue; }
@@ -1128,6 +1143,49 @@ function render() {
   renderList(vis);
   renderChips();
   if (center) updateCenterSub(vis.length);
+}
+
+/* Zoomed out, ~13.7k individual dots are confetti rather than information — you cannot
+   tell a dense metro from a sparse one. Below CLUSTER_ZOOM we aggregate into a coarse
+   lat/lon grid and draw one labelled bubble per cell. Grid binning is O(n) and runs in a
+   few ms, which is why this needs no clustering library. */
+const CLUSTER_ZOOM = 6;
+let clusterLayer = null;
+let lastClusterZ = null;
+function onZoomChanged() {
+  const z = map.getZoom();
+  const now = z <= CLUSTER_ZOOM;
+  // only re-render when clustering turns on/off, or the grid resolution changes
+  if (lastClusterZ === null || now !== (lastClusterZ <= CLUSTER_ZOOM) || (now && z !== lastClusterZ)) {
+    lastClusterZ = z; render();
+  } else lastClusterZ = z;
+}
+function drawClusters(vis) {
+  if (clusterLayer) { map.removeLayer(clusterLayer); clusterLayer = null; }
+  const z = map.getZoom();
+  if (z > CLUSTER_ZOOM || vis.length < 60) return false;
+  const cell = 360 / Math.pow(2, z) / 7;
+  const bins = new Map();
+  for (const s of vis) {
+    const k = Math.floor(s.lon / cell) + ':' + Math.floor(s.lat / cell);
+    let b = bins.get(k);
+    if (!b) { b = { n: 0, lat: 0, lon: 0 }; bins.set(k, b); }
+    b.n++; b.lat += s.lat; b.lon += s.lon;
+  }
+  const out = [];
+  for (const b of bins.values()) {
+    const d = Math.round(Math.min(46, 22 + Math.log2(b.n) * 4.2));
+    const lat = b.lat / b.n, lon = b.lon / b.n;
+    const m = L.marker([lat, lon], {
+      keyboard: false,
+      icon: L.divIcon({ className: 'clus' + (b.n > 999 ? ' big' : ''), iconSize: [d, d],
+        html: '<i>' + (b.n > 999 ? (b.n / 1000).toFixed(1) + 'k' : b.n) + '</i>' })
+    });
+    m.on('click', () => map.setView([lat, lon], Math.min(CLUSTER_ZOOM + 3, z + 3)));
+    out.push(m);
+  }
+  clusterLayer = L.layerGroup(out).addTo(map);
+  return true;
 }
 
 /* ───────── chips ───────── */
@@ -1180,6 +1238,8 @@ function renderList(vis) {
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
      nothing here", which is the wrong answer and sends people looking in the wrong place. */
+  $('sortLbl').textContent = sortLabelNow();
+  syncPressed();
   const nar = narrowings(), fbar = $('fbar');
   fbar.hidden = !nar.length;
   fbar.innerHTML = nar.length
@@ -1220,7 +1280,7 @@ function renderList(vis) {
         <div class="sub"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${s.stalls === 1 ? '<span class="tag one">1 stall</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
-      <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
+      <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button>
     </div>`;
   }).join('') + (vis.length > 300
     ? `<div class="empty">Showing the first 300 of ${vis.length}. Narrow the filter to see more.</div>` : '');
@@ -1278,6 +1338,9 @@ $('handle').addEventListener('touchmove', e => {
 $('handle').addEventListener('touchend', () => { dragY = null; }, { passive: true });
 
 const SORT_LABEL = { dist: 'Nearest', walk: 'Shortest walk', stalls: 'Most stalls', power: 'Fastest charger', charge: 'Fastest for my car' };
+/* Route mode orders by position along the route regardless of sortBy, so the picker
+   must not keep claiming 'Shortest walk'. */
+const sortLabelNow = () => route ? 'Along the route' : SORT_LABEL[sortBy];
 $('sortBtn').onclick = () => {
   const opts = [];
   if (center) opts.push('dist');
@@ -1733,9 +1796,22 @@ $('routeToggle').onclick = () => {
   const on = $('routePanel').classList.toggle('show');
   $('overlayTop').classList.toggle('routing', on);
   $('routeToggle').classList.toggle('on', on);
-  if (!on) { clearRoute(); route = null; render(); syncUrl(); }
+  /* Closing the panel used to throw the route away, so filtering a route by chain meant
+     rebuilding it. The route is scope, like a pinned area: it survives until explicitly
+     cleared with the x on the summary bar. */
+  if (!on && !route) { clearRoute(); render(); syncUrl(); }
+  if (!on) $('overlayTop').classList.remove('routed');
   setTimeout(() => map.invalidateSize({ pan: false }), 220);
 };
+function dropRoute() {
+  clearRoute(); route = null;
+  $('routePanel').classList.remove('show');
+  $('routeToggle').classList.remove('on');
+  $('overlayTop').classList.remove('routing', 'routed');
+  $('fromIn').value = ''; $('toIn').value = '';
+  render(); syncUrl();
+  setTimeout(() => map.invalidateSize({ pan: false }), 220);
+}
 function fitRouteWhenReady() {
   if (routeLayer) settleFit(() => routeLayer.getBounds(), [28, 28]);
 }
@@ -1797,7 +1873,9 @@ function applyCorridor(verts, mi, hr) {
   const trip = `${$('fromIn').value.trim()} → ${$('toIn').value.trim()}`;
   $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
     `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · ${ids.size} chargers ≤${corridorMi}mi</i></span>` +
-    `<span class="ed">Edit</span>`;
+    `<span class="ed">Edit</span><button class="rclear" id="rClear" title="Clear route" aria-label="Clear route">×</button>`;
+  $('overlayTop').classList.add('routed');
+  $('rClear').onclick = e => { e.stopPropagation(); dropRoute(); toast('Route cleared'); };
   $('routePanel').classList.add('collapsed');
   $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
     $('routeInfo').onclick = null;
@@ -1876,6 +1954,13 @@ $('netSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
   localStorage.setItem('cc_net', netFilter);
   render(); syncUrl();
 });
+/* Toggle chips looked pressed but never said so to assistive tech. */
+function syncPressed() {
+  $('netSeg').querySelectorAll('[data-net]').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.classList.contains('on'))));
+  $('savedChip').setAttribute('aria-pressed', String($('savedChip').classList.contains('on')));
+  $('filtBtn').setAttribute('aria-pressed', String(activeFilterCount() > 0));
+}
 function syncNetSeg() {
   $('netSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.net === netFilter));
 }
