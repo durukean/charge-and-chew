@@ -38,6 +38,13 @@ CASES = [
     ("mcdonalds near me",                    dict(here=True,  chains=["McDonald's"], net=None, place="")),
     ("electrify america near walmart in dallas tx",
                                              dict(here=False, chains=["Walmart"], net="Electrify America", place="dallas tx")),
+    # Regressions: filler words used to survive into the place text and get geocoded to a
+    # real town ("wheres to" -> West Springfield, MA), teleporting the map mid-search.
+    ("wheres the nearest supercharger to an in n out",
+                                             dict(here=False, chains=["In-N-Out"], net="tesla", place="")),
+    ("whats the closest charger to a target",dict(here=False, chains=["Target"],   net=None,    place="")),
+    ("i want to find a charger near costco", dict(here=False, chains=["Costco"],   net=None,    place="")),
+    ("show me chargers near walmart",        dict(here=False, chains=["Walmart"],  net=None,    place="")),
 ]
 
 

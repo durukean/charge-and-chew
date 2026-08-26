@@ -17,37 +17,39 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 KEY = os.environ.get("AFDC_API_KEY", "DEMO_KEY")
 HOST = "https://developer.nlr.gov"
 
-# AFDC network code -> (display name, brand color)
+# AFDC network code -> (display name, marker colour)
+# Mirror of NETCOL in index.html (the app overrides these at render time; keep both
+# in sync so a fresh fetch matches). No pure red — red pins read as "out of service".
 NETWORKS = {
-    "Tesla":               ("Tesla Supercharger", "#e82127"),
-    "Tesla Destination":   ("Tesla Destination",  "#e82127"),
-    "ChargePoint Network": ("ChargePoint",        "#f7941e"),
-    "Electrify America":   ("Electrify America",  "#00b04f"),
-    "eVgo Network":        ("EVgo",               "#00a3a3"),
-    "EV Connect":          ("EV Connect",         "#5b6cff"),
-    "Blink Network":       ("Blink",              "#00b0e6"),
-    "FORD_CHARGE":         ("Ford BlueOval",      "#1a56db"),
-    "IONNA":               ("IONNA",              "#6d4bff"),
-    "RIVIAN_ADVENTURE":    ("Rivian Adventure",   "#5b7f95"),
-    "RIVIAN_WAYPOINTS":    ("Rivian Waypoints",   "#5b7f95"),
-    "FLO":                 ("FLO",                "#00c389"),
-    "BP_PULSE":            ("bp pulse",           "#009e42"),
-    "SHELL_RECHARGE":      ("Shell Recharge",     "#fbce07"),
-    "EVCS":                ("EVCS",               "#2bb673"),
-    "RED_E":               ("Red E",              "#d0021b"),
-    "WALMART":             ("Walmart Charge",     "#0071ce"),
-    "FCN":                 ("Francis Energy",     "#7b61ff"),
-    "CHARGELAB":           ("ChargeLab",          "#333333"),
-    "EVGATEWAY":           ("EV Gateway",         "#5b6cff"),
-    "FPLEV":               ("FPL EVolution",      "#00a94f"),
-    "Non-Networked":       ("Non-networked",      "#8892a0"),
+    "Tesla":               ("Tesla Supercharger", "#ff6b5a"),
+    "Tesla Destination":   ("Tesla Destination",  "#ff6b5a"),
+    "ChargePoint Network": ("ChargePoint",        "#f59e0b"),
+    "Electrify America":   ("Electrify America",  "#22c55e"),
+    "eVgo Network":        ("EVgo",               "#14b8a6"),
+    "EV Connect":          ("EV Connect",         "#6366f1"),
+    "Blink Network":       ("Blink",              "#0ea5e9"),
+    "FORD_CHARGE":         ("Ford BlueOval",      "#2563eb"),
+    "IONNA":               ("IONNA",              "#7c3aed"),
+    "RIVIAN_ADVENTURE":    ("Rivian Adventure",   "#0891b2"),
+    "RIVIAN_WAYPOINTS":    ("Rivian Waypoints",   "#0891b2"),
+    "FLO":                 ("FLO",                "#10b981"),
+    "BP_PULSE":            ("bp pulse",           "#059669"),
+    "SHELL_RECHARGE":      ("Shell Recharge",     "#eab308"),
+    "EVCS":                ("EVCS",               "#84cc16"),
+    "RED_E":               ("Red E",              "#a855f7"),
+    "WALMART":             ("Walmart Charge",     "#3b82f6"),
+    "FCN":                 ("Francis Energy",     "#c084fc"),
+    "CHARGELAB":           ("ChargeLab",          "#64748b"),
+    "EVGATEWAY":           ("EV Gateway",         "#818cf8"),
+    "FPLEV":               ("FPL EVolution",      "#34d399"),
+    "Non-Networked":       ("Non-networked",      "#94a3b8"),
 }
 def net_name(code):
     if not code or code == "Non-Networked":
-        return "Non-networked", "#8892a0"
+        return "Non-networked", "#94a3b8"
     if code in NETWORKS:
         return NETWORKS[code]
-    return code.replace("_", " ").title(), "#8892a0"
+    return code.replace("_", " ").title(), "#94a3b8"
 
 CONN_BIT = {"J1772COMBO": 1, "TESLA": 2, "J3271": 2, "CHADEMO": 4}  # J3271 = NACS
 

@@ -51,7 +51,7 @@
 :root[data-theme="dark"]{
   --bg:#0e1116; --surface:#171a20; --surface2:#1e222a; --surface3:#272c35;
   --line:#262b33; --line2:#363d48;
-  --txt:#eef1f5; --dim:#a2abb7; --dim2:#6b7483;
+  --txt:#eef1f5; --dim:#a2abb7; --dim2:#8b949f;
   --accent:#4ade80; --accent-ink:#0b0e13;   /* 10:1 on the dark surface */
   --good:#4ade80; --good-bg:rgba(74,222,128,.13); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
   --bad:#f87171; --bad-bg:rgba(248,113,113,.13);
@@ -255,6 +255,17 @@ svg{display:block}
 .leaflet-tooltip-top:before{border-top-color:var(--line2)}
 
 /* ═══ sheet ═══ */
+.fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
+.fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
+  background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
+  font-size:11.5px;font-weight:700;line-height:1;min-height:26px}
+.fbar .fb b{font-weight:700}
+.fbar .fb button{border:0;background:none;color:var(--dim);font-size:14px;line-height:1;
+  cursor:pointer;padding:2px 1px 2px 2px;border-radius:50%}
+.fbar .fb button:hover{color:var(--txt)}
+.fbar .fball{border:0;background:var(--accent);color:#fff;border-radius:999px;
+  padding:6px 11px;font-size:11.5px;font-weight:800;cursor:pointer;min-height:28px}
+:root[data-theme="dark"] .fbar .fball{color:#0b1a10}
 #sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
   border-radius:22px 22px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.14);display:flex;flex-direction:column;
   flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
@@ -552,14 +563,14 @@ svg{display:block}
     <div id="pinHint">Tap the map to search that area</div>
     <div id="legend" class="collapsed">
       <button id="legendToggle" aria-expanded="false">
-        <span class="sw" style="background:#e82127"></span> Networks
+        <span class="sw" style="background:#ff6b5a"></span> Networks
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div id="legendList"></div>
     </div>
 
     <div class="mapctl">
-      <button class="mbtn" id="themeBtn" title="Theme" aria-label="Toggle theme"></button>
+      <button class="mbtn" id="themeBtn" title="Theme — auto follows sunrise/sunset" aria-label="Toggle theme"></button>
       <button class="mbtn" id="routeToggle" title="Plan a road trip" aria-label="Plan a road trip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="5.5" r="2.2"/><path d="M8.7 18.5H13a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h4.3"/></svg></button>
       <button class="mbtn" id="pinBtn" title="Drop a pin to search an area" aria-label="Drop a pin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s6.5-6 6.5-10.5a6.5 6.5 0 0 0-13 0C5.5 15.5 12 21.5 12 21.5z"/><circle cx="12" cy="11" r="2.4"/></svg></button>
       <button class="mbtn primary" id="locBtn" title="Use my location" aria-label="Use my location"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2"/></svg></button>
@@ -586,6 +597,7 @@ svg{display:block}
       <button class="sortbtn" id="sortBtn"><svg class="ci" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l-3 3M17 20l3-3"/></svg><span id="sortLbl">Sort</span></button>
       <button class="iconbtn sm" id="shareBtn" title="Copy link to this view" aria-label="Share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="17" cy="18" r="2.4"/><path d="M8.1 10.9l6.8-3.8M8.1 13.1l6.8 3.8"/></svg></button>
     </div>
+    <div id="fbar" class="fbar" hidden></div>
     <div id="list"></div>
   </section>
 </div>
@@ -657,8 +669,9 @@ svg{display:block}
 <div id="about"><div class="box">
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
   <p>13,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
-  <p><b>How to use it:</b> set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
-  <p>Chargers are colour-coded by network on the map (Tesla red, Electrify America green, EVgo teal, ChargePoint orange…). We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
+  <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
+  <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
+  <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
   <p>Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
@@ -707,6 +720,34 @@ let netPick = null;   // an exact network name when the search query asked for o
 const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
 let F = Object.assign({}, FDEF, JSON.parse(localStorage.getItem('cc_filters') || '{}'));
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
+const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
+  h24: () => 'Open 24h', free: () => 'Free', nodlr: () => 'No dealerships',
+  noiso: () => 'Walkable only' };
+/* Everything narrowing the list EXCEPT the chain picks, which are the user's stated
+   intent rather than a hidden filter. The network and car filters used to live outside
+   activeFilterCount(), so "0 stops" could be caused by a filter that nothing on screen
+   mentioned and that Reset did not clear. Anything that hides a stop belongs here. */
+function narrowings() {
+  const out = [];
+  if (netPick) out.push({ k: 'net', label: netPick + ' only' });
+  else if (netFilter === 'tesla') out.push({ k: 'net', label: 'Tesla only' });
+  else if (netFilter === 'other') out.push({ k: 'net', label: 'Non-Tesla only' });
+  if (onlyMine && car) out.push({ k: 'car', label: 'Fits ' + car });
+  Object.keys(FDEF).forEach(k => { if (F[k]) out.push({ k: 'f:' + k, label: FLABEL[k]() }); });
+  return out;
+}
+function clearNarrowing(k) {
+  if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg(); }
+  else if (k === 'car') { onlyMine = false; localStorage.setItem('cc_onlymine', '0'); renderCarBar(); }
+  else if (k.startsWith('f:')) { F[k.slice(2)] = FDEF[k.slice(2)]; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
+  render(); syncUrl();
+}
+function clearAllNarrowing() {
+  netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all');
+  onlyMine = false; localStorage.setItem('cc_onlymine', '0');
+  F = Object.assign({}, FDEF); localStorage.setItem('cc_filters', JSON.stringify(F));
+  syncNetSeg(); renderCarBar(); syncFilterUI(); render(); syncUrl();
+}
 let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
 const CARS = D.cars || {};
 let car = localStorage.getItem('cc_car') || '';   // model name or '' for none
@@ -813,8 +854,8 @@ function popupHtml(s) {
     : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
-    <div class="pp-net"><span class="dot" style="background:${s.col}"></span>${esc(s.net)}</div>
-    <div class="pp-meta">${s.stalls ? s.stalls + ' stalls · ' : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
+    <div class="pp-net"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</div>
+    <div class="pp-meta">${s.stalls ? s.stalls + (s.stalls === 1 ? ' stall · ' : ' stalls · ') : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
     ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
     ${!Object.keys(m).length ? '<div class="pp-warn">🌙 Nothing we track within a 10-minute walk — likely an isolated stop, worth checking before a night charge.</div>' : ''}
@@ -911,6 +952,21 @@ function track(name, detail) {
 const TILE_URLS = {
   light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' };
+/* Network marker colours. Presentation lives here, not in data.js, so a palette
+   change never needs a data refetch. Keep in sync with data/fetch_chargers.py.
+   No pure red: users read red map pins as "out of service". */
+const NETCOL = {
+  'Tesla Supercharger': '#ff6b5a', 'Tesla Destination': '#ff6b5a',
+  'ChargePoint': '#f59e0b', 'Electrify America': '#22c55e', 'EVgo': '#14b8a6',
+  'EV Connect': '#6366f1', 'EV Gateway': '#818cf8', 'Blink': '#0ea5e9',
+  'Red E': '#a855f7', 'Ford BlueOval': '#2563eb', 'EVCS': '#84cc16',
+  'Francis Energy': '#c084fc', 'IONNA': '#7c3aed', 'Rivian Adventure': '#0891b2',
+  'Rivian Waypoints': '#0891b2', 'FLO': '#10b981', 'bp pulse': '#059669',
+  'Shell Recharge': '#eab308', 'Walmart Charge': '#3b82f6', 'FPL EVolution': '#34d399',
+  'ChargeLab': '#64748b', 'Non-networked': '#94a3b8' };
+const NETFALLBACK = '#94a3b8';
+const netCol = s => NETCOL[s.net] || NETFALLBACK;
+
 const MTHEME = {
   light: { base: '#9aa7b3', ghost: '#cdd5dc', hot: '#15803d', hotStroke: '#ffffff' },
   dark:  { base: '#4a5563', ghost: '#252b34', hot: '#4ade80', hotStroke: '#0e1116' } };
@@ -919,8 +975,41 @@ let curDark = false, tiles = null;
 const ICON_SUN = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>';
 const ICON_MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>';
 const ICON_AUTO = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M12 3.5a8.5 8.5 0 0 1 0 17" fill="currentColor" stroke="none" opacity=".35"/></svg>';
+/* Auto theme follows the sun, not the OS: light through the day, dark after sunset.
+   Sunrise/sunset from the standard solar-declination approximation. Latitude comes
+   from the user's area once we know it, else the US midpoint; longitude is estimated
+   from the timezone offset when unknown (worst case ~30 min off, which is fine for
+   deciding light vs dark). Equation of time is ignored (±15 min). */
+function sunWindow(date, lat, lon) {
+  const start = Date.UTC(date.getFullYear(), 0, 0);
+  const day = Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - start) / 864e5);
+  const rad = Math.PI / 180;
+  const decl = 23.44 * Math.sin(rad * (360 / 365) * (day - 81));
+  const cosH = -Math.tan(lat * rad) * Math.tan(decl * rad);
+  if (cosH >= 1) return { rise: 24, set: 24 };   // polar night — dark all day
+  if (cosH <= -1) return { rise: 0, set: 24 };   // midnight sun — light all day
+  const H = Math.acos(cosH) / rad / 15;                       // half-day length, hours
+  const utcOff = -date.getTimezoneOffset() / 60;
+  const tc = 4 * (lon - 15 * utcOff) / 60;                    // longitude correction, hours
+  return { rise: 12 - H - tc, set: 12 + H - tc };
+}
+/* Longitude guess when we have no area yet: the zone's STANDARD-time meridian. Deriving
+   it from the current offset instead would land 15 degrees off all summer, because the
+   offset already carries the DST hour — that put sunset an hour early in August. */
+function tzMeridian(d) {
+  const jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+  const jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+  return 15 * (-Math.max(jan, jul) / 60);
+}
 function isDarkNow() {
-  return themePref === 'dark' || (themePref === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+  if (themePref === 'dark') return true;
+  if (themePref === 'light') return false;
+  const now = new Date();
+  const lat = (center && center.lat) || 39.5;                 // US midpoint if we have no area yet
+  const lon = (center && center.lon) || tzMeridian(now);
+  const { rise, set } = sunWindow(now, lat, lon);
+  const h = now.getHours() + now.getMinutes() / 60;
+  return h < rise || h >= set;
 }
 function applyTheme() {
   curDark = isDarkNow();
@@ -936,13 +1025,18 @@ $('themeBtn').onclick = () => {
   themePref = themePref === 'auto' ? (curDark ? 'light' : 'dark') : themePref === 'light' ? 'dark' : 'auto';
   localStorage.setItem('cc_theme', themePref);
   applyTheme();
-  toast(themePref === 'auto' ? 'Theme follows your system' : themePref === 'dark' ? 'Dark theme' : 'Light theme');
+  toast(themePref === 'auto' ? 'Auto — light by day, dark after sunset'
+      : themePref === 'dark' ? 'Dark theme' : 'Light theme');
 };
+/* Auto mode has to flip while the app sits open — a long drive crosses sunset. Re-check
+   on a timer and whenever the tab is refocused; applyTheme() rebuilds tiles, so only
+   call it when the answer actually changed. */
 (function () {
-  const mq = matchMedia('(prefers-color-scheme: dark)');
-  const onChange = () => { if (themePref === 'auto') applyTheme(); };
-  if (mq.addEventListener) mq.addEventListener('change', onChange);
-  else if (mq.addListener) mq.addListener(onChange);   // pre-Chrome 39 / older in-car browsers
+  const recheck = () => { if (themePref === 'auto' && isDarkNow() !== curDark) applyTheme(); };
+  setInterval(recheck, 10 * 60 * 1000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) recheck(); });
+  window.addEventListener('focus', recheck);
+  window.__themeRecheck = recheck;      // called when the area changes latitude
 })();
 
 /* ───────── filtering ───────── */
@@ -982,6 +1076,21 @@ function bestWalk(s) {
 }
 const routeIdx = id => (route && route.order.has(id)) ? route.order.get(id) : 9e9;
 const chargeOr = s => { const v = chargeMin(s); return (v === null || v === undefined) ? 9e9 : v; };
+/* How many stops the chain + area would give with every narrowing removed. Used so the
+   empty state only blames a filter when clearing it would actually bring stops back —
+   otherwise "Tesla only is hiding everything" is just a second wrong answer. */
+function countWithoutNarrowing() {
+  let n = 0;
+  for (const s of SITES) {
+    if (!inScope(s)) continue;
+    if (cat === 'fav') { if (favs.has(s.id)) n++; continue; }
+    if (!active.size) { n++; continue; }
+    const m = MATCH[s.id]; if (!m) continue;
+    for (const k of active) if (k in m) { n++; break; }
+  }
+  return n;
+}
+
 function visibleSites() {
   const out = [];
   for (const s of SITES) if (inScope(s) && passesChain(s)) out.push(s);
@@ -1012,7 +1121,7 @@ function render() {
     if (state === 'h') { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
     if (state === 'g') { m.setStyle({ radius: 2.2, weight: 0, fillColor: T.ghost, fillOpacity: .55, opacity: 1 }); continue; }
     m.setStyle({ radius: filtering ? 6.5 : 4.2, weight: filtering ? 1.8 : 1,
-      color: T.hotStroke, fillColor: s.col || T.hot,
+      color: T.hotStroke, fillColor: netCol(s),
       fillOpacity: filtering ? .97 : .78, opacity: filtering ? 1 : .9 });
     if (filtering) m.bringToFront();
   }
@@ -1049,6 +1158,14 @@ function renderChips() {
   $('chiprow').scrollLeft = keep;
 }
 
+/* Delegated so it covers the filter bar and the empty-state button alike. */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-clear]'); if (!b) return;
+  const k = b.dataset.clear;
+  if (k === '*') { clearAllNarrowing(); toast('Showing every charger'); }
+  else clearNarrowing(k);
+});
+
 /* ───────── list ───────── */
 function renderList(vis) {
   const filtering = active.size > 0 || cat === 'fav';
@@ -1059,12 +1176,25 @@ function renderList(vis) {
 
   $('sheetTitle').innerHTML = (filtering || route || center)
     ? `${vis.length} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
-    : `${SITES.length.toLocaleString()} fast chargers <em>· pick a chain to filter</em>`;
+    : `${vis.length.toLocaleString()} fast chargers <em>· every network, no filters</em>`;
+
+  /* Show what is hiding stops. Without this a stale network filter reads as "there is
+     nothing here", which is the wrong answer and sends people looking in the wrong place. */
+  const nar = narrowings(), fbar = $('fbar');
+  fbar.hidden = !nar.length;
+  fbar.innerHTML = nar.length
+    ? nar.map(n => `<span class="fb">${esc(n.label)}<button data-clear="${esc(n.k)}" aria-label="Remove filter: ${esc(n.label)}" title="Remove">×</button></span>`).join('')
+      + (nar.length > 1 ? '<button class="fball" data-clear="*">Show all chargers</button>' : '')
+    : '';
 
   if (!vis.length) {
+    const couldHelp = nar.length ? countWithoutNarrowing() : 0;
+    const fix = couldHelp
+      ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <b>' + esc(nar[0].label) + '</b> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*" style="margin-top:10px">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
+      : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}Try another chain, a bigger radius, or a wider route corridor.`;
     $('list').innerHTML = cat === 'fav'
       ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
-      : `<div class="empty"><b>Nothing matches</b>${activeFilterCount() ? 'Your filters may be too strict — hours and pricing are often missing from the data.' : 'Try more chains, a bigger radius, or a wider route corridor.'}</div>`;
+      : `<div class="empty">${fix}</div>`;
     return;
   }
   const showIdx = !!route;
@@ -1087,7 +1217,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><b>${esc(s.name)}</b><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
-        <div class="sub"><span class="netdot" style="background:${s.col}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${s.stalls === 1 ? '<span class="tag one">1 stall</span>' : ''}</div>
+        <div class="sub"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${s.stalls === 1 ? '<span class="tag one">1 stall</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
       <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button>
@@ -1274,6 +1404,7 @@ function setCenter(lat, lon, label, kind) {
   $('ccIcon').textContent = kind === 'me' ? '🔵' : kind === 'pin' ? '📌' : '🔎';
   $('ccLabel').textContent = label;
   sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
+  if (window.__themeRecheck) window.__themeRecheck();   // new latitude can change sunset
   render(); setSheet('mid'); syncUrl();
   settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
 }
@@ -1388,7 +1519,7 @@ function groupedChains() {
   const counts = {};
   for (const s of SITES) {
     const k = s.net || 'Other';
-    if (!counts[k]) counts[k] = { n: 0, col: s.col };
+    if (!counts[k]) counts[k] = { n: 0, col: netCol(s) };
     counts[k].n++;
   }
   const top = Object.keys(counts).sort((a, b) => counts[b].n - counts[a].n).slice(0, 10);
@@ -1454,7 +1585,15 @@ const HERE_RE = /\b(near me|by me|around me|close to me|my area|my location|my s
 const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot', 'zone', 'region',
   'somewhere', 'anywhere', 'place', 'places', 'best', 'good', 'great', 'cheap', 'cheapest',
   'closest', 'nearest', 'fastest', 'quick', 'food', 'eat', 'eats', 'lunch', 'dinner',
-  'breakfast', 'coffee', 'stop', 'stops', 'trip', 'route', 'now', 'open', 'today']);
+  'breakfast', 'coffee', 'stop', 'stops', 'trip', 'route', 'now', 'open', 'today',
+  // Question and filler words NOISE misses. "wheres the nearest ... to an in n out"
+  // used to leave the place text "wheres to", which Nominatim resolved to a real town
+  // (West Springfield, MA) and the map flew there. Words already covered by NOISE are
+  // deliberately not repeated here; 'of' and 'in' are left out because real US place
+  // names contain them (Isle of Palms, Lake in the Hills).
+  'wheres', 'whats', 'which', 'who', 'whos', 'how', 'when', 'why', 'was', 'to', 'on',
+  'for', 'from', 'or', 'any', 'some', 'i', 'im', 'you', 'we', 'can', 'get', 'got',
+  'need', 'want', 'looking', 'look', 'please', 'there', 'that', 'this', 'go', 'going']);
 
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
@@ -1523,6 +1662,18 @@ async function geocode(q) {
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
   const ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
   const best = ranked[0];
+  /* Nominatim returns a confident-looking hit for almost any string, so leftover words
+     could teleport the map to a real town that has nothing to do with the query. Require
+     the result to actually echo something the user typed. ZIPs and short names are exempt
+     because their match lands in structured address fields, not the display name. */
+  const words = q.toLowerCase().match(/[a-z]{4,}/g) || [];
+  if (words.length) {
+    const hay = ((best.display_name || '') + ' ' + JSON.stringify(best.address || {})).toLowerCase();
+    const toks = hay.match(/[a-z]{3,}/g) || [];
+    // Prefix match, not equality, so nicknames still land: philly -> Philadelphia.
+    const echoes = words.some(w => toks.some(t => t.startsWith(w.slice(0, 4)) || w.startsWith(t.slice(0, 4))));
+    if (!echoes) throw new Error(`Couldn't find "${q}"`);
+  }
   return { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
@@ -1585,6 +1736,9 @@ $('routeToggle').onclick = () => {
   if (!on) { clearRoute(); route = null; render(); syncUrl(); }
   setTimeout(() => map.invalidateSize({ pan: false }), 220);
 };
+function fitRouteWhenReady() {
+  if (routeLayer) settleFit(() => routeLayer.getBounds(), [28, 28]);
+}
 function clearRoute() {
   if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
   if (routeCase) { map.removeLayer(routeCase); routeCase = null; }
@@ -1636,8 +1790,10 @@ function applyCorridor(verts, mi, hr) {
     if (best <= maxM) { ids.add(s.id); order.set(s.id, bi); }
   }
   route = { verts, ids, order, mi, hr };
-  const rsz = map.getSize();
-  if (rsz.x > 60 && rsz.y > 60) { try { map.fitBounds(routeLayer.getBounds(), { padding: [28, 28], animate: false }); } catch (e) {} }
+  /* On a shared link this runs during boot, when the map can still report a near-zero
+     size — the old guard skipped the fit and never retried, so the recipient landed on a
+     national view with the route as a squiggle. Retry until the map is really laid out. */
+  fitRouteWhenReady();
   const trip = `${$('fromIn').value.trim()} → ${$('toIn').value.trim()}`;
   $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
     `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · ${ids.size} chargers ≤${corridorMi}mi</i></span>` +
@@ -1679,19 +1835,23 @@ $('shareBtn').onclick = async () => {
   } catch (e) { toast('Copy the URL from the address bar'); }
 };
 
-function settleFit(getBounds, padding, maxZoom) {
+/* Fitting during boot races the layout: the map can still report a near-zero size, and
+   fitBounds would produce a NaN centre. This used to try once and give up silently, which
+   is why shared links opened on the national view instead of the thing being shared.
+   Retry until the map is actually laid out. */
+function settleFit(getBounds, padding, maxZoom, tries = 0) {
   setTimeout(() => {
     map.invalidateSize({ pan: false });
-    setTimeout(() => {
-      const b = getBounds();
-      if (!b || !b.isValid || !b.isValid()) return;
-      const sz = map.getSize();
-      if (sz.x < 60 || sz.y < 60) return;   // map not laid out yet -> fitBounds would NaN
+    const b = getBounds();
+    const sz = map.getSize();
+    const ready = b && b.isValid && b.isValid() && sz.x >= 60 && sz.y >= 60;
+    if (ready) {
       const o = { padding, animate: false };
       if (maxZoom) o.maxZoom = maxZoom;
-      try { map.fitBounds(b, o); } catch (e) { /* transient sizing race */ }
-    }, 80);
-  }, 340);
+      try { map.fitBounds(b, o); return; } catch (e) { /* transient sizing race */ }
+    }
+    if (tries < 14) settleFit(getBounds, padding, maxZoom, tries + 1);
+  }, tries === 0 ? 340 : 120);
 }
 
 function fitToResults() {
@@ -1699,6 +1859,13 @@ function fitToResults() {
   if (!v.length) return;
   const b = L.latLngBounds(v.map(s => [s.lat, s.lon]));
   settleFit(() => b, [26, 26], 11);
+}
+
+/* Frame the shared area. setCenter() deliberately does not move the map — dropping a pin
+   should not yank the view out from under you — so deep links ask for the fit explicitly. */
+function fitToCenter() {
+  if (!radiusLayer) return;
+  settleFit(() => radiusLayer.getBounds(), [24, 24], 13);
 }
 
 /* ───────── network filter ───────── */
@@ -1741,9 +1908,8 @@ $('filtBtn').onclick = () => { $('filters').classList.add('show'); syncFilterUI(
 $('filtClose').onclick = $('filtDone').onclick = () => $('filters').classList.remove('show');
 $('filters').onclick = e => { if (e.target.id === 'filters') $('filters').classList.remove('show'); };
 $('filtClear').onclick = () => {
-  F = Object.assign({}, FDEF);
-  localStorage.setItem('cc_filters', JSON.stringify(F));
-  syncFilterUI(); render(); syncUrl();
+  clearAllNarrowing();     // includes the network and car filters, which live outside this panel
+  toast('All filters cleared');
 };
 
 /* ───────── hero (first-run quick pick) ───────── */
@@ -1802,7 +1968,7 @@ render();
 let boot = null;
 if (q.get('at')) {
   const [la, lo] = q.get('at').split(',').map(Number);
-  if (isFinite(la) && isFinite(lo)) boot = () => { setCenter(la, lo, 'Shared spot', 'pin'); reverseName(la, lo); };
+  if (isFinite(la) && isFinite(lo)) boot = () => { setCenter(la, lo, 'Shared spot', 'pin'); reverseName(la, lo); fitToCenter(); };
 } else if (q.get('state')) {
   const st = q.get('state').toUpperCase();
   const inState = SITES.filter(s => s.st === st);
@@ -1811,7 +1977,7 @@ if (q.get('at')) {
     const lo = inState.reduce((a, s) => a + s.lon, 0) / inState.length;
     radiusMi = 50;
     $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.mi === '50'));
-    boot = () => setCenter(la, lo, st, 'place');
+    boot = () => { setCenter(la, lo, st, 'place'); fitToCenter(); };
   }
 }
 if (q.get('from') && q.get('to')) {
