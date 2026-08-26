@@ -142,6 +142,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -150,6 +151,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{BASE}/{canonical}">
 {robots}
+<link rel="icon" href="{BASE}/favicon.ico" sizes="32x32">
 <link rel="icon" href="{BASE}/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="{BRAND}">
@@ -162,7 +164,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta name="theme-color" content="#0d1117">
 {jsonld}
 <link rel="stylesheet" href="{root}assets/pages.css"></head><body><div class="wrap">
-<header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z" fill="#000"/><circle cx="57" cy="17" r="8.5" fill="#000"/><circle cx="61" cy="29" r="7.5" fill="#000"/><circle cx="55" cy="40.5" r="6.5" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
+<header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.

@@ -2,9 +2,11 @@
 
 ## The mark
 
-A filled disc with a **bite** taken out of the right edge and a **charging bolt** knocked out of
-the middle. One shape carrying both halves of the name. Three scalloped tooth marks, not a
-single notch — a single notch reads as an irregular circle, not a bite.
+A filled disc with a **bite** taken out of the top-right edge and a **charging bolt** knocked
+out of the middle. One shape carrying both halves of the name. The bite is one deep crater
+with two small tooth nicks at its rim — reworked 2026-08-25 after the first version (three
+shallow spread scallops) read as a cog, not a bite. Depth is what sells the bite; the nicks
+keep it from being the Apple silhouette.
 
 Canonical file: `brand/logo.svg` (also `favicon.svg` at the site root).
 
@@ -35,7 +37,8 @@ and badges use JetBrains Mono so columns line up.
 | File | Use |
 |---|---|
 | `brand/logo.svg` | Master |
-| `favicon.svg` | Browser tab |
+| `favicon.svg` | Browser tab (modern) |
+| `favicon.ico` | Browser tab fallback — 16/32/48 PNG-in-ICO, packed by the python snippet in git history |
 | `icon-192.png` / `icon-512.png` | PWA install |
 | `icon-maskable-512.png` | Android adaptive (no rounding — the OS masks it) |
 | `apple-touch-icon.png` | iOS home screen |
@@ -53,6 +56,6 @@ python3 -m http.server 8642   # from the repo root
 ## Explorations
 
 `brand/concepts.png`, `brand/refined.png`, `brand/color.png` record what was tried and
-rejected: a fork/bolt hybrid that read as a whisk, a plain bolt-in-a-circle that looked like
+rejected: shallow scallop bites that read as a cog (`bite.png`/`bite2.png` compare the fixes), a fork/bolt hybrid that read as a whisk, a plain bolt-in-a-circle that looked like
 every other EV app, a hard-split two-tone whose seam looked accidental at 16px, and
 blue→amber / teal→orange gradients that went muddy through the middle.
