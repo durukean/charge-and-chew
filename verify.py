@@ -104,6 +104,22 @@ if os.path.exists(sample):
     check("<h1>" in h, "generated pages lost their h1")
     check(" a IHOP" not in h, "grammar regression: 'a IHOP'")
 
+# The basemap has a silent-failure mode: CARTO throttles by referrer and serves a
+# watermark tile reading "API key required" as a valid HTTP 200 PNG, so no request errors
+# and the entire map becomes that message. Guard the probe and its fallback.
+_html = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
+# match the actual call site at boot, not just the identifier — a commented-out call
+# still contains the name, which an earlier version of this check happily accepted
+check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
+      "basemap probe is never called — throttled CARTO tiles would blank the map silently")
+for _needle, _why in [
+    ("async function probeBasemap", "basemap probe definition gone"),
+    ("BASEMAPS", "basemap table gone"),
+    ("maxNativeZoom", "Esri fallback would go blank past z16 without maxNativeZoom"),
+    ("World_Light_Gray_Reference", "Esri fallback lost its label layer"),
+]:
+    check(_needle in _html, _why)
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
