@@ -38,7 +38,7 @@
   --bg:#f4f5f7; --surface:#ffffff; --surface2:#f1f3f5; --surface3:#e8ebee;
   --line:#e7eaee; --line2:#d5dae0;
   --txt:#191c1f; --dim:#5b6470; --dim2:#667085;
-  --accent:#2563eb; --accent-ink:#ffffff;
+  --accent:#15803d; --accent-ink:#ffffff;   /* brand green, darkened to 5.0:1 on white */
   --good:#0a7d55; --good-bg:#effaf4; --warn:#b45309; --warn-bg:#fef3e2; --bad:#b91c1c; --bad-bg:#fdeaea;
   --amber:#f59e0b;
   --glass:rgba(255,255,255,.92);
@@ -51,7 +51,7 @@
   --bg:#0e1116; --surface:#171a20; --surface2:#1e222a; --surface3:#272c35;
   --line:#262b33; --line2:#363d48;
   --txt:#eef1f5; --dim:#a2abb7; --dim2:#6b7483;
-  --accent:#60a5fa; --accent-ink:#0b0e13;
+  --accent:#4ade80; --accent-ink:#0b0e13;   /* 10:1 on the dark surface */
   --good:#4ade80; --good-bg:rgba(74,222,128,.13); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
   --bad:#f87171; --bad-bg:rgba(248,113,113,.13);
   --amber:#fbbf24;
@@ -78,7 +78,7 @@ svg{display:block}
   flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .45s}
 #splash.gone{opacity:0;pointer-events:none}
 .splash-logo{font-size:clamp(26px,7vw,40px);font-weight:800;letter-spacing:-1.2px}
-.splash-logo .c{color:var(--accent)}.splash-logo .h{color:var(--amber)}
+.splash-logo .c{color:#16a34a}.splash-logo .h{color:var(--amber)}
 .splash-logo .amp{color:var(--dim2);margin:0 .1em;font-weight:600}
 .splash-bar{width:150px;height:3px;background:var(--surface3);border-radius:2px;overflow:hidden}
 .splash-bar i{display:block;height:100%;width:38%;background:var(--accent);border-radius:2px;animation:slide 1.1s ease-in-out infinite}
@@ -103,8 +103,8 @@ svg{display:block}
 /* search pill */
 .searchpill{display:flex;align-items:center;gap:9px;height:50px;padding:0 6px 0 8px;border-radius:16px;
   background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
-.searchpill .mark{width:36px;height:36px;border-radius:11px;background:var(--accent);color:var(--accent-ink);
-  display:grid;place-items:center;flex-shrink:0}
+.searchpill .mark{width:36px;height:36px;flex-shrink:0;display:grid;place-items:center}
+.searchpill .mark svg{width:32px;height:32px}
 .searchpill input{flex:1;background:none;border:none;outline:none;font-size:14.5px;min-width:0;font-weight:500}
 .searchpill input::placeholder{color:var(--dim2);font-weight:400}
 .searchpill .clr{color:var(--dim2);padding:5px;display:none}
@@ -380,6 +380,9 @@ svg{display:block}
   box-shadow:0 24px 64px rgba(15,18,22,.3);padding:24px 20px;position:relative;
   animation:up .3s cubic-bezier(.32,.72,0,1)}
 .herocard .x{position:absolute;top:14px;right:14px;color:var(--dim2);padding:4px}
+
+.hero-mark{width:56px;height:56px;margin-bottom:12px}
+.hero-mark svg{width:100%;height:100%}
 .herocard .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);
   background:var(--surface2);border:1px solid var(--line);padding:5px 11px;border-radius:20px;margin-bottom:14px}
 .herocard h1{font-size:26px;font-weight:800;letter-spacing:-1px;line-height:1.14;margin-bottom:8px}
@@ -480,6 +483,7 @@ svg{display:block}
 </head>
 <body>
 <div id="splash">
+  <div class="splash-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z" fill="#000"/><circle cx="57" cy="17" r="8.5" fill="#000"/><circle cx="61" cy="29" r="7.5" fill="#000"/><circle cx="55" cy="40.5" r="6.5" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></div>
   <div class="splash-logo"><span class="c">Charge</span><span class="amp">&amp;</span><span class="h">Chew</span></div>
   <div class="splash-bar"><i></i></div>
   <small>Loading fast chargers…</small>
@@ -488,8 +492,8 @@ svg{display:block}
 <div id="app">
   <div class="overlay-top" id="overlayTop">
       <div class="searchpill" id="placeBox">
-        <a class="mark" href="#about" title="About Charge &amp; Chew">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.4a.6.6 0 0 0 .5 1H10l-1 7.2a.5.5 0 0 0 .9.4L19.6 10a.6.6 0 0 0-.5-1H14l1-6.4a.5.5 0 0 0-.9-.4z"/></svg>
+        <a class="mark" href="#about" title="About Charge &amp; Chew" aria-label="About Charge and Chew">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z" fill="#000"/><circle cx="57" cy="17" r="8.5" fill="#000"/><circle cx="61" cy="29" r="7.5" fill="#000"/><circle cx="55" cy="40.5" r="6.5" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg>
         </a>
         <input id="placeIn" placeholder="Try: Tesla chargers near Costco near me" autocomplete="off" enterkeyhint="search">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -563,6 +567,7 @@ svg{display:block}
     <div id="hero">
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div class="hero-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z" fill="#000"/><circle cx="57" cy="17" r="8.5" fill="#000"/><circle cx="61" cy="29" r="7.5" fill="#000"/><circle cx="55" cy="40.5" r="6.5" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></div>
         <span class="badge">⚡ Free · 13,000+ US fast chargers</span>
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
@@ -906,8 +911,8 @@ const TILE_URLS = {
   light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' };
 const MTHEME = {
-  light: { base: '#9aa7b3', ghost: '#cdd5dc', hot: '#2563eb', hotStroke: '#ffffff' },
-  dark:  { base: '#4a5563', ghost: '#252b34', hot: '#60a5fa', hotStroke: '#0e1116' } };
+  light: { base: '#9aa7b3', ghost: '#cdd5dc', hot: '#15803d', hotStroke: '#ffffff' },
+  dark:  { base: '#4a5563', ghost: '#252b34', hot: '#4ade80', hotStroke: '#0e1116' } };
 let themePref = localStorage.getItem('cc_theme') || 'auto';
 let curDark = false, tiles = null;
 const ICON_SUN = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>';

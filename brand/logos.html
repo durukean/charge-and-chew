@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#f4f5f7;color:#191c1f;padding:28px 24px}
+h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-.4px}
+.sub{color:#667085;font-size:13px;margin-bottom:22px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:#fff;border:1px solid #e7eaee;border-radius:16px;padding:16px;width:236px;
+  box-shadow:0 1px 8px rgba(25,28,31,.06)}
+.tag{font-size:11px;font-weight:800;color:#2563eb;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.desc{font-size:11.5px;color:#667085;line-height:1.45;margin-top:9px;min-height:44px}
+.big{height:104px;display:grid;place-items:center;background:#f8f9fb;border-radius:12px;margin-bottom:10px}
+.sizes{display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid #f1f3f5}
+.sz{display:grid;place-items:center}
+.sz small{display:block;font-size:9px;color:#8b95a3;text-align:center;margin-top:3px}
+.tile{border-radius:22%;display:grid;place-items:center;background:#2563eb}
+</style></head><body>
+<h1>Charge &amp; Chew — logo concepts</h1>
+<div class="sub">The name fuses two ideas; the mark should too. Each shown large, then at app-icon and favicon size.</div>
+<div class="row" id="row"></div>
+<script>
+// Each concept returns an SVG string drawn on a 64x64 grid.
+const CONCEPTS = [
+{ tag:'A · Bitten bolt', desc:'A charging bolt with a bite taken out of it. Says charge and chew in one shape — and it is still a bolt at 16px.',
+  svg:(c)=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <defs><mask id="mA"><rect width="64" height="64" fill="#000"/>
+      <path d="M36 6 L16 36 h11 l-3 22 L48 28 H36.5 z" fill="#fff"/>
+      <circle cx="45" cy="20" r="9" fill="#000"/><circle cx="41" cy="45" r="6.5" fill="#000"/>
+    </mask></defs>
+    <rect width="64" height="64" fill="none"/>
+    <g mask="url(#mA)"><rect width="64" height="64" fill="${c}"/></g></svg>` },
+
+{ tag:'B · Fork bolt', desc:'A fork whose centre tine is a lightning bolt. Reads as cutlery first, which leans into the food half.',
+  svg:(c)=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <g fill="${c}">
+      <rect x="17" y="8" width="4.6" height="19" rx="2.3"/>
+      <rect x="42.4" y="8" width="4.6" height="19" rx="2.3"/>
+      <path d="M33.8 7 L25.6 21 h5.2 l-1.6 10 L38.4 17.5 h-5.2 z"/>
+      <path d="M15 25 h34 a3 3 0 0 1 3 3 v1 a11 11 0 0 1 -8 10.6 V56 a3.2 3.2 0 0 1 -6.4 0 V39.6 A11 11 0 0 1 12 29 v-1 a3 3 0 0 1 3 -3z" opacity=".22"/>
+      <path d="M20 30 h24 a1 1 0 0 1 1 1 a13 13 0 0 1 -9 12.3 V56 a3.2 3.2 0 0 1 -6.4 0 V43.3 A13 13 0 0 1 19 31 a1 1 0 0 1 1 -1z"/>
+    </g></svg>` },
+
+{ tag:'C · Plug plate', desc:'A dinner plate that is also a charging port — two prongs and a bolt. Ties the stop to a meal.',
+  svg:(c)=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <g fill="none" stroke="${c}" stroke-width="4.4">
+      <circle cx="32" cy="32" r="23"/><circle cx="32" cy="32" r="14.5" opacity=".3"/></g>
+    <path d="M34.6 17 L22 35 h8.2 l-2 12 L42 29 h-8.2 z" fill="${c}"/></svg>` },
+
+{ tag:'D · Pin bite', desc:'A map pin with a bite out of its side and a bolt inside. Most explicit about being a map product.',
+  svg:(c)=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <defs><mask id="mD"><rect width="64" height="64" fill="#000"/>
+      <path d="M32 4c10.5 0 19 8.5 19 19 0 13.5-19 37-19 37S13 36.5 13 23C13 12.5 21.5 4 32 4z" fill="#fff"/>
+      <circle cx="51" cy="17" r="7.5" fill="#000"/><circle cx="47.5" cy="31" r="5" fill="#000"/>
+      <path d="M34.4 11 L23 27.5 h7.4 l-1.8 11 L40 22.5 h-7.4 z" fill="#000"/>
+    </mask></defs>
+    <g mask="url(#mD)"><rect width="64" height="64" fill="${c}"/></g></svg>` },
+
+{ tag:'E · Bolt & bite mono', desc:'A circular badge: bolt on the left, bite crescent on the right. Works as a stamp or sticker.',
+  svg:(c)=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <defs><mask id="mE"><rect width="64" height="64" fill="#000"/>
+      <circle cx="32" cy="32" r="26" fill="#fff"/>
+      <circle cx="56" cy="24" r="11" fill="#000"/>
+      <path d="M33.5 13 L20 34 h9l-2 15 L42 27 h-9 z" fill="#000"/>
+    </mask></defs>
+    <g mask="url(#mE)"><rect width="64" height="64" fill="${c}"/></g></svg>` }
+];
+const row=document.getElementById('row');
+row.innerHTML = CONCEPTS.map(c=>`
+  <div class="card">
+    <div class="tag">${c.tag}</div>
+    <div class="big"><div style="width:78px;height:78px">${c.svg('#2563eb')}</div></div>
+    <div class="sizes">
+      <div class="sz"><div class="tile" style="width:52px;height:52px"><div style="width:34px;height:34px">${c.svg('#fff')}</div></div><small>app 52px</small></div>
+      <div class="sz"><div class="tile" style="width:32px;height:32px"><div style="width:21px;height:21px">${c.svg('#fff')}</div></div><small>32px</small></div>
+      <div class="sz"><div class="tile" style="width:16px;height:16px"><div style="width:11px;height:11px">${c.svg('#fff')}</div></div><small>favicon</small></div>
+    </div>
+    <div class="desc">${c.desc}</div>
+  </div>`).join('');
+</script></body></html>

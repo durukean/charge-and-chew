@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#f4f5f7;color:#191c1f;padding:26px}
+h1{font-size:19px;font-weight:800;margin-bottom:3px;letter-spacing:-.4px}
+.sub{color:#667085;font-size:12.5px;margin-bottom:20px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:#fff;border:1px solid #e7eaee;border-radius:16px;padding:16px;width:230px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:9px;color:#475467}
+.big{height:96px;display:grid;place-items:center;background:#f8f9fb;border-radius:12px;margin-bottom:10px}
+.sizes{display:flex;align-items:center;gap:12px}
+.sz small{display:block;font-size:9px;color:#8b95a3;text-align:center;margin-top:3px}
+.tile{border-radius:22%;display:grid;place-items:center}
+.note{font-size:11.5px;color:#667085;line-height:1.45;margin-top:9px;min-height:46px}
+</style></head><body>
+<h1>Two-tone: EV on one side, food on the other</h1>
+<div class="sub">The mark should say both halves of the name without needing the wordmark.</div>
+<div class="row" id="row"></div>
+<script>
+const BOLT='M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z';
+const TEETH=[[57,17,8.5],[61,29,7.5],[55,40.5,6.5]];
+function disc(id, leftCol, rightCol, boltCol){
+  return `<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <defs>
+      <linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="${leftCol}"/><stop offset="100%" stop-color="${rightCol}"/></linearGradient>
+      <mask id="m${id}"><rect width="64" height="64" fill="#000"/>
+        <circle cx="32" cy="32" r="27" fill="#fff"/>
+        <path d="${BOLT}" fill="#000"/>
+        ${TEETH.map(t=>`<circle cx="${t[0]}" cy="${t[1]}" r="${t[2]}" fill="#000"/>`).join('')}
+      </mask></defs>
+    <g mask="url(#m${id})"><rect width="64" height="64" fill="url(#g${id})"/></g></svg>`;
+}
+function split(id, leftCol, rightCol){   // hard vertical split, not a blend
+  return `<svg viewBox="0 0 64 64" width="100%" height="100%">
+    <defs><mask id="s${id}"><rect width="64" height="64" fill="#000"/>
+      <circle cx="32" cy="32" r="27" fill="#fff"/>
+      <path d="${BOLT}" fill="#000"/>
+      ${TEETH.map(t=>`<circle cx="${t[0]}" cy="${t[1]}" r="${t[2]}" fill="#000"/>`).join('')}
+    </mask></defs>
+    <g mask="url(#s${id})">
+      <rect x="0" y="0" width="32" height="64" fill="${leftCol}"/>
+      <rect x="32" y="0" width="32" height="64" fill="${rightCol}"/>
+    </g></svg>`;
+}
+const V=[
+ {tag:'1 · Blue → amber blend', bg:'#0e1116', el:(k)=>disc(k,'#2563eb','#f59e0b'), note:'Current palette, blended across the mark. Safe, matches the live app exactly.'},
+ {tag:'2 · Green → amber blend', bg:'#0e1116', el:(k)=>disc(k,'#16a34a','#f59e0b'), note:'Electric green for charge, amber for food. Reads more "clean energy" and less like a maps app.'},
+ {tag:'3 · Hard split, blue/amber', bg:'#0e1116', el:(k)=>split(k,'#2563eb','#f59e0b'), note:'Two literal halves. Most explicit, but the seam can look accidental at 16px.'},
+ {tag:'4 · Teal → orange blend', bg:'#0e1116', el:(k)=>disc(k,'#0d9488','#f97316'), note:'Cooler EV teal into a warmer food orange. Highest contrast between the two halves.'}
+];
+document.getElementById('row').innerHTML=V.map((v,i)=>`
+ <div class="card">
+  <div class="tag">${v.tag}</div>
+  <div class="big"><div style="width:84px;height:84px">${v.el('a'+i)}</div></div>
+  <div class="sizes">
+   <div class="sz"><div class="tile" style="width:52px;height:52px;background:#fff;border:1px solid #eee">
+     <div style="width:36px;height:36px">${v.el('b'+i)}</div></div><small>light</small></div>
+   <div class="sz"><div class="tile" style="width:52px;height:52px;background:#0e1116">
+     <div style="width:36px;height:36px">${v.el('c'+i)}</div></div><small>dark</small></div>
+   <div class="sz"><div class="tile" style="width:28px;height:28px;background:#fff;border:1px solid #eee">
+     <div style="width:19px;height:19px">${v.el('d'+i)}</div></div><small>28px</small></div>
+   <div class="sz"><div class="tile" style="width:16px;height:16px;background:#fff;border:1px solid #eee">
+     <div style="width:11px;height:11px">${v.el('e'+i)}</div></div><small>16px</small></div>
+  </div>
+  <div class="note">${v.note}</div>
+ </div>`).join('');
+</script></body></html>

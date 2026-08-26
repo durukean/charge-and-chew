@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#f4f5f7;color:#191c1f;padding:28px 24px}
+h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-.4px}
+.sub{color:#667085;font-size:13px;margin-bottom:22px}
+.row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.card{background:#fff;border:1px solid #e7eaee;border-radius:16px;padding:18px;width:300px;
+  box-shadow:0 1px 8px rgba(25,28,31,.06)}
+.tag{font-size:11px;font-weight:800;color:#2563eb;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.big{height:130px;display:grid;place-items:center;background:#f8f9fb;border-radius:12px;margin-bottom:12px}
+.sizes{display:flex;align-items:center;gap:14px;padding-top:12px;border-top:1px solid #f1f3f5}
+.sz small{display:block;font-size:9px;color:#8b95a3;text-align:center;margin-top:4px}
+.tile{border-radius:22%;display:grid;place-items:center;background:#2563eb}
+.desc{font-size:12px;color:#667085;line-height:1.5;margin-top:11px;min-height:52px}
+.lock{background:#fff;border:1px solid #e7eaee;border-radius:16px;padding:20px 24px;display:flex;
+  align-items:center;gap:26px;flex-wrap:wrap}
+.wm{display:flex;align-items:center;gap:11px}
+.wm .t{font-size:24px;font-weight:800;letter-spacing:-.8px}
+.wm .t .c{color:#2563eb}.wm .t .h{color:#f59e0b}.wm .t i{color:#98a2b3;font-style:normal;margin:0 2px}
+.dark{background:#0e1116;border-color:#262b33}
+.dark .t{color:#eef1f5}.dark .t .c{color:#60a5fa}.dark .t .h{color:#fbbf24}
+</style></head><body>
+<h1>Refined — the bite has to actually read</h1>
+<div class="sub">Scalloped tooth marks instead of a single notch, so it says "bite" and not "irregular shape".</div>
+<div class="row" id="row"></div>
+<div id="locks"></div>
+<script>
+// A proper bite: overlapping circles scalloped out of the edge, like teeth.
+function biteMask(id, shape, teeth){
+  return `<defs><mask id="${id}"><rect width="64" height="64" fill="#000"/>${shape}
+    ${teeth.map(t=>`<circle cx="${t[0]}" cy="${t[1]}" r="${t[2]}" fill="#000"/>`).join('')}
+  </mask></defs>`;
+}
+const BOLT = 'M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z';
+
+const CONCEPTS = [
+{ tag:'A2 · Bitten bolt', desc:'The bolt itself is bitten — three scallops out of the upper-right edge. One shape carrying both halves of the name.',
+  svg:c=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    ${biteMask('a2', `<path d="M36 5 L15 36 h12 l-3.5 23 L50 26 H37.5 z" fill="#fff"/>`,
+      [[45.5,13.5,7],[52,21.5,6],[49,32,5.5]])}
+    <g mask="url(#a2)"><rect width="64" height="64" fill="${c}"/></g></svg>` },
+
+{ tag:'B2 · Bitten pin', desc:'A map pin bitten on the right with a bolt cut through it. Says map, charge and food at once — and the silhouette is unmistakable.',
+  svg:c=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    ${biteMask('b2', `<path d="M32 3.5c11 0 20 8.7 20 19.5 0 14-20 38-20 38S12 37 12 23C12 12.2 21 3.5 32 3.5z" fill="#fff"/>
+      <path d="${BOLT}" fill="#000"/>`,
+      [[52.5,13,7.5],[56,24,6.5],[50,34,5.5]])}
+    <g mask="url(#b2)"><rect width="64" height="64" fill="${c}"/></g></svg>` },
+
+{ tag:'C2 · Bitten disc', desc:'A filled circle bitten on the right, bolt knocked out of the middle. The simplest and the most legible at tiny sizes.',
+  svg:c=>`<svg viewBox="0 0 64 64" width="100%" height="100%">
+    ${biteMask('c2', `<circle cx="32" cy="32" r="27" fill="#fff"/><path d="${BOLT}" fill="#000"/>`,
+      [[57,17,8.5],[61,29,7.5],[55,40.5,6.5]])}
+    <g mask="url(#c2)"><rect width="64" height="64" fill="${c}"/></g></svg>` }
+];
+document.getElementById('row').innerHTML = CONCEPTS.map(c=>`
+  <div class="card">
+    <div class="tag">${c.tag}</div>
+    <div class="big"><div style="width:96px;height:96px">${c.svg('#2563eb')}</div></div>
+    <div class="sizes">
+      <div class="sz"><div class="tile" style="width:56px;height:56px"><div style="width:36px;height:36px">${c.svg('#fff')}</div></div><small>app</small></div>
+      <div class="sz"><div class="tile" style="width:32px;height:32px"><div style="width:21px;height:21px">${c.svg('#fff')}</div></div><small>32px</small></div>
+      <div class="sz"><div class="tile" style="width:16px;height:16px"><div style="width:11px;height:11px">${c.svg('#fff')}</div></div><small>16px</small></div>
+      <div class="sz"><div style="width:44px;height:44px">${c.svg('#191c1f')}</div><small>mono</small></div>
+    </div>
+    <div class="desc">${c.desc}</div>
+  </div>`).join('');
+
+document.getElementById('locks').innerHTML = ['','dark'].map(mode=>`
+  <div class="lock ${mode}" style="margin-bottom:12px">
+    ${CONCEPTS.map(c=>`<div class="wm">
+      <div style="width:34px;height:34px">${c.svg(mode?'#60a5fa':'#2563eb')}</div>
+      <div class="t"><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span></div>
+    </div>`).join('')}
+  </div>`).join('');
+</script></body></html>

@@ -62,13 +62,13 @@ def fmt_d(m):
 CSS = """
 :root{
   --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
-  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#2563eb;--accent-ink:#fff;
+  --txt:#191c1f;--dim:#5b6470;--dim2:#667085;--accent:#15803d;--accent-ink:#fff;
   --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
   --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
 }
 @media(prefers-color-scheme:dark){:root{
   --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
-  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#60a5fa;--accent-ink:#0b0e13;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#4ade80;--accent-ink:#0b0e13;
   --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
   --sh:0 2px 10px rgba(0,0,0,.35);
 }}
@@ -82,9 +82,9 @@ a{color:var(--accent)}
 header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
   color:var(--txt);text-decoration:none}
-header .logo .mk{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
-  display:grid;place-items:center;font-size:15px}
-header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber)}
+header .logo .mk{width:32px;height:32px;display:grid;place-items:center;flex-shrink:0}
+header .logo .mk svg{width:32px;height:32px}
+header .logo .c{color:#16a34a}header .logo .h{color:var(--amber)}
 header nav{margin-left:auto;display:flex;gap:14px}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
 h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
@@ -162,7 +162,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta name="theme-color" content="#0d1117">
 {jsonld}
 <link rel="stylesheet" href="{root}assets/pages.css"></head><body><div class="wrap">
-<header><a class="logo" href="{root}"><span class="mk">\u26a1</span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
+<header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M34.5 9 L20 35.5 h9.5 l-2.5 19 L45 27 H34 z" fill="#000"/><circle cx="57" cy="17" r="8.5" fill="#000"/><circle cx="61" cy="29" r="7.5" fill="#000"/><circle cx="55" cy="40.5" r="6.5" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
 {body}
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
