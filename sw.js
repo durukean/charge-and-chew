@@ -4,7 +4,7 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v3';
+const VERSION = 'cc-v4';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 const DATA  = `${VERSION}-data`;    // data.js — big, versioned by ?v= in the URL
 const TILES = `${VERSION}-tiles`;   // map tiles for areas already viewed
@@ -30,7 +30,12 @@ self.addEventListener('activate', e => {
   })());
 });
 
-self.addEventListener('message', e => { if (e.data === 'skipWaiting') self.skipWaiting(); });
+self.addEventListener('message', e => {
+  if (e.data === 'skipWaiting') self.skipWaiting();
+  // Switching map style must drop cached tiles from the old provider — and is the escape
+  // hatch if a watermark tile ever got cached by an older build of this worker.
+  if (e.data === 'clearTiles') e.waitUntil(caches.delete(TILES));
+});
 
 async function trimCache(name, max) {
   const c = await caches.open(name);
@@ -45,14 +50,25 @@ self.addEventListener('fetch', event => {
   const sameOrigin = url.origin === self.location.origin;
 
   // ---- map tiles (cross-origin): cache-first, capped — gives an offline map of where you've been
-  if (/basemaps\.cartocdn\.com/.test(url.hostname)) {
+  if (/basemaps\.cartocdn\.com|server\.arcgisonline\.com/.test(url.hostname)) {
+    // The basemap probe must see the network, never this cache: a cached watermark tile
+    // would make the probe conclude the wrong thing, and a cached good tile would hide a
+    // block that is happening right now.
+    if (url.searchParams.has('probe')) return;
     event.respondWith((async () => {
       const c = await caches.open(TILES);
       const hit = await c.match(request);
       if (hit) return hit;
       try {
         const res = await fetch(request);
-        if (res && (res.ok || res.type === 'opaque')) { c.put(request, res.clone()); trimCache(TILES, TILE_LIMIT); }
+        // NEVER cache a throttle/watermark tile. CARTO answers a referrer block with an
+        // "API key required" image as a valid 200 PNG; caching it cache-first pinned that
+        // message on the map permanently, surviving deploys and CARTO itself recovering.
+        // Real tiles are tens of KB, watermarks and blanks are under 2 KB.
+        if (res && res.ok && res.type !== 'opaque') {
+          const buf = await res.clone().arrayBuffer();
+          if (buf.byteLength > 2000) { c.put(request, res.clone()); trimCache(TILES, TILE_LIMIT); }
+        }
         return res;
       } catch { return hit || Response.error(); }
     })());

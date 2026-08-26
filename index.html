@@ -681,10 +681,16 @@ svg{display:block}
 <div id="about"><div class="box">
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
   <p>13,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
+  <p><b>Map style:</b> Esri by default, which needs no account. CARTO's basemap looks better but
+  now requires an API key for this site — without one it stamps "API key required" across every tile,
+  so only pick it if you have a key configured.</p>
+  <div class="seg" id="baseSeg" style="margin:-4px 0 14px">
+    <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
+  </div>
   <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
-  <p>Basemap tiles come from CARTO, with an automatic fallback to Esri if CARTO is unavailable in your region. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
+  <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
   <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
@@ -990,20 +996,43 @@ const BASEMAPS = {
     // Esri's canvas has no tiles past z16; upscale rather than going blank at deep zoom.
     opts:  { maxZoom: 19, maxNativeZoom: 16 },
     attrib: '<a href="https://www.esri.com">Esri</a>' } };
-let baseProvider = localStorage.getItem('cc_base') || 'carto';
+let basePref = localStorage.getItem('cc_basepref') || 'auto';   // auto | carto | esri
+let baseProvider = basePref !== 'auto' ? basePref : 'esri';
 // A healthy z12 tile over Austin is tens of KB; a watermark or blank tile is under 2 KB.
-const PROBE = 'https://a.basemaps.cartocdn.com/rastertiles/voyager/12/935/1686@2x.png';
-async function probeBasemap() {
-  const cached = localStorage.getItem('cc_base_at');
-  if (cached && Date.now() - +cached < 216e5 && localStorage.getItem('cc_base')) return;  // re-check every 6h
-  try {
-    const r = await fetch(PROBE, { cache: 'no-store' });
-    const b = await r.blob();
-    baseProvider = (r.ok && b.size > 8000) ? 'carto' : 'esri';
-  } catch (e) { baseProvider = 'esri'; }
-  localStorage.setItem('cc_base', baseProvider);
-  localStorage.setItem('cc_base_at', String(Date.now()));
+/* CARTO now enforces on this domain and answers with its normal map tile with
+   "API KEY REQUIRED" rendered INTO the image — a full-size, valid PNG. There is no status
+   code, no failed request and no size difference to detect it by: an earlier fix here
+   probed tile byte length and was fooled completely, because a watermarked tile is
+   11-88 KB exactly like a good one. So we do not try to detect it. Esri's canvas needs no
+   key and is the default; CARTO stays selectable for whoever holds an API key. */
+function probeBasemap() {
+  baseProvider = basePref === 'auto' ? 'esri' : basePref;
   applyTheme();
+}
+/* Real outages do surface as tile errors, which is worth surviving. */
+let tileFails = 0;
+function onTileError() {
+  if (basePref !== 'auto' || baseProvider !== 'esri') return;
+  if (++tileFails < 6) return;
+  tileFails = 0; baseProvider = 'carto'; applyTheme();
+}
+/* If the probe was wrong for this visitor — CARTO can serve a good tile for the probe and
+   watermarks for the rest — they need a way out that does not depend on our detection. */
+function setBasePref(p) {
+  basePref = p;
+  localStorage.setItem('cc_basepref', p);
+  localStorage.removeItem('cc_base_at');
+  if (p === 'auto') { probeBasemap(); toast('Map style: automatic'); }
+  else { baseProvider = p; localStorage.setItem('cc_base', p); applyTheme();
+         toast('Map style: ' + (p === 'carto' ? 'CARTO' : 'Esri')); }
+  syncBasePref();
+  if (navigator.serviceWorker && navigator.serviceWorker.controller)
+    navigator.serviceWorker.controller.postMessage('clearTiles');
+}
+function syncBasePref() {
+  const g = $('baseSeg'); if (!g) return;
+  g.querySelectorAll('button').forEach(b =>
+    b.classList.toggle('on', b.dataset.base === basePref));
 }
 /* Network marker colours. Presentation lives here, not in data.js, so a palette
    change never needs a data refetch. Keep in sync with data/fetch_chargers.py.
@@ -1073,6 +1102,7 @@ function applyTheme() {
   if (labelTiles) { map.removeLayer(labelTiles); labelTiles = null; }
   const bm = BASEMAPS[baseProvider] || BASEMAPS.carto;
   tiles = L.tileLayer(bm[curDark ? 'dark' : 'light'], bm.opts).addTo(map);
+  tiles.on('tileerror', onTileError);
   if (baseProvider === 'esri') {
     labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], bm.opts).addTo(map);
   }
@@ -2070,6 +2100,8 @@ $('hero').addEventListener('click', e => { if (e.target.id === 'hero') hideHero(
 /* ───────── boot ───────── */
 applyTheme();
 probeBasemap();      // silently swaps the basemap if CARTO is serving blocked tiles here
+$('baseSeg').querySelectorAll('button').forEach(b => b.onclick = () => setBasePref(b.dataset.base));
+syncBasePref();
 saveFavs();
 renderCarBar();
 $('savedChip').classList.toggle('on', false);

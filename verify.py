@@ -111,9 +111,13 @@ _html = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
 # match the actual call site at boot, not just the identifier — a commented-out call
 # still contains the name, which an earlier version of this check happily accepted
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
-      "basemap probe is never called — throttled CARTO tiles would blank the map silently")
+      "basemap selection is never called — the map would have no tile layer")
+# CARTO stamps "API KEY REQUIRED" into a normal, full-size tile, so it cannot be detected
+# by status code or byte length. Esri must stay the default for the unauthenticated site.
+check("basePref === 'auto' ? 'esri'" in _html,
+      "default basemap is no longer Esri — CARTO watermarks every tile without an API key")
 for _needle, _why in [
-    ("async function probeBasemap", "basemap probe definition gone"),
+    ("function probeBasemap", "basemap selection gone"),
     ("BASEMAPS", "basemap table gone"),
     ("maxNativeZoom", "Esri fallback would go blank past z16 without maxNativeZoom"),
     ("World_Light_Gray_Reference", "Esri fallback lost its label layer"),
