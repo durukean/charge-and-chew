@@ -66,7 +66,11 @@ import re as _re
 DEALER_RE = _re.compile(r'\b(nissan|bmw|mini of|mercedes|chevrolet|chevy|ford of|toyota|honda|kia|'
                         r'hyundai|audi|volkswagen|vw of|subaru|lexus|cadillac|buick|gmc|dodge|chrysler|'
                         r'jeep|ram|volvo|porsche|mazda|dealer|auto group|automotive)\b', _re.I)
-PRIVATE_RE = _re.compile(r'not for public|private|employees? only|staff only|test (evse|site)|for testing', _re.I)
+# AFDC sometimes ships records whose own name says they are not usable. "NOT A PUBLIC SITE -
+# IONNA Customer Experience Center" (Adak, AK) sat on the map for months because the pattern
+# only matched "not for public".
+PRIVATE_RE = _re.compile(r'not (for|a) public|private|employees? only|staff only|'
+                         r'test (evse|site)|for testing|do not use|decommission', _re.I)
 TRUCK_NETS = {"Watt Ev"}          # WattEV = heavy-truck megawatt depots, not for cars
 MIN_KW = 24                        # below this it is not DC fast (AFDC miscategorisation)
 
@@ -91,7 +95,7 @@ def pretty_name(name, host=""):
 
 def clean(sites):
     """Drop unusable rows, de-duplicate co-located listings, tidy names, flag dealerships."""
-    stats = dict(start=len(sites), low_kw=0, truck=0, private=0, dup=0, renamed=0, dealer=0)
+    stats = dict(start=len(sites), low_kw=0, truck=0, private=0, dup=0, renamed=0, dealer=0, unnamed=0)
     kept = []
     for s in sites:
         if s.get("net") in TRUCK_NETS:
@@ -105,6 +109,12 @@ def clean(sites):
         pn = pretty_name(s.get("name", ""))
         if pn != s.get("name"):
             s["name"] = pn; stats["renamed"] += 1
+        # A few records carry a name like "DC", "76" or "M3", which tells a user nothing.
+        # Fall back to the address rather than dropping an otherwise valid charger.
+        if len(_re.sub(r'[^A-Za-z0-9]', '', pn)) < 3:
+            alt = s.get("street") or ""
+            s["name"] = alt.strip() or f"Charger · {s.get('city','')}".strip(" ·")
+            stats["unnamed"] += 1
         kept.append(s)
 
     # de-duplicate in two passes:

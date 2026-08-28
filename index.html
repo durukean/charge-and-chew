@@ -229,7 +229,11 @@ svg{display:block}
 .leaflet-popup-content-wrapper{background:var(--surface);color:var(--txt);border-radius:16px;
   border:1px solid var(--line);box-shadow:var(--sh)}
 .leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
-.leaflet-popup-content{margin:14px 16px;font-size:13px}
+/* On short viewports (a laptop in landscape, a phone with the keyboard up) the stop
+   details ran off the top of the map with the name cut off and no way to scroll. */
+.leaflet-popup-content{margin:14px 16px;font-size:13px;max-height:min(62vh,420px);overflow-y:auto;
+  overscroll-behavior:contain}
+
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
 .pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;padding-right:22px}
 .pp-name{font-weight:700;font-size:15px;flex:1;line-height:1.25;letter-spacing:-.2px}
@@ -267,6 +271,7 @@ svg{display:block}
 :root[data-theme="dark"] .clus i{background:rgba(74,222,128,.9);color:#08160d;
   border-color:rgba(14,17,22,.85)}
 .clus.big i{font-size:12.5px}
+.heropick .c small{font-weight:600;font-size:10.5px;color:var(--dim2);text-transform:none}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
@@ -414,13 +419,15 @@ svg{display:block}
 .herocard h1 i{color:var(--dim2);font-style:normal;margin:0 2px;font-weight:600}
 .herocard p{color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:16px}
 .herogrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.heropick{display:flex;align-items:center;gap:9px;padding:12px 13px;border-radius:14px;background:var(--surface2);
-  border:1px solid var(--line);font-size:13.5px;font-weight:700;text-align:left;transition:.12s}
+.heropick{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;
+  column-gap:9px;row-gap:1px;align-items:center;padding:11px 13px;border-radius:14px;
+  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:700;
+  text-align:left;transition:.12s}
 .heropick:hover{border-color:var(--accent)}
 .heropick:active{transform:scale(.97)}
-.heropick .e{font-size:19px;flex-shrink:0}
-.heropick>span:nth-child(2){flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600}
+.heropick .e{font-size:19px;grid-row:1/3;align-self:center}
+.heropick>span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600;white-space:nowrap}
 #heroAll{width:100%;height:46px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
   font-weight:700;font-size:14.5px;margin-bottom:9px}
 #heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
@@ -689,7 +696,7 @@ svg{display:block}
   </div>
   <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
-  <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private, and we flag dealership lots because access and hours are often restricted.</p>
+  <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
@@ -705,7 +712,7 @@ svg{display:block}
 <div id="offlineBar" hidden>Offline — showing saved data</div>
 <div id="toast"></div>
 
-<script src="data.js?v=7"></script>
+<script src="data.js?v=8"></script>
 <script>
 (() => {
 'use strict';
@@ -826,7 +833,8 @@ function dwell(min) {
   if (min <= 40) return 'quick meal';
   return 'sit-down meal';
 }
-const fmtFt = m => m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
+const fmtFt = m => m < 25 ? 'at this stop'
+  : m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let toastT;
 function toast(msg) {
@@ -1280,7 +1288,7 @@ function renderChips() {
   for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
-      <span class="cnt">${counts[k]}</span></button>`).join('')
+      <span class="cnt" title="${counts[k].toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k]}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All ${CHAIN_KEYS.length} chains</button>`;
   el.querySelectorAll('.chip[data-k]').forEach(c => c.onclick = () => {
     const k = c.dataset.k;
@@ -2079,7 +2087,7 @@ function buildHero() {
   const g = $('heroGrid');
   const picks = HERO_PICKS.filter(k => BRANDS[k]);
   g.innerHTML = picks.map(k =>
-    `<button class="heropick" data-k="${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${esc(k)}</span><span class="c">${counts[k]}</span></button>`).join('');
+    `<button class="heropick" data-k="${esc(k)}" aria-label="${counts[k].toLocaleString()} chargers near ${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${esc(k)}</span><span class="c">${counts[k].toLocaleString()} <small>chargers</small></span></button>`).join('');
   g.querySelectorAll('[data-k]').forEach(b => b.onclick = () => selectChain(b.dataset.k));
 }
 function selectChain(k) {
