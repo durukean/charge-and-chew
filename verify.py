@@ -119,6 +119,11 @@ check(re.search(r"if \(looksLikeChainBrand\(", _html) is not None,
       "chain-brand detector is never called — an untracked brand would again anchor the "
       "map on an arbitrary branch")
 check("unsupportedChain" in _html, "unsupported-brand error path gone")
+# Live POI search: arbitrary categories/brands are queried from OSM scoped to the current
+# area, because precomputing them would add ~1.6 MB for +400 brands.
+check(re.search(r"runLivePoi\(", _html) is not None, "live POI search is never called")
+check("POI_TAGS" in _html and "detectPoiIntent" in _html, "live POI category mapping gone")
+check("clearLivePoi()" in _html, "live POI results would leak across areas")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
       "basemap selection is never called — the map would have no tile layer")
 # CARTO stamps "API KEY REQUIRED" into a normal, full-size tile, so it cannot be detected

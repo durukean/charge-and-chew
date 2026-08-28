@@ -722,6 +722,11 @@ svg{display:block}
     <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
   </div>
   <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
+  <p><b>Search for anything:</b> the 90 chains below are precomputed and instant, but you can also
+  search a category or a brand we don't track — "bank", "tire shop", "pharmacy", "gym", "Chase",
+  "GameStop". Those are looked up live from OpenStreetMap for the area you're viewing, so pick an
+  area first and give it a few seconds. Precomputing every brand isn't possible: it would add
+  roughly 1.6&nbsp;MB to the download for a few hundred more.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
@@ -815,12 +820,13 @@ const hav = (a1, o1, a2, o2) => {
 const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
 // Nominatim and OSRM are free shared services — under load they hang rather than fail,
 // which left the UI stuck on "Routing…" forever with no way to tell.
-function fetchTimeout(url, ms) {
+function fetchTimeout(url, ms, init) {
   ms = ms || 12000;
-  if (typeof AbortController === 'undefined') return fetch(url);   // old in-car browsers
+  init = init || {};
+  if (typeof AbortController === 'undefined') return fetch(url, init);   // old in-car browsers
   const c = new AbortController();
   const t = setTimeout(() => c.abort(), ms);
-  return fetch(url, { signal: c.signal }).then(function (r) { clearTimeout(t); return r; },
+  return fetch(url, Object.assign({}, init, { signal: c.signal })).then(function (r) { clearTimeout(t); return r; },
     function (e) {
       clearTimeout(t);
       throw new Error(e && e.name === 'AbortError'
@@ -1338,7 +1344,7 @@ function renderChips() {
   for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
-      <span class="cnt" title="${counts[k].toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k]}</span></button>`).join('')
+      <span class="cnt" title="${(counts[k] || 0).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k] || 0}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All ${CHAIN_KEYS.length} chains</button>`;
   el.querySelectorAll('.chip[data-k]').forEach(c => c.onclick = () => {
     const k = c.dataset.k;
@@ -1592,6 +1598,8 @@ $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 function setCenter(lat, lon, label, kind) {
   track('area-search', kind);            // 'me' | 'pin' | 'place' — not where
   center = { lat, lon, label, kind };
+  // live POI results were fetched for the old area; they mean nothing here
+  if (typeof clearLivePoi === 'function') clearLivePoi();
   route = null; clearRoute();
   if (centerLayer) map.removeLayer(centerLayer);
   if (radiusLayer) map.removeLayer(radiusLayer);
@@ -1647,7 +1655,10 @@ function locate(target, opts) {
     if (target === 'route') {
       $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
       toast('Start set to your location');
-    } else setCenter(la, lo, 'My location', 'me');
+    } else {
+      setCenter(la, lo, 'My location', 'me');
+      if (opts.thenPoi) runLivePoi(opts.thenPoi);   // "banks near me" with no area set yet
+    }
   };
   /* We only need to know which town you are in, not which side of the street. Asking for
      high accuracy forces a GPS fix: slow or unavailable on a laptop, and indoors on a
@@ -1787,6 +1798,9 @@ const NET_WORDS = [
   ['flo', 'FLO'], ['non-networked', 'Non-networked']
 ];
 const NOISE = /\b(ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s)\b/g;
+// Same words as a set, for callers that need to test one word at a time (a /g regex is
+// stateful across .test calls, which makes it the wrong tool for that).
+const NOISE_WORD = new Set(NOISE.source.replace(/\\b|[()]/g, '').split('|').map(w => w.trim()));
 
 function normalise(t) {
   return String(t).toLowerCase().replace(/[.'\u2019]/g, '').replace(/[^a-z0-9\s-]/g, ' ')
@@ -1899,10 +1913,21 @@ const titleCaseBrand = t => String(t).split(' ').map((w, i) =>
 /* A brand with branches in several towns is not a place to centre the map on. A settlement
    or admin area of the same name means it IS a place (Springfield, Brooklyn), and a
    one-off landmark (Disneyland, San Diego Zoo) only ever appears in one town. */
+const BIZ_AMENITY = new Set(['bank', 'fast_food', 'cafe', 'restaurant', 'pharmacy', 'fuel',
+  'car_wash', 'car_rental', 'bar', 'pub', 'dentist', 'clinic', 'veterinary', 'atm']);
+const isBusinessHit = h => h.class === 'shop' || h.class === 'office' || h.class === 'craft'
+  || (h.class === 'amenity' && BIZ_AMENITY.has(h.type))
+  || (h.class === 'leisure' && h.type === 'fitness_centre');
+
 function looksLikeChainBrand(hits, q) {
   const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const target = norm(q);
   const same = hits.filter(h => norm(String(h.display_name || '').split(',')[0]).startsWith(target));
+  if (!same.length) return false;
+  /* Even a single hit is a brand if it is a shop or a business amenity — "gamestop"
+     resolved to one store in Columbus and flew the map there. Landmarks are tourism,
+     natural or historic classes, so they are unaffected. */
+  if (same.every(isBusinessHit)) return true;
   if (same.length < 2) return false;
   for (const h of same) {
     if (h.class === 'boundary') return false;
@@ -1977,6 +2002,14 @@ $('placeIn').addEventListener('keydown', async e => {
 
   render(); syncUrl();
 
+  /* "banks near me", "tire shop" — a category word means they want that kind of place,
+     not a town of that name. Ask OSM live, scoped to the area. */
+  const poi = p.chains.length ? null : detectPoiIntent(raw);
+  if (poi && !p.here) {
+    if (!center) { locate('center', { thenPoi: poi }); return; }
+    runLivePoi(poi); return;
+  }
+
   if (p.here) {                          // "near me", "in my area", "around here"
     locate('center');
     return;
@@ -2002,13 +2035,172 @@ $('placeIn').addEventListener('keydown', async e => {
   } catch (err) {
     render(); syncUrl();
     if (err.unsupportedChain) {
-      // Naming a brand we don't cover is a reasonable thing to try. Say so, and show what
-      // we do cover, rather than leaving a dead-end toast.
-      toast(err.message + ' — here are the chains we cover');
-      setTimeout(openPicker, 550);
+      /* A brand we don't precompute. If we know where to look, ask OSM live for it;
+         otherwise get an area first. Either way it beats a dead-end toast. */
+      const intent = { tags: ['amenity=bank'], name: p.place, label: p.place, brandOnly: true };
+      if (center) runLivePoi(intent);
+      else { toast(err.message + ' — pick an area and try again'); setTimeout(openPicker, 700); }
     } else toast(err.message);
   } finally { $('placeBox').classList.remove('busy'); }
 });
+
+
+/* ───────── live POI search ─────────
+   The 90 curated chains are precomputed and instant, but people ask for anything — a bank,
+   a tyre shop, their gym. Precomputing that does not scale: each charger-to-brand link
+   costs ~5 bytes gzipped and there are already 70k of them, so +400 brands would add
+   ~1.6 MB to a payload that is already the slowest thing here. Instead we ask
+   OpenStreetMap live, scoped to the area you are looking at, and match against chargers
+   in the browser.
+
+   Overpass will not tolerate an unanchored name regex over a wide radius (it times out),
+   so every query is constrained by an indexed tag first and names are filtered here. */
+const POI_TAGS = {
+  bank: ['amenity=bank'], banks: ['amenity=bank'], atm: ['amenity=atm'],
+  pharmacy: ['amenity=pharmacy'], drugstore: ['amenity=pharmacy'], chemist: ['amenity=pharmacy'],
+  tire: ['shop=tyres'], tires: ['shop=tyres'], tyre: ['shop=tyres'], tyres: ['shop=tyres'],
+  mechanic: ['shop=car_repair'], garage: ['shop=car_repair'], repair: ['shop=car_repair'],
+  carwash: ['amenity=car_wash'], wash: ['amenity=car_wash'],
+  gym: ['leisure=fitness_centre'], fitness: ['leisure=fitness_centre'],
+  hotel: ['tourism=hotel'], hotels: ['tourism=hotel'], motel: ['tourism=motel'],
+  grocery: ['shop=supermarket'], groceries: ['shop=supermarket'], supermarket: ['shop=supermarket'],
+  hospital: ['amenity=hospital'], clinic: ['amenity=clinic'], urgent: ['amenity=clinic'],
+  dentist: ['amenity=dentist'], vet: ['amenity=veterinary'], veterinary: ['amenity=veterinary'],
+  post: ['amenity=post_office'], library: ['amenity=library'],
+  cinema: ['amenity=cinema'], movie: ['amenity=cinema'], movies: ['amenity=cinema'],
+  gas: ['amenity=fuel'], fuel: ['amenity=fuel'], petrol: ['amenity=fuel'],
+  restaurant: ['amenity=restaurant'], restaurants: ['amenity=restaurant'],
+  cafe: ['amenity=cafe'], bar: ['amenity=bar'], pub: ['amenity=pub'],
+  bakery: ['shop=bakery'], pet: ['shop=pet'], pets: ['shop=pet'],
+  hardware: ['shop=hardware', 'shop=doityourself'],
+  barber: ['shop=hairdresser'], salon: ['shop=hairdresser'], haircut: ['shop=hairdresser'],
+  laundry: ['shop=laundry'], laundromat: ['shop=laundry'],
+  liquor: ['shop=alcohol'], convenience: ['shop=convenience'],
+  mall: ['shop=mall'], bookstore: ['shop=books'], books: ['shop=books'],
+  playground: ['leisure=playground'], park: ['leisure=park'],
+  restroom: ['amenity=toilets'], bathroom: ['amenity=toilets'], toilets: ['amenity=toilets'] };
+// "331 bank" reads as a typo; pluralise the last word of whatever they typed.
+function plural(t) {
+  const w = String(t).trim().split(' '); const last = w[w.length - 1];
+  if (/(s|x|z|ch|sh)$/i.test(last)) w[w.length - 1] = last + 'es';
+  else if (/[^aeiou]y$/i.test(last)) w[w.length - 1] = last.slice(0, -1) + 'ies';
+  else w[w.length - 1] = last + 's';
+  return w.join(' ');
+}
+const POI_EMOJI = { amenity: '📍', shop: '🛍️', leisure: '🏋️', tourism: '🏨' };
+const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places', 'near',
+  'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and']);
+
+/* Turn what was typed into {tags, name} — a tag to ask Overpass for, plus any leftover
+   words to match the POI name against here. */
+function detectPoiIntent(raw) {
+  const words = normalise(raw).split(' ').filter(Boolean);
+  let tags = null, used = -1;
+  words.forEach((w, i) => { if (!tags && POI_TAGS[w]) { tags = POI_TAGS[w]; used = i; } });
+  const rest = words.filter((w, i) => i !== used && !POI_FILLER.has(w) && !NOISE_WORD.has(w));
+  if (tags) return { tags, name: rest.join(' '), label: raw.trim() };
+  return null;
+}
+
+const OVERPASS = 'https://overpass-api.de/api/interpreter';
+const poiCache = new Map();
+async function overpassFetch(body, tries) {
+  const hit = poiCache.get(body);
+  if (hit) return hit;
+  for (let i = 0; i <= (tries === undefined ? 1 : tries); i++) {
+    try {
+      const r = await fetchTimeout(OVERPASS, 28000, {
+        method: 'POST', body: 'data=' + encodeURIComponent(body),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+      if (!r.ok) throw new Error('overpass ' + r.status);
+      const j = await r.json();
+      poiCache.set(body, j.elements || []);
+      return j.elements || [];
+    } catch (e) { if (i === (tries === undefined ? 1 : tries)) throw e; }
+  }
+}
+
+let livePoiKey = null;
+function clearLivePoi() {
+  if (!livePoiKey) return;
+  for (const id in MATCH) { if (MATCH[id][livePoiKey] !== undefined) delete MATCH[id][livePoiKey]; }
+  delete BRANDS[livePoiKey];
+  delete counts[livePoiKey];
+  active.delete(livePoiKey);
+  livePoiKey = null;
+}
+
+async function runLivePoi(intent) {
+  if (!center) { toast('Pick an area first — tap the location button or search a city'); return; }
+  const R = Math.round(radiusMi * MI);
+  const at = `around:${R},${center.lat.toFixed(5)},${center.lon.toFixed(5)}`;
+  /* Anchored brand regex for a bare brand name, exact tag match for a category. Both are
+     constrained enough for Overpass; an unanchored name regex times out at this radius. */
+  const parts = intent.brandOnly
+    ? `nwr(${at})["brand"~"^${intent.name.replace(/[^a-z0-9 ]/gi, '')}",i];`
+    : intent.tags.map(t => {
+        const [k, v] = t.split('=');
+        return `nwr(${at})["${k}"="${v}"];`;
+      }).join('');
+  const q = `[out:json][timeout:25];(${parts});out center 600;`;
+
+  clearLivePoi();
+  toast(`Searching ${esc(intent.label)} near ${esc(center.label)}…`);
+  $('placeBox').classList.add('busy');
+  let els;
+  try { els = await overpassFetch(q); }
+  catch (e) {
+    $('placeBox').classList.remove('busy');
+    toast("OpenStreetMap didn't answer — try again in a moment");
+    return;
+  }
+  $('placeBox').classList.remove('busy');
+
+  const want = intent.name;
+  const pois = [];
+  for (const el of els) {
+    const lat = el.lat !== undefined ? el.lat : (el.center || {}).lat;
+    const lon = el.lon !== undefined ? el.lon : (el.center || {}).lon;
+    if (lat === undefined || lon === undefined) continue;
+    const t = el.tags || {};
+    const nm = t.name || t.brand || '';
+    // name filtering happens here, not in the query: Overpass times out on loose regexes
+    if (want && !intent.brandOnly && !(nm + ' ' + (t.brand || '')).toLowerCase().includes(want)) continue;
+    pois.push({ lat, lon, name: nm });
+  }
+  if (!pois.length) {
+    toast(`No ${esc(intent.label)} found within ${radiusMi} mi of ${esc(center.label)}`);
+    render(); return;
+  }
+
+  // match against chargers in the area — only those in scope, so this stays small
+  const key = intent.label.replace(/\b\w/g, c => c.toUpperCase());
+  const inArea = SITES.filter(s => hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI);
+  let matched = 0;
+  for (const s of inArea) {
+    let best = Infinity;
+    for (const p of pois) {
+      const d = hav(s.lat, s.lon, p.lat, p.lon);
+      if (d < best) best = d;
+    }
+    if (best <= D.walkM) {
+      (MATCH[s.id] = MATCH[s.id] || {})[key] = best;   // mDist accepts plain metres
+      matched++;
+    }
+  }
+  const fam = intent.brandOnly ? 'shop' : intent.tags[0].split('=')[0];
+  BRANDS[key] = { e: POI_EMOJI[fam] || '📍', cat: 'live', n: pois.length };
+  counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
+  livePoiKey = key;
+  active.clear(); active.add(key);
+  cat = 'all'; $('savedChip').classList.remove('on');
+  track('live-poi', intent.tags[0]);
+  render(); renderChips(); setSheet('mid'); syncUrl();
+  const many = pois.length === 1 ? esc(intent.label) : esc(plural(intent.label));
+  toast(matched
+    ? `${matched} charger${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
+    : `Found ${pois.length} ${many}, but none within a walk of a charger`);
+}
 
 /* ───────── route ───────── */
 $('routeToggle').onclick = () => {
