@@ -2284,6 +2284,10 @@ function applyCorridor(verts, mi, hr) {
     }
     if (best <= maxM) { ids.add(s.id); order.set(s.id, bi); }
   }
+  /* Live POI matches were computed for a circular area; a route replaces that scope, so
+     carrying them over would list stops matched against somewhere you are no longer
+     searching — and would put a ?poi= in the URL that a shared link cannot rebuild. */
+  clearLivePoi();
   route = { verts, ids, order, mi, hr };
   /* On a shared link this runs during boot, when the map can still report a near-zero
      size — the old guard skipped the fit and never retried, so the recipient landed on a
