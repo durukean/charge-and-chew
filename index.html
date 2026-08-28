@@ -849,6 +849,13 @@ const saveFavs = () => {
 /* ───────── map ───────── */
 const map = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true })
   .setView([39.3, -96.5], 4);
+/* Framing the country for the viewport we actually have. Deliberately a WIDE, SHORT band
+   rather than true CONUS bounds: fitBounds always contains what you give it, so the real
+   bounding box on a tall phone zooms out until Canada and South America fill the screen.
+   A band whose aspect is wider than any viewport makes longitude the binding constraint,
+   so the US fills the width on both phone and desktop and the extra height simply crops. */
+const US_BOUNDS = L.latLngBounds([[34.0, -124.6], [45.0, -67.0]]);
+function fitUS() { settleFit(() => US_BOUNDS, [10, 10]); }
 const attribCtl = L.control.attribution({ prefix: false }).addTo(map);
 let attribCur = '';
 function setAttribution(provider) {
@@ -1248,7 +1255,9 @@ function drawClusters(vis) {
   if (clusterLayer) { map.removeLayer(clusterLayer); clusterLayer = null; }
   const z = map.getZoom();
   if (z > CLUSTER_ZOOM || vis.length < 60) return false;
-  const cell = 360 / Math.pow(2, z) / 7;
+  // Cell size in degrees that works out to ~64 CSS px at any zoom — wider than the
+  // largest bubble (40 px) so neighbours never collide into an unreadable mass.
+  const cell = 360 / Math.pow(2, z) / 4;
   const bins = new Map();
   for (const s of vis) {
     const k = Math.floor(s.lon / cell) + ':' + Math.floor(s.lat / cell);
@@ -1258,7 +1267,7 @@ function drawClusters(vis) {
   }
   const out = [];
   for (const b of bins.values()) {
-    const d = Math.round(Math.min(46, 22 + Math.log2(b.n) * 4.2));
+    const d = Math.round(Math.min(40, 21 + Math.log2(b.n) * 3.4));
     const lat = b.lat / b.n, lon = b.lon / b.n;
     const m = L.marker([lat, lon], {
       keyboard: false,
@@ -2160,7 +2169,15 @@ if (q.get('from') && q.get('to')) {
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size) { setSheet('mid'); fitToResults(); }
-else if (localStorage.getItem('cc_hero') !== '0') showHero();
+else {
+  /* On a phone the map was the full screen height with a sliver of list under it, which
+     gives the map a ~1:4 aspect no country fits into, and hides the results that are the
+     actual point. Open the sheet first so the map has its final size, THEN frame the
+     country — fitting first leaves the US sitting low once the sheet takes its space. */
+  if (!wideLayout()) { setSheet('mid'); setTimeout(fitUS, 460); }   // sheet animates for ~300ms
+  else fitUS();
+  if (localStorage.getItem('cc_hero') !== '0') showHero();
+}
 
 /* ───────── offline / installable ───────── */
 function setOnline(on) {
