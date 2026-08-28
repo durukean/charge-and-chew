@@ -24,8 +24,8 @@ STATES = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"Cali
 "PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas",
 "UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"}
 
-raw = open(os.path.join(HERE, "data.js")).read()
-D = json.loads(raw[raw.index("{"): raw.rindex("}") + 1])
+from data_reader import load_data
+D = load_data(os.path.join(HERE, "data.js"))
 sites = {s["id"]: s for s in D["sites"]}
 brands, matches = D["brands"], {int(k): v for k, v in D["matches"].items()}
 

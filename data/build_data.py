@@ -238,8 +238,13 @@ def main():
                 raise SystemExit(f"ABORT: these chains vanished entirely: {sorted(lost_chains)}. "
                                  f"Usually a broken brand regex. data.js not written.")
 
-    js = "window.PITSTOP_DATA = " + json.dumps(payload, separators=(",", ":")) + ";\n"
-    open(out_path, "w").write(js)
+    # JSON.parse() beats an object literal on cold parse by ~1.5-2x in the browser for
+    # about +1 KB gzipped. Single-quoted so the JSON's own double quotes need no escaping.
+    compact = json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
+    esc = (compact.replace("\\", "\\\\").replace("'", "\\'")
+                  .replace("\u2028", "\\u2028").replace("\u2029", "\\u2029"))
+    js = "window.PITSTOP_DATA = JSON.parse('" + esc + "');\n"
+    open(out_path, "w", encoding="utf-8").write(js)
 
     from collections import Counter
     cnt = Counter()

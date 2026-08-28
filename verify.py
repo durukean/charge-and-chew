@@ -27,12 +27,11 @@ def soft(cond, msg):
 p = os.path.join(HERE, "data.js")
 check(os.path.exists(p), "data.js is missing")
 if os.path.exists(p):
-    raw = open(p).read()
-    check(raw.startswith("window.PITSTOP_DATA"), "data.js has the wrong shape")
     try:
-        D = json.loads(raw[raw.index("{"): raw.rindex("}") + 1])
+        from data_reader import load_data
+        D = load_data(p)
     except Exception as e:
-        fail.append(f"data.js is not valid JSON: {e}")
+        fail.append(f"data.js is not valid: {e}")
         D = None
     if D:
         check(len(D.get("sites", [])) > 9000, f"only {len(D.get('sites', []))} chargers")

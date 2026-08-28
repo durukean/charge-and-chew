@@ -744,7 +744,7 @@ svg{display:block}
 <div id="offlineBar" hidden>Offline — showing saved data</div>
 <div id="toast"></div>
 
-<script src="data.js?v=8"></script>
+<script src="data.js?v=9"></script>
 <script>
 (() => {
 'use strict';
@@ -2102,6 +2102,13 @@ function detectPoiIntent(raw) {
   return null;
 }
 
+/* A live search has to survive being shared. The synthetic chain key is meaningless to a
+   fresh page (it is not in CHAIN_KEYS, so it was silently dropped), so the URL carries the
+   search term and the lookup is re-run on load. */
+function intentFromTerm(term) {
+  return detectPoiIntent(term) || { tags: ['amenity=bank'], name: normalise(term), label: term, brandOnly: true };
+}
+
 const OVERPASS = 'https://overpass-api.de/api/interpreter';
 const poiCache = new Map();
 async function overpassFetch(body, tries) {
@@ -2120,8 +2127,9 @@ async function overpassFetch(body, tries) {
   }
 }
 
-let livePoiKey = null;
+let livePoiKey = null, livePoiTerm = null;
 function clearLivePoi() {
+  livePoiTerm = null;
   if (!livePoiKey) return;
   for (const id in MATCH) { if (MATCH[id][livePoiKey] !== undefined) delete MATCH[id][livePoiKey]; }
   delete BRANDS[livePoiKey];
@@ -2191,7 +2199,7 @@ async function runLivePoi(intent) {
   const fam = intent.brandOnly ? 'shop' : intent.tags[0].split('=')[0];
   BRANDS[key] = { e: POI_EMOJI[fam] || '📍', cat: 'live', n: pois.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
-  livePoiKey = key;
+  livePoiKey = key; livePoiTerm = intent.label;
   active.clear(); active.add(key);
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
@@ -2299,7 +2307,9 @@ function applyCorridor(verts, mi, hr) {
 /* ───────── share / url ───────── */
 function syncUrl() {
   const u = new URL(location.href), p = u.searchParams;
-  active.size ? p.set('chain', [...active].join(',')) : p.delete('chain');
+  const shareable = [...active].filter(k => k !== livePoiKey);
+  shareable.length ? p.set('chain', shareable.join(',')) : p.delete('chain');
+  livePoiTerm ? p.set('poi', livePoiTerm) : p.delete('poi');
   netFilter !== 'all' ? p.set('net', netFilter) : p.delete('net');
   F.kw ? p.set('minkw', F.kw) : p.delete('minkw');
   F.stalls ? p.set('minstalls', F.stalls) : p.delete('minstalls');
@@ -2476,7 +2486,10 @@ render();
 let boot = null;
 if (q.get('at')) {
   const [la, lo] = q.get('at').split(',').map(Number);
-  if (isFinite(la) && isFinite(lo)) boot = () => { setCenter(la, lo, 'Shared spot', 'pin'); reverseName(la, lo); fitToCenter(); };
+  if (isFinite(la) && isFinite(lo)) boot = () => {
+    setCenter(la, lo, 'Shared spot', 'pin'); reverseName(la, lo); fitToCenter();
+    if (q.get('poi')) runLivePoi(intentFromTerm(q.get('poi')));
+  };
 } else if (q.get('state')) {
   const st = q.get('state').toUpperCase();
   const inState = SITES.filter(s => s.st === st);
@@ -2496,7 +2509,9 @@ if (q.get('from') && q.get('to')) {
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size) { setSheet('mid'); fitToResults(); }
-else if (restoreArea()) { /* picked up where you left off */ }
+else if (restoreArea()) {
+  if (q.get('poi')) runLivePoi(intentFromTerm(q.get('poi')));
+}
 else {
   /* On a phone the map was the full screen height with a sliver of list under it, which
      gives the map a ~1:4 aspect no country fits into, and hides the results that are the
