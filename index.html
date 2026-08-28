@@ -206,6 +206,16 @@ svg{display:block}
 #centerCard .rad button.on{background:var(--accent);color:var(--accent-ink)}
 #centerCard .x{color:var(--dim2);padding:3px;display:grid;place-items:center}
 
+/* Panning the map and expecting results to follow is the behaviour every map app has
+   trained people to expect. Dropping a pin required finding a button first and then
+   tapping again, which is why moving the map felt like it did nothing. */
+#searchHere{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 14px);
+  transform:translateX(-50%);z-index:602;border:0;border-radius:100px;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:13px;
+  padding:0 16px;height:38px;box-shadow:0 4px 16px rgba(0,0,0,.22);white-space:nowrap;
+  animation:drop .18s}
+#searchHere[hidden]{display:none}
+#searchHere:active{transform:translateX(-50%) scale(.96)}
 #pinHint{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 16px);transform:translateX(-50%);z-index:601;
   background:var(--accent);color:var(--accent-ink);font-size:12.5px;font-weight:700;padding:9px 15px;
   border-radius:12px;box-shadow:var(--sh);display:none;white-space:nowrap}
@@ -596,6 +606,7 @@ svg{display:block}
     <div id="map" role="application" aria-label="Map of EV fast chargers"></div>
 
     <div id="pinHint">Tap the map to search that area</div>
+    <button id="searchHere" type="button" hidden>Search this area</button>
     <div id="legend" class="collapsed">
       <button id="legendToggle" aria-expanded="false">
         <span class="sw" style="background:#ff6b5a"></span> Networks
@@ -872,6 +883,19 @@ const map = L.map('map', { zoomControl: false, attributionControl: false, worldC
    so the US fills the width on both phone and desktop and the extra height simply crops. */
 const US_BOUNDS = L.latLngBounds([[34.0, -124.6], [45.0, -67.0]]);
 function fitUS() { settleFit(() => US_BOUNDS, [10, 10]); }
+/* Reopen on the last area searched, so a returning visitor is not dropped back on the
+   national map. Expires after a fortnight — by then you have probably driven elsewhere. */
+function restoreArea() {
+  let a; try { a = JSON.parse(localStorage.getItem('cc_area') || 'null'); } catch (e) { return false; }
+  if (!a || !isFinite(a.lat) || !isFinite(a.lon)) return false;
+  if (Date.now() - (a.t || 0) > 14 * 864e5) { localStorage.removeItem('cc_area'); return false; }
+  if (a.r) { radiusMi = a.r; $('ccRad').querySelectorAll('button')
+    .forEach(x => x.classList.toggle('on', +x.dataset.mi === a.r)); }
+  setCenter(a.lat, a.lon, a.label || 'Last area', a.kind || 'place');
+  if (!wideLayout()) setSheet('mid');
+  fitToCenter();
+  return true;
+}
 const attribCtl = L.control.attribution({ prefix: false }).addTo(map);
 let attribCur = '';
 function setAttribution(provider) {
@@ -1579,6 +1603,11 @@ function setCenter(lat, lon, label, kind) {
   $('ccIcon').textContent = kind === 'me' ? '🔵' : kind === 'pin' ? '📌' : '🔎';
   $('ccLabel').textContent = label;
   sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
+  /* Remember where you were. Without this every visit restarted at the national view and
+     you had to find your area again, which is most of why search felt unreliable. */
+  try {
+    localStorage.setItem('cc_area', JSON.stringify({ lat, lon, label, kind, r: radiusMi, t: Date.now() }));
+  } catch (e) { /* private mode */ }
   if (window.__themeRecheck) window.__themeRecheck();   // new latitude can change sunset
   render(); setSheet('mid'); syncUrl();
   settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
@@ -1611,22 +1640,59 @@ function locate(target, opts) {
   }
   if (!navigator.geolocation) return fallback('Location not supported — try a city name');
   $('locBtn').classList.add('busy'); toast('Finding you…');
-  navigator.geolocation.getCurrentPosition(p => {
+
+  const ok = p => {
     $('locBtn').classList.remove('busy');
     const la = p.coords.latitude, lo = p.coords.longitude;
     if (target === 'route') {
       $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
       toast('Start set to your location');
     } else setCenter(la, lo, 'My location', 'me');
-  }, err => {
-    $('locBtn').classList.remove('busy');
-    fallback(err.code === 1
-      ? 'Location blocked — showing everywhere, or type a city'
-      : 'Could not get your location — try a city name');
-  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  };
+  /* We only need to know which town you are in, not which side of the street. Asking for
+     high accuracy forces a GPS fix: slow or unavailable on a laptop, and indoors on a
+     phone it would burn the full timeout and then fail. Coarse network positioning
+     answers almost instantly. Only if that fails do we try the expensive way. */
+  navigator.geolocation.getCurrentPosition(ok, () => {
+    navigator.geolocation.getCurrentPosition(ok, err => {
+      $('locBtn').classList.remove('busy');
+      fallback(err.code === 1
+        ? 'Location blocked — search a city, or tap the map to pick an area'
+        : 'Could not get your location — search a city, or tap the map to pick an area');
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+  }, { enableHighAccuracy: false, timeout: 6000, maximumAge: 600000 });
 }
 $('locBtn').onclick = () => locate('center');
 $('useLoc').onclick = () => locate('route');
+
+/* "Search this area" — appears once you have moved the map meaningfully away from what is
+   currently being shown, and searches the middle of the view at a radius matching the
+   viewport, so what you see is what you get. */
+function viewRadiusMi() {
+  const sz = map.getSize();
+  if (sz.x < 60 || sz.y < 60) return radiusMi;      // no layout yet -> bounds are meaningless
+  const c = map.getCenter(), b = map.getBounds();
+  const meters = Math.min(hav(c.lat, c.lng, c.lat, b.getEast()), hav(c.lat, c.lng, b.getNorth(), c.lng));
+  const mi = meters / MI;
+  return [10, 25, 50].reduce((a, v) => Math.abs(v - mi) < Math.abs(a - mi) ? v : a, 25);
+}
+function maybeOfferSearchHere() {
+  if (route || pinMode) return $('searchHere').hidden = true;
+  const c = map.getCenter();
+  // far enough that the current results plainly no longer describe the view
+  const movedFar = !center || hav(center.lat, center.lon, c.lat, c.lng) > radiusMi * MI * 0.55;
+  $('searchHere').hidden = !movedFar || map.getZoom() < 7;
+}
+map.on('moveend zoomend', maybeOfferSearchHere);
+$('searchHere').onclick = () => {
+  const c = map.getCenter();
+  radiusMi = viewRadiusMi();
+  $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));
+  $('searchHere').hidden = true;
+  setCenter(c.lat, c.lng, 'This area', 'pin');
+  reverseName(c.lat, c.lng);
+  track('search-here');
+};
 
 /* drop pin */
 $('pinBtn').onclick = () => {
@@ -2238,6 +2304,7 @@ if (q.get('from') && q.get('to')) {
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size) { setSheet('mid'); fitToResults(); }
+else if (restoreArea()) { /* picked up where you left off */ }
 else {
   /* On a phone the map was the full screen height with a sliver of list under it, which
      gives the map a ~1:4 aspect no country fits into, and hides the results that are the
