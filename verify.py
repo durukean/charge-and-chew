@@ -110,6 +110,15 @@ if os.path.exists(sample):
 _html = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
 # match the actual call site at boot, not just the identifier — a commented-out call
 # still contains the name, which an earlier version of this check happily accepted
+# "supercharger near chase bank" flew the map to Dallas: every hit was a different Chase
+# branch and the Dallas one won only because OSM tagged that building class=place, which
+# scoreHit rewards. Guard the detector that stops a brand being treated as a place.
+# match the CALL, not the identifier: the definition alone would satisfy a name check
+# even with the call removed (the same trap the basemap guard fell into first time)
+check(re.search(r"if \(looksLikeChainBrand\(", _html) is not None,
+      "chain-brand detector is never called — an untracked brand would again anchor the "
+      "map on an arbitrary branch")
+check("unsupportedChain" in _html, "unsupported-brand error path gone")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
       "basemap selection is never called — the map would have no tile layer")
 # CARTO stamps "API KEY REQUIRED" into a normal, full-size tile, so it cannot be detected

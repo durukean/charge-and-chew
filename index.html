@@ -1344,7 +1344,9 @@ function renderList(vis) {
 
   $('sheetTitle').innerHTML = (filtering || route || center)
     ? `${vis.length} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
-    : `${vis.length.toLocaleString()} fast chargers <em>· every network, no filters</em>`;
+    : `${vis.length.toLocaleString()} fast chargers <em>· ${narrowings().length
+        ? esc(narrowings().map(n => n.label).join(' · '))
+        : 'every network, no filters'}</em>`;
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
      nothing here", which is the wrong answer and sends people looking in the wrong place. */
@@ -1824,6 +1826,31 @@ const PLACE_CLASS_BONUS = { place: 3, boundary: 3, landuse: 1 };
 function scoreHit(h) {
   return (PLACE_CLASS_BONUS[h.class] || 0) + (+h.importance || 0);
 }
+const SMALL_WORDS = new Set(['of', 'the', 'and', 'a', 'an', 'at', 'in', 'on', 'for']);
+const titleCaseBrand = t => String(t).split(' ').map((w, i) =>
+  i && SMALL_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+/* A brand with branches in several towns is not a place to centre the map on. A settlement
+   or admin area of the same name means it IS a place (Springfield, Brooklyn), and a
+   one-off landmark (Disneyland, San Diego Zoo) only ever appears in one town. */
+function looksLikeChainBrand(hits, q) {
+  const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const target = norm(q);
+  const same = hits.filter(h => norm(String(h.display_name || '').split(',')[0]).startsWith(target));
+  if (same.length < 2) return false;
+  for (const h of same) {
+    if (h.class === 'boundary') return false;
+    if (h.class === 'place' && h.type !== 'house' && h.type !== 'house_number') return false;
+  }
+  const towns = new Set();
+  for (const h of same) {
+    const a = h.address || {};
+    const t = a.city || a.town || a.village || a.county || '';
+    if (t) towns.add(t + '|' + (a.state || ''));
+  }
+  return towns.size >= 2;
+}
+
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
@@ -1839,6 +1866,17 @@ async function geocode(q) {
      could teleport the map to a real town that has nothing to do with the query. Require
      the result to actually echo something the user typed. ZIPs and short names are exempt
      because their match lands in structured address fields, not the display name. */
+  /* "supercharger near chase bank" used to fly to Dallas. Every hit was a different Chase
+     branch with identical importance, and the Dallas one won only because OSM tagged that
+     one building class=place, which scoreHit rewards. The real problem is that a brand we
+     do not track was being treated as a place at all. Detect that and say so instead of
+     anchoring the map on an arbitrary branch. Covered chains never reach here — the parser
+     matches them before we geocode. */
+  if (looksLikeChainBrand(ranked, q)) {
+    const e = new Error(`We don't track ${titleCaseBrand(q)} yet`);
+    e.unsupportedChain = true;
+    throw e;
+  }
   const words = q.toLowerCase().match(/[a-z]{4,}/g) || [];
   if (words.length) {
     const hay = ((best.display_name || '') + ' ' + JSON.stringify(best.address || {})).toLowerCase();
@@ -1897,7 +1935,12 @@ $('placeIn').addEventListener('keydown', async e => {
     setCenter(g.lat, g.lon, g.label, 'place');
   } catch (err) {
     render(); syncUrl();
-    toast(err.message);
+    if (err.unsupportedChain) {
+      // Naming a brand we don't cover is a reasonable thing to try. Say so, and show what
+      // we do cover, rather than leaving a dead-end toast.
+      toast(err.message + ' — here are the chains we cover');
+      setTimeout(openPicker, 550);
+    } else toast(err.message);
   } finally { $('placeBox').classList.remove('busy'); }
 });
 
