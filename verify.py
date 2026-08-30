@@ -123,6 +123,10 @@ check("unsupportedChain" in _html, "unsupported-brand error path gone")
 check(re.search(r"runLivePoi\(", _html) is not None, "live POI search is never called")
 check("POI_TAGS" in _html and "detectPoiIntent" in _html, "live POI category mapping gone")
 check("clearLivePoi()" in _html, "live POI results would leak across areas")
+# /near/<chain>/<state>/ promises a statewide count; a radius around the state centroid
+# silently delivered a fraction of it (Texas: 83 promised, 11 shown).
+check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
+check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
       "basemap selection is never called — the map would have no tile layer")
 # CARTO stamps "API KEY REQUIRED" into a normal, full-size tile, so it cannot be detected

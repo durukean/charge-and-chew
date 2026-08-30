@@ -235,7 +235,15 @@ svg{display:block}
 #legendList b{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 #legendList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #legendList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
-@media(max-width:520px){#legend{max-width:160px}#legendList{max-height:34vh}}
+/* Esri's required credit is long and wraps to two lines on a phone, where it used to sit
+   on top of the legend. It has to stay visible, so give it the full width at the very
+   bottom and lift the legend clear of it. */
+@media(max-width:520px){
+  #legend{max-width:160px;bottom:40px}
+  #legendList{max-height:34vh}
+  .leaflet-control-attribution{font-size:9px!important;line-height:1.35!important;
+    max-width:100vw!important;border-radius:0!important}
+}
 
 /* FABs */
 .mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
@@ -298,6 +306,7 @@ svg{display:block}
 /* Esri's dark canvas is a mid-grey that floats against our near-black chrome. Filter the
    tile pane (not the overlay pane, so markers keep their colour) to sit it in the theme. */
 :root[data-theme="dark"] #map.bm-esri .leaflet-tile-pane{filter:brightness(.62) contrast(1.06) saturate(.9)}
+#centerCard.statewide #ccRad{display:none}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
@@ -758,6 +767,8 @@ if (typeof L === 'undefined') {
 if (!D) { document.getElementById('splash').innerHTML =
   '<div style="color:#ff5a5f;font-size:14px">data.js failed to load</div>'; return; }
 
+// state names for /near/<chain>/<state>/ landings — mirrors STATES in build.py
+const STATE_NAME = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado", "CT":"Connecticut","DE":"Delaware","DC":"Washington DC","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho", "IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine", "MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri", "MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico", "NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon", "PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas", "UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"};
 const WALK_MPM = 80, MI = 1609.34;
 const SITES = D.sites, BRANDS = D.brands;
 const MATCH = {}; for (const k in D.matches) MATCH[+k] = D.matches[k];
@@ -766,7 +777,7 @@ const byId = {}; SITES.forEach(s => byId[s.id] = s);
 /* ───────── state ───────── */
 const active = new Set();
 let cat = 'all';
-let center = null;
+let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landings
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
@@ -1218,6 +1229,10 @@ function passesChain(s) {
 }
 function inScope(s) {
   if (route) return route.ids.has(s.id);
+  /* A state is a shape, not a circle. Landing from /near/ihop/tx/ used to drop a 50-mile
+     radius on the centroid of Texas — a state ~800 miles wide — so a page promising 83
+     chargers opened the map on 11. */
+  if (stateScope) return s.st === stateScope;
   if (center) return hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI;
   return true;
 }
@@ -1371,6 +1386,7 @@ function renderList(vis) {
   const what = cat === 'fav' ? 'saved' : [...active].map(k => BRANDS[k].e + ' ' + k).join(' or ');
   let scope = '';
   if (route) scope = ' on route';
+  else if (stateScope) scope = ` in ${STATE_NAME[stateScope] || stateScope}`;
   else if (center) scope = ` within ${radiusMi} mi of ${center.label}`;
 
   $('sheetTitle').innerHTML = (filtering || route || center)
@@ -1625,10 +1641,11 @@ function updateCenterSub(n) {
   $('ccSub').textContent = `${n} stop${n === 1 ? '' : 's'} within ${radiusMi} mi`;
 }
 function clearCenter() {
-  center = null;
+  center = null; stateScope = null;
+  clearLivePoi();
   if (centerLayer) { map.removeLayer(centerLayer); centerLayer = null; }
   if (radiusLayer) { map.removeLayer(radiusLayer); radiusLayer = null; }
-  $('centerCard').classList.remove('show');
+  $('centerCard').classList.remove('show', 'statewide');
   sortBy = 'walk'; $('sortLbl').textContent = SORT_LABEL.walk;
   render(); syncUrl();
 }
@@ -2321,7 +2338,7 @@ function syncUrl() {
   F.h24 ? p.set('h24', '1') : p.delete('h24');
   F.free ? p.set('free', '1') : p.delete('free');
   F.noiso ? p.set('noiso', '1') : p.delete('noiso');
-  p.delete('state');
+  stateScope ? p.set('state', stateScope) : p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
   if (route) { p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
@@ -2499,11 +2516,15 @@ if (q.get('at')) {
   const st = q.get('state').toUpperCase();
   const inState = SITES.filter(s => s.st === st);
   if (inState.length) {
-    const la = inState.reduce((a, s) => a + s.lat, 0) / inState.length;
-    const lo = inState.reduce((a, s) => a + s.lon, 0) / inState.length;
-    radiusMi = 50;
-    $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.mi === '50'));
-    boot = () => { setCenter(la, lo, st, 'place'); fitToCenter(); };
+    boot = () => {
+      stateScope = st;
+      $('centerCard').classList.add('show');
+      $('centerCard').classList.add('statewide');
+      $('ccIcon').textContent = '🗺️';
+      $('ccLabel').textContent = STATE_NAME[st] || st;
+      render(); setSheet('mid'); syncUrl();
+      settleFit(() => L.latLngBounds(inState.map(s => [s.lat, s.lon])), [24, 24], 11);
+    };
   }
 }
 if (q.get('from') && q.get('to')) {
