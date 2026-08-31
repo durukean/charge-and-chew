@@ -947,8 +947,10 @@ function popupHtml(s) {
     : teslaGate ? '⚠ adapter — and site must allow non-Tesla EVs'
     : cp === 'adapter' ? '⚠ needs adapter' : '✕ incompatible';
   const carLine = cm != null
-    ? `<div class="pp-car"><span class="cc ${cp}">${cpTxt}</span>
-       <span>~${cm} min 10–80% · ${dwell(cm)}</span></div>`
+    ? (cp === null
+        ? `<div class="pp-car"><span class="cc null">${cpTxt} — this stop has no connector your car can use</span></div>`
+        : `<div class="pp-car"><span class="cc ${cp}">${cpTxt}</span>
+       <span>~${cm} min 10–80% · ${dwell(cm)}</span></div>`)
     : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
@@ -1426,8 +1428,12 @@ function renderList(vis) {
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
     const cm = chargeMin(s), cp = compat(s);
+    /* A charge time next to "✕ incompatible" is a contradiction — if the car cannot plug
+       in, there is no charge time. */
     const carBadge = cm != null
-      ? `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : cp === null ? '✕' : '⚡'} ~${cm}m</span>` : '';
+      ? (cp === null
+          ? `<span class="cbadge null">✕ no plug</span>`
+          : `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : '⚡'} ~${cm}m</span>`) : '';
     const bw = bestWalk(s);
     const lead = showIdx ? `<div class="idx">${i + 1}</div>`
       : bw < 9e9 ? `<div class="wring"><b>≥${walkMin(bw)}</b><span>min</span></div>`
