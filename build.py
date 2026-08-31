@@ -550,5 +550,7 @@ open(os.path.join(HERE, "assets", "pages.css"), "w").write(CSS)
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 sm += f"<url><loc>{BASE}/</loc></url>\n" + "".join(f"<url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
 open(os.path.join(HERE, "sitemap.xml"), "w").write(sm)
-open(os.path.join(HERE, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
+# /admin/ reads private analytics; it is noindex too, but keep crawlers out of it entirely.
+open(os.path.join(HERE, "robots.txt"), "w").write(
+    f"User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: {BASE}/sitemap.xml\n")
 print(f"Generated {len(urls)} pages + sitemap.xml + robots.txt (base {BASE})")

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Analytics · Charge &amp; Chew</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--line:#e3e7eb;--txt:#191c1f;
+  --dim:#5b6470;--dim2:#5f6879;--accent:#15803d;--accent-ink:#fff;--amber:#b45309;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1116;--surface:#171a20;--surface2:#1e222a;
+  --line:#272c35;--txt:#eef1f5;--dim:#a2abb7;--dim2:#8b949f;--accent:#4ade80;--accent-ink:#0b1a10;--amber:#fbbf24}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  padding:20px 16px 60px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:21px;letter-spacing:-.4px;display:flex;align-items:center;gap:9px;margin-bottom:3px}
+h1 .mk{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#16a34a,#f59e0b);flex-shrink:0}
+.sub{color:var(--dim);font-size:13px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:700;color:var(--dim);margin-bottom:6px}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface2);color:var(--txt);font-size:14px;font-family:inherit}
+button{border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink);font-family:inherit}
+button.ghost{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
+.row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.row>div{flex:1;min-width:180px}
+.note{font-size:11.5px;color:var(--dim2);margin-top:9px;line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi b{display:block;font-size:26px;letter-spacing:-.6px;font-family:var(--mono)}
+.kpi span{font-size:11.5px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+td{padding:6px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+td:last-child{text-align:right;font-family:var(--mono);font-size:12.5px;color:var(--dim);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.bar{height:5px;border-radius:3px;background:var(--accent);opacity:.28;margin-top:3px}
+.chart{display:flex;align-items:flex-end;gap:2px;height:110px;margin-top:4px}
+.chart div{flex:1;background:var(--accent);opacity:.75;border-radius:2px 2px 0 0;min-height:1px}
+.chart div:hover{opacity:1}
+.err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:12px;border-radius:10px;font-size:13px}
+@media(prefers-color-scheme:dark){.err{background:#2a1416;border-color:#5c2326;color:#fca5a5}}
+.trunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:1px;width:100%}
+.muted{color:var(--dim2);font-size:12.5px}
+.funnel td:first-child{font-weight:600}
+</style></head>
+<body><div class="wrap">
+<h1><span class="mk"></span>Analytics</h1>
+<p class="sub">Reads your GoatCounter data directly from your browser. Nothing is sent anywhere else.</p>
+
+<div class="card" id="setup">
+  <div class="row">
+    <div><label for="tok">GoatCounter API token</label><input id="tok" type="password" placeholder="paste token" autocomplete="off"></div>
+    <div style="max-width:150px"><label for="days">Period</label>
+      <select id="days"><option value="7">7 days</option><option value="30" selected>30 days</option>
+      <option value="90">90 days</option><option value="365">1 year</option></select></div>
+    <div style="flex:0 0 auto"><button id="go">Load</button></div>
+    <div style="flex:0 0 auto"><button id="forget" class="ghost">Forget token</button></div>
+  </div>
+  <p class="note">Create a token at <b>chargeandchew.goatcounter.com → Settings → API tokens</b>, with
+  <b>“Read statistics”</b> permission. It is stored only in this browser’s local storage and sent only to
+  GoatCounter. This page is <b>noindex</b> and not linked from the site — but it is a public URL, so the
+  token is what protects your data, not the address.</p>
+</div>
+
+<div id="out"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const SITE = 'https://chargeandchew.goatcounter.com';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nf = n => (+n || 0).toLocaleString();
+
+$('tok').value = localStorage.getItem('cc_gc_token') || '';
+$('days').value = localStorage.getItem('cc_gc_days') || '30';
+$('forget').onclick = () => { localStorage.removeItem('cc_gc_token'); $('tok').value = ''; $('out').innerHTML = ''; };
+
+/* GoatCounter allows 4 requests/second; stay under it rather than getting throttled mid-load. */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function api(path, token, params) {
+  const u = new URL(SITE + '/api/v0/' + path);
+  Object.entries(params || {}).forEach(([k, v]) => v != null && u.searchParams.set(k, v));
+  const r = await fetch(u, { headers: { Authorization: 'Bearer ' + token } });
+  if (r.status === 401 || r.status === 403) throw new Error('Token rejected — check it has “Read statistics” permission.');
+  if (!r.ok) throw new Error(path + ' → HTTP ' + r.status);
+  return r.json();
+}
+
+function table(rows, total, fmt) {
+  if (!rows || !rows.length) return '<p class="muted">No data for this period.</p>';
+  const max = Math.max(...rows.map(r => r.count)) || 1;
+  return '<table>' + rows.map(r => {
+    const label = fmt ? fmt(r) : esc(r.name || r.id || '(none)');
+    return `<tr><td><div class="trunc">${label}</div>
+      <div class="bar" style="width:${Math.max(2, 100 * r.count / max)}%"></div></td>
+      <td>${nf(r.count)}${total ? ' · ' + Math.round(100 * r.count / total) + '%' : ''}</td></tr>`;
+  }).join('') + '</table>';
+}
+
+async function load() {
+  const token = $('tok').value.trim();
+  const days = +$('days').value;
+  if (!token) { $('out').innerHTML = '<div class="err">Paste a token first.</div>'; return; }
+  localStorage.setItem('cc_gc_days', String(days));
+  $('out').innerHTML = '<p class="muted">Loading…</p>';
+
+  const end = new Date(), start = new Date(Date.now() - days * 864e5);
+  const iso = d => d.toISOString().slice(0, 10);
+  const P = { start: iso(start), end: iso(end) };
+
+  try {
+    const total = await api('stats/total', token, P);
+    // only persist a token once GoatCounter has accepted it
+    localStorage.setItem('cc_gc_token', token);
+    await sleep(260);
+    const hits = await api('stats/hits', token, { ...P, limit: 200, daily: true });
+    const pages = {};
+    for (const k of ['browsers', 'systems', 'locations', 'toprefs', 'sizes']) {
+      await sleep(260);
+      try { pages[k] = await api('stats/' + k, token, { ...P, limit: 12 }); }
+      catch (e) { pages[k] = { stats: [], _err: e.message }; }
+    }
+
+    // split real pages from the e- prefixed custom events
+    const all = (hits.stats || []);
+    const isEvent = p => (p.path || '').startsWith('e-');
+    const real = all.filter(p => !isEvent(p));
+    const events = all.filter(isEvent).map(p => ({ ...p, ev: p.path.replace(/^e-/, '') }));
+    const evCount = n => { const e = events.find(x => x.ev === n || x.ev.startsWith(n + '/')); return e ? e.count : 0; };
+    const evSum = pre => events.filter(x => x.ev === pre || x.ev.startsWith(pre + '/'))
+                               .reduce((a, b) => a + b.count, 0);
+
+    // daily series for the chart
+    const series = {};
+    all.forEach(p => (p.stats || []).forEach(d => { series[d.day] = (series[d.day] || 0) + (d.daily || 0); }));
+    const dayKeys = Object.keys(series).sort();
+    const maxDay = Math.max(...dayKeys.map(d => series[d]), 1);
+
+    const funnel = [
+      ['Arrived', total.total, ''],
+      ['Picked a chain from the splash', evSum('hero-pick'), 'hero-pick'],
+      ['Set an area (search / locate / pin)', evSum('area-search'), 'area-search'],
+      ['Searched a shop type live', evSum('live-poi'), 'live-poi'],
+      ['Opened a charger', evSum('open-charger'), 'open-charger'],
+      ['Saved a stop', evSum('save-stop'), 'save-stop'],
+      ['Planned a route', evSum('route'), 'route'],
+      ['Shared a view', evSum('share'), 'share'],
+      ['Shown the install offer', evSum('install-offer'), 'install-offer'],
+      ['Installed', evSum('install-done'), 'install-done'],
+      ['Launched from home screen', evSum('pwa-launch'), 'pwa-launch']
+    ];
+
+    const seoPages = real.filter(p => (p.path || '').startsWith('/near/') || (p.path || '').startsWith('/along/'));
+    const seoTotal = seoPages.reduce((a, b) => a + b.count, 0);
+
+    $('out').innerHTML = `
+      <div class="kpis">
+        <div class="kpi"><b>${nf(total.total)}</b><span>Pageviews</span></div>
+        <div class="kpi"><b>${nf(total.total_events)}</b><span>Events</span></div>
+        <div class="kpi"><b>${nf(seoTotal)}</b><span>Landing-page views</span></div>
+        <div class="kpi"><b>${nf(Math.round(total.total / Math.max(1, days)))}</b><span>Per day</span></div>
+      </div>
+
+      <div class="card"><h2>Daily traffic · last ${days} days</h2>
+        <div class="chart">${dayKeys.map(d =>
+          `<div style="height:${Math.max(1, 100 * series[d] / maxDay)}%" title="${d}: ${series[d]}"></div>`).join('')}</div>
+        <p class="note">${dayKeys[0] || ''} → ${dayKeys[dayKeys.length - 1] || ''}</p></div>
+
+      <div class="card"><h2>What people actually do</h2>
+        <table class="funnel">${funnel.map(([label, n]) =>
+          `<tr><td>${esc(label)}</td><td>${nf(n)}${total.total ? ' · ' + Math.round(100 * n / total.total) + '%' : ''}</td></tr>`).join('')}</table>
+        <p class="note">Counted once per session, so these are people, not clicks. Percentages are of pageviews.</p></div>
+
+      <div class="grid">
+        <div class="card"><h2>Where they came from</h2>${table((pages.toprefs || {}).stats, total.total)}</div>
+        <div class="card"><h2>Countries</h2>${table((pages.locations || {}).stats, total.total)}</div>
+        <div class="card"><h2>Browsers</h2>${table((pages.browsers || {}).stats, total.total)}</div>
+        <div class="card"><h2>Operating systems</h2>${table((pages.systems || {}).stats, total.total)}</div>
+        <div class="card"><h2>Screen sizes</h2>${table((pages.sizes || {}).stats, total.total)}</div>
+        <div class="card"><h2>Top pages</h2>${table(real.slice(0, 12), total.total,
+          r => esc(r.path || r.name))}</div>
+      </div>
+
+      <div class="card"><h2>Landing pages that get traffic (${seoPages.length} of 2,978)</h2>
+        ${table(seoPages.slice(0, 20), seoTotal, r => esc(r.path))}
+        <p class="note">Only these earn their keep. If most of the 2,978 generated pages never appear here,
+        that is the signal to prune rather than generate more.</p></div>
+
+      <div class="card"><h2>All events</h2>${table(events.map(e => ({ name: e.ev, count: e.count })), null)}</div>`;
+  } catch (e) {
+    $('out').innerHTML = `<div class="err"><b>Couldn’t load.</b><br>${esc(e.message)}</div>`;
+  }
+}
+$('go').onclick = load;
+$('tok').addEventListener('keydown', e => { if (e.key === 'Enter') load(); });
+if ($('tok').value) load();
+</script>
+</body></html>
