@@ -126,6 +126,11 @@ check("clearLivePoi()" in _html, "live POI results would leak across areas")
 # /near/<chain>/<state>/ promises a statewide count; a radius around the state centroid
 # silently delivered a fraction of it (Texas: 83 promised, 11 shown).
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
+# The install offer must stay gated: never on the first visit, never after a dismissal,
+# never when already installed. An ungated prompt is worse than no prompt.
+check("visits < 2" in _html, "install prompt is no longer gated to returning visitors")
+check("installSnoozed" in _html, "install dismissal is no longer remembered")
+check("deliveredValue" in _html, "install prompt no longer waits until the app is useful")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
       "basemap selection is never called — the map would have no tile layer")

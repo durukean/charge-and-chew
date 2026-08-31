@@ -307,6 +307,24 @@ svg{display:block}
    tile pane (not the overlay pane, so markers keep their colour) to sit it in the theme. */
 :root[data-theme="dark"] #map.bm-esri .leaflet-tile-pane{filter:brightness(.62) contrast(1.06) saturate(.9)}
 #centerCard.statewide #ccRad{display:none}
+/* Install nudge. Deliberately a card above the sheet rather than a modal: this is an
+   offer, not a decision the user owes us. */
+#installCard{position:fixed;left:10px;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);
+  z-index:1400;display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:16px;
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);
+  animation:icIn .22s ease-out}
+@keyframes icIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#installCard[hidden]{display:none}
+.ic-mark{width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,#16a34a,#f59e0b)}
+.ic-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ic-txt b{font-size:13.5px}
+.ic-txt span{font-size:11.5px;color:var(--dim);line-height:1.35}
+.ic-act{display:flex;align-items:center;gap:6px;flex-shrink:0}
+#icGo{background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:12.5px;
+  padding:9px 14px;border-radius:10px;min-height:38px}
+#icNo{color:var(--dim);font-size:12px;font-weight:600;padding:9px 8px;min-height:38px}
+@media(min-width:760px){#installCard{left:auto;right:16px;max-width:390px}}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
@@ -751,6 +769,11 @@ svg{display:block}
 </div></div>
 
 <div id="offlineBar" hidden>Offline — showing saved data</div>
+<div id="installCard" hidden>
+  <div class="ic-mark" aria-hidden="true"></div>
+  <div class="ic-txt"><b>Add to your home screen</b><span id="icSub">Opens instantly, works offline on the road.</span></div>
+  <div class="ic-act"><button id="icGo">Add</button><button id="icNo" aria-label="Not now">Not now</button></div>
+</div>
 <div id="toast"></div>
 
 <script src="data.js?v=9"></script>
@@ -1407,6 +1430,12 @@ function renderList(vis) {
     ? nar.map(n => `<span class="fb">${esc(n.label)}<button data-clear="${esc(n.k)}" aria-label="Remove filter: ${esc(n.label)}" title="Remove">×</button></span>`).join('')
       + (nar.length > 1 ? '<button class="fball" data-clear="*">Show all chargers</button>' : '')
     : '';
+
+  /* The moment the app just proved useful is the only moment worth asking. */
+  if (vis.length && (active.size || center || route)) {
+    deliveredValue = true;
+    setTimeout(offerInstall, 1200);
+  }
 
   if (!vis.length) {
     const couldHelp = nar.length ? countWithoutNarrowing() : 0;
@@ -2233,6 +2262,68 @@ async function runLivePoi(intent) {
     ? `${matched} charger${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
     : `Found ${pois.length} ${many}, but none within a walk of a charger`);
 }
+
+
+/* ───────── install nudge ─────────
+   A phone utility is worth far more on the home screen than in a tab, but a prompt on
+   arrival is the classic way to get dismissed forever. So: only after the app has actually
+   proved useful (a search or chain pick that returned stops), only from the second visit,
+   never when already installed, and a "not now" is respected for 30 days.
+
+   iOS Safari never fires beforeinstallprompt and has no programmatic install, so there we
+   show the Share-sheet instructions instead — and only to iOS Safari, since Chrome on iOS
+   cannot add to the home screen at all. */
+const installed = () => matchMedia('(display-mode: standalone)').matches
+  || window.navigator.standalone === true
+  // read the param directly rather than via `q`, which is declared further down the file
+  || new URLSearchParams(location.search).get('src') === 'pwa';
+const iosSafari = () => /iP(hone|ad|od)/.test(navigator.userAgent)
+  && /Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent);
+
+let deferredInstall = null, installShown = false, deliveredValue = false;
+const visits = (() => {
+  const n = (+localStorage.getItem('cc_visits') || 0) + 1;
+  try { localStorage.setItem('cc_visits', String(n)); } catch (e) {}
+  return n;
+})();
+
+function installSnoozed() {
+  const t = +localStorage.getItem('cc_install_no') || 0;
+  return Date.now() - t < 30 * 864e5;
+}
+function offerInstall() {
+  if (installShown || installed() || installSnoozed() || visits < 2) return;
+  if (!deferredInstall && !iosSafari()) return;      // nothing we can offer on this browser
+  installShown = true;
+  if (iosSafari() && !deferredInstall) {
+    $('icSub').textContent = 'Tap Share, then "Add to Home Screen".';
+    $('icGo').hidden = true;
+  }
+  $('installCard').hidden = false;
+  track('install-offer', deferredInstall ? 'prompt' : 'ios-hint');
+}
+function hideInstall(remember) {
+  $('installCard').hidden = true;
+  if (remember) { try { localStorage.setItem('cc_install_no', String(Date.now())); } catch (e) {} }
+}
+addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredInstall = e;
+  // Chrome fires this once the page settles, typically after results are already on
+  // screen — without this the offer would wait for a render that never comes.
+  if (deliveredValue) setTimeout(offerInstall, 400);
+});
+addEventListener('appinstalled', () => { hideInstall(false); track('install-done', '1'); });
+$('icNo').onclick = () => { hideInstall(true); track('install-dismiss', '1'); };
+$('icGo').onclick = async () => {
+  if (!deferredInstall) return hideInstall(true);
+  hideInstall(false);
+  deferredInstall.prompt();
+  const r = await deferredInstall.userChoice.catch(() => ({ outcome: 'error' }));
+  track('install-choice', r.outcome);
+  // the event is single-use; a dismissal shouldn't re-ask this session
+  deferredInstall = null;
+  if (r.outcome !== 'accepted') localStorage.setItem('cc_install_no', String(Date.now()));
+};
 
 /* ───────── route ───────── */
 $('routeToggle').onclick = () => {
