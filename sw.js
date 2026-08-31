@@ -4,7 +4,7 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v7';
+const VERSION = 'cc-v8';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 const DATA  = `${VERSION}-data`;    // data.js — big, versioned by ?v= in the URL
 const TILES = `${VERSION}-tiles`;   // map tiles for areas already viewed
