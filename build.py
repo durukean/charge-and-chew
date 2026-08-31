@@ -139,8 +139,11 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
 """
 
-def page(path, title, desc, body, canonical, jsonld="", thin=False):
+def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
     robots = '<meta name="robots" content="noindex,follow">' if thin else ''
+    # Per-chain social card when one has been rendered (see make_og.py); the generic card
+    # otherwise, so a missing og/ directory can never break the build.
+    og_url = f"{BASE}/og/{og}.png" if og and os.path.exists(os.path.join(HERE, "og", og + ".png")) else f"{BASE}/og.png"
     depth = path.count("/")
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
@@ -161,7 +164,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{BASE}/{canonical}">
-<meta property="og:image" content="{BASE}/og.png">
+<meta property="og:image" content="{og_url}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d1117">
@@ -372,7 +375,7 @@ for key, b in brands.items():
 {faq_html}"""
     can = f"near/{cs}/"
     path = f"near/{cs}/index.html"
-    page(path, title, desc, body, can, jsonld_chain(key, hits, can, faq_schema)); add(path)
+    page(path, title, desc, body, can, jsonld_chain(key, hits, can, faq_schema), og=slug(key)); add(path)
 
 
 # ---- per chain+state (needs complete state_chain from the loop above) ----
@@ -410,7 +413,7 @@ for key, b in brands.items():
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
         thin = len(v) < STATE_INDEX_MIN   # keep crawlable, but out of the index for now
-        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can, faq_schema), thin=thin)
+        page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can, faq_schema), thin=thin, og=slug(key))
         if not thin: add(path)
 
 # ---- near/index.html ----

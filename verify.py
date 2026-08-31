@@ -133,6 +133,15 @@ check("installSnoozed" in _html, "install dismissal is no longer remembered")
 check("deliveredValue" in _html, "install prompt no longer waits until the app is useful")
 # The live lookup is the app's most distinctive feature and is invisible without examples.
 check("SUGGESTIONS" in _html, "search examples gone — live lookup becomes undiscoverable again")
+# Per-chain social cards: a page may reference og/<slug>.png only if it was rendered,
+# otherwise every share of that page shows a broken image.
+import glob as _glob
+_miss = set()
+for _p in _glob.glob(os.path.join(HERE, "near", "**", "index.html"), recursive=True):
+    _m = re.search(r'og:image" content="[^"]*/og/([^"]+)\.png"', open(_p, encoding="utf-8").read())
+    if _m and not os.path.exists(os.path.join(HERE, "og", _m.group(1) + ".png")):
+        _miss.add(_m.group(1))
+check(not _miss, f"pages reference social cards that do not exist: {sorted(_miss)[:5]}")
 check("tire shop" in _html, "the live-category example is gone from the suggestions")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
