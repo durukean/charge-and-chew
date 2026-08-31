@@ -1665,9 +1665,7 @@ function setCenter(lat, lon, label, kind) {
   sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
   /* Remember where you were. Without this every visit restarted at the national view and
      you had to find your area again, which is most of why search felt unreliable. */
-  try {
-    localStorage.setItem('cc_area', JSON.stringify({ lat, lon, label, kind, r: radiusMi, t: Date.now() }));
-  } catch (e) { /* private mode */ }
+  rememberArea();
   if (window.__themeRecheck) window.__themeRecheck();   // new latitude can change sunset
   render(); setSheet('mid'); syncUrl();
   settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
@@ -1773,13 +1771,28 @@ map.on('click', e => {
   setCenter(e.latlng.lat, e.latlng.lng, 'Dropped pin', 'pin');
   reverseName(e.latlng.lat, e.latlng.lng);
 });
+/* Remember where you were. Without this every visit restarted at the national view and
+   you had to find your area again, which is most of why search felt unreliable. */
+function rememberArea() {
+  if (!center) return;
+  try {
+    localStorage.setItem('cc_area', JSON.stringify({ lat: center.lat, lon: center.lon,
+      label: center.label, kind: center.kind, r: radiusMi, t: Date.now() }));
+  } catch (e) { /* private mode */ }
+}
+
 async function reverseName(lat, lon) {
   try {
     const r = await fetchTimeout(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`, 8000);
     const j = await r.json();
     const nm = placeLabel(j);
     if (nm && center && center.kind === 'pin') {
-      center.label = nm; $('ccLabel').textContent = nm; render();
+      center.label = nm; $('ccLabel').textContent = nm;
+      /* Persist the resolved name too. Without this the stored area kept the placeholder
+         ("Shared spot" / "Dropped pin") and every return visit showed that instead of the
+         actual city. */
+      rememberArea();
+      render();
     }
   } catch (e) { /* keep the generic label */ }
 }
