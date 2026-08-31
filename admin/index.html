@@ -26,12 +26,18 @@ button{border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:1
   background:var(--accent);color:var(--accent-ink);font-family:inherit}
 button.ghost{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
 .row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
-.row>div{flex:1;min-width:180px}
+.row>div{flex:1;min-width:170px}
+/* the date pair must be allowed to shrink, or it pushes the buttons underneath itself */
+#rangeWrap input{min-width:0;flex:1}
+.row>div[style*='flex:0 0 auto']{flex:0 0 auto}
 .note{font-size:11.5px;color:var(--dim2);margin-top:9px;line-height:1.5}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
 .kpi b{display:block;font-size:26px;letter-spacing:-.6px;font-family:var(--mono)}
 .kpi span{font-size:11.5px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.kpi em{display:block;font-style:normal;font-size:11.5px;font-weight:700;margin-top:5px;color:var(--dim2)}
+.kpi em.up{color:var(--accent)}.kpi em.down{color:var(--amber)}
+.kpi em span{font-weight:500;text-transform:none;letter-spacing:0;color:var(--dim2)}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-bottom:10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -55,9 +61,12 @@ tr:last-child td{border-bottom:0}
 <div class="card" id="setup">
   <div class="row">
     <div><label for="tok">GoatCounter API token</label><input id="tok" type="password" placeholder="paste token" autocomplete="off"></div>
-    <div style="max-width:150px"><label for="days">Period</label>
-      <select id="days"><option value="7">7 days</option><option value="30" selected>30 days</option>
-      <option value="90">90 days</option><option value="365">1 year</option></select></div>
+    <div style="max-width:160px"><label for="days">Period</label>
+      <select id="days"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option>
+      <option value="90">Last 90 days</option><option value="365">Last year</option>
+      <option value="all">All time</option><option value="custom">Custom range…</option></select></div>
+    <div id="rangeWrap" style="display:none;min-width:250px;max-width:340px"><label>From / to</label>
+      <div style="display:flex;gap:6px"><input id="from" type="date"><input id="to" type="date"></div></div>
     <div style="flex:0 0 auto"><button id="go">Load</button></div>
     <div style="flex:0 0 auto"><button id="forget" class="ghost">Forget token</button></div>
   </div>
@@ -78,6 +87,11 @@ const nf = n => (+n || 0).toLocaleString();
 
 $('tok').value = localStorage.getItem('cc_gc_token') || '';
 $('days').value = localStorage.getItem('cc_gc_days') || '30';
+(function () {
+  const t = new Date(), f = new Date(Date.now() - 30 * 864e5);
+  $('to').value = t.toISOString().slice(0, 10);
+  $('from').value = f.toISOString().slice(0, 10);
+})();
 $('forget').onclick = () => { localStorage.removeItem('cc_gc_token'); $('tok').value = ''; $('out').innerHTML = ''; };
 
 /* GoatCounter allows 4 requests/second; stay under it rather than getting throttled mid-load. */
@@ -89,6 +103,16 @@ async function api(path, token, params) {
   if (r.status === 401 || r.status === 403) throw new Error('Token rejected — check it has “Read statistics” permission.');
   if (!r.ok) throw new Error(path + ' → HTTP ' + r.status);
   return r.json();
+}
+
+/* Direction against the preceding window. A bare total cannot tell you whether anything
+   is working; the same number next to "vs 41 before" can. */
+function delta(now, before) {
+  if (before == null || !isFinite(before)) return '';
+  if (!before) return now ? '<em class="up">new</em>' : '';
+  const pct = Math.round(100 * (now - before) / before);
+  const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : '';
+  return `<em class="${cls}">${pct > 0 ? '+' : ''}${pct}% <span>vs ${nf(before)} before</span></em>`;
 }
 
 function table(rows, total, fmt) {
@@ -104,20 +128,45 @@ function table(rows, total, fmt) {
 
 async function load() {
   const token = $('tok').value.trim();
-  const days = +$('days').value;
+  const sel = $('days').value;
+  const days = sel === 'all' || sel === 'custom' ? 0 : +sel;
   if (!token) { $('out').innerHTML = '<div class="err">Paste a token first.</div>'; return; }
-  localStorage.setItem('cc_gc_days', String(days));
+  localStorage.setItem('cc_gc_days', sel);
   $('out').innerHTML = '<p class="muted">Loading…</p>';
 
-  const end = new Date(), start = new Date(Date.now() - days * 864e5);
   const iso = d => d.toISOString().slice(0, 10);
+  let start, end = new Date(), label;
+  if (sel === 'custom') {
+    if (!$('from').value || !$('to').value) { $('out').innerHTML = '<div class="err">Pick both dates.</div>'; return; }
+    start = new Date($('from').value); end = new Date($('to').value);
+    label = $('from').value + ' → ' + $('to').value;
+  } else if (sel === 'all') {
+    // GoatCounter keeps everything since the tag was installed; ask from well before that
+    // and it returns whatever exists.
+    start = new Date('2020-01-01'); label = 'all time';
+  } else {
+    start = new Date(Date.now() - days * 864e5); label = 'last ' + days + ' days';
+  }
   const P = { start: iso(start), end: iso(end) };
+  const span = Math.max(1, Math.round((end - start) / 864e5));
 
   try {
     const total = await api('stats/total', token, P);
     // only persist a token once GoatCounter has accepted it
     localStorage.setItem('cc_gc_token', token);
     await sleep(260);
+
+    /* A total on its own says nothing. Fetch the immediately preceding window of the same
+       length so every headline number carries a direction. Skipped for "all time", which
+       has nothing before it to compare against. */
+    let prev = null;
+    if (sel !== 'all') {
+      const pEnd = new Date(start.getTime() - 864e5);
+      const pStart = new Date(pEnd.getTime() - span * 864e5);
+      try { prev = await api('stats/total', token, { start: iso(pStart), end: iso(pEnd) }); }
+      catch (e) { /* comparison is a nicety, not a reason to fail the page */ }
+      await sleep(260);
+    }
     const hits = await api('stats/hits', token, { ...P, limit: 200, daily: true });
     const pages = {};
     for (const k of ['browsers', 'systems', 'locations', 'toprefs', 'sizes']) {
@@ -160,13 +209,13 @@ async function load() {
 
     $('out').innerHTML = `
       <div class="kpis">
-        <div class="kpi"><b>${nf(total.total)}</b><span>Pageviews</span></div>
-        <div class="kpi"><b>${nf(total.total_events)}</b><span>Events</span></div>
+        <div class="kpi"><b>${nf(total.total)}</b><span>Pageviews</span>${delta(total.total, prev && prev.total)}</div>
+        <div class="kpi"><b>${nf(total.total_events)}</b><span>Events</span>${delta(total.total_events, prev && prev.total_events)}</div>
         <div class="kpi"><b>${nf(seoTotal)}</b><span>Landing-page views</span></div>
-        <div class="kpi"><b>${nf(Math.round(total.total / Math.max(1, days)))}</b><span>Per day</span></div>
+        <div class="kpi"><b>${nf(Math.round(total.total / span))}</b><span>Per day avg</span></div>
       </div>
 
-      <div class="card"><h2>Daily traffic · last ${days} days</h2>
+      <div class="card"><h2>Daily traffic · ${esc(label)}</h2>
         <div class="chart">${dayKeys.map(d =>
           `<div style="height:${Math.max(1, 100 * series[d] / maxDay)}%" title="${d}: ${series[d]}"></div>`).join('')}</div>
         <p class="note">${dayKeys[0] || ''} → ${dayKeys[dayKeys.length - 1] || ''}</p></div>
@@ -196,6 +245,10 @@ async function load() {
     $('out').innerHTML = `<div class="err"><b>Couldn’t load.</b><br>${esc(e.message)}</div>`;
   }
 }
+$('days').addEventListener('change', () => {
+  $('rangeWrap').style.display = $('days').value === 'custom' ? '' : 'none';
+});
+$('days').dispatchEvent(new Event('change'));
 $('go').onclick = load;
 $('tok').addEventListener('keydown', e => { if (e.key === 'Enter') load(); });
 if ($('tok').value) load();
