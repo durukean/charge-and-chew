@@ -137,7 +137,13 @@ check("SUGGESTIONS" in _html, "search examples gone — live lookup becomes undi
 check("chainDetail" in _html, "tap-a-chain lookup gone")
 check("travelmode=walking" in _html, "per-chain walking directions gone")
 # The place-card URL form must survive: ?api=1&query= lands on a results list instead.
-check("/maps/place/" in _html, "Google place-card links gone — reviews/photos unreachable")
+# /maps/place/ renders an empty panel and ?api=1&query= resolves by text to the wrong
+# city; only the viewport-scoped search form lands on the right branch.
+check("/maps/search/" in _html and "/@" in _html,
+      "Google place links are not the viewport-scoped form — they will resolve to the wrong branch")
+# match the URL being BUILT, not the word appearing in a comment explaining why not to
+check("google.com/maps/place/" not in _html,
+      "reverted to the /maps/place/ URL, which renders an empty panel")
 # Per-chain social cards: a page may reference og/<slug>.png only if it was rendered,
 # otherwise every share of that page shows a broken image.
 import glob as _glob

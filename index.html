@@ -2197,13 +2197,17 @@ $('placeIn').addEventListener('keydown', async e => {
 
 
 
-/* Google's documented `?api=1&query=` action lands on a results LIST even when there is a
-   single match; /maps/place/<name>/@<lat>,<lon> opens the place card itself — reviews,
-   photos, hours. Undocumented but long-stable, and it degrades to the map at those
-   coordinates rather than an error if the name does not resolve. */
+/* Getting this URL right took three attempts, all verified by actually opening them:
+     /maps/place/<name>/@<lat>,<lon>   → an EMPTY panel. That form needs Google's internal
+       place-id payload; without it there is no business at all. This shipped once.
+     ?api=1&query=<name> <lat>,<lon>   → resolves by TEXT, so "Wendy's 30.26,-97.73" found a
+       Wendy's on Lincoln Blvd in California. Confidently wrong is worse than empty.
+     /maps/search/<name>/@<lat>,<lon>,17z → correct: the @ sets the viewport and the search
+       is scoped to it, so it lands on the branch actually next to the charger.
+   Do not "simplify" this back to the documented api=1 form. */
 const gPlace = (name, lat, lon) =>
-  'https://www.google.com/maps/place/' + encodeURIComponent(String(name).trim()).replace(/%20/g, '+')
-  + '/@' + lat + ',' + lon + ',18z';
+  'https://www.google.com/maps/search/' + encodeURIComponent(String(name).trim())
+  + '/@' + lat + ',' + lon + ',17z';
 
 /* ───────── opening hours ─────────
    OSM opening_hours is a whole specification; this handles the shapes that actually occur
