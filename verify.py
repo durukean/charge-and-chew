@@ -133,6 +133,9 @@ check("installSnoozed" in _html, "install dismissal is no longer remembered")
 check("deliveredValue" in _html, "install prompt no longer waits until the app is useful")
 # The live lookup is the app's most distinctive feature and is invisible without examples.
 check("SUGGESTIONS" in _html, "search examples gone — live lookup becomes undiscoverable again")
+# Chain rows carry the POI's own coordinates, so walking directions need no lookup.
+check("chainDetail" in _html, "tap-a-chain lookup gone")
+check("travelmode=walking" in _html, "per-chain walking directions gone")
 # Per-chain social cards: a page may reference og/<slug>.png only if it was rendered,
 # otherwise every share of that page shows a broken image.
 import glob as _glob
