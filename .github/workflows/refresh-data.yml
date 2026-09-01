@@ -55,6 +55,9 @@ jobs:
       - name: Service worker tile-cache tests
         run: node sw_test.mjs
 
+      - name: Opening-hours parser tests
+        run: python3 verify_hours.py
+
       - name: Commit and push if anything changed
         run: |
           git config user.name  "github-actions[bot]"

@@ -338,6 +338,19 @@ svg{display:block}
 #sugg button:hover,#sugg button.cur{background:var(--surface2)}
 #sugg button i{font-style:normal;font-size:15px;width:20px;text-align:center;flex-shrink:0}
 #sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
+/* The place you actually searched for: which one, open or not, how to reach it. */
+.pp-poi{background:var(--surface2);border:1px solid var(--line);border-radius:11px;
+  padding:9px 11px;margin:9px 0 4px}
+.pp-poi-h{font-weight:800;font-size:13.5px}
+.pp-poi-h i{font-style:normal;font-weight:600;color:var(--dim2);font-size:12px}
+.pp-poi-a{color:var(--dim);font-size:11.5px;margin-top:2px}
+.pp-poi-s{margin-top:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.oh{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
+.oh.y{background:rgba(21,128,61,.13);color:var(--accent)}
+.oh.n{background:rgba(180,83,9,.14);color:var(--amber)}
+.ohn{font-size:11.5px;color:var(--dim)}
+.pp-poi-l{display:flex;gap:12px;margin-top:7px}
+.pp-poi-l a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
@@ -976,9 +989,32 @@ function reportUrl(s) {
 function popupHtml(s) {
   const m = MATCH[s.id] || {};
   const rows = Object.entries(m).map(([k, v]) => { const d = mDist(s, v);
-    return `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)}</span>
+    const isLive = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name;
+    const label = isLive ? livePoiFor[s.id].name : k;
+    return `<div class="pp-chain"><span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</span>
      <span class="d">≥${walkMin(d)} min · ${fmtFt(d)}</span></div>`; }).join('')
     || '<div class="pp-chain" style="color:var(--dim2)">No tracked chains within a 10-min walk</div>';
+
+  /* What you actually searched for: which place it is, whether it is open, how to reach it.
+     Every field is optional in OSM, so each is shown only when present. */
+  const P = livePoiKey && livePoiFor[s.id];
+  let poiBlock = '';
+  if (P) {
+    const oh = hoursNow(P.hours);
+    const state = oh ? `<span class="oh ${oh.open ? 'y' : 'n'}">${oh.open ? 'Open now' : 'Closed'}</span>
+        <span class="ohn">${esc(oh.note)}</span>`
+      : P.hours ? `<span class="ohn">${esc(P.hours)}</span>` : '';
+    const links = [
+      P.phone ? `<a href="tel:${esc(P.phone.replace(/[^+\d]/g, ''))}">Call</a>` : '',
+      P.site ? `<a href="${esc(P.site)}" target="_blank" rel="noopener">Website</a>` : '',
+      `<a href="https://www.google.com/maps/dir/?api=1&destination=${P.lat},${P.lon}" target="_blank" rel="noopener">Directions</a>`
+    ].filter(Boolean).join('');
+    poiBlock = `<div class="pp-poi">
+      <div class="pp-poi-h">${esc(P.name || livePoiKey)}${P.brand && P.brand !== P.name ? ' <i>· ' + esc(P.brand) + '</i>' : ''}</div>
+      ${P.addr ? `<div class="pp-poi-a">${esc(P.addr)}</div>` : ''}
+      <div class="pp-poi-s">${state || '<span class="ohn">Hours not listed</span>'}</div>
+      <div class="pp-poi-l">${links}</div></div>`;
+  }
   const cm = chargeMin(s), cp = compat(s);
   const teslaGate = cp === 'adapter' && isTesla(s) && !(s.conn & 1);
   const cpTxt = cp === 'native' ? '✓ fits your car'
@@ -1000,6 +1036,7 @@ function popupHtml(s) {
     ${s.stalls === 1 ? '<div class="pp-warn">⏳ Single stall — if someone is plugged in, you wait. Have a backup in mind.</div>' : ''}
     <div class="pp-note">Live availability and prices aren\u2019t shown here — check the network\u2019s own app before you rely on a stop.</div>
     ${carLine}
+    ${poiBlock}
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
       <a target="_blank" rel="noopener" href="${reportUrl(s)}" class="rep" title="Wrong info? Tell us">Report</a>
@@ -1467,8 +1504,13 @@ function renderList(vis) {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
-    const chains = ent.slice(0, 4).map(([k, v]) =>
-      `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(k) + '</b>' : esc(k)} ≥${walkMin(mDist(s, v))}min</span>`).join('');
+    // "Discount Tire ≥3min" tells you something; "Tire Shop ≥3min" does not
+    const lp = livePoiFor[s.id];
+    const chains = ent.slice(0, 4).map(([k, v]) => {
+      const isLive = k === livePoiKey && lp && lp.name;
+      const label = isLive ? lp.name : k;              // the real shop, not the category
+      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)} ≥${walkMin(mDist(s, v))}min</span>`;
+    }).join('');
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
     const cm = chargeMin(s), cp = compat(s);
@@ -2126,6 +2168,73 @@ $('placeIn').addEventListener('keydown', async e => {
 });
 
 
+
+/* ───────── opening hours ─────────
+   OSM opening_hours is a whole specification; this handles the shapes that actually occur
+   ("Mo-Fr 08:00-18:00; Sa 09:00-13:00", "24/7", day lists, multiple spans, "off").
+   Anything it cannot read is shown verbatim rather than guessed at — telling someone a
+   shop is open when it is closed is worse than saying nothing. */
+const OH_DAYS = { su: 0, mo: 1, tu: 2, we: 3, th: 4, fr: 5, sa: 6 };
+function parseHours(spec) {
+  if (!spec) return null;
+  const t = String(spec).trim();
+  if (/^24\/7$/i.test(t)) return { always: true };
+  const week = [[], [], [], [], [], [], []];
+  let understood = false;
+  for (const rule of t.split(';')) {
+    const r = rule.trim(); if (!r) continue;
+    const m = r.match(/^([A-Za-z,\-\s]+?)\s+(.+)$/);
+    if (!m) return null;
+    const dayPart = m[1].toLowerCase().replace(/\s/g, ''), timePart = m[2].trim();
+    const days = [];
+    for (const chunk of dayPart.split(',')) {
+      const range = chunk.split('-');
+      const a = OH_DAYS[range[0].slice(0, 2)];
+      if (a === undefined) return null;
+      if (range.length === 1) days.push(a);
+      else {
+        const b = OH_DAYS[range[1].slice(0, 2)];
+        if (b === undefined) return null;
+        for (let d = a; ; d = (d + 1) % 7) { days.push(d); if (d === b) break; }
+      }
+    }
+    if (/^(off|closed)$/i.test(timePart)) { days.forEach(d => week[d] = []); understood = true; continue; }
+    const spans = [];
+    for (const sp of timePart.split(',')) {
+      const tm = sp.trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);
+      if (!tm) return null;
+      spans.push([+tm[1] * 60 + +tm[2], +tm[3] * 60 + +tm[4]]);
+    }
+    days.forEach(d => week[d] = week[d].concat(spans));
+    understood = true;
+  }
+  return understood ? { week } : null;
+}
+/* Returns {open:bool, note:string} or null when the spec could not be read. */
+function hoursNow(spec, now) {
+  const p = parseHours(spec); if (!p) return null;
+  if (p.always) return { open: true, note: 'Open 24/7' };
+  now = now || new Date();
+  const mins = now.getHours() * 60 + now.getMinutes(), day = now.getDay();
+  const fmt = m => String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  for (const [a, b] of p.week[day]) {
+    // a span ending past midnight is written 20:00-02:00
+    if (b > a ? (mins >= a && mins < b) : (mins >= a || mins < b))
+      return { open: true, note: 'Open until ' + fmt(b) };
+  }
+  const later = p.week[day].filter(([a]) => a > mins).sort((x, y) => x[0] - y[0])[0];
+  if (later) return { open: false, note: 'Opens ' + fmt(later[0]) };
+  for (let i = 1; i <= 7; i++) {
+    const d = (day + i) % 7;
+    if (p.week[d].length) {
+      const nm = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d];
+      return { open: false, note: 'Opens ' + nm + ' ' + fmt(p.week[d].sort((x, y) => x[0] - y[0])[0][0]) };
+    }
+  }
+  return { open: false, note: 'Closed' };
+}
+window.__hoursNow = hoursNow;   // exercised by verify_hours.py
+
 /* ───────── live POI search ─────────
    The 90 curated chains are precomputed and instant, but people ask for anything — a bank,
    a tyre shop, their gym. Precomputing that does not scale: each charger-to-brand link
@@ -2208,9 +2317,9 @@ async function overpassFetch(body, tries) {
   }
 }
 
-let livePoiKey = null, livePoiTerm = null;
+let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
 function clearLivePoi() {
-  livePoiTerm = null;
+  livePoiTerm = null; livePoiFor = {};
   if (!livePoiKey) return;
   for (const id in MATCH) { if (MATCH[id][livePoiKey] !== undefined) delete MATCH[id][livePoiKey]; }
   delete BRANDS[livePoiKey];
@@ -2255,7 +2364,15 @@ async function runLivePoi(intent) {
     const nm = t.name || t.brand || '';
     // name filtering happens here, not in the query: Overpass times out on loose regexes
     if (want && !intent.brandOnly && !(nm + ' ' + (t.brand || '')).toLowerCase().includes(want)) continue;
-    pois.push({ lat, lon, name: nm });
+    /* Keep what OSM knows about the place. Showing "Tire Shop ≥3 min" without saying WHICH
+       shop, whether it is open, or where it is, is barely an answer. */
+    const addr = [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ');
+    pois.push({ lat, lon, name: nm,
+      brand: t.brand || '',
+      addr: [addr, t['addr:city']].filter(Boolean).join(', '),
+      hours: t.opening_hours || '',
+      phone: t.phone || t['contact:phone'] || '',
+      site: t.website || t['contact:website'] || '' });
   }
   if (!pois.length) {
     toast(`No ${esc(intent.label)} found within ${radiusMi} mi of ${esc(center.label)}`);
@@ -2266,14 +2383,16 @@ async function runLivePoi(intent) {
   const key = intent.label.replace(/\b\w/g, c => c.toUpperCase());
   const inArea = SITES.filter(s => hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI);
   let matched = 0;
+  livePoiFor = {};
   for (const s of inArea) {
-    let best = Infinity;
+    let best = Infinity, bestPoi = null;
     for (const p of pois) {
       const d = hav(s.lat, s.lon, p.lat, p.lon);
-      if (d < best) best = d;
+      if (d < best) { best = d; bestPoi = p; }
     }
     if (best <= D.walkM) {
       (MATCH[s.id] = MATCH[s.id] || {})[key] = best;   // mDist accepts plain metres
+      livePoiFor[s.id] = bestPoi;                      // the actual place, for the card and panel
       matched++;
     }
   }
