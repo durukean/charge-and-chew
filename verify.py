@@ -136,6 +136,8 @@ check("SUGGESTIONS" in _html, "search examples gone — live lookup becomes undi
 # Chain rows carry the POI's own coordinates, so walking directions need no lookup.
 check("chainDetail" in _html, "tap-a-chain lookup gone")
 check("travelmode=walking" in _html, "per-chain walking directions gone")
+# The place-card URL form must survive: ?api=1&query= lands on a results list instead.
+check("/maps/place/" in _html, "Google place-card links gone — reviews/photos unreachable")
 # Per-chain social cards: a page may reference og/<slug>.png only if it was rendered,
 # otherwise every share of that page shows a broken image.
 import glob as _glob

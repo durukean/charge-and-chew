@@ -338,6 +338,8 @@ svg{display:block}
 #sugg button:hover,#sugg button.cur{background:var(--surface2)}
 #sugg button i{font-style:normal;font-size:15px;width:20px;text-align:center;flex-shrink:0}
 #sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
+.pp-chain .pl{color:inherit;text-decoration:none;border-bottom:1px dotted var(--dim2)}
+.pp-chain .pl:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .pp-chain.tap{cursor:pointer;border-radius:8px;margin:0 -6px;padding-left:6px;padding-right:6px}
 .pp-chain.tap:hover{background:var(--surface2)}
 .pp-chain .go{margin-left:8px;color:var(--accent);text-decoration:none;font-weight:800;
@@ -1005,8 +1007,14 @@ function popupHtml(s) {
     const label = isLive ? livePoiFor[s.id].name : k;
     const at = mLatLng(s, v);
     const coord = at ? at[0].toFixed(5) + ',' + at[1].toFixed(5) : '';
+    /* Name opens the place on Google Maps — reviews, photos and hours we cannot match —
+       and the arrow stays walking directions. Searching the name AT the coordinates is
+       what makes Google resolve to that specific branch rather than the brand in general. */
+    const gmaps = at ? gPlace(label, at[0].toFixed(5), at[1].toFixed(5)) : '';
     return `<div class="pp-chain${at ? ' tap' : ''}"${at ? ` data-poi="${esc(k)}" data-at="${coord}"` : ''}>
-      <span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</span>
+      <span>${BRANDS[k].e} ${at
+        ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</a>`
+        : (active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label))}</span>
       <span class="d">≥${walkMin(d)} min · ${fmtFt(d)}</span>
       ${at ? `<a class="go" href="https://www.google.com/maps/dir/?api=1&destination=${coord}&travelmode=walking"
         target="_blank" rel="noopener" title="Walking directions to this ${esc(k)}" aria-label="Walking directions to this ${esc(k)}">↗</a>` : ''}
@@ -1022,10 +1030,12 @@ function popupHtml(s) {
     const state = oh ? `<span class="oh ${oh.open ? 'y' : 'n'}">${oh.open ? 'Open now' : 'Closed'}</span>
         <span class="ohn">${esc(oh.note)}</span>`
       : P.hours ? `<span class="ohn">${esc(P.hours)}</span>` : '';
+    const pCoord = P.lat.toFixed(5) + ',' + P.lon.toFixed(5);
     const links = [
+      `<a href="${gPlace(P.name || livePoiKey, P.lat.toFixed(5), P.lon.toFixed(5))}" target="_blank" rel="noopener">Reviews &amp; photos</a>`,
       P.phone ? `<a href="tel:${esc(P.phone.replace(/[^+\d]/g, ''))}">Call</a>` : '',
       P.site ? `<a href="${esc(P.site)}" target="_blank" rel="noopener">Website</a>` : '',
-      `<a href="https://www.google.com/maps/dir/?api=1&destination=${P.lat},${P.lon}" target="_blank" rel="noopener">Directions</a>`
+      `<a href="https://www.google.com/maps/dir/?api=1&destination=${pCoord}&travelmode=walking" target="_blank" rel="noopener">Directions</a>`
     ].filter(Boolean).join('');
     poiBlock = `<div class="pp-poi">
       <div class="pp-poi-h">${esc(P.name || livePoiKey)}${P.brand && P.brand !== P.name ? ' <i>· ' + esc(P.brand) + '</i>' : ''}</div>
@@ -2187,6 +2197,14 @@ $('placeIn').addEventListener('keydown', async e => {
 
 
 
+/* Google's documented `?api=1&query=` action lands on a results LIST even when there is a
+   single match; /maps/place/<name>/@<lat>,<lon> opens the place card itself — reviews,
+   photos, hours. Undocumented but long-stable, and it degrades to the map at those
+   coordinates rather than an error if the name does not resolve. */
+const gPlace = (name, lat, lon) =>
+  'https://www.google.com/maps/place/' + encodeURIComponent(String(name).trim()).replace(/%20/g, '+')
+  + '/@' + lat + ',' + lon + ',18z';
+
 /* ───────── opening hours ─────────
    OSM opening_hours is a whole specification; this handles the shapes that actually occur
    ("Mo-Fr 08:00-18:00; Sa 09:00-13:00", "24/7", day lists, multiple spans, "off").
@@ -2601,7 +2619,8 @@ async function chainDetail(name, lat, lon) {
     name: best.name || best.brand || name,
     addr: [[best['addr:housenumber'], best['addr:street']].filter(Boolean).join(' '), best['addr:city']].filter(Boolean).join(', '),
     hours: best.opening_hours || '', phone: best.phone || best['contact:phone'] || '',
-    site: best.website || best['contact:website'] || ''
+    site: best.website || best['contact:website'] || '',
+    at: lat + ',' + lon
   } : null;
   poiDetailCache.set(ck, out);
   return out;
@@ -2612,6 +2631,7 @@ function poiDetailHtml(p) {
   const state = oh ? `<span class="oh ${oh.open ? 'y' : 'n'}">${oh.open ? 'Open now' : 'Closed'}</span>${esc(oh.note)}`
     : p.hours ? esc(p.hours) : 'Hours not listed';
   const links = [
+    p.at ? `<a href="${gPlace(p.name, p.at.split(',')[0], p.at.split(',')[1])}" target="_blank" rel="noopener">Reviews &amp; photos</a>` : '',
     p.phone ? `<a href="tel:${esc(p.phone.replace(/[^+\d]/g, ''))}">Call</a>` : '',
     p.site ? `<a href="${esc(p.site)}" target="_blank" rel="noopener">Website</a>` : ''
   ].filter(Boolean).join('');
@@ -2619,7 +2639,8 @@ function poiDetailHtml(p) {
 }
 /* Delegated: popups are rebuilt on every open, so per-element handlers would be lost. */
 document.addEventListener('click', async e => {
-  if (e.target.closest('.pp-chain .go')) return;          // the arrow is a plain link
+  // both links on the row are plain links; only the rest of the row expands the details
+  if (e.target.closest('.pp-chain .go') || e.target.closest('.pp-chain .pl')) return;
   const row = e.target.closest('.pp-chain.tap'); if (!row) return;
   const open = row.nextElementSibling && row.nextElementSibling.classList.contains('pp-det');
   if (open) { row.nextElementSibling.remove(); return; }
