@@ -262,8 +262,8 @@ svg{display:block}
 .leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
 /* On short viewports (a laptop in landscape, a phone with the keyboard up) the stop
    details ran off the top of the map with the name cut off and no way to scroll. */
-.leaflet-popup-content{margin:14px 16px;font-size:13px;max-height:min(62vh,420px);overflow-y:auto;
-  overscroll-behavior:contain}
+.leaflet-popup-content{margin:14px 16px;font-size:13px;
+  max-height:var(--pop-max,min(62vh,420px));overflow-y:auto;overscroll-behavior:contain}
 
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
 .pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;padding-right:22px}
@@ -338,6 +338,10 @@ svg{display:block}
 #sugg button:hover,#sugg button.cur{background:var(--surface2)}
 #sugg button i{font-style:normal;font-size:15px;width:20px;text-align:center;flex-shrink:0}
 #sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
+@media(max-width:760px){
+  #app.popup-open .mapctl{opacity:0;pointer-events:none;transition:opacity .15s}
+  #app.popup-open #legend{opacity:0;pointer-events:none}
+}
 .pp-chain .pl{color:inherit;text-decoration:none;border-bottom:1px dotted var(--dim2)}
 .pp-chain .pl:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .pp-chain.tap{cursor:pointer;border-radius:8px;margin:0 -6px;padding-left:6px;padding-right:6px}
@@ -579,7 +583,10 @@ svg{display:block}
 
 /* touch screens (phones, and the Tesla centre screen): bigger hit areas */
 @media(pointer:coarse){
-  #centerCard{right:78px}          /* clear the larger touch FABs */
+  /* #centerCard is position:static, so `right` did nothing and the theme FAB sat on top of
+     the 50-mile radius button, making it untappable. margin-right is what actually reserves
+     the column on a static element. */
+  #centerCard.show{margin-right:72px}
   .chip{height:44px;padding:0 16px;font-size:14px}
   .searchpill{height:54px}
   .searchpill .pbtn{width:46px;height:46px}
@@ -1076,6 +1083,9 @@ function popupHtml(s) {
 SITES.forEach(s => {
   const m = L.circleMarker([s.lat, s.lon], { renderer: canvas, radius: 3.5, weight: 1,
     color: '#6b7482', fillColor: '#6b7482', fillOpacity: .6 }).addTo(map);
+  // registered BEFORE bindPopup so it runs before Leaflet's own click-to-open handler,
+  // which is what makes the padding apply to map clicks as well as list taps
+  m.on('click', () => popupPad(m));
   m.bindPopup(() => popupHtml(s), { maxWidth: 300, autoPanPadding: [24, 24] });
   m._sid = s.id;
   mk[s.id] = m;
@@ -1101,14 +1111,27 @@ function showPOIs(s) {
       .bindTooltip(`${esc(k)} · ≥${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
       .addTo(poiLayer);
   }
-  // frame the charger + its POIs so the walking distance is visible (popup sits top, so pad it).
-  // Guard: skip when the map is too short for the padding (fitBounds -> NaN center otherwise).
+  /* Frame the charger and its POIs so the walk is visible. This runs on popupopen, i.e.
+     AFTER Leaflet has auto-panned the popup into view — so the padding here is what
+     actually decides where the popup ends up. A flat 200 px top pad was far short of the
+     overlay (~200 px) plus the panel itself (~440 px), which is why the details kept
+     landing behind the search bar. Pad by what is really in the way, top and bottom. */
   const sz = map.getSize();
   if (pts.length > 1 && sz.y > 320 && sz.x > 120) {
-    const padTop = Math.min(200, Math.round(sz.y * 0.42));
+    const mapBox = map.getContainer().getBoundingClientRect();
+    const pop = document.querySelector('.leaflet-popup');
+    const popH = pop ? pop.getBoundingClientRect().height : 0;
+    const ovB = Math.max(0, $('overlayTop').getBoundingClientRect().bottom - mapBox.top);
+    const sheetTop = $('sheet').getBoundingClientRect().top;
+    const covered = Math.max(0, Math.round(mapBox.bottom - sheetTop));
+    /* Pad by exactly what is in the way, and cap only at the point where fitBounds would
+       have no room left. A fixed fraction (0.62) was still 168 px short of clearing the
+       overlay plus the panel. */
+    const padBottom = Math.min(Math.round(sz.y * 0.25), covered + 24);
+    const padTop = Math.min(Math.max(80, sz.y - padBottom - 60), Math.round(ovB + popH + 20));
     try {
       map.fitBounds(L.latLngBounds(pts),
-        { paddingTopLeft: [40, padTop], paddingBottomRight: [40, 50], maxZoom: 16, animate: false });
+        { paddingTopLeft: [40, padTop], paddingBottomRight: [40, padBottom], maxZoom: 16, animate: false });
     } catch (e) { /* transient sizing race — leave the view as-is */ }
   }
 }
@@ -1126,6 +1149,11 @@ map.on('popupopen', e => {
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
 map.on('popupclose', clearPOIs);
+/* The floating map buttons sit over the right edge of the stop panel on a phone, covering
+   the Directions button and two of the walk arrows. While the panel is open they are not
+   what you are looking at, so get them out of the way. */
+map.on('popupopen', () => document.getElementById('app').classList.add('popup-open'));
+map.on('popupclose', () => document.getElementById('app').classList.remove('popup-open'));
 
 function toggleFav(id) {
   track('save-stop');
@@ -1568,8 +1596,14 @@ function renderList(vis) {
     r.onclick = e => {
       if (e.target.dataset.star !== undefined) return;
       const s = byId[+r.dataset.id];
+      /* Opening on a fixed timer raced the 0.7 s fly: autoPan ran mid-animation and left the
+         panel off-screen. Wait for the movement to end — but a flyTo to where the map
+         already is never fires moveend, so keep a timer as a floor. */
+      let opened = false;
+      const show = () => { if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup(); };
       map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
-      setTimeout(() => mk[s.id].openPopup(), 780);
+      map.once('moveend', show);
+      setTimeout(show, 900);
       if (!wideLayout()) setSheet('peek');
     };
   });
@@ -2208,6 +2242,32 @@ $('placeIn').addEventListener('keydown', async e => {
 const gPlace = (name, lat, lon) =>
   'https://www.google.com/maps/search/' + encodeURIComponent(String(name).trim())
   + '/@' + lat + ',' + lon + ',17z';
+
+/* Leaflet pans a popup into the map container, but the search pill, chip row and area card
+   float ON TOP of that container — so with a uniform 24 px padding the panel opened
+   underneath them and was unreadable on a phone. Measure what is actually covering the map
+   and pad by that. */
+function popupPad(m) {
+  const p = m.getPopup && m.getPopup();
+  if (!p) return;
+  const top = $('overlayTop').getBoundingClientRect().bottom
+            - map.getContainer().getBoundingClientRect().top;
+  p.options.autoPanPaddingTopLeft = L.point(24, Math.max(24, Math.round(top) + 14));
+  p.options.autoPanPaddingBottomRight = L.point(24, 28);
+  /* A 300 px popup becomes 337 px with its wrapper, which on a 375 px phone leaves too
+     little slack for Leaflet to pan it fully into view — it overflowed the right edge by
+     64 px. Give the panel room to be panned. */
+  p.options.maxWidth = Math.min(300, Math.max(220, innerWidth - 96));
+  /* Cap the height to the strip of map that is actually VISIBLE. The map container runs
+     full-height behind the bottom sheet, so measuring the container gave 459 px of room
+     where only ~250 px existed, autoPan could not fit the panel and gave up entirely —
+     leaving it 286 px under the search bar. The real space is overlay-bottom to sheet-top. */
+  const mapBox = map.getContainer().getBoundingClientRect();
+  const sheetTop = $('sheet').getBoundingClientRect().top;
+  const visibleBand = Math.min(sheetTop, mapBox.bottom) - (mapBox.top + top);
+  const avail = Math.max(150, Math.round(visibleBand - 108));   // popup chrome + tip
+  document.documentElement.style.setProperty('--pop-max', avail + 'px');
+}
 
 /* ───────── opening hours ─────────
    OSM opening_hours is a whole specification; this handles the shapes that actually occur
