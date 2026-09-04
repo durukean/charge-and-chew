@@ -1826,7 +1826,16 @@ function locate(target, opts) {
       $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
       toast('Start set to your location');
     } else {
+      /* Say WHERE we think you are, and how sure. A browser without GPS positions you from
+         IP or wifi, which is routinely a different state — labelling that "My location"
+         gave no way to tell it had gone wrong. Naming the town makes a bad fix obvious and
+         the flagged low accuracy explains it. */
+      const acc = p.coords.accuracy || 0;
       setCenter(la, lo, 'My location', 'me');
+      reverseName(la, lo);
+      if (acc > 25000) {
+        toast(`Rough location only (±${Math.round(acc / 1000)} km) — search a city if this is wrong`);
+      }
       if (opts.thenPoi) runLivePoi(opts.thenPoi);   // "banks near me" with no area set yet
     }
   };
@@ -1905,7 +1914,7 @@ async function reverseName(lat, lon) {
     const r = await fetchTimeout(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`, 8000);
     const j = await r.json();
     const nm = placeLabel(j);
-    if (nm && center && center.kind === 'pin') {
+    if (nm && center && (center.kind === 'pin' || center.kind === 'me')) {
       center.label = nm; $('ccLabel').textContent = nm;
       /* Persist the resolved name too. Without this the stored area kept the placeholder
          ("Shared spot" / "Dropped pin") and every return visit showed that instead of the
