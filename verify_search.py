@@ -57,6 +57,31 @@ CASES = [
     ("ihop lunch",                           dict(here=False, chains=["IHOP"], place="", anyCat=None)),
     # No category word means no category filter.
     ("superchargers in brooklyn",            dict(anyCat=None)),
+    # Trips typed into the search bar. The route planner is one unlabelled icon in a stack
+    # of four, so this is how people will actually reach it.
+    ("LA to Las Vegas",                      dict(trip="Los Angeles, CA|Las Vegas")),
+    ("denver - salt lake city",              dict(trip="Denver|Salt Lake City")),
+    # A hyphenated place name is one place, not two.
+    ("winston-salem",                        dict(trip=None)),
+    ("los angeles to las vegas",             dict(trip="Los Angeles|Las Vegas")),
+    ("chargers from denver to moab",         dict(trip="Denver|Moab")),
+    ("toledo to detroit",                    dict(trip="Toledo|Detroit")),
+    ("nyc -> boston",                        dict(trip="New York, NY|Boston")),
+    # A chain named alongside a trip must keep BOTH: route the drive, filter to the brand.
+    ("ihop from la to vegas",                dict(trip="Los Angeles, CA|Las Vegas, NV",
+                                                  chains=["IHOP"])),
+    # False positives are the whole risk here: every one of these contains " to " and is a
+    # chain or place search, not a drive. Hijacking one would be worse than the feature.
+    ("wheres the nearest supercharger to an in n out", dict(trip=None)),
+    ("whats the closest charger to a target",dict(trip=None)),
+    ("i want to find a charger near costco", dict(trip=None)),
+    ("take me to denver",                    dict(trip=None)),
+    ("can i get to denver",                  dict(trip=None)),
+    ("go to san diego",                      dict(trip=None)),
+    ("closest charger to me",                dict(trip=None)),
+    ("chargers near me",                     dict(trip=None)),
+    ("ihop",                                 dict(trip=None)),
+    ("superchargers in brooklyn",            dict(trip=None)),
 ]
 
 
@@ -88,14 +113,17 @@ window.__ready = function () {{
   var P = window.__parseQuery, qs = {cases_json}, r = [];
   for (var i = 0; i < qs.length; i++) {{
     var p = P(qs[i]);
+    var tp = window.__parseTrip(qs[i]);
     r.push({{q: qs[i], here: !!p.here, chains: p.chains, net: p.net, place: p.place,
-              anyCat: p.anyCat == null ? null : p.anyCat}});
+              anyCat: p.anyCat == null ? null : p.anyCat,
+              trip: tp ? tp.from + '|' + tp.to : null}});
   }}
   document.getElementById('out').textContent = JSON.stringify(r);
 }};
 </script>
 <iframe src="/?nosw=1" style="width:900px;height:700px" onload="setTimeout(function(){{
-  try {{ window.__parseQuery = this.contentWindow.__parseQuery; window.__ready(); }}
+  try {{ window.__parseQuery = this.contentWindow.__parseQuery;
+         window.__parseTrip = this.contentWindow.__parseTrip; window.__ready(); }}
   catch (e) {{ document.getElementById('out').textContent = 'ERR ' + e.message; }}
 }}.bind(this), 6000)"></iframe>""")
 

@@ -249,6 +249,8 @@ svg{display:block}
 /* FABs */
 .mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
   display:flex;flex-direction:column;gap:9px}
+.mbtn#routeToggle{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+.mbtn#routeToggle.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .mbtn{width:46px;height:46px;border-radius:16px;background:var(--surface);border:1px solid var(--line);
   color:var(--txt);display:grid;place-items:center;box-shadow:var(--sh);transition:.15s}
 .mbtn:active{transform:scale(.92)}
@@ -529,6 +531,9 @@ svg{display:block}
 .heropick .e{font-size:19px;grid-row:1/3;align-self:center}
 .heropick>span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600;white-space:nowrap}
+#heroTrip{width:100%;min-height:46px;border-radius:13px;background:var(--surface2);
+  border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));color:var(--txt);
+  font-weight:700;font-size:14px;margin:14px 0 9px;padding:11px 14px;line-height:1.35}
 #heroAll{width:100%;height:46px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
   font-weight:700;font-size:14.5px;margin-bottom:9px}
 #heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
@@ -630,7 +635,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew" aria-label="About Charge and Chew">
           <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg>
         </a>
-        <input id="placeIn" placeholder="Search a chain, a shop type, or a place" autocomplete="off"
+        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off"
                enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
@@ -710,6 +715,7 @@ svg{display:block}
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
         <div class="herogrid" id="heroGrid"></div>
+        <button id="heroTrip" class="trip">🚗 Planning a drive? Find stops along your route</button>
         <button id="heroAll">Browse all chains</button>
         <button id="heroSkip">Just explore the map</button>
       </div>
@@ -2129,7 +2135,56 @@ function parseQuery(raw) {
   return { chains: chains, net: net, place: place, here: here, anyCat: anyc };
 }
 
-window.__parseQuery = parseQuery;   // exposed for the search test suite
+window.__parseQuery = parseQuery;
+
+/* ───────── "LA to Las Vegas" typed into the search bar ─────────
+   The route planner was one unlabelled icon, fourth in a stack of four grey map buttons,
+   so in practice nobody found it. People express a trip long before they hunt for a
+   control, so the search bar has to understand one.
+
+   Guarded hard, because the existing test corpus is full of queries that contain " to "
+   and are emphatically NOT trips: "wheres the nearest supercharger to an in n out",
+   "whats the closest charger to a target", "i want to find a charger near costco". The
+   rule is that BOTH sides must survive NOISE stripping and contain nothing from
+   TRIP_REJECT -- the words that are never a US place on their own. */
+const CITY_ALIAS = {
+  la: 'Los Angeles, CA', 'l a': 'Los Angeles, CA', vegas: 'Las Vegas, NV',
+  nyc: 'New York, NY', 'new york city': 'New York, NY', sf: 'San Francisco, CA',
+  'san fran': 'San Francisco, CA', frisco: 'San Francisco, CA', dc: 'Washington, DC',
+  'washington dc': 'Washington, DC', philly: 'Philadelphia, PA', nola: 'New Orleans, LA',
+  atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
+  stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV' };
+const TRIP_REJECT = new Set([...NON_PLACE,
+  'take', 'taking', 'drive', 'driving', 'drove', 'head', 'heading', 'headed', 'travel',
+  'traveling', 'travelling', 'road', 'way', 'ride', 'riding', 'flying', 'walk']);
+
+function tripSide(raw) {
+  const w = raw.replace(NOISE, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+  if (!w.length || w.length > 5) return null;
+  if (w.some(x => TRIP_REJECT.has(x))) return null;
+  const t = w.join(' ');
+  if (t.replace(/[^a-z]/g, '').length < 2) return null;
+  // A chain name on one side means they are looking for that brand, not driving to it.
+  for (const [alias] of CHAIN_ALIAS) if (alias === t) return null;
+  return CITY_ALIAS[t] || t.replace(/\b[a-z]/g, c => c.toUpperCase());
+}
+
+function parseTrip(raw) {
+  const t = normalise(String(raw).replace(/\s*(?:->|—>|–>|→|>)\s*/g, ' to ')
+                                 .replace(/\s+[-–—]\s+/g, ' to '));
+  let a, b;
+  const fm = t.match(/(?:^|\s)from\s+(.+?)\s+to\s+(.+?)\s*$/);
+  if (fm) { a = fm[1]; b = fm[2]; }
+  else {
+    const parts = t.split(/\s+(?:to|->|→|>)\s+/);
+    if (parts.length !== 2) return null;
+    a = parts[0]; b = parts[1];
+  }
+  const A = tripSide(a), B = tripSide(b);
+  return (A && B && A !== B) ? { from: A, to: B } : null;
+}
+window.__parseTrip = parseTrip;   // exposed for the search test suite
+   // exposed for the search test suite
 
 /* place search */
 const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
@@ -2239,6 +2294,16 @@ $('placeIn').addEventListener('keydown', async e => {
   $('placeIn').blur();
   const p = parseQuery(raw);
 
+  /* "ihop from la to vegas" is a route AND a chain filter, so the chain/network handling
+     below still runs; only the destination differs. */
+  const trip = parseTrip(raw);
+  if (trip) {
+    $('routePanel').classList.add('show');
+    $('routeToggle').classList.add('on');
+    $('overlayTop').classList.add('routing');
+    $('fromIn').value = trip.from; $('toIn').value = trip.to;
+  }
+
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {
     active.clear(); anyCat = null;
@@ -2257,6 +2322,8 @@ $('placeIn').addEventListener('keydown', async e => {
   }
 
   render(); syncUrl();
+
+  if (trip) { track('search-trip'); $('goBtn').click(); return; }
 
   /* "banks near me", "tire shop" — a category word means they want that kind of place,
      not a town of that name. Ask OSM live, scoped to the area. */
@@ -2706,6 +2773,11 @@ $('icGo').onclick = async () => {
    examples are deliberately a spread — a chain we precompute, a category we fetch live, a
    brand we do not track, and a place — so one glance shows the whole range. */
 const SUGGESTIONS = [
+  /* Road trips lead: it is the one capability nobody discovers on their own, and the
+     suggestion list scrolls, so anything below the fold teaches nothing. */
+  { h: 'Road trips — stops along the way' },
+  { q: 'LA to Las Vegas',   i: '🚗', note: 'route' },
+  { q: 'Dallas to Austin',  i: '🚗', note: 'route' },
   { h: 'Shop types — looked up live' },
   { q: 'tire shop',      i: '🛞', note: 'live' },
   { q: 'bank near me',   i: '🏦', note: 'live' },
@@ -3077,6 +3149,13 @@ function selectChain(k) {
 }
 function showHero() { buildHero(); $('hero').classList.add('show'); }
 function hideHero() { $('hero').classList.remove('show'); localStorage.setItem('cc_hero', '0'); }
+$('heroTrip').onclick = () => {
+  hideHero(); track('hero-trip');
+  $('routePanel').classList.add('show');
+  $('routeToggle').classList.add('on');
+  $('overlayTop').classList.add('routing');
+  setTimeout(() => $('fromIn').focus(), 120);
+};
 $('heroAll').onclick = () => { hideHero(); openPicker(); };
 $('heroSkip').onclick = hideHero;
 $('heroClose').onclick = hideHero;

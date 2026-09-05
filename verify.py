@@ -220,6 +220,26 @@ if os.path.exists(_trips):
             check("Good places to break" not in open(_f, encoding="utf-8").read(),
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
+# ---- typing a trip into the search bar ----
+# The route planner is one unlabelled icon, fourth in a stack of four map buttons, so the
+# search bar and the hero card are the doors people actually use.
+for _needle, _why in [
+    ("function parseTrip", "typing a trip into the search bar no longer works"),
+    ("window.__parseTrip", "parseTrip is not exported — the search suite cannot test it"),
+    ("TRIP_REJECT", "the trip false-positive guard is gone"),
+    ("CITY_ALIAS", "city abbreviations (LA, NYC, SF) no longer expand"),
+    ("if (trip) { track('search-trip'); $('goBtn').click(); return; }",
+     "a parsed trip is never handed to the router"),
+    ("heroTrip", "the hero card no longer offers to plan a drive"),
+    ("LA to Las Vegas", "the search suggestions have no road-trip example"),
+]:
+    check(_needle in _html, _why)
+# An arrow has to become "to" BEFORE normalise(), which strips punctuation.
+check("' to ')" in _html and "->" in _html,
+      "arrow syntax is normalised away before parseTrip sees it")
+check("or 'LA to Las Vegas'" in _html, "the search placeholder does not mention trips")
+check("#routeToggle{color:var(--accent)" in _html,
+      "the route button reads as a fourth grey utility icon again")
 check("tire shop" in _html, "the live-category example is gone from the suggestions")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
