@@ -7,6 +7,7 @@
 Run after data/fetch_pois.py.  Usage: python3 build.py [--base https://chargeandchew.com]
 """
 import json, os, re, sys, html, shutil
+from urllib.parse import quote
 from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -126,6 +127,18 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
   margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
 .stats b{color:var(--txt)}
+/* Wide content must scroll inside its own box; the page body must never scroll sideways. */
+.tripwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 22px;
+  border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--sh)}
+table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
+table.trip th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--dim2);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line)}
+table.trip td{padding:12px 14px;vertical-align:top;line-height:1.5;color:var(--dim);
+  border-bottom:1px solid var(--line)}
+table.trip tr:last-child td{border-bottom:0}
+table.trip td b{color:var(--txt)}
+table.trip td:first-child{white-space:nowrap;color:var(--txt);font-variant-numeric:tabular-nums}
+table.trip small{color:var(--dim2);font-size:12.5px}
 .faq{display:flex;flex-direction:column;gap:8px}
 .faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
   box-shadow:var(--sh)}
@@ -171,7 +184,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 {jsonld}
 <link rel="stylesheet" href="{root}assets/pages.css"></head><body><div class="wrap">
 <header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
-<nav><a href="{root}">Map</a><a href="{root}near/">All chains</a></nav></header>
+<nav><a href="{root}">Map</a><a href="{root}near/">All chains</a><a href="{root}trip/">Road trips</a></nav></header>
 {body}
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']}.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
@@ -537,6 +550,8 @@ left out — on an interstate run they cost more time than they save.</p>
 <p class="lead">Pick an interstate to see every fast charger within {CORRIDOR_MI:g} miles of it, in order
 along the route, with the restaurants and stores within a 10-minute walk of each stop.</p>
 <div class="chips">{idx_chips}</div>
+<h2>Planning a specific drive?</h2>
+<p class="lead">City-to-city guides pick the stops for you: <a href="../trip/">EV road trip charging with food nearby →</a></p>
 <h2>Or browse by chain</h2>
 <p class="lead">After a specific brand instead? <a href="../near/">All 90 chains, state by state →</a></p>'''
         page("along/index.html", "EV fast chargers along the interstates",
@@ -544,6 +559,191 @@ along the route, with the restaurants and stores within a 10-minute walk of each
              "order, with nearby food and shopping for each stop.", body, "along/")
         add("along/index.html")
         print(f"Interstate corridor pages: {len(hw_links)}")
+
+# ---- trip pages: "EV charging stops from Los Angeles to Las Vegas" ----
+# The interstate pages answer "what is on I-15". These answer the question people actually
+# type, which names two cities and not a road number. Route geometry is pre-fetched and
+# committed by make_trips.py, so this build never depends on a routing server being up.
+TRIP_PATH = os.path.join(HERE, "data", "trips.json")
+TRIP_MI = 5.0
+TRIP_MIN_KW = 50
+
+def trip_slug(a, b):
+    return f"{slug(a.split(',')[0])}-to-{slug(b.split(',')[0])}"
+
+def trip_card(s, focus, root, href):
+    """site_card, but every link points back at this trip rather than a chain+state view."""
+    return site_card(s, focus, root).replace(
+        f'href="{root}?chain={esc(focus)}&amp;state={s["st"]}"', f'href="{href}"')
+
+if os.path.exists(TRIP_PATH):
+    trips = json.load(open(TRIP_PATH))
+    trip_links = []
+    for tk in sorted(trips, key=lambda k: trips[k]["a"]):
+        t = trips[tk]
+        pts = t["pts"]
+        cum = [0.0]
+        for i in range(1, len(pts)):
+            cum.append(cum[-1] + _hav_m(pts[i-1][0], pts[i-1][1], pts[i][0], pts[i][1]) / 1609.34)
+        total_mi = cum[-1]
+        cell = 0.05
+        grid = {}
+        for i, (la, lo) in enumerate(pts):
+            grid.setdefault((round(la / cell), round(lo / cell)), []).append(i)
+        maxm = TRIP_MI * 1609.34
+        reach = int(maxm / 111000 / cell) + 1
+        found = []
+        for sid, s_ in sites.items():
+            if (s_.get("kw") or 0) < TRIP_MIN_KW:
+                continue
+            ci, cj = round(s_["lat"] / cell), round(s_["lon"] / cell)
+            cand = []
+            for di in range(-reach, reach + 1):
+                for dj in range(-reach, reach + 1):
+                    cand.extend(grid.get((ci + di, cj + dj), ()))
+            if not cand:
+                continue
+            best = None; bi = 0
+            for i in cand:
+                d = _hav_m(s_["lat"], s_["lon"], pts[i][0], pts[i][1])
+                if best is None or d < best:
+                    best = d; bi = i
+            if best is not None and best <= maxm:
+                found.append((bi, sid, best))
+        if len(found) < 10:
+            print(f"  skip trip {tk}: only {len(found)} chargers")
+            continue
+        found.sort()
+        is_food = lambda k: brands.get(k, {}).get("cat") == "food"
+        withfood = [f for f in found if any(is_food(k) for k in matches.get(f[1], {}))]
+
+        a, b = t["a"], t["b"]
+        sl = trip_slug(a, b)
+        map_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;any=food"
+
+        # Suggested stops: split the drive into even legs and take the strongest stop near each
+        # break -- power and stalls first, then the shortest walk to food. This is geography,
+        # not a range estimate: it says where the good stops ARE, never when you must charge.
+        legs = 0 if t["mi"] < 130 else max(2, min(4, int(t["mi"] // 130) + 1))
+        picks = []
+        for n in range(1, legs):
+            target = total_mi * n / legs
+            span = max(18.0, total_mi * 0.12)
+            near = [f for f in withfood if abs(cum[f[0]] - target) <= span]
+            if not near:
+                continue
+            def score(f):
+                sx = sites[f[1]]
+                m = matches.get(f[1], {})
+                walk = min((d for k, d in m.items() if is_food(k)), default=9e9)
+                return (-min(sx.get("kw") or 0, 350), -min(sx.get("stalls") or 0, 40), walk)
+            pick = min(near, key=score)
+            if pick[1] not in [p[1] for p in picks]:
+                picks.append(pick)
+
+        rows = []
+        for bi, sid, dist in picks:
+            sx = sites[sid]
+            m = matches.get(sid, {})
+            fk = sorted(((d, k) for k, d in m.items() if is_food(k)))[:3]
+            eats = ", ".join(f"{brands[k]['e']} {esc(k)} ≥{mins(d)} min" for d, k in fk)
+            rows.append(f"<tr><td><b>mile {int(round(cum[bi]))}</b></td>"
+                        f"<td><b>{esc(sx['city'])}, {sx['st']}</b><br><small>{esc(sx['name'])}</small></td>"
+                        f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stalls</small></td>"
+                        f"<td>{eats or '&mdash;'}</td></tr>")
+        stops_tbl = (f'<div class="tripwrap"><table class="trip"><thead><tr><th>At</th>'
+                     f'<th>Where</th><th>Charger</th><th>Food within a walk</th></tr></thead>'
+                     f'<tbody>{"".join(rows)}</tbody></table></div>' if rows else "")
+
+        # Spread the cards across the whole drive. Taking the first 48 in route order would
+        # fill the page with the origin city's suburbs and never reach the far end.
+        NBINS = 40
+        if len(withfood) > NBINS:
+            bins = {}
+            for f in withfood:
+                bi_ = min(NBINS - 1, int(cum[f[0]] / max(total_mi, 1) * NBINS))
+                sx = sites[f[1]]
+                m = matches.get(f[1], {})
+                walk = min((d for k, d in m.items() if is_food(k)), default=9e9)
+                rank = (-min(sx.get("kw") or 0, 350), -min(sx.get("stalls") or 0, 40), walk)
+                if bi_ not in bins or rank < bins[bi_][0]:
+                    bins[bi_] = (rank, f)
+            shown = [v[1] for _, v in sorted(bins.items())]
+        else:
+            shown = withfood
+        cards = []
+        for bi, sid, dist in shown:
+            m = matches.get(sid, {})
+            fk = [k for k in m if is_food(k)]
+            focus = min(fk, key=lambda k: m[k]) if fk else (min(m, key=lambda k: m[k]) if m else "")
+            cards.append(trip_card(sites[sid], focus, "../../", map_url))
+
+        kws = [sites[f[1]]["kw"] for f in found if sites[f[1]].get("kw")]
+        med = sorted(kws)[len(kws) // 2] if kws else 0
+        big = sum(1 for k in kws if k >= 150)
+        tesla = sum(1 for f in found if "Tesla" in (sites[f[1]].get("net") or ""))
+        hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
+        drive = f"{hrs}h {mns:02d}m"
+
+        title = f"EV charging stops from {a} to {b} — with food nearby"
+        desc = (f"{len(found)} DC fast chargers within {TRIP_MI:g} miles of the {t['mi']:g}-mile drive "
+                f"from {a} to {b}, and the {len(withfood)} of them with a restaurant within a "
+                f"10-minute walk. In route order.")
+        break_sec = ("<h2>Good places to break the drive</h2>"
+                     f"<p>Split into roughly {legs} legs, these are the strongest stops near each "
+                     "break &mdash; most power, most stalls, shortest walk to food. Where you "
+                     "actually need to charge depends on your car and how you drive; this is "
+                     f"where the good stops are.</p>{stops_tbl}") if rows else ""
+        spread = (" &mdash; the strongest stop in each stretch of the drive, so the list covers "
+                  "the whole route rather than filling up with the city you left"
+                  if len(withfood) > NBINS else "")
+        body = (f"<h1>EV charging stops from {esc(a)} to {esc(b)}</h1>\n"
+                f'<p class="lead">The drive is <b>{t["mi"]:g} miles</b>, about <b>{drive}</b>. Along it '
+                f"sit <b>{len(found)} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
+                f"&mdash; and <b>{len(withfood)}</b> of those have somewhere to eat within a "
+                "10-minute walk, so the charging stop and the meal are the same stop.</p>\n"
+                f'<a class="cta" href="{map_url}">Plan this trip on the map &rarr;</a>\n'
+                f"{break_sec}\n"
+                f'<p class="stats">Typical power along this route is <b>{med} kW</b>, with <b>{big}</b> '
+                f"stops at 150 kW or more and <b>{tesla}</b> on the Tesla network. Chargers under "
+                f"{TRIP_MIN_KW} kW are left out &mdash; on a drive this length they cost more time "
+                "than they save.</p>\n"
+                "<h2>Every stop with food within a walk</h2>\n"
+                f"<p>In order along the route{spread}.</p>\n"
+                f'{"".join(cards)}\n'
+                '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>')
+        path = f"trip/{sl}/index.html"
+        page(path, title, desc, body, f"trip/{sl}/")
+        add(path)
+        trip_links.append((a.split(",")[0], b.split(",")[0], sl, len(withfood)))
+
+    if trip_links:
+        chips = "".join(f'<a href="../{sl}/">{esc(x)} &rarr; {esc(y)} <small>{n}</small></a>'
+                        for x, y, sl, n in trip_links)
+        for x, y, sl, n in trip_links:
+            f = os.path.join(HERE, f"trip/{sl}/index.html")
+            doc = open(f).read().replace('<div class="chips" id="tripchips"></div>',
+                                         f'<div class="chips">{chips}</div>')
+            open(f, "w").write(doc)
+        idx_chips = "".join(f'<a href="{sl}/">{esc(x)} &rarr; {esc(y)} <small>{n} stops</small></a>'
+                            for x, y, sl, n in trip_links)
+        idx_body = (
+            "<h1>EV road trip charging, planned around food</h1>\n"
+            f'<p class="lead">Pick a drive to see every fast charger within {TRIP_MI:g} miles of the '
+            "route, in order, with the restaurants within a 10-minute walk of each one. Charging "
+            "takes 20&ndash;40 minutes; this is about spending them somewhere worth stopping.</p>\n"
+            f'<div class="chips">{idx_chips}</div>\n'
+            "<h2>Not your route?</h2>\n"
+            '<p class="lead">The map plans any drive: type a start and a destination and it finds '
+            'the chargers along it. <a class="cta" href="../">Open the map &rarr;</a></p>\n'
+            "<h2>Or browse by road</h2>\n"
+            '<p class="lead"><a href="../along/">Every charger along the interstates &rarr;</a></p>')
+        page("trip/index.html", "EV road trip charging stops with food nearby",
+             "Charging stops for popular US road trips - LA to Las Vegas, New York to Boston, "
+             "Dallas to Austin and more - with the restaurants within a 10-minute walk of each stop.",
+             idx_body, "trip/")
+        add("trip/index.html")
+        print(f"Trip pages: {len(trip_links)}")
 
 # ---- shared stylesheet (was inlined on every page: 4.9 KB x ~3,000 pages) ----
 os.makedirs(os.path.join(HERE, "assets"), exist_ok=True)

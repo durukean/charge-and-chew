@@ -45,6 +45,18 @@ CASES = [
     ("whats the closest charger to a target",dict(here=False, chains=["Target"],   net=None,    place="")),
     ("i want to find a charger near costco", dict(here=False, chains=["Costco"],   net=None,    place="")),
     ("show me chargers near walmart",        dict(here=False, chains=["Walmart"],  net=None,    place="")),
+    # Category queries: "somewhere to eat" is a chain query that names a category. The
+    # trigger word must never survive into the place text -- "hungry in denver" geocoding
+    # "hungry denver" is exactly the class of bug that sent people to the wrong state.
+    ("somewhere to eat near me",             dict(here=True,  chains=[], place="",       anyCat="food")),
+    ("food near me",                         dict(here=True,  chains=[], place="",       anyCat="food")),
+    ("hungry in denver",                     dict(here=False, chains=[], place="denver", anyCat="food")),
+    ("tesla charger with lunch in barstow",  dict(here=False, chains=[], net="tesla", place="barstow", anyCat="food")),
+    ("shopping near me",                     dict(here=True,  chains=[], place="",       anyCat="store")),
+    # A named chain wins: the category word must not override what they actually asked for.
+    ("ihop lunch",                           dict(here=False, chains=["IHOP"], place="", anyCat=None)),
+    # No category word means no category filter.
+    ("superchargers in brooklyn",            dict(anyCat=None)),
 ]
 
 
@@ -76,7 +88,8 @@ window.__ready = function () {{
   var P = window.__parseQuery, qs = {cases_json}, r = [];
   for (var i = 0; i < qs.length; i++) {{
     var p = P(qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: p.chains, net: p.net, place: p.place}});
+    r.push({{q: qs[i], here: !!p.here, chains: p.chains, net: p.net, place: p.place,
+              anyCat: p.anyCat == null ? null : p.anyCat}});
   }}
   document.getElementById('out').textContent = JSON.stringify(r);
 }};

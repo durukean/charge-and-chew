@@ -158,6 +158,68 @@ for _p in _glob.glob(os.path.join(HERE, "near", "**", "index.html"), recursive=T
     if _m and not os.path.exists(os.path.join(HERE, "og", _m.group(1) + ".png")):
         _miss.add(_m.group(1))
 check(not _miss, f"pages reference social cards that do not exist: {sorted(_miss)[:5]}")
+
+# ---- "Any food" / "Any store" category filter ----
+# One predicate feeds passesChain, bestWalk and countWithoutNarrowing. If they drift apart,
+# a stop can pass the filter but sort as if it had no match, or the empty state can blame
+# the wrong thing.
+for _needle, _why in [
+    ("let anyCat = null", "the any-category filter state is gone"),
+    ("const chainQuery = ()", "chainQuery helper gone — the three filter paths would drift"),
+    ("const chainKeysOn =", "chainKeysOn helper gone"),
+    ('data-cat="${c}"', "the Any food / Any store chips are gone"),
+    ("CAT_LABEL", "category chip labels gone"),
+]:
+    check(_needle in _html, _why)
+check(_html.count("if (!chainQuery()) return true;") == 1
+      and "return chainKeysOn(m).length > 0;" in _html,
+      "passesChain no longer routes through the shared chain predicate")
+check("const keys = chainQuery() ? chainKeysOn(m) : Object.keys(m);" in _html,
+      "bestWalk ignores the category filter — sorting would use an unmatched chain's distance")
+check("anyCat ? p.set('any', anyCat)" in _html and "q.get('any')" in _html,
+      "the category filter is not shareable — a ?any= link would open unfiltered")
+# The trigger words must be stripped from the place text. "hungry in denver" geocoding
+# "hungry denver" is the exact bug class that used to teleport the map to another state.
+# Category and brand replace each other. Without this, tapping a brand while a category was
+# on OR-ed them and the result count went UP -- a tap that reads as narrowing must not widen.
+check(_html.count("if (active.has(k)) { anyCat = null; track('chain', k); }") == 2,
+      "picking a chain no longer clears the category filter — the count would grow on a narrowing tap")
+check("if (anyCat) { active.clear(); track('anycat', anyCat); }" in _html,
+      "picking a category no longer clears the chain selection")
+for _w in ("'meal'", "'hungry'", "'shopping'"):
+    check(_w in _html, f"category trigger word {_w} is not in NON_PLACE — it would be geocoded")
+
+# ---- trip pages ----
+_trips = os.path.join(HERE, "data", "trips.json")
+check(os.path.exists(_trips), "data/trips.json is missing — make_trips.py has not been run")
+if os.path.exists(_trips):
+    _tj = json.load(open(_trips))
+    _dirs = [d for d in os.listdir(os.path.join(HERE, "trip"))
+             if os.path.isdir(os.path.join(HERE, "trip", d))] if os.path.isdir(os.path.join(HERE, "trip")) else []
+    check(len(_dirs) >= len(_tj) - 2,
+          f"only {len(_dirs)} trip pages for {len(_tj)} cached routes")
+    _sm = open(os.path.join(HERE, "sitemap.xml"), encoding="utf-8").read()
+    check(_sm.count("/trip/") >= len(_dirs), "trip pages are missing from the sitemap")
+    _lv = os.path.join(HERE, "trip", "los-angeles-to-las-vegas", "index.html")
+    check(os.path.exists(_lv), "the LA to Las Vegas trip page is gone")
+    if os.path.exists(_lv):
+        _t = open(_lv, encoding="utf-8").read()
+        # The CTA is the whole point of the page: it must land on the app already routed
+        # and already filtered to food, or the page is just a list.
+        check("any=food" in _t and "from=Los%20Angeles" in _t and "to=Las%20Vegas" in _t,
+              "the trip CTA no longer opens the map on that route with food selected")
+        check("mile " in _t, "the break-the-drive table lost its route mileage")
+        # Distance, not point index. OSRM emits geometry far denser in cities, and indexing
+        # by point put the first suggested stop 30 miles into a 270-mile drive.
+        _m = [int(x) for x in re.findall(r"<b>mile (\d+)</b>", _t)]
+        check(_m and _m[0] > 45,
+              f"first suggested stop is at mile {_m[0] if _m else '?'} — sampling is skewed to the origin city")
+    for _short in ("orlando-to-tampa", "denver-to-colorado-springs"):
+        _f = os.path.join(HERE, "trip", _short, "index.html")
+        if os.path.exists(_f):
+            check("Good places to break" not in open(_f, encoding="utf-8").read(),
+                  f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
+check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
 check("tire shop" in _html, "the live-category example is gone from the suggestions")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,

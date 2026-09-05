@@ -157,6 +157,7 @@ svg{display:block}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .chip.on .cnt{color:var(--accent-ink);opacity:.7}
 .chip.more{border-style:dashed;color:var(--accent);background:transparent;box-shadow:none}
+.chip.catchip{font-weight:650}
 .qchip{color:var(--dim)}
 .qchip.on{color:var(--accent-ink)}
 
@@ -641,6 +642,7 @@ svg{display:block}
       <div id="carBar"></div>
 
       <div class="chiprow" id="chiprow">
+        <div style="display:contents" id="catchips"></div>
         <div class="qf" id="netSeg">
           <button class="chip qchip" data-net="tesla" aria-pressed="false">⚡ Tesla</button>
           <button class="chip qchip" data-net="other" aria-pressed="false">Other networks</button>
@@ -818,7 +820,10 @@ svg{display:block}
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><b>Popular chains:</b></p>
   <div class="chainlinks"><a href="near/ihop/">🥞 IHOP</a><a href="near/waffle-house/">🧇 Waffle House</a><a href="near/denny-s/">🍳 Denny's</a><a href="near/cracker-barrel/">🪵 Cracker Barrel</a><a href="near/in-n-out/">🍔 In-N-Out</a><a href="near/whataburger/">🍔 Whataburger</a><a href="near/chick-fil-a/">🐔 Chick-fil-A</a><a href="near/starbucks/">☕ Starbucks</a><a href="near/dunkin/">🍩 Dunkin'</a><a href="near/mcdonald-s/">🍟 McDonald's</a><a href="near/chipotle/">🌯 Chipotle</a><a href="near/panera-bread/">🥖 Panera Bread</a><a href="near/culver-s/">🍦 Culver's</a><a href="near/buc-ee-s/">🦫 Buc-ee's</a><a href="near/wawa/">🦆 Wawa</a><a href="near/sheetz/">⛽ Sheetz</a><a href="near/circle-k/">⛽ Circle K</a><a href="near/love-s/">⛽ Love's</a><a href="near/pilot/">⛽ Pilot</a><a href="near/walmart/">🛒 Walmart</a><a href="near/target/">🎯 Target</a><a href="near/costco/">📦 Costco</a><a href="near/sam-s-club/">🏪 Sam's Club</a><a href="near/kroger/">🛒 Kroger</a><a href="near/publix/">🛒 Publix</a><a href="near/h-e-b/">🛒 H-E-B</a><a href="near/whole-foods/">🥬 Whole Foods</a><a href="near/trader-joe-s/">🛍️ Trader Joe's</a><a href="near/meijer/">🛒 Meijer</a><a href="near/dollar-general/">🏪 Dollar General</a></div>
-  <p><a href="near/"><b>Browse all 90 chains &amp; every state →</b></a><br>
+  <p><b>Road trips:</b></p>
+  <div class="chainlinks"><a href="trip/los-angeles-to-las-vegas/">LA → Las Vegas</a><a href="trip/los-angeles-to-san-francisco/">LA → San Francisco</a><a href="trip/new-york-to-boston/">New York → Boston</a><a href="trip/new-york-to-washington/">New York → DC</a><a href="trip/dallas-to-austin/">Dallas → Austin</a><a href="trip/seattle-to-portland/">Seattle → Portland</a><a href="trip/miami-to-orlando/">Miami → Orlando</a><a href="trip/atlanta-to-nashville/">Atlanta → Nashville</a><a href="trip/denver-to-salt-lake-city/">Denver → Salt Lake City</a><a href="trip/phoenix-to-las-vegas/">Phoenix → Las Vegas</a></div>
+  <p><a href="trip/"><b>All road trip charging guides →</b></a><br>
+  <a href="near/"><b>Browse all 90 chains &amp; every state →</b></a><br>
   <a href="along/"><b>Or browse chargers along the interstates →</b></a></p>
   <a class="close" href="#">Close</a>
 </div></div>
@@ -855,6 +860,10 @@ const byId = {}; SITES.forEach(s => byId[s.id] = s);
 
 /* ───────── state ───────── */
 const active = new Set();
+/* "Any food" / "Any store": the category is already on every brand, so this is a chain
+   selection that names a category instead of a brand. Kept out of `active` on purpose —
+   putting 60 keys in there would light up every chip and blow out the shareable URL. */
+let anyCat = null;
 let cat = 'all';
 let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landings
 let radiusMi = 25;
@@ -1109,7 +1118,7 @@ function showPOIs(s) {
   clearPOIs();
   const m = MATCH[s.id]; if (!m) return;
   let keys = Object.keys(m);
-  if (active.size) keys = keys.filter(k => active.has(k));
+  if (chainQuery()) keys = chainKeysOn(m);
   keys = keys.slice(0, 16);
   const pts = [[s.lat, s.lon]];
   for (const k of keys) {
@@ -1367,10 +1376,9 @@ function passesChain(s) {
   if (!passesSpec(s)) return false;
   if (onlyMine && carInfo() && compat(s) === null) return false;
   if (cat === 'fav') return favs.has(s.id);
-  if (!active.size) return true;
+  if (!chainQuery()) return true;
   const m = MATCH[s.id]; if (!m) return false;
-  for (const k of active) if (k in m) return true;
-  return false;
+  return chainKeysOn(m).length > 0;
 }
 function inScope(s) {
   if (route) return route.ids.has(s.id);
@@ -1383,7 +1391,7 @@ function inScope(s) {
 }
 function bestWalk(s) {
   const m = MATCH[s.id] || {};
-  const keys = active.size ? [...active].filter(k => k in m) : Object.keys(m);
+  const keys = chainQuery() ? chainKeysOn(m) : Object.keys(m);
   return keys.length ? Math.min(...keys.map(k => mDist(s, m[k]))) : 9e9;
 }
 const routeIdx = id => (route && route.order.has(id)) ? route.order.get(id) : 9e9;
@@ -1396,9 +1404,9 @@ function countWithoutNarrowing() {
   for (const s of SITES) {
     if (!inScope(s)) continue;
     if (cat === 'fav') { if (favs.has(s.id)) n++; continue; }
-    if (!active.size) { n++; continue; }
+    if (!chainQuery()) { n++; continue; }
     const m = MATCH[s.id]; if (!m) continue;
-    for (const k of active) if (k in m) { n++; break; }
+    if (chainKeysOn(m).length) n++;
   }
   return n;
 }
@@ -1418,7 +1426,7 @@ function visibleSites() {
 
 function render() {
   const vis = visibleSites(), visIds = new Set(vis.map(s => s.id));
-  const filtering = active.size > 0 || cat === 'fav';
+  const filtering = chainQuery() || cat === 'fav';
   const T = MTHEME[curDark ? 'dark' : 'light'];
   const clustered = drawClusters(vis);
   const themeKey = (curDark ? 'd' : 'l') + (clustered ? 'C' : '');
@@ -1494,6 +1502,23 @@ const counts = {};
 for (const k in BRANDS) counts[k] = 0;
 for (const id in MATCH) for (const k in MATCH[id]) counts[k]++;
 const CHAIN_KEYS = Object.keys(BRANDS).filter(k => counts[k] > 0).sort((a, b) => counts[b] - counts[a]);
+const CAT_LABEL = { food: '🍴 Any food', store: '🛒 Any store' };
+const inCat = (k, c) => !!(BRANDS[k] && BRANDS[k].cat === c);
+const hasCat = (m, c) => { for (const k in m) if (inCat(k, c)) return true; return false; };
+const catCount = {};
+for (const c of ['food', 'store']) {
+  let n = 0;
+  for (const id in MATCH) if (hasCat(MATCH[id], c)) n++;
+  catCount[c] = n;
+}
+/* One predicate for "does this stop satisfy the current chain query", so passesChain,
+   bestWalk and countWithoutNarrowing can never drift apart. */
+const chainKeysOn = m => {
+  const out = [];
+  for (const k in m) if (active.has(k) || (anyCat && inCat(k, anyCat))) out.push(k);
+  return out;
+};
+const chainQuery = () => active.size > 0 || !!anyCat;
 
 function renderChips() {
   const el = $('chips');
@@ -1503,14 +1528,27 @@ function renderChips() {
   if (cat === 'fav') keys = [...active];
   const top = keys.slice(0, 14);
   for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
+  /* Ahead of the brand chips, because "somewhere to eat" is the question most people
+     actually have — naming a chain is the narrower, later thought. */
+  $('catchips').innerHTML = (cat === 'fav' ? [] : ['food', 'store'])
+    .map(c => `<button class="chip catchip ${anyCat === c ? 'on' : ''}" data-cat="${c}"
+      aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_LABEL[c]}
+      <span class="cnt">${catCount[c].toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
       <span class="cnt" title="${(counts[k] || 0).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k] || 0}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All ${CHAIN_KEYS.length} chains</button>`;
+  $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
+    const k = c.dataset.cat;
+    anyCat = anyCat === k ? null : k;
+    if (anyCat) { active.clear(); track('anycat', anyCat); }
+    render(); syncUrl();
+    if (anyCat && !route) { setSheet('mid'); if (!center) fitToResults(); }
+  });
   el.querySelectorAll('.chip[data-k]').forEach(c => c.onclick = () => {
     const k = c.dataset.k;
     active.has(k) ? active.delete(k) : active.add(k);
-    if (active.has(k)) track('chain', k);
+    if (active.has(k)) { anyCat = null; track('chain', k); }
     render(); syncUrl();
   });
   $('moreChip').onclick = openPicker;
@@ -1527,8 +1565,9 @@ document.addEventListener('click', e => {
 
 /* ───────── list ───────── */
 function renderList(vis) {
-  const filtering = active.size > 0 || cat === 'fav';
-  const what = cat === 'fav' ? 'saved' : [...active].map(k => BRANDS[k].e + ' ' + k).join(' or ');
+  const filtering = chainQuery() || cat === 'fav';
+  const what = cat === 'fav' ? 'saved'
+    : [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)].join(' or ');
   let scope = '';
   if (route) scope = ' on route';
   else if (stateScope) scope = ` in ${STATE_NAME[stateScope] || stateScope}`;
@@ -1552,7 +1591,7 @@ function renderList(vis) {
     : '';
 
   /* The moment the app just proved useful is the only moment worth asking. */
-  if (vis.length && (active.size || center || route)) {
+  if (vis.length && (chainQuery() || center || route)) {
     deliveredValue = true;
     setTimeout(offerInstall, 1200);
   }
@@ -1571,7 +1610,8 @@ function renderList(vis) {
   $('list').innerHTML = vis.slice(0, 300).map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
-    ent.sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+    const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
+    ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
     // "Discount Tire ≥3min" tells you something; "Tire Shop ≥3min" does not
     const lp = livePoiFor[s.id];
     const chains = ent.slice(0, 4).map(([k, v]) => {
@@ -1764,7 +1804,7 @@ function drawPicker() {
   $('pkGrid').querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
     const k = b.dataset.k;
     active.has(k) ? active.delete(k) : active.add(k);
-    if (active.has(k)) track('chain', k);
+    if (active.has(k)) { anyCat = null; track('chain', k); }
     b.classList.toggle('on'); render(); syncUrl();
   });
 }
@@ -1774,7 +1814,7 @@ function closePicker() {
   if (active.size && !route) { setSheet('mid'); if (!center) fitToResults(); }
 }
 $('pkClose').onclick = $('pkDone').onclick = closePicker;
-$('pkClear').onclick = () => { active.clear(); drawPicker(); render(); syncUrl(); };
+$('pkClear').onclick = () => { active.clear(); anyCat = null; drawPicker(); render(); syncUrl(); };
 $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 
 /* ───────── center: locate / pin / place ───────── */
@@ -2047,6 +2087,7 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
   'somewhere', 'anywhere', 'place', 'places', 'best', 'good', 'great', 'cheap', 'cheapest',
   'closest', 'nearest', 'fastest', 'quick', 'food', 'eat', 'eats', 'lunch', 'dinner',
   'breakfast', 'coffee', 'stop', 'stops', 'trip', 'route', 'now', 'open', 'today',
+  'meal', 'meals', 'hungry', 'snack', 'store', 'stores', 'shopping', 'errand', 'errands',
   // Question and filler words NOISE misses. "wheres the nearest ... to an in n out"
   // used to leave the place text "wheres to", which Nominatim resolved to a real town
   // (West Springfield, MA) and the map flew there. Words already covered by NOISE are
@@ -2074,12 +2115,18 @@ function parseQuery(raw) {
     const re = new RegExp('(^|\\s)' + word + '(\\s|$)');
     while (re.test(t)) { if (!net) net = val; t = t.replace(re, ' '); }
   }
+  /* "somewhere to eat", "food near me" — a category, not a chain. Only counts when the
+     query named no chain of its own, so "ihop lunch" still means IHOP. */
+  const anyc = chains.length ? null
+    : /\b(food|eat|eats|lunch|dinner|breakfast|meal|meals|hungry|snack)\b/.test(t) ? 'food'
+    : /\b(store|stores|shopping|errand|errands)\b/.test(t) ? 'store'
+    : null;
   let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
   // Strip surviving non-place words; if nothing meaningful is left, there is no place.
   place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc };
 }
 
 window.__parseQuery = parseQuery;   // exposed for the search test suite
@@ -2194,8 +2241,11 @@ $('placeIn').addEventListener('keydown', async e => {
 
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {
-    active.clear();
+    active.clear(); anyCat = null;
     p.chains.forEach(k => { active.add(k); track('search-chain', k); });
+    cat = 'all'; $('savedChip').classList.remove('on');
+  } else if (p.anyCat) {
+    active.clear(); anyCat = p.anyCat; track('anycat', p.anyCat);
     cat = 'all'; $('savedChip').classList.remove('on');
   }
   if (p.net) {
@@ -2577,7 +2627,7 @@ async function runLivePoi(intent) {
   BRANDS[key] = { e: POI_EMOJI[fam] || '📍', cat: 'live', n: pois.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
   livePoiKey = key; livePoiTerm = intent.label;
-  active.clear(); active.add(key);
+  active.clear(); anyCat = null; active.add(key);
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
   render(); renderChips(); setSheet('mid'); syncUrl();
@@ -2899,6 +2949,7 @@ function syncUrl() {
   const u = new URL(location.href), p = u.searchParams;
   const shareable = [...active].filter(k => k !== livePoiKey);
   shareable.length ? p.set('chain', shareable.join(',')) : p.delete('chain');
+  anyCat ? p.set('any', anyCat) : p.delete('any');
   livePoiTerm ? p.set('poi', livePoiTerm) : p.delete('poi');
   netFilter !== 'all' ? p.set('net', netFilter) : p.delete('net');
   F.kw ? p.set('minkw', F.kw) : p.delete('minkw');
@@ -3056,6 +3107,7 @@ const q = new URLSearchParams(location.search);
   const key = CHAIN_KEYS.find(b => b.toLowerCase() === k.toLowerCase());
   if (key) active.add(key);
 });
+if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
 if (['tesla', 'other'].includes(q.get('net'))) { netFilter = q.get('net'); syncNetSeg(); }
 if (q.get('minkw')) F.kw = +q.get('minkw') || 0;
 if (q.get('minstalls')) F.stalls = +q.get('minstalls') || 0;
@@ -3102,7 +3154,7 @@ if (q.get('from') && q.get('to')) {
   boot = () => $('goBtn').click();
 }
 if (boot) setTimeout(boot, 80);
-else if (active.size) { setSheet('mid'); fitToResults(); }
+else if (active.size || anyCat) { setSheet('mid'); fitToResults(); }
 else if (restoreArea()) {
   if (q.get('poi')) runLivePoi(intentFromTerm(q.get('poi')));
 }

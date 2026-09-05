@@ -65,6 +65,18 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .stats{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
   margin-bottom:22px;font-size:14.5px;line-height:1.6;color:var(--dim);box-shadow:var(--sh)}
 .stats b{color:var(--txt)}
+/* Wide content must scroll inside its own box; the page body must never scroll sideways. */
+.tripwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 22px;
+  border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--sh)}
+table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
+table.trip th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--dim2);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line)}
+table.trip td{padding:12px 14px;vertical-align:top;line-height:1.5;color:var(--dim);
+  border-bottom:1px solid var(--line)}
+table.trip tr:last-child td{border-bottom:0}
+table.trip td b{color:var(--txt)}
+table.trip td:first-child{white-space:nowrap;color:var(--txt);font-variant-numeric:tabular-nums}
+table.trip small{color:var(--dim2);font-size:12.5px}
 .faq{display:flex;flex-direction:column;gap:8px}
 .faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
   box-shadow:var(--sh)}
