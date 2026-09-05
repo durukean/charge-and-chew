@@ -240,6 +240,31 @@ check("' to ')" in _html and "->" in _html,
 check("or 'LA to Las Vegas'" in _html, "the search placeholder does not mention trips")
 check("#routeToggle{color:var(--accent)" in _html,
       "the route button reads as a fourth grey utility icon again")
+
+# ---- place typeahead ----
+# Suggestions come from SITES, not a geocoder: no request, no extra payload, works offline,
+# and it can only ever suggest somewhere we actually have chargers.
+for _needle, _why in [
+    ("const PLACES =", "the local place index is gone"),
+    ("function snapPlace", '"lasvegas" no longer resolves to a real city'),
+    ("function placeMatches", "place typeahead matching gone"),
+    ("function liveSugg", "the search dropdown no longer reacts to typing"),
+    ("data-hold", "the half-typed-trip row would run as a query instead of waiting"),
+]:
+    check(_needle in _html, _why)
+check("const snap = snapPlace(q);" in _html,
+      "geocode() no longer re-spaces run-together names — every caller funnels through it")
+check("$('placeIn').addEventListener('input', showSugg);" in _html,
+      "typing hides the suggestions again instead of filtering them")
+# "toledo" must not parse as "to" + "ledo": the tail group is optional and $-anchored
+# precisely so \\s* cannot be used here.
+check(r"/^(.*?\b(?:to|->|→))(?:\s+(.*))?$/i" in _html,
+      "the trip-tail regex changed shape — 'toledo' can parse as a trip head")
+# A substring search over city+state matched "det" inside "clydetx".
+check("p.ckey.includes(k)" in _html,
+      "substring matching runs across the comma again — 'det' would match 'Clyde, TX'")
+check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
+      "a picked suggestion renders as 'Las Vegas Nv' — the state code is not restored")
 check("tire shop" in _html, "the live-category example is gone from the suggestions")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,

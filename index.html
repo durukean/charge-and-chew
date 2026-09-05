@@ -2166,7 +2166,13 @@ function tripSide(raw) {
   if (t.replace(/[^a-z]/g, '').length < 2) return null;
   // A chain name on one side means they are looking for that brand, not driving to it.
   for (const [alias] of CHAIN_ALIAS) if (alias === t) return null;
-  return CITY_ALIAS[t] || t.replace(/\b[a-z]/g, c => c.toUpperCase());
+  /* normalise() has already dropped the comma, so a suggestion the user picked comes back
+     as "las vegas nv" and naive title-casing renders it "Las Vegas Nv". Put the state code
+     back the way it was written. */
+  const pretty = t.replace(/\b[a-z]/g, c => c.toUpperCase())
+                  .replace(/\s+([A-Za-z]{2})$/, (all, st) =>
+                    STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all);
+  return CITY_ALIAS[t] || snapPlace(t) || pretty;
 }
 
 function parseTrip(raw) {
@@ -2253,6 +2259,11 @@ function looksLikeChainBrand(hits, q) {
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
+
+  /* Nominatim has never heard of "lasvegas". Every caller -- the search bar and both route
+     fields -- funnels through here, so re-spacing it once fixes all of them. */
+  const snap = snapPlace(q);
+  if (snap) q = snap;
 
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
               '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
@@ -2789,6 +2800,104 @@ const SUGGESTIONS = [
   { q: 'Chase',          i: '🏦', note: 'brand' },
   { q: 'Denver',         i: '📍', note: 'place' } ];
 
+/* ───────── place index, built from our own data ─────────
+   Typeahead comes from SITES, not a geocoder. It costs no request and no extra payload
+   (city and state already ship with every charger), it works offline, and it can only ever
+   suggest somewhere we actually have chargers -- a geocoder will happily complete a town we
+   cover nothing in. Sorted by charger count, so the biggest namesake wins the way
+   Nominatim's own importance ranking would. */
+const PLACES = (() => {
+  const n = new Map();
+  for (const s of SITES) {
+    if (!s.city || !s.st) continue;
+    const city = String(s.city).trim().replace(/[,;.\s]+$/, '');
+    // AFDC city fields occasionally hold a street address ("8900 E. Buckeye Ave.")
+    if (city.length < 3 || /\d/.test(city)) continue;
+    const k = city + ', ' + s.st;
+    n.set(k, (n.get(k) || 0) + 1);
+  }
+  return [...n.entries()]
+    .map(([label, c]) => {
+      const city = label.slice(0, label.lastIndexOf(',')).toLowerCase();
+      // key spans city+state so "lasvegasnv" still prefixes; ckey is the city alone, so a
+      // substring search cannot run across the comma ("clydetx" must not match "det").
+      return { label, c, city, key: label.toLowerCase().replace(/[^a-z]/g, ''),
+               ckey: city.replace(/[^a-z]/g, '') };
+    })
+    .sort((a, b) => b.c - a.c);
+})();
+
+/* "lasvegas" is not a place to any geocoder, but it is unambiguous to a person. Snap a
+   run-together word onto a city we have BEFORE asking Nominatim -- and only when it really
+   is run together, so "portland" is still left for the geocoder to disambiguate. */
+function snapPlace(t) {
+  const raw = String(t).trim().toLowerCase();
+  if (!raw || /\s/.test(raw)) return null;
+  const k = raw.replace(/[^a-z]/g, '');
+  if (k.length < 5) return null;
+  for (const p of PLACES) if (p.city === raw) return null;   // already a real one-word name
+  for (const p of PLACES) {
+    if (/[\s-]/.test(p.city) && p.city.replace(/[^a-z]/g, '') === k) return p.label;
+  }
+  return null;
+}
+
+/* Prefix first, then substring, so "las" leads with Las Vegas rather than Douglas. */
+function placeMatches(q, limit) {
+  const k = String(q).toLowerCase().replace(/[^a-z]/g, '');
+  if (k.length < 2) return [];
+  const pre = [], sub = [];
+  for (const p of PLACES) {
+    if (p.key.startsWith(k)) { if (pre.length < limit) pre.push(p); }
+    else if (sub.length < limit && p.ckey.includes(k)) sub.push(p);
+    if (pre.length >= limit) break;
+  }
+  return [...pre, ...sub].slice(0, limit);
+}
+
+function chainMatches(q, limit) {
+  const k = String(q).toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (k.length < 2) return [];
+  const pre = [], sub = [];
+  for (const b of CHAIN_KEYS) {
+    const bk = b.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (bk.startsWith(k)) pre.push(b);
+    else if (bk.includes(k)) sub.push(b);
+  }
+  return [...pre, ...sub].slice(0, limit);
+}
+
+/* What the dropdown shows once there is text. A trip in progress ("la to lasveg") completes
+   only the tail, because the start is already decided. */
+const nCharger = n => `${n.toLocaleString()} charger${n === 1 ? '' : 's'}`;
+function liveSugg(raw) {
+  const out = [];
+  /* The caller trims, so "Las Vegas, NV to " arrives without its trailing space and a
+     `\s+` here would stop matching. Making the whitespace optional instead would let
+     "toledo" parse as "to" + "ledo", so the tail group is optional and anchored to $. */
+  const m = raw.match(/^(.*?\b(?:to|->|→))(?:\s+(.*))?$/i);
+  const head = m ? m[1] + ' ' : '';
+  const tail = m ? (m[2] || '') : raw;
+  if (m) {
+    /* Nothing typed after "to" yet: offer the biggest places rather than an empty panel,
+       which is where picking "Las Vegas, NV to ..." used to leave you. */
+    const hits = tail.trim().length >= 2 ? placeMatches(tail, 6)
+      : PLACES.filter(p => !head.toLowerCase().includes(p.city)).slice(0, 6);
+    for (const p of hits)
+      out.push({ q: head + p.label, i: '🚗', label: p.label, note: 'route', sub: nCharger(p.c) });
+    return out;
+  }
+  for (const b of chainMatches(raw, 3))
+    out.push({ q: b, i: BRANDS[b].e, label: b, note: 'chain', sub: nCharger(counts[b] || 0) });
+  for (const p of placeMatches(raw, 6))
+    out.push({ q: p.label, i: '📍', label: p.label, note: 'place', sub: nCharger(p.c) });
+  // Offer the trip they are halfway to typing, rather than making them find the panel.
+  if (!m && out.length && out[0].note === 'place')
+    out.push({ q: out[0].label + ' to ', i: '🚗', label: `${out[0].label} to …`,
+               note: 'route', sub: 'plan a drive', hold: true });
+  return out;
+}
+
 let suggIdx = -1;
 function suggOpen() { return !$('sugg').hidden; }
 function placeSugg() {
@@ -2801,11 +2910,22 @@ function placeSugg() {
   el.style.maxHeight = Math.max(140, innerHeight - r.bottom - 18) + 'px';
 }
 function showSugg() {
-  if ($('placeIn').value.trim()) return hideSugg();
-  const el = $('sugg');
-  el.innerHTML = SUGGESTIONS.map(s => s.h
-    ? `<div class="sg-h">${esc(s.h)}</div>`
-    : `<button type="button" role="option" data-q="${esc(s.q)}"><i>${s.i}</i>${esc(s.q)}<small>${esc(s.note)}</small></button>`).join('');
+  const raw = $('placeIn').value.trim(), el = $('sugg');
+  let html;
+  if (!raw) {
+    html = SUGGESTIONS.map(s => s.h
+      ? `<div class="sg-h">${esc(s.h)}</div>`
+      : `<button type="button" role="option" data-q="${esc(s.q)}"><i>${s.i}</i>${esc(s.q)}<small>${esc(s.note)}</small></button>`).join('');
+  } else {
+    const hits = liveSugg(raw);
+    if (!hits.length) return hideSugg();
+    /* data-hold keeps the panel open after the pick: "Denver, CO to " is a half-typed trip,
+       not a query to run. */
+    html = hits.map(s =>
+      `<button type="button" role="option" data-q="${esc(s.q)}"${s.hold ? ' data-hold="1"' : ''}>` +
+      `<i>${s.i}</i>${esc(s.label)}<small>${esc(s.sub)}</small></button>`).join('');
+  }
+  el.innerHTML = html;
   suggIdx = -1;
   el.hidden = false;
   placeSugg();
@@ -2815,9 +2935,12 @@ function hideSugg() {
   $('sugg').hidden = true; suggIdx = -1;
   $('placeIn').setAttribute('aria-expanded', 'false');
 }
-function runSugg(q) {
-  hideSugg();
+function runSugg(q, hold) {
   const i = $('placeIn');
+  if (hold) {                       // half-typed trip: fill it in and keep typing
+    i.value = q; i.focus(); showSugg(); return;
+  }
+  hideSugg();
   i.value = q;
   i.dispatchEvent(new Event('input', { bubbles: true }));
   i.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
@@ -2826,7 +2949,7 @@ function runSugg(q) {
 /* Registered before the search handler so Enter picks the highlighted example rather than
    submitting an empty query. */
 $('placeIn').addEventListener('keydown', e => {
-  if (!suggOpen()) { if (e.key === 'ArrowDown' && !$('placeIn').value.trim()) showSugg(); return; }
+  if (!suggOpen()) { if (e.key === 'ArrowDown') showSugg(); return; }
   const opts = [...$('sugg').querySelectorAll('[data-q]')];
   if (e.key === 'Escape') { hideSugg(); e.stopPropagation(); return; }
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -2840,15 +2963,15 @@ $('placeIn').addEventListener('keydown', e => {
   }
   if (e.key === 'Enter' && suggIdx >= 0 && opts[suggIdx]) {
     e.preventDefault(); e.stopImmediatePropagation();   // don't also run the empty-input search
-    runSugg(opts[suggIdx].dataset.q);
+    runSugg(opts[suggIdx].dataset.q, opts[suggIdx].dataset.hold);
   }
 }, true);
 $('placeIn').addEventListener('focus', showSugg);
-$('placeIn').addEventListener('input', () => { $('placeIn').value.trim() ? hideSugg() : showSugg(); });
+$('placeIn').addEventListener('input', showSugg);
 // pointerdown, not click: blur fires first and would hide the panel before the click lands
 $('sugg').addEventListener('pointerdown', e => {
   const b = e.target.closest('[data-q]'); if (!b) return;
-  e.preventDefault(); runSugg(b.dataset.q);
+  e.preventDefault(); runSugg(b.dataset.q, b.dataset.hold);
 });
 $('placeIn').addEventListener('blur', () => setTimeout(hideSugg, 120));
 addEventListener('resize', () => { if (suggOpen()) placeSugg(); });

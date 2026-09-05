@@ -63,6 +63,17 @@ CASES = [
     ("denver - salt lake city",              dict(trip="Denver|Salt Lake City")),
     # A hyphenated place name is one place, not two.
     ("winston-salem",                        dict(trip=None)),
+    # Run-together names: "lasvegas" is nothing to a geocoder but obvious to a person.
+    ("la to lasvegas",                       dict(trip="Los Angeles, CA|Las Vegas, NV")),
+    ("sanfrancisco to sacramento",           dict(trip="San Francisco, CA|Sacramento")),
+    ("newyork to boston",                    dict(trip="New York, NY|Boston")),
+    # A real one-word city is left alone for the geocoder to disambiguate.
+    ("portland to seattle",                  dict(trip="Portland|Seattle")),
+    # A picked suggestion arrives comma-less ("las vegas nv"); the state code must come back
+    # as ", NV" rather than being title-cased into "Nv".
+    ("las vegas nv to los angeles ca",        dict(trip="Las Vegas, NV|Los Angeles, CA")),
+    # ...but a trailing two-letter word that is not a state is left alone.
+    ("denver to el paso tx",                  dict(trip="Denver|El Paso, TX")),
     ("los angeles to las vegas",             dict(trip="Los Angeles|Las Vegas")),
     ("chargers from denver to moab",         dict(trip="Denver|Moab")),
     ("toledo to detroit",                    dict(trip="Toledo|Detroit")),
