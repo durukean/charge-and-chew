@@ -133,6 +133,11 @@ check("installSnoozed" in _html, "install dismissal is no longer remembered")
 check("deliveredValue" in _html, "install prompt no longer waits until the app is useful")
 # The live lookup is the app's most distinctive feature and is invisible without examples.
 check("SUGGESTIONS" in _html, "search examples gone — live lookup becomes undiscoverable again")
+# Dwell advice must stay chain-aware: the generic version claimed "sit-down meal" when the
+# only thing within a walk was a coffee shop.
+check("dwellAdvice" in _html and "CHAIN_DWELL" in _html, "chain-aware dwell advice gone")
+check("DWELL_MIN[o.kind] + o.walk * 2" in _html,
+      "dwell advice no longer counts the walk BOTH ways — it would recommend unreachable stops")
 # Chain rows carry the POI's own coordinates, so walking directions need no lookup.
 check("chainDetail" in _html, "tap-a-chain lookup gone")
 check("travelmode=walking" in _html, "per-chain walking directions gone")

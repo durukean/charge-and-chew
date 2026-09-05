@@ -353,6 +353,13 @@ svg{display:block}
 .pp-det .oh{margin-right:6px}
 .pp-det a{color:var(--accent);font-weight:700;text-decoration:none;margin-right:10px}
 /* The place you actually searched for: which one, open or not, how to reach it. */
+/* What the charge time is actually good for, given what is within a walk. */
+.pp-dwell{background:rgba(21,128,61,.10);border:1px solid rgba(21,128,61,.22);color:var(--txt);
+  border-radius:10px;padding:7px 10px;margin:7px 0 2px;font-size:12px;line-height:1.45}
+.pp-dwell b{font-weight:800}
+.pp-dwell.tight{background:rgba(180,83,9,.10);border-color:rgba(180,83,9,.24);color:var(--dim)}
+:root[data-theme="dark"] .pp-dwell{background:rgba(74,222,128,.10);border-color:rgba(74,222,128,.20)}
+:root[data-theme="dark"] .pp-dwell.tight{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.22)}
 .pp-poi{background:var(--surface2);border:1px solid var(--line);border-radius:11px;
   padding:9px 11px;margin:9px 0 4px}
 .pp-poi-h{font-weight:800;font-size:13.5px}
@@ -802,6 +809,10 @@ svg{display:block}
   <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
+  <p><b>What the wait is good for:</b> when you've set your car we compare the estimated charge time to
+  what's actually within a walk — a sit-down place needs about 45 minutes, a quick meal 20, a coffee 10 —
+  and count the walk in both directions. So a 48-minute charge with an IHOP six minutes away is called a
+  quick meal, not a sit-down one. Rough guidance, not a reservation.</p>
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
   <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
@@ -1059,7 +1070,7 @@ function popupHtml(s) {
     ? (cp === null
         ? `<div class="pp-car"><span class="cc null">${cpTxt} — this stop has no connector your car can use</span></div>`
         : `<div class="pp-car"><span class="cc ${cp}">${cpTxt}</span>
-       <span>~${cm} min 10–80% · ${dwell(cm)}</span></div>`)
+       <span>~${cm} min 10–80%</span></div>` + dwellAdvice(s, cm))
     : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
@@ -1075,7 +1086,8 @@ function popupHtml(s) {
     <div class="pp-list">${rows}</div>
     <div class="pp-links">
       <a target="_blank" rel="noopener" href="${reportUrl(s)}" class="rep" title="Wrong info? Tell us">Report</a>
-      <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lon}">Map</a>
+      <a target="_blank" rel="noopener" href="${gPlace(/non-network/i.test(s.net) ? s.name : s.net, s.lat.toFixed(5), s.lon.toFixed(5))}"
+         title="Google reviews for this charger — the closest thing to a reliability check">Reviews</a>
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}">Directions</a>
     </div>`;
 }
@@ -2276,6 +2288,62 @@ function popupPad(m) {
   const visibleBand = Math.min(sheetTop, mapBox.bottom) - (mapBox.top + top);
   const avail = Math.max(150, Math.round(visibleBand - 108));   // popup chrome + tip
   document.documentElement.style.setProperty('--pop-max', avail + 'px');
+}
+
+
+/* ───────── what the charge time is actually good for ─────────
+   The stop panel already estimated a dwell ("sit-down meal") from charge time alone, which
+   is useless if the only thing within a walk is a Starbucks. We know exactly WHICH chains
+   are there, so match the window to what is actually reachable — the one thing a generic
+   route planner cannot do, because it only knows an amenity exists, not which one.
+
+   Minutes are how long the place realistically takes, not how long you may stay. */
+const DWELL_MIN = {
+  grab: 10,   // counter or drive-thru, coffee and a pastry
+  quick: 20,  // fast food or fast casual, eaten in
+  sit: 45,    // table service: ordering, waiting, paying
+  shop: 15    // a browse; works at almost any length
+};
+const CHAIN_DWELL = {};
+[['grab', ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee', 'Krispy Kreme',
+           'Little Caesars', "Casey's", 'Circle K', 'QuikTrip', 'RaceTrac', 'Kwik Trip', 'Speedway',
+           'Royal Farms', 'Sheetz', 'Wawa', "Love's", 'Pilot', 'Flying J', 'TA Travel Center']],
+ ['quick', ["McDonald's", 'Burger King', "Wendy's", 'Taco Bell', 'Subway', 'Chipotle', 'KFC',
+            'Popeyes', "Arby's", 'Jack in the Box', "Carl's Jr.", "Hardee's", 'Del Taco', 'Sonic',
+            'Whataburger', 'In-N-Out', 'Five Guys', 'Shake Shack', "Culver's",
+            'Dairy Queen', 'Panda Express', 'Panera Bread', "Jersey Mike's", 'Firehouse Subs',
+            'Wingstop', "Zaxby's", 'Bojangles', 'Chick-fil-A', "Raising Cane's", 'Cook Out',
+            "Portillo's", 'Pizza Hut', "Domino's"]],
+ ['sit', ['IHOP', "Denny's", 'Waffle House', 'Cracker Barrel', "Applebee's", "Chili's",
+          'Olive Garden', 'Texas Roadhouse', 'Buffalo Wild Wings', 'Red Robin']]
+].forEach(([kind, list]) => list.forEach(n => CHAIN_DWELL[n] = kind));
+
+/* Everything in the store category is a browse unless already classified above. */
+function dwellKind(name) {
+  if (CHAIN_DWELL[name]) return CHAIN_DWELL[name];
+  const b = BRANDS[name];
+  return b && b.cat === 'store' ? 'shop' : 'quick';
+}
+
+/* Given the charge time and what is within a walk, say what the wait is actually good for. */
+function dwellAdvice(s, mins) {
+  if (mins == null) return '';
+  const m = MATCH[s.id]; if (!m) return '';
+  const opts = Object.keys(m)
+    .map(k => ({ k, kind: dwellKind(k), walk: walkMin(mDist(s, m[k])) }))
+    // there and back has to fit inside the charge, with a little slack
+    .filter(o => DWELL_MIN[o.kind] + o.walk * 2 <= mins - 3)
+    .sort((a, b) => (DWELL_MIN[b.kind] - DWELL_MIN[a.kind]) || (a.walk - b.walk));
+  if (!opts.length) {
+    const nearest = Object.keys(m).sort((a, b) => mDist(s, m[a]) - mDist(s, m[b]))[0];
+    return nearest
+      ? `<div class="pp-dwell tight">${mins} min is tight — ${esc(nearest)} is a ${walkMin(mDist(s, m[nearest]))} min walk each way.</div>`
+      : '';
+  }
+  const best = opts[0];
+  const label = { grab: 'a coffee run', quick: 'a quick meal', sit: 'a sit-down meal', shop: 'a browse' }[best.kind];
+  return `<div class="pp-dwell">${mins} min here — time for ${label} at
+    <b>${esc(best.k)}</b> (${best.walk} min walk).</div>`;
 }
 
 /* ───────── opening hours ─────────
