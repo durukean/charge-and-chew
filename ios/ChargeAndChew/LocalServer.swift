@@ -9,8 +9,15 @@ import Network
 /// bundled files. `http://127.0.0.1` *is* trustworthy by definition, so serving our own
 /// bundle over loopback gets the whole platform back without shipping anything remote.
 ///
-/// Nothing leaves the device: the listener is pinned to loopback and the port is random per
-/// launch, so no other process can guess it and the app answers no request from the network.
+/// Nothing leaves the device: the listener is pinned to loopback and answers no request from
+/// the network.
+///
+/// The port is FIXED, and that is not an oversight. Web storage is scoped to the origin, and
+/// the origin includes the port -- with a random port per launch every launch was a fresh
+/// origin, and favourites, the saved car, the theme choice and the "don't show me the intro
+/// again" flag were all silently lost between runs. A fixed port keeps one origin for the
+/// life of the install; a random one is used only if that port is somehow taken, which on a
+/// phone it never is.
 final class LocalServer {
 
     private var listener: NWListener?
@@ -24,14 +31,21 @@ final class LocalServer {
 
     init(root: URL) { self.root = root }
 
-    /// Starts on a random free loopback port and returns once it is actually listening, so
-    /// the caller can load a URL immediately without racing the socket.
+    static let preferredPort: UInt16 = 47831
+
+    /// Returns once the listener is actually ready, so the caller can load a URL immediately
+    /// without racing the socket. Tries the fixed port first (see the note on the class).
     func start() throws -> UInt16 {
+        do { return try start(on: NWEndpoint.Port(rawValue: Self.preferredPort)!) }
+        catch { return try start(on: .any) }
+    }
+
+    private func start(on port: NWEndpoint.Port) throws -> UInt16 {
         let params = NWParameters.tcp
         params.requiredInterfaceType = .loopback
         params.allowLocalEndpointReuse = true
 
-        let listener = try NWListener(using: params, on: .any)
+        let listener = try NWListener(using: params, on: port)
         self.listener = listener
 
         let ready = DispatchSemaphore(value: 0)
@@ -60,7 +74,7 @@ final class LocalServer {
                           userInfo: [NSLocalizedDescriptionKey: "listener did not become ready"])
         }
         if let startError { throw startError }
-        return port
+        return self.port
     }
 
     func stop() {

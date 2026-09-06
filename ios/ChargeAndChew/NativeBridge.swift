@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import CoreLocation
 import WebKit
 
@@ -56,6 +56,11 @@ final class NativeBridge: NSObject {
 
     private let manager = CLLocationManager()
     private weak var webView: WKWebView?
+
+    /// Everything the page can ask the shell for beyond location. Set by the host.
+    var onShare: ((URL, String) -> Void)?
+    var onTheme: ((Bool) -> Void)?
+    private let haptic = UIImpactFeedbackGenerator(style: .light)
     /// Requests parked until the user answers the permission sheet.
     private var waiting: [(id: Int, watch: Bool)] = []
     private var watching = Set<Int>()
@@ -110,14 +115,22 @@ final class NativeBridge: NSObject {
 extension NativeBridge: WKScriptMessageHandler {
     func userContentController(_ c: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let body = message.body as? [String: Any],
-              let cmd = body["cmd"] as? String,
-              let id = body["id"] as? Int else { return }
+              let cmd = body["cmd"] as? String else { return }
+        let id = body["id"] as? Int ?? 0
+        let opts = body["opts"] as? [String: Any] ?? [:]
         switch cmd {
         case "locate": serve(id: id, watch: false)
         case "watch":  serve(id: id, watch: true)
         case "clearWatch":
             watching.remove(id)
             if watching.isEmpty { manager.stopUpdatingLocation() }
+        case "share":
+            guard let raw = opts["url"] as? String, let url = URL(string: raw) else { return }
+            onShare?(url, opts["title"] as? String ?? "Charge & Chew")
+        case "theme":
+            onTheme?(opts["dark"] as? Bool ?? false)
+        case "haptic":
+            haptic.impactOccurred()
         default: break
         }
     }

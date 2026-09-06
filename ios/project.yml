@@ -45,6 +45,10 @@ targets:
         # loopback and local hostnames only -- every remote request is still forced to HTTPS,
         # and NSAllowsArbitraryLoads is deliberately NOT set.
         ITSAppUsesNonExemptEncryption: false
+        # canOpenURL() answers "no" for any scheme not declared here, so without this the
+        # Google Maps app would never be detected and everyone would get Apple Maps.
+        LSApplicationQueriesSchemes:
+          - comgooglemaps
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
     settings:

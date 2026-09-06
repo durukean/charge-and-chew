@@ -48,6 +48,37 @@ Nothing does it automatically, and a stale bundle looks exactly like a working o
 - **`WebViewController.swift`** — hosts the web view, holds the splash until first paint,
   and sends every non-loopback URL to Safari.
 
+## Audit findings, fixed (2026-09-06)
+
+Found by using the app on the simulator, not by reading it:
+
+- **Storage was wiped on every launch.** The server took a random port, the origin
+  includes the port, and web storage is per-origin — favourites, saved car, theme and the
+  "don't show the intro again" flag all vanished between runs. The port is now fixed
+  (`LocalServer.preferredPort`), random only as a fallback.
+- **Share sent a loopback URL.** `location.href` inside the shell is `http://127.0.0.1:…`,
+  which means nothing to anyone. The page now builds `https://chargeandchew.com/?…` and
+  hands it to the native share sheet (`shareUrl()` / `native('share')`).
+- **The popup fell off the right edge** on stops whose walkable places sit to the east.
+  `fitBounds` pads 40 px a side while the popup is ~340 px wide. `keepPopupOnScreen()`
+  measures the popup after the fit and pans by exactly the overflow.
+- **The intro card was cut off by the results sheet.** It was `position:absolute` inside
+  `#mapWrap` and only ever covered the map. Now `position:fixed`.
+- **Keyboard accessory bar (▲ ▼ ✓)** — the most recognisable "web page in a box" tell.
+  `AppWebView` swaps WebKit's content view for a runtime subclass whose
+  `inputAccessoryView` is nil, the same technique Capacitor and Cordova ship.
+- **Site pages 404'd.** `/near/…`, `/along/…`, `/trip/…` are not bundled; any main-frame
+  navigation to a loopback path other than `/index.html` now opens the real site in an
+  in-app `SFSafariViewController`.
+- **Directions** hand off to the Google Maps app when installed; otherwise **Apple Maps**
+  (`maps://?daddr=…&dirflg=w`), never Google's mobile-web "install our app" page.
+- Status bar follows the page's solar theme (`native('theme')`), not the system setting —
+  otherwise the clock is black-on-black every evening for anyone in light mode.
+- Analytics script was protocol-relative and resolved to `http://` on the loopback origin,
+  which ATS refuses, so the app was invisible in GoatCounter. Now `https://`.
+- Service worker skipped (`!NATIVE`), install nudge suppressed (`installed()` is true),
+  long-press text callouts disabled on UI chrome, haptic tick on state-changing taps.
+
 ## Traps already paid for
 
 - **XcodeGen overwrites `Info.plist`.** `info.path` means "generate this file here". A

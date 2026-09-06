@@ -267,6 +267,10 @@ check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
       "a picked suggestion renders as 'Las Vegas Nv' — the state code is not restored")
 # The hero card is taller than a phone viewport. Centring it puts the title and the close
 # button off-screen with no way to scroll them back.
+check("function keepPopupOnScreen" in _html and _html.count("keepPopupOnScreen();") == 1,
+      "the post-fit popup nudge is gone — on a phone the popup's right half falls off screen")
+check("#hero{position:fixed;" in _html,
+      "the hero is absolute inside #mapWrap again — on a phone the sheet cuts it off")
 check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,
       "the hero card centres again — on a phone its top is unreachable")
 check(".herocard{width:100%;max-width:460px;margin:auto" in _html,
