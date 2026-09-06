@@ -287,6 +287,10 @@ check(".mapctl{top:min(calc(var(--ovh, 250px) + 10px), calc(100% - 262px));botto
       "the FAB stack is anchored to the map bottom again — it collides with the chip row when the overlay grows")
 check('id="poiRetry"' in _html and "$('poiRetry').onclick = () => runLivePoi(intent);" in _html,
       "a failed live lookup is only a 3-second toast again — on a phone that reads as nothing happened")
+check('data-net="${esc(k)}"' in _html and "netPick = netPick === k ? null : k;" in _html,
+      "legend rows no longer filter by network — on a phone they look tappable and did nothing")
+check(".empty .fball{display:block" in _html and "'The <strong>' + esc(nar[0].label)" in _html,
+      "the empty state renders its filter label as a block and its button as plain text again")
 check("#hero{position:fixed;" in _html,
       "the hero is absolute inside #mapWrap again — on a phone the sheet cuts it off")
 check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,
