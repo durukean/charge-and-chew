@@ -38,8 +38,12 @@ xcodebuild -exportArchive -archivePath ChargeAndChew.xcarchive \
 
 # The web app is the whole product; an IPA missing it builds, signs and installs fine and
 # is then a blank screen on the device.
-unzip -l export/ChargeAndChew.ipa | grep -q 'Web/data.js' || { echo "FATAL: data.js missing from IPA"; exit 1; }
-unzip -l export/ChargeAndChew.ipa | grep -q 'Web/index.html' || { echo "FATAL: index.html missing from IPA"; exit 1; }
+# Listing captured first, on purpose: `unzip -l | grep -q` under pipefail FAILS on success,
+# because grep exits at the first match and unzip dies of SIGPIPE. That false FATAL cost a
+# release.
+LISTING=$(unzip -l export/ChargeAndChew.ipa)
+grep -q 'Web/data.js'    <<<"$LISTING" || { echo "FATAL: data.js missing from IPA"; exit 1; }
+grep -q 'Web/index.html' <<<"$LISTING" || { echo "FATAL: index.html missing from IPA"; exit 1; }
 echo "==> IPA ok: $(du -h export/ChargeAndChew.ipa | cut -f1)"
 
 [ "${1:-}" = "--no-upload" ] && { echo "stopping before upload"; exit 0; }

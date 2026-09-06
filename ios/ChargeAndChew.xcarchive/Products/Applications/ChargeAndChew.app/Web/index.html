@@ -61,6 +61,10 @@
   --scrim:linear-gradient(180deg,rgba(14,17,22,.9) 0%,rgba(14,17,22,.42) 55%,transparent 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+/* Inside the native shell a long-press on a label must not pop a Copy / Look Up callout;
+   that is the single fastest way for an app to feel like a web page in a box. */
+html.native{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+html.native input,html.native textarea,html.native .pp-addr{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -504,13 +508,16 @@ svg{display:block}
 .pkfoot .done{background:var(--accent);color:var(--accent-ink)}
 
 /* ═══ hero ═══ */
-/* flex-start + margin:auto on the card, NOT align-items:center. Centring a card that is
+/* position:fixed, not absolute: the hero lives inside #mapWrap, and absolute made it cover
+   only the map. On a phone the results sheet sits directly under the map, so the card was
+   cut off at the sheet with its buttons unreachable.
+   flex-start + margin:auto on the card, NOT align-items:center. Centring a card that is
    taller than the viewport overflows it equally top and bottom, and the overflowing top --
    the title and the close button -- is then unreachable, because a centred flex item cannot
    be scrolled back into view. This way it centres when it fits and scrolls when it does not.
    The safe-area padding matters on a notched phone in standalone/native, where there is no
    browser chrome holding the card clear of the status bar. */
-#hero{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;z-index:1500;display:none;
+#hero{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:1500;display:none;
   align-items:flex-start;justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:calc(env(safe-area-inset-top) + 18px) 18px calc(env(safe-area-inset-bottom) + 18px);
   background:rgba(15,18,22,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
@@ -873,6 +880,24 @@ const MATCH = {}; for (const k in D.matches) MATCH[+k] = D.matches[k];
 const byId = {}; SITES.forEach(s => byId[s.id] = s);
 
 /* ───────── state ───────── */
+/* ───────── native shell ─────────
+   The iOS app serves this same file from a loopback port and injects a message bridge
+   before any script runs. Everything that assumes a browser tab -- the service worker, the
+   install nudge, sharing location.href, the Web Share API -- has to know it is not in one:
+   a shared link that reads http://127.0.0.1:61234/ is a bug, not a link. */
+const NATIVE = !!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc);
+const native = (cmd, opts) => { if (NATIVE) window.webkit.messageHandlers.cc.postMessage({ cmd, id: 0, opts: opts || {} }); };
+if (NATIVE) document.documentElement.classList.add('native');
+/* The public URL for whatever is on screen. Inside the shell location.href is the loopback
+   server, which means nothing to anyone else. */
+function shareUrl() {
+  if (!NATIVE) return location.href;
+  const u = new URL('https://chargeandchew.com/');
+  u.search = location.search;
+  u.searchParams.delete('src'); u.searchParams.delete('nosw');
+  return u.href;
+}
+
 const active = new Set();
 /* "Any food" / "Any store": the category is already on every brand, so this is a chain
    selection that names a category instead of a brand. Kept out of `active` on purpose —
@@ -1167,8 +1192,27 @@ function showPOIs(s) {
     try {
       map.fitBounds(L.latLngBounds(pts),
         { paddingTopLeft: [40, padTop], paddingBottomRight: [40, padBottom], maxZoom: 16, animate: false });
+      keepPopupOnScreen();
     } catch (e) { /* transient sizing race — leave the view as-is */ }
   }
+}
+
+/* fitBounds pads 40 px a side, but the popup is ~340 px wide and hangs off its marker, so a
+   marker that lands at the left edge of the fitted bounds puts the popup's right half --
+   the walk arrows and the Directions button -- off the screen. Seen on an iPhone in Las
+   Vegas; invisible on a desktop, where the map is wider than any popup. After the fit,
+   measure the popup itself and pan by exactly what overflows. */
+function keepPopupOnScreen() {
+  const pop = document.querySelector('.leaflet-popup');
+  if (!pop) return;
+  const b = pop.getBoundingClientRect(), m = map.getContainer().getBoundingClientRect();
+  const margin = 10;
+  let dx = 0, dy = 0;
+  if (b.right > m.right - margin) dx = b.right - (m.right - margin);
+  else if (b.left < m.left + margin) dx = b.left - (m.left + margin);
+  const ovB = $('overlayTop').getBoundingClientRect().bottom;
+  if (b.top < ovB + margin) dy = b.top - (ovB + margin);
+  if (dx || dy) map.panBy([dx, dy], { animate: false });
 }
 
 map.on('popupopen', e => {
@@ -1337,6 +1381,7 @@ function isDarkNow() {
 function applyTheme() {
   curDark = isDarkNow();
   document.documentElement.dataset.theme = curDark ? 'dark' : 'light';
+  native('theme', { dark: curDark });   // the shell matches its status bar to us
   const mc = document.querySelector('meta[name="theme-color"]');
   if (mc) mc.content = curDark ? '#0e1116' : '#f4f5f7';
   if (tiles) map.removeLayer(tiles);
@@ -2724,6 +2769,14 @@ async function runLivePoi(intent) {
 }
 
 
+/* A tick on the taps that change what is on screen. Only the shell can do this; in a
+   browser the call is a no-op. Capture phase so it fires even when a handler stops
+   propagation. */
+document.addEventListener('click', e => {
+  if (NATIVE && e.target.closest('.chip, .qchip, .catchip, [data-star], [data-fav], .mbtn, .heropick, #goBtn'))
+    native('haptic', {});
+}, true);
+
 /* ───────── install nudge ─────────
    A phone utility is worth far more on the home screen than in a tab, but a prompt on
    arrival is the classic way to get dismissed forever. So: only after the app has actually
@@ -2733,7 +2786,7 @@ async function runLivePoi(intent) {
    iOS Safari never fires beforeinstallprompt and has no programmatic install, so there we
    show the Share-sheet instructions instead — and only to iOS Safari, since Chrome on iOS
    cannot add to the home screen at all. */
-const installed = () => matchMedia('(display-mode: standalone)').matches
+const installed = () => NATIVE || matchMedia('(display-mode: standalone)').matches
   || window.navigator.standalone === true
   // read the param directly rather than via `q`, which is declared further down the file
   || new URLSearchParams(location.search).get('src') === 'pwa';
@@ -3170,7 +3223,8 @@ function syncUrl() {
 $('shareBtn').onclick = async () => {
   track('share');
   syncUrl();
-  const url = location.href;
+  const url = shareUrl();
+  if (NATIVE) { native('share', { url, title: 'Charge & Chew' }); return; }
   try {
     if (navigator.share && window.innerWidth < 760) { await navigator.share({ title: 'Charge & Chew', url }); return; }
     await navigator.clipboard.writeText(url);
@@ -3389,7 +3443,7 @@ setOnline(navigator.onLine);
 if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') track('pwa-launch');
 if (!navigator.onLine) track('offline-use');
 
-if ('serviceWorker' in navigator && q.get('nosw') !== '1') {
+if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
       reg.addEventListener('updatefound', () => {
@@ -3422,6 +3476,6 @@ setTimeout(() => {
 }, 260);
 })();
 </script>
-<script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
