@@ -265,6 +265,12 @@ check("p.ckey.includes(k)" in _html,
       "substring matching runs across the comma again — 'det' would match 'Clyde, TX'")
 check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
       "a picked suggestion renders as 'Las Vegas Nv' — the state code is not restored")
+# The hero card is taller than a phone viewport. Centring it puts the title and the close
+# button off-screen with no way to scroll them back.
+check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,
+      "the hero card centres again — on a phone its top is unreachable")
+check(".herocard{width:100%;max-width:460px;margin:auto" in _html,
+      "the hero card lost margin:auto, so it no longer centres when it does fit")
 check("tire shop" in _html, "the live-category example is gone from the suggestions")
 check("if (stateScope) return s.st === stateScope;" in _html, "state scope is not applied in inScope")
 check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,

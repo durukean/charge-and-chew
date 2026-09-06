@@ -1,0 +1,53 @@
+name: ChargeAndChew
+options:
+  bundleIdPrefix: com.durukean
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+targets:
+  ChargeAndChew:
+    type: application
+    platform: iOS
+    sources:
+      - path: ChargeAndChew
+        excludes:
+          - "Web/**"
+          - "Info.plist"
+      # Copied wholesale, unprocessed: index.html and data.js must reach the bundle byte for
+      # byte, and letting Xcode "optimise" the web assets would silently rewrite them.
+      - path: ChargeAndChew/Web
+        type: folder
+        buildPhase: resources
+    # Every Info.plist key lives HERE, not in a hand-written file. `info.path` means
+    # "generate this file", so xcodegen OVERWRITES whatever is at that path on every run --
+    # a hand-edited plist silently lost its scene manifest, iOS made an empty window, and
+    # the app launched to a black screen with no code running and nothing in the log.
+    info:
+      path: ChargeAndChew/Info.plist
+      properties:
+        CFBundleDisplayName: "Charge & Chew"
+        UILaunchStoryboardName: LaunchScreen
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. Your location stays on your device."
+        # The bundled app is served over http://127.0.0.1. NSAllowsLocalNetworking permits
+        # loopback and local hostnames only -- every remote request is still forced to HTTPS,
+        # and NSAllowsArbitraryLoads is deliberately NOT set.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.durukean.chargeandchew
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
