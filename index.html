@@ -911,7 +911,13 @@ const byId = {}; SITES.forEach(s => byId[s.id] = s);
    a shared link that reads http://127.0.0.1:61234/ is a bug, not a link. */
 const NATIVE = !!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc);
 const native = (cmd, opts) => { if (NATIVE) window.webkit.messageHandlers.cc.postMessage({ cmd, id: 0, opts: opts || {} }); };
-if (NATIVE) document.documentElement.classList.add('native');
+if (NATIVE) {
+  document.documentElement.classList.add('native');
+  /* There is no console to read on a phone. Errors and toasts go to the shell, which writes
+     them to a file readable off the simulator (debug builds only). */
+  addEventListener('error', e => native('log', { msg: 'error: ' + e.message + ' @' + (e.lineno || '?') }));
+  addEventListener('unhandledrejection', e => native('log', { msg: 'rejection: ' + String(e.reason && e.reason.message || e.reason) }));
+}
 /* The public URL for whatever is on screen. Inside the shell location.href is the loopback
    server, which means nothing to anyone else. */
 function shareUrl() {
@@ -1033,6 +1039,7 @@ const fmtFt = m => m < 25 ? 'at this stop'
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let toastT;
 function toast(msg) {
+  native('log', { msg: 'toast: ' + String(arguments[0]) });   // phone-side console
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
 }
@@ -2739,7 +2746,15 @@ async function runLivePoi(intent) {
   try { els = await overpassFetch(q); }
   catch (e) {
     $('placeBox').classList.remove('busy');
-    toast("OpenStreetMap didn't answer — try again in a moment");
+    /* A toast alone was not enough: on a phone it is gone in three seconds and what the
+       user sees is "I searched and nothing happened". Put the failure, and the retry, where
+       the results were going to be. */
+    $('list').innerHTML = `<div class="empty"><b>OpenStreetMap didn't answer</b>Live lookups for
+      "${esc(intent.label)}" use a free community server that is sometimes busy.
+      <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`;
+    $('sheetTitle').innerHTML = `Couldn't look up <em>${esc(intent.label)}</em>`;
+    $('poiRetry').onclick = () => runLivePoi(intent);
+    setSheet('mid');
     return;
   }
   $('placeBox').classList.remove('busy');

@@ -60,6 +60,8 @@ final class NativeBridge: NSObject {
     /// Everything the page can ask the shell for beyond location. Set by the host.
     var onShare: ((URL, String) -> Void)?
     var onTheme: ((Bool) -> Void)?
+    /// Location is denied at the system level. The page cannot fix that; only Settings can.
+    var onLocationDenied: (() -> Void)?
     private let haptic = UIImpactFeedbackGenerator(style: .light)
     /// Requests parked until the user answers the permission sheet.
     private var waiting: [(id: Int, watch: Bool)] = []
@@ -96,6 +98,7 @@ final class NativeBridge: NSObject {
             manager.requestWhenInUseAuthorization()
         case .denied, .restricted:
             fail(id, 1, "Location permission denied")
+            onLocationDenied?()
         default:
             begin(id: id, watch: watch)
         }
@@ -131,6 +134,8 @@ extension NativeBridge: WKScriptMessageHandler {
             onTheme?(opts["dark"] as? Bool ?? false)
         case "haptic":
             haptic.impactOccurred()
+        case "log":
+            Diag.log("js: \(opts["msg"] as? String ?? "")")
         default: break
         }
     }
@@ -144,6 +149,8 @@ extension NativeBridge: CLLocationManagerDelegate {
         case .denied, .restricted:
             let parked = waiting; waiting = []
             parked.forEach { fail($0.id, 1, "Location permission denied") }
+            // They just said no on the system sheet; do not immediately nag with another
+            // alert. The Settings offer is for the NEXT tap, when they have changed their mind.
         default:
             let parked = waiting; waiting = []
             parked.forEach { begin(id: $0.id, watch: $0.watch) }

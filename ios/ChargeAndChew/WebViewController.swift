@@ -58,6 +58,7 @@ final class WebViewController: UIViewController {
         let bridge = NativeBridge(webView: webView)
         bridge.onShare = { [weak self] url, title in self?.share(url, title: title) }
         bridge.onTheme = { [weak self] isDark in self?.applyTheme(dark: isDark) }
+        bridge.onLocationDenied = { [weak self] in self?.offerLocationSettings() }
         controller.add(bridge, name: NativeBridge.name)
         self.bridge = bridge
 
@@ -151,6 +152,22 @@ final class WebViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     override var preferredStatusBarStyle: UIStatusBarStyle { dark ? .lightContent : .darkContent }
+
+    /// Once location is denied, every later tap on the locate button would fail silently --
+    /// the page's toast is gone in three seconds and iOS will never show the permission
+    /// sheet again. The only way back is Settings, so offer the shortcut.
+    private func offerLocationSettings() {
+        guard presentedViewController == nil else { return }
+        let alert = UIAlertController(
+            title: "Location is off for Charge & Chew",
+            message: "Turn it on in Settings to find chargers near you. You can also just search a city or drop a pin.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Not now", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
+        })
+        present(alert, animated: true)
+    }
 
     private func share(_ url: URL, title: String) {
         let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
