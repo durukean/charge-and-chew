@@ -286,6 +286,8 @@ check("#app:has(#routePanel.show:not(.collapsed)) .mapctl" in _html,
 # Two FABs on phones, not four: theme is in Filters, pin-drop is press-and-hold.
 check("#themeBtn,#pinBtn{display:none}" in _html, "the phone FAB stack is four high again")
 check('id="appearanceSeg"' in _html and "function syncAppearanceSeg" in _html, "the Appearance control left Filters")
+check("'#filters .seg.wide[data-f] button'" in _html and "'#filters .seg.wide[data-f]'" in _html,
+      "the filter wiring grabs every segment in the sheet again and overwrites the Appearance handlers")
 check("track('longpress-pin')" in _html, "press-and-hold to drop a pin is gone — phones have no pin button")
 check(".chip.more::before" in _html and "＋ All chains" in _html, "the sticky All-chains chip lost its fade")
 check('id="poiRetry"' in _html and "$('poiRetry').onclick = () => runLivePoi(intent);" in _html,

@@ -1710,9 +1710,15 @@ function renderList(vis) {
     const fix = couldHelp
       ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <strong>' + esc(nar[0].label) + '</strong> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
       : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}Try another chain, a bigger radius, or a wider route corridor.`;
+    /* "No saved stops yet" with a 1 on the star chip is a contradiction; the stop is just
+       outside the current area. Say so, and offer the way out. */
     $('list').innerHTML = cat === 'fav'
-      ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
+      ? (favs.size
+          ? `<div class="empty"><b>None of your ${favs.size} saved stop${favs.size === 1 ? ' is' : 's are'} in this area</b>
+             <button class="fball" id="favAll">Show all saved stops</button></div>`
+          : '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
+    const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); fitToResults(); };
     return;
   }
   const showIdx = !!route;
@@ -3424,7 +3430,8 @@ syncNetSeg();
 
 /* ───────── spec filters ───────── */
 function syncFilterUI() {
-  document.querySelectorAll('#filters .seg.wide').forEach(seg => {
+  // [data-f] only: the Appearance segment in the same sheet is not a result filter
+  document.querySelectorAll('#filters .seg.wide[data-f]').forEach(seg => {
     const key = seg.dataset.f;
     seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.v === (F[key] || 0)));
   });
@@ -3433,7 +3440,7 @@ function syncFilterUI() {
   $('filtN').textContent = n || '';
   $('filtBtn').classList.toggle('on', n > 0);
 }
-document.querySelectorAll('#filters .seg.wide button').forEach(b => b.onclick = () => {
+document.querySelectorAll('#filters .seg.wide[data-f] button').forEach(b => b.onclick = () => {
   track('filter', b.parentElement.dataset.f);
   F[b.parentElement.dataset.f] = +b.dataset.v;
   localStorage.setItem('cc_filters', JSON.stringify(F));
