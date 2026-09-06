@@ -161,6 +161,9 @@ svg{display:block}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .chip.on .cnt{color:var(--accent-ink);opacity:.7}
 .chip.more{border-style:dashed;color:var(--accent);background:transparent;box-shadow:none}
+/* Sticky at the row's right edge: it took four full flings across 20 chips to reach the
+   picker on a phone. Opaque background so chips scrolling underneath do not show through. */
+.chip.more{position:sticky;right:0;background:var(--bg);z-index:1}
 .chip.catchip{font-weight:650}
 .qchip{color:var(--dim)}
 .qchip.on{color:var(--accent-ink)}
@@ -1954,7 +1957,14 @@ function clearCenter() {
   sortBy = 'walk'; $('sortLbl').textContent = SORT_LABEL.walk;
   render(); syncUrl();
 }
-$('ccX').onclick = clearCenter;
+/* The x on the area card widens the scope to the whole country; leaving the map parked
+   on the old area showed an empty patch of desert under a list that now starts in
+   Illinois. Refit to whatever is now in scope. clearCenter() itself stays put because the
+   route planner calls it right before it fits the route. */
+$('ccX').onclick = () => {
+  clearCenter();
+  if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();
+};
 $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); radiusMi = +b.dataset.mi;
@@ -3326,7 +3336,12 @@ function settleFit(getBounds, padding, maxZoom, tries = 0) {
     const sz = map.getSize();
     const ready = b && b.isValid && b.isValid() && sz.x >= 60 && sz.y >= 60;
     if (ready) {
-      const o = { padding, animate: false };
+      /* On a phone the overlay (search, chips, car bar, centre card) floats over the top
+         of the map, so a symmetric fit puts the northern third of whatever it framed under
+         the chips. Pad the top by what is actually covering it. */
+      const mapTop = map.getContainer().getBoundingClientRect().top;
+      const ovH = wideLayout() ? 0 : Math.max(0, Math.round($('overlayTop').getBoundingClientRect().bottom - mapTop));
+      const o = { paddingTopLeft: [padding[0], padding[1] + ovH], paddingBottomRight: padding, animate: false };
       if (maxZoom) o.maxZoom = maxZoom;
       try { map.fitBounds(b, o); return; } catch (e) { /* transient sizing race */ }
     }

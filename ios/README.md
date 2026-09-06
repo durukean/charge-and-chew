@@ -79,6 +79,38 @@ Found by using the app on the simulator, not by reading it:
 - Service worker skipped (`!NATIVE`), install nudge suppressed (`installed()` is true),
   long-press text callouts disabled on UI chrome, haptic tick on state-changing taps.
 
+## Walkthrough findings, fixed (2026-09-06, second pass)
+
+Every control, exercised on the simulator one at a time:
+
+- **Return did nothing in the route fields.** The phone keyboard now says "next" / "go"
+  (`enterkeyhint`) and does it. `autocorrect` is off on every place field — iOS rewrote
+  "Barstow" as "Bar stow". Route fields show the geocoded name ("Los Angeles, CA"), not "la".
+- **Sheet at full height:** the map is ~170 px and its floating controls landed on the search
+  bar. Hidden at `sheet-full`. Resizing the sheet fired `moveend` and popped "Search this
+  area"; suppressed for 900 ms after a sheet change.
+- **FAB stack vs. overlay:** the stack was anchored to the map bottom and the overlay grew
+  from the top (car bar, centre card, route panel); they met and the stack sat on the chip
+  row. It now hangs off the overlay's bottom edge (`--ovh` from a ResizeObserver), clamped
+  to the map. Two wrong attempts: the rule landed in the desktop media block; then the
+  clamp used 46 px buttons when phones use 54 px.
+- **Route panel open for editing:** FABs hidden (collision) — which removed the only way to
+  close it, so the panel has its own close button.
+- **Failed live lookup** was a three-second toast; the failure and a Try again button now
+  sit where the results were going to be.
+- **Location denied:** iOS never shows the sheet again, so the shell offers Open Settings on
+  the *next* tap (not on the denial itself).
+- **Network legend rows** looked tappable and did nothing; they now narrow to that network
+  (the search's `netPick`), and the legend collapses after a pick.
+- **Empty state** rendered its filter label as a block and "Show them" as an unstyled
+  button; fixed.
+- **"+ All 90 chains"** took four flings to reach; it is sticky at the row's right edge.
+- **Clearing the area** left the map on an empty patch of desert under a list that now
+  started in Illinois; the map refits to the new scope.
+- **Phone-side log:** JS errors, unhandled rejections and every toast are posted to the
+  shell and land in `Documents/cc-boot.log` (debug builds). That is how a "tire shop" miss
+  was diagnosed as a transient Overpass non-answer rather than a bug.
+
 ## Traps already paid for
 
 - **XcodeGen overwrites `Info.plist`.** `info.path` means "generate this file here". A

@@ -291,6 +291,12 @@ check('data-net="${esc(k)}"' in _html and "netPick = netPick === k ? null : k;" 
       "legend rows no longer filter by network — on a phone they look tappable and did nothing")
 check(".empty .fball{display:block" in _html and "'The <strong>' + esc(nar[0].label)" in _html,
       "the empty state renders its filter label as a block and its button as plain text again")
+check(".chip.more{position:sticky;right:0" in _html,
+      "the All-chains chip is no longer sticky — it takes four flings to reach on a phone")
+check("if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();" in _html,
+      "clearing the area no longer refits the map — an empty map under a list from another state")
+check("paddingTopLeft: [padding[0], padding[1] + ovH]" in _html,
+      "map fits are symmetric again — on a phone the top of the framed area hides under the chips")
 check("#hero{position:fixed;" in _html,
       "the hero is absolute inside #mapWrap again — on a phone the sheet cuts it off")
 check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,
