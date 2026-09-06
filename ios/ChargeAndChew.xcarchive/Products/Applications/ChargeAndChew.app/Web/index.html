@@ -164,6 +164,8 @@ svg{display:block}
 /* Sticky at the row's right edge: it took four full flings across 20 chips to reach the
    picker on a phone. Opaque background so chips scrolling underneath do not show through. */
 .chip.more{position:sticky;right:0;background:var(--bg);z-index:1}
+.chip.more::before{content:'';position:absolute;right:100%;top:-4px;bottom:-4px;width:22px;pointer-events:none;
+  background:linear-gradient(to right,transparent,var(--bg))}
 .chip.catchip{font-weight:650}
 .qchip{color:var(--dim)}
 .qchip.on{color:var(--accent-ink)}
@@ -363,9 +365,11 @@ svg{display:block}
      car bar, route panel, centre card -- and the map shrinks as the sheet rises, and the
      two met in the middle: the FAB stack sat on top of the chip row. --ovh is kept current
      by a ResizeObserver on #overlayTop. */
-  .mapctl{top:min(calc(var(--ovh, 250px) + 10px), calc(100% - 262px));bottom:auto}
-  /* ^ the min() clamps the stack to the map: with the car bar and the centre card both
-     open, hanging it off the overlay pushed the locate button under the results sheet. */
+  /* Two buttons, not four. A four-high stack anchored anywhere on a phone-sized map lands
+     on something -- the chips, the clusters, the centre card. Theme lives in Filters and
+     pin-drop is press-and-hold on the map, so what is left (route, locate) fits in the
+     bottom-right corner where every map app keeps it. */
+  #themeBtn,#pinBtn{display:none}
   /* With the list pulled all the way up the map is ~170 px tall, and its floating controls
      -- network legend, "Search this area", the locate stack, attribution -- landed on top
      of the search bar and chips. Nothing on a 170 px map is worth tapping anyway. */
@@ -824,6 +828,13 @@ svg{display:block}
         <button class="ftog" data-f="noiso">🌙 Hide isolated stops (nothing walkable)</button>
       </div>
       <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
+    </div>
+    <div class="fgroup">
+      <label>Appearance</label>
+      <div class="seg wide" id="appearanceSeg">
+        <button data-v="auto" class="on">Auto</button><button data-v="light">Light</button><button data-v="dark">Dark</button>
+      </div>
+      <p class="fhint">Auto follows the sun — light by day, dark after sunset.</p>
     </div>
     <div class="pkfoot">
       <button class="clear" id="filtClear">Reset</button>
@@ -1637,7 +1648,7 @@ function renderChips() {
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
       <span class="cnt" title="${(counts[k] || 0).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k] || 0}</span></button>`).join('')
-    + `<button class="chip more" id="moreChip">＋ All ${CHAIN_KEYS.length} chains</button>`;
+    + `<button class="chip more" id="moreChip">＋ All chains</button>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
     const k = c.dataset.cat;
     anyCat = anyCat === k ? null : k;
@@ -1675,9 +1686,7 @@ function renderList(vis) {
 
   $('sheetTitle').innerHTML = (filtering || route || center)
     ? `${vis.length} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
-    : `${vis.length.toLocaleString()} fast chargers <em>· ${narrowings().length
-        ? esc(narrowings().map(n => n.label).join(' · '))
-        : 'every network, no filters'}</em>`;
+    : `${vis.length.toLocaleString()} fast chargers${narrowings().length ? '' : ' <em>· every network, no filters</em>'}`;
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
      nothing here", which is the wrong answer and sends people looking in the wrong place. */
@@ -1701,9 +1710,15 @@ function renderList(vis) {
     const fix = couldHelp
       ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <strong>' + esc(nar[0].label) + '</strong> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
       : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}Try another chain, a bigger radius, or a wider route corridor.`;
+    /* "No saved stops yet" with a 1 on the star chip is a contradiction; the stop is just
+       outside the current area. Say so, and offer the way out. */
     $('list').innerHTML = cat === 'fav'
-      ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
+      ? (favs.size
+          ? `<div class="empty"><b>None of your ${favs.size} saved stop${favs.size === 1 ? ' is' : 's are'} in this area</b>
+             <button class="fball" id="favAll">Show all saved stops</button></div>`
+          : '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
+    const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); fitToResults(); };
     return;
   }
   const showIdx = !!route;
@@ -2854,11 +2869,41 @@ document.addEventListener('click', e => {
     native('haptic', {});
 }, true);
 
-/* The FAB stack hangs off the overlay's bottom edge on phones (see .mapctl in the mobile
-   CSS), so the overlay's height has to be a CSS variable that tracks it. */
-new ResizeObserver(() => {
-  $('app').style.setProperty('--ovh', Math.round($('overlayTop').getBoundingClientRect().height) + 'px');
-}).observe($('overlayTop'));
+/* Press and hold anywhere on the map to search that spot. The phone has no pin button --
+   this is the affordance every map app uses for "here". Own detection rather than the
+   browser's contextmenu, which Mobile Safari does not fire on a long press. */
+(() => {
+  const el = map.getContainer();
+  let timer = null, sx = 0, sy = 0;
+  const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
+  el.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    sx = e.clientX; sy = e.clientY;
+    cancel();
+    timer = setTimeout(() => {
+      timer = null;
+      const ll = map.containerPointToLatLng(L.point(sx - el.getBoundingClientRect().left, sy - el.getBoundingClientRect().top));
+      native('haptic', {});
+      pinMode = false; $('pinBtn').classList.remove('on'); $('pinHint').classList.remove('show');
+      setCenter(ll.lat, ll.lng, 'Dropped pin', 'pin');
+      reverseName(ll.lat, ll.lng);
+      track('longpress-pin');
+    }, 550);
+  }, { passive: true });
+  el.addEventListener('pointermove', e => { if (timer && Math.hypot(e.clientX - sx, e.clientY - sy) > 10) cancel(); }, { passive: true });
+  el.addEventListener('pointerup', cancel, { passive: true });
+  el.addEventListener('pointercancel', cancel, { passive: true });
+  el.addEventListener('touchmove', () => { /* pinch/pan */ }, { passive: true });
+})();
+
+/* Appearance lives in Filters now (the map button is desktop-only). */
+$('appearanceSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
+  themePref = b.dataset.v; localStorage.setItem('cc_theme', themePref); applyTheme(); syncAppearanceSeg();
+});
+function syncAppearanceSeg() {
+  $('appearanceSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === themePref));
+}
+syncAppearanceSeg();
 
 /* ───────── install nudge ─────────
    A phone utility is worth far more on the home screen than in a tab, but a prompt on
@@ -3385,7 +3430,8 @@ syncNetSeg();
 
 /* ───────── spec filters ───────── */
 function syncFilterUI() {
-  document.querySelectorAll('#filters .seg.wide').forEach(seg => {
+  // [data-f] only: the Appearance segment in the same sheet is not a result filter
+  document.querySelectorAll('#filters .seg.wide[data-f]').forEach(seg => {
     const key = seg.dataset.f;
     seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.v === (F[key] || 0)));
   });
@@ -3394,7 +3440,7 @@ function syncFilterUI() {
   $('filtN').textContent = n || '';
   $('filtBtn').classList.toggle('on', n > 0);
 }
-document.querySelectorAll('#filters .seg.wide button').forEach(b => b.onclick = () => {
+document.querySelectorAll('#filters .seg.wide[data-f] button').forEach(b => b.onclick = () => {
   track('filter', b.parentElement.dataset.f);
   F[b.parentElement.dataset.f] = +b.dataset.v;
   localStorage.setItem('cc_filters', JSON.stringify(F));
