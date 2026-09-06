@@ -161,6 +161,9 @@ svg{display:block}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .chip.on .cnt{color:var(--accent-ink);opacity:.7}
 .chip.more{border-style:dashed;color:var(--accent);background:transparent;box-shadow:none}
+/* Sticky at the row's right edge: it took four full flings across 20 chips to reach the
+   picker on a phone. Opaque background so chips scrolling underneath do not show through. */
+.chip.more{position:sticky;right:0;background:var(--bg);z-index:1}
 .chip.catchip{font-weight:650}
 .qchip{color:var(--dim)}
 .qchip.on{color:var(--accent-ink)}
@@ -180,6 +183,13 @@ svg{display:block}
 .rfield input::placeholder{color:var(--dim2)}
 .rfield .mini{color:var(--dim);padding:4px;display:grid;place-items:center}
 .rrow2{display:flex;gap:8px;align-items:center}
+/* The panel needs its own close: on a phone the FAB stack (including the route toggle)
+   is hidden while the panel is open, because it collided with the fields. */
+.rcard{position:relative}
+.rclose{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;color:var(--dim);background:var(--surface2);border:1px solid var(--line);z-index:2}
+#routePanel.collapsed .rclose{display:none}
+#routePanel:not(.collapsed) .rfield:first-of-type{margin-right:42px}
 #goBtn{flex:1;height:44px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:700;
   font-size:14.5px;box-shadow:var(--sh2);transition:.15s}
 #goBtn:disabled{opacity:.5}
@@ -237,6 +247,8 @@ svg{display:block}
 #legend:not(.collapsed) #legendToggle svg{transform:rotate(180deg)}
 #legendList{padding:0 11px 10px;display:flex;flex-direction:column;gap:5px;max-height:44vh;overflow-y:auto}
 #legendList div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+#legendList div[data-net]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
+#legendList div[data-net].on{background:var(--surface2);color:var(--txt);font-weight:700}
 #legendList b{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 #legendList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #legendList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
@@ -347,6 +359,22 @@ svg{display:block}
 #sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
 @media(max-width:760px){
   #app.popup-open .mapctl{opacity:0;pointer-events:none;transition:opacity .15s}
+  /* Anchored to the BOTTOM of the overlay, not the bottom of the map. The overlay grows --
+     car bar, route panel, centre card -- and the map shrinks as the sheet rises, and the
+     two met in the middle: the FAB stack sat on top of the chip row. --ovh is kept current
+     by a ResizeObserver on #overlayTop. */
+  .mapctl{top:min(calc(var(--ovh, 250px) + 10px), calc(100% - 262px));bottom:auto}
+  /* ^ the min() clamps the stack to the map: with the car bar and the centre card both
+     open, hanging it off the overlay pushed the locate button under the results sheet. */
+  /* With the list pulled all the way up the map is ~170 px tall, and its floating controls
+     -- network legend, "Search this area", the locate stack, attribution -- landed on top
+     of the search bar and chips. Nothing on a 170 px map is worth tapping anyway. */
+  #app.sheet-full .mapctl,#app.sheet-full #legend,#app.sheet-full #searchHere,#app.sheet-full #pinHint,
+  #app.sheet-full .leaflet-control-attribution{opacity:0;pointer-events:none;transition:opacity .15s}
+  /* Same collision with the route panel open for editing: on a phone the panel is ~400 px
+     tall and the FAB stack, anchored to the bottom of a short map, rode up over the
+     Destination field and the corridor buttons. Nothing in the stack is needed mid-edit. */
+  #app:has(#routePanel.show:not(.collapsed)) .mapctl{opacity:0;pointer-events:none}
   #app.popup-open #legend{opacity:0;pointer-events:none}
 }
 .pp-chain .pl{color:inherit;text-decoration:none;border-bottom:1px dotted var(--dim2)}
@@ -440,6 +468,11 @@ svg{display:block}
 .row .star.on{color:var(--amber)}
 .empty{text-align:center;color:var(--dim);font-size:13px;padding:30px 20px;line-height:1.6}
 .empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14.5px}
+.empty strong{color:var(--txt);font-weight:700}
+/* the "Show them" pill inside an empty state was an unstyled <button> glued to "here." */
+.empty .fball{display:block;margin:12px auto 0;border:0;background:var(--accent);color:#fff;border-radius:999px;
+  padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer}
+:root[data-theme="dark"] .empty .fball{color:#0b1a10}
 
 /* ═══ modals ═══ */
 .modal{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:2000;background:rgba(15,18,22,.45);backdrop-filter:blur(7px);
@@ -650,7 +683,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew" aria-label="About Charge and Chew">
           <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg>
         </a>
-        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off"
+        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off" autocorrect="off" spellcheck="false"
                enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
@@ -676,12 +709,13 @@ svg{display:block}
 
       <div id="routePanel">
         <div class="rcard">
+          <button class="rclose" id="rClose" aria-label="Close route planner" title="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           <div class="rfield"><span class="dot a"></span>
-            <input id="fromIn" placeholder="Start — city or address" autocomplete="off">
+            <input id="fromIn" placeholder="Start — city or address" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="words" enterkeyhint="next">
             <button class="mini" id="useLoc" title="Use my location" aria-label="Use my current location as the start"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></button>
           </div>
           <div class="rfield"><span class="dot b"></span>
-            <input id="toIn" placeholder="Destination" autocomplete="off"></div>
+            <input id="toIn" placeholder="Destination" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="words" enterkeyhint="go"></div>
           <div class="rrow2">
             <button id="goBtn">Find stops along route</button>
             <div class="seg" id="corridorSeg">
@@ -754,7 +788,7 @@ svg{display:block}
     <h3><span>Pick chains</span><button class="iconbtn sm" id="pkClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="searchbox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="pkSearch" placeholder="Search 90 chains…" autocomplete="off">
+      <input id="pkSearch" placeholder="Search 90 chains…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
     </div>
     <div class="pkgrid" id="pkGrid"></div>
     <div class="pkfoot">
@@ -804,7 +838,7 @@ svg{display:block}
     <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Specs are approximations (usable battery, typical peak DC rate). Stored on this device only.</p>
     <div class="searchbox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="carSearch" placeholder="Search your model…" autocomplete="off">
+      <input id="carSearch" placeholder="Search your model…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
     </div>
     <div class="pkgrid" id="carGrid" style="grid-template-columns:1fr"></div>
     <div class="pkfoot">
@@ -887,7 +921,13 @@ const byId = {}; SITES.forEach(s => byId[s.id] = s);
    a shared link that reads http://127.0.0.1:61234/ is a bug, not a link. */
 const NATIVE = !!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc);
 const native = (cmd, opts) => { if (NATIVE) window.webkit.messageHandlers.cc.postMessage({ cmd, id: 0, opts: opts || {} }); };
-if (NATIVE) document.documentElement.classList.add('native');
+if (NATIVE) {
+  document.documentElement.classList.add('native');
+  /* There is no console to read on a phone. Errors and toasts go to the shell, which writes
+     them to a file readable off the simulator (debug builds only). */
+  addEventListener('error', e => native('log', { msg: 'error: ' + e.message + ' @' + (e.lineno || '?') }));
+  addEventListener('unhandledrejection', e => native('log', { msg: 'rejection: ' + String(e.reason && e.reason.message || e.reason) }));
+}
 /* The public URL for whatever is on screen. Inside the shell location.href is the loopback
    server, which means nothing to anyone else. */
 function shareUrl() {
@@ -932,7 +972,7 @@ function narrowings() {
   return out;
 }
 function clearNarrowing(k) {
-  if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg(); }
+  if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg(); renderLegend(); }
   else if (k === 'car') { onlyMine = false; localStorage.setItem('cc_onlymine', '0'); renderCarBar(); }
   else if (k.startsWith('f:')) { F[k.slice(2)] = FDEF[k.slice(2)]; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
   render(); syncUrl();
@@ -1009,6 +1049,7 @@ const fmtFt = m => m < 25 ? 'at this stop'
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let toastT;
 function toast(msg) {
+  native('log', { msg: 'toast: ' + String(arguments[0]) });   // phone-side console
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
 }
@@ -1658,7 +1699,7 @@ function renderList(vis) {
   if (!vis.length) {
     const couldHelp = nar.length ? countWithoutNarrowing() : 0;
     const fix = couldHelp
-      ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <b>' + esc(nar[0].label) + '</b> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*" style="margin-top:10px">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
+      ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <strong>' + esc(nar[0].label) + '</strong> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
       : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}Try another chain, a bigger radius, or a wider route corridor.`;
     $('list').innerHTML = cat === 'fav'
       ? '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>'
@@ -1732,11 +1773,15 @@ function sheetPx(s) {
   return Math.round(h * (window.innerWidth >= 760 ? 0.38 : 0.44));
 }
 const wideLayout = () => window.matchMedia('(min-width:900px)').matches;
+let sheetChangedAt = 0;
 function setSheet(s) {
   sheetState = s;
+  sheetChangedAt = Date.now();
   const el = $('sheet');
   el.classList.toggle('mid', s === 'mid');
   el.classList.toggle('full', s === 'full');
+  // the map's floating controls have nowhere to go when the map is a sliver
+  $('app').classList.toggle('sheet-full', s === 'full');
   if (wideLayout()) el.style.height = '';        // sidebar owns its height
   else el.style.height = sheetPx(s) + 'px';
   setTimeout(() => map.invalidateSize({ pan: false }), 300);
@@ -1912,7 +1957,14 @@ function clearCenter() {
   sortBy = 'walk'; $('sortLbl').textContent = SORT_LABEL.walk;
   render(); syncUrl();
 }
-$('ccX').onclick = clearCenter;
+/* The x on the area card widens the scope to the whole country; leaving the map parked
+   on the old area showed an empty patch of desert under a list that now starts in
+   Illinois. Refit to whatever is now in scope. clearCenter() itself stays put because the
+   route planner calls it right before it fits the route. */
+$('ccX').onclick = () => {
+  clearCenter();
+  if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();
+};
 $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); radiusMi = +b.dataset.mi;
@@ -1979,6 +2031,10 @@ function viewRadiusMi() {
 }
 function maybeOfferSearchHere() {
   if (route || pinMode) return $('searchHere').hidden = true;
+  /* Resizing the sheet resizes the map, which moves its centre and fires moveend. That is
+     not the user looking somewhere else, and "Search this area" popping up because they
+     pulled the list up was confusing on a phone. */
+  if (Date.now() - sheetChangedAt < 900) return;
   const c = map.getCenter();
   // far enough that the current results plainly no longer describe the view
   const movedFar = !center || hav(center.lat, center.lon, c.lat, c.lng) > radiusMi * MI * 0.55;
@@ -2072,7 +2128,7 @@ function groupedChains() {
 }
 
 /* ───────── network legend ───────── */
-(function () {
+function renderLegend() {
   const counts = {};
   for (const s of SITES) {
     const k = s.net || 'Other';
@@ -2080,14 +2136,27 @@ function groupedChains() {
     counts[k].n++;
   }
   const top = Object.keys(counts).sort((a, b) => counts[b].n - counts[a].n).slice(0, 10);
+  /* Rows are buttons, not just swatches: on a phone a list of named networks with counts
+     reads as tappable, and tapping one did nothing. Now it narrows to exactly that network
+     (the same netPick the search uses for "evgo near target"), shown in the filter bar as
+     "<network> only" with its own x. */
   $('legendList').innerHTML = top.map(k =>
-    `<div><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
+    `<div role="button" tabindex="0" data-net="${esc(k)}" class="${netPick === k ? 'on' : ''}"><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
   ).join('') + `<div style="margin-top:2px"><b style="background:#8892a0"></b><span>other networks</span></div>`;
+  $('legendList').querySelectorAll('[data-net]').forEach(row => row.onclick = () => {
+    const k = row.dataset.net;
+    netPick = netPick === k ? null : k;
+    netFilter = !netPick ? 'all' : /tesla/i.test(k) ? 'tesla' : 'other';
+    localStorage.setItem('cc_net', netFilter);
+    syncNetSeg(); renderLegend(); render(); syncUrl();
+    if (netPick) { track('legend-net', k); $('legend').classList.add('collapsed'); $('legendToggle').setAttribute('aria-expanded', 'false'); }
+  });
   $('legendToggle').onclick = () => {
     const open = $('legend').classList.toggle('collapsed');
     $('legendToggle').setAttribute('aria-expanded', String(!open));
   };
-})();
+}
+renderLegend();
 
 /* ───────── smart query parsing ─────────
    "tesla superchargers near costco in irvine" should just work. Everything is matched
@@ -2707,7 +2776,15 @@ async function runLivePoi(intent) {
   try { els = await overpassFetch(q); }
   catch (e) {
     $('placeBox').classList.remove('busy');
-    toast("OpenStreetMap didn't answer — try again in a moment");
+    /* A toast alone was not enough: on a phone it is gone in three seconds and what the
+       user sees is "I searched and nothing happened". Put the failure, and the retry, where
+       the results were going to be. */
+    $('list').innerHTML = `<div class="empty"><b>OpenStreetMap didn't answer</b>Live lookups for
+      "${esc(intent.label)}" use a free community server that is sometimes busy.
+      <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`;
+    $('sheetTitle').innerHTML = `Couldn't look up <em>${esc(intent.label)}</em>`;
+    $('poiRetry').onclick = () => runLivePoi(intent);
+    setSheet('mid');
     return;
   }
   $('placeBox').classList.remove('busy');
@@ -2776,6 +2853,12 @@ document.addEventListener('click', e => {
   if (NATIVE && e.target.closest('.chip, .qchip, .catchip, [data-star], [data-fav], .mbtn, .heropick, #goBtn'))
     native('haptic', {});
 }, true);
+
+/* The FAB stack hangs off the overlay's bottom edge on phones (see .mapctl in the mobile
+   CSS), so the overlay's height has to be a CSS variable that tracks it. */
+new ResizeObserver(() => {
+  $('app').style.setProperty('--ovh', Math.round($('overlayTop').getBoundingClientRect().height) + 'px');
+}).observe($('overlayTop'));
 
 /* ───────── install nudge ─────────
    A phone utility is worth far more on the home screen than in a tab, but a prompt on
@@ -3138,6 +3221,11 @@ $('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
   b.classList.add('on'); corridorMi = +b.dataset.mi;
   if (route) applyCorridor(route.verts, route.mi, route.hr);
 });
+/* Return in "Start" moves to "Destination"; Return in "Destination" runs the route. The
+   phone keyboard labels those keys "next" and "go" (enterkeyhint), so they must do it. */
+$('rClose').onclick = () => $('routeToggle').click();   // same path as the FAB toggle
+$('fromIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').focus(); } });
+$('toIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').blur(); $('goBtn').click(); } });
 $('goBtn').onclick = async () => {
   const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
   if (!f || !t) return toast('Enter a start and a destination');
@@ -3145,6 +3233,11 @@ $('goBtn').onclick = async () => {
   $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
   try {
     const [a, b] = await Promise.all([geocode(f), geocode(t)]);
+    /* Show what the geocoder actually resolved. "la" -> "vegas" in the summary reads like
+       the app did not understand; "Los Angeles, CA -> Las Vegas, NV" says it did, and it
+       is what Edit should show too. */
+    if (a.label && a.label !== 'Pinned coordinates') $('fromIn').value = a.label;
+    if (b.label && b.label !== 'Pinned coordinates') $('toIn').value = b.label;
     const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
     const j = await r.json();
     if (!j.routes || !j.routes.length) throw new Error('No driving route found');
@@ -3243,7 +3336,12 @@ function settleFit(getBounds, padding, maxZoom, tries = 0) {
     const sz = map.getSize();
     const ready = b && b.isValid && b.isValid() && sz.x >= 60 && sz.y >= 60;
     if (ready) {
-      const o = { padding, animate: false };
+      /* On a phone the overlay (search, chips, car bar, centre card) floats over the top
+         of the map, so a symmetric fit puts the northern third of whatever it framed under
+         the chips. Pad the top by what is actually covering it. */
+      const mapTop = map.getContainer().getBoundingClientRect().top;
+      const ovH = wideLayout() ? 0 : Math.max(0, Math.round($('overlayTop').getBoundingClientRect().bottom - mapTop));
+      const o = { paddingTopLeft: [padding[0], padding[1] + ovH], paddingBottomRight: padding, animate: false };
       if (maxZoom) o.maxZoom = maxZoom;
       try { map.fitBounds(b, o); return; } catch (e) { /* transient sizing race */ }
     }
