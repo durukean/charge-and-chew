@@ -44,6 +44,7 @@ targets:
         # The bundled app is served over http://127.0.0.1. NSAllowsLocalNetworking permits
         # loopback and local hostnames only -- every remote request is still forced to HTTPS,
         # and NSAllowsArbitraryLoads is deliberately NOT set.
+        ITSAppUsesNonExemptEncryption: false
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
     settings:
