@@ -77,5 +77,24 @@ Nothing does it automatically, and a stale bundle looks exactly like a working o
   (`com.apple.developer.carplay-charging`), which needs a separate entitlement request and
   native `CPPointOfInterestTemplate` UI. The web app cannot render on the car screen. That
   is the next real piece of work, and it is a project, not an afternoon.
-- **Bundle ID `com.durukean.chargeandchew`** is a guess and has no App Store Connect record.
-- `DEVELOPMENT_TEAM` is unset, so device builds and archives will not sign yet.
+
+## Shipping a build
+
+```bash
+./release.sh              # sync, generate, bump build, archive, export, verify, upload
+./release.sh --no-upload  # stop at export/ChargeAndChew.ipa
+```
+
+- App Store Connect app **6809134093**, bundle `com.chargeandchew.app` (bundleId resource
+  `ZHDTTDU73N`), SKU `chargeandchew001`, team `T37B6B6S7K`.
+- **`POST /v1/apps` is refused** — "resource 'apps' does not allow CREATE". The first app
+  record must be made in the web UI; everything after that is API-drivable.
+- **Export must NOT pass `-authenticationKey*`.** With the ASC API key it fails "Cloud
+  signing permission error / No profiles were found" — the logged-in Xcode session has
+  signing rights the key does not. Archive is happy either way.
+- **The ASC New App form is React-controlled**: programmatic field values are reset on the
+  next render, and its native `<select>`s need click-then-type-ahead. Type it like a person.
+- Internal beta groups **reject** `POST /betaGroups/{id}/relationships/builds` ("Builds
+  cannot be assigned to this internal group"). Internal testers get every processed build
+  automatically; the only gate that matters is export compliance, which
+  `ITSAppUsesNonExemptEncryption: false` in project.yml now answers at build time.
