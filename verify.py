@@ -269,6 +269,22 @@ check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
 # button off-screen with no way to scroll them back.
 check("function keepPopupOnScreen" in _html and _html.count("keepPopupOnScreen();") == 1,
       "the post-fit popup nudge is gone — on a phone the popup's right half falls off screen")
+check(_html.count('enterkeyhint=') == 5 and 'autocorrect="off"' in _html,
+      "phone-keyboard attributes are missing — Return keys say the wrong thing and autocorrect mangles place names")
+check("$('toIn').blur(); $('goBtn').click();" in _html,
+      "Return in the Destination field no longer runs the route")
+check("classList.toggle('sheet-full', s === 'full')" in _html and "#app.sheet-full .mapctl" in _html,
+      "map controls are no longer hidden when the sheet is full — they pile onto the search bar on a phone")
+check("Date.now() - sheetChangedAt < 900" in _html,
+      "'Search this area' fires on sheet resizes again")
+check("$('fromIn').value = a.label" in _html and "$('toIn').value = b.label" in _html,
+      "the route fields no longer show the geocoded place names — the summary reads 'la -> vegas'")
+check('id="rClose"' in _html and "$('rClose').onclick = () => $('routeToggle').click();" in _html,
+      "the route panel has no close control — with the FABs hidden on a phone it cannot be dismissed")
+check("#app:has(#routePanel.show:not(.collapsed)) .mapctl" in _html,
+      "the FAB stack overlaps the route panel again while editing a route on a phone")
+check(".mapctl{top:min(calc(var(--ovh, 250px) + 10px), calc(100% - 262px));bottom:auto}" in _html and "setProperty('--ovh'" in _html,
+      "the FAB stack is anchored to the map bottom again — it collides with the chip row when the overlay grows")
 check("#hero{position:fixed;" in _html,
       "the hero is absolute inside #mapWrap again — on a phone the sheet cuts it off")
 check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,

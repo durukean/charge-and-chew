@@ -180,6 +180,13 @@ svg{display:block}
 .rfield input::placeholder{color:var(--dim2)}
 .rfield .mini{color:var(--dim);padding:4px;display:grid;place-items:center}
 .rrow2{display:flex;gap:8px;align-items:center}
+/* The panel needs its own close: on a phone the FAB stack (including the route toggle)
+   is hidden while the panel is open, because it collided with the fields. */
+.rcard{position:relative}
+.rclose{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;color:var(--dim);background:var(--surface2);border:1px solid var(--line);z-index:2}
+#routePanel.collapsed .rclose{display:none}
+#routePanel:not(.collapsed) .rfield:first-of-type{margin-right:42px}
 #goBtn{flex:1;height:44px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:700;
   font-size:14.5px;box-shadow:var(--sh2);transition:.15s}
 #goBtn:disabled{opacity:.5}
@@ -347,6 +354,22 @@ svg{display:block}
 #sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
 @media(max-width:760px){
   #app.popup-open .mapctl{opacity:0;pointer-events:none;transition:opacity .15s}
+  /* Anchored to the BOTTOM of the overlay, not the bottom of the map. The overlay grows --
+     car bar, route panel, centre card -- and the map shrinks as the sheet rises, and the
+     two met in the middle: the FAB stack sat on top of the chip row. --ovh is kept current
+     by a ResizeObserver on #overlayTop. */
+  .mapctl{top:min(calc(var(--ovh, 250px) + 10px), calc(100% - 262px));bottom:auto}
+  /* ^ the min() clamps the stack to the map: with the car bar and the centre card both
+     open, hanging it off the overlay pushed the locate button under the results sheet. */
+  /* With the list pulled all the way up the map is ~170 px tall, and its floating controls
+     -- network legend, "Search this area", the locate stack, attribution -- landed on top
+     of the search bar and chips. Nothing on a 170 px map is worth tapping anyway. */
+  #app.sheet-full .mapctl,#app.sheet-full #legend,#app.sheet-full #searchHere,#app.sheet-full #pinHint,
+  #app.sheet-full .leaflet-control-attribution{opacity:0;pointer-events:none;transition:opacity .15s}
+  /* Same collision with the route panel open for editing: on a phone the panel is ~400 px
+     tall and the FAB stack, anchored to the bottom of a short map, rode up over the
+     Destination field and the corridor buttons. Nothing in the stack is needed mid-edit. */
+  #app:has(#routePanel.show:not(.collapsed)) .mapctl{opacity:0;pointer-events:none}
   #app.popup-open #legend{opacity:0;pointer-events:none}
 }
 .pp-chain .pl{color:inherit;text-decoration:none;border-bottom:1px dotted var(--dim2)}
@@ -650,7 +673,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew" aria-label="About Charge and Chew">
           <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg>
         </a>
-        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off"
+        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off" autocorrect="off" spellcheck="false"
                enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
@@ -676,12 +699,13 @@ svg{display:block}
 
       <div id="routePanel">
         <div class="rcard">
+          <button class="rclose" id="rClose" aria-label="Close route planner" title="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
           <div class="rfield"><span class="dot a"></span>
-            <input id="fromIn" placeholder="Start — city or address" autocomplete="off">
+            <input id="fromIn" placeholder="Start — city or address" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="words" enterkeyhint="next">
             <button class="mini" id="useLoc" title="Use my location" aria-label="Use my current location as the start"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></button>
           </div>
           <div class="rfield"><span class="dot b"></span>
-            <input id="toIn" placeholder="Destination" autocomplete="off"></div>
+            <input id="toIn" placeholder="Destination" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="words" enterkeyhint="go"></div>
           <div class="rrow2">
             <button id="goBtn">Find stops along route</button>
             <div class="seg" id="corridorSeg">
@@ -754,7 +778,7 @@ svg{display:block}
     <h3><span>Pick chains</span><button class="iconbtn sm" id="pkClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="searchbox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="pkSearch" placeholder="Search 90 chains…" autocomplete="off">
+      <input id="pkSearch" placeholder="Search 90 chains…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
     </div>
     <div class="pkgrid" id="pkGrid"></div>
     <div class="pkfoot">
@@ -804,7 +828,7 @@ svg{display:block}
     <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Specs are approximations (usable battery, typical peak DC rate). Stored on this device only.</p>
     <div class="searchbox">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="carSearch" placeholder="Search your model…" autocomplete="off">
+      <input id="carSearch" placeholder="Search your model…" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
     </div>
     <div class="pkgrid" id="carGrid" style="grid-template-columns:1fr"></div>
     <div class="pkfoot">
@@ -1732,11 +1756,15 @@ function sheetPx(s) {
   return Math.round(h * (window.innerWidth >= 760 ? 0.38 : 0.44));
 }
 const wideLayout = () => window.matchMedia('(min-width:900px)').matches;
+let sheetChangedAt = 0;
 function setSheet(s) {
   sheetState = s;
+  sheetChangedAt = Date.now();
   const el = $('sheet');
   el.classList.toggle('mid', s === 'mid');
   el.classList.toggle('full', s === 'full');
+  // the map's floating controls have nowhere to go when the map is a sliver
+  $('app').classList.toggle('sheet-full', s === 'full');
   if (wideLayout()) el.style.height = '';        // sidebar owns its height
   else el.style.height = sheetPx(s) + 'px';
   setTimeout(() => map.invalidateSize({ pan: false }), 300);
@@ -1979,6 +2007,10 @@ function viewRadiusMi() {
 }
 function maybeOfferSearchHere() {
   if (route || pinMode) return $('searchHere').hidden = true;
+  /* Resizing the sheet resizes the map, which moves its centre and fires moveend. That is
+     not the user looking somewhere else, and "Search this area" popping up because they
+     pulled the list up was confusing on a phone. */
+  if (Date.now() - sheetChangedAt < 900) return;
   const c = map.getCenter();
   // far enough that the current results plainly no longer describe the view
   const movedFar = !center || hav(center.lat, center.lon, c.lat, c.lng) > radiusMi * MI * 0.55;
@@ -2777,6 +2809,12 @@ document.addEventListener('click', e => {
     native('haptic', {});
 }, true);
 
+/* The FAB stack hangs off the overlay's bottom edge on phones (see .mapctl in the mobile
+   CSS), so the overlay's height has to be a CSS variable that tracks it. */
+new ResizeObserver(() => {
+  $('app').style.setProperty('--ovh', Math.round($('overlayTop').getBoundingClientRect().height) + 'px');
+}).observe($('overlayTop'));
+
 /* ───────── install nudge ─────────
    A phone utility is worth far more on the home screen than in a tab, but a prompt on
    arrival is the classic way to get dismissed forever. So: only after the app has actually
@@ -3138,6 +3176,11 @@ $('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
   b.classList.add('on'); corridorMi = +b.dataset.mi;
   if (route) applyCorridor(route.verts, route.mi, route.hr);
 });
+/* Return in "Start" moves to "Destination"; Return in "Destination" runs the route. The
+   phone keyboard labels those keys "next" and "go" (enterkeyhint), so they must do it. */
+$('rClose').onclick = () => $('routeToggle').click();   // same path as the FAB toggle
+$('fromIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').focus(); } });
+$('toIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').blur(); $('goBtn').click(); } });
 $('goBtn').onclick = async () => {
   const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
   if (!f || !t) return toast('Enter a start and a destination');
@@ -3145,6 +3188,11 @@ $('goBtn').onclick = async () => {
   $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
   try {
     const [a, b] = await Promise.all([geocode(f), geocode(t)]);
+    /* Show what the geocoder actually resolved. "la" -> "vegas" in the summary reads like
+       the app did not understand; "Los Angeles, CA -> Las Vegas, NV" says it did, and it
+       is what Edit should show too. */
+    if (a.label && a.label !== 'Pinned coordinates') $('fromIn').value = a.label;
+    if (b.label && b.label !== 'Pinned coordinates') $('toIn').value = b.label;
     const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
     const j = await r.json();
     if (!j.routes || !j.routes.length) throw new Error('No driving route found');
