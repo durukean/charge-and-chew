@@ -79,6 +79,21 @@ Found by using the app on the simulator, not by reading it:
 - Service worker skipped (`!NATIVE`), install nudge suppressed (`installed()` is true),
   long-press text callouts disabled on UI chrome, haptic tick on state-changing taps.
 
+## Phone layout (2026-09-07): the sheet is the control surface
+
+A real-phone screenshot showed the main screen still busy after the button cleanup: the
+phone layout was the desktop layout squeezed — four rows of controls floating over a ~300 px
+map. Phones now get what Apple Maps and Google Maps do: **one search pill on top, the map
+full-bleed, everything else in the bottom sheet.**
+
+- `relayout()` in index.html physically moves `#carBar`, `#chiprow` and `#centerCard` into
+  the sheet head on narrow screens and back on wide ones (`#app.phone` scopes the CSS).
+- The car reads as two chips at the head of the chip row (the desktop tag's `flex:1` +
+  ellipsis collapsed it to a lone emoji inside a scrolling row — fixed with `flex:0 0 auto`).
+- No legend button on phones; the same network list lives in Filters (`#filtNetList`).
+- Peek height shows title + where + chips, so the chips are always one glance away.
+- Map buttons: route + locate, bottom-right. Theme is in Filters; pin-drop is press-and-hold.
+
 ## Walkthrough findings, fixed (2026-09-06, second pass)
 
 Every control, exercised on the simulator one at a time:
