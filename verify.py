@@ -285,6 +285,16 @@ check("#app:has(#routePanel.show:not(.collapsed)) .mapctl" in _html,
       "the FAB stack overlaps the route panel again while editing a route on a phone")
 # Two FABs on phones, not four: theme is in Filters, pin-drop is press-and-hold.
 check("#themeBtn,#pinBtn{display:none}" in _html, "the phone FAB stack is four high again")
+# Phone layout: the sheet is the control surface. relayout() moves the car bar, chip row and
+# area card into the sheet on narrow screens and back on wide ones.
+check("function relayout()" in _html and "document.querySelector('.sheethead').after($('centerCard'), $('chiprow'))" in _html,
+      "the phone relayout is gone — controls float over the map again")
+check("$('chiprow').prepend($('carBar'))" in _html, "the car bar no longer joins the chip row on phones")
+check('id="filtNetList"' in _html and "$('filtNetList').innerHTML = rows" in _html,
+      "Networks are not in Filters — phones have no legend button")
+check("#app.phone #carBar .cartag{flex:0 0 auto" in _html,
+      "the car chip collapses to a lone emoji in the chip row again")
+check("phoneLayout ? 150 +" in _html, "the phone peek height no longer shows the chips")
 check('id="appearanceSeg"' in _html and "function syncAppearanceSeg" in _html, "the Appearance control left Filters")
 check("'#filters .seg.wide[data-f] button'" in _html and "'#filters .seg.wide[data-f]'" in _html,
       "the filter wiring grabs every segment in the sheet again and overwrites the Appearance handlers")

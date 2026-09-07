@@ -248,12 +248,12 @@ svg{display:block}
 #legend.collapsed #legendList{display:none}
 #legend:not(.collapsed) #legendToggle svg{transform:rotate(180deg)}
 #legendList{padding:0 11px 10px;display:flex;flex-direction:column;gap:5px;max-height:44vh;overflow-y:auto}
-#legendList div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
-#legendList div[data-net]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
-#legendList div[data-net].on{background:var(--surface2);color:var(--txt);font-weight:700}
-#legendList b{width:11px;height:11px;border-radius:50%;flex-shrink:0}
-#legendList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#legendList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
+#legendList div,#filtNetList div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+#legendList div[data-net],#filtNetList div[data-net]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
+#legendList div[data-net].on,#filtNetList div[data-net].on{background:var(--surface2);color:var(--txt);font-weight:700}
+#legendList b,#filtNetList b{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+#legendList span,#filtNetList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#legendList i,#filtNetList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
 /* Esri's required credit is long and wraps to two lines on a phone, where it used to sit
    on top of the legend. It has to stay visible, so give it the full width at the very
    bottom and lift the legend clear of it. */
@@ -370,6 +370,29 @@ svg{display:block}
      pin-drop is press-and-hold on the map, so what is left (route, locate) fits in the
      bottom-right corner where every map app keeps it. */
   #themeBtn,#pinBtn{display:none}
+  /* Sheet as the control surface (see relayout()). Everything below is scoped to
+     #app.phone so the desktop never sees it. */
+  #app.phone #legend{display:none}
+  #app.phone .leaflet-control-attribution{max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+  #app.phone .sheethead{padding-bottom:6px}
+  #app.phone #sheet #centerCard.show{margin:0 12px 8px;padding:6px 8px 6px 12px;border-radius:12px;box-shadow:none;
+    background:var(--surface2);animation:none;gap:8px}
+  #app.phone #sheet #centerCard .lbl{font-size:13px}
+  #app.phone #sheet #centerCard .sub{display:none}      /* the title above already says it */
+  #app.phone #sheet #centerCard .rad button{height:28px;padding:0 9px;font-size:12px}
+  #app.phone #sheet .chiprow{padding:2px 12px 9px;flex-shrink:0;margin:0}
+  #app.phone #sheet .chiprow .chip{height:36px;padding:0 12px;font-size:12.5px}
+  #app.phone #carBar.show{display:contents}
+  #app.phone #carBar .cartag,#app.phone #carBar .mine{height:36px;border-radius:100px;padding:0 12px;font-size:12.5px;
+    font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px;border:1px solid var(--line);
+    background:var(--surface);color:var(--txt);flex-shrink:0;box-shadow:var(--sh)}
+  #app.phone #carBar .cartag .spec{display:none}       /* "250kW · NACS" is a detail, not a chip */
+  /* the desktop car tag is flex:1 with an ellipsising name; in a scrolling chip row that
+     collapses to a lone emoji */
+  #app.phone #carBar .cartag{flex:0 0 auto;min-width:0}
+  #app.phone #carBar .cartag .m{flex:none;overflow:visible}
+  #app.phone #carBar .mine.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  #app.phone #fbar{padding-top:0}
   /* With the list pulled all the way up the map is ~170 px tall, and its floating controls
      -- network legend, "Search this area", the locate stack, attribution -- landed on top
      of the search bar and chips. Nothing on a 170 px map is worth tapping anyway. */
@@ -828,6 +851,11 @@ svg{display:block}
         <button class="ftog" data-f="noiso">🌙 Hide isolated stops (nothing walkable)</button>
       </div>
       <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
+    </div>
+    <div class="fgroup">
+      <label>Network</label>
+      <div id="filtNetList" class="netlist"></div>
+      <p class="fhint">Tap a network to show only its chargers; tap again for all.</p>
     </div>
     <div class="fgroup">
       <label>Appearance</label>
@@ -1781,13 +1809,43 @@ function renderList(vis) {
 
 /* ───────── sheet ───────── */
 let sheetState = 'peek';
+let phoneLayout = false;
 function sheetPx(s) {
   const h = window.innerHeight;
-  if (s === 'peek') return 52;
+  // On a phone the chips live in the sheet, so "peek" has to show them, not just a title.
+  if (s === 'peek') return phoneLayout ? 150 + ($('centerCard').classList.contains('show') ? 46 : 0) : 52;
   if (s === 'full') return Math.round(h * 0.82);
-  return Math.round(h * (window.innerWidth >= 760 ? 0.38 : 0.44));
+  return Math.round(h * (phoneLayout ? 0.5 : window.innerWidth >= 760 ? 0.38 : 0.44));
 }
 const wideLayout = () => window.matchMedia('(min-width:900px)').matches;
+
+/* ───────── phone layout ─────────
+   On a phone the control surface is the bottom sheet, the way Apple Maps and Google Maps do
+   it: the map gets one search pill on top and nothing else. Four rows of controls floating
+   over a 300 px map, with buttons on every side of it, was the whole reason the screen read
+   as busy. The car bar, the chip row and the area card physically move into the sheet head
+   on narrow screens and move back on wide ones; the desktop keeps its arrangement. */
+const phoneSlots = {};
+function relayout() {
+  const narrow = !wideLayout();
+  if (narrow === phoneLayout) return;
+  phoneLayout = narrow;
+  const ids = ['centerCard', 'carBar', 'chiprow'];
+  if (narrow) {
+    for (const id of ids) { const ph = document.createComment('slot:' + id); $(id).before(ph); phoneSlots[id] = ph; }
+    document.querySelector('.sheethead').after($('centerCard'), $('chiprow'));
+    $('chiprow').prepend($('carBar'));          // the car reads as two chips at the head of the row
+    $('app').classList.add('phone');
+  } else {
+    for (const id of ids) { const ph = phoneSlots[id]; if (ph) { ph.replaceWith($(id)); phoneSlots[id] = null; } }
+    $('app').classList.remove('phone');
+  }
+  $('sheet').style.height = wideLayout() ? '' : sheetPx(sheetState) + 'px';
+  setTimeout(() => map.invalidateSize({ pan: false }), 60);
+}
+relayout();
+let relayoutT = null;
+addEventListener('resize', () => { clearTimeout(relayoutT); relayoutT = setTimeout(relayout, 150); });
 let sheetChangedAt = 0;
 function setSheet(s) {
   sheetState = s;
@@ -2155,10 +2213,12 @@ function renderLegend() {
      reads as tappable, and tapping one did nothing. Now it narrows to exactly that network
      (the same netPick the search uses for "evgo near target"), shown in the filter bar as
      "<network> only" with its own x. */
-  $('legendList').innerHTML = top.map(k =>
+  const rows = top.map(k =>
     `<div role="button" tabindex="0" data-net="${esc(k)}" class="${netPick === k ? 'on' : ''}"><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
-  ).join('') + `<div style="margin-top:2px"><b style="background:#8892a0"></b><span>other networks</span></div>`;
-  $('legendList').querySelectorAll('[data-net]').forEach(row => row.onclick = () => {
+  ).join('');
+  $('legendList').innerHTML = rows + `<div style="margin-top:2px"><b style="background:#8892a0"></b><span>other networks</span></div>`;
+  $('filtNetList').innerHTML = rows;   // same list inside Filters, where the phone finds it
+  document.querySelectorAll('#legendList [data-net], #filtNetList [data-net]').forEach(row => row.onclick = () => {
     const k = row.dataset.net;
     netPick = netPick === k ? null : k;
     netFilter = !netPick ? 'all' : /tesla/i.test(k) ? 'tesla' : 'other';
