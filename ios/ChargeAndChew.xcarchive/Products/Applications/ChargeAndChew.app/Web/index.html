@@ -370,6 +370,9 @@ svg{display:block}
      pin-drop is press-and-hold on the map, so what is left (route, locate) fits in the
      bottom-right corner where every map app keeps it. */
   #themeBtn,#pinBtn{display:none}
+  /* Lower, now that there are two: at the old height the pair sat on the east-coast
+     clusters of the national view. The attribution strip is 16 px; this clears it. */
+  .mapctl{bottom:calc(env(safe-area-inset-bottom) + 30px)}
   /* Sheet as the control surface (see relayout()). Everything below is scoped to
      #app.phone so the desktop never sees it. */
   #app.phone #legend{display:none}
