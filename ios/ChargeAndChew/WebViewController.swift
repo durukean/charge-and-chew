@@ -6,7 +6,6 @@ import SafariServices
 /// server, CoreLocation, the share sheet, haptics, and the data refresh.
 final class WebViewController: UIViewController {
 
-    private var server: LocalServer?
     private var bridge: NativeBridge?
     private var webView: WKWebView!
     private let splash = UIView()
@@ -35,6 +34,11 @@ final class WebViewController: UIViewController {
 
     private func buildWebView() {
         let cfg = WKWebViewConfiguration()
+        if let root = webRoot {
+            let handler = AppSchemeHandler(root: root)
+            handler.overlay = DataUpdater.overlayDir
+            cfg.setURLSchemeHandler(handler, forURLScheme: AppSchemeHandler.scheme)
+        }
         cfg.allowsInlineMediaPlayback = true
         cfg.mediaTypesRequiringUserActionForPlayback = []
 
@@ -108,18 +112,9 @@ final class WebViewController: UIViewController {
 
     private func startServing() {
         guard let root = webRoot else { return showFailure("The app bundle is missing its web assets.") }
-        let server = LocalServer(root: root)
-        server.overlay = DataUpdater.overlayDir
-        self.server = server
-        do {
-            let port = try server.start()
-            let url = URL(string: "http://127.0.0.1:\(port)/index.html?src=ios")!
-            Diag.log("serving \(url.absoluteString)")
-            webView.load(URLRequest(url: url))
-        } catch {
-            Diag.log("server start FAILED: \(error)")
-            return showFailure("Could not start the local server.")
-        }
+        let url = URL(string: "\(AppSchemeHandler.origin)/index.html?src=ios")!
+        Diag.log("loading \(url.absoluteString)")
+        webView.load(URLRequest(url: url))
         // Fire and forget. The app is already usable from the bundled copy; a newer dataset
         // simply lands on the next launch rather than yanking the map out from under anyone.
         DataUpdater.refresh(bundled: root.appendingPathComponent("data.js")) { _ in }
@@ -237,7 +232,7 @@ extension WebViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         Diag.log("didFailProvisional: \(error)")
-        showFailure("Could not reach the app's local server.")
+        showFailure("Could not load the app.")
     }
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
@@ -252,7 +247,7 @@ extension WebViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = action.request.url else { return decisionHandler(.cancel) }
         if url.scheme == "about" { return decisionHandler(.allow) }
-        if url.host == "127.0.0.1" {
+        if url.scheme == AppSchemeHandler.scheme {
             // The app itself is one page. Any other main-frame path is a site page.
             if action.targetFrame?.isMainFrame == true, url.path != "/index.html", url.path != "/" {
                 openExternal(siteURL(forLocalPath: url.path, query: url.query))
@@ -271,7 +266,7 @@ extension WebViewController: WKUIDelegate {
     func webView(_ webView: WKWebView, createWebViewWith cfg: WKWebViewConfiguration,
                  for action: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let url = action.request.url {
-            if url.host == "127.0.0.1" { openExternal(siteURL(forLocalPath: url.path, query: url.query)) }
+            if url.scheme == AppSchemeHandler.scheme { openExternal(siteURL(forLocalPath: url.path, query: url.query)) }
             else { openExternal(url) }
         }
         return nil

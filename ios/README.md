@@ -31,12 +31,15 @@ Nothing does it automatically, and a stale bundle looks exactly like a working o
 
 ## How it fits together
 
-- **`LocalServer.swift`** — static files over `http://127.0.0.1:<random port>`.
-  A `file://` URL is not a trustworthy origin, so on that scheme WebKit kills service
-  workers, gives the page an opaque origin that breaks `localStorage`, and blocks `fetch`
-  between bundled files. Loopback is trustworthy by definition and gets all of it back.
-  Pinned to the loopback interface with a fresh random port each launch; paths are
-  `standardized` before a prefix check so a crafted request cannot escape the bundle.
+- **`AppSchemeHandler.swift`** — serves the bundle to WKWebView as `chargeandchew://app/…`
+  through a `WKURLSchemeHandler`. No socket, no port. This replaced a loopback HTTP
+  server, which worked until its fixed port was taken (two simulators on one Mac was
+  enough): it fell back to a random port, the origin changed, and favourites, the saved
+  car and every preference silently vanished — web storage is per-origin and the origin
+  includes the port. A scheme has no port, so the origin is stable for the life of the
+  install. Paths are `standardized` before a prefix check so a crafted request cannot
+  escape the bundle. Custom schemes are not "secure contexts", but nothing here needs
+  one: the service worker is skipped, geolocation and sharing are bridged natively.
 - **`NativeBridge.swift`** — replaces `navigator.geolocation` at document start with a shim
   that calls CoreLocation. WKWebView has never given a page reliable geolocation without
   private API, and doing it natively also puts our own usage string on the system sheet at
@@ -53,9 +56,8 @@ Nothing does it automatically, and a stale bundle looks exactly like a working o
 Found by using the app on the simulator, not by reading it:
 
 - **Storage was wiped on every launch.** The server took a random port, the origin
-  includes the port, and web storage is per-origin — favourites, saved car, theme and the
-  "don't show the intro again" flag all vanished between runs. The port is now fixed
-  (`LocalServer.preferredPort`), random only as a fallback.
+  includes the port, and web storage is per-origin. First fix: a fixed port. Real fix
+  (build 6): no port at all — see `AppSchemeHandler.swift`.
 - **Share sent a loopback URL.** `location.href` inside the shell is `http://127.0.0.1:…`,
   which means nothing to anyone. The page now builds `https://chargeandchew.com/?…` and
   hands it to the native share sheet (`shareUrl()` / `native('share')`).

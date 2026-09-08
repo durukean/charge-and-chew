@@ -46,16 +46,11 @@ targets:
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. Your location stays on your device."
-        # The bundled app is served over http://127.0.0.1. NSAllowsLocalNetworking permits
-        # loopback and local hostnames only -- every remote request is still forced to HTTPS,
-        # and NSAllowsArbitraryLoads is deliberately NOT set.
         ITSAppUsesNonExemptEncryption: false
         # canOpenURL() answers "no" for any scheme not declared here, so without this the
         # Google Maps app would never be detected and everyone would get Apple Maps.
         LSApplicationQueriesSchemes:
           - comgooglemaps
-        NSAppTransportSecurity:
-          NSAllowsLocalNetworking: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chargeandchew.app
