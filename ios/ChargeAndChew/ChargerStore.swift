@@ -15,8 +15,9 @@ struct Charger {
     let net: String
     let kw: Int, stalls: Int
     let city: String, st: String
+    typealias Place = (brand: String, emoji: String, metres: Double)
     /// brand -> walking distance in metres, food chains only
-    let food: [(brand: String, emoji: String, metres: Double)]
+    let food: [Place]
 
     var coordinate: CLLocationCoordinate2D { .init(latitude: lat, longitude: lon) }
 }

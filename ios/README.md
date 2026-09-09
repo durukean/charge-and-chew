@@ -81,6 +81,13 @@ Found by using the app on the simulator, not by reading it:
 - Service worker skipped (`!NATIVE`), install nudge suppressed (`installed()` is true),
   long-press text callouts disabled on UI chrome, haptic tick on state-changing taps.
 
+## Widget (2026-09-09): verified on the simulator
+
+"Nearest stop with food" (small + medium): the closest fast charger with somewhere to eat a
+short walk away — name, distance · kW · stalls, walkable places with minutes. Tapping it opens
+the app on that stop via `ccapp://stop?at=lat,lon`. Verified end to end: added from the
+gallery, rendered with real data for the simulated location, deep link landed on the stop.
+
 ## CarPlay (2026-09-09): built, entitlement pending
 
 The one part of the product that had to be built twice, natively: CarPlay only renders
@@ -204,8 +211,8 @@ Every control, exercised on the simulator one at a time:
   the script when a profile expires or a new bundle id (extension) appears.
 - **The widget needs no App Group, on purpose.** A new capability on the App ID is something
   this signing setup cannot add; the widget reads the containing app's bundle
-  (`App.app/PlugIns/X.appex` → two levels up) and inherits the app's location permission via
-  `NSWidgetWantsLocation`.
+  (`App.app/PlugIns/X.appex` → two levels up) and asks CoreLocation itself under the app's authorization (`NSWidgetWantsLocation`). iOS shows one
+  system prompt — "Allow widgets from Charge & Chew to use your location?" — the first time it runs.
 - **The ASC New App form is React-controlled**: programmatic field values are reset on the
   next render, and its native `<select>`s need click-then-type-ahead. Type it like a person.
 - Internal beta groups **reject** `POST /betaGroups/{id}/relationships/builds` ("Builds

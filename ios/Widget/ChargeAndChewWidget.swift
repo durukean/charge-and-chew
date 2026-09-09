@@ -6,8 +6,8 @@ import CoreLocation
 /// product exists for, without opening anything; a tap opens the app on that stop.
 ///
 /// The widget asks CoreLocation itself, under the containing app's authorization
-/// (NSWidgetWantsLocation); it never shows a prompt of its own. Without a fix it shows a
-/// one-line nudge to open the app.
+/// (NSWidgetWantsLocation). iOS asks once, system-wide, whether the app's widgets may use
+/// location; after that there are no prompts. Without a fix it shows a one-line nudge.
 struct StopEntry: TimelineEntry {
     let date: Date
     let charger: Charger?
@@ -81,20 +81,24 @@ struct StopView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 6) {
                         Image(systemName: "bolt.fill").foregroundStyle(green)
-                        Text(entry.stale ? "Near your last spot" : "Nearest stop with food")
-                            .font(.caption2.weight(.bold)).foregroundStyle(.secondary)
+                        Text(family == .systemSmall ? "Nearest with food" : "Nearest stop with food")
+                            .font(.caption2.weight(.bold)).foregroundStyle(.secondary).lineLimit(1)
                     }
                     Text(c.name).font(.system(size: family == .systemSmall ? 14 : 16, weight: .bold))
                         .lineLimit(2).minimumScaleFactor(0.85)
                     Text(String(format: "%.1f mi · %d kW · %d stalls", entry.miles, c.kw, c.stalls))
                         .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
-                    HStack(spacing: 6) {
-                        ForEach(Array(c.food.prefix(family == .systemSmall ? 2 : 3).enumerated()), id: \.offset) { _, f in
-                            Text("\(f.emoji) \(f.brand) \(max(1, Int((f.metres / 80).rounded()))) min")
-                                .font(.caption2.weight(.semibold)).lineLimit(1)
-                                .padding(.horizontal, 7).padding(.vertical, 4)
-                                .background(Color.primary.opacity(0.08), in: Capsule())
-                        }
+                    // Small widgets stack the chips: two side by side truncated "IHOP" to "IH…".
+                    let chips = Array(c.food.prefix(family == .systemSmall ? 2 : 3).enumerated())
+                    let chip: (Charger.Place) -> AnyView = { f in AnyView(
+                        Text("\(f.emoji) \(f.brand) \(max(1, Int((f.metres / 80).rounded()))) min")
+                            .font(.caption2.weight(.semibold)).lineLimit(1).minimumScaleFactor(0.8)
+                            .padding(.horizontal, 7).padding(.vertical, 4)
+                            .background(Color.primary.opacity(0.08), in: Capsule())) }
+                    if family == .systemSmall {
+                        VStack(alignment: .leading, spacing: 4) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
+                    } else {
+                        HStack(spacing: 6) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
                     }
                     Spacer(minLength: 0)
                 }
