@@ -745,6 +745,63 @@ if os.path.exists(TRIP_PATH):
         add("trip/index.html")
         print(f"Trip pages: {len(trip_links)}")
 
+
+# ---- privacy + support (App Store requires both URLs; they are useful pages regardless) ----
+PRIVACY_BODY = """<h1>Privacy</h1>
+<p class="lead">Charge &amp; Chew has no accounts, no sign-in and no advertising. Here is exactly what
+happens with your data, on the website and in the iOS app.</p>
+<h2>Your location</h2>
+<p>Used only when you tap the locate button, to centre the map on you. It stays on your device.
+Two things are sent elsewhere so the app can work, neither of them to us: your coordinates go to
+<a href="https://nominatim.openstreetmap.org">OpenStreetMap's Nominatim</a> to put a place name on
+the area, and to the <a href="https://project-osrm.org">OSRM</a> router when you plan a route. Both
+are community services with their own policies. Deny location and everything still works by
+searching a city or pressing on the map.</p>
+<h2>What we keep on your device</h2>
+<p>Saved stops, your car, theme and filter choices, and the last area you looked at — in your
+browser's local storage, or the app's. Nothing is sent to us. Clearing site data, or deleting the
+app, removes all of it.</p>
+<h2>Analytics</h2>
+<p>We count page views with <a href="https://www.goatcounter.com">GoatCounter</a>, which is
+open-source and privacy-first: no cookies, no personal data, no cross-site tracking. It tells us
+roughly how many people used the site and which pages, and nothing about who you are.</p>
+<h2>Other services the app talks to</h2>
+<p>Map tiles from Esri; charger data from the US DOE / NREL Alternative Fuel Stations database
+(bundled, refreshed monthly); chain and shop locations from OpenStreetMap. Tapping a place or
+"Directions" opens Google Maps or Apple Maps, which are governed by their own policies.</p>
+<h2>Contact</h2>
+<p>Questions or a deletion request (there is nothing on our side to delete, but ask anyway):
+<a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>.</p>
+<p class="stats">Last updated 2026-09-09.</p>"""
+page("privacy/index.html", "Privacy", "What Charge & Chew does with your data: no accounts, no ads, location stays on your device, anonymous page counts only.", PRIVACY_BODY, "privacy/")
+add("privacy/index.html")
+
+SUPPORT_BODY = """<h1>Support</h1>
+<p class="lead">Charge &amp; Chew finds DC fast chargers within a short walk of the restaurants and stores
+you'd actually stop at. Free, no account. Here is how to get the most out of it, and how to reach us.</p>
+<h2>How to use it</h2>
+<p><b>Search</b> a chain ("IHOP"), a place ("Barstow"), a kind of shop ("tire shop"), or a whole
+drive ("LA to Las Vegas"). <b>Tap a stop</b> to see every walkable place with minutes, and get
+directions. <b>Press and hold the map</b> to search that spot. <b>Set your car</b> (the car icon) for
+connector compatibility and a rough charge time at each stop.</p>
+<h2>Things worth knowing</h2>
+<p>Walk times are straight-line estimates at about 3 mph. Charge times assume a typical peak rate
+for your car. Charger hours, pricing and stall counts come from public data and can be out of date —
+always check the network's own app before relying on a stop, and treat a single-stall site with
+caution.</p>
+<h2>Something wrong?</h2>
+<p>A dead charger, a closed restaurant, a chain we should add, a bug:
+<a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report">open an
+issue</a> or email <a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>. Include the
+stop's name and city.</p>
+<h2>Data sources</h2>
+<p>US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">Alternative Fuel
+Stations</a> database; <a href="https://www.openstreetmap.org">OpenStreetMap</a> for places; Esri
+basemap. Not affiliated with Tesla, Inc. or any listed chain or network.</p>
+<p><a href="../privacy/">Privacy</a></p>"""
+page("support/index.html", "Support", "How to use Charge & Chew, what the numbers mean, and how to report a problem.", SUPPORT_BODY, "support/")
+add("support/index.html")
+
 # ---- shared stylesheet (was inlined on every page: 4.9 KB x ~3,000 pages) ----
 os.makedirs(os.path.join(HERE, "assets"), exist_ok=True)
 open(os.path.join(HERE, "assets", "pages.css"), "w").write(CSS)

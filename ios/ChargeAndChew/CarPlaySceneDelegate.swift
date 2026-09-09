@@ -84,7 +84,9 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         poi.setPointsOfInterest(items, selectedIndex: NSNotFound)
     }
 
-    private func walkMin(_ metres: Double) -> Int { max(1, Int((metres / 80).rounded(.up))) }   // ~80 m/min
+    /// Same constant and the same rounding as the web app's walkMin(): a stop must not say
+    /// "4 min" on the phone and "5 min" on the car.
+    private func walkMin(_ metres: Double) -> Int { max(1, Int((metres / 80).rounded())) }
 
     private func showEmpty(_ message: String) {
         let info = CPInformationTemplate(title: "Charge & Chew", layout: .leading,
