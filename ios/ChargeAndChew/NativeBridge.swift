@@ -76,6 +76,8 @@ final class NativeBridge: NSObject {
 
     private func reply(_ id: Int, _ loc: CLLocation) {
         let c = loc.coordinate
+        // The widget has no reliable location of its own; it uses the app's last fix.
+        UserDefaults(suiteName: ChargerStore.groupID)?.set([c.latitude, c.longitude, Date().timeIntervalSince1970], forKey: "lastFix")
         let js = """
         window.__ccNative.resolve(\(id), {latitude: \(c.latitude), longitude: \(c.longitude), \
         accuracy: \(max(loc.horizontalAccuracy, 1)), altitude: null, altitudeAccuracy: null, \

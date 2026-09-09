@@ -136,6 +136,21 @@ final class WebViewController: UIViewController {
         ])
     }
 
+    // MARK: - deep links
+
+    private var pendingDeepLink: URL?
+
+    /// The page understands ?at=lat,lon&r= at boot, so a deep link is just a reload with
+    /// those parameters. Held until the page exists if the link arrives at cold launch.
+    func open(deepLink url: URL) {
+        guard url.scheme == "ccapp" else { return }
+        guard webView != nil, webView.url != nil else { pendingDeepLink = url; return }
+        let q = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        var c = URLComponents(string: "\(AppSchemeHandler.origin)/index.html")!
+        c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { ["at", "r", "chain"].contains($0.name) }
+        if let u = c.url { Diag.log("deep link -> \(u.absoluteString)"); webView.load(URLRequest(url: u)) }
+    }
+
     // MARK: - native services for the page
 
     /// The page runs its own solar theme -- light by day, dark by night -- independent of the
@@ -223,6 +238,7 @@ extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         Diag.log("didFinish \(webView.url?.absoluteString ?? "?")")
         hideSplash()
+        if let u = pendingDeepLink { pendingDeepLink = nil; open(deepLink: u) }
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

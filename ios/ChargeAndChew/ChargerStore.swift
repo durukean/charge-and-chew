@@ -27,13 +27,19 @@ final class ChargerStore {
     private(set) var chargers: [Charger] = []
     private(set) var loaded = false
 
+    /// Where data.js lives is the host's business: the app prefers its refreshed overlay,
+    /// then the bundle; the widget reads the copy the app leaves in the App Group.
+    var dataURL: (() -> URL?)?
+
+    /// The App Group both the app and the widget can read. The app copies data.js here on
+    /// launch; the widget cannot see the app's bundle, and bundling 4 MB twice is silly.
+    static let groupID = "group.com.chargeandchew.app"
+    static var groupDir: URL? { FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID) }
+
     func loadIfNeeded() {
         guard !loaded else { return }
         loaded = true
-        let overlay = DataUpdater.overlayDir.appendingPathComponent("data.js")
-        let bundled = Bundle.main.url(forResource: "Web", withExtension: nil)?.appendingPathComponent("data.js")
-        let file = FileManager.default.fileExists(atPath: overlay.path) ? overlay : bundled
-        guard let file, let raw = try? String(contentsOf: file, encoding: .utf8) else { return }
+        guard let file = dataURL?(), let raw = try? String(contentsOf: file, encoding: .utf8) else { return }
         guard let open = raw.range(of: "JSON.parse('"), let close = raw.range(of: "');", options: .backwards) else { return }
         let body = String(raw[open.upperBound..<close.lowerBound])
 

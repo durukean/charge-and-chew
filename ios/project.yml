@@ -24,6 +24,7 @@ targets:
         excludes:
           - "Web/**"
           - "Info.plist"
+          - "*.entitlements"
       # Copied wholesale, unprocessed: index.html and data.js must reach the bundle byte for
       # byte, and letting Xcode "optimise" the web assets would silently rewrite them.
       - path: ChargeAndChew/Web
@@ -56,6 +57,9 @@ targets:
           - UIInterfaceOrientationPortrait
         NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. Your location stays on your device."
         ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.chargeandchew.app.deeplink
+            CFBundleURLSchemes: [ccapp]
         # canOpenURL() answers "no" for any scheme not declared here, so without this the
         # Google Maps app would never be detected and everyone would get Apple Maps.
         LSApplicationQueriesSchemes:
@@ -68,6 +72,35 @@ targets:
         SUPPORTS_MACCATALYST: NO
       configs:
         # The CarPlay entitlement is not granted yet; a Release (device/TestFlight) build
-        # carrying it would fail to sign. Debug = simulator, where it just works.
+        # carrying it would fail to sign. Debug = simulator, where it just works. Both files
+        # carry the App Group the widget reads from.
         Debug:
           CODE_SIGN_ENTITLEMENTS: ChargeAndChew/CarPlay.entitlements
+        Release:
+          CODE_SIGN_ENTITLEMENTS: ChargeAndChew/App.entitlements
+    dependencies:
+      - target: ChargeAndChewWidget
+        embed: true
+
+  ChargeAndChewWidget:
+    type: app-extension
+    platform: iOS
+    # containerBackground (the only sane way to draw a widget) is iOS 17+. The app itself
+    # stays at 16; iOS 16 users simply get no widget.
+    deploymentTarget: "17.0"
+    sources:
+      - path: Widget
+        excludes: ["Info.plist", "*.entitlements"]
+      - path: ChargeAndChew/ChargerStore.swift
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: "Charge & Chew"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chargeandchew.app.widget
+        CODE_SIGN_ENTITLEMENTS: Widget/Widget.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
