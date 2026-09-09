@@ -42,6 +42,15 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleDisplayName: "Charge & Chew"
+        # Scenes are required for CarPlay. Delegate classes are assigned in code
+        # (AppDelegate.configurationForConnecting), so no UISceneDelegateClassName here.
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Phone
+            CPTemplateApplicationSceneSessionRoleApplication:
+              - UISceneConfigurationName: CarPlay
         UILaunchStoryboardName: LaunchScreen
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
@@ -57,3 +66,8 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MACCATALYST: NO
+      configs:
+        # The CarPlay entitlement is not granted yet; a Release (device/TestFlight) build
+        # carrying it would fail to sign. Debug = simulator, where it just works.
+        Debug:
+          CODE_SIGN_ENTITLEMENTS: ChargeAndChew/CarPlay.entitlements

@@ -81,6 +81,34 @@ Found by using the app on the simulator, not by reading it:
 - Service worker skipped (`!NATIVE`), install nudge suppressed (`installed()` is true),
   long-press text callouts disabled on UI chrome, haptic tick on state-changing taps.
 
+## CarPlay (2026-09-09): built, entitlement pending
+
+The one part of the product that had to be built twice, natively: CarPlay only renders
+Apple's templates, so the web app cannot appear on the car screen.
+
+- `CarPlaySceneDelegate.swift` — a `CPPointOfInterestTemplate` of the nearest fast
+  chargers **that have somewhere to eat within a walk**, nearest first, re-queried when the
+  driver pans the car map. Each POI: distance · kW · stalls, up to three walkable places
+  with minutes, and a **Directions** button that hands off to Apple Maps.
+- `ChargerStore.swift` — reads the *same* `data.js` the web view uses (overlay copy if a
+  refresh landed, bundled otherwise), unescaping exactly the two things build_data.py
+  escapes (`\` and `'`). The car never shows older chargers than the phone.
+- Scenes came back for CarPlay's sake (`PhoneSceneDelegate`, `CarPlaySceneDelegate`), but
+  the delegate classes are assigned **by type** in `AppDelegate.configurationForConnecting`
+  — never by the Info.plist string lookup that silently failed earlier.
+- `CarPlay.entitlements` (`com.apple.developer.carplay-charging`) is applied to **Debug
+  (simulator) builds only** via project.yml. A Release build carrying an ungranted
+  entitlement fails to sign, so TestFlight builds stay CarPlay-free until Apple grants it.
+
+**To see it:** in Simulator.app, I/O → External Displays → CarPlay. The scene logs
+`carplay: connected` and `carplay: N chargers with food near …` to the boot log; capture
+the car screen with `xcrun simctl io <udid> screenshot --display=external out.png`.
+
+**Entitlement request** (developer.apple.com/contact/carplay/, Apple account holder only):
+category **EV Charging**; the app locates DC fast chargers and shows which have food or
+shopping within a short walk, with directions handed to Apple Maps; no in-car video, no
+messaging, no audio. Apple typically answers in days to a few weeks.
+
 ## Phone layout (2026-09-07): the sheet is the control surface
 
 A real-phone screenshot showed the main screen still busy after the button cleanup: the
