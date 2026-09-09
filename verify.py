@@ -312,8 +312,8 @@ check("if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();" in _htm
       "clearing the area no longer refits the map — an empty map under a list from another state")
 check("paddingTopLeft: [padding[0], padding[1] + ovH]" in _html,
       "map fits are symmetric again — on a phone the top of the framed area hides under the chips")
-check("#hero{position:fixed;" in _html,
-      "the hero is absolute inside #mapWrap again — on a phone the sheet cuts it off")
+check("#hero{position:fixed;" in _html and "height:100dvh" in _html,
+      "the hero is absolute or uses inset:0 again — in Mobile Safari with viewport-fit=cover its last button hides under the toolbar")
 check("align-items:flex-start;justify-content:center;overflow-y:auto" in _html,
       "the hero card centres again — on a phone its top is unreachable")
 check(".herocard{width:100%;max-width:460px;margin:auto" in _html,
