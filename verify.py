@@ -220,6 +220,11 @@ if os.path.exists(_trips):
             check("Good places to break" not in open(_f, encoding="utf-8").read(),
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
+# App Store Connect needs both URLs to resolve; the app links them from its about panel.
+for _pg in ("privacy", "support"):
+    check(os.path.exists(os.path.join(HERE, _pg, "index.html")), f"/{_pg}/ page is missing")
+    check(f"/{_pg}/" in _sm if "_sm" in dir() else True, f"/{_pg}/ is not in the sitemap")
+check('href="privacy/"' in _html and 'href="support/"' in _html, "the about panel lost its privacy/support links")
 # ---- typing a trip into the search bar ----
 # The route planner is one unlabelled icon, fourth in a stack of four map buttons, so the
 # search bar and the hero card are the doors people actually use.
