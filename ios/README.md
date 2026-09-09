@@ -197,9 +197,15 @@ Every control, exercised on the simulator one at a time:
   `ZHDTTDU73N`), SKU `chargeandchew001`, team `T37B6B6S7K`.
 - **`POST /v1/apps` is refused** — "resource 'apps' does not allow CREATE". The first app
   record must be made in the web UI; everything after that is API-drivable.
-- **Export must NOT pass `-authenticationKey*`.** With the ASC API key it fails "Cloud
-  signing permission error / No profiles were found" — the logged-in Xcode session has
-  signing rights the key does not. Archive is happy either way.
+- **Signing, the version that finally holds:** *archive* WITH the ASC API key (without it:
+  "No Accounts"); *export* with **manual signing** against App Store profiles minted through
+  the ASC API by `ios/mint-profiles.js` and installed locally. Cloud signing with the key
+  cannot create distribution profiles, and "automatic" export has no account to ask. Re-run
+  the script when a profile expires or a new bundle id (extension) appears.
+- **The widget needs no App Group, on purpose.** A new capability on the App ID is something
+  this signing setup cannot add; the widget reads the containing app's bundle
+  (`App.app/PlugIns/X.appex` → two levels up) and inherits the app's location permission via
+  `NSWidgetWantsLocation`.
 - **The ASC New App form is React-controlled**: programmatic field values are reset on the
   next render, and its native `<select>`s need click-then-type-ahead. Type it like a person.
 - Internal beta groups **reject** `POST /betaGroups/{id}/relationships/builds` ("Builds

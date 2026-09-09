@@ -5,9 +5,9 @@ import CoreLocation
 /// "Nearest stop with food" on the home screen. One glance answers the question the whole
 /// product exists for, without opening anything; a tap opens the app on that stop.
 ///
-/// Location comes from the app's last fix (saved into the App Group by the location bridge)
-/// rather than from the widget asking CoreLocation itself: widget location is throttled and
-/// often stale anyway, and this way the widget never shows a permission prompt of its own.
+/// The widget asks CoreLocation itself, under the containing app's authorization
+/// (NSWidgetWantsLocation); it never shows a prompt of its own. Without a fix it shows a
+/// one-line nudge to open the app.
 struct StopEntry: TimelineEntry {
     let date: Date
     let charger: Charger?
@@ -21,17 +21,15 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in: Context, completion: @escaping (Timeline<StopEntry>) -> Void) {
         let store = ChargerStore.shared
-        store.dataURL = { ChargerStore.groupDir?.appendingPathComponent("data.js") }
-        var entry = StopEntry(date: Date(), charger: nil, miles: 0, stale: false)
-        if let fix = UserDefaults(suiteName: ChargerStore.groupID)?.array(forKey: "lastFix") as? [Double], fix.count == 3 {
-            let loc = CLLocation(latitude: fix[0], longitude: fix[1])
-            let age = Date().timeIntervalSince1970 - fix[2]
-            if let (c, d) = store.nearestWithFood(to: loc, limit: 1).first {
-                entry = StopEntry(date: Date(), charger: c, miles: d / 1609.34, stale: age > 86_400)
+        store.dataURL = { ChargerStore.containingAppWebDir?.appendingPathComponent("data.js") }
+        WidgetLocation.shared.fix { loc in
+            var entry = StopEntry(date: Date(), charger: nil, miles: 0, stale: false)
+            if let loc, let (c, d) = store.nearestWithFood(to: loc, limit: 1).first {
+                entry = StopEntry(date: Date(), charger: c, miles: d / 1609.34, stale: false)
             }
+            // Re-run every 30 minutes.
+            completion(Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(1800))))
         }
-        // Re-run every 30 minutes; the app refreshes the fix whenever it is used.
-        completion(Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(1800))))
     }
 
     private var sample: StopEntry {
@@ -41,6 +39,35 @@ struct Provider: TimelineProvider {
                                    food: [(brand: "IHOP", emoji: "🥞", metres: 240), (brand: "In-N-Out", emoji: "🍔", metres: 400)]),
                   miles: 1.2, stale: false)
     }
+}
+
+/// One-shot location with a short timeout. Widgets run briefly and off the main actor;
+/// a fix that has not arrived in four seconds is not coming this cycle.
+final class WidgetLocation: NSObject, CLLocationManagerDelegate {
+    static let shared = WidgetLocation()
+    private let manager = CLLocationManager()
+    private var pending: ((CLLocation?) -> Void)?
+    private var timer: DispatchWorkItem?
+
+    func fix(_ done: @escaping (CLLocation?) -> Void) {
+        DispatchQueue.main.async {
+            self.manager.delegate = self
+            self.manager.desiredAccuracy = kCLLocationAccuracyKilometer
+            guard [.authorizedAlways, .authorizedWhenInUse].contains(self.manager.authorizationStatus) else { return done(nil) }
+            self.pending = done
+            let t = DispatchWorkItem { [weak self] in self?.finish(nil) }
+            self.timer = t
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: t)
+            self.manager.requestLocation()
+        }
+    }
+    private func finish(_ loc: CLLocation?) {
+        timer?.cancel(); timer = nil
+        let p = pending; pending = nil
+        p?(loc)
+    }
+    func locationManager(_ m: CLLocationManager, didUpdateLocations locs: [CLLocation]) { finish(locs.last) }
+    func locationManager(_ m: CLLocationManager, didFailWithError error: Error) { finish(nil) }
 }
 
 struct StopView: View {

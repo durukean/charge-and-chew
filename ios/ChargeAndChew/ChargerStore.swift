@@ -31,10 +31,16 @@ final class ChargerStore {
     /// then the bundle; the widget reads the copy the app leaves in the App Group.
     var dataURL: (() -> URL?)?
 
-    /// The App Group both the app and the widget can read. The app copies data.js here on
-    /// launch; the widget cannot see the app's bundle, and bundling 4 MB twice is silly.
-    static let groupID = "group.com.chargeandchew.app"
-    static var groupDir: URL? { FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID) }
+    /// An extension lives at App.app/PlugIns/X.appex, and may read its containing app's
+    /// bundle. That is how the widget gets data.js without an App Group -- a capability that
+    /// would have to be added to the App ID, which automatic signing here cannot do -- and
+    /// without bundling 4 MB twice.
+    static var containingAppWebDir: URL? {
+        var url = Bundle.main.bundleURL
+        if url.pathExtension == "appex" { url = url.deletingLastPathComponent().deletingLastPathComponent() }
+        let web = url.appendingPathComponent("Web", isDirectory: true)
+        return FileManager.default.fileExists(atPath: web.path) ? web : nil
+    }
 
     func loadIfNeeded() {
         guard !loaded else { return }

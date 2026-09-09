@@ -11,19 +11,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             if FileManager.default.fileExists(atPath: overlay.path) { return overlay }
             return Bundle.main.url(forResource: "Web", withExtension: nil)?.appendingPathComponent("data.js")
         }
-        // Give the widget the same data. Cheap (one 4 MB copy, only when the source is newer)
-        // and off the main thread, so launch is not paying for it.
-        DispatchQueue.global(qos: .utility).async {
-            guard let src = ChargerStore.shared.dataURL?(), let dir = ChargerStore.groupDir else { return }
-            let dst = dir.appendingPathComponent("data.js")
-            let fm = FileManager.default
-            let srcDate = (try? fm.attributesOfItem(atPath: src.path)[.modificationDate] as? Date) ?? .distantPast
-            let dstDate = (try? fm.attributesOfItem(atPath: dst.path)[.modificationDate] as? Date) ?? .distantPast
-            if !fm.fileExists(atPath: dst.path) || srcDate > dstDate {
-                try? fm.removeItem(at: dst)
-                try? fm.copyItem(at: src, to: dst)
-            }
-        }
         return true
     }
 

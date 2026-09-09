@@ -26,9 +26,13 @@ xcodegen generate --spec project.yml --project .
 echo "==> build $BUILD"
 
 rm -rf ChargeAndChew.xcarchive export
+# Archive WITH the API key: without it xcodebuild reports "No Accounts" and cannot
+# provision. Export is the step that must run WITHOUT it (see below).
 xcodebuild -project ChargeAndChew.xcodeproj -scheme ChargeAndChew \
   -sdk iphoneos -configuration Release -archivePath ChargeAndChew.xcarchive \
-  -allowProvisioningUpdates archive
+  -allowProvisioningUpdates \
+  -authenticationKeyPath /Users/durukan/Downloads/AuthKey_$KEY_ID.p8 \
+  -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER" archive
 
 # Deliberately NO -authenticationKey* on export. With the API key, export fails with
 # "Cloud signing permission error / No profiles for 'com.chargeandchew.app' were found";
