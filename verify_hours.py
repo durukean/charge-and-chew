@@ -8,7 +8,13 @@ showing the raw string rather than guessing.
 import json, os, re, subprocess, sys, tempfile, shutil, http.server, socketserver, threading
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+# Probe a list, the way verify_ui.py and verify_search.py do. A single hard-coded macOS
+# path made the monthly refresh die on the Linux CI runner with FileNotFoundError, and the
+# whole data pipeline stopped silently for over a week.
+CHROME = ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+          "/Applications/Chromium.app/Contents/MacOS/Chromium",
+          "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable",
+          "/usr/bin/chromium", "/usr/bin/chromium-browser")
 
 # (spec, ISO datetime, expected open state or None when the parser should decline)
 CASES = [
@@ -29,6 +35,10 @@ CASES = [
 ]
 
 def main():
+    binpath = next((c for c in CHROME if os.path.exists(c)), None)
+    if not binpath:
+        print("SKIP: Chrome not found")
+        return 0
     os.chdir(HERE)
     port = 8757
     srv = socketserver.TCPServer(("127.0.0.1", port), http.server.SimpleHTTPRequestHandler)
@@ -49,7 +59,7 @@ function run(f){
 }
 </script>""" % json.dumps(CASES))
     out = os.path.join(tmp, "o.html")
-    subprocess.run([CHROME, "--headless=new", "--virtual-time-budget=9000",
+    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
                     f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
                    stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
     dom = open(out).read()
