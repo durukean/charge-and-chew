@@ -71,9 +71,14 @@ final class ChargerStore {
             if let m = matches[String(id)] {
                 for (brand, v) in m {
                     guard let b = brands[brand], (b["cat"] as? String) == "food",
-                          v.count >= 2, let dx = v[0] as? Double, let dy = v[1] as? Double else { continue }
-                    // matches hold metre offsets from the charger; distance is the hypotenuse
-                    food.append((brand, b["e"] as? String ?? "", (dx * dx + dy * dy).squareRoot()))
+                          v.count >= 2, let dLat = v[0] as? Double, let dLon = v[1] as? Double else { continue }
+                    /* A match value is [dLat, dLon] as integer DEGREE deltas x1e4 from the
+                       charger -- not metres. Treating them as metres made 89% of walk times
+                       wrong and always too short: an eight-minute walk read as one minute,
+                       which is the dangerous direction to be wrong in. Convert to a real
+                       coordinate and measure, exactly as mDist() does on the web. */
+                    let there = CLLocation(latitude: lat + dLat / 1e4, longitude: lon + dLon / 1e4)
+                    food.append((brand, b["e"] as? String ?? "", there.distance(from: CLLocation(latitude: lat, longitude: lon))))
                 }
                 food.sort { $0.2 < $1.2 }
             }

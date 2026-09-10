@@ -220,6 +220,27 @@ if os.path.exists(_trips):
             check("Good places to break" not in open(_f, encoding="utf-8").read(),
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
+
+# ---- native parity: the Swift side must decode match offsets the same way the web does ----
+# A match value is [dLat, dLon] as integer DEGREE deltas x1e4. Reading them as metres made
+# 89% of the widget's and CarPlay's walk times wrong, and always too short (an 8-minute walk
+# showed as 1 minute). Both readers must agree with mDist().
+check("v[0] / 1e4" in _html and "v[1] / 1e4" in _html,
+      "the web decoder for match offsets changed shape — re-check the Swift one in lockstep")
+_store = os.path.join(HERE, "ios", "ChargeAndChew", "ChargerStore.swift")
+if os.path.exists(_store):
+    _sw = open(_store, encoding="utf-8").read()
+    check("dLat / 1e4" in _sw and "dLon / 1e4" in _sw,
+          "ChargerStore no longer converts match offsets from degrees — widget/CarPlay walk times will be wrong")
+    check("(dx * dx + dy * dy).squareRoot()" not in _sw,
+          "ChargerStore treats match offsets as metres again (the 89%-wrong bug)")
+# Same speed AND rounding as the web's walkMin(), or a stop reads 4 min on the phone and 5
+# in the car. Both native surfaces compute it themselves.
+for _f in ("ios/ChargeAndChew/CarPlaySceneDelegate.swift", "ios/Widget/ChargeAndChewWidget.swift"):
+    _p = os.path.join(HERE, _f)
+    if os.path.exists(_p):
+        check("/ 80).rounded())" in open(_p, encoding="utf-8").read(),
+              f"{_f} no longer uses the web's 80 m/min + round() for walk minutes")
 # App Store Connect needs both URLs to resolve; the app links them from its about panel.
 for _pg in ("privacy", "support"):
     check(os.path.exists(os.path.join(HERE, _pg, "index.html")), f"/{_pg}/ page is missing")
