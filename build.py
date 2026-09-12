@@ -713,7 +713,8 @@ if os.path.exists(TRIP_PATH):
                 f'{"".join(cards)}\n'
                 '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>')
         path = f"trip/{sl}/index.html"
-        page(path, title, desc, body, f"trip/{sl}/")
+        # Trip pages are the ones people share; make_og.py renders a card naming the drive.
+        page(path, title, desc, body, f"trip/{sl}/", og=f"trip-{sl}")
         add(path)
         trip_links.append((a.split(",")[0], b.split(",")[0], sl, len(withfood)))
 
