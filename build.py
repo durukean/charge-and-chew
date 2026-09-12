@@ -295,6 +295,32 @@ def jsonld_chain(key, sites_list, canonical, faq_schema=None):
     return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
 
 
+def jsonld_route(name, kind, stop_ids, canonical, total):
+    """Structured data for the corridor pages (/along/, /trip/).
+
+    These were the only sections shipping none, and they are the ones the site most wants to
+    win -- "LA to Las Vegas EV charging" is a whole question answered by one page. Same shape
+    as the chain pages: a breadcrumb plus an ItemList of real Places."""
+    items = []
+    for i, sid in enumerate(stop_ids[:25], 1):
+        s_ = sites[sid]
+        items.append({"@type": "ListItem", "position": i, "item": {
+            "@type": "Place", "name": f"{s_.get('net','DC fast charger')} — {s_['name']}",
+            "address": {"@type": "PostalAddress", "streetAddress": s_["street"],
+                        "addressLocality": s_["city"], "addressRegion": s_["st"], "addressCountry": "US"},
+            "geo": {"@type": "GeoCoordinates", "latitude": s_["lat"], "longitude": s_["lon"]}}})
+    crumb_root = f"{BASE}/trip/" if kind == "trip" else f"{BASE}/along/"
+    crumb_name = "Road trips" if kind == "trip" else "Interstates"
+    blocks = [
+        {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": crumb_name, "item": crumb_root},
+            {"@type": "ListItem", "position": 2, "name": name, "item": f"{BASE}/{canonical}"}]},
+        {"@context": "https://schema.org", "@type": "ItemList",
+         "name": f"EV fast chargers with food along {name}",
+         "numberOfItems": total, "itemListElement": items}]
+    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+
+
 def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
     items = []
     for i, (d, sid) in enumerate(sites_list[:25], 1):
@@ -517,7 +543,7 @@ if os.path.exists(HW_PATH):
         med = sorted(kws)[len(kws)//2] if kws else 0
         big = sum(1 for k in kws if k >= 150)
         h24 = sum(1 for f in found if sites[f[1]].get("h24"))
-        title = f"EV fast chargers along {disp} — with food and stores nearby"
+        title = f"EV chargers with food along {disp}"
         desc = (f"{len(found)} public DC fast chargers within {CORRIDOR_MI:g} miles of {disp}, "
                 f"{len(withchain)} of them within a 10-minute walk of a restaurant or store. "
                 f"Ordered along the route through {len(states)} states.")
@@ -533,7 +559,8 @@ left out — on an interstate run they cost more time than they save.</p>
 {"".join(cards)}
 <h2>Other interstates</h2><div class="chips" id="hwchips"></div>'''
         path = f"along/{slug_ref}/index.html"
-        page(path, title, desc, body, f"along/{slug_ref}/")
+        page(path, title, desc, body, f"along/{slug_ref}/",
+             jsonld_route(disp, "along", [f[1] for f in withchain], f"along/{slug_ref}/", len(withchain)))
         add(path)
         hw_links.append((disp, slug_ref, len(found)))
 
@@ -685,7 +712,9 @@ if os.path.exists(TRIP_PATH):
         hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
         drive = f"{hrs}h {mns:02d}m"
 
-        title = f"EV charging stops from {a} to {b} — with food nearby"
+        # Google truncates near 60 characters and the suffix adds 16, so lead with the two
+        # cities -- that is what people type -- and keep the whole thing inside the budget.
+        title = f"{a.split(',')[0]} to {b.split(',')[0]} EV charging stops"
         desc = (f"{len(found)} DC fast chargers within {TRIP_MI:g} miles of the {t['mi']:g}-mile drive "
                 f"from {a} to {b}, and the {len(withfood)} of them with a restaurant within a "
                 f"10-minute walk. In route order.")
@@ -714,7 +743,10 @@ if os.path.exists(TRIP_PATH):
                 '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>')
         path = f"trip/{sl}/index.html"
         # Trip pages are the ones people share; make_og.py renders a card naming the drive.
-        page(path, title, desc, body, f"trip/{sl}/", og=f"trip-{sl}")
+        page(path, title, desc, body, f"trip/{sl}/",
+             jsonld_route(f"{a.split(',')[0]} to {b.split(',')[0]}", "trip",
+                          [f[1] for f in shown], f"trip/{sl}/", len(withfood)),
+             og=f"trip-{sl}")
         add(path)
         trip_links.append((a.split(",")[0], b.split(",")[0], sl, len(withfood)))
 

@@ -221,6 +221,30 @@ if os.path.exists(_trips):
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
 
+# ---- corridor pages must carry structured data and fit Google's title budget ----
+# /along/ and /trip/ shipped none for a long time while every /near/ page had three schemas,
+# and they are the pages the site most wants to win. Titles were ~90 chars; Google truncates
+# near 60 and the " | Charge & Chew" suffix costs 16 of them.
+import json as _json
+_noldd, _longt, _badjson = [], [], []
+for _p in _glob.glob(os.path.join(HERE, "trip", "*", "index.html")) + \
+          _glob.glob(os.path.join(HERE, "along", "*", "index.html")):
+    _h = open(_p, encoding="utf-8").read()
+    _blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', _h, re.S)
+    if not _blocks:
+        _noldd.append(os.path.relpath(_p, HERE))
+    for _b in _blocks:
+        try:
+            _json.loads(_b)
+        except Exception:
+            _badjson.append(os.path.relpath(_p, HERE))
+    _t = re.search(r"<title>(.*?)</title>", _h, re.S)
+    if _t and len(_t.group(1)) > 66:
+        _longt.append((len(_t.group(1)), os.path.relpath(_p, HERE)))
+check(not _noldd, f"corridor pages with no structured data: {_noldd[:3]}")
+check(not _badjson, f"corridor pages with unparseable JSON-LD: {_badjson[:3]}")
+check(len(_longt) <= 4, f"corridor titles over 66 chars: {sorted(_longt, reverse=True)[:3]}")
+
 # ---- native parity: the Swift side must decode match offsets the same way the web does ----
 # A match value is [dLat, dLon] as integer DEGREE deltas x1e4. Reading them as metres made
 # 89% of the widget's and CarPlay's walk times wrong, and always too short (an 8-minute walk
