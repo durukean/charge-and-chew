@@ -81,6 +81,21 @@ targets:
     dependencies:
       - target: ChargeAndChewWidget
         embed: true
+    postBuildScripts:
+      # The CarPlay scene is declared for the simulator, where CarPlay can be exercised
+      # without the entitlement. A RELEASE build must not advertise it: the entitlement is
+      # not granted, so the scene could never connect, and an App Review tester who looks
+      # for CarPlay and finds nothing is a rejection. Delete this whole phase (and the
+      # Debug-only entitlements line above) on the day Apple grants carplay-charging.
+      - name: Strip CarPlay scene from Release
+        basedOnDependencyAnalysis: false
+        script: |
+          [ "$CONFIGURATION" = "Release" ] || exit 0
+          PLIST="$TARGET_BUILD_DIR/$INFOPLIST_PATH"
+          /usr/libexec/PlistBuddy -c \
+            "Delete :UIApplicationSceneManifest:UISceneConfigurations:CPTemplateApplicationSceneSessionRoleApplication" \
+            "$PLIST" 2>/dev/null || true
+          echo "note: CarPlay scene stripped from Release Info.plist" 
 
   ChargeAndChewWidget:
     type: app-extension
