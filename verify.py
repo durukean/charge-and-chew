@@ -226,8 +226,9 @@ check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any
 # screen to hit) and the chip row 36px tall; the chips keep their look and gain the
 # difference through a transparent overlay, since nothing sits directly above or below them.
 check("width:44px;height:44px" in _html, "the hero close button is back under the 44px minimum")
-check(".chip::after{content:'';position:absolute;left:0;right:0;top:-4px;bottom:-4px}" in _html,
-      "chips lost their extended touch area")
+# Chips are sized for touch in the coarse-pointer block, not with an overlay; a second
+# mechanism would stack on top of the 44px they already get.
+check(".chip{height:44px" in _html, "chips are no longer 44px tall on touch devices")
 
 # ---- corridor pages must carry structured data and fit Google's title budget ----
 # /along/ and /trip/ shipped none for a long time while every /near/ page had three schemas,

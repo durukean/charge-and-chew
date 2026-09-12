@@ -157,12 +157,6 @@ svg{display:block}
   font-size:13px;font-weight:600;white-space:nowrap;color:var(--txt);
   transition:transform .12s,background .15s,border-color .15s,color .15s}
 .chip:active{transform:scale(.94)}
-/* The row is 36px tall by design and nothing sits directly above or below it, so the hit
-   area can reach Apple's 44px minimum without the chips looking any bigger. */
-@media(pointer:coarse){
-  .chip{position:relative}
-  .chip::after{content:'';position:absolute;left:0;right:0;top:-4px;bottom:-4px}
-}
 .chip .cnt{font-size:10.5px;color:var(--dim2);font-weight:500}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .chip.on .cnt{color:var(--accent-ink);opacity:.7}
@@ -701,7 +695,7 @@ svg{display:block}
   .row{padding:15px 13px}
   .row .star{font-size:20px;width:48px;height:48px;padding-top:4px}
   .sortbtn{padding:9px 8px;font-size:13px}
-  .iconbtn.sm{width:40px;height:40px}
+  .iconbtn.sm{width:44px;height:44px}   /* share/close buttons: the last ones under 44 */
   #centerCard .rad button{padding:7px 11px;font-size:12.5px}
   .pkitem,.caritem{padding:14px 13px}
   .heropick{padding:15px 14px}
