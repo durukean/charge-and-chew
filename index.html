@@ -157,6 +157,12 @@ svg{display:block}
   font-size:13px;font-weight:600;white-space:nowrap;color:var(--txt);
   transition:transform .12s,background .15s,border-color .15s,color .15s}
 .chip:active{transform:scale(.94)}
+/* The row is 36px tall by design and nothing sits directly above or below it, so the hit
+   area can reach Apple's 44px minimum without the chips looking any bigger. */
+@media(pointer:coarse){
+  .chip{position:relative}
+  .chip::after{content:'';position:absolute;left:0;right:0;top:-4px;bottom:-4px}
+}
 .chip .cnt{font-size:10.5px;color:var(--dim2);font-weight:500}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .chip.on .cnt{color:var(--accent-ink);opacity:.7}
@@ -589,7 +595,10 @@ svg{display:block}
 .herocard{width:100%;max-width:460px;margin:auto;background:var(--surface);border:1px solid var(--line);border-radius:26px;
   box-shadow:0 24px 64px rgba(15,18,22,.3);padding:24px 20px;position:relative;
   animation:up .3s cubic-bezier(.32,.72,0,1)}
-.herocard .x{position:absolute;top:14px;right:14px;color:var(--dim2);padding:4px}
+.herocard .x{position:absolute;top:6px;right:6px;color:var(--dim2);
+  /* 44x44 hit area (Apple's minimum) while the glyph still reads as a small x: it was
+     26x26, the hardest thing on the screen to hit. */
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0}
 
 .hero-mark{width:56px;height:56px;margin-bottom:12px}
 .hero-mark svg{width:100%;height:100%}
@@ -628,6 +637,8 @@ svg{display:block}
 #about p{margin-bottom:12px}
 #about b{color:var(--txt)}
 #about a{color:var(--accent);text-decoration:none}
+/* Inline links in the about sheet were an 11px-tall target; give them room to be tapped. */
+@media(pointer:coarse){#about .chainlinks a,#about p>a{display:inline-block;padding:6px 0;min-height:32px}}
 .chainlinks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .chainlinks a{background:var(--surface2);border:1px solid var(--line);border-radius:100px;
   padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none}
@@ -1472,10 +1483,11 @@ function applyTheme() {
   if (labelTiles) { map.removeLayer(labelTiles); labelTiles = null; }
   const bm = BASEMAPS[baseProvider] || BASEMAPS.carto;
   $('map').classList.toggle('bm-esri', baseProvider === 'esri');
-  tiles = L.tileLayer(bm[curDark ? 'dark' : 'light'], bm.opts).addTo(map);
+  // alt:'' marks the tiles decorative — otherwise every tile is an unlabelled image
+  tiles = L.tileLayer(bm[curDark ? 'dark' : 'light'], { ...bm.opts, alt: '' }).addTo(map);
   tiles.on('tileerror', onTileError);
   if (baseProvider === 'esri') {
-    labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], bm.opts).addTo(map);
+    labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], { ...bm.opts, alt: '' }).addTo(map);
   }
   setAttribution(bm.attrib);
   $('themeBtn').innerHTML = themePref === 'auto' ? ICON_AUTO : curDark ? ICON_MOON : ICON_SUN;

@@ -221,6 +221,14 @@ if os.path.exists(_trips):
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
 
+# ---- touch targets ----
+# Apple's minimum is 44x44. The hero's close button was 26x26 (the hardest thing on the
+# screen to hit) and the chip row 36px tall; the chips keep their look and gain the
+# difference through a transparent overlay, since nothing sits directly above or below them.
+check("width:44px;height:44px" in _html, "the hero close button is back under the 44px minimum")
+check(".chip::after{content:'';position:absolute;left:0;right:0;top:-4px;bottom:-4px}" in _html,
+      "chips lost their extended touch area")
+
 # ---- corridor pages must carry structured data and fit Google's title budget ----
 # /along/ and /trip/ shipped none for a long time while every /near/ page had three schemas,
 # and they are the pages the site most wants to win. Titles were ~90 chars; Google truncates
