@@ -57,6 +57,11 @@ targets:
           - UIInterfaceOrientationPortrait
         NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. Your location stays on your device."
         ITSAppUsesNonExemptEncryption: false
+        # Siri matches these against the app name in a spoken phrase; without them the only
+        # accepted wording is the full store name, "Charge & Chew: EV Stops".
+        INAlternativeAppNames:
+          - INAlternativeAppName: "Charge and Chew"
+          - INAlternativeAppName: "Charge Chew"
         CFBundleURLTypes:
           - CFBundleURLName: com.chargeandchew.app.deeplink
             CFBundleURLSchemes: [ccapp]

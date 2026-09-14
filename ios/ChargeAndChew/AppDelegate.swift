@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 import CarPlay
 
 @main
@@ -11,6 +12,25 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             if FileManager.default.fileExists(atPath: overlay.path) { return overlay }
             return Bundle.main.url(forResource: "Web", withExtension: nil)?.appendingPathComponent("data.js")
         }
+        #if DEBUG
+        // Exercise the Siri answer with real data at launch; Shortcuts cannot run an app
+        // intent in the Simulator, so this is how the intent's logic gets verified.
+        if ProcessInfo.processInfo.environment["CC_TEST_INTENT"] != nil {
+            DispatchQueue.global(qos: .utility).async {
+                let store = StopAnswer.preparedStore()
+                for (label, loc, chain) in [
+                    ("LA, no chain", CLLocation(latitude: 34.0522, longitude: -118.2437), String?.none),
+                    ("LA, IHOP", CLLocation(latitude: 34.0522, longitude: -118.2437), "IHOP"),
+                    ("LA, Zzzz", CLLocation(latitude: 34.0522, longitude: -118.2437), "Zzzz"),
+                    ("mid-ocean", CLLocation(latitude: 30.0, longitude: -140.0), String?.none),
+                ] {
+                    let r = StopAnswer.build(near: loc, chain: chain, store: store)
+                    Diag.log("INTENT[\(label)]: \(r.spoken)")
+                }
+                Diag.log("INTENT[no location]: \(StopAnswer.build(near: nil, chain: nil, store: store).spoken)")
+            }
+        }
+        #endif
         return true
     }
 

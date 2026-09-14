@@ -221,6 +221,23 @@ if os.path.exists(_trips):
                   f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
 
+# ---- Siri / Shortcuts ----
+# The strongest native capability that needs no entitlement, and a real answer to Guideline
+# 4.2. The answer-building is deliberately separate from the intent shell because Shortcuts
+# cannot run an app intent in the Simulator -- StopAnswer.build is what can be verified.
+_ai = os.path.join(HERE, "ios", "ChargeAndChew", "AppIntents.swift")
+if os.path.exists(_ai):
+    _a = open(_ai, encoding="utf-8").read()
+    for _needle, _why in [
+        ("struct NearestStopIntent: AppIntent", "the Siri intent is gone"),
+        ("enum StopAnswer", "the intent's logic is back inside the intent shell and cannot be tested"),
+        ("AppShortcutsProvider", "the app no longer offers Siri phrases"),
+        ("openAppWhenRun: Bool = false", "the intent opens the app instead of answering, which defeats asking Siri"),
+    ]:
+        check(_needle in _a, _why)
+    check("$(.applicationName)" not in _a and ".applicationName" in _a,
+          "Siri phrases must interpolate .applicationName or the system rejects them")
+
 # ---- touch targets ----
 # Apple's minimum is 44x44. The hero's close button was 26x26 (the hardest thing on the
 # screen to hit) and the chip row 36px tall; the chips keep their look and gain the
@@ -268,8 +285,9 @@ if os.path.exists(_store):
     check("(dx * dx + dy * dy).squareRoot()" not in _sw,
           "ChargerStore treats match offsets as metres again (the 89%-wrong bug)")
 # Same speed AND rounding as the web's walkMin(), or a stop reads 4 min on the phone and 5
-# in the car. Both native surfaces compute it themselves.
-for _f in ("ios/ChargeAndChew/CarPlaySceneDelegate.swift", "ios/Widget/ChargeAndChewWidget.swift"):
+# in the car. Every native surface computes it itself.
+for _f in ("ios/ChargeAndChew/CarPlaySceneDelegate.swift", "ios/Widget/ChargeAndChewWidget.swift",
+           "ios/ChargeAndChew/AppIntents.swift"):
     _p = os.path.join(HERE, _f)
     if os.path.exists(_p):
         check("/ 80).rounded())" in open(_p, encoding="utf-8").read(),
