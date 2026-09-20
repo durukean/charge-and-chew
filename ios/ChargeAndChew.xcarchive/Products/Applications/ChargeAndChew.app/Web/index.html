@@ -905,10 +905,13 @@ svg{display:block}
   </div>
   <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
   <p><b>Search for anything:</b> tap the search box to see examples. The 90 chains below are precomputed
-  and instant, but you can also search a category or a brand we don't track — "bank", "tire shop", "pharmacy", "gym", "Chase",
+  and instant, but you can also search a category or a brand we don't track — "ice cream", "bank", "tire shop", "pharmacy", "gym", "Chase",
   "GameStop". Those are looked up live from OpenStreetMap for the area you're viewing, so pick an
   area first and give it a few seconds. Precomputing every brand isn't possible: it would add
   roughly 1.6&nbsp;MB to the download for a few hundred more.</p>
+  <p><b>A category along a drive:</b> the two combine — <em>"LA to Las Vegas near ice cream"</em>, <em>"Denver to Moab with a coffee shop"</em>.
+  The route is drawn first, then we ask OpenStreetMap what is within a walk of each stop on it, so the answer is
+  every charger on the way that has one — not just the ones near where the map happens to be pointing.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
   <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
@@ -1142,6 +1145,17 @@ map.on('zoomend', onZoomChanged);
 
 
 const canvas = L.canvas({ padding: .6 });
+/* The route has to sit UNDER the chargers. Leaflet puts the circleMarkers' canvas and a
+   polyline's SVG in the same overlayPane, and the route is added last -- so an 8px line was
+   painted over every dot along the corridor and, being a real SVG path, swallowed the taps
+   as well: the stops you had just searched for could not be opened. Its own pane below the
+   overlay pane fixes the painting; interactive:false fixes the taps (the line has no
+   handler of its own, so nothing is lost). Both are needed -- a lower pane still captures
+   pointer events. */
+map.createPane('routePane');
+map.getPane('routePane').style.zIndex = 350;
+map.getPane('routePane').style.pointerEvents = 'none';
+const routeRenderer = L.svg({ pane: 'routePane' });
 const mk = {};
 const poiLayer = L.layerGroup().addTo(map);
 let centerLayer = null, radiusLayer = null, routeLayer = null, routeCase = null;
@@ -2382,6 +2396,42 @@ function tripSide(raw) {
   return CITY_ALIAS[t] || snapPlace(t) || pretty;
 }
 
+/* Is this string, on its own, somewhere we could actually route to? Used only to decide
+   where a destination ENDS -- never to reject one, because plenty of real towns have no
+   charger and so are not in PLACES. */
+function knownPlace(t) {
+  const k = String(t).trim().toLowerCase();
+  if (!k) return false;
+  if (CITY_ALIAS[k] || snapPlace(k)) return true;
+  const bare = k.replace(/[^a-z]/g, '');
+  if (bare.length < 3) return false;
+  for (const p of PLACES) if (p.ckey === bare || p.key === bare) return true;
+  return false;
+}
+
+/* "LA to las vegas near ice cream shop" -- the destination is Las Vegas and "ice cream
+   shop" is what to look for along the way. Splitting on " to " and keeping the whole tail
+   gave a destination of "Las Vegas Ice Cream Shop", which the geocoder cheerfully resolved
+   to somewhere else entirely: a silently wrong route, which is worse than no route.
+
+   Two ways the tail comes off. An explicit joining word is unambiguous. Without one
+   ("la to vegas ice cream") we only cut when the whole tail is NOT a place but a prefix of
+   it IS -- so "denver to salt lake city" and "la to barstow" are never touched. */
+const DEST_QUALIFIER = /^(.+?)\s+(?:near|nearby|close to|next to|by|with|w|that has|that have|having|and|plus|stopping at|stop at|for)\s+(.+)$/;
+function splitDest(b) {
+  const m = b.match(DEST_QUALIFIER);
+  if (m && knownPlace(m[1])) return { dest: m[1], filter: m[2] };
+  const w = b.split(' ').filter(Boolean);
+  if (w.length > 1 && !knownPlace(b)) {
+    for (let n = w.length - 1; n >= 1; n--) {
+      const head = w.slice(0, n).join(' ');
+      if (knownPlace(head)) return { dest: head, filter: w.slice(n).join(' ') };
+    }
+  }
+  if (m) return { dest: m[1], filter: m[2] };   // qualifier word, unrecognised place
+  return { dest: b, filter: '' };
+}
+
 function parseTrip(raw) {
   const t = normalise(String(raw).replace(/\s*(?:->|—>|–>|→|>)\s*/g, ' to ')
                                  .replace(/\s+[-–—]\s+/g, ' to '));
@@ -2393,8 +2443,9 @@ function parseTrip(raw) {
     if (parts.length !== 2) return null;
     a = parts[0]; b = parts[1];
   }
-  const A = tripSide(a), B = tripSide(b);
-  return (A && B && A !== B) ? { from: A, to: B } : null;
+  const sp = splitDest(b);
+  const A = tripSide(a), B = tripSide(sp.dest);
+  return (A && B && A !== B) ? { from: A, to: B, filter: sp.filter } : null;
 }
 window.__parseTrip = parseTrip;   // exposed for the search test suite
    // exposed for the search test suite
@@ -2510,11 +2561,13 @@ $('placeIn').addEventListener('keydown', async e => {
   if (e.key !== 'Enter') return;
   const raw = $('placeIn').value.trim(); if (!raw) return;
   $('placeIn').blur();
-  const p = parseQuery(raw);
+  const trip = parseTrip(raw);
+  /* A trailing filter belongs to the trip, not the query: parseQuery would read "las vegas
+     near ice cream shop" as a place. Hand it only the part that describes what to find. */
+  const p = parseQuery(trip && trip.filter ? trip.filter : raw);
 
   /* "ihop from la to vegas" is a route AND a chain filter, so the chain/network handling
      below still runs; only the destination differs. */
-  const trip = parseTrip(raw);
   if (trip) {
     $('routePanel').classList.add('show');
     $('routeToggle').classList.add('on');
@@ -2541,12 +2594,24 @@ $('placeIn').addEventListener('keydown', async e => {
 
   render(); syncUrl();
 
-  if (trip) { track('search-trip'); $('goBtn').click(); return; }
+  if (trip) {
+    track('search-trip');
+    /* "la to vegas near ice cream" -- a category we do not precompute, wanted along the
+       drive. Route first, then ask OSM about the stops on it. A named chain is already in
+       `active` and needs no lookup. */
+    const tripPoi = (!p.chains.length && trip.filter) ? detectPoiIntent(trip.filter) : null;
+    if (tripPoi) track('live-poi-route', tripPoi.tags[0]);
+    runRoute(tripPoi ? { poi: tripPoi } : {});
+    return;
+  }
 
   /* "banks near me", "tire shop" — a category word means they want that kind of place,
      not a town of that name. Ask OSM live, scoped to the area. */
   const poi = p.chains.length ? null : detectPoiIntent(raw);
   if (poi && !p.here) {
+    // A route on screen is the area they mean; applyCorridor clears `center`, so asking
+    // them to pick a location here would be asking about somewhere they just left.
+    if (route) { runLivePoi(poi, 'route'); return; }
     if (!center) { locate('center', { thenPoi: poi }); return; }
     runLivePoi(poi); return;
   }
@@ -2780,7 +2845,43 @@ const POI_TAGS = {
   liquor: ['shop=alcohol'], convenience: ['shop=convenience'],
   mall: ['shop=mall'], bookstore: ['shop=books'], books: ['shop=books'],
   playground: ['leisure=playground'], park: ['leisure=park'],
-  restroom: ['amenity=toilets'], bathroom: ['amenity=toilets'], toilets: ['amenity=toilets'] };
+  restroom: ['amenity=toilets'], bathroom: ['amenity=toilets'], toilets: ['amenity=toilets'],
+  /* Treats and quick food. "ice cream" was the first thing a real user typed that this map
+     could not answer -- it fell through to the geocoder and searched for a TOWN called
+     "ice cream shop". OSM tags both an amenity and a shop for most of these. */
+  icecream: ['amenity=ice_cream', 'shop=ice_cream'], gelato: ['amenity=ice_cream', 'shop=ice_cream'],
+  creamery: ['amenity=ice_cream', 'shop=ice_cream'], frozen: ['amenity=ice_cream', 'shop=ice_cream'],
+  donut: ['shop=pastry', 'shop=bakery'], donuts: ['shop=pastry', 'shop=bakery'],
+  doughnut: ['shop=pastry', 'shop=bakery'], pastry: ['shop=pastry'],
+  candy: ['shop=confectionery'], sweets: ['shop=confectionery'],
+  chocolate: ['shop=chocolate', 'shop=confectionery'],
+  dessert: ['amenity=ice_cream', 'shop=pastry', 'shop=confectionery'],
+  coffee: ['amenity=cafe'], espresso: ['amenity=cafe'], tea: ['amenity=cafe'],
+  fastfood: ['amenity=fast_food'], burger: ['amenity=fast_food'], burgers: ['amenity=fast_food'],
+  pizza: ['amenity=fast_food', 'amenity=restaurant'], taco: ['amenity=fast_food'],
+  tacos: ['amenity=fast_food'], sandwich: ['amenity=fast_food'], sandwiches: ['amenity=fast_food'],
+  sushi: ['amenity=restaurant'], diner: ['amenity=restaurant'], breakfast: ['amenity=restaurant'],
+  lunch: ['amenity=restaurant'], dinner: ['amenity=restaurant'],
+  deli: ['shop=deli'], butcher: ['shop=butcher'], juice: ['shop=beverages', 'amenity=cafe'],
+  smoothie: ['amenity=cafe'], icecreamshop: ['amenity=ice_cream', 'shop=ice_cream'] };
+
+/* Two-word category names, checked BEFORE single words. Without this, "ice cream shop"
+   matched on "ice" and then kept "cream" as a NAME filter -- so every result had to be
+   called "cream" and Baskin-Robbins was thrown away. */
+const POI_PHRASES = {
+  'ice cream': ['amenity=ice_cream', 'shop=ice_cream'],
+  'frozen yogurt': ['amenity=ice_cream', 'shop=ice_cream'],
+  'fast food': ['amenity=fast_food'], 'coffee shop': ['amenity=cafe'],
+  'coffee house': ['amenity=cafe'], 'gas station': ['amenity=fuel'],
+  'grocery store': ['shop=supermarket'], 'convenience store': ['shop=convenience'],
+  'car wash': ['amenity=car_wash'], 'dog park': ['leisure=dog_park'],
+  'urgent care': ['amenity=clinic'], 'rest stop': ['highway=rest_area'],
+  'rest area': ['highway=rest_area'], 'thrift store': ['shop=second_hand'],
+  'book store': ['shop=books'], 'pet store': ['shop=pet'],
+  'hardware store': ['shop=hardware', 'shop=doityourself'],
+  'liquor store': ['shop=alcohol'], 'department store': ['shop=department_store'],
+  'shopping mall': ['shop=mall'], 'movie theater': ['amenity=cinema'],
+  'picnic area': ['tourism=picnic_site'], 'dog friendly': ['leisure=dog_park'] };
 // "331 bank" reads as a typo; pluralise the last word of whatever they typed.
 function plural(t) {
   const w = String(t).trim().split(' '); const last = w[w.length - 1];
@@ -2789,7 +2890,26 @@ function plural(t) {
   else w[w.length - 1] = last + 's';
   return w.join(' ');
 }
-const POI_EMOJI = { amenity: '📍', shop: '🛍️', leisure: '🏋️', tourism: '🏨' };
+/* Keyed by the OSM tag, falling back to the tag's family. A row that reads "📍 McConnell's"
+   tells you nothing; "🍦 McConnell's" is the answer to the question that was asked. */
+const POI_EMOJI = { amenity: '📍', shop: '🛍️', leisure: '🏋️', tourism: '🏨', highway: '🛣️' };
+const POI_ICON = {
+  'amenity=ice_cream': '🍦', 'shop=ice_cream': '🍦', 'shop=confectionery': '🍬',
+  'shop=chocolate': '🍫', 'shop=pastry': '🍩', 'shop=bakery': '🥐', 'shop=deli': '🥪',
+  'shop=butcher': '🥩', 'shop=beverages': '🥤', 'amenity=cafe': '☕',
+  'amenity=fast_food': '🍔', 'amenity=restaurant': '🍽️', 'amenity=bar': '🍸',
+  'amenity=pub': '🍺', 'amenity=fuel': '⛽', 'amenity=bank': '🏦', 'amenity=atm': '🏧',
+  'amenity=pharmacy': '💊', 'amenity=hospital': '🏥', 'amenity=clinic': '🩺',
+  'amenity=dentist': '🦷', 'amenity=veterinary': '🐾', 'amenity=car_wash': '🧼',
+  'amenity=cinema': '🎬', 'amenity=library': '📚', 'amenity=post_office': '📮',
+  'amenity=toilets': '🚻', 'shop=tyres': '🛞', 'shop=car_repair': '🔧',
+  'shop=supermarket': '🛒', 'shop=convenience': '🏪', 'shop=alcohol': '🍷',
+  'shop=books': '📚', 'shop=pet': '🐶', 'shop=hardware': '🔨', 'shop=doityourself': '🔨',
+  'shop=hairdresser': '💈', 'shop=laundry': '🧺', 'shop=mall': '🏬',
+  'shop=department_store': '🏬', 'shop=second_hand': '♻️',
+  'leisure=fitness_centre': '🏋️', 'leisure=park': '🌳', 'leisure=playground': '🛝',
+  'leisure=dog_park': '🐕', 'tourism=hotel': '🏨', 'tourism=motel': '🏩',
+  'tourism=picnic_site': '🧺', 'highway=rest_area': '🛣️' };
 const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places', 'near',
   'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and']);
 
@@ -2797,12 +2917,26 @@ const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places
    words to match the POI name against here. */
 function detectPoiIntent(raw) {
   const words = normalise(raw).split(' ').filter(Boolean);
-  let tags = null, used = -1;
-  words.forEach((w, i) => { if (!tags && POI_TAGS[w]) { tags = POI_TAGS[w]; used = i; } });
-  const rest = words.filter((w, i) => i !== used && !POI_FILLER.has(w) && !NOISE_WORD.has(w));
-  if (tags) return { tags, name: rest.join(' '), label: raw.trim() };
-  return null;
+  let tags = null;
+  const used = new Set();
+  // Longest match first: "ice cream" must win over "ice".
+  for (let i = 0; i < words.length - 1 && !tags; i++) {
+    const pair = words[i] + ' ' + words[i + 1];
+    if (POI_PHRASES[pair]) { tags = POI_PHRASES[pair]; used.add(i); used.add(i + 1); }
+  }
+  if (!tags) words.forEach((w, i) => { if (!tags && POI_TAGS[w]) { tags = POI_TAGS[w]; used.add(i); } });
+  if (!tags) return null;
+  const rest = words.filter((w, i) => !used.has(i) && !POI_FILLER.has(w) && !NOISE_WORD.has(w));
+  /* The label becomes a chip and a toast, so "a gas station" and "ice cream near me" have
+     to lose the words that were only ever grammar. Keep the category words in the order
+     they were typed; fall back to the raw text if trimming would leave nothing. */
+  const last = Math.max(...used);
+  const kept = words.filter((w, i) => used.has(i) || (i === last + 1 && (w === 'shop' || w === 'store'))
+                                   || (!POI_FILLER.has(w) && !NOISE_WORD.has(w)));
+  return { tags, name: rest.join(' '), label: kept.join(' ') || raw.trim() };
 }
+
+window.__detectPoiIntent = detectPoiIntent;   // exposed for the search test suite
 
 /* A live search has to survive being shared. The synthetic chain key is meaningless to a
    fresh page (it is not in CHAIN_KEYS, so it was silently dropped), so the URL carries the
@@ -2840,10 +2974,37 @@ function clearLivePoi() {
   livePoiKey = null;
 }
 
-async function runLivePoi(intent) {
-  if (!center) { toast('Pick an area first — tap the location button or search a city'); return; }
-  const R = Math.round(radiusMi * MI);
-  const at = `around:${R},${center.lat.toFixed(5)},${center.lon.toFixed(5)}`;
+/* Overpass takes a whole list of centres in one `around:`, so a route is asked about in a
+   single request. Capped because the query is a URL-encoded body and a cross-country drive
+   can hold a thousand chargers; 300 points covers LA->NYC at better than one every 10 mi. */
+const LIVE_ROUTE_CAP = 300;
+
+async function runLivePoi(intent, scope) {
+  /* A route IS the search area. Without this, "ice cream" on a planned drive either asked
+     for a circle around wherever the map happened to be centred, or refused outright. */
+  const onRoute = scope === 'route' || (!scope && route && !center);
+  if (!onRoute && !center) { toast('Pick an area first — tap the location button or search a city'); return; }
+
+  let at, inScope, scopeLabel;
+  if (onRoute) {
+    inScope = SITES.filter(s => route.ids.has(s.id));
+    if (!inScope.length) { toast('No chargers on this route to search around'); return; }
+    /* Ask around the CHARGERS, not the road. The question is "which stop has one within
+       walking distance", and the road itself is thousands of vertices of no interest. */
+    let pts = inScope;
+    if (pts.length > LIVE_ROUTE_CAP) {
+      const step = pts.length / LIVE_ROUTE_CAP;
+      pts = Array.from({ length: LIVE_ROUTE_CAP }, (_, i) => pts[Math.floor(i * step)]);
+    }
+    at = 'around:' + Math.round(D.walkM) + ','
+       + pts.map(s => s.lat.toFixed(5) + ',' + s.lon.toFixed(5)).join(',');
+    scopeLabel = 'this route';
+  } else {
+    const R = Math.round(radiusMi * MI);
+    at = `around:${R},${center.lat.toFixed(5)},${center.lon.toFixed(5)}`;
+    inScope = SITES.filter(s => hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI);
+    scopeLabel = center.label;
+  }
   /* Anchored brand regex for a bare brand name, exact tag match for a category. Both are
      constrained enough for Overpass; an unanchored name regex times out at this radius. */
   const parts = intent.brandOnly
@@ -2852,10 +3013,10 @@ async function runLivePoi(intent) {
         const [k, v] = t.split('=');
         return `nwr(${at})["${k}"="${v}"];`;
       }).join('');
-  const q = `[out:json][timeout:25];(${parts});out center 600;`;
+  const q = `[out:json][timeout:25];(${parts});out center ${onRoute ? 2000 : 600};`;
 
   clearLivePoi();
-  toast(`Searching ${esc(intent.label)} near ${esc(center.label)}…`);
+  toast(`Searching ${esc(intent.label)} ${onRoute ? 'along your route' : 'near ' + esc(scopeLabel)}…`);
   $('placeBox').classList.add('busy');
   let els;
   try { els = await overpassFetch(q); }
@@ -2895,16 +3056,17 @@ async function runLivePoi(intent) {
       site: t.website || t['contact:website'] || '' });
   }
   if (!pois.length) {
-    toast(`No ${esc(intent.label)} found within ${radiusMi} mi of ${esc(center.label)}`);
+    toast(onRoute
+      ? `No ${esc(intent.label)} within a walk of any charger on this route`
+      : `No ${esc(intent.label)} found within ${radiusMi} mi of ${esc(scopeLabel)}`);
     render(); return;
   }
 
   // match against chargers in the area — only those in scope, so this stays small
   const key = intent.label.replace(/\b\w/g, c => c.toUpperCase());
-  const inArea = SITES.filter(s => hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI);
   let matched = 0;
   livePoiFor = {};
-  for (const s of inArea) {
+  for (const s of inScope) {
     let best = Infinity, bestPoi = null;
     for (const p of pois) {
       const d = hav(s.lat, s.lon, p.lat, p.lon);
@@ -2917,7 +3079,8 @@ async function runLivePoi(intent) {
     }
   }
   const fam = intent.brandOnly ? 'shop' : intent.tags[0].split('=')[0];
-  BRANDS[key] = { e: POI_EMOJI[fam] || '📍', cat: 'live', n: pois.length };
+  const icon = intent.brandOnly ? '🛍️' : (POI_ICON[intent.tags[0]] || POI_EMOJI[fam] || '📍');
+  BRANDS[key] = { e: icon, cat: 'live', n: pois.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
   livePoiKey = key; livePoiTerm = intent.label;
   active.clear(); anyCat = null; active.add(key);
@@ -2926,7 +3089,7 @@ async function runLivePoi(intent) {
   render(); renderChips(); setSheet('mid'); syncUrl();
   const many = pois.length === 1 ? esc(intent.label) : esc(plural(intent.label));
   toast(matched
-    ? `${matched} charger${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
+    ? `${matched} ${onRoute ? 'stop' : 'charger'}${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
     : `Found ${pois.length} ${many}, but none within a walk of a charger`);
 }
 
@@ -3047,8 +3210,12 @@ const SUGGESTIONS = [
      suggestion list scrolls, so anything below the fold teaches nothing. */
   { h: 'Road trips — stops along the way' },
   { q: 'LA to Las Vegas',   i: '🚗', note: 'route' },
+  /* The pairing is the product: a drive AND what you want to eat when you stop. Nobody
+     guesses it is possible, so one example has to say it outright. */
+  { q: 'LA to Las Vegas near ice cream', i: '🍦', note: 'route' },
   { q: 'Dallas to Austin',  i: '🚗', note: 'route' },
   { h: 'Shop types — looked up live' },
+  { q: 'ice cream',      i: '🍦', note: 'live' },
   { q: 'tire shop',      i: '🛞', note: 'live' },
   { q: 'bank near me',   i: '🏦', note: 'live' },
   { q: 'pharmacy',       i: '💊', note: 'live' },
@@ -3341,7 +3508,11 @@ $('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
 $('rClose').onclick = () => $('routeToggle').click();   // same path as the FAB toggle
 $('fromIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').focus(); } });
 $('toIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('toIn').blur(); $('goBtn').click(); } });
-$('goBtn').onclick = async () => {
+/* Named, and awaitable, because a search like "la to vegas near ice cream" is TWO steps:
+   draw the corridor, then ask OSM what is walkable from the stops on it. The old
+   fire-and-forget `$('goBtn').click()` gave the caller nothing to wait on. */
+async function runRoute(opts) {
+  opts = opts || {};
   const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
   if (!f || !t) return toast('Enter a start and a destination');
   if (!navigator.onLine) return toast('Route planning needs a connection');
@@ -3359,14 +3530,19 @@ $('goBtn').onclick = async () => {
     const verts = j.routes[0].geometry.coordinates.map(c2 => [c2[1], c2[0]]);
     clearCenter();
     applyCorridor(verts, j.routes[0].distance / MI, j.routes[0].duration / 3600);
+    /* applyCorridor drops any live POI matches, because they were computed for a circle
+       that no longer applies. Re-run them against the route we just drew. */
+    if (opts.poi) await runLivePoi(opts.poi, 'route');
   } catch (e) { $('routeInfo').textContent = e.message; }
   $('goBtn').disabled = false;
-};
+}
+$('goBtn').onclick = () => runRoute();
 function applyCorridor(verts, mi, hr) {
   track('route');
   clearRoute();
-  routeCase = L.polyline(verts, { color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
-  routeLayer = L.polyline(verts, { color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
+  const rOpt = { pane: 'routePane', renderer: routeRenderer, interactive: false };
+  routeCase = L.polyline(verts, { ...rOpt, color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
+  routeLayer = L.polyline(verts, { ...rOpt, color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
   const maxM = corridorMi * MI;
   const cells = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
   for (const v of verts) {
@@ -3629,7 +3805,9 @@ if (q.get('from') && q.get('to')) {
   $('routePanel').classList.add('show'); $('routeToggle').classList.add('on');
   $('overlayTop').classList.add('routing');
   $('fromIn').value = q.get('from'); $('toIn').value = q.get('to');
-  boot = () => $('goBtn').click();
+  // A shared "route + ice cream" link has to rebuild both halves, in that order.
+  const bootPoi = q.get('poi') ? intentFromTerm(q.get('poi')) : null;
+  boot = () => runRoute(bootPoi ? { poi: bootPoi } : {});
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size || anyCat) { setSheet('mid'); fitToResults(); }
