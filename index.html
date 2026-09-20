@@ -3103,7 +3103,27 @@ function clearLivePoi() {
 /* Overpass takes a whole list of centres in one `around:`, so a route is asked about in a
    single request. Capped because the query is a URL-encoded body and a cross-country drive
    can hold a thousand chargers; 300 points covers LA->NYC at better than one every 10 mi. */
-const LIVE_ROUTE_CAP = 300;
+/* Measured against the real server, twice, because the first diagnosis was incomplete:
+     - 300 centres in one `around:`  -> HTTP 504 after 11 s, WITH both slots free.
+     - 100 centres                   -> HTTP 200 in 11 s.
+   So a long route cannot be one request however patiently we wait: the query itself is too
+   expensive. Send affordable chunks instead, in sequence through the queue (concurrency is
+   the OTHER failure -- see overpassQueued). Dedupe first: an 800 m radius already covers
+   its neighbours, and chargers cluster hard in cities, so most of a 250-stop corridor
+   collapses into far fewer distinct circles. */
+const LIVE_CHUNK = 100, LIVE_ROUTE_CAP = 600;
+
+/* Keep one centre per ~walkM cell. Two chargers 200 m apart ask Overpass the same question
+   twice; the cell size is tied to the radius so nothing inside it is lost. */
+function thinCentres(sites, m) {
+  const cell = m / 111320, seen = new Set(), out = [];
+  for (const s of sites) {
+    const k = Math.round(s.lat / cell) + ',' + Math.round(s.lon / cell);
+    if (seen.has(k)) continue;
+    seen.add(k); out.push(s);
+  }
+  return out;
+}
 
 async function runLivePoi(intent, scope) {
   const gen = ++livePoiGen;
@@ -3112,43 +3132,58 @@ async function runLivePoi(intent, scope) {
   const onRoute = scope === 'route' || (!scope && route && !center);
   if (!onRoute && !center) { toast('Pick an area first — tap the location button or search a city'); return; }
 
-  let at, inScope, scopeLabel;
+  let ats, inScope, scopeLabel;
   if (onRoute) {
     inScope = SITES.filter(s => route.ids.has(s.id));
     if (!inScope.length) { toast('No chargers on this route to search around'); return; }
     /* Ask around the CHARGERS, not the road. The question is "which stop has one within
        walking distance", and the road itself is thousands of vertices of no interest. */
-    let pts = inScope;
+    let pts = thinCentres(inScope, D.walkM);
     if (pts.length > LIVE_ROUTE_CAP) {
       const step = pts.length / LIVE_ROUTE_CAP;
       pts = Array.from({ length: LIVE_ROUTE_CAP }, (_, i) => pts[Math.floor(i * step)]);
     }
-    at = 'around:' + Math.round(D.walkM) + ','
-       + pts.map(s => s.lat.toFixed(5) + ',' + s.lon.toFixed(5)).join(',');
+    ats = [];
+    for (let i = 0; i < pts.length; i += LIVE_CHUNK) {
+      ats.push('around:' + Math.round(D.walkM) + ','
+        + pts.slice(i, i + LIVE_CHUNK).map(s => s.lat.toFixed(5) + ',' + s.lon.toFixed(5)).join(','));
+    }
     scopeLabel = 'this route';
   } else {
     const R = Math.round(radiusMi * MI);
-    at = `around:${R},${center.lat.toFixed(5)},${center.lon.toFixed(5)}`;
+    ats = [`around:${R},${center.lat.toFixed(5)},${center.lon.toFixed(5)}`];
     inScope = SITES.filter(s => hav(center.lat, center.lon, s.lat, s.lon) <= radiusMi * MI);
     scopeLabel = center.label;
   }
   /* Anchored brand regex for a bare brand name, exact tag match for a category. Both are
      constrained enough for Overpass; an unanchored name regex times out at this radius. */
-  const parts = intent.brandOnly
-    ? `nwr(${at})["brand"~"^${intent.name.replace(/[^a-z0-9 ]/gi, '')}",i];`
-    : intent.tags.map(t => {
-        const [k, v] = t.split('=');
-        return `nwr(${at})["${k}"="${v}"];`;
-      }).join('');
-  const q = `[out:json][timeout:25];(${parts});out center ${onRoute ? 2000 : 600};`;
+  const queries = ats.map(at => {
+    const parts = intent.brandOnly
+      ? `nwr(${at})["brand"~"^${intent.name.replace(/[^a-z0-9 ]/gi, '')}",i];`
+      : intent.tags.map(t => {
+          const [k, v] = t.split('=');
+          return `nwr(${at})["${k}"="${v}"];`;
+        }).join('');
+    return `[out:json][timeout:25];(${parts});out center ${onRoute ? 2000 : 600};`;
+  });
 
   clearLivePoi();
   toast(`Searching ${esc(intent.label)} ${onRoute ? 'along your route' : 'near ' + esc(scopeLabel)}…`);
   $('placeBox').classList.add('busy');
-  let els;
+  let els = [];
   try {
-    els = await overpassFetch(q, undefined,
-      () => toast(`${esc(intent.label)} — OpenStreetMap is busy, trying again…`));
+    /* Sequential, not Promise.all: two at once is the 429 this queue exists to prevent,
+       and the queue would serialise them anyway. Reporting progress matters more here --
+       a long drive is several round trips. */
+    for (let i = 0; i < queries.length; i++) {
+      if (queries.length > 1) {
+        toast(`Searching ${esc(intent.label)} along your route… (${i + 1}/${queries.length})`);
+      }
+      const part = await overpassFetch(queries[i], undefined,
+        () => toast(`${esc(intent.label)} — OpenStreetMap is busy, trying again…`));
+      if (gen !== livePoiGen) return;     // superseded mid-way; stop spending requests
+      els = els.concat(part);
+    }
   }
   catch (e) {
     $('placeBox').classList.remove('busy');
@@ -3169,10 +3204,17 @@ async function runLivePoi(intent, scope) {
 
   const want = intent.name;
   const pois = [];
+  /* Chunked route queries overlap at the seams, so the same shop can arrive twice. Harmless
+     for the per-charger match (it takes the nearest either way) but it would inflate the
+     count the toast reports, which is the one number the user checks against reality. */
+  const seenPoi = new Set();
   for (const el of els) {
     const lat = el.lat !== undefined ? el.lat : (el.center || {}).lat;
     const lon = el.lon !== undefined ? el.lon : (el.center || {}).lon;
     if (lat === undefined || lon === undefined) continue;
+    const pk = lat.toFixed(6) + ',' + lon.toFixed(6);
+    if (seenPoi.has(pk)) continue;
+    seenPoi.add(pk);
     const t = el.tags || {};
     const nm = t.name || t.brand || '';
     // name filtering happens here, not in the query: Overpass times out on loose regexes

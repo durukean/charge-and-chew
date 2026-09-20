@@ -159,6 +159,24 @@ check("livePoiGen" in _html and _html.count("gen !== livePoiGen") >= 2,
 # A cache-key collision would serve a different query's answer with total confidence.
 check("const poiSig" in _html and "v.s !== poiSig(body)" in _html,
       "cached Overpass answers are not verified against the query that asked for them")
+# ---- a long route cannot be one Overpass request ----
+# Measured with BOTH slots free, so this is not the concurrency limit: 300 `around:`
+# centres in one query returns HTTP 504 after 11 s, while 100 centres returns 200 in 11 s.
+# The query itself is too expensive, so route lookups are thinned and chunked.
+# Check the CALL, not the definition. The definition-only form of this check passed
+# happily with the call removed -- the second time that mistake was made in this file.
+check(re.search(r"thinCentres\(inScope, D\.walkM\)", _html) is not None,
+      "route lookups no longer dedupe their circles — a clustered corridor would ask "
+      "Overpass the same question dozens of times")
+check("LIVE_CHUNK" in _html and re.search(r"i \+= LIVE_CHUNK", _html) is not None,
+      "route lookups are sent as one giant query again — Overpass answers that with a 504")
+_lc = re.search(r"const LIVE_CHUNK = (\d+)", _html)
+check(_lc is not None and int(_lc.group(1)) <= 150,
+      "the Overpass chunk size is above what the server actually answers (measured: 100 ok, "
+      "300 times out)")
+check("const seenPoi = new Set()" in _html,
+      "chunked route results are not deduped — shops at the chunk seams would be "
+      "double-counted in the number shown to the user")
 # There is no usable mirror. overpass.osm.ch answers HTTP 200 with an EMPTY element list
 # for US queries because it carries a Switzerland-only extract -- as a fallback it would
 # report "no ice cream shops on your route" with complete confidence.
