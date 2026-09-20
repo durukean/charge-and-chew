@@ -148,6 +148,17 @@ check("e.retryAfter = parseInt(r.headers.get('retry-after')" in _html,
       "Overpass Retry-After is ignored — retries would hammer a server that asked us to wait")
 check("OVERPASS_DEADLINE" in _html,
       "the Overpass retry loop has no deadline — a user could wait 90 s with no feedback")
+# A queue turns one hung request into a permanent stall, which the unqueued code could not
+# do: fetchTimeout cannot cancel on a browser with no AbortController. Cap every turn.
+check("overpass queue timeout" in _html,
+      "a hung Overpass request would deadlock the queue for the life of the page")
+# Serialising means a superseded search comes back AFTER the newer one and would paint its
+# stale results over what the user is actually looking at.
+check("livePoiGen" in _html and _html.count("gen !== livePoiGen") >= 2,
+      "a superseded live lookup can overwrite the newer search's results")
+# A cache-key collision would serve a different query's answer with total confidence.
+check("const poiSig" in _html and "v.s !== poiSig(body)" in _html,
+      "cached Overpass answers are not verified against the query that asked for them")
 # There is no usable mirror. overpass.osm.ch answers HTTP 200 with an EMPTY element list
 # for US queries because it carries a Switzerland-only extract -- as a fallback it would
 # report "no ice cream shops on your route" with complete confidence.
