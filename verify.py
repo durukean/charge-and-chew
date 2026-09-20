@@ -121,6 +121,40 @@ check("unsupportedChain" in _html, "unsupported-brand error path gone")
 # Live POI search: arbitrary categories/brands are queried from OSM scoped to the current
 # area, because precomputing them would add ~1.6 MB for +400 brands.
 check(re.search(r"runLivePoi\(", _html) is not None, "live POI search is never called")
+# ---- Overpass: one request at a time ----
+# Measured, not assumed: firing five requests at once produced four HTTP 429s and one
+# success. The limit is CONCURRENT REQUESTS PER IP, not query size, and a 429 takes ~8 s
+# to come back. The app overlaps its own calls easily (a second search while the first
+# runs, a chain-row tap during a category lookup, a shared link that rebuilds a route and
+# a lookup together), so every call is serialised through one queue.
+check("function overpassQueued" in _html, "Overpass calls are no longer serialised — "
+      "the app would 429 itself the moment two lookups overlap")
+check("return overpassQueued(" in _html, "overpassFetch bypasses the queue")
+check("overpassChain = run.then(() => {}, () => {})" in _html,
+      "a failed Overpass call would poison the queue and stall every later lookup")
+# Answers are cached for a week so a reload, a retry or a shared link costs nothing.
+# Check the CALL SITES, not the definitions: renaming the function away left the first
+# version of this check passing happily.
+check(re.search(r"poiCache\.set\(body, els\); poiStore\(body, els\);", _html) is not None,
+      "successful Overpass answers are no longer written to the persistent cache — every "
+      "reload would re-ask a free community server")
+check(re.search(r"poiCache\.get\(body\) \|\| poiStored\(body\)", _html) is not None,
+      "the persistent Overpass cache is never read")
+check("POI_TTL" in _html, "cached Overpass answers would never expire")
+check("const trimEls" in _html,
+      "cached and fresh Overpass answers would have different shapes")
+# Retry must back off and honour Retry-After; an instant retry at a 429 always fails again.
+check("e.retryAfter = parseInt(r.headers.get('retry-after')" in _html,
+      "Overpass Retry-After is ignored — retries would hammer a server that asked us to wait")
+check("OVERPASS_DEADLINE" in _html,
+      "the Overpass retry loop has no deadline — a user could wait 90 s with no feedback")
+# There is no usable mirror. overpass.osm.ch answers HTTP 200 with an EMPTY element list
+# for US queries because it carries a Switzerland-only extract -- as a fallback it would
+# report "no ice cream shops on your route" with complete confidence.
+check("osm.ch" not in _html.split("const OVERPASS =")[-1][:400] or
+      "Switzerland-only" in _html,
+      "a region-limited Overpass mirror was added — it returns 200 with zero results for "
+      "the US and would silently report 'nothing found'")
 check("POI_TAGS" in _html and "detectPoiIntent" in _html, "live POI category mapping gone")
 check("clearLivePoi()" in _html, "live POI results would leak across areas")
 # /near/<chain>/<state>/ promises a statewide count; a radius around the state centroid

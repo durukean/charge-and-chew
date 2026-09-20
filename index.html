@@ -2945,23 +2945,128 @@ function intentFromTerm(term) {
   return detectPoiIntent(term) || { tags: ['amenity=bank'], name: normalise(term), label: term, brandOnly: true };
 }
 
+/* Overpass is a free community server and the only part of this app that can simply refuse.
+   Measured before writing any of this: there is no usable public mirror to fail over to.
+   overpass.osm.jp blocks CORS, overpass.kumi.systems and overpass.private.coffee never
+   answered at all, and overpass.osm.ch returns HTTP 200 with an EMPTY element list for any
+   US query because it carries a Switzerland-only extract -- a "fallback" that would report
+   "no ice cream shops on your route" with total confidence. Do not add mirrors without
+   checking they hold planet data AND send CORS headers.
+
+   So the strategy is to ask less and wait properly, not to ask elsewhere. */
 const OVERPASS = 'https://overpass-api.de/api/interpreter';
+const POI_LS = 'cc_poi_', POI_TTL = 7 * 864e5, POI_MAX = 3.5e5;
 const poiCache = new Map();
-async function overpassFetch(body, tries) {
-  const hit = poiCache.get(body);
-  if (hit) return hit;
-  for (let i = 0; i <= (tries === undefined ? 1 : tries); i++) {
+
+/* Cache only the fields every caller actually reads, and trim on BOTH paths so a fresh
+   answer and a cached one are the same shape -- otherwise a future caller works against a
+   warm cache and breaks against a cold one. */
+const trimEls = els => els.map(e => ({ lat: e.lat, lon: e.lon, center: e.center, tags: e.tags }));
+
+function poiKey(body) {                       // FNV-1a; short, stable, and no collisions
+  let h = 2166136261;                         // that matter for a local cache key
+  for (let i = 0; i < body.length; i++) { h ^= body.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return POI_LS + (h >>> 0).toString(36) + '_' + body.length;
+}
+function poiStored(body) {
+  try {
+    const raw = localStorage.getItem(poiKey(body));
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    if (!v || Date.now() - v.t > POI_TTL) { localStorage.removeItem(poiKey(body)); return null; }
+    return v.e;
+  } catch (e) { return null; }
+}
+function poiStore(body, els) {
+  let s;
+  try { s = JSON.stringify({ t: Date.now(), e: els }); } catch (e) { return; }
+  if (s.length > POI_MAX) return;             // one huge answer must not evict everything
+  try { localStorage.setItem(poiKey(body), s); }
+  catch (e) {
+    /* Out of quota. Drop expired entries first, then the oldest, and try once more. Never
+       let a caching failure break the search that produced the data. */
+    try {
+      const mine = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith(POI_LS)) {
+          let t = 0; try { t = JSON.parse(localStorage.getItem(k)).t || 0; } catch (e2) {}
+          if (Date.now() - t > POI_TTL) localStorage.removeItem(k); else mine.push([k, t]);
+        }
+      }
+      mine.sort((a, b) => a[1] - b[1]).slice(0, Math.ceil(mine.length / 2))
+          .forEach(([k]) => localStorage.removeItem(k));
+      localStorage.setItem(poiKey(body), s);
+    } catch (e2) { /* give up quietly; the answer is still returned */ }
+  }
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* Three attempts at 28 s each plus their waits is a minute and a half of nothing, which
+   reads as a hang. Cap the whole operation instead, and say something before the second
+   attempt so the wait is visibly a retry rather than a stall. */
+const OVERPASS_DEADLINE = 45000;
+
+/* Overpass allows only a couple of concurrent requests per IP and answers the rest with
+   429 -- and it takes about 8 s to say so. Measured: five fired at once produced four 429s
+   and one success. The app produces overlap on its own (a second search while the first is
+   still running, a chain-row tap during a category lookup, a shared link that rebuilds a
+   route and a lookup together), so EVERY Overpass call goes through one queue and waits its
+   turn. This, not the retry logic, is what stopped "OpenStreetMap didn't answer". */
+let overpassChain = Promise.resolve();
+function overpassQueued(fn) {
+  const run = overpassChain.then(fn, fn);
+  overpassChain = run.then(() => {}, () => {});   // one failure must not poison the queue
+  return run;
+}
+
+function overpassFetch(body, tries, onRetry) {
+  const hit = poiCache.get(body) || poiStored(body);
+  if (hit) { poiCache.set(body, hit); return Promise.resolve(hit); }
+  // Re-check inside the queue: an identical query ahead of this one may have just filled it.
+  return overpassQueued(() => {
+    const warm = poiCache.get(body) || poiStored(body);
+    if (warm) { poiCache.set(body, warm); return warm; }
+    return overpassRun(body, tries, onRetry);
+  });
+}
+
+async function overpassRun(body, tries, onRetry) {
+  const n = tries === undefined ? 2 : tries;
+  const until = Date.now() + OVERPASS_DEADLINE;
+  let last;
+  for (let i = 0; i <= n; i++) {
     try {
       const r = await fetchTimeout(OVERPASS, 28000, {
         method: 'POST', body: 'data=' + encodeURIComponent(body),
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
-      if (!r.ok) throw new Error('overpass ' + r.status);
-      const j = await r.json();
-      poiCache.set(body, j.elements || []);
-      return j.elements || [];
-    } catch (e) { if (i === (tries === undefined ? 1 : tries)) throw e; }
+      if (!r.ok) {
+        /* 429 (too many requests) and 504 (gateway timeout) are what a busy Overpass
+           actually returns, and both mean "not right now" rather than "never". Retrying
+           instantly is guaranteed to fail again and only burns the user's time and our
+           share of a shared server, so wait -- and wait as long as the server asks. */
+        const e = new Error('overpass ' + r.status);
+        e.status = r.status;
+        e.retryAfter = parseInt(r.headers.get('retry-after') || '', 10) * 1000 || 0;
+        throw e;
+      }
+      const els = trimEls((await r.json()).elements || []);
+      poiCache.set(body, els); poiStore(body, els);
+      return els;
+    } catch (e) {
+      last = e;
+      if (i === n) throw e;
+      const wait = Math.min(e.retryAfter || 0, 8000) || [1200, 3000, 6000][i] || 6000;
+      if (Date.now() + wait >= until) throw e;   // no time left for another round trip
+      if (onRetry) onRetry(i + 1, n);
+      await sleep(wait);
+    }
   }
+  throw last;
 }
+
+window.__overpassFetch = overpassFetch;   // exposed so the queue can be tested end to end
 
 let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
 function clearLivePoi() {
@@ -3019,7 +3124,10 @@ async function runLivePoi(intent, scope) {
   toast(`Searching ${esc(intent.label)} ${onRoute ? 'along your route' : 'near ' + esc(scopeLabel)}…`);
   $('placeBox').classList.add('busy');
   let els;
-  try { els = await overpassFetch(q); }
+  try {
+    els = await overpassFetch(q, undefined,
+      () => toast(`${esc(intent.label)} — OpenStreetMap is busy, trying again…`));
+  }
   catch (e) {
     $('placeBox').classList.remove('busy');
     /* A toast alone was not enough: on a phone it is gone in three seconds and what the
