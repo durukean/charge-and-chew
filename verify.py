@@ -235,6 +235,23 @@ check(_zm is not None and int(_zm.group(1)) < 400,
 check("getPane('routePane').style.pointerEvents = 'none'" in _html,
       "the route pane accepts pointer events again — taps on chargers under the line would "
       "hit the line instead")
+# ---- chip counts must describe the CURRENT scope ----
+# With a route on screen the chips advertised the national figure: "Any food 10,458" and
+# then 210 results. A number the app cannot honour is the same class of bug as a
+# confidently wrong destination.
+check("function ensureScopeCounts" in _html and "ensureScopeCounts();" in _html,
+      "chip counts are no longer rescoped — a route would advertise national totals")
+check(re.search(r"\$\{chipCatCount\(c\)", _html) is not None
+      and re.search(r"\$\{chipCount\(k\)\}", _html) is not None,
+      "renderChips reads the national counts directly again")
+# A live POI lookup writes new keys into MATCH without the scope changing, so the memo has
+# to be invalidated explicitly or the new chip shows 0.
+# Match the live STATEMENT, not the substring: "// matchVer++;" satisfied the first
+# version of this check. Third time that mistake has been made in this file — a guard
+# that a commented-out line still passes is not a guard.
+check(len(re.findall(r"(?m)^\s*matchVer\+\+;", _html)) >= 2,
+      "the scoped-count memo is not invalidated when a live lookup changes MATCH — the new "
+      "chip would show 0")
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.

@@ -1674,6 +1674,38 @@ for (const c of ['food', 'store']) {
   for (const id in MATCH) if (hasCat(MATCH[id], c)) n++;
   catCount[c] = n;
 }
+/* A chip count has to describe what you will actually get. With a route or an area on
+   screen the national figure is a promise the app cannot keep -- "Any food 10,458" and then
+   210 results -- so recompute inside the current scope. Memoised on the scope, because the
+   scope changes far less often than the chips redraw, and bumped by matchVer because a live
+   POI lookup writes new keys into MATCH without the scope changing at all. */
+let matchVer = 0;
+let scopeCountSig = false, scopeCounts = null, scopeCatCount = null;
+function scopeSig() {
+  if (route) return 'r:' + route.ids.size + ':' + corridorMi + ':' + matchVer;
+  if (stateScope) return 's:' + stateScope + ':' + matchVer;
+  if (center) return 'c:' + center.lat.toFixed(3) + ',' + center.lon.toFixed(3)
+                   + ':' + radiusMi + ':' + matchVer;
+  return null;                        // national: the precomputed totals are already right
+}
+function ensureScopeCounts() {
+  const sig = scopeSig();
+  if (sig === scopeCountSig) return;
+  scopeCountSig = sig;
+  if (!sig) { scopeCounts = null; scopeCatCount = null; return; }
+  const c = {}, cc = { food: 0, store: 0 };
+  for (const s of SITES) {
+    if (!inScope(s)) continue;
+    const m = MATCH[s.id]; if (!m) continue;
+    for (const k in m) c[k] = (c[k] || 0) + 1;
+    if (hasCat(m, 'food')) cc.food++;
+    if (hasCat(m, 'store')) cc.store++;
+  }
+  scopeCounts = c; scopeCatCount = cc;
+}
+const chipCount = k => scopeCounts ? (scopeCounts[k] || 0) : (counts[k] || 0);
+const chipCatCount = c => scopeCatCount ? scopeCatCount[c] : catCount[c];
+
 /* One predicate for "does this stop satisfy the current chain query", so passesChain,
    bestWalk and countWithoutNarrowing can never drift apart. */
 const chainKeysOn = m => {
@@ -1686,9 +1718,14 @@ const chainQuery = () => active.size > 0 || !!anyCat;
 function renderChips() {
   const el = $('chips');
   const keep = $('chiprow').scrollLeft;
+  ensureScopeCounts();
   let keys = CHAIN_KEYS;
   if (cat === 'food' || cat === 'store') keys = keys.filter(k => BRANDS[k].cat === cat);
   if (cat === 'fav') keys = [...active];
+  /* Inside a scope, lead with the chains that are actually THERE. Nationally Starbucks
+     outranks everything; on a drive through the Mojave it may have nothing on the road and
+     the chip you want is the one with stops on it. */
+  if (scopeCounts && cat !== 'fav') keys = keys.slice().sort((a, b) => chipCount(b) - chipCount(a));
   const top = keys.slice(0, 14);
   for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
   /* Ahead of the brand chips, because "somewhere to eat" is the question most people
@@ -1696,10 +1733,10 @@ function renderChips() {
   $('catchips').innerHTML = (cat === 'fav' ? [] : ['food', 'store'])
     .map(c => `<button class="chip catchip ${anyCat === c ? 'on' : ''}" data-cat="${c}"
       aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_LABEL[c]}
-      <span class="cnt">${catCount[c].toLocaleString()}</span></button>`).join('');
+      <span class="cnt">${chipCatCount(c).toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
-      <span class="cnt" title="${(counts[k] || 0).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k] || 0}</span></button>`).join('')
+      <span class="cnt" title="${chipCount(k).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}${scopeCounts ? ' here' : ''}">${chipCount(k)}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All chains</button>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
     const k = c.dataset.cat;
@@ -3137,6 +3174,7 @@ let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
 let livePoiGen = 0;
 function clearLivePoi() {
   livePoiTerm = null; livePoiFor = {};
+  matchVer++;                       // MATCH is about to change; scoped chip counts are stale
   if (!livePoiKey) return;
   for (const id in MATCH) { if (MATCH[id][livePoiKey] !== undefined) delete MATCH[id][livePoiKey]; }
   delete BRANDS[livePoiKey];
@@ -3333,6 +3371,7 @@ async function runLivePoi(intent, scope) {
   BRANDS[key] = { e: icon, cat: 'live', n: pois.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
   livePoiKey = key; livePoiTerm = intent.label;
+  matchVer++;                       // new keys in MATCH -> recompute the scoped chip counts
   active.clear(); anyCat = null; active.add(key);
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
