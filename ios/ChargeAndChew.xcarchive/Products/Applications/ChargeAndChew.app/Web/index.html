@@ -2963,23 +2963,30 @@ const poiCache = new Map();
    warm cache and breaks against a cold one. */
 const trimEls = els => els.map(e => ({ lat: e.lat, lon: e.lon, center: e.center, tags: e.tags }));
 
-function poiKey(body) {                       // FNV-1a; short, stable, and no collisions
-  let h = 2166136261;                         // that matter for a local cache key
+function fnv(body, seed) {
+  let h = seed;
   for (let i = 0; i < body.length; i++) { h ^= body.charCodeAt(i); h = Math.imul(h, 16777619); }
-  return POI_LS + (h >>> 0).toString(36) + '_' + body.length;
+  return (h >>> 0).toString(36);
 }
+const poiKey = body => POI_LS + fnv(body, 2166136261) + '_' + body.length;
+/* A key collision would hand back someone else's answer with total confidence -- pharmacies
+   for "ice cream" -- which is the exact failure this whole area was fixed for. A second
+   independently seeded hash, stored in the value and checked on read, makes that
+   impossible in practice rather than merely unlikely. */
+const poiSig = body => fnv(body, 991);
 function poiStored(body) {
   try {
     const raw = localStorage.getItem(poiKey(body));
     if (!raw) return null;
     const v = JSON.parse(raw);
     if (!v || Date.now() - v.t > POI_TTL) { localStorage.removeItem(poiKey(body)); return null; }
+    if (v.s !== poiSig(body)) return null;     // different query, same slot: ask for real
     return v.e;
   } catch (e) { return null; }
 }
 function poiStore(body, els) {
   let s;
-  try { s = JSON.stringify({ t: Date.now(), e: els }); } catch (e) { return; }
+  try { s = JSON.stringify({ t: Date.now(), s: poiSig(body), e: els }); } catch (e) { return; }
   if (s.length > POI_MAX) return;             // one huge answer must not evict everything
   try { localStorage.setItem(poiKey(body), s); }
   catch (e) {
@@ -3016,7 +3023,17 @@ const OVERPASS_DEADLINE = 45000;
    turn. This, not the retry logic, is what stopped "OpenStreetMap didn't answer". */
 let overpassChain = Promise.resolve();
 function overpassQueued(fn) {
-  const run = overpassChain.then(fn, fn);
+  /* A queue is only as safe as its slowest member. On a browser with no AbortController
+     fetchTimeout falls back to a plain fetch it cannot cancel, and ONE hung request would
+     block every later lookup for the life of the page -- a deadlock the old unqueued code
+     could not have. Cap each turn so the queue always advances. Racing does not cancel the
+     request underneath, but it does free the queue, which is the point. */
+  const capped = () => Promise.race([
+    Promise.resolve().then(fn),
+    new Promise((_, rej) => setTimeout(
+      () => rej(new Error('overpass queue timeout')), OVERPASS_DEADLINE + 5000))
+  ]);
+  const run = overpassChain.then(capped, capped);
   overpassChain = run.then(() => {}, () => {});   // one failure must not poison the queue
   return run;
 }
@@ -3069,6 +3086,10 @@ async function overpassRun(body, tries, onRetry) {
 window.__overpassFetch = overpassFetch;   // exposed so the queue can be tested end to end
 
 let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
+/* Requests are serialised, so a second search waits for the first -- and then the FIRST one
+   would come back and apply its results over the newer search the user is actually looking
+   at. Stamp each lookup and drop anything that has been superseded. */
+let livePoiGen = 0;
 function clearLivePoi() {
   livePoiTerm = null; livePoiFor = {};
   if (!livePoiKey) return;
@@ -3085,6 +3106,7 @@ function clearLivePoi() {
 const LIVE_ROUTE_CAP = 300;
 
 async function runLivePoi(intent, scope) {
+  const gen = ++livePoiGen;
   /* A route IS the search area. Without this, "ice cream" on a planned drive either asked
      for a circle around wherever the map happened to be centred, or refused outright. */
   const onRoute = scope === 'route' || (!scope && route && !center);
@@ -3130,6 +3152,7 @@ async function runLivePoi(intent, scope) {
   }
   catch (e) {
     $('placeBox').classList.remove('busy');
+    if (gen !== livePoiGen) return;        // superseded: its failure is no longer news
     /* A toast alone was not enough: on a phone it is gone in three seconds and what the
        user sees is "I searched and nothing happened". Put the failure, and the retry, where
        the results were going to be. */
@@ -3142,6 +3165,7 @@ async function runLivePoi(intent, scope) {
     return;
   }
   $('placeBox').classList.remove('busy');
+  if (gen !== livePoiGen) return;          // a newer search started while this one waited
 
   const want = intent.name;
   const pois = [];
