@@ -2913,6 +2913,51 @@ const POI_ICON = {
 const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places', 'near',
   'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and']);
 
+/* Chains we ALREADY have, grouped by the OSM tag a category search asks for.
+   The live lookup depends on a free community server that is genuinely unreliable; these
+   90 chains are bundled, offline and instant. When OSM cannot answer, "ice cream" can
+   still say where the Dairy Queens are instead of showing nothing but an error.
+   Keys are exact BRANDS keys -- a typo here would silently match nothing, so verify.py
+   checks every one of them against data.js. */
+const CAT_CHAINS = {
+  'amenity=ice_cream': ['Dairy Queen'],
+  'shop=ice_cream': ['Dairy Queen'],
+  'amenity=cafe': ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee'],
+  'shop=pastry': ["Dunkin'", 'Krispy Kreme'],
+  'shop=bakery': ['Krispy Kreme', "Dunkin'"],
+  'amenity=fast_food': ["McDonald's", 'Burger King', "Wendy's", 'Taco Bell', 'KFC', 'Popeyes',
+    "Arby's", 'Jack in the Box', 'Sonic', "Carl's Jr.", "Hardee's", 'Del Taco', 'Whataburger',
+    'In-N-Out', "Culver's", 'Five Guys', 'Shake Shack', 'Chick-fil-A', "Raising Cane's",
+    "Zaxby's", 'Bojangles', 'Wingstop', 'Subway', "Jersey Mike's", 'Firehouse Subs',
+    'Chipotle', 'Panda Express', 'Cook Out', "Portillo's", "Domino's", 'Pizza Hut',
+    'Little Caesars'],
+  'amenity=restaurant': ['IHOP', "Denny's", 'Waffle House', 'Cracker Barrel', 'Olive Garden',
+    "Applebee's", "Chili's", 'Texas Roadhouse', 'Buffalo Wild Wings', 'Red Robin',
+    'Panera Bread'],
+  'amenity=fuel': ["Love's", 'Pilot', 'Flying J', 'QuikTrip', 'RaceTrac', 'Kwik Trip',
+    'Speedway', "Casey's", 'Circle K', 'Royal Farms', 'TA Travel Center', "Buc-ee's",
+    'Sheetz', 'Wawa'],
+  'shop=convenience': ['Circle K', "Casey's", 'Kwik Trip', 'QuikTrip', 'Wawa', 'Sheetz',
+    'Royal Farms', "Buc-ee's"],
+  'amenity=pharmacy': ['Walgreens', 'CVS'],
+  'shop=supermarket': ['Kroger', 'Safeway', 'Publix', 'H-E-B', 'Aldi', 'Whole Foods',
+    "Trader Joe's", 'Meijer', 'Hy-Vee', 'Fred Meyer', 'Wegmans', 'Harris Teeter',
+    'Giant Eagle', 'Sprouts'],
+  'shop=hardware': ['Home Depot', "Lowe's"],
+  'shop=doityourself': ['Home Depot', "Lowe's"],
+  'shop=department_store': ['Walmart', 'Target', 'Meijer'],
+  'shop=deli': ["Jersey Mike's", 'Subway', 'Firehouse Subs'] };
+
+/* The bundled chains that answer this intent, in scope, that we actually hold data for. */
+function seedChains(intent) {
+  if (!intent || intent.brandOnly || !intent.tags) return [];
+  const out = new Set();
+  for (const t of intent.tags) for (const k of (CAT_CHAINS[t] || [])) {
+    if (BRANDS[k] && counts[k] > 0) out.add(k);
+  }
+  return [...out];
+}
+
 /* Turn what was typed into {tags, name} — a tag to ask Overpass for, plus any leftover
    words to match the POI name against here. */
 function detectPoiIntent(raw) {
@@ -3188,6 +3233,37 @@ async function runLivePoi(intent, scope) {
   catch (e) {
     $('placeBox').classList.remove('busy');
     if (gen !== livePoiGen) return;        // superseded: its failure is no longer news
+
+    /* An error panel is a dead end, and for most categories we are not actually empty
+       handed: 90 chains ship with the app. Answer with those instead, say plainly that it
+       is the partial answer, and leave the retry for the rest. */
+    /* Only worth doing if it actually answers. "ice cream" near downtown LA maps to Dairy
+       Queen, of which there are none for miles -- offering "0 stops near Dairy Queen" is a
+       worse answer than admitting the lookup failed, because it looks like a result. */
+    const seed = seedChains(intent)
+      .filter(k => inScope.some(sc => MATCH[sc.id] && MATCH[sc.id][k] !== undefined));
+    if (seed.length) {
+      clearLivePoi();
+      active.clear(); anyCat = null;
+      seed.forEach(k => active.add(k));
+      cat = 'all'; $('savedChip').classList.remove('on');
+      track('live-poi-seeded', intent.tags[0]);
+      render(); renderChips(); setSheet('mid'); syncUrl();
+      const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
+      toast(`OpenStreetMap is busy — showing ${esc(names)} from our own data`);
+      /* The banner goes above the results rather than replacing them: the list is useful,
+         it is just not the whole answer. */
+      const bar = document.createElement('div');
+      bar.className = 'empty';
+      bar.style.cssText = 'margin:0 0 8px;padding:10px 12px';
+      bar.innerHTML = `<b>Showing chains we bundle</b>OpenStreetMap was busy, so anything we
+        don't track is missing.
+        <button class="fball" id="poiRetry" style="margin-top:8px">Try again for all</button>`;
+      $('list').prepend(bar);
+      $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
+      return;
+    }
+
     /* A toast alone was not enough: on a phone it is gone in three seconds and what the
        user sees is "I searched and nothing happened". Put the failure, and the retry, where
        the results were going to be. */
@@ -3195,7 +3271,7 @@ async function runLivePoi(intent, scope) {
       "${esc(intent.label)}" use a free community server that is sometimes busy.
       <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`;
     $('sheetTitle').innerHTML = `Couldn't look up <em>${esc(intent.label)}</em>`;
-    $('poiRetry').onclick = () => runLivePoi(intent);
+    $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
     setSheet('mid');
     return;
   }

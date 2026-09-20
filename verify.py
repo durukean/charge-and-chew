@@ -174,6 +174,46 @@ _lc = re.search(r"const LIVE_CHUNK = (\d+)", _html)
 check(_lc is not None and int(_lc.group(1)) <= 150,
       "the Overpass chunk size is above what the server actually answers (measured: 100 ok, "
       "300 times out)")
+# ---- bundled-chain fallback for a failed live lookup ----
+# The live lookup leans on a free community server that genuinely refuses sometimes. For
+# most categories we are not empty handed: 90 chains ship with the app. Every key in
+# CAT_CHAINS must exist in data.js -- a typo would silently match nothing and the fallback
+# would appear to work while doing nothing at all.
+check("const CAT_CHAINS" in _html, "the bundled-chain fallback is gone — a busy OSM would "
+      "again mean a dead-end error panel")
+check(re.search(r"const seed = seedChains\(intent\)", _html) is not None,
+      "seedChains is never called on the failure path")
+# The fallback must prove it has something IN SCOPE before offering itself. "ice cream"
+# near downtown LA maps to Dairy Queen, of which there are none for miles, and
+# "0 stops near Dairy Queen" reads as a result while being worse than admitting failure.
+check("MATCH[sc.id][k] !== undefined" in _html,
+      "the bundled-chain fallback no longer checks it has any stops in scope — it would "
+      "answer '0 stops near <chain>' and look like a result")
+if "D" in dir() and D:
+    _i = _html.find("const CAT_CHAINS = {")
+    if _i >= 0:
+        _j, _d = _html.index("{", _i), 0
+        for _k in range(_j, len(_html)):
+            if _html[_k] == "{": _d += 1
+            elif _html[_k] == "}":
+                _d -= 1
+                if _d == 0: break
+        _body = _html[_j:_k]
+        # names are single- OR double-quoted in the JS (apostrophes force double), and
+        # OSM key=value tags share the object -- keep only the values that are names.
+        _tok = re.findall(r"'((?:[^'\\\\]|\\\\.)*)'|\"([^\"]*)\"", _body)
+        _chains = set()
+        for _a, _b in _tok:
+            _v = (_a or _b).replace("\\'", "'")
+            if _v and "=" not in _v and not _v.strip().startswith(","):
+                _chains.add(_v)
+        _known = set(D.get("brands", {}))
+        _bad = sorted(c for c in _chains if c not in _known)
+        check(not _bad, "CAT_CHAINS names chains that are not in data.js (the fallback "
+                        "would silently find nothing): %s" % _bad[:5])
+        check(len(_chains) > 40, "CAT_CHAINS only maps %d chains — the fallback covers far "
+                                 "less than it should" % len(_chains))
+
 check("const seenPoi = new Set()" in _html,
       "chunked route results are not deduped — shops at the chunk seams would be "
       "double-counted in the number shown to the user")
@@ -472,8 +512,10 @@ check("'#filters .seg.wide[data-f] button'" in _html and "'#filters .seg.wide[da
       "the filter wiring grabs every segment in the sheet again and overwrites the Appearance handlers")
 check("track('longpress-pin')" in _html, "press-and-hold to drop a pin is gone — phones have no pin button")
 check(".chip.more::before" in _html and "＋ All chains" in _html, "the sticky All-chains chip lost its fade")
-check('id="poiRetry"' in _html and "$('poiRetry').onclick = () => runLivePoi(intent);" in _html,
-      "a failed live lookup is only a 3-second toast again — on a phone that reads as nothing happened")
+check('id="poiRetry"' in _html
+      and re.search(r"\$\('poiRetry'\)\.onclick = \(\) => runLivePoi\(intent,", _html) is not None,
+      "a failed live lookup is only a 3-second toast again — on a phone that reads as nothing "
+      "happened (the retry must also carry the scope, or it re-searches the wrong area)")
 check('data-net="${esc(k)}"' in _html and "netPick = netPick === k ? null : k;" in _html,
       "legend rows no longer filter by network — on a phone they look tappable and did nothing")
 check(".empty .fball{display:block" in _html and "'The <strong>' + esc(nar[0].label)" in _html,
