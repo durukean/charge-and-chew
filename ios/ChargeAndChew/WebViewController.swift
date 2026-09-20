@@ -147,7 +147,11 @@ final class WebViewController: UIViewController {
         guard webView != nil, webView.url != nil else { pendingDeepLink = url; return }
         let q = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
         var c = URLComponents(string: "\(AppSchemeHandler.origin)/index.html")!
-        c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { ["at", "r", "chain"].contains($0.name) }
+        /* Keep this in step with what index.html reads at boot. `from`/`to`/`c` rebuild a
+           route and `poi` re-runs a live category lookup against it -- without them a
+           shared "LA to Las Vegas near ice cream" link opened in the app as a bare map. */
+        let allowed = ["at", "r", "chain", "any", "net", "from", "to", "c", "poi", "state"]
+        c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { allowed.contains($0.name) }
         if let u = c.url { Diag.log("deep link -> \(u.absoluteString)"); webView.load(URLRequest(url: u)) }
     }
 

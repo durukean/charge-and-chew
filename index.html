@@ -1145,6 +1145,17 @@ map.on('zoomend', onZoomChanged);
 
 
 const canvas = L.canvas({ padding: .6 });
+/* The route has to sit UNDER the chargers. Leaflet puts the circleMarkers' canvas and a
+   polyline's SVG in the same overlayPane, and the route is added last -- so an 8px line was
+   painted over every dot along the corridor and, being a real SVG path, swallowed the taps
+   as well: the stops you had just searched for could not be opened. Its own pane below the
+   overlay pane fixes the painting; interactive:false fixes the taps (the line has no
+   handler of its own, so nothing is lost). Both are needed -- a lower pane still captures
+   pointer events. */
+map.createPane('routePane');
+map.getPane('routePane').style.zIndex = 350;
+map.getPane('routePane').style.pointerEvents = 'none';
+const routeRenderer = L.svg({ pane: 'routePane' });
 const mk = {};
 const poiLayer = L.layerGroup().addTo(map);
 let centerLayer = null, radiusLayer = null, routeLayer = null, routeCase = null;
@@ -3529,8 +3540,9 @@ $('goBtn').onclick = () => runRoute();
 function applyCorridor(verts, mi, hr) {
   track('route');
   clearRoute();
-  routeCase = L.polyline(verts, { color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
-  routeLayer = L.polyline(verts, { color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
+  const rOpt = { pane: 'routePane', renderer: routeRenderer, interactive: false };
+  routeCase = L.polyline(verts, { ...rOpt, color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
+  routeLayer = L.polyline(verts, { ...rOpt, color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
   const maxM = corridorMi * MI;
   const cells = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
   for (const v of verts) {

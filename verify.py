@@ -125,6 +125,13 @@ check("POI_TAGS" in _html and "detectPoiIntent" in _html, "live POI category map
 check("clearLivePoi()" in _html, "live POI results would leak across areas")
 # /near/<chain>/<state>/ promises a statewide count; a radius around the state centroid
 # silently delivered a fraction of it (Texas: 83 promised, 11 shown).
+_zm = re.search(r"getPane\('routePane'\)\.style\.zIndex = (\d+)", _html)
+check(_zm is not None and int(_zm.group(1)) < 400,
+      "the route pane is no longer below the overlay pane (400) that holds the charger "
+      "canvas — the line would paint over every dot on the corridor again")
+check("getPane('routePane').style.pointerEvents = 'none'" in _html,
+      "the route pane accepts pointer events again — taps on chargers under the line would "
+      "hit the line instead")
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.
@@ -322,6 +329,14 @@ for _needle, _why in [
      "searching a category with a route on screen no longer searches the route"),
     ("const onRoute = scope === 'route'",
      "runLivePoi cannot be scoped to a route"),
+    # ---- the route must not sit on top of the chargers ----
+    # circleMarkers render into a canvas in the overlayPane; a polyline's SVG lands in the
+    # SAME pane and is added later, so an 8px route line painted over every dot on the
+    # corridor AND swallowed the taps -- the stops you had just searched for could not be
+    # opened. Both halves are load-bearing: a lower pane still captures pointer events.
+    ("map.createPane('routePane')", "the route no longer has its own pane and covers the chargers"),
+    ("pane: 'routePane', renderer: routeRenderer, interactive: false",
+     "the route line is interactive again — it would swallow taps meant for the chargers"),
     ("window.__detectPoiIntent",
      "detectPoiIntent is not exported — the search suite cannot test it"),
     ("heroTrip", "the hero card no longer offers to plan a drive"),
