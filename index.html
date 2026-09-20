@@ -2560,6 +2560,12 @@ async function geocode(q) {
   const snap = snapPlace(q);
   if (snap) q = snap;
 
+  /* A place does not move. Caching the resolution makes a shared link instant and keeps
+     route planning working through a Nominatim outage for anywhere already looked up. */
+  const gk = q.trim().toLowerCase();
+  const cached = lsGet(GEO_NS, gk, GEO_TTL);
+  if (cached) return cached;
+
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
               '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
   const r = await fetchTimeout(url);
@@ -2590,7 +2596,9 @@ async function geocode(q) {
     const echoes = words.some(w => toks.some(t => t.startsWith(w.slice(0, 4)) || w.startsWith(t.slice(0, 4))));
     if (!echoes) throw new Error(`Couldn't find "${q}"`);
   }
-  return { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
+  const hit = { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
+  lsPut(GEO_NS, gk, hit, GEO_CAP);        // only successes: a cached failure would stick
+  return hit;
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
 $('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
@@ -3091,6 +3099,53 @@ function poiStore(body, els) {
 }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* Nominatim and OSRM are the other two free public services on the critical path, and
+   neither was cached: every shared trip link re-asked both for an answer that cannot have
+   changed, and an outage in either killed route planning outright. Same shape as the
+   Overpass cache, including the second hash stored alongside the value -- a key collision
+   must never hand back a different query's answer.
+   Only successes are stored. Caching a transient failure would poison a place name for as
+   long as the entry lived. */
+function lsGet(ns, key, ttl) {
+  try {
+    const raw = localStorage.getItem(ns + fnv(key, 2166136261));
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    if (!v || Date.now() - v.t > ttl || v.s !== fnv(key, 991)) return null;
+    return v.d;
+  } catch (e) { return null; }
+}
+function lsPut(ns, key, data, cap) {
+  let body;
+  try { body = JSON.stringify({ t: Date.now(), s: fnv(key, 991), d: data }); } catch (e) { return; }
+  const mine = () => {
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || !k.startsWith(ns)) continue;
+      let t = 0; try { t = JSON.parse(localStorage.getItem(k)).t || 0; } catch (e) {}
+      out.push([k, t]);
+    }
+    return out.sort((a, b) => a[1] - b[1]);       // oldest first
+  };
+  const put = () => localStorage.setItem(ns + fnv(key, 2166136261), body);
+  try { put(); }
+  catch (e) {
+    // out of quota: drop the oldest half of OUR namespace and try once more
+    try {
+      const m = mine();
+      m.slice(0, Math.max(1, Math.ceil(m.length / 2))).forEach(([k]) => localStorage.removeItem(k));
+      put();
+    } catch (e2) { return; }                      // never let caching break the thing it caches
+  }
+  if (cap) {                                      // bound the namespace even without a quota error
+    const m = mine();
+    if (m.length > cap) m.slice(0, m.length - cap).forEach(([k]) => localStorage.removeItem(k));
+  }
+}
+const GEO_NS = 'cc_geo_', GEO_TTL = 90 * 864e5, GEO_CAP = 120;
+const RTE_NS = 'cc_rte_', RTE_TTL = 30 * 864e5, RTE_CAP = 12;
 
 /* Three attempts at 28 s each plus their waits is a minute and a half of nothing, which
    reads as a hang. Cap the whole operation instead, and say something before the second
@@ -3813,12 +3868,22 @@ async function runRoute(opts) {
        is what Edit should show too. */
     if (a.label && a.label !== 'Pinned coordinates') $('fromIn').value = a.label;
     if (b.label && b.label !== 'Pinned coordinates') $('toIn').value = b.label;
-    const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
-    const j = await r.json();
-    if (!j.routes || !j.routes.length) throw new Error('No driving route found');
-    const verts = j.routes[0].geometry.coordinates.map(c2 => [c2[1], c2[0]]);
+    /* Roads do not change between two taps of the same link. Caching the geometry makes a
+       shared trip instant and keeps a previously-planned route working while OSRM is down --
+       which, being another free public service, it sometimes is. ~50 kB for a 269-mile
+       route, so the namespace is capped rather than left to grow. */
+    const rk = [a.lat.toFixed(4), a.lon.toFixed(4), b.lat.toFixed(4), b.lon.toFixed(4)].join(',');
+    let trip = lsGet(RTE_NS, rk, RTE_TTL);
+    if (!trip) {
+      const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
+      const j = await r.json();
+      if (!j.routes || !j.routes.length) throw new Error('No driving route found');
+      trip = { v: j.routes[0].geometry.coordinates.map(c2 => [+c2[1].toFixed(5), +c2[0].toFixed(5)]),
+               mi: j.routes[0].distance / MI, hr: j.routes[0].duration / 3600 };
+      lsPut(RTE_NS, rk, trip, RTE_CAP);
+    }
     clearCenter();
-    applyCorridor(verts, j.routes[0].distance / MI, j.routes[0].duration / 3600);
+    applyCorridor(trip.v, trip.mi, trip.hr);
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
     if (opts.poi) await runLivePoi(opts.poi, 'route');

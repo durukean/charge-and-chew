@@ -252,6 +252,27 @@ check(re.search(r"\$\{chipCatCount\(c\)", _html) is not None
 check(len(re.findall(r"(?m)^\s*matchVer\+\+;", _html)) >= 2,
       "the scoped-count memo is not invalidated when a live lookup changes MATCH — the new "
       "chip would show 0")
+# ---- the other two free services on the critical path ----
+# Nominatim and OSRM were uncached: every shared trip link re-asked both for an answer that
+# cannot have changed, and an outage in either killed route planning outright. Verified by
+# blocking both and re-planning the same trip entirely from cache.
+check("function lsGet" in _html and "function lsPut" in _html,
+      "the geocode/route cache is gone — a shared trip would re-ask two public services")
+check(re.search(r"lsGet\(GEO_NS, gk, GEO_TTL\)", _html) is not None
+      and re.search(r"lsPut\(GEO_NS, gk, hit, GEO_CAP\)", _html) is not None,
+      "geocoding is no longer cached")
+check(re.search(r"lsGet\(RTE_NS, rk, RTE_TTL\)", _html) is not None
+      and re.search(r"lsPut\(RTE_NS, rk, trip, RTE_CAP\)", _html) is not None,
+      "route geometry is no longer cached — an OSRM outage would kill a route already planned")
+# Caching a failure would stick: the lsPut must sit after every validation, so only a
+# resolved place is ever stored.
+_gi, _gp = _html.find("const gk = q.trim()"), _html.find("lsPut(GEO_NS, gk, hit")
+check(_gi > 0 and _gp > _html.find("if (looksLikeChainBrand(", _gi),
+      "the geocode cache is written before validation — a bad hit would be cached")
+# Route entries are ~50 kB; the namespace has to be bounded.
+check(re.search(r"RTE_CAP = \d+", _html) is not None and "if (cap) {" in _html,
+      "the route cache is unbounded — 50 kB an entry would fill localStorage")
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.
