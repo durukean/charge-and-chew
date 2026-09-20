@@ -305,8 +305,25 @@ for _needle, _why in [
     ("window.__parseTrip", "parseTrip is not exported — the search suite cannot test it"),
     ("TRIP_REJECT", "the trip false-positive guard is gone"),
     ("CITY_ALIAS", "city abbreviations (LA, NYC, SF) no longer expand"),
-    ("if (trip) { track('search-trip'); $('goBtn').click(); return; }",
+    ("runRoute(tripPoi ? { poi: tripPoi } : {});",
      "a parsed trip is never handed to the router"),
+    # ---- a category wanted ALONG the drive ----
+    # "LA to las vegas near ice cream shop" used to put the whole tail into the
+    # destination and route to a town called "Las Vegas Ice Cream Shop" -- silently
+    # wrong, which is worse than refusing. These are the four pieces that fix it.
+    ("function splitDest", "the trip destination no longer stops at a qualifier"),
+    ("function knownPlace", "there is no way to tell where a destination ends"),
+    ("const POI_PHRASES", "two-word categories ('ice cream') are gone"),
+    ("'ice cream': ['amenity=ice_cream', 'shop=ice_cream']",
+     "ice cream is not a searchable category"),
+    ("await runLivePoi(opts.poi, 'route')",
+     "a category named with a trip is never looked up along the route"),
+    ("if (route) { runLivePoi(poi, 'route'); return; }",
+     "searching a category with a route on screen no longer searches the route"),
+    ("const onRoute = scope === 'route'",
+     "runLivePoi cannot be scoped to a route"),
+    ("window.__detectPoiIntent",
+     "detectPoiIntent is not exported — the search suite cannot test it"),
     ("heroTrip", "the hero card no longer offers to plan a drive"),
     ("LA to Las Vegas", "the search suggestions have no road-trip example"),
 ]:

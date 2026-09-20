@@ -93,6 +93,56 @@ CASES = [
     ("chargers near me",                     dict(trip=None)),
     ("ihop",                                 dict(trip=None)),
     ("superchargers in brooklyn",            dict(trip=None)),
+
+    # ── A category wanted ALONG a drive. This is the app's whole premise and it was
+    # broken: "LA to las vegas near ice cream shop" put the entire tail into the
+    # destination and routed to a town called "Las Vegas Ice Cream Shop". A wrong
+    # destination that the geocoder happily resolves is worse than no route at all.
+    ("LA to las vegas near ice cream shop",
+        dict(trip="Los Angeles, CA|Las Vegas", filter="ice cream shop",
+             poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),
+    # No joining word: the tail is cut where the known place ends.
+    ("la to vegas ice cream",
+        dict(trip="Los Angeles, CA|Las Vegas, NV", filter="ice cream",
+             poi="amenity=ice_cream+shop=ice_cream")),
+    ("denver to moab near coffee shop",
+        dict(trip="Denver|Moab", filter="coffee shop", poi="amenity=cafe")),
+    ("la to vegas with a gas station",
+        dict(trip="Los Angeles, CA|Las Vegas, NV", poi="amenity=fuel",
+             poiLabel="gas station")),
+    # A named chain alongside a trip stays a chain: no live lookup, no category.
+    ("la to vegas with starbucks",
+        dict(trip="Los Angeles, CA|Las Vegas, NV", chains=["Starbucks"], poi=None)),
+    ("ihop from la to vegas",
+        dict(trip="Los Angeles, CA|Las Vegas, NV", chains=["IHOP"], filter="", poi=None)),
+
+    # Destinations that must NEVER be cut. Every one of these is a real place whose name
+    # has more than one word, or ends in something that looks like a qualifier.
+    ("la to salt lake city",      dict(trip="Los Angeles, CA|Salt Lake City", filter="")),
+    ("denver to el paso tx",      dict(trip="Denver|El Paso, TX", filter="")),
+    ("la to san francisco",       dict(trip="Los Angeles, CA|San Francisco", filter="")),
+    ("chicago to st louis",       dict(trip="Chicago|St Louis", filter="")),
+    ("la to las vegas",           dict(trip="Los Angeles, CA|Las Vegas", filter="")),
+    ("phoenix to new york",       dict(trip="Phoenix|New York", filter="")),
+    # A destination we have no chargers in is left whole rather than guessed at.
+    ("denver to moab",            dict(trip="Denver|Moab", filter="")),
+
+    # ── "ice cream" as a plain search, with no trip.
+    ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
+    ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),
+    ("ice cream near me",    dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream", here=True)),
+    ("frozen yogurt",        dict(poi="amenity=ice_cream+shop=ice_cream")),
+    # The two-word phrase must beat the single word: matching "ice" alone left "cream" as a
+    # NAME filter, so every result had to be called "cream" and Baskin-Robbins was dropped.
+    ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream")),
+    # Categories that already worked must keep working, labels included.
+    ("tire shop",            dict(poi="shop=tyres", poiLabel="tire shop")),
+    ("bank near me",         dict(poi="amenity=bank", poiLabel="bank", here=True)),
+    ("pharmacy",             dict(poi="amenity=pharmacy", poiLabel="pharmacy")),
+    ("gym",                  dict(poi="leisure=fitness_centre")),
+    # A chain we precompute must not be hijacked into a live category lookup.
+    ("ihop",                 dict(chains=["IHOP"])),
+    ("starbucks",            dict(chains=["Starbucks"])),
 ]
 
 
@@ -125,16 +175,24 @@ window.__ready = function () {{
   for (var i = 0; i < qs.length; i++) {{
     var p = P(qs[i]);
     var tp = window.__parseTrip(qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: p.chains, net: p.net, place: p.place,
-              anyCat: p.anyCat == null ? null : p.anyCat,
-              trip: tp ? tp.from + '|' + tp.to : null}});
+    /* The app hands parseQuery only the trip's trailing filter when there is one, so the
+       probe has to do the same or it tests a code path nobody runs. */
+    var pq = (tp && tp.filter) ? P(tp.filter) : p;
+    var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place,
+              anyCat: pq.anyCat == null ? null : pq.anyCat,
+              trip: tp ? tp.from + '|' + tp.to : null,
+              filter: tp ? tp.filter : null,
+              poi: poi ? poi.tags.join('+') : null,
+              poiLabel: poi ? poi.label : null}});
   }}
   document.getElementById('out').textContent = JSON.stringify(r);
 }};
 </script>
 <iframe src="/?nosw=1" style="width:900px;height:700px" onload="setTimeout(function(){{
   try {{ window.__parseQuery = this.contentWindow.__parseQuery;
-         window.__parseTrip = this.contentWindow.__parseTrip; window.__ready(); }}
+         window.__parseTrip = this.contentWindow.__parseTrip;
+         window.__detectPoiIntent = this.contentWindow.__detectPoiIntent; window.__ready(); }}
   catch (e) {{ document.getElementById('out').textContent = 'ERR ' + e.message; }}
 }}.bind(this), 6000)"></iframe>""")
 
