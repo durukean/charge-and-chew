@@ -996,6 +996,11 @@ const active = new Set();
 let anyCat = null;
 let cat = 'all';
 let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landings
+/* {label, icon, keys} while the bundled-chain fallback is on screen. Declared up here with
+   the other view state, not beside the code that sets it: renderList reads it and sits
+   ~1,400 lines earlier, and a `let` read before its line runs is a TDZ error that would
+   blank the app at boot. */
+let seedFor = null;
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
@@ -1766,8 +1771,19 @@ document.addEventListener('click', e => {
 /* ───────── list ───────── */
 function renderList(vis) {
   const filtering = chainQuery() || cat === 'fav';
+  /* The bundled-chain fallback turns "coffee" into five active chains, and listing them all
+     gave "136 stops near ☕ Starbucks or 🍩 Dunkin' or ☕ Dutch Bros or ☕ Peet's Coffee or ☕
+     Caribou Coffee on route" -- unreadable on a phone, and not what was asked. When the
+     active set is exactly what a fallback put there, name the question instead. Compared
+     by set rather than tracked through every mutation, so tapping any chip afterwards
+     simply falls back to the ordinary title. */
+  const isSeed = seedFor && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k));
+  const parts = [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)];
   const what = cat === 'fav' ? 'saved'
-    : [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)].join(' or ');
+    : isSeed ? seedFor.icon + ' ' + seedFor.label
+    // A hand-picked set can grow just as long; past three it stops being a sentence.
+    : parts.length > 3 ? parts.slice(0, 2).join(' or ') + ` and ${parts.length - 2} more`
+    : parts.join(' or ');
   let scope = '';
   if (route) scope = ' on route';
   else if (stateScope) scope = ` in ${STATE_NAME[stateScope] || stateScope}`;
@@ -3339,6 +3355,8 @@ async function runLivePoi(intent, scope) {
       clearLivePoi();
       active.clear(); anyCat = null;
       seed.forEach(k => active.add(k));
+      seedFor = { label: intent.label, keys: seed.slice(),
+                  icon: POI_ICON[intent.tags[0]] || POI_EMOJI[intent.tags[0].split('=')[0]] || '📍' };
       cat = 'all'; $('savedChip').classList.remove('on');
       track('live-poi-seeded', intent.tags[0]);
       render(); renderChips(); setSheet('mid'); syncUrl();

@@ -273,6 +273,19 @@ check(_gi > 0 and _gp > _html.find("if (looksLikeChainBrand(", _gi),
 check(re.search(r"RTE_CAP = \d+", _html) is not None and "if (cap) {" in _html,
       "the route cache is unbounded — 50 kB an entry would fill localStorage")
 
+# ---- sheet title stays a sentence ----
+# The fallback activates five chains for one search ("coffee"); listing them all gave a
+# title that truncated to mush on a phone. Name the question when the set is the seed's,
+# and cap any hand-picked list past three.
+check("isSeed ? seedFor.icon + ' ' + seedFor.label" in _html,
+      "the fallback title lists every bundled chain again instead of naming the search")
+check("parts.length > 3 ?" in _html, "long chain selections are no longer capped in the title")
+# seedFor is read by renderList ~1,400 lines above where the fallback sets it. A `let`
+# declared down there and read during boot is a TDZ error that blanks the app.
+_sf, _rl = _html.find("let seedFor = null;"), _html.find("function renderList(")
+check(0 < _sf < _rl, "seedFor is declared after renderList, which reads it — a TDZ error "
+      "at boot would blank the whole app")
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.
