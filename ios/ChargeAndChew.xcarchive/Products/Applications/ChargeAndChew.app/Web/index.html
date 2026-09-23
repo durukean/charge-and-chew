@@ -996,6 +996,11 @@ const active = new Set();
 let anyCat = null;
 let cat = 'all';
 let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landings
+/* {label, icon, keys} while the bundled-chain fallback is on screen. Declared up here with
+   the other view state, not beside the code that sets it: renderList reads it and sits
+   ~1,400 lines earlier, and a `let` read before its line runs is a TDZ error that would
+   blank the app at boot. */
+let seedFor = null;
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
@@ -1674,6 +1679,38 @@ for (const c of ['food', 'store']) {
   for (const id in MATCH) if (hasCat(MATCH[id], c)) n++;
   catCount[c] = n;
 }
+/* A chip count has to describe what you will actually get. With a route or an area on
+   screen the national figure is a promise the app cannot keep -- "Any food 10,458" and then
+   210 results -- so recompute inside the current scope. Memoised on the scope, because the
+   scope changes far less often than the chips redraw, and bumped by matchVer because a live
+   POI lookup writes new keys into MATCH without the scope changing at all. */
+let matchVer = 0;
+let scopeCountSig = false, scopeCounts = null, scopeCatCount = null;
+function scopeSig() {
+  if (route) return 'r:' + route.ids.size + ':' + corridorMi + ':' + matchVer;
+  if (stateScope) return 's:' + stateScope + ':' + matchVer;
+  if (center) return 'c:' + center.lat.toFixed(3) + ',' + center.lon.toFixed(3)
+                   + ':' + radiusMi + ':' + matchVer;
+  return null;                        // national: the precomputed totals are already right
+}
+function ensureScopeCounts() {
+  const sig = scopeSig();
+  if (sig === scopeCountSig) return;
+  scopeCountSig = sig;
+  if (!sig) { scopeCounts = null; scopeCatCount = null; return; }
+  const c = {}, cc = { food: 0, store: 0 };
+  for (const s of SITES) {
+    if (!inScope(s)) continue;
+    const m = MATCH[s.id]; if (!m) continue;
+    for (const k in m) c[k] = (c[k] || 0) + 1;
+    if (hasCat(m, 'food')) cc.food++;
+    if (hasCat(m, 'store')) cc.store++;
+  }
+  scopeCounts = c; scopeCatCount = cc;
+}
+const chipCount = k => scopeCounts ? (scopeCounts[k] || 0) : (counts[k] || 0);
+const chipCatCount = c => scopeCatCount ? scopeCatCount[c] : catCount[c];
+
 /* One predicate for "does this stop satisfy the current chain query", so passesChain,
    bestWalk and countWithoutNarrowing can never drift apart. */
 const chainKeysOn = m => {
@@ -1686,9 +1723,14 @@ const chainQuery = () => active.size > 0 || !!anyCat;
 function renderChips() {
   const el = $('chips');
   const keep = $('chiprow').scrollLeft;
+  ensureScopeCounts();
   let keys = CHAIN_KEYS;
   if (cat === 'food' || cat === 'store') keys = keys.filter(k => BRANDS[k].cat === cat);
   if (cat === 'fav') keys = [...active];
+  /* Inside a scope, lead with the chains that are actually THERE. Nationally Starbucks
+     outranks everything; on a drive through the Mojave it may have nothing on the road and
+     the chip you want is the one with stops on it. */
+  if (scopeCounts && cat !== 'fav') keys = keys.slice().sort((a, b) => chipCount(b) - chipCount(a));
   const top = keys.slice(0, 14);
   for (const k of [...active].reverse()) if (!top.includes(k)) top.unshift(k);
   /* Ahead of the brand chips, because "somewhere to eat" is the question most people
@@ -1696,10 +1738,10 @@ function renderChips() {
   $('catchips').innerHTML = (cat === 'fav' ? [] : ['food', 'store'])
     .map(c => `<button class="chip catchip ${anyCat === c ? 'on' : ''}" data-cat="${c}"
       aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_LABEL[c]}
-      <span class="cnt">${catCount[c].toLocaleString()}</span></button>`).join('');
+      <span class="cnt">${chipCatCount(c).toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
-      <span class="cnt" title="${(counts[k] || 0).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}">${counts[k] || 0}</span></button>`).join('')
+      <span class="cnt" title="${chipCount(k).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}${scopeCounts ? ' here' : ''}">${chipCount(k)}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All chains</button>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
     const k = c.dataset.cat;
@@ -1729,8 +1771,19 @@ document.addEventListener('click', e => {
 /* ───────── list ───────── */
 function renderList(vis) {
   const filtering = chainQuery() || cat === 'fav';
+  /* The bundled-chain fallback turns "coffee" into five active chains, and listing them all
+     gave "136 stops near ☕ Starbucks or 🍩 Dunkin' or ☕ Dutch Bros or ☕ Peet's Coffee or ☕
+     Caribou Coffee on route" -- unreadable on a phone, and not what was asked. When the
+     active set is exactly what a fallback put there, name the question instead. Compared
+     by set rather than tracked through every mutation, so tapping any chip afterwards
+     simply falls back to the ordinary title. */
+  const isSeed = seedFor && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k));
+  const parts = [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)];
   const what = cat === 'fav' ? 'saved'
-    : [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)].join(' or ');
+    : isSeed ? seedFor.icon + ' ' + seedFor.label
+    // A hand-picked set can grow just as long; past three it stops being a sentence.
+    : parts.length > 3 ? parts.slice(0, 2).join(' or ') + ` and ${parts.length - 2} more`
+    : parts.join(' or ');
   let scope = '';
   if (route) scope = ' on route';
   else if (stateScope) scope = ` in ${STATE_NAME[stateScope] || stateScope}`;
@@ -2523,6 +2576,12 @@ async function geocode(q) {
   const snap = snapPlace(q);
   if (snap) q = snap;
 
+  /* A place does not move. Caching the resolution makes a shared link instant and keeps
+     route planning working through a Nominatim outage for anywhere already looked up. */
+  const gk = q.trim().toLowerCase();
+  const cached = lsGet(GEO_NS, gk, GEO_TTL);
+  if (cached) return cached;
+
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
               '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
   const r = await fetchTimeout(url);
@@ -2553,7 +2612,9 @@ async function geocode(q) {
     const echoes = words.some(w => toks.some(t => t.startsWith(w.slice(0, 4)) || w.startsWith(t.slice(0, 4))));
     if (!echoes) throw new Error(`Couldn't find "${q}"`);
   }
-  return { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
+  const hit = { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
+  lsPut(GEO_NS, gk, hit, GEO_CAP);        // only successes: a cached failure would stick
+  return hit;
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
 $('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
@@ -2913,6 +2974,51 @@ const POI_ICON = {
 const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places', 'near',
   'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and']);
 
+/* Chains we ALREADY have, grouped by the OSM tag a category search asks for.
+   The live lookup depends on a free community server that is genuinely unreliable; these
+   90 chains are bundled, offline and instant. When OSM cannot answer, "ice cream" can
+   still say where the Dairy Queens are instead of showing nothing but an error.
+   Keys are exact BRANDS keys -- a typo here would silently match nothing, so verify.py
+   checks every one of them against data.js. */
+const CAT_CHAINS = {
+  'amenity=ice_cream': ['Dairy Queen'],
+  'shop=ice_cream': ['Dairy Queen'],
+  'amenity=cafe': ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee'],
+  'shop=pastry': ["Dunkin'", 'Krispy Kreme'],
+  'shop=bakery': ['Krispy Kreme', "Dunkin'"],
+  'amenity=fast_food': ["McDonald's", 'Burger King', "Wendy's", 'Taco Bell', 'KFC', 'Popeyes',
+    "Arby's", 'Jack in the Box', 'Sonic', "Carl's Jr.", "Hardee's", 'Del Taco', 'Whataburger',
+    'In-N-Out', "Culver's", 'Five Guys', 'Shake Shack', 'Chick-fil-A', "Raising Cane's",
+    "Zaxby's", 'Bojangles', 'Wingstop', 'Subway', "Jersey Mike's", 'Firehouse Subs',
+    'Chipotle', 'Panda Express', 'Cook Out', "Portillo's", "Domino's", 'Pizza Hut',
+    'Little Caesars'],
+  'amenity=restaurant': ['IHOP', "Denny's", 'Waffle House', 'Cracker Barrel', 'Olive Garden',
+    "Applebee's", "Chili's", 'Texas Roadhouse', 'Buffalo Wild Wings', 'Red Robin',
+    'Panera Bread'],
+  'amenity=fuel': ["Love's", 'Pilot', 'Flying J', 'QuikTrip', 'RaceTrac', 'Kwik Trip',
+    'Speedway', "Casey's", 'Circle K', 'Royal Farms', 'TA Travel Center', "Buc-ee's",
+    'Sheetz', 'Wawa'],
+  'shop=convenience': ['Circle K', "Casey's", 'Kwik Trip', 'QuikTrip', 'Wawa', 'Sheetz',
+    'Royal Farms', "Buc-ee's"],
+  'amenity=pharmacy': ['Walgreens', 'CVS'],
+  'shop=supermarket': ['Kroger', 'Safeway', 'Publix', 'H-E-B', 'Aldi', 'Whole Foods',
+    "Trader Joe's", 'Meijer', 'Hy-Vee', 'Fred Meyer', 'Wegmans', 'Harris Teeter',
+    'Giant Eagle', 'Sprouts'],
+  'shop=hardware': ['Home Depot', "Lowe's"],
+  'shop=doityourself': ['Home Depot', "Lowe's"],
+  'shop=department_store': ['Walmart', 'Target', 'Meijer'],
+  'shop=deli': ["Jersey Mike's", 'Subway', 'Firehouse Subs'] };
+
+/* The bundled chains that answer this intent, in scope, that we actually hold data for. */
+function seedChains(intent) {
+  if (!intent || intent.brandOnly || !intent.tags) return [];
+  const out = new Set();
+  for (const t of intent.tags) for (const k of (CAT_CHAINS[t] || [])) {
+    if (BRANDS[k] && counts[k] > 0) out.add(k);
+  }
+  return [...out];
+}
+
 /* Turn what was typed into {tags, name} — a tag to ask Overpass for, plus any leftover
    words to match the POI name against here. */
 function detectPoiIntent(raw) {
@@ -3010,6 +3116,53 @@ function poiStore(body, els) {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+/* Nominatim and OSRM are the other two free public services on the critical path, and
+   neither was cached: every shared trip link re-asked both for an answer that cannot have
+   changed, and an outage in either killed route planning outright. Same shape as the
+   Overpass cache, including the second hash stored alongside the value -- a key collision
+   must never hand back a different query's answer.
+   Only successes are stored. Caching a transient failure would poison a place name for as
+   long as the entry lived. */
+function lsGet(ns, key, ttl) {
+  try {
+    const raw = localStorage.getItem(ns + fnv(key, 2166136261));
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    if (!v || Date.now() - v.t > ttl || v.s !== fnv(key, 991)) return null;
+    return v.d;
+  } catch (e) { return null; }
+}
+function lsPut(ns, key, data, cap) {
+  let body;
+  try { body = JSON.stringify({ t: Date.now(), s: fnv(key, 991), d: data }); } catch (e) { return; }
+  const mine = () => {
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || !k.startsWith(ns)) continue;
+      let t = 0; try { t = JSON.parse(localStorage.getItem(k)).t || 0; } catch (e) {}
+      out.push([k, t]);
+    }
+    return out.sort((a, b) => a[1] - b[1]);       // oldest first
+  };
+  const put = () => localStorage.setItem(ns + fnv(key, 2166136261), body);
+  try { put(); }
+  catch (e) {
+    // out of quota: drop the oldest half of OUR namespace and try once more
+    try {
+      const m = mine();
+      m.slice(0, Math.max(1, Math.ceil(m.length / 2))).forEach(([k]) => localStorage.removeItem(k));
+      put();
+    } catch (e2) { return; }                      // never let caching break the thing it caches
+  }
+  if (cap) {                                      // bound the namespace even without a quota error
+    const m = mine();
+    if (m.length > cap) m.slice(0, m.length - cap).forEach(([k]) => localStorage.removeItem(k));
+  }
+}
+const GEO_NS = 'cc_geo_', GEO_TTL = 90 * 864e5, GEO_CAP = 120;
+const RTE_NS = 'cc_rte_', RTE_TTL = 30 * 864e5, RTE_CAP = 12;
+
 /* Three attempts at 28 s each plus their waits is a minute and a half of nothing, which
    reads as a hang. Cap the whole operation instead, and say something before the second
    attempt so the wait is visibly a retry rather than a stall. */
@@ -3092,6 +3245,7 @@ let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
 let livePoiGen = 0;
 function clearLivePoi() {
   livePoiTerm = null; livePoiFor = {};
+  matchVer++;                       // MATCH is about to change; scoped chip counts are stale
   if (!livePoiKey) return;
   for (const id in MATCH) { if (MATCH[id][livePoiKey] !== undefined) delete MATCH[id][livePoiKey]; }
   delete BRANDS[livePoiKey];
@@ -3188,6 +3342,39 @@ async function runLivePoi(intent, scope) {
   catch (e) {
     $('placeBox').classList.remove('busy');
     if (gen !== livePoiGen) return;        // superseded: its failure is no longer news
+
+    /* An error panel is a dead end, and for most categories we are not actually empty
+       handed: 90 chains ship with the app. Answer with those instead, say plainly that it
+       is the partial answer, and leave the retry for the rest. */
+    /* Only worth doing if it actually answers. "ice cream" near downtown LA maps to Dairy
+       Queen, of which there are none for miles -- offering "0 stops near Dairy Queen" is a
+       worse answer than admitting the lookup failed, because it looks like a result. */
+    const seed = seedChains(intent)
+      .filter(k => inScope.some(sc => MATCH[sc.id] && MATCH[sc.id][k] !== undefined));
+    if (seed.length) {
+      clearLivePoi();
+      active.clear(); anyCat = null;
+      seed.forEach(k => active.add(k));
+      seedFor = { label: intent.label, keys: seed.slice(),
+                  icon: POI_ICON[intent.tags[0]] || POI_EMOJI[intent.tags[0].split('=')[0]] || '📍' };
+      cat = 'all'; $('savedChip').classList.remove('on');
+      track('live-poi-seeded', intent.tags[0]);
+      render(); renderChips(); setSheet('mid'); syncUrl();
+      const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
+      toast(`OpenStreetMap is busy — showing ${esc(names)} from our own data`);
+      /* The banner goes above the results rather than replacing them: the list is useful,
+         it is just not the whole answer. */
+      const bar = document.createElement('div');
+      bar.className = 'empty';
+      bar.style.cssText = 'margin:0 0 8px;padding:10px 12px';
+      bar.innerHTML = `<b>Showing chains we bundle</b>OpenStreetMap was busy, so anything we
+        don't track is missing.
+        <button class="fball" id="poiRetry" style="margin-top:8px">Try again for all</button>`;
+      $('list').prepend(bar);
+      $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
+      return;
+    }
+
     /* A toast alone was not enough: on a phone it is gone in three seconds and what the
        user sees is "I searched and nothing happened". Put the failure, and the retry, where
        the results were going to be. */
@@ -3195,7 +3382,7 @@ async function runLivePoi(intent, scope) {
       "${esc(intent.label)}" use a free community server that is sometimes busy.
       <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`;
     $('sheetTitle').innerHTML = `Couldn't look up <em>${esc(intent.label)}</em>`;
-    $('poiRetry').onclick = () => runLivePoi(intent);
+    $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
     setSheet('mid');
     return;
   }
@@ -3257,6 +3444,7 @@ async function runLivePoi(intent, scope) {
   BRANDS[key] = { e: icon, cat: 'live', n: pois.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
   livePoiKey = key; livePoiTerm = intent.label;
+  matchVer++;                       // new keys in MATCH -> recompute the scoped chip counts
   active.clear(); anyCat = null; active.add(key);
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
@@ -3698,12 +3886,22 @@ async function runRoute(opts) {
        is what Edit should show too. */
     if (a.label && a.label !== 'Pinned coordinates') $('fromIn').value = a.label;
     if (b.label && b.label !== 'Pinned coordinates') $('toIn').value = b.label;
-    const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
-    const j = await r.json();
-    if (!j.routes || !j.routes.length) throw new Error('No driving route found');
-    const verts = j.routes[0].geometry.coordinates.map(c2 => [c2[1], c2[0]]);
+    /* Roads do not change between two taps of the same link. Caching the geometry makes a
+       shared trip instant and keeps a previously-planned route working while OSRM is down --
+       which, being another free public service, it sometimes is. ~50 kB for a 269-mile
+       route, so the namespace is capped rather than left to grow. */
+    const rk = [a.lat.toFixed(4), a.lon.toFixed(4), b.lat.toFixed(4), b.lon.toFixed(4)].join(',');
+    let trip = lsGet(RTE_NS, rk, RTE_TTL);
+    if (!trip) {
+      const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
+      const j = await r.json();
+      if (!j.routes || !j.routes.length) throw new Error('No driving route found');
+      trip = { v: j.routes[0].geometry.coordinates.map(c2 => [+c2[1].toFixed(5), +c2[0].toFixed(5)]),
+               mi: j.routes[0].distance / MI, hr: j.routes[0].duration / 3600 };
+      lsPut(RTE_NS, rk, trip, RTE_CAP);
+    }
     clearCenter();
-    applyCorridor(verts, j.routes[0].distance / MI, j.routes[0].duration / 3600);
+    applyCorridor(trip.v, trip.mi, trip.hr);
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
     if (opts.poi) await runLivePoi(opts.poi, 'route');
