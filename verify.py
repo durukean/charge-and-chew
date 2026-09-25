@@ -357,6 +357,35 @@ console.log(f.length?f.join("\n"):"OK");"""
     _r = subprocess.run([_node, "-e", _js], capture_output=True, text=True)
     check(_r.stdout.strip() == "OK", "safeUrl() fails its attack battery:\n  " + (_r.stdout + _r.stderr).strip()[:400])
 
+# ---- iOS: the downloaded data overlay must never beat a newer bundle ----
+# Every reader (web view, native store, Siri) prefers the overlay unconditionally. Without a
+# prune, an app update shipping NEWER data kept losing to a stale download for good, and paired
+# the update's new index.html with old-format data.js. Proven on the simulator: stale dropped,
+# newer kept, a tie goes to the bundle.
+_swf = lambda f: open(os.path.join(HERE, "ios", "ChargeAndChew", f)).read() \
+    if os.path.exists(os.path.join(HERE, "ios", "ChargeAndChew", f)) else ""
+# Distinct names: `_ai` is already a PATH further up this file.
+_ov_ad, _ov_ai = _swf("AppDelegate.swift"), _swf("AppIntents.swift")
+_ov_du, _ov_wv = _swf("DataUpdater.swift"), _swf("WebViewController.swift")
+# LIVE statements only -- a commented-out "//DataUpdater.pruneStaleOverlay(" still contains the
+# name, and a substring check passed against it. Fourth time that mistake was made here.
+_LIVE_PRUNE = re.compile(r"(?m)^\s*DataUpdater\.pruneStaleOverlay\(")
+_LIVE_RESET = re.compile(r"(?m)^\s*Diag\.reset\(\)")
+if _ov_ad:
+    check("static func pruneStaleOverlay" in _ov_du and "bundleDate >= overlayDate" in _ov_du,
+          "DataUpdater no longer drops an overlay the bundle has caught up with")
+    _dfl = _ov_ad[_ov_ad.find("didFinishLaunchingWithOptions"):]
+    _p, _q = _LIVE_PRUNE.search(_dfl), _dfl.find("ChargerStore.shared.dataURL")
+    check(_p is not None and _p.start() < _q,
+          "AppDelegate resolves data.js without first pruning a stale overlay")
+    check(_LIVE_PRUNE.search(_ov_ai[_ov_ai.find("func preparedStore"):]) is not None,
+          "the Siri intent resolves data.js without pruning — it can run without the app UI launching")
+    _vdl = _ov_wv[_ov_wv.find("override func viewDidLoad()"):][:300]
+    check(not _LIVE_RESET.search(_vdl),
+          "viewDidLoad resets the boot log again — every line logged at launch is wiped")
+    check(_LIVE_RESET.search(_dfl[:400]) is not None,
+          "the boot log is no longer reset at the start of launch")
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.

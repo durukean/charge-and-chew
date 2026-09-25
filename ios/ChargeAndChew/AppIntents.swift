@@ -81,6 +81,10 @@ enum StopAnswer {
     /// Points the shared store at whichever data.js is current (refreshed copy, else bundled).
     static func preparedStore() -> ChargerStore {
         let store = ChargerStore.shared
+        // Siri can resolve an intent without the app's UI ever launching, so do not rely on
+        // AppDelegate having pruned first. Idempotent; a no-op when already clean.
+        DataUpdater.pruneStaleOverlay(
+            bundled: Bundle.main.url(forResource: "Web", withExtension: nil)?.appendingPathComponent("data.js"))
         store.dataURL = {
             let overlay = DataUpdater.overlayDir.appendingPathComponent("data.js")
             if FileManager.default.fileExists(atPath: overlay.path) { return overlay }

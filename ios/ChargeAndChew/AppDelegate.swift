@@ -7,6 +7,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication,
                      didFinishLaunchingWithOptions opts: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        Diag.reset()          // first thing: everything below is part of this launch's log
+        // Before ANY reader resolves data.js: after an app update the bundle may be newer
+        // than a copy downloaded earlier, and every reader prefers the overlay.
+        DataUpdater.pruneStaleOverlay(
+            bundled: Bundle.main.url(forResource: "Web", withExtension: nil)?.appendingPathComponent("data.js"))
         ChargerStore.shared.dataURL = {
             let overlay = DataUpdater.overlayDir.appendingPathComponent("data.js")
             if FileManager.default.fileExists(atPath: overlay.path) { return overlay }

@@ -19,7 +19,9 @@ final class WebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Diag.reset()
+        // No Diag.reset() here: this runs AFTER didFinishLaunching, so resetting wiped every
+        // line logged at launch -- the stale-overlay prune and the CC_TEST_INTENT Siri output
+        // included. The log is reset once, at the true start of launch, in AppDelegate.
         Diag.log("viewDidLoad; webRoot=\(webRoot?.path ?? "NIL")")
         // Until the page reports its own theme, follow the system so the splash does not
         // flash the wrong colour on the way in.

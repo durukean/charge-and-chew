@@ -44,6 +44,28 @@ enum DataUpdater {
         return String(head[r]).split(separator: "\"").last.map(String.init)
     }
 
+    /// An app update can ship data NEWER than a copy downloaded earlier. Every reader --
+    /// the web view, the native charger store and the Siri intent -- prefers the overlay
+    /// unconditionally, so without this a stale download would keep winning over a fresher
+    /// bundle for good: `currentGenerated` stops consulting the bundle once an overlay exists,
+    /// so it never even noticed. Worse, it pairs the update's new index.html (served from the
+    /// bundle) with old-format data.js (served from the overlay) -- the day an update changes
+    /// the data format, that pairing breaks.
+    /// Drop the overlay whenever the bundle is at least as new. Reads the date from the FILE,
+    /// not UserDefaults, so a lost or mismatched preference cannot keep a stale copy alive.
+    /// Cheap and idempotent: 512 bytes from each file.
+    static func pruneStaleOverlay(bundled: URL?) {
+        let file = overlayDir.appendingPathComponent("data.js")
+        guard FileManager.default.fileExists(atPath: file.path) else { return }
+        let overlayDate = generatedDate(in: file) ?? ""
+        let bundleDate = bundled.flatMap { generatedDate(in: $0) } ?? ""
+        // An unreadable overlay (no date) is treated as older than anything -- also dropped.
+        guard bundleDate >= overlayDate else { return }
+        try? FileManager.default.removeItem(at: file)
+        UserDefaults.standard.removeObject(forKey: generatedKey)
+        Diag.log("dropped stale data overlay (\(overlayDate.isEmpty ? "undated" : overlayDate)) -- bundle is \(bundleDate)")
+    }
+
     static func refresh(bundled: URL?, completion: @escaping (Bool) -> Void) {
         let have = currentGenerated(bundled: bundled)
         var req = URLRequest(url: remote)
