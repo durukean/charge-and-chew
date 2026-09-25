@@ -1001,6 +1001,12 @@ let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landing
    ~1,400 lines earlier, and a `let` read before its line runs is a TDZ error that would
    blank the app at boot. */
 let seedFor = null;
+/* True until the first real render. Boot used to render THREE times: applyTheme() rendered,
+   probeBasemap() called applyTheme() again and rendered again, and only then was the URL
+   applied and the one render that mattered run. The first two drew a state that was about
+   to be discarded -- a national view flashed before a shared route -- and cost ~630 ms of
+   main thread on a desktop, several seconds on a mid-range phone. */
+let booting = true;
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
@@ -1504,7 +1510,7 @@ function applyTheme() {
   }
   setAttribution(bm.attrib);
   $('themeBtn').innerHTML = themePref === 'auto' ? ICON_AUTO : curDark ? ICON_MOON : ICON_SUN;
-  render();
+  if (!booting) render();   // boot renders once, after the URL has been applied
 }
 $('themeBtn').onclick = () => {
   themePref = themePref === 'auto' ? (curDark ? 'light' : 'dark') : themePref === 'light' ? 'dark' : 'auto';
@@ -1579,20 +1585,37 @@ function countWithoutNarrowing() {
   return n;
 }
 
+/* Sort by a key computed ONCE per stop. The comparators used to call bestWalk() -- a
+   haversine per matched chain -- on both sides of every comparison: ~190,000 comparisons to
+   sort 13,798 stops, so ~380,000 calls where 13,798 will do. That one line was 175 ms of
+   the first render and 62 ms of every chip tap after it, on a desktop.
+   The decorated sort is stable exactly as Array.prototype.sort is, so ties keep the same
+   order and the list is identical -- verified against the old ordering in four states. */
+function sortByKey(arr, key) {
+  const d = new Array(arr.length);
+  for (let i = 0; i < arr.length; i++) d[i] = [key(arr[i]), arr[i]];
+  d.sort((a, b) => a[0] - b[0]);
+  for (let i = 0; i < d.length; i++) arr[i] = d[i][1];
+  return arr;
+}
 function visibleSites() {
   const out = [];
   for (const s of SITES) if (inScope(s) && passesChain(s)) out.push(s);
-  if (route) out.sort((a, b) => routeIdx(a.id) - routeIdx(b.id));
-  else if (sortBy === 'dist' && center) out.sort((a, b) =>
-    hav(center.lat, center.lon, a.lat, a.lon) - hav(center.lat, center.lon, b.lat, b.lon));
-  else if (sortBy === 'stalls') out.sort((a, b) => b.stalls - a.stalls);
-  else if (sortBy === 'power') out.sort((a, b) => b.kw - a.kw);
-  else if (sortBy === 'charge' && carInfo()) out.sort((a, b) => chargeOr(a) - chargeOr(b));
-  else out.sort((a, b) => bestWalk(a) - bestWalk(b));
+  if (route) sortByKey(out, s => routeIdx(s.id));
+  else if (sortBy === 'dist' && center) sortByKey(out, s => hav(center.lat, center.lon, s.lat, s.lon));
+  else if (sortBy === 'stalls') sortByKey(out, s => -s.stalls);
+  else if (sortBy === 'power') sortByKey(out, s => -s.kw);
+  else if (sortBy === 'charge' && carInfo()) sortByKey(out, s => chargeOr(s));
+  else sortByKey(out, s => bestWalk(s));
   return out;
 }
 
 function render() {
+  /* Read BEFORE anything below writes the DOM. renderChips used to read this itself, right
+     after renderList had replaced ~300 rows -- and reading a layout property on a dirty DOM
+     forces a synchronous layout of the whole page. Measured: 35 ms for that one read, the
+     single largest cost of a chip tap, billed to the chips but really the list's layout. */
+  const chipScroll = $('chiprow').scrollLeft;
   const vis = visibleSites(), visIds = new Set(vis.map(s => s.id));
   const filtering = chainQuery() || cat === 'fav';
   const T = MTHEME[curDark ? 'dark' : 'light'];
@@ -1616,7 +1639,7 @@ function render() {
     if (filtering) m.bringToFront();
   }
   renderList(vis);
-  renderChips();
+  renderChips(chipScroll);
   if (center) updateCenterSub(vis.length);
 }
 
@@ -1720,9 +1743,9 @@ const chainKeysOn = m => {
 };
 const chainQuery = () => active.size > 0 || !!anyCat;
 
-function renderChips() {
+function renderChips(keep) {
   const el = $('chips');
-  const keep = $('chiprow').scrollLeft;
+  if (keep === undefined) keep = $('chiprow').scrollLeft;   // standalone callers only
   ensureScopeCounts();
   let keys = CHAIN_KEYS;
   if (cat === 'food' || cat === 'store') keys = keys.filter(k => BRANDS[k].cat === cat);
@@ -1757,7 +1780,8 @@ function renderChips() {
     render(); syncUrl();
   });
   $('moreChip').onclick = openPicker;
-  $('chiprow').scrollLeft = keep;
+  // A write forces layout too; the row is almost always at 0, so skip the no-op.
+  if (keep) $('chiprow').scrollLeft = keep;
 }
 
 /* Delegated so it covers the filter bar and the empty-state button alike. */
@@ -3359,7 +3383,7 @@ async function runLivePoi(intent, scope) {
                   icon: POI_ICON[intent.tags[0]] || POI_EMOJI[intent.tags[0].split('=')[0]] || '📍' };
       cat = 'all'; $('savedChip').classList.remove('on');
       track('live-poi-seeded', intent.tags[0]);
-      render(); renderChips(); setSheet('mid'); syncUrl();
+      render(); setSheet('mid'); syncUrl();
       const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
       toast(`OpenStreetMap is busy — showing ${esc(names)} from our own data`);
       /* The banner goes above the results rather than replacing them: the list is useful,
@@ -3448,7 +3472,7 @@ async function runLivePoi(intent, scope) {
   active.clear(); anyCat = null; active.add(key);
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
-  render(); renderChips(); setSheet('mid'); syncUrl();
+  render(); setSheet('mid'); syncUrl();
   const many = pois.length === 1 ? esc(intent.label) : esc(plural(intent.label));
   toast(matched
     ? `${matched} ${onRoute ? 'stop' : 'charger'}${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
@@ -4110,8 +4134,10 @@ $('hero').addEventListener('click', e => { if (e.target.id === 'hero') hideHero(
 
 
 /* ───────── boot ───────── */
-applyTheme();
-probeBasemap();      // silently swaps the basemap if CARTO is serving blocked tiles here
+/* probeBasemap() picks the provider and then calls applyTheme() itself. Calling applyTheme()
+   first as well built a whole tile layer and started downloading its tiles, only for
+   probeBasemap to tear it down and rebuild it a moment later. */
+probeBasemap();
 $('baseSeg').querySelectorAll('button').forEach(b => b.onclick = () => setBasePref(b.dataset.base));
 (function () {
   const row = $('chiprow');
@@ -4149,6 +4175,7 @@ if (q.get('c')) {
   corridorMi = +q.get('c') || 5;
   $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === corridorMi));
 }
+booting = false;
 render();
 
 let boot = null;

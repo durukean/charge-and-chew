@@ -286,6 +286,32 @@ _sf, _rl = _html.find("let seedFor = null;"), _html.find("function renderList(")
 check(0 < _sf < _rl, "seedFor is declared after renderList, which reads it — a TDZ error "
       "at boot would blank the whole app")
 
+# ---- boot and render performance (measured, not assumed) ----
+# Boot rendered THREE times: applyTheme() rendered, probeBasemap() called applyTheme() again
+# (tearing down the tile layer it had just built and re-fetching tiles), and only then was the
+# URL applied and the one render that mattered run. ~800 ms -> 174 ms once fixed.
+check("if (!booting) render();" in _html,
+      "applyTheme renders during boot again — boot would render three times")
+check(re.search(r"(?m)^booting = false;\nrender\(\);", _html) is not None,
+      "boot never clears the booting flag before its single render")
+_boot = _html[_html.find("/* ───────── boot ───────── */"):][:600]
+check(not re.search(r"(?m)^applyTheme\(\);\s*$", _boot),
+      "boot calls applyTheme() before probeBasemap() again — it builds a tile layer that is "
+      "torn down a moment later and re-downloads its tiles")
+# The default sort called bestWalk() -- a haversine per chain -- inside the comparator:
+# ~380,000 calls to sort 13,798 stops. 175 ms -> 18 ms; ordering proven identical.
+check("function sortByKey" in _html and "sortByKey(out, s => bestWalk(s))" in _html,
+      "visibleSites sorts with a computed comparator again (~380k haversines per render)")
+_vs = _html[_html.find("function visibleSites()"):][:900]
+check("out.sort((a, b) => bestWalk" not in _vs,
+      "bestWalk() is back inside a sort comparator")
+# Reading a layout property right after the list is rewritten forces a whole-page layout.
+check("const chipScroll = $('chiprow').scrollLeft;" in _html and "renderChips(chipScroll)" in _html,
+      "render no longer reads the chip scroll before dirtying the DOM — each tap forces a "
+      "synchronous whole-page layout again (measured 35 ms)")
+check("render(); renderChips();" not in _html,
+      "chips are drawn twice again after render() — which already draws them")
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.
