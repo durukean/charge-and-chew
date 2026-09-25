@@ -44,6 +44,12 @@ if os.path.exists(p):
         # matches must be [dLat,dLon] deltas, not the old plain metres
         mv = next(iter(next(iter(D["matches"].values())).values()), None)
         check(isinstance(mv, list) and len(mv) == 2, "match values are not [dLat,dLon] deltas")
+        # price is rendered into innerHTML. It is safe only because data/fetch_chargers.py
+        # normalises AFDC's free-text pricing to an enum -- a coupling across two files, so
+        # pin the enum here as well as escaping at the render site.
+        _pv = {s.get("price", "") for s in D["sites"]}
+        check(_pv <= {"free", "paid", ""},
+              f"site.price holds values outside the enum ('free'|'paid'|''): {sorted(_pv - {'free','paid',''})[:3]}")
         # coordinates inside the US
         bad = [s for s in D["sites"] if not (18 < s["lat"] < 72 and -180 < s["lon"] < -64)]
         check(not bad, f"{len(bad)} chargers have coordinates outside the US")
@@ -311,6 +317,45 @@ check("const chipScroll = $('chiprow').scrollLeft;" in _html and "renderChips(ch
       "synchronous whole-page layout again (measured 35 ms)")
 check("render(); renderChips();" not in _html,
       "chips are drawn twice again after render() — which already draws them")
+
+# ---- security: untrusted strings reaching the DOM ----
+# toast() writes textContent, so its text is inherently safe and must NOT be esc()'d: six
+# call sites did, and users read "Searching Barnes &amp; Noble". Both halves are pinned --
+# if toast ever became innerHTML, un-escaped callers would make OSM names an XSS vector.
+_tb = _html[_html.find("function toast(msg) {"):][:400]
+check("t.textContent = msg" in _tb and "innerHTML" not in _tb,
+      "toast() no longer uses textContent — its callers pass un-escaped OSM text")
+_toasts = []
+for _m in re.finditer(r"\btoast\(", _html):
+    _i, _d = _m.end(), 1
+    _j = _i
+    while _j < len(_html) and _d:
+        _d += {"(": 1, ")": -1}.get(_html[_j], 0); _j += 1
+    if "esc(" in _html[_i:_j]: _toasts.append(_html.count("\n", 0, _m.start()) + 1)
+check(not _toasts, "toast() text is esc()'d again — users would see literal &amp; (lines %s)" % _toasts[:5])
+# An OSM website= tag is free text anyone can edit; esc() leaves javascript: URLs intact.
+# safeUrl is an allow-list (output always starts with http or is empty), which is what makes
+# it immune to "java<TAB>script:" -- mutation-tested: removing the whitespace strip does NOT
+# reopen it, and that is correct. What must never happen is widening the allowed schemes.
+check(len(re.findall(r'href="\$\{esc\(safeUrl\((?:P|p)\.site\)\)\}"', _html)) == 2
+      and "href=\"${esc(P.site)}\"" not in _html and "href=\"${esc(p.site)}\"" not in _html,
+      "an OSM website= value reaches an href without safeUrl() — javascript: URLs survive esc()")
+# Run the REAL function against real payloads, not a re-implementation of it.
+import shutil, subprocess
+_node = shutil.which("node")
+if _node and "function safeUrl(u)" in _html:
+    _fn = _html[_html.index("function safeUrl(u)"):_html.index("/* textContent, deliberately")]
+    _js = _fn + r"""
+const bad=["javascript:alert(1)","JavaScript:alert(1)","  javascript:alert(1)","java\tscript:alert(1)",
+ "java\nscript:alert(1)","javascript\r:alert(1)","\u0000javascript:alert(1)",
+ "data:text/html,<script>alert(1)</script>","vbscript:msgbox(1)","JaVaScRiPt:alert`1`","//evil.com/x"];
+const good=[["https://a.com","https://a.com"],["www.b.com","https://www.b.com"],["c.com/m","https://c.com/m"]];
+const f=[];
+for(const b of bad){const r=safeUrl(b);if(r&&/^(javascript|data|vbscript):/i.test(r.replace(/\s/g,""))||r.startsWith("//"))f.push("LET THROUGH "+JSON.stringify(b));}
+for(const [i,w] of good){if(safeUrl(i)!==w)f.push("BROKE "+i+" -> "+safeUrl(i));}
+console.log(f.length?f.join("\n"):"OK");"""
+    _r = subprocess.run([_node, "-e", _js], capture_output=True, text=True)
+    check(_r.stdout.strip() == "OK", "safeUrl() fails its attack battery:\n  " + (_r.stdout + _r.stderr).strip()[:400])
 
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,

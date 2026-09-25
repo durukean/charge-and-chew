@@ -1110,6 +1110,28 @@ const fmtFt = m => m < 25 ? 'at this stop'
   : m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 let toastT;
+/* An OSM website= tag is free text that anyone can edit, and esc() keeps it inside the
+   attribute but does NOTHING to a javascript: URL -- that survives escaping intact and lands
+   in the href.
+   This is an ALLOW-list, and that is what makes it safe: every return value either starts
+   with http(s):// or is empty, so no input can come out as javascript:. (A deny-list that
+   looked for "javascript:" would be bypassed by "java<TAB>script:", which browsers treat as
+   javascript: because they delete tab/CR/LF inside URLs -- do not rewrite it as one.)
+   Whitespace and control characters are still stripped first, for correctness rather than
+   safety: OSM values with a stray leading space or byte would otherwise be dropped.
+   OSM also often omits the scheme ("www.example.com"), which as an href resolved RELATIVE to
+   our own site -- a broken link -- so a bare host gets https:// rather than being dropped. */
+function safeUrl(u) {
+  u = String(u || '').replace(/[\u0000-\u0020\u007F]+/g, '');
+  if (!u) return '';
+  if (/^https?:\/\//i.test(u)) return u;
+  if (/^[\w-]+(\.[\w-]+)+([:/?#]|$)/.test(u) && !/^[a-z][\w+.-]*:\/\//i.test(u)) return 'https://' + u;
+  return '';                                   // javascript:, data:, vbscript:, relative junk
+}
+
+/* textContent, deliberately -- so toast text is inherently safe and must NOT be esc()'d.
+   Six call sites did, and users read "Searching Barnes &amp; Noble". If this is ever changed
+   to innerHTML, every caller has to escape again or OSM place names become an XSS vector. */
 function toast(msg) {
   native('log', { msg: 'toast: ' + String(arguments[0]) });   // phone-side console
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
@@ -1214,7 +1236,7 @@ function popupHtml(s) {
     const links = [
       `<a href="${gPlace(P.name || livePoiKey, P.lat.toFixed(5), P.lon.toFixed(5))}" target="_blank" rel="noopener">Reviews &amp; photos</a>`,
       P.phone ? `<a href="tel:${esc(P.phone.replace(/[^+\d]/g, ''))}">Call</a>` : '',
-      P.site ? `<a href="${esc(P.site)}" target="_blank" rel="noopener">Website</a>` : '',
+      safeUrl(P.site) ? `<a href="${esc(safeUrl(P.site))}" target="_blank" rel="noopener">Website</a>` : '',
       `<a href="https://www.google.com/maps/dir/?api=1&destination=${pCoord}&travelmode=walking" target="_blank" rel="noopener">Directions</a>`
     ].filter(Boolean).join('');
     poiBlock = `<div class="pp-poi">
@@ -1237,7 +1259,7 @@ function popupHtml(s) {
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
     <div class="pp-net"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</div>
-    <div class="pp-meta">${s.stalls ? s.stalls + (s.stalls === 1 ? ' stall · ' : ' stalls · ') : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + s.price : ''}${s.h24 ? ' · 24h' : ''}</div>
+    <div class="pp-meta">${s.stalls ? s.stalls + (s.stalls === 1 ? ' stall · ' : ' stalls · ') : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + esc(s.price) : ''}${s.h24 ? ' · 24h' : ''}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
     ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
     ${!Object.keys(m).length ? '<div class="pp-warn">🌙 Nothing we track within a 10-minute walk — likely an isolated stop, worth checking before a night charge.</div>' : ''}
@@ -3346,7 +3368,7 @@ async function runLivePoi(intent, scope) {
   });
 
   clearLivePoi();
-  toast(`Searching ${esc(intent.label)} ${onRoute ? 'along your route' : 'near ' + esc(scopeLabel)}…`);
+  toast(`Searching ${intent.label} ${onRoute ? 'along your route' : 'near ' + scopeLabel}…`);
   $('placeBox').classList.add('busy');
   let els = [];
   try {
@@ -3355,10 +3377,10 @@ async function runLivePoi(intent, scope) {
        a long drive is several round trips. */
     for (let i = 0; i < queries.length; i++) {
       if (queries.length > 1) {
-        toast(`Searching ${esc(intent.label)} along your route… (${i + 1}/${queries.length})`);
+        toast(`Searching ${intent.label} along your route… (${i + 1}/${queries.length})`);
       }
       const part = await overpassFetch(queries[i], undefined,
-        () => toast(`${esc(intent.label)} — OpenStreetMap is busy, trying again…`));
+        () => toast(`${intent.label} — OpenStreetMap is busy, trying again…`));
       if (gen !== livePoiGen) return;     // superseded mid-way; stop spending requests
       els = els.concat(part);
     }
@@ -3385,7 +3407,7 @@ async function runLivePoi(intent, scope) {
       track('live-poi-seeded', intent.tags[0]);
       render(); setSheet('mid'); syncUrl();
       const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
-      toast(`OpenStreetMap is busy — showing ${esc(names)} from our own data`);
+      toast(`OpenStreetMap is busy — showing ${names} from our own data`);
       /* The banner goes above the results rather than replacing them: the list is useful,
          it is just not the whole answer. */
       const bar = document.createElement('div');
@@ -3442,8 +3464,8 @@ async function runLivePoi(intent, scope) {
   }
   if (!pois.length) {
     toast(onRoute
-      ? `No ${esc(intent.label)} within a walk of any charger on this route`
-      : `No ${esc(intent.label)} found within ${radiusMi} mi of ${esc(scopeLabel)}`);
+      ? `No ${intent.label} within a walk of any charger on this route`
+      : `No ${intent.label} found within ${radiusMi} mi of ${scopeLabel}`);
     render(); return;
   }
 
@@ -3473,7 +3495,7 @@ async function runLivePoi(intent, scope) {
   cat = 'all'; $('savedChip').classList.remove('on');
   track('live-poi', intent.tags[0]);
   render(); setSheet('mid'); syncUrl();
-  const many = pois.length === 1 ? esc(intent.label) : esc(plural(intent.label));
+  const many = pois.length === 1 ? intent.label : plural(intent.label);
   toast(matched
     ? `${matched} ${onRoute ? 'stop' : 'charger'}${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
     : `Found ${pois.length} ${many}, but none within a walk of a charger`);
@@ -3831,7 +3853,7 @@ function poiDetailHtml(p) {
   const links = [
     p.at ? `<a href="${gPlace(p.name, p.at.split(',')[0], p.at.split(',')[1])}" target="_blank" rel="noopener">Reviews &amp; photos</a>` : '',
     p.phone ? `<a href="tel:${esc(p.phone.replace(/[^+\d]/g, ''))}">Call</a>` : '',
-    p.site ? `<a href="${esc(p.site)}" target="_blank" rel="noopener">Website</a>` : ''
+    safeUrl(p.site) ? `<a href="${esc(safeUrl(p.site))}" target="_blank" rel="noopener">Website</a>` : ''
   ].filter(Boolean).join('');
   return `<div class="pp-det">${state}${p.addr ? '<br>' + esc(p.addr) : ''}${links ? '<br>' + links : ''}</div>`;
 }
