@@ -3055,9 +3055,13 @@ const CAT_CHAINS = {
   'shop=department_store': ['Walmart', 'Target', 'Meijer'],
   'shop=deli': ["Jersey Mike's", 'Subway', 'Firehouse Subs'] };
 
-/* The bundled chains that answer this intent, in scope, that we actually hold data for. */
+/* The bundled chains that answer this intent, in scope, that we actually hold data for.
+   Only for a PURE category. "blue bottle coffee" is a cafe search filtered to a name we do
+   not bundle; standing in Starbucks, Dunkin' and Dutch Bros for it answers a question the
+   user did not ask -- a confidently wrong result, which is worse than admitting the lookup
+   failed. A name filter means a specific place was wanted, so nothing bundled qualifies. */
 function seedChains(intent) {
-  if (!intent || intent.brandOnly || !intent.tags) return [];
+  if (!intent || intent.brandOnly || !intent.tags || intent.name) return [];
   const out = new Set();
   for (const t of intent.tags) for (const k of (CAT_CHAINS[t] || [])) {
     if (BRANDS[k] && counts[k] > 0) out.add(k);

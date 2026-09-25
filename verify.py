@@ -393,6 +393,31 @@ if _ov_ad:
     check('host.hasSuffix(".google.com")' in _ov_wv and 'host.hasSuffix("google.com")' not in _ov_wv,
           "openExternal matches google.com by bare suffix again — evilgoogle.com would pass")
 
+# ---- instant category results, merged with the live lookup ----
+# The bundled chains answer immediately; the live lookup then ADDS independents. Merge, not
+# replace: OSM tags a Dairy Queen as fast_food, so an ice_cream lookup never returns one and a
+# replace would silently lose it. Verified with a controlled Overpass response: 86 -> 88 (one
+# indie cafe within a walk of two chargers), bundled Starbucks dropped, no duplicates.
+_rlp = _html[_html.find("async function runLivePoi"):]
+_net = _rlp.find("await overpassFetch(")
+check(0 < _rlp.find("applySeed(intent, seed);") < _net,
+      "category results are no longer shown before the live lookup — back to a 10-20 s blank wait")
+check("const indie = seed.length ? pois.filter(p => !isBundledChain(p, seed)) : pois;" in _html,
+      "live results are no longer de-duplicated against the bundled chains already shown")
+check("applySeed(intent, matched ? seed.concat(key) : seed);" in _html,
+      "a successful lookup REPLACES the bundled chains again — Dairy Queen would vanish from ice cream")
+if _node and "function isBundledChain(p, chains)" in _html:
+    _fn2 = _html[_html.index("const nameKey = s =>"):_html.index("/* Put the bundled chains for a category on screen.")]
+    _js2 = _fn2 + r"""
+const C=["Starbucks","Dunkin'","Peet's Coffee","Dutch Bros"];
+const t=[[{brand:"Starbucks",name:"Starbucks"},true],[{name:"Starbucks Coffee"},true],[{brand:"Dunkin' Donuts"},true],
+ [{name:"Peet's Coffee & Tea"},true],[{name:"Dutch Bros. Coffee"},true],[{name:"Blue Bottle Coffee"},false],
+ [{name:"Verve"},false],[{name:""},false],[{},false]];
+const f=t.filter(([p,w])=>isBundledChain(p,C)!==w).map(([p,w])=>JSON.stringify(p)+" expected "+w);
+console.log(f.length?f.join("\n"):"OK");"""
+    _r2 = subprocess.run([_node, "-e", _js2], capture_output=True, text=True)
+    check(_r2.stdout.strip() == "OK", "isBundledChain() misclassifies places:\n  " + (_r2.stdout + _r2.stderr).strip()[:300])
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.

@@ -3069,6 +3069,37 @@ function seedChains(intent) {
   return [...out];
 }
 
+/* Is this OSM place one of the chains we already bundle? Compared on letters only, by
+   prefix, so OSM's "Starbucks Coffee", "Dunkin' Donuts" and "Peet's Coffee & Tea" all
+   match our "Starbucks", "Dunkin'" and "Peet's Coffee". Used to keep a merged result from
+   listing the same Starbucks twice -- once as itself and once as a generic coffee shop. */
+const nameKey = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+function isBundledChain(p, chains) {
+  const ks = [nameKey(p.brand), nameKey(p.name)].filter(Boolean);
+  return chains.some(c => { const ck = nameKey(c); return ck && ks.some(k => k.startsWith(ck)); });
+}
+
+/* Put the bundled chains for a category on screen. Used twice: straight away, so a category
+   search answers in the same frame instead of after a 10-20 s lookup, and as the fallback when
+   that lookup fails. */
+function applySeed(intent, seed) {
+  active.clear(); anyCat = null;
+  seed.forEach(k => active.add(k));
+  seedFor = { label: intent.label, keys: seed.slice(),
+              icon: POI_ICON[intent.tags[0]] || POI_EMOJI[intent.tags[0].split('=')[0]] || '📍' };
+  cat = 'all'; $('savedChip').classList.remove('on');
+}
+/* The strip above a seeded list. render() rewrites #list, so this is (re)placed after it. */
+function seedBanner(html) {
+  const old = $('seedBar'); if (old) old.remove();
+  if (!html) return;
+  const bar = document.createElement('div');
+  bar.id = 'seedBar'; bar.className = 'empty';
+  bar.style.cssText = 'margin:0 0 8px;padding:10px 12px';
+  bar.innerHTML = html;
+  $('list').prepend(bar);
+}
+
 /* Turn what was typed into {tags, name} — a tag to ask Overpass for, plus any leftover
    words to match the POI name against here. */
 function detectPoiIntent(raw) {
@@ -3372,6 +3403,19 @@ async function runLivePoi(intent, scope) {
   });
 
   clearLivePoi();
+  seedFor = null;
+  /* Answer NOW from the chains we ship, then let the live lookup add the independents. The
+     lookup is 10-20 s on a good day and fails outright on a bad one; there is no reason to
+     show an unfiltered list while we wait when we already hold part of the answer. */
+  const seed = seedChains(intent)
+    .filter(k => inScope.some(sc => MATCH[sc.id] && MATCH[sc.id][k] !== undefined));
+  if (seed.length) {
+    applySeed(intent, seed);
+    track('live-poi-instant', intent.tags[0]);
+    render(); setSheet('mid'); syncUrl();
+    seedBanner(`<b>Chains we bundle — showing now</b>Checking OpenStreetMap for independent
+      ${esc(plural(intent.label))} too…`);
+  }
   toast(`Searching ${intent.label} ${onRoute ? 'along your route' : 'near ' + scopeLabel}…`);
   $('placeBox').classList.add('busy');
   let els = [];
@@ -3396,31 +3440,18 @@ async function runLivePoi(intent, scope) {
     /* An error panel is a dead end, and for most categories we are not actually empty
        handed: 90 chains ship with the app. Answer with those instead, say plainly that it
        is the partial answer, and leave the retry for the rest. */
-    /* Only worth doing if it actually answers. "ice cream" near downtown LA maps to Dairy
-       Queen, of which there are none for miles -- offering "0 stops near Dairy Queen" is a
-       worse answer than admitting the lookup failed, because it looks like a result. */
-    const seed = seedChains(intent)
-      .filter(k => inScope.some(sc => MATCH[sc.id] && MATCH[sc.id][k] !== undefined));
+    /* The bundled chains are already on screen (shown before the lookup started), so a
+       failure only has to say the answer is partial and offer the retry. seed is empty when
+       nothing bundled answers this search IN SCOPE -- "ice cream" near downtown LA maps to
+       Dairy Queen, of which there are none for miles -- and then "0 stops near Dairy Queen"
+       would look like a result while being worse than admitting the lookup failed. */
     if (seed.length) {
-      clearLivePoi();
-      active.clear(); anyCat = null;
-      seed.forEach(k => active.add(k));
-      seedFor = { label: intent.label, keys: seed.slice(),
-                  icon: POI_ICON[intent.tags[0]] || POI_EMOJI[intent.tags[0].split('=')[0]] || '📍' };
-      cat = 'all'; $('savedChip').classList.remove('on');
       track('live-poi-seeded', intent.tags[0]);
-      render(); setSheet('mid'); syncUrl();
       const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
       toast(`OpenStreetMap is busy — showing ${names} from our own data`);
-      /* The banner goes above the results rather than replacing them: the list is useful,
-         it is just not the whole answer. */
-      const bar = document.createElement('div');
-      bar.className = 'empty';
-      bar.style.cssText = 'margin:0 0 8px;padding:10px 12px';
-      bar.innerHTML = `<b>Showing chains we bundle</b>OpenStreetMap was busy, so anything we
+      seedBanner(`<b>Showing chains we bundle</b>OpenStreetMap was busy, so anything we
         don't track is missing.
-        <button class="fball" id="poiRetry" style="margin-top:8px">Try again for all</button>`;
-      $('list').prepend(bar);
+        <button class="fball" id="poiRetry" style="margin-top:8px">Try again for all</button>`);
       $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
       return;
     }
@@ -3466,7 +3497,18 @@ async function runLivePoi(intent, scope) {
       phone: t.phone || t['contact:phone'] || '',
       site: t.website || t['contact:website'] || '' });
   }
-  if (!pois.length) {
+  /* With the bundled chains already on screen, the live result's job is to ADD the
+     independents. Keeping a Starbucks here too would list it twice -- as itself and as a
+     generic coffee shop -- so drop anything that is one of the chains already shown.
+     Merge rather than replace: OSM tags a Dairy Queen as fast_food, so an ice_cream lookup
+     never returns one, and replacing would silently lose it. */
+  const indie = seed.length ? pois.filter(p => !isBundledChain(p, seed)) : pois;
+  if (!indie.length) {
+    if (seed.length) {                  // the bundled answer stands; say there is nothing more
+      seedBanner('');
+      toast(`No independent ${plural(intent.label)} beyond the chains shown`);
+      return;
+    }
     toast(onRoute
       ? `No ${intent.label} within a walk of any charger on this route`
       : `No ${intent.label} found within ${radiusMi} mi of ${scopeLabel}`);
@@ -3479,7 +3521,7 @@ async function runLivePoi(intent, scope) {
   livePoiFor = {};
   for (const s of inScope) {
     let best = Infinity, bestPoi = null;
-    for (const p of pois) {
+    for (const p of indie) {
       const d = hav(s.lat, s.lon, p.lat, p.lon);
       if (d < best) { best = d; bestPoi = p; }
     }
@@ -3491,18 +3533,30 @@ async function runLivePoi(intent, scope) {
   }
   const fam = intent.brandOnly ? 'shop' : intent.tags[0].split('=')[0];
   const icon = intent.brandOnly ? '🛍️' : (POI_ICON[intent.tags[0]] || POI_EMOJI[fam] || '📍');
-  BRANDS[key] = { e: icon, cat: 'live', n: pois.length };
+  BRANDS[key] = { e: icon, cat: 'live', n: indie.length };
   counts[key] = matched;          // renderChips reads counts[], not BRANDS[].n
   livePoiKey = key; livePoiTerm = intent.label;
   matchVer++;                       // new keys in MATCH -> recompute the scoped chip counts
-  active.clear(); anyCat = null; active.add(key);
-  cat = 'all'; $('savedChip').classList.remove('on');
+  if (seed.length) {
+    // bundled chains + the independents, as one answer under the search's own name
+    applySeed(intent, matched ? seed.concat(key) : seed);
+  } else {
+    active.clear(); anyCat = null; active.add(key);
+    cat = 'all'; $('savedChip').classList.remove('on');
+  }
   track('live-poi', intent.tags[0]);
   render(); setSheet('mid'); syncUrl();
-  const many = pois.length === 1 ? intent.label : plural(intent.label);
-  toast(matched
-    ? `${matched} ${onRoute ? 'stop' : 'charger'}${matched === 1 ? '' : 's'} within a short walk of ${pois.length} ${many}`
-    : `Found ${pois.length} ${many}, but none within a walk of a charger`);
+  const many = indie.length === 1 ? intent.label : plural(intent.label);
+  if (seed.length) {
+    const near = indie.length === 1 ? `an independent ${intent.label}` : `independent ${plural(intent.label)}`;
+    toast(matched
+      ? `Added ${matched} stop${matched === 1 ? '' : 's'} near ${near}`
+      : `No independent ${plural(intent.label)} within a walk — showing the chains`);
+  } else {
+    toast(matched
+      ? `${matched} ${onRoute ? 'stop' : 'charger'}${matched === 1 ? '' : 's'} within a short walk of ${indie.length} ${many}`
+      : `Found ${indie.length} ${many}, but none within a walk of a charger`);
+  }
 }
 
 
