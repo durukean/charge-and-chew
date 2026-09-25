@@ -192,6 +192,10 @@ check(re.search(r"const seed = seedChains\(intent\)", _html) is not None,
 # The fallback must prove it has something IN SCOPE before offering itself. "ice cream"
 # near downtown LA maps to Dairy Queen, of which there are none for miles, and
 # "0 stops near Dairy Queen" reads as a result while being worse than admitting failure.
+# A name filter ("blue bottle coffee") means a specific place was wanted: the bundled chains
+# must not stand in for it, or a busy OSM answers with Starbucks for Blue Bottle.
+check("if (!intent || intent.brandOnly || !intent.tags || intent.name) return [];" in _html,
+      "the bundled-chain fallback answers a NAMED search ('blue bottle coffee') with unrelated chains")
 check("MATCH[sc.id][k] !== undefined" in _html,
       "the bundled-chain fallback no longer checks it has any stops in scope — it would "
       "answer '0 stops near <chain>' and look like a result")
