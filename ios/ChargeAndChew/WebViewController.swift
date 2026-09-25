@@ -200,7 +200,10 @@ final class WebViewController: UIViewController {
             UIApplication.shared.open(url); return
         }
         let host = url.host?.lowercased() ?? ""
-        if host.hasSuffix("google.com") && url.path.hasPrefix("/maps") {
+        // Exact domain or a real subdomain: a bare hasSuffix("google.com") also matched
+        // "evilgoogle.com", routing it past the in-app Safari sheet.
+        let isGoogle = host == "google.com" || host.hasSuffix(".google.com")
+        if isGoogle && url.path.hasPrefix("/maps") {
             // Directions: if the Google Maps app is installed the Universal Link takes it;
             // otherwise Google serves a mobile web page whose main feature is a nag to
             // install the app. Apple Maps is on every iPhone and gives real turn-by-turn,

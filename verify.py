@@ -385,6 +385,9 @@ if _ov_ad:
           "viewDidLoad resets the boot log again — every line logged at launch is wiped")
     check(_LIVE_RESET.search(_dfl[:400]) is not None,
           "the boot log is no longer reset at the start of launch")
+    # A bare hasSuffix("google.com") also matches "evilgoogle.com".
+    check('host.hasSuffix(".google.com")' in _ov_wv and 'host.hasSuffix("google.com")' not in _ov_wv,
+          "openExternal matches google.com by bare suffix again — evilgoogle.com would pass")
 
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
