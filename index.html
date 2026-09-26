@@ -2403,6 +2403,18 @@ const CHAIN_ALIAS = (function () {
   map.sort((x, y) => y[0].length - x[0].length);      // longest match wins
   return map;
 })();
+/* People split and join brand names every way: "chick fila", "mc donalds", "star bucks",
+   "in nout". Rather than list each spelling, a run of adjacent words is also compared with its
+   spaces removed. Only against names of 5+ letters, so short aliases ("bk", "dq", "heb")
+   cannot be assembled by accident out of unrelated words. */
+const CHAIN_SQUASH = (function () {
+  const m = new Map();
+  for (const [alias, key] of CHAIN_ALIAS) {
+    const sq = alias.replace(/[\s-]/g, '');
+    if (sq.length >= 5 && !m.has(sq)) m.set(sq, key);
+  }
+  return m;
+})();
 
 // "near me", "in my area", "around here" — these mean the user's location, not a place name.
 // Left unhandled, the leftover word ("area", "location", "here") was geocoded and landed in
@@ -2432,6 +2444,19 @@ function parseQuery(raw) {
     if (chains.indexOf(key) !== -1) continue;
     const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
+  }
+  // Second pass: 2-4 adjacent words, spaces removed ("chick fila" -> "chickfila").
+  {
+    let w = t.trim().split(/\s+/).filter(Boolean);
+    for (let n = Math.min(4, w.length); n >= 2; n--) {
+      for (let i = 0; i + n <= w.length; i++) {
+        const key = CHAIN_SQUASH.get(w.slice(i, i + n).join('').replace(/-/g, ''));
+        if (key && chains.indexOf(key) === -1) {
+          chains.push(key); w.splice(i, n); i--;
+        }
+      }
+    }
+    t = ' ' + w.join(' ') + ' ';
   }
   // Strip EVERY network word, not just the first. Breaking after "tesla" matched left
   // "supercharger" in the place text, and "supercharger westwood" geocodes to a Tesla
@@ -2473,7 +2498,9 @@ const CITY_ALIAS = {
   'san fran': 'San Francisco, CA', frisco: 'San Francisco, CA', dc: 'Washington, DC',
   'washington dc': 'Washington, DC', philly: 'Philadelphia, PA', nola: 'New Orleans, LA',
   atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
-  stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV' };
+  stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV',
+  // California coast shorthand. Neither collides with a state code, unlike "sd" or "sc".
+  sb: 'Santa Barbara, CA', slo: 'San Luis Obispo, CA' };
 const TRIP_REJECT = new Set([...NON_PLACE,
   'take', 'taking', 'drive', 'driving', 'drove', 'head', 'heading', 'headed', 'travel',
   'traveling', 'travelling', 'road', 'way', 'ride', 'riding', 'flying', 'walk']);
@@ -2525,6 +2552,16 @@ function splitDest(b) {
     for (let n = w.length - 1; n >= 1; n--) {
       const head = w.slice(0, n).join(' ');
       if (knownPlace(head)) return { dest: head, filter: w.slice(n).join(' ') };
+    }
+  }
+  /* A recognised chain at the END is never part of a place name, even when we cannot
+     recognise the place itself: "la to sb chick fila" used to route to a town called
+     "Sb Chick Fila". Shortest head first, and only when the chain consumes the whole tail,
+     so "fort wayne sonic" splits after "fort wayne" and not after "fort". */
+  if (w.length > 1) {
+    for (let n = 1; n < w.length; n++) {
+      const tail = w.slice(n).join(' '), pq = parseQuery(tail);
+      if (pq.chains.length && !pq.place) return { dest: w.slice(0, n).join(' '), filter: tail };
     }
   }
   if (m) return { dest: m[1], filter: m[2] };   // qualifier word, unrecognised place

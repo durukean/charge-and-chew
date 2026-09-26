@@ -127,6 +127,28 @@ CASES = [
     # A destination we have no chargers in is left whole rather than guessed at.
     ("denver to moab",            dict(trip="Denver|Moab", filter="")),
 
+    # ── Brand names typed split or joined any which way. The user's own phrase,
+    # "la to santa barbara chick fila", drew the right route but matched NO chain, because
+    # "chick fila" was the one spelling not in the alias table. Adjacent words are now also
+    # compared with their spaces removed.
+    ("la to santa barbara chick fila",
+        dict(trip="Los Angeles, CA|Santa Barbara", chains=["Chick-fil-A"])),
+    ("chick fila from la to santa barbara",
+        dict(trip="Los Angeles, CA|Santa Barbara", chains=["Chick-fil-A"])),
+    ("mc donalds near me",   dict(chains=["McDonald's"], here=True)),
+    ("star bucks in austin", dict(chains=["Starbucks"], place="austin")),
+    # A chain at the END of a destination is never part of the place -- even an unknown one.
+    # "la to sb chick fila" used to route to a town called "Sb Chick Fila".
+    ("la to sb chick fila",   dict(trip="Los Angeles, CA|Santa Barbara, CA", chains=["Chick-fil-A"])),
+    ("la to ojai chick fila", dict(trip="Los Angeles, CA|Ojai", chains=["Chick-fil-A"])),
+    # Zzyzx, CA is real (on I-15) but has no chargers, so it is NOT a known place: this is the
+    # case that exercises the trailing-chain rule by itself -- the others are caught earlier.
+    ("la to zzyzx chick fila", dict(trip="Los Angeles, CA|Zzyzx", chains=["Chick-fil-A"])),
+    ("fort wayne to chicago sonic", dict(trip="Fort Wayne|Chicago", chains=["Sonic"])),
+    # Squashing must never invent a chain out of ordinary words or places.
+    ("coffee shop",          dict(chains=[])),
+    ("la to santa barbara",  dict(trip="Los Angeles, CA|Santa Barbara", chains=[])),
+
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
     ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),
@@ -189,23 +211,39 @@ window.__ready = function () {{
   document.getElementById('out').textContent = JSON.stringify(r);
 }};
 </script>
-<iframe src="/?nosw=1" style="width:900px;height:700px" onload="setTimeout(function(){{
-  try {{ window.__parseQuery = this.contentWindow.__parseQuery;
-         window.__parseTrip = this.contentWindow.__parseTrip;
-         window.__detectPoiIntent = this.contentWindow.__detectPoiIntent; window.__ready(); }}
-  catch (e) {{ document.getElementById('out').textContent = 'ERR ' + e.message; }}
-}}.bind(this), 6000)"></iframe>""")
+<!-- Poll for the parser instead of sleeping a fixed 6 s after onload. Chrome dumps the DOM when
+     a VIRTUAL-time budget runs out; when loading was slow, onload arrived late, onload + 6 s
+     overshot the budget, and the dump caught "pending" -- measured failing 2 runs in 6 on
+     unchanged code. This suite gates the monthly data refresh, so a flake here silently
+     skipped a month's data. Now it runs the moment the parser exists. -->
+<iframe src="/?nosw=1" style="width:900px;height:700px" onload="(function (f) {{
+  var n = 0, t = setInterval(function () {{
+    var w = f.contentWindow; n++;
+    if (w && typeof w.__parseQuery === 'function' && typeof w.__parseTrip === 'function'
+          && typeof w.__detectPoiIntent === 'function') {{
+      clearInterval(t);
+      try {{ window.__parseQuery = w.__parseQuery; window.__parseTrip = w.__parseTrip;
+             window.__detectPoiIntent = w.__detectPoiIntent; window.__ready(); }}
+      catch (e) {{ document.getElementById('out').textContent = 'ERR ' + e.message; }}
+    }} else if (n > 240) {{
+      clearInterval(t);
+      document.getElementById('out').textContent = 'ERR the app never exported its parser';
+    }}
+  }}, 250);
+}})(this)"></iframe>""")
 
     prof = tempfile.mkdtemp()
     try:
         domfile = os.path.join(prof, "dom.html")
         cmd = [binpath, "--headless=new", "--disable-gpu", "--no-sandbox",
-               f"--user-data-dir={prof}", "--virtual-time-budget=15000",
+               f"--user-data-dir={prof}", "--virtual-time-budget=90000",
                "--disable-features=ServiceWorker", "--dump-dom",
                f"http://127.0.0.1:{port}/__search_probe.html"]
         with open(domfile, "w") as fh:
             proc = subprocess.Popen(cmd, stdout=fh, stderr=subprocess.DEVNULL)
-            deadline = time.time() + 90
+            # Generous: measured 45-101 s under load, and a slow CI runner must not turn a
+            # correct parser into a failed data refresh. It exits as soon as the dump lands.
+            deadline = time.time() + 240
             while time.time() < deadline:
                 if proc.poll() is not None:
                     break

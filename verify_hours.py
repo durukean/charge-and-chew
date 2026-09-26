@@ -40,8 +40,11 @@ def main():
         print("SKIP: Chrome not found")
         return 0
     os.chdir(HERE)
-    port = 8757
-    srv = socketserver.TCPServer(("127.0.0.1", port), http.server.SimpleHTTPRequestHandler)
+    # Ephemeral port: a fixed one fails outright if anything else already holds it (another
+    # dev server on the same Mac did exactly that to a different fixed port).
+    socketserver.TCPServer.allow_reuse_address = True
+    srv = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+    port = srv.server_address[1]
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     tmp = tempfile.mkdtemp()
     probe = os.path.join(HERE, "_hours_probe.html")
@@ -59,7 +62,7 @@ function run(f){
 }
 </script>""" % json.dumps(CASES))
     out = os.path.join(tmp, "o.html")
-    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
+    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=60000",
                     f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
                    stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
     dom = open(out).read()
