@@ -65,11 +65,17 @@ function run(f){
 }
 </script>""" % json.dumps(CASES))
     out = os.path.join(tmp, "o.html")
-    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
-                    f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
-                   stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
-    dom = open(out).read()
-    os.remove(probe); srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
+    # Clean up in `finally`: a timeout used to skip cleanup and leave _hours_probe.html in the
+    # repo root, where a `git add -A` committed it.
+    try:
+        subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
+                        f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
+                       stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
+        dom = open(out).read()
+    finally:
+        try: os.remove(probe)
+        except OSError: pass
+        srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)
     m = re.search(r'<pre id="o">(.*?)</pre>', dom, re.S)
     if not m or not m.group(1).strip():
         print("FAIL: probe produced nothing"); return 1
