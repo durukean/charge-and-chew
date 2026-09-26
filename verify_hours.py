@@ -44,6 +44,9 @@ def main():
     # dev server on the same Mac did exactly that to a different fixed port).
     socketserver.TCPServer.allow_reuse_address = True
     srv = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+    # Keep the budget SHORT. --dump-dom waits for the whole virtual budget to expire, and pending
+    # map-tile requests pause virtual time, so raising it to 60 s made every run blow the 90 s
+    # real-time timeout. 9 s has passed every run: the probe runs at onload, with no fixed delay.
     port = srv.server_address[1]
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     tmp = tempfile.mkdtemp()
@@ -62,7 +65,7 @@ function run(f){
 }
 </script>""" % json.dumps(CASES))
     out = os.path.join(tmp, "o.html")
-    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=60000",
+    subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
                     f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
                    stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
     dom = open(out).read()
