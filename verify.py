@@ -418,6 +418,25 @@ console.log(f.length?f.join("\n"):"OK");"""
     _r2 = subprocess.run([_node, "-e", _js2], capture_output=True, text=True)
     check(_r2.stdout.strip() == "OK", "isBundledChain() misclassifies places:\n  " + (_r2.stdout + _r2.stderr).strip()[:300])
 
+# ---- phone map: big enough, and framed for the space it actually has ----
+# The sheet opened to 50% of a phone, the fit framed the FULL-height map, then the sheet slid up
+# and the map shrank keeping its top edge -- only 33% of LA -> Santa Barbara was on screen.
+_sp = re.search(r"phoneLayout \? (0\.\d+) :", _html)
+check(_sp is not None and float(_sp.group(1)) <= 0.42,
+      "the phone sheet opens taller than 42% again — the map is squeezed to a strip")
+check(re.search(r"\$\('sheet'\)\.addEventListener\('transitionend'", _html) is not None
+      and "settleFit(lastFit.getBounds, lastFit.padding, lastFit.maxZoom);" in _html,
+      "the map is no longer re-framed once the sheet finishes resizing — results end up under it")
+check("if (wideLayout() || sheetState === 'full' || !lastFit || userMovedMap) return;" in _html,
+      "re-framing ignores the user — the map would snap back after they pan it")
+_lf, _ss = _html.find("let lastFit = null, userMovedMap = false;"), _html.find("function setSheet(")
+check(0 < _lf < _ss, "lastFit is declared after setSheet, which reads it — a TDZ error at boot")
+check(re.search(r"(?m)^map\.on\('dragstart', \(\) => \{ userMovedMap = true; \}\);", _html) is not None,
+      "a user drag no longer stops automatic re-framing")
+# Whole-number zooms halved the frame: 266 px for a route that fits 377 at a half step.
+check(re.search(r"zoomSnap: 0\.5\b", _html) is not None,
+      "the map snaps to whole zoom levels again — a fit that just misses drops a full step and halves")
+
 check("stateScope" in _html, "state scope gone — /near/<chain>/<state>/ links would under-deliver")
 # The install offer must stay gated: never on the first visit, never after a dismissal,
 # never when already installed. An ungated prompt is worse than no prompt.

@@ -1007,6 +1007,10 @@ let seedFor = null;
    to be discarded -- a national view flashed before a shared route -- and cost ~630 ms of
    main thread on a desktop, several seconds on a mid-range phone. */
 let booting = true;
+/* Read by setSheet() and the map's gesture listeners, both far above settleFit where these are
+   set. Declared here with the rest of the view state: a `let` read before its line has run is a
+   TDZ error that blanks the app at boot. */
+let lastFit = null, userMovedMap = false;
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
@@ -1143,7 +1147,13 @@ const saveFavs = () => {
 };
 
 /* ───────── map ───────── */
-const map = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true })
+/* zoomSnap 0.5: a fit can only land on a whole zoom level by default, so when one step closer
+   would not quite fit, it falls back a full step and HALVES the frame -- measured, LA -> Santa
+   Barbara drawn 266 px wide on a 440 px phone, exactly half of the 532 one step in would need.
+   Half steps fit it properly. Tiles stay sharp: Leaflet rounds the tile level, so N.5 loads
+   level N+1 tiles scaled DOWN (0.71x) rather than level N scaled up. */
+const map = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true,
+                           zoomSnap: 0.5 })
   .setView([39.3, -96.5], 4);
 /* Framing the country for the viewport we actually have. Deliberately a WIDE, SHORT band
    rather than true CONUS bounds: fitBounds always contains what you give it, so the real
@@ -1175,6 +1185,14 @@ function setAttribution(provider) {
   attribCtl.addAttribution(html); attribCur = html;
 }
 map.on('zoomend', onZoomChanged);
+/* The user taking over the map -- after this the sheet moving must not re-frame it. Real
+   gestures only: a tap on a pin is not "moving the map". dragstart is Leaflet's, and fires
+   for user drags but never for programmatic pans; zooms are caught at the source, because
+   zoomstart also fires for every fitBounds we do ourselves. */
+map.on('dragstart', () => { userMovedMap = true; });
+map.getContainer().addEventListener('wheel', () => { userMovedMap = true; }, { passive: true });
+map.getContainer().addEventListener('touchstart', e => { if (e.touches.length > 1) userMovedMap = true; }, { passive: true });
+map.on('dblclick', () => { userMovedMap = true; });
 
 
 const canvas = L.canvas({ padding: .6 });
@@ -1938,7 +1956,10 @@ function sheetPx(s) {
   // On a phone the chips live in the sheet, so "peek" has to show them, not just a title.
   if (s === 'peek') return phoneLayout ? 150 + ($('centerCard').classList.contains('show') ? 46 : 0) : 52;
   if (s === 'full') return Math.round(h * 0.82);
-  return Math.round(h * (phoneLayout ? 0.5 : window.innerWidth >= 760 ? 0.38 : 0.44));
+  /* 0.40 on a phone, not 0.5. With the route card on top, half a screen of sheet left the map
+     about 40% of the display -- "can't see the pin points". At 0.40 the map gets just over
+     half, and one full result plus the start of the next still show; drag up for more. */
+  return Math.round(h * (phoneLayout ? 0.40 : window.innerWidth >= 760 ? 0.38 : 0.44));
 }
 const wideLayout = () => window.matchMedia('(min-width:900px)').matches;
 
@@ -1982,6 +2003,17 @@ function setSheet(s) {
   else el.style.height = sheetPx(s) + 'px';
   setTimeout(() => map.invalidateSize({ pan: false }), 300);
 }
+/* Re-frame when the sheet's height animation has ACTUALLY finished, not on a timer. A timer
+   raced the 280 ms transition with a 60 ms margin, and a tab that is not compositing never
+   runs the transition at all -- the fit then framed the full-height map and the route ended
+   up under the sheet. transitionend fires once the map really has its new size, however long
+   that took. Not at 'full', where the map is a sliver; never once the user has taken over. */
+$('sheet').addEventListener('transitionend', e => {
+  if (e.target !== $('sheet') || e.propertyName !== 'height') return;
+  map.invalidateSize({ pan: false });
+  if (wideLayout() || sheetState === 'full' || !lastFit || userMovedMap) return;
+  settleFit(lastFit.getBounds, lastFit.padding, lastFit.maxZoom);
+});
 window.addEventListener('resize', () => {
   $('sheet').style.height = wideLayout() ? '' : sheetPx(sheetState) + 'px';
   setTimeout(() => map.invalidateSize({ pan: false }), 60);
@@ -4133,7 +4165,13 @@ $('shareBtn').onclick = async () => {
    fitBounds would produce a NaN centre. This used to try once and give up silently, which
    is why shared links opened on the national view instead of the thing being shared.
    Retry until the map is actually laid out. */
+/* What the map was last asked to frame, so it can be framed AGAIN when the sheet changes
+   height. The fit ran while the map was still full height; the sheet then slid up, the map
+   shrank keeping its top edge fixed, and the route ended up under the sheet -- measured: only
+   33% of LA -> Santa Barbara on screen. Re-framing stops the moment the user pans or pinches:
+   their view is theirs. */
 function settleFit(getBounds, padding, maxZoom, tries = 0) {
+  if (tries === 0) { lastFit = { getBounds, padding, maxZoom }; userMovedMap = false; }
   setTimeout(() => {
     map.invalidateSize({ pan: false });
     const b = getBounds();
