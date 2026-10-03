@@ -433,6 +433,11 @@ _lf, _ss = _html.find("let lastFit = null, userMovedMap = false;"), _html.find("
 check(0 < _lf < _ss, "lastFit is declared after setSheet, which reads it — a TDZ error at boot")
 check(re.search(r"(?m)^map\.on\('dragstart', \(\) => \{ userMovedMap = true; \}\);", _html) is not None,
       "a user drag no longer stops automatic re-framing")
+# The button column floats over the map's right edge; the LA pins sat half-covered on the
+# route button until the fit measured it.
+check("paddingBottomRight: [Math.max(padding[0], ctlW + 6), padding[1]]" in _html
+      and "document.querySelector('.mapctl')" in _html,
+      "the map fit ignores the button column again — pins at the right edge end up under it")
 # Whole-number zooms halved the frame: 266 px for a route that fits 377 at a half step.
 check(re.search(r"zoomSnap: 0\.5\b", _html) is not None,
       "the map snaps to whole zoom levels again — a fit that just misses drops a full step and halves")
