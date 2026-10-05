@@ -846,4 +846,23 @@ open(os.path.join(HERE, "sitemap.xml"), "w").write(sm)
 # /admin/ reads private analytics; it is noindex too, but keep crawlers out of it entirely.
 open(os.path.join(HERE, "robots.txt"), "w").write(
     f"User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: {BASE}/sitemap.xml\n")
+# ---- data.js cache-busting: the URL follows the CONTENT ----
+# The service worker serves data.js cache-first, keyed on its full URL. The ?v= used to be a
+# hand-edited constant ("?v=9", unchanged for months), and this pipeline rewrote the file but
+# never the URL -- so returning web visitors kept their first cached copy for good, and the
+# monthly refresh only reached them by accident whenever a code change bumped sw.js. A hash of
+# the content makes new data a new URL (cache miss, fetch, old entry dropped) while unchanged
+# data keeps the same URL, so nobody re-downloads a megabyte for nothing.
+import hashlib
+_dj = os.path.join(HERE, "data.js")
+if os.path.exists(_dj):
+    _ver = hashlib.sha256(open(_dj, "rb").read()).hexdigest()[:10]
+    _ix = os.path.join(HERE, "index.html")
+    _h = open(_ix, encoding="utf-8").read()
+    _h2, _n = re.subn(r'src="data\.js\?v=[^"]*"', f'src="data.js?v={_ver}"', _h)
+    if _n != 1:
+        sys.exit(f"build.py: expected exactly one data.js <script> in index.html, found {_n}")
+    if _h2 != _h:
+        open(_ix, "w", encoding="utf-8").write(_h2)
+    print(f"data.js version {_ver}")
 print(f"Generated {len(urls)} pages + sitemap.xml + robots.txt (base {BASE})")

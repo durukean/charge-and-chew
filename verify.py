@@ -71,6 +71,15 @@ if os.path.exists(os.path.join(HERE, "index.html")):
     check(not re.search(r"[\w\)\]]\?\.[\w\(\[]", h),
           "index.html uses optional chaining ?. — blanks the app on older in-car browsers")
     check('src="data.js?v=' in h, "data.js is not cache-busted")
+    # The ?v= must be the hash of the data itself. The service worker serves data.js cache-first
+    # by URL, so a stale ?v= means returning visitors never see new data -- which is exactly
+    # what happened for months while it was a hand-edited "?v=9" the refresh never touched.
+    import hashlib
+    _want = hashlib.sha256(open(os.path.join(HERE, "data.js"), "rb").read()).hexdigest()[:10]
+    _got = re.search(r'src="data\.js\?v=([^"]*)"', h)
+    check(_got is not None and _got.group(1) == _want,
+          f"index.html loads data.js?v={_got.group(1) if _got else '?'} but the data hashes to {_want} "
+          "— returning visitors would keep a stale cached dataset (run build.py)")
     check("goatcounter" in h, "analytics snippet is missing")
     for token in ["#map", "sheetTitle", "filtBtn", "themeBtn"]:
         check(token in h, f"index.html lost '{token}'")
