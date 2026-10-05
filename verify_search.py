@@ -149,6 +149,20 @@ CASES = [
     ("coffee shop",          dict(chains=[])),
     ("la to santa barbara",  dict(trip="Los Angeles, CA|Santa Barbara", chains=[])),
 
+    # ── Found by typing what road-trippers actually type.
+    # "dc" is ALSO a noise word ("DC fast charger"), stripped before the city alias was tried,
+    # so "dc to nyc" was not a trip at all -- it searched around NYC.
+    ("dc to nyc",            dict(trip="Washington, DC|New York, NY")),
+    ("nyc to dc",            dict(trip="New York, NY|Washington, DC")),
+    ("washington dc to nyc", dict(trip="Washington, DC|New York, NY")),
+    ("dc fast chargers in austin", dict(trip=None, place="austin")),   # ...and still noise here
+    ("la to san diego in and out", dict(trip="Los Angeles, CA|San Diego", chains=["In-N-Out"])),
+    # Words describing the visit must never reach the geocoder as a place name.
+    ("where can i charge near costco", dict(chains=["Costco"], place="")),
+    ("denny's 24 hours",               dict(chains=["Denny's"], place="")),
+    ("starbucks drive thru",           dict(chains=["Starbucks"], place="")),
+    ("mcdonalds drive-thru in phoenix", dict(chains=["McDonald's"], place="phoenix")),
+
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
     ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),

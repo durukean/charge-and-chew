@@ -2401,7 +2401,11 @@ const NET_WORDS = [
   ['evcs', 'EVCS'], ['red e', 'Red E'], ['shell', 'Shell Recharge'], ['bp pulse', 'bp pulse'],
   ['flo', 'FLO'], ['non-networked', 'Non-networked']
 ];
-const NOISE = /\b(ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s)\b/g;
+/* "charge", "24 hours" and "drive thru" describe the visit, not a place. They survived into the
+   place text and went to the geocoder: "where can i charge near costco" looked up a place
+   called "charge", "denny's 24 hours" one called "24 hours". normalise() has already turned
+   "24/7" into "24 7" and "drive-thru" into "drive thru". */
+const NOISE = /\b(ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|charge|recharge|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s|24 hours|24 hour|24 hrs|24h|24 7|open late|drive thru|drive through|drive in|drive-thru|drive-through|drive-in)\b/g;
 // Same words as a set, for callers that need to test one word at a time (a /g regex is
 // stateful across .test calls, which makes it the wrong tool for that).
 const NOISE_WORD = new Set(NOISE.source.replace(/\\b|[()]/g, '').split('|').map(w => w.trim()));
@@ -2422,6 +2426,7 @@ const CHAIN_ALIAS = (function () {
   const extra = {
     'mcdonalds': "McDonald's", 'micky ds': "McDonald's", 'chickfila': 'Chick-fil-A',
     'chick fil a': 'Chick-fil-A', 'innout': 'In-N-Out', 'in n out': 'In-N-Out',
+    'in and out': 'In-N-Out',
     'bucees': "Buc-ee's", 'buccees': "Buc-ee's", 'dunkin donuts': "Dunkin'",
     'starbucks coffee': 'Starbucks', 'bk': 'Burger King', 'taco': 'Taco Bell',
     'heb': 'H-E-B', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
@@ -2538,6 +2543,11 @@ const TRIP_REJECT = new Set([...NON_PLACE,
   'traveling', 'travelling', 'road', 'way', 'ride', 'riding', 'flying', 'walk']);
 
 function tripSide(raw) {
+  /* A city nickname wins before noise is stripped. "dc" is ALSO a noise word -- "DC fast
+     charger" -- so stripping first erased it, left the side empty, and "dc to nyc" stopped
+     being a trip at all: it searched around NYC instead. */
+  const whole = raw.replace(/\s+/g, ' ').trim();
+  if (CITY_ALIAS[whole]) return CITY_ALIAS[whole];
   const w = raw.replace(NOISE, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
   if (!w.length || w.length > 5) return null;
   if (w.some(x => TRIP_REJECT.has(x))) return null;
