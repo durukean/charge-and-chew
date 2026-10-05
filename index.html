@@ -2434,7 +2434,9 @@ const CHAIN_ALIAS = (function () {
     'cvs pharmacy': 'CVS', 'seven eleven': 'Circle K', 'loves': "Love's",
     'pilot flying j': 'Pilot', 'cracker barrel old country store': 'Cracker Barrel',
     'panera': 'Panera Bread', 'cane s': "Raising Cane's", 'canes': "Raising Cane's",
-    'jack in box': 'Jack in the Box', 'dq': 'Dairy Queen', 'kfc chicken': 'KFC'
+    'jack in box': 'Jack in the Box', 'dq': 'Dairy Queen', 'kfc chicken': 'KFC',
+    'starbuck': 'Starbucks', 'walmart supercenter': 'Walmart', 'costco gas': 'Costco',
+    'costco gas station': 'Costco', 'costco wholesale': 'Costco'
   };
   for (const a in extra) if (BRANDS[extra[a]]) map.push([a, extra[a]]);
   map.sort((x, y) => y[0].length - x[0].length);      // longest match wins
@@ -2452,6 +2454,38 @@ const CHAIN_SQUASH = (function () {
   }
   return m;
 })();
+/* One slip of the thumb: "starbuks", "mcdonals", "chikfila", "chipolte". A word (or a short
+   run of words, joined) within one edit of a brand name counts as that brand -- but only for
+   words of 7+ letters and never for a word that is part of a town we have chargers in. The
+   length floor is what keeps real places off brands -- Culver City / Culver's, Casey /
+   Casey's -- while still letting "walmarts" and "targets" through. */
+function oneEdit(a, b) {
+  if (a === b) return false;
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  let i = 0; while (i < la && i < lb && a[i] === b[i]) i++;
+  if (la === lb) return a.slice(i + 1) === b.slice(i + 1) ||
+    (a[i] === b[i + 1] && a[i + 1] === b[i] && a.slice(i + 2) === b.slice(i + 2));
+  return la > lb ? a.slice(i + 1) === b.slice(i) : a.slice(i) === b.slice(i + 1);
+}
+let townWords = null;
+function chainTypo(word) {
+  if (word.length < 7) return null;
+  if (!townWords) {
+    townWords = new Set();
+    for (const s of SITES) {
+      const c = normalise(s.city || '');
+      if (!c) continue;
+      townWords.add(c.replace(/[\s-]/g, ''));
+      for (const x of c.split(/[\s-]/)) townWords.add(x);
+    }
+  }
+  if (townWords.has(word)) return null;
+  for (const [sq, key] of CHAIN_SQUASH) {
+    if (oneEdit(word, sq)) return key;
+  }
+  return null;
+}
 
 // "near me", "in my area", "around here" — these mean the user's location, not a place name.
 // Left unhandled, the leftover word ("area", "location", "here") was geocoded and landed in
@@ -2470,7 +2504,9 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
   // names contain them (Isle of Palms, Lake in the Hills).
   'wheres', 'whats', 'which', 'who', 'whos', 'how', 'when', 'why', 'was', 'to', 'on',
   'for', 'from', 'or', 'any', 'some', 'i', 'im', 'you', 'we', 'can', 'get', 'got',
-  'need', 'want', 'looking', 'look', 'please', 'there', 'that', 'this', 'go', 'going']);
+  'need', 'want', 'looking', 'look', 'please', 'there', 'that', 'this', 'go', 'going',
+  // What kind of stop, not where: "costco gas", "walmart supercenter", "free chargers in sf".
+  'gas', 'fuel', 'free', 'supercenter', 'restaurant', 'restaurants', 'locations']);
 
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
@@ -2493,6 +2529,15 @@ function parseQuery(raw) {
         }
       }
     }
+    // Third pass, only when nothing matched exactly: one typo away ("starbuks", "chik fila").
+    if (!chains.length) {
+      for (let n = Math.min(3, w.length); n >= 1 && !chains.length; n--) {
+        for (let i = 0; i + n <= w.length; i++) {
+          const key = chainTypo(w.slice(i, i + n).join('').replace(/-/g, ''));
+          if (key) { chains.push(key); w.splice(i, n); break; }
+        }
+      }
+    }
     t = ' ' + w.join(' ') + ' ';
   }
   // Strip EVERY network word, not just the first. Breaking after "tesla" matched left
@@ -2509,12 +2554,26 @@ function parseQuery(raw) {
     : /\b(food|eat|eats|lunch|dinner|breakfast|meal|meals|hungry|snack)\b/.test(t) ? 'food'
     : /\b(store|stores|shopping|errand|errands)\b/.test(t) ? 'store'
     : null;
+  // "free chargers in sf" asks for the Free filter; the word itself is not part of a place.
+  const free = /\sfree\s/.test(t);
+  /* "portland or", "portland me", "evansville in": three state codes are also everyday
+     words that NOISE and NON_PLACE strip, which turned Portland, Maine into Portland,
+     Oregon. Keep the code when it trails a word that is not itself filler. */
+  const stm = t.match(/\s([a-z]+)\s(in|me|or)\s*$/);
+  const keepSt = stm && !NOISE_WORD.has(stm[1]) && !NON_PLACE.has(stm[1]) ? stm : null;
   let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
   // Strip surviving non-place words; if nothing meaningful is left, there is no place.
   place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
+  if (keepSt && place.split(' ').pop() === keepSt[1]) place += ', ' + keepSt[2].toUpperCase();
+  /* "chargers in sf", "starbucks in la": two-letter nicknames fell under the 3-letter floor
+     below, so the place vanished and the search quietly became "near me". "dc" never even
+     got that far -- NOISE strips it as in "DC fast" -- so it only counts after "in"/"near"
+     or "washington". */
+  if (/\s(?:(?:in|near|around)\s(?:washington\s)?|washington\s)dc\s*$/.test(t)) place = 'Washington, DC';
+  else if (CITY_ALIAS[place]) place = CITY_ALIAS[place];
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here, anyCat: anyc };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free };
 }
 
 window.__parseQuery = parseQuery;
@@ -2548,6 +2607,14 @@ function tripSide(raw) {
      being a trip at all: it searched around NYC instead. */
   const whole = raw.replace(/\s+/g, ' ').trim();
   if (CITY_ALIAS[whole]) return CITY_ALIAS[whole];
+  /* "portland or to seattle" was not a trip at all ("or" is a reject word) and "portland me
+     to boston" silently started in Oregon ("me" is noise). A trailing state code belongs
+     to the place: resolve the rest on its own and put the code back. */
+  const st = whole.match(/^(.*\S)\s+([a-z]{2})$/);
+  if (st && STATE_NAME[st[2].toUpperCase()] && !NOISE_WORD.has(st[1].split(' ').pop())) {
+    const head = tripSide(st[1]);
+    if (head) return /,/.test(head) ? head : head + ', ' + st[2].toUpperCase();
+  }
   const w = raw.replace(NOISE, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
   if (!w.length || w.length > 5) return null;
   if (w.some(x => TRIP_REJECT.has(x))) return null;
@@ -2615,7 +2682,10 @@ function parseTrip(raw) {
                                  .replace(/\s+[-–—]\s+/g, ' to '));
   let a, b;
   const fm = t.match(/(?:^|\s)from\s+(.+?)\s+to\s+(.+?)\s*$/);
+  // "halfway between la and sf", "chargers between dallas and houston": also a drive.
+  const bm = !fm && t.match(/(?:^|\s)between\s+(.+?)\s+and\s+(.+?)\s*$/);
   if (fm) { a = fm[1]; b = fm[2]; }
+  else if (bm) { a = bm[1]; b = bm[2]; }
   else {
     const parts = t.split(/\s+(?:to|->|→|>)\s+/);
     if (parts.length !== 2) return null;
@@ -2626,7 +2696,6 @@ function parseTrip(raw) {
   return (A && B && A !== B) ? { from: A, to: B, filter: sp.filter } : null;
 }
 window.__parseTrip = parseTrip;   // exposed for the search test suite
-   // exposed for the search test suite
 
 /* place search */
 const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
@@ -2776,6 +2845,9 @@ $('placeIn').addEventListener('keydown', async e => {
     localStorage.setItem('cc_net', netFilter);
     syncNetSeg();
     track('search-net', p.net);
+  }
+  if (p.free && !F.free) {
+    F.free = 1; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
   }
 
   render(); syncUrl();

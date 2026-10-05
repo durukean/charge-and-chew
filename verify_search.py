@@ -163,6 +163,41 @@ CASES = [
     ("starbucks drive thru",           dict(chains=["Starbucks"], place="")),
     ("mcdonalds drive-thru in phoenix", dict(chains=["McDonald's"], place="phoenix")),
 
+    # ── Round two of real typing.
+    # One slip of the thumb used to send the misspelling to the geocoder as a place.
+    ("starbuks near me",       dict(chains=["Starbucks"], place="", here=True)),
+    ("mcdonals in dallas",     dict(chains=["McDonald's"], place="dallas")),
+    ("chik fil a",             dict(chains=["Chick-fil-A"], place="")),
+    ("chikfila near me",       dict(chains=["Chick-fil-A"], place="", here=True)),
+    ("chipolte in austin",     dict(chains=["Chipotle"], place="austin")),
+    ("starbuck near me",       dict(chains=["Starbucks"], here=True)),
+    ("walmarts near me",       dict(chains=["Walmart"], place="", here=True)),
+    ("targets in houston",     dict(chains=["Target"], place="houston")),
+    # ...but a real town one letter from a brand is still the town.
+    ("culver city",            dict(chains=[], place="culver city")),
+    ("casey",                  dict(chains=[], place="casey")),
+    # The kind of stop is not a place.
+    ("walmart supercenter near me", dict(chains=["Walmart"], place="", here=True)),
+    ("costco gas",             dict(chains=["Costco"], place="")),
+    ("free chargers in sf",    dict(place="San Francisco, CA", free=True)),
+    ("chargers in sf",         dict(place="San Francisco, CA", free=False)),
+    # Two-letter nicknames fell under the 3-letter floor and the search became "near me".
+    ("starbucks in la",        dict(chains=["Starbucks"], place="Los Angeles, CA")),
+    ("chargers in dc",         dict(place="Washington, DC")),
+    ("starbucks in washington dc", dict(chains=["Starbucks"], place="Washington, DC")),
+    ("tesla dc",               dict(net="tesla", place="")),
+    # "or", "me" and "in" are state codes as well as filler words.
+    ("portland or to seattle", dict(trip="Portland, OR|Seattle")),
+    ("portland me to boston",  dict(trip="Portland, ME|Boston")),
+    ("seattle to portland or", dict(trip="Seattle|Portland, OR")),
+    ("chargers in portland or", dict(place="portland, OR", trip=None)),
+    ("evansville in",          dict(place="evansville, IN")),
+    ("find me a charger",      dict(place="")),
+    ("new orleans la to houston", dict(trip="New Orleans, LA|Houston")),
+    # Another way of saying a drive.
+    ("halfway between la and sf", dict(trip="Los Angeles, CA|San Francisco, CA")),
+    ("starbucks between dallas and houston", dict(trip="Dallas|Houston", chains=["Starbucks"])),
+
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
     ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),
@@ -215,7 +250,7 @@ window.__ready = function () {{
        probe has to do the same or it tests a code path nobody runs. */
     var pq = (tp && tp.filter) ? P(tp.filter) : p;
     var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place,
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free,
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,

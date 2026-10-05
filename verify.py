@@ -370,6 +370,24 @@ console.log(f.length?f.join("\n"):"OK");"""
     _r = subprocess.run([_node, "-e", _js], capture_output=True, text=True)
     check(_r.stdout.strip() == "OK", "safeUrl() fails its attack battery:\n  " + (_r.stdout + _r.stderr).strip()[:400])
 
+# The typo-tolerant chain match must never swallow a town we have chargers in. No town in
+# today's data is one edit from a brand, so the search suite cannot exercise this guard; run
+# the REAL functions against a synthetic town instead.
+if _node and "function chainTypo(word)" in _html:
+    _a = _html.index("function oneEdit(a, b)")
+    _fn = _html[_a:_html.index("\n}\n", _html.index("function chainTypo(word)")) + 3]
+    _js = """const normalise=t=>String(t).toLowerCase();
+const CHAIN_SQUASH=new Map([["chipotle","Chipotle"],["walmart","Walmart"]]);
+let SITES=[{city:"Chipolte"}];
+""" + _fn + """
+const f=[];
+if(chainTypo("chipolte")!==null)f.push("town 'Chipolte' became a chain");
+if(chainTypo("walmarts")!=="Walmart")f.push("walmarts -> "+chainTypo("walmarts"));
+if(chainTypo("walmrt")!==null)f.push("6-letter word matched");
+console.log(f.length?f.join("\\n"):"OK");"""
+    _r = subprocess.run([_node, "-e", _js], capture_output=True, text=True)
+    check(_r.stdout.strip() == "OK", "chainTypo() fails its battery:\n  " + (_r.stdout + _r.stderr).strip()[:400])
+
 # ---- iOS: the downloaded data overlay must never beat a newer bundle ----
 # Every reader (web view, native store, Siri) prefers the overlay unconditionally. Without a
 # prune, an app update shipping NEWER data kept losing to a stale download for good, and paired
