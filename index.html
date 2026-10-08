@@ -943,12 +943,51 @@ svg{display:block}
 </div>
 <div id="toast"></div>
 
+<script>
+/* Last resort. Anything that stops the app script during boot used to leave the splash up
+   forever, and reloading never helped when the cause was saved data: a corrupted favourite
+   or filter value froze the app until the user found "clear site data" on their own. If the
+   splash is still up a few seconds after an uncaught error, offer to reset saved data. */
+window.addEventListener('error', function () {
+  setTimeout(function () {
+    var s = document.getElementById('splash');
+    if (!s || s.classList.contains('gone') || s.querySelector('#ccReset')) return;
+    s.innerHTML = '<div style="max-width:300px;text-align:center;font-size:14px;line-height:1.5">' +
+      'Charge &amp; Chew couldn\u2019t start.<br>Resetting saved favourites and settings usually fixes it.' +
+      '<br><button id="ccReset" style="margin-top:14px;padding:10px 18px;border-radius:10px;border:0;' +
+      'background:#15803d;color:#fff;font-weight:600;font-size:15px">Reset and reload</button></div>';
+    document.getElementById('ccReset').onclick = function () {
+      try { for (var i = localStorage.length - 1; i >= 0; i--) { var k = localStorage.key(i);
+        if (k && k.indexOf('cc_') === 0) localStorage.removeItem(k); } } catch (e) {}
+      location.reload();
+    };
+  }, 2500);
+});
+</script>
 <script src="data.js?v=045cb90a04"></script>
 <script>
 (() => {
 'use strict';
 const D = window.PITSTOP_DATA;
 const $ = id => document.getElementById(id);
+/* Storage that cannot throw. With site data blocked, merely touching window.localStorage
+   throws, and dozens of reads below run at boot. Shadowing the name for this whole script
+   turns that into a session-only memory store instead of a frozen splash. */
+const localStorage = (() => {
+  try { const s = window.localStorage; s.getItem('cc_probe'); return s; } catch (e) {
+    const m = new Map();
+    return { getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => { m.set(k, String(v)); },
+             removeItem: k => { m.delete(k); }, key: i => { const k = [...m.keys()][i]; return k === undefined ? null : k; },
+             get length() { return m.size; } };
+  }
+})();
+/* A saved value is whatever was last written, by any version of the app, or by hand. Parse
+   it defensively and check its shape: `new Set({"x":1})` at boot froze the app for good. */
+const readJSON = (k, fallback, ok) => {
+  try { const v = JSON.parse(localStorage.getItem(k)); return v != null && (!ok || ok(v)) ? v : fallback; }
+  catch (e) { return fallback; }
+};
+const isPlainObj = v => typeof v === 'object' && !Array.isArray(v);
 if (typeof L === 'undefined') {
   $('splash').innerHTML = '<div style="max-width:280px;text-align:center;color:#b91c1c;font-size:14px;' +
     'line-height:1.5">The map library didn\u2019t load.<br>Check your connection and reload.</div>';
@@ -1012,6 +1051,13 @@ let center = null, stateScope = null;   // set by /near/<chain>/<state>/ landing
    ~1,400 lines earlier, and a `let` read before its line runs is a TDZ error that would
    blank the app at boot. */
 let seedFor = null;
+/* Bumped by every search, route and area change. An answer that arrives for an older value
+   is dropped: searching Austin (slow) then Denver (fast) used to end on Austin, and a route
+   finishing late wiped out a newer search. */
+let navGen = 0;
+// Live category lookup generation. Up here, not beside runLivePoi: setCenter() bumps it and
+// can run long before that line does.
+let livePoiGen = 0;
 /* True until the first real render. Boot used to render THREE times: applyTheme() rendered,
    probeBasemap() called applyTheme() again and rendered again, and only then was the URL
    applied and the one render that mattered run. The first two drew a state that was about
@@ -1027,10 +1073,11 @@ let route = null;
 let corridorMi = 5;
 let pinMode = false;
 let sortBy = 'walk';
-let netFilter = localStorage.getItem('cc_net') || 'all';  // all | tesla | other
+let netFilter = ['all', 'tesla', 'other'].includes(localStorage.getItem('cc_net'))
+  ? localStorage.getItem('cc_net') : 'all';   // all | tesla | other
 let netPick = null;   // an exact network name when the search query asked for one
 const FDEF = { kw: 0, stalls: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
-let F = Object.assign({}, FDEF, JSON.parse(localStorage.getItem('cc_filters') || '{}'));
+let F = Object.assign({}, FDEF, readJSON('cc_filters', {}, isPlainObj));
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
   h24: () => 'Open 24h', free: () => 'Free', nodlr: () => 'No dealerships',
@@ -1060,7 +1107,7 @@ function clearAllNarrowing() {
   F = Object.assign({}, FDEF); localStorage.setItem('cc_filters', JSON.stringify(F));
   syncNetSeg(); renderCarBar(); syncFilterUI(); render(); syncUrl();
 }
-let favs = new Set(JSON.parse(localStorage.getItem('cc_favs') || '[]'));
+let favs = new Set(readJSON('cc_favs', [], Array.isArray));
 const CARS = D.cars || {};
 let car = localStorage.getItem('cc_car') || '';   // model name or '' for none
 let onlyMine = localStorage.getItem('cc_onlymine') === '1';   // connector filter
@@ -1150,6 +1197,11 @@ function safeUrl(u) {
 function toast(msg) {
   native('log', { msg: 'toast: ' + String(arguments[0]) });   // phone-side console
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  /* The update prompt makes this element tappable and sets a reload handler, and its own
+     cleanup lives in the timer cleared below. Any later toast used to cancel that cleanup,
+     leaving an invisible, tappable reload button over the results list. Every ordinary
+     toast resets both. */
+  t.style.pointerEvents = ''; t.onclick = null;
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
 }
 const saveFavs = () => {
@@ -1446,7 +1498,8 @@ const BASEMAPS = {
     opts:  { maxZoom: 19, maxNativeZoom: 16 },
     // verbatim from the service's own copyrightText — Esri requires basemap AND data credit
     attrib: '<a href="https://www.esri.com">Esri</a>, HERE, Garmin, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, and the GIS user community' } };
-let basePref = localStorage.getItem('cc_basepref') || 'auto';   // auto | carto | esri
+let basePref = ['auto', 'carto', 'esri'].includes(localStorage.getItem('cc_basepref'))
+  ? localStorage.getItem('cc_basepref') : 'auto';   // auto | carto | esri
 let baseProvider = basePref !== 'auto' ? basePref : 'esri';
 // A healthy z12 tile over Austin is tens of KB; a watermark or blank tile is under 2 KB.
 /* CARTO now enforces on this domain and answers with its normal map tile with
@@ -1459,12 +1512,22 @@ function probeBasemap() {
   baseProvider = basePref === 'auto' ? 'esri' : basePref;
   applyTheme();
 }
-/* Real outages do surface as tile errors, which is worth surviving. */
-let tileFails = 0;
+/* Real outages do surface as tile errors, which is worth surviving -- but so do a patch of
+   bad signal and being offline (the service worker answers an uncached tile with an error).
+   Six failures over the WHOLE session used to switch to CARTO, whose tiles carry the
+   watermark above, and nothing ever switched back. Now only a burst while online counts,
+   and Esri is retried after three minutes. */
+let tileFails = [];
 function onTileError() {
-  if (basePref !== 'auto' || baseProvider !== 'esri') return;
-  if (++tileFails < 6) return;
-  tileFails = 0; baseProvider = 'carto'; applyTheme();
+  if (basePref !== 'auto' || baseProvider !== 'esri' || !navigator.onLine) return;
+  const now = Date.now();
+  tileFails = tileFails.filter(t => now - t < 20000);
+  tileFails.push(now);
+  if (tileFails.length < 12) return;
+  tileFails = []; baseProvider = 'carto'; applyTheme();
+  setTimeout(() => {
+    if (basePref === 'auto' && baseProvider === 'carto') { baseProvider = 'esri'; applyTheme(); }
+  }, 180000);
 }
 /* If the probe was wrong for this visitor — CARTO can serve a good tile for the probe and
    watermarks for the rest — they need a way out that does not depend on our detection. */
@@ -1502,7 +1565,8 @@ const netCol = s => NETCOL[s.net] || NETFALLBACK;
 const MTHEME = {
   light: { base: '#9aa7b3', ghost: '#cdd5dc', hot: '#15803d', hotStroke: '#ffffff' },
   dark:  { base: '#4a5563', ghost: '#252b34', hot: '#4ade80', hotStroke: '#0e1116' } };
-let themePref = localStorage.getItem('cc_theme') || 'auto';
+let themePref = ['auto', 'light', 'dark'].includes(localStorage.getItem('cc_theme'))
+  ? localStorage.getItem('cc_theme') : 'auto';
 let curDark = false, tiles = null, labelTiles = null;
 const ICON_SUN = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>';
 const ICON_MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>';
@@ -2163,6 +2227,9 @@ $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 /* ───────── center: locate / pin / place ───────── */
 function setCenter(lat, lon, label, kind) {
   track('area-search', kind);            // 'me' | 'pin' | 'place' — not where
+  /* A new area makes anything still in flight for the old one wrong: a slow "ice cream"
+     lookup for Austin finished after a search for Denver and relabelled Denver with it. */
+  navGen++; livePoiGen++;
   center = { lat, lon, label, kind };
   // live POI results were fetched for the old area; they mean nothing here
   if (typeof clearLivePoi === 'function') clearLivePoi();
@@ -2189,6 +2256,7 @@ function updateCenterSub(n) {
 }
 function clearCenter() {
   center = null; stateScope = null;
+  navGen++; livePoiGen++;
   clearLivePoi();
   if (centerLayer) { map.removeLayer(centerLayer); centerLayer = null; }
   if (radiusLayer) { map.removeLayer(radiusLayer); radiusLayer = null; }
@@ -2316,11 +2384,16 @@ function rememberArea() {
 }
 
 async function reverseName(lat, lon) {
+  const asked = center;   // a second pin dropped meanwhile must not get this one's town
   try {
-    const r = await fetchTimeout(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`, 8000);
+    /* Only a town name is wanted (zoom=10), so send town precision: two decimals is about a
+       kilometre. Exact coordinates went to a third party although the location prompt says
+       the location stays on the device. */
+    const r = await fetchTimeout(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${(+lat).toFixed(2)}&lon=${(+lon).toFixed(2)}`, 8000);
+    if (!r.ok) return;
     const j = await r.json();
     const nm = placeLabel(j);
-    if (nm && center && (center.kind === 'pin' || center.kind === 'me')) {
+    if (nm && center && center === asked && (center.kind === 'pin' || center.kind === 'me')) {
       center.label = nm; $('ccLabel').textContent = nm;
       /* Persist the resolved name too. Without this the stored area kept the placeholder
          ("Shared spot" / "Dropped pin") and every return visit showed that instead of the
@@ -2772,6 +2845,10 @@ function looksLikeChainBrand(hits, q) {
   return towns.size >= 2;
 }
 
+/* Free public services answer overload with an HTML error page; parsing that as JSON put
+   "Unexpected token '<'" on screen. Say what happened and what to do instead. */
+const busyMsg = (what, status) => status === 429 || status === 403 || status >= 500
+  ? `${what} is busy right now — try again in a minute` : `${what} failed (error ${status})`;
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
@@ -2790,6 +2867,7 @@ async function geocode(q) {
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
               '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
   const r = await fetchTimeout(url);
+  if (!r.ok) throw new Error(busyMsg('Place search', r.status));
   const j = await r.json();
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
   const ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
@@ -2904,10 +2982,13 @@ $('placeIn').addEventListener('keydown', async e => {
 
   toast('Searching…');
   $('placeBox').classList.add('busy');
+  const myNav = ++navGen;
   try {
     const g = await geocode(p.place);
+    if (myNav !== navGen) return;            // they searched or moved on meanwhile
     setCenter(g.lat, g.lon, g.label, 'place');
   } catch (err) {
+    if (myNav !== navGen) return;
     render(); syncUrl();
     if (err.unsupportedChain) {
       /* A brand we don't precompute. If we know where to look, ask OSM live for it;
@@ -3485,7 +3566,6 @@ let livePoiKey = null, livePoiTerm = null, livePoiFor = {};
 /* Requests are serialised, so a second search waits for the first -- and then the FIRST one
    would come back and apply its results over the newer search the user is actually looking
    at. Stamp each lookup and drop anything that has been superseded. */
-let livePoiGen = 0;
 function clearLivePoi() {
   livePoiTerm = null; livePoiFor = {};
   matchVer++;                       // MATCH is about to change; scoped chip counts are stale
@@ -3739,6 +3819,9 @@ document.addEventListener('click', e => {
   const cancel = () => { if (timer) { clearTimeout(timer); timer = null; } };
   el.addEventListener('pointerdown', e => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
+    /* Popups and map controls live inside the map container too. A slow press on a popup's
+       Directions link (or iOS's own link-preview press) dropped a pin and replaced the area. */
+    if (e.target.closest && e.target.closest('.leaflet-popup, .leaflet-control')) { cancel(); return; }
     sx = e.clientX; sy = e.clientY;
     cancel();
     timer = setTimeout(() => {
@@ -4087,11 +4170,15 @@ document.addEventListener('click', async e => {
   document.querySelectorAll('.pp-det').forEach(d => d.remove());
   const [la, lo] = (row.dataset.at || '').split(',');
   row.insertAdjacentHTML('afterend', '<div class="pp-det">Looking up…</div>');
+  /* Hold on to THIS details box. Writing to "whatever follows the row" meant that after a
+     collapse the late answer overwrote the next chain's row instead (Chipotle's details
+     replaced Subway). If the box is gone, the answer is no longer wanted. */
+  const det = row.nextElementSibling;
   try {
     const p = await chainDetail(row.dataset.poi, la, lo);
-    if (row.nextElementSibling) row.nextElementSibling.outerHTML = poiDetailHtml(p);
+    if (det.isConnected) det.outerHTML = poiDetailHtml(p);
   } catch (err) {
-    if (row.nextElementSibling) row.nextElementSibling.textContent = "Couldn't reach OpenStreetMap.";
+    if (det.isConnected) det.textContent = "Couldn't reach OpenStreetMap.";
   }
 });
 
@@ -4145,8 +4232,15 @@ async function runRoute(opts) {
   if (!f || !t) return toast('Enter a start and a destination');
   if (!navigator.onLine) return toast('Route planning needs a connection');
   $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
+  const myNav = ++navGen;
+  const stale = () => {
+    if (myNav === navGen) return false;
+    if ($('routeInfo').textContent === 'Routing…') $('routeInfo').textContent = '';
+    return true;
+  };
   try {
     const [a, b] = await Promise.all([geocode(f), geocode(t)]);
+    if (stale()) return;
     /* Show what the geocoder actually resolved. "la" -> "vegas" in the summary reads like
        the app did not understand; "Los Angeles, CA -> Las Vegas, NV" says it did, and it
        is what Edit should show too. */
@@ -4160,23 +4254,26 @@ async function runRoute(opts) {
     let trip = lsGet(RTE_NS, rk, RTE_TTL);
     if (!trip) {
       const r = await fetchTimeout(`https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=full&geometries=geojson`, 20000);
+      if (!r.ok) throw new Error(busyMsg('Route planning', r.status));
       const j = await r.json();
       if (!j.routes || !j.routes.length) throw new Error('No driving route found');
       trip = { v: j.routes[0].geometry.coordinates.map(c2 => [+c2[1].toFixed(5), +c2[0].toFixed(5)]),
                mi: j.routes[0].distance / MI, hr: j.routes[0].duration / 3600 };
       lsPut(RTE_NS, rk, trip, RTE_CAP);
     }
+    if (stale()) return;
     clearCenter();
     applyCorridor(trip.v, trip.mi, trip.hr);
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
     if (opts.poi) await runLivePoi(opts.poi, 'route');
-  } catch (e) { $('routeInfo').textContent = e.message; }
-  $('goBtn').disabled = false;
+  } catch (e) { if (!stale()) $('routeInfo').textContent = e.message; }
+  finally { $('goBtn').disabled = false; }
 }
 $('goBtn').onclick = () => runRoute();
 function applyCorridor(verts, mi, hr) {
   track('route');
+  livePoiGen++;
   clearRoute();
   const rOpt = { pane: 'routePane', renderer: routeRenderer, interactive: false };
   routeCase = L.polyline(verts, { ...rOpt, color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);

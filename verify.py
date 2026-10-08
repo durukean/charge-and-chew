@@ -346,6 +346,34 @@ for _m in re.finditer(r"\btoast\(", _html):
         _d += {"(": 1, ")": -1}.get(_html[_j], 0); _j += 1
     if "esc(" in _html[_i:_j]: _toasts.append(_html.count("\n", 0, _m.start()) + 1)
 check(not _toasts, "toast() text is esc()'d again — users would see literal &amp; (lines %s)" % _toasts[:5])
+# ---- stale answers and leftover state (audit 2026-10-07; each reproduced before the fix) ----
+_toastfn = _html[_html.find("function toast(msg) {"):][:900]
+check("t.style.pointerEvents = ''; t.onclick = null;" in _toastfn,
+      "toast() no longer resets the update prompt's tap handler — an invisible reload button over the list")
+check(re.search(r"const g = await geocode\(p\.place\);\n\s*if \(myNav !== navGen\) return;", _html) is not None,
+      "a slow place search can overwrite a newer one again (Austin answering after Denver)")
+_rr = _html[_html.find("async function runRoute(opts)"):_html.find("function applyCorridor(")]
+check(_rr.count("if (stale()) return;") >= 2 and "finally { $('goBtn').disabled = false; }" in _rr,
+      "a late route can wipe a newer search again, or leave the Go button disabled")
+for _fn in ("function setCenter(", "function clearCenter("):
+    _b = _html[_html.find(_fn):][:400]
+    check("navGen++; livePoiGen++;" in _b, f"{_fn.split('(')[0][9:]} no longer cancels lookups still running for the old area")
+check(re.search(r"(?m)^let livePoiGen = 0;", _html) and _html.find("let livePoiGen = 0;") < _html.find("function setCenter("),
+      "livePoiGen is declared after setCenter — a boot-time setCenter would hit the TDZ")
+check("if (det.isConnected) det.outerHTML = poiDetailHtml(p);" in _html and
+      "row.nextElementSibling.outerHTML" not in _html,
+      "a late chain-detail answer can overwrite the NEXT chain's row again")
+check("e.target.closest('.leaflet-popup, .leaflet-control')" in _html,
+      "press-and-hold inside a popup drops a pin again")
+_rv = _html[_html.find("async function reverseName("):][:900]
+check("center === asked" in _rv and "toFixed(2)" in _rv,
+      "reverseName sends exact coordinates again, or names a newer pin with an older answer")
+check("if (!r.ok) throw new Error(busyMsg('Place search', r.status));" in _html
+      and "if (!r.ok) throw new Error(busyMsg('Route planning', r.status));" in _html,
+      "a rate-limited geocode or route shows a raw JSON parse error again")
+_te = _html[_html.find("function onTileError()"):][:400]
+check("!navigator.onLine" in _te and "setTimeout(" in _te,
+      "bad signal can switch the map to watermarked CARTO tiles for the rest of the session again")
 # An OSM website= tag is free text anyone can edit; esc() leaves javascript: URLs intact.
 # safeUrl is an allow-list (output always starts with http or is empty), which is what makes
 # it immune to "java<TAB>script:" -- mutation-tested: removing the whitespace strip does NOT

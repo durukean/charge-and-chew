@@ -92,23 +92,10 @@ def chrome_bin():
     return None
 
 
-def main():
-    binpath = chrome_bin()
-    if not binpath:
-        print("SKIP: Chrome not found; UI test not run")
-        return 0
-    httpd, port = serve()
-    time.sleep(0.4)
-    # No `at=`: that triggers a reverse-geocode to Nominatim which keeps the page alive past
-    # the virtual-time budget and makes Chrome hang. The chain filter alone exercises the
-    # same rendering path with no external network.
-    url = f"http://127.0.0.1:{port}/?chain=IHOP&nosw=1"
+def render_dom(binpath, url):
+    """Load url in headless Chrome and return the rendered DOM, or None."""
     prof = tempfile.mkdtemp()          # manual: Chrome holds files open, so cleanup must be lenient
     try:
-        # --dump-dom after a settle period; we inject the probe via a data: bookmarklet-free path
-        # by using --virtual-time-budget so scripts run, then evaluate through the DevTools protocol.
-        script = os.path.join(prof, "probe.js")
-        open(script, "w").write(PROBE)
         # No service worker during the test: it keeps the page alive and --dump-dom never returns.
         cmd = [binpath, "--headless=new", "--disable-gpu", "--no-sandbox",
                f"--user-data-dir={prof}", "--virtual-time-budget=12000",
@@ -131,12 +118,45 @@ def main():
                 proc.kill()
         dom = open(domfile, encoding="utf-8", errors="replace").read()
         if len(dom) < 5000:
-            print("FAIL: headless Chrome produced no usable DOM")
-            httpd.shutdown()
-            return 1
+            print(f"FAIL: headless Chrome produced no usable DOM for {url}")
+            return None
+        return dom
     finally:
         shutil.rmtree(prof, ignore_errors=True)
+
+
+def main():
+    binpath = chrome_bin()
+    if not binpath:
+        print("SKIP: Chrome not found; UI test not run")
+        return 0
+    httpd, port = serve()
+    time.sleep(0.4)
+    # No `at=`: that triggers a reverse-geocode to Nominatim which keeps the page alive past
+    # the virtual-time budget and makes Chrome hang. The chain filter alone exercises the
+    # same rendering path with no external network.
+    url = f"http://127.0.0.1:{port}/?chain=IHOP&nosw=1"
+    dom = render_dom(binpath, url)
+    if dom is None:
+        httpd.shutdown()
+        return 1
+
+    # Second boot with corrupted saved settings. One malformed favourite used to stop the
+    # whole app script, leaving the splash up forever -- and reloading never fixed it.
+    seed = os.path.join(HERE, "__seed_storage.html")
+    open(seed, "w").write("""<!doctype html><script>
+localStorage.setItem('cc_favs', '{"x":1}'); localStorage.setItem('cc_filters', 'garbage{');
+localStorage.setItem('cc_net', 'bogus'); localStorage.setItem('cc_basepref', 'nonsense');
+localStorage.setItem('cc_theme', 'purple');
+location.replace('/?chain=IHOP&nosw=1');
+</script>""")
+    try:
+        dom_bad = render_dom(binpath, f"http://127.0.0.1:{port}/__seed_storage.html")
+    finally:
+        os.remove(seed)
     httpd.shutdown()
+    if dom_bad is None:
+        return 1
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
     checks = {
@@ -151,6 +171,7 @@ def main():
         # splash rather than the source: an error only counts if it replaced the splash body.
         "no_boot_error": not re.search(r'id="splash"[^>]*>\s*<div[^>]*color:#b91c1c', dom),
         "data_actually_loaded": dom.count('class="row"') > 3,
+        "boots_with_corrupted_saved_settings": dom_bad.count('class="row"') > 3,
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():
