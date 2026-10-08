@@ -118,10 +118,37 @@ if os.path.exists(sample):
     check("<h1>" in h, "generated pages lost their h1")
     check(" a IHOP" not in h, "grammar regression: 'a IHOP'")
 
+# Structured data is quoted verbatim by search engines and AI tools: plain text only, and
+# the network named once. 527 pages showed "Arby&#x27;s"; ~10,000 entries read
+# "Tesla Supercharger — Woodburn, OR - Tesla Supercharger".
+_ld_bad, _ld_dbl, _no_banner = [], 0, []
+for _p in pages + glob.glob(os.path.join(HERE, "trip/**/index.html"), recursive=True):
+    _h = open(_p, encoding="utf-8").read()
+    if 'name="apple-itunes-app"' not in _h:
+        _no_banner.append(os.path.relpath(_p, HERE))
+    for _m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', _h, re.S):
+        if re.search(r"&#x27;|&#39;|&amp;|&quot;", _m.group(1)):
+            _ld_bad.append(os.path.relpath(_p, HERE))
+        _ld_dbl += len(re.findall(r'"name": "Tesla Supercharger \u2014 [^"]*Tesla Supercharger', _m.group(1)))
+check(not _ld_bad, f"{len(_ld_bad)} pages have HTML escapes inside JSON-LD, e.g. {_ld_bad[:2]}")
+check(_ld_dbl == 0, f"{_ld_dbl} JSON-LD place names repeat the network")
+check(not _no_banner, f"{len(_no_banner)} generated pages lack the Smart App Banner, e.g. {_no_banner[:2]}")
+_bp = open(os.path.join(HERE, "build.py")).read()
+check(re.search(r"(?m)^\s*WRITTEN\.add\(os\.path\.normpath\(full\)\)", _bp)
+      and re.search(r"(?m)^\s*os\.remove\(_full\)", _bp),
+      "build.py no longer retires pages it stopped generating — they live on with stale data")
+_priv = open(os.path.join(HERE, "privacy", "index.html"), encoding="utf-8").read()
+check("Google Fonts" in _priv and "CARTO" in _priv and "It stays on your device" not in _priv,
+      "privacy policy no longer discloses Google Fonts / CARTO, or claims location stays on the device")
+
 # The basemap has a silent-failure mode: CARTO throttles by referrer and serves a
 # watermark tile reading "API key required" as a valid HTTP 200 PNG, so no request errors
 # and the entire map becomes that message. Guard the probe and its fallback.
 _html = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
+check('name="apple-itunes-app" content="app-id=6809134093"' in _html, "home page lost the Smart App Banner")
+check(re.search(r'<meta name="viewport" content="[^"]*user-scalable=no', _html) is None,
+      "pinch-zoom is blocked on the website again (WCAG 1.4.4); lock it only inside the app")
+check("Find Tesla Superchargers" not in _html, "home page metadata says Tesla-only again")
 # match the actual call site at boot, not just the identifier — a commented-out call
 # still contains the name, which an earlier version of this check happily accepted
 # "supercharger near chase bank" flew the map to Dallas: every hit was a different Chase
@@ -444,6 +471,21 @@ if _ov_ad:
           "viewDidLoad resets the boot log again — every line logged at launch is wiped")
     check(_LIVE_RESET.search(_dfl[:400]) is not None,
           "the boot log is no longer reset at the start of launch")
+    # Release-blocking iOS details from the 2026-10-07 audit.
+    _py = open(os.path.join(HERE, "ios", "project.yml")).read()
+    _wsec = _py[_py.find("  ChargeAndChewWidget:"):]
+    check("CFBundleVersion: $(CURRENT_PROJECT_VERSION)" in _wsec,
+          "widget build number is hard-coded again — App Store Connect flags the mismatch (ITMS-90473)")
+    check("stays on your device" not in _py, "location prompt claims the location stays on the device again")
+    _pm = os.path.join(HERE, "ios", "ChargeAndChew", "PrivacyInfo.xcprivacy")
+    check(os.path.exists(_pm) and "<string>CA92.1</string>" in open(_pm).read(),
+          "privacy manifest missing, or no longer declares the UserDefaults reason")
+    check('appendingPathComponent("widget.tsv")' in _swf("../Widget/ChargeAndChewWidget.swift")
+          and "make-widget-index.py" in open(os.path.join(HERE, "ios", "sync-web.sh")).read(),
+          "the widget parses the full data.js again (~70 MB peak, over WidgetKit's limit)")
+    check(re.search(r"(?m)^\s*guard userTapped else", _ov_wv) is not None
+          and 'scheme == "tel" || scheme == "mailto"' in _ov_wv,
+          "non-web links can open without a tap again (tel:, sms:, other apps)")
     # A bare hasSuffix("google.com") also matches "evilgoogle.com".
     check('host.hasSuffix(".google.com")' in _ov_wv and 'host.hasSuffix("google.com")' not in _ov_wv,
           "openExternal matches google.com by bare suffix again — evilgoogle.com would pass")

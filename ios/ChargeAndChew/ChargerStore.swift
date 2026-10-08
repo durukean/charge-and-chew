@@ -64,6 +64,25 @@ final class ChargerStore {
         return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
     }
 
+    /// One line per stop with food: id, lat, lon, kw, stalls, net, city, st, name, food --
+    /// food being brand<US>emoji<US>metres entries joined by <RS>, nearest first.
+    static func parseCompact(_ raw: String) -> [Charger] {
+        var out: [Charger] = []
+        for line in raw.split(separator: "\n", omittingEmptySubsequences: true) {
+            let f = line.split(separator: "\t", omittingEmptySubsequences: false)
+            guard f.count == 10, let id = Int(f[0]), let lat = Double(f[1]), let lon = Double(f[2]) else { continue }
+            let food: [Charger.Place] = f[9].split(separator: "\u{1E}").compactMap { e in
+                let p = e.split(separator: "\u{1F}", omittingEmptySubsequences: false)
+                guard p.count == 3, let m = Double(p[2]) else { return nil }
+                return (brand: String(p[0]), emoji: String(p[1]), metres: m)
+            }
+            out.append(Charger(id: id, name: String(f[8]), lat: lat, lon: lon, net: String(f[5]),
+                               kw: Int(f[3]) ?? 0, stalls: Int(f[4]) ?? 0,
+                               city: String(f[6]), st: String(f[7]), food: food))
+        }
+        return out
+    }
+
     /// Siri runs off the main thread while CarPlay and the widget run on others.
     private let lock = NSLock()
 
@@ -72,8 +91,15 @@ final class ChargerStore {
         // Marked loaded only on SUCCESS. Setting it first meant one failed read (a file
         // mid-swap, a memory spike) left an empty charger list for the life of the process.
         guard !loaded else { return }
-        guard let file = dataURL?(), let raw = try? String(contentsOf: file, encoding: .utf8),
-              let root = Self.decodePayload(raw),
+        guard let file = dataURL?(), let raw = try? String(contentsOf: file, encoding: .utf8) else { return }
+        // The widget's own small index (make-widget-index.py): the full data.js decoded into
+        // Foundation objects peaks around 70 MB, over WidgetKit's ~30 MB limit.
+        if file.pathExtension == "tsv" {
+            chargers = Self.parseCompact(raw)
+            loaded = !chargers.isEmpty
+            return
+        }
+        guard let root = Self.decodePayload(raw),
               let sites = root["sites"] as? [[String: Any]],
               let brands = root["brands"] as? [String: [String: Any]],
               let matches = root["matches"] as? [String: [String: [Any]]] else { return }

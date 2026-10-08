@@ -48,7 +48,23 @@ for _sid, _m in matches.items():
 WALK = 80
 
 def slug(s): return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+from html import unescape   # 'html' itself is shadowed by locals named html below
 def esc(s): return html.escape(str(s))
+
+
+def ld_script(x):
+    """One JSON-LD block. Search engines and AI tools quote these strings verbatim, so they
+    must be plain text: the FAQ text used to be HTML-escaped first and showed up as
+    "Arby&#x27;s" on 527 pages. Only "</" needs neutralising inside a script element."""
+    return ('<script type="application/ld+json">'
+            + json.dumps(x, ensure_ascii=False).replace("</", "<\\/") + "</script>")
+
+
+def place_name(s):
+    """"Tesla Supercharger — Woodburn, OR - Tesla Supercharger" doubled the network ~10,000
+    times; only prefix the network when the station name does not already say it."""
+    net, name = s.get("net") or "DC fast charger", s["name"]
+    return name if net.lower() in name.lower() else f"{net} — {name}"
 def mins(m): return max(1, round(m / WALK))
 def art(name):
     """'a IHOP' reads wrong; pick a/an by how the name is actually said."""
@@ -161,6 +177,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
     root = "../" * depth
     out = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-itunes-app" content="app-id=6809134093">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
@@ -194,6 +211,14 @@ Walk times are minimums from straight-line distance at ~3 mph; the real walk is 
     full = os.path.join(HERE, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, "w").write(out)
+    WRITTEN.add(os.path.normpath(full))
+
+
+# Every page this run writes. Anything else under the generated sections is a page a past run
+# made that no longer qualifies; it is deleted at the end instead of living on with old data
+# (near/domino-s/me was still serving August numbers in October).
+WRITTEN = set()
+GENERATED_DIRS = ("near", "along", "trip")
 
 
 def page_stats(key, rows):
@@ -268,8 +293,9 @@ def faq_block(key, st_name, sx):
     html = '<h2>Common questions</h2><div class="faq">' + "".join(
         f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in qa) + "</div>"
     schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-        {"@type": "Question", "name": q,
-         "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in qa]}
+        {"@type": "Question", "name": unescape(re.sub(r"<[^>]+>", "", q)),
+         "acceptedAnswer": {"@type": "Answer",
+                            "text": unescape(re.sub(r"<[^>]+>", "", a))}} for q, a in qa]}
     return html, schema
 
 
@@ -279,7 +305,7 @@ def jsonld_chain(key, sites_list, canonical, faq_schema=None):
     for i, (d, sid) in enumerate(sites_list[:25], 1):
         s = sites[sid]
         items.append({"@type": "ListItem", "position": i, "item": {
-            "@type": "Place", "name": f"{s.get('net','DC fast charger')} — {s['name']}",
+            "@type": "Place", "name": place_name(s),
             "address": {"@type": "PostalAddress", "streetAddress": s["street"],
                         "addressLocality": s["city"], "addressRegion": s["st"], "addressCountry": "US"},
             "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}})
@@ -292,7 +318,7 @@ def jsonld_chain(key, sites_list, canonical, faq_schema=None):
          "numberOfItems": len(sites_list), "itemListElement": items}]
     if faq_schema:
         blocks.append(faq_schema)
-    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+    return "".join(ld_script(x) for x in blocks)
 
 
 def jsonld_route(name, kind, stop_ids, canonical, total):
@@ -305,7 +331,7 @@ def jsonld_route(name, kind, stop_ids, canonical, total):
     for i, sid in enumerate(stop_ids[:25], 1):
         s_ = sites[sid]
         items.append({"@type": "ListItem", "position": i, "item": {
-            "@type": "Place", "name": f"{s_.get('net','DC fast charger')} — {s_['name']}",
+            "@type": "Place", "name": place_name(s_),
             "address": {"@type": "PostalAddress", "streetAddress": s_["street"],
                         "addressLocality": s_["city"], "addressRegion": s_["st"], "addressCountry": "US"},
             "geo": {"@type": "GeoCoordinates", "latitude": s_["lat"], "longitude": s_["lon"]}}})
@@ -318,7 +344,7 @@ def jsonld_route(name, kind, stop_ids, canonical, total):
         {"@context": "https://schema.org", "@type": "ItemList",
          "name": f"EV fast chargers with food along {name}",
          "numberOfItems": total, "itemListElement": items}]
-    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+    return "".join(ld_script(x) for x in blocks)
 
 
 def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
@@ -326,7 +352,7 @@ def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
     for i, (d, sid) in enumerate(sites_list[:25], 1):
         s = sites[sid]
         items.append({"@type": "ListItem", "position": i, "item": {
-            "@type": "Place", "name": f"{s.get('net','DC fast charger')} — {s['name']}",
+            "@type": "Place", "name": place_name(s),
             "address": {"@type": "PostalAddress", "streetAddress": s["street"],
                         "addressLocality": s["city"], "addressRegion": s["st"], "addressCountry": "US"},
             "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}})
@@ -340,7 +366,7 @@ def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
          "numberOfItems": len(sites_list), "itemListElement": items}]
     if faq_schema:
         blocks.append(faq_schema)
-    return "".join(f'<script type="application/ld+json">{json.dumps(x)}</script>' for x in blocks)
+    return "".join(ld_script(x) for x in blocks)
 
 
 def site_card(s, focus, root):
@@ -470,7 +496,7 @@ states_html = "".join(
     + "</div>"
     for st, cm in sorted(state_chain.items(), key=lambda x: STATES.get(x[0], x[0])))
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
-<p class="lead">{len(matches)} of {len(sites)} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
+<p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <a class="cta" href="../">Open the interactive map →</a>
 <p><a class="cta" href="../along/">Browse by interstate instead →</a></p>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
@@ -784,12 +810,13 @@ PRIVACY_BODY = """<h1>Privacy</h1>
 <p class="lead">Charge &amp; Chew has no accounts, no sign-in and no advertising. Here is exactly what
 happens with your data, on the website and in the iOS app.</p>
 <h2>Your location</h2>
-<p>Used only when you tap the locate button, to centre the map on you. It stays on your device.
-Two things are sent elsewhere so the app can work, neither of them to us: your coordinates go to
-<a href="https://nominatim.openstreetmap.org">OpenStreetMap's Nominatim</a> to put a place name on
-the area, and to the <a href="https://project-osrm.org">OSRM</a> router when you plan a route. Both
-are community services with their own policies. Deny location and everything still works by
-searching a city or pressing on the map.</p>
+<p>Used only when you tap the locate button, to centre the map on you. It is never sent to us.
+Some of it reaches the map services the app needs, none of which is ours: a town-level position
+(rounded to about a kilometre) goes to <a href="https://nominatim.openstreetmap.org">OpenStreetMap's
+Nominatim</a> to put a place name on the area; your start and destination go to the
+<a href="https://project-osrm.org">OSRM</a> router when you plan a route; and map tiles and nearby-place
+lookups reveal the area you are looking at to the services listed below. Deny location and
+everything still works by searching a city or pressing on the map.</p>
 <h2>What we keep on your device</h2>
 <p>Saved stops, your car, theme and filter choices, and the last area you looked at — in your
 browser's local storage, or the app's. Nothing is sent to us. Clearing site data, or deleting the
@@ -799,14 +826,17 @@ app, removes all of it.</p>
 open-source and privacy-first: no cookies, no personal data, no cross-site tracking. It tells us
 roughly how many people used the site and which pages, and nothing about who you are.</p>
 <h2>Other services the app talks to</h2>
-<p>Map tiles from Esri; charger data from the US DOE / NREL Alternative Fuel Stations database
-(bundled, refreshed monthly); chain and shop locations from OpenStreetMap. Tapping a place or
-"Directions" opens Google Maps or Apple Maps, which are governed by their own policies.</p>
+<p>Map tiles from Esri (or CARTO, if you choose that map style, or as a stand-in while Esri is
+unreachable); fonts from Google Fonts, which like any web host sees your IP address when the page
+loads; charger data from the US DOE / NREL Alternative Fuel Stations database (bundled, refreshed
+monthly); chain and shop locations from OpenStreetMap, including live lookups through its Overpass
+service. Tapping a place or "Directions" opens Google Maps or Apple Maps, which are governed by
+their own policies.</p>
 <h2>Contact</h2>
 <p>Questions or a deletion request (there is nothing on our side to delete, but ask anyway):
 <a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>.</p>
-<p class="stats">Last updated 2026-09-09.</p>"""
-page("privacy/index.html", "Privacy", "What Charge & Chew does with your data: no accounts, no ads, location stays on your device, anonymous page counts only.", PRIVACY_BODY, "privacy/")
+<p class="stats">Last updated 2026-10-08.</p>"""
+page("privacy/index.html", "Privacy", "What Charge & Chew does with your data: no accounts, no ads, your location is never sent to us, anonymous page counts only.", PRIVACY_BODY, "privacy/")
 add("privacy/index.html")
 
 SUPPORT_BODY = """<h1>Support</h1>
@@ -817,6 +847,10 @@ you'd actually stop at. Free, no account. Here is how to get the most out of it,
 drive ("LA to Las Vegas"). <b>Tap a stop</b> to see every walkable place with minutes, and get
 directions. <b>Press and hold the map</b> to search that spot. <b>Set your car</b> (the car icon) for
 connector compatibility and a rough charge time at each stop.</p>
+<h2>On iPhone</h2>
+<p>Charge &amp; Chew is also an iPhone app, with a home-screen widget for the nearest stop with
+food and Siri shortcuts: <a href="https://apps.apple.com/us/app/charge-chew-ev-stops/id6809134093">get it
+on the App Store</a>.</p>
 <h2>Things worth knowing</h2>
 <p>Walk times are straight-line estimates at about 3 mph. Charge times assume a typical peak rate
 for your car. Charger hours, pricing and stall counts come from public data and can be out of date —
@@ -838,6 +872,22 @@ add("support/index.html")
 # ---- shared stylesheet (was inlined on every page: 4.9 KB x ~3,000 pages) ----
 os.makedirs(os.path.join(HERE, "assets"), exist_ok=True)
 open(os.path.join(HERE, "assets", "pages.css"), "w").write(CSS)
+
+# ---- retire pages this run no longer generates ----
+_retired = [os.path.normpath(os.path.join(_root, "index.html"))
+            for _d in GENERATED_DIRS for _root, _dirs, _files in os.walk(os.path.join(HERE, _d))
+            if "index.html" in _files and os.path.normpath(os.path.join(_root, "index.html")) not in WRITTEN]
+if len(_retired) > 200:
+    # A run that suddenly retires hundreds of pages is a broken build, not a quiet month.
+    sys.exit(f"refusing: {len(_retired)} pages would be retired (e.g. {_retired[:3]})")
+for _full in _retired:
+    os.remove(_full)
+    _dir = os.path.dirname(_full)
+    while _dir != HERE and os.path.isdir(_dir) and not os.listdir(_dir):
+        os.rmdir(_dir); _dir = os.path.dirname(_dir)
+_retired = [os.path.relpath(_f, HERE) for _f in _retired]
+if _retired:
+    print(f"Retired {len(_retired)} page(s) no longer generated: {', '.join(_retired[:5])}")
 
 # ---- sitemap / robots ----
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

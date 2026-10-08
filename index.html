@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>
+/* Pinch-zoom stays available on the website (blocking it fails WCAG 1.4.4 and Android Chrome
+   honours the block). Only the iOS app, whose bridge is injected before this runs, locks it:
+   there the page is the whole app and a stray pinch would zoom the entire interface. */
+if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc)
+  document.querySelector('meta[name=viewport]').content += ', maximum-scale=1.0, user-scalable=no';
+</script>
+<meta name="apple-itunes-app" content="app-id=6809134093">
 <title>Charge &amp; Chew — Fast EV chargers near your favorite restaurants &amp; stores</title>
 <meta name="description" content="Find EV fast chargers — Tesla, Electrify America, EVgo and more — within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Search any area, drop a pin, or plan a road trip around where you actually want to eat.">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -10,13 +18,14 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Charge &amp; Chew">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="canonical" href="https://chargeandchew.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Charge &amp; Chew">
 <meta property="og:title" content="Charge &amp; Chew — Fast EV chargers near your favorite chains">
-<meta property="og:description" content="Find Tesla Superchargers within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Plan road trip charging stops around where you actually want to eat.">
+<meta property="og:description" content="Find EV fast chargers — Tesla, Electrify America, EVgo and more — within a short walk of IHOP, Walmart, Chick-fil-A, Buc-ee's and dozens of other chains. Plan road trip charging stops around where you actually want to eat.">
 <meta property="og:url" content="https://chargeandchew.com/">
 <meta property="og:image" content="https://chargeandchew.com/og.png">
 <meta property="og:image:width" content="1200">
@@ -27,7 +36,7 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"Charge & Chew",
 "url":"https://chargeandchew.com/","applicationCategory":"TravelApplication",
 "operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-"description":"Find Tesla Superchargers within walking distance of specific restaurant and store chains, and plan road trip charging stops around them."}
+"description":"Find EV fast chargers on every major network within walking distance of specific restaurant and store chains, and plan road trip charging stops around them."}
 </script>
 <link rel="stylesheet" href="/vendor/leaflet.css">
 <script src="/vendor/leaflet.js"></script>
@@ -65,6 +74,7 @@
    that is the single fastest way for an app to feel like a web page in a box. */
 html.native{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 html.native input,html.native textarea,html.native .pp-addr{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+html.native .web-only{display:none}   /* e.g. the App Store link, inside the app itself */
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -923,7 +933,8 @@ svg{display:block}
   <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
   <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
   <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.
-  <a href="privacy/"><b>Privacy</b></a> · <a href="support/"><b>Support</b></a></p>
+  <a href="privacy/"><b>Privacy</b></a> · <a href="support/"><b>Support</b></a><span class="web-only"> ·
+  <a href="https://apps.apple.com/us/app/charge-chew-ev-stops/id6809134093" target="_blank" rel="noopener"><b>iPhone app</b></a></span></p>
   <p><b>Popular chains:</b></p>
   <div class="chainlinks"><a href="near/ihop/">🥞 IHOP</a><a href="near/waffle-house/">🧇 Waffle House</a><a href="near/denny-s/">🍳 Denny's</a><a href="near/cracker-barrel/">🪵 Cracker Barrel</a><a href="near/in-n-out/">🍔 In-N-Out</a><a href="near/whataburger/">🍔 Whataburger</a><a href="near/chick-fil-a/">🐔 Chick-fil-A</a><a href="near/starbucks/">☕ Starbucks</a><a href="near/dunkin/">🍩 Dunkin'</a><a href="near/mcdonald-s/">🍟 McDonald's</a><a href="near/chipotle/">🌯 Chipotle</a><a href="near/panera-bread/">🥖 Panera Bread</a><a href="near/culver-s/">🍦 Culver's</a><a href="near/buc-ee-s/">🦫 Buc-ee's</a><a href="near/wawa/">🦆 Wawa</a><a href="near/sheetz/">⛽ Sheetz</a><a href="near/circle-k/">⛽ Circle K</a><a href="near/love-s/">⛽ Love's</a><a href="near/pilot/">⛽ Pilot</a><a href="near/walmart/">🛒 Walmart</a><a href="near/target/">🎯 Target</a><a href="near/costco/">📦 Costco</a><a href="near/sam-s-club/">🏪 Sam's Club</a><a href="near/kroger/">🛒 Kroger</a><a href="near/publix/">🛒 Publix</a><a href="near/h-e-b/">🛒 H-E-B</a><a href="near/whole-foods/">🥬 Whole Foods</a><a href="near/trader-joe-s/">🛍️ Trader Joe's</a><a href="near/meijer/">🛒 Meijer</a><a href="near/dollar-general/">🏪 Dollar General</a></div>
   <p><b>Road trips:</b></p>

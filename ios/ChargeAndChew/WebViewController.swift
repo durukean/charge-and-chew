@@ -200,9 +200,16 @@ final class WebViewController: UIViewController {
     /// Maps app can claim them (Universal Links do not fire inside SFSafariViewController);
     /// everything else opens in an in-app Safari sheet with a Done button, which keeps the
     /// user in the app instead of bouncing them out to Safari with no way back.
-    private func openExternal(_ url: URL) {
+    private func openExternal(_ url: URL, userTapped: Bool) {
         guard let scheme = url.scheme?.lowercased() else { return }
+        /* Only a link the user actually tapped may leave the app. Any non-web URL used to be
+           handed to the system for any navigation in any frame, so a script (including the
+           third-party analytics one) could start a call, a text or another app with no tap.
+           The page itself never navigates by script, so this costs nothing. */
+        guard userTapped else { Diag.log("blocked untapped navigation to \(scheme):"); return }
         if scheme != "http" && scheme != "https" {
+            // tel: is the phone number on a stop; mailto: is the support address.
+            guard scheme == "tel" || scheme == "mailto" else { return }
             UIApplication.shared.open(url); return
         }
         let host = url.host?.lowercased() ?? ""
@@ -281,12 +288,13 @@ extension WebViewController: WKNavigationDelegate {
         if url.scheme == AppSchemeHandler.scheme {
             // The app itself is one page. Any other main-frame path is a site page.
             if action.targetFrame?.isMainFrame == true, url.path != "/index.html", url.path != "/" {
-                openExternal(siteURL(forLocalPath: url.path, query: url.query))
+                openExternal(siteURL(forLocalPath: url.path, query: url.query),
+                             userTapped: action.navigationType == .linkActivated)
                 return decisionHandler(.cancel)
             }
             return decisionHandler(.allow)
         }
-        openExternal(url)
+        openExternal(url, userTapped: action.navigationType == .linkActivated)
         decisionHandler(.cancel)
     }
 }
@@ -297,8 +305,10 @@ extension WebViewController: WKUIDelegate {
     func webView(_ webView: WKWebView, createWebViewWith cfg: WKWebViewConfiguration,
                  for action: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let url = action.request.url {
-            if url.scheme == AppSchemeHandler.scheme { openExternal(siteURL(forLocalPath: url.path, query: url.query)) }
-            else { openExternal(url) }
+            let tapped = action.navigationType == .linkActivated
+            if url.scheme == AppSchemeHandler.scheme {
+                openExternal(siteURL(forLocalPath: url.path, query: url.query), userTapped: tapped)
+            } else { openExternal(url, userTapped: tapped) }
         }
         return nil
     }

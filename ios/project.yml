@@ -8,7 +8,7 @@ options:
 
 settings:
   base:
-    MARKETING_VERSION: "1.0.4"
+    MARKETING_VERSION: "1.0.5"
     CURRENT_PROJECT_VERSION: "19"
     SWIFT_VERSION: "5.0"
     CODE_SIGN_STYLE: Automatic
@@ -55,7 +55,9 @@ targets:
         UILaunchStoryboardName: LaunchScreen
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
-        NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. Your location stays on your device."
+        # Honest wording: map lookups for your area do reach map services (town-level for
+        # place names). "Stays on your device" was not true.
+        NSLocationWhenInUseUsageDescription: "Charge & Chew uses your location to show the fast chargers nearest to you, and what you can walk to while you charge. It isn't sent to us or linked to you; map services only see the area you're looking at."
         ITSAppUsesNonExemptEncryption: false
         # Siri matches these against the app name in a spoken phrase; without them the only
         # accepted wording is the full store name, "Charge & Chew: EV Stops".
@@ -116,6 +118,10 @@ targets:
       path: Widget/Info.plist
       properties:
         CFBundleDisplayName: "Charge & Chew"
+        # Must match the app's, or App Store Connect flags the upload (ITMS-90473) -- the
+        # same literal-"1" trap fixed for the app target above.
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
         # The widget asks CoreLocation itself, under the containing app's authorization.

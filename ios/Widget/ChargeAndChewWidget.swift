@@ -21,7 +21,7 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in: Context, completion: @escaping (Timeline<StopEntry>) -> Void) {
         let store = ChargerStore.shared
-        store.dataURL = { ChargerStore.containingAppWebDir?.appendingPathComponent("data.js") }
+        store.dataURL = { ChargerStore.containingAppWebDir?.appendingPathComponent("widget.tsv") }
         WidgetLocation.shared.fix { loc in
             var entry = StopEntry(date: Date(), charger: nil, miles: 0, stale: false)
             if let loc, let (c, d) = store.nearestWithFood(to: loc, limit: 1).first {
@@ -45,8 +45,13 @@ struct Provider: TimelineProvider {
 /// a fix that has not arrived in four seconds is not coming this cycle.
 final class WidgetLocation: NSObject, CLLocationManagerDelegate {
     static let shared = WidgetLocation()
-    private let manager = CLLocationManager()
-    private var pending: ((CLLocation?) -> Void)?
+    // Lazy, and only touched inside main-queue blocks: getTimeline runs on a background
+    // thread, and a CLLocationManager delivers its callbacks on the thread that created it.
+    private lazy var manager = CLLocationManager()
+    /// Everyone waiting on the current fix. A small and a medium widget refresh together;
+    /// a single slot meant the second request overwrote the first, whose timeline then never
+    /// completed. Main-thread only.
+    private var waiting: [(CLLocation?) -> Void] = []
     private var timer: DispatchWorkItem?
 
     func fix(_ done: @escaping (CLLocation?) -> Void) {
@@ -54,7 +59,8 @@ final class WidgetLocation: NSObject, CLLocationManagerDelegate {
             self.manager.delegate = self
             self.manager.desiredAccuracy = kCLLocationAccuracyKilometer
             guard [.authorizedAlways, .authorizedWhenInUse].contains(self.manager.authorizationStatus) else { return done(nil) }
-            self.pending = done
+            self.waiting.append(done)
+            guard self.timer == nil else { return }      // a request is already in flight
             let t = DispatchWorkItem { [weak self] in self?.finish(nil) }
             self.timer = t
             DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: t)
@@ -63,11 +69,15 @@ final class WidgetLocation: NSObject, CLLocationManagerDelegate {
     }
     private func finish(_ loc: CLLocation?) {
         timer?.cancel(); timer = nil
-        let p = pending; pending = nil
-        p?(loc)
+        let all = waiting; waiting = []
+        all.forEach { $0(loc) }
     }
-    func locationManager(_ m: CLLocationManager, didUpdateLocations locs: [CLLocation]) { finish(locs.last) }
-    func locationManager(_ m: CLLocationManager, didFailWithError error: Error) { finish(nil) }
+    func locationManager(_ m: CLLocationManager, didUpdateLocations locs: [CLLocation]) {
+        DispatchQueue.main.async { self.finish(locs.last) }
+    }
+    func locationManager(_ m: CLLocationManager, didFailWithError error: Error) {
+        DispatchQueue.main.async { self.finish(nil) }
+    }
 }
 
 struct StopView: View {
