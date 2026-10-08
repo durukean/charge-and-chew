@@ -1,6 +1,14 @@
 const crypto=require('crypto'),fs=require('fs'),https=require('https');
-const KEY_ID='63U8C63MW7', ISS='b8ade631-2e77-4eb4-81f9-2bd3c20ca355';
-const pk=fs.readFileSync('/Users/durukan/Downloads/AuthKey_63U8C63MW7.p8','utf8');
+// Key ID, issuer and .p8 path come from the environment or the git-ignored .asc.env at the
+// repo root -- never from this file, which is public.
+const path=require('path');
+const envFile=path.join(__dirname,'..','.asc.env');
+const conf=Object.assign({},fs.existsSync(envFile)?Object.fromEntries(fs.readFileSync(envFile,'utf8')
+  .split('\n').map(l=>l.match(/^\s*([A-Z_]+)=(.*)$/)).filter(Boolean).map(m=>[m[1],m[2].trim()])):{},
+  ...['ASC_KEY_ID','ASC_ISSUER_ID','ASC_KEY_PATH'].filter(k=>process.env[k]).map(k=>({[k]:process.env[k]})));
+for(const k of ['ASC_KEY_ID','ASC_ISSUER_ID','ASC_KEY_PATH']) if(!conf[k]) throw new Error(k+' missing: set it or add it to .asc.env');
+const KEY_ID=conf.ASC_KEY_ID, ISS=conf.ASC_ISSUER_ID;
+const pk=fs.readFileSync(conf.ASC_KEY_PATH,'utf8');
 function b64u(o){return Buffer.from(typeof o==='string'?o:JSON.stringify(o)).toString('base64').replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');}
 function jwt(){const h={alg:'ES256',kid:KEY_ID,typ:'JWT'};const now=Math.floor(Date.now()/1000);
   const p={iss:ISS,iat:now,exp:now+1200,aud:'appstoreconnect-v1'};const s=b64u(h)+'.'+b64u(p);

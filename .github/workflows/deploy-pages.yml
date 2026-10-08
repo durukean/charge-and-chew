@@ -1,0 +1,48 @@
+name: Deploy site
+
+# GitHub Pages serves ONLY what publish.py puts in _site/ -- an allow-list. It used to serve
+# the whole repository, which published the signed .ipa, the Xcode archive and the release
+# tooling along with the site.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # The monthly refresh pushes with GITHUB_TOKEN, and a token push never triggers another
+  # workflow. Without this, refreshed data would sit in main and never go live.
+  workflow_run:
+    workflows: ["Refresh data"]
+    types: [completed]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Assemble the public site (fails if any page links to a file left out)
+        run: python3 publish.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

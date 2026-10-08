@@ -19,6 +19,15 @@ shopping and ~63% for one near dining. This does that lookup, for 90 chains.
 | `along/` | Generated SEO pages: chargers along each major interstate |
 | `sw.js` / `manifest.json` | Offline + installable |
 | `data/` | The pipeline (below) and its committed caches |
+| `publish.py` | Copies the public allow-list into `_site/`, the only thing GitHub Pages serves |
+
+## Deploying
+
+Every push to `main` (and every successful monthly refresh) runs `.github/workflows/deploy-pages.yml`,
+which runs `publish.py` and deploys `_site/`. Nothing outside its allow-list is ever public, so
+release outputs, scripts and pipeline caches can live in the repo safely. **A new public file
+must be added to `FILES` or `DIRS` in `publish.py`**; if a page links to something that is not
+there, the deploy fails instead of the live site breaking.
 
 ## Pipeline
 

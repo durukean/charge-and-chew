@@ -22,3 +22,13 @@ ios/preview/raw.mov
 _hours_probe.html
 __search_probe.html
 __perf.html
+
+# Release outputs from ios/release.sh: the signed .ipa, the Xcode archive (dSYMs, development
+# provisioning profiles listing device UDIDs) and export logs. These were committed for a while
+# and, because Pages served the repo root, downloadable from chargeandchew.com. Never again.
+ios/ChargeAndChew.xcarchive/
+ios/export/
+# App Store Connect key ID / issuer / .p8 path (read by tools/asc.js and ios/release.sh).
+.asc.env
+# Output of publish.py: the only thing GitHub Pages serves.
+_site/

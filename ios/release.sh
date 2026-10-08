@@ -12,8 +12,11 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 TEAM=T37B6B6S7K
-KEY_ID=63U8C63MW7
-ISSUER=b8ade631-2e77-4eb4-81f9-2bd3c20ca355
+# API key ID, issuer and .p8 path live in the git-ignored ../.asc.env (see tools/asc.js).
+[[ -f ../.asc.env ]] && source ../.asc.env
+: "${ASC_KEY_ID:?set ASC_KEY_ID or create .asc.env}" "${ASC_ISSUER_ID:?}" "${ASC_KEY_PATH:?}"
+KEY_ID=$ASC_KEY_ID
+ISSUER=$ASC_ISSUER_ID
 
 ./sync-web.sh
 xcodegen generate --spec project.yml --project .
@@ -31,7 +34,7 @@ rm -rf ChargeAndChew.xcarchive export
 xcodebuild -project ChargeAndChew.xcodeproj -scheme ChargeAndChew \
   -sdk iphoneos -configuration Release -archivePath ChargeAndChew.xcarchive \
   -allowProvisioningUpdates \
-  -authenticationKeyPath /Users/durukan/Downloads/AuthKey_$KEY_ID.p8 \
+  -authenticationKeyPath "$ASC_KEY_PATH" \
   -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER" archive
 
 # Deliberately NO -authenticationKey* on export. With the API key, export fails with
