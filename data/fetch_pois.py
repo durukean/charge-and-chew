@@ -157,7 +157,10 @@ def main():
             continue
         pois[key] = res
         print(f"{key}: {len(res)} locations", flush=True)
-        json.dump(pois, open(cache_path, "w"))
+        # Write-then-rename: a crash mid-dump left a truncated cache that broke every later build.
+        with open(cache_path + ".tmp", "w") as f:
+            json.dump(pois, f)
+        os.replace(cache_path + ".tmp", cache_path)
         time.sleep(8)  # be polite to overpass
 
     # Sanity check: a brand whose OSM count collapses is almost always a bad regex

@@ -43,12 +43,14 @@ final class ChargerStore {
         return FileManager.default.fileExists(atPath: web.path) ? web : nil
     }
 
-    func loadIfNeeded() {
-        guard !loaded else { return }
-        loaded = true
-        guard let file = dataURL?(), let raw = try? String(contentsOf: file, encoding: .utf8) else { return }
-        guard let open = raw.range(of: "JSON.parse('"), let close = raw.range(of: "');", options: .backwards) else { return }
-        let body = String(raw[open.upperBound..<close.lowerBound])
+    /// Decodes a data.js file body into its JSON root, or nil if it is not a complete,
+    /// well-formed file. Shared with DataUpdater, which runs it on a download BEFORE swapping
+    /// it in -- a truncated file must never become the copy every later launch reads.
+    static func decodePayload(_ raw: String) -> [String: Any]? {
+        guard let open = raw.range(of: "JSON.parse('"),
+              let close = raw.range(of: "');", options: .backwards),
+              open.upperBound <= close.lowerBound else { return nil }
+        let body = raw[open.upperBound..<close.lowerBound]
 
         var json = ""; json.reserveCapacity(body.utf8.count)
         var it = body.makeIterator()
@@ -58,8 +60,20 @@ final class ChargerStore {
                 if n == "'" || n == "\\" { json.append(n) } else { json.append("\\"); json.append(n) }
             } else { json.append(c) }
         }
-        guard let data = json.data(using: .utf8),
-              let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+        guard let data = json.data(using: .utf8) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    }
+
+    /// Siri runs off the main thread while CarPlay and the widget run on others.
+    private let lock = NSLock()
+
+    func loadIfNeeded() {
+        lock.lock(); defer { lock.unlock() }
+        // Marked loaded only on SUCCESS. Setting it first meant one failed read (a file
+        // mid-swap, a memory spike) left an empty charger list for the life of the process.
+        guard !loaded else { return }
+        guard let file = dataURL?(), let raw = try? String(contentsOf: file, encoding: .utf8),
+              let root = Self.decodePayload(raw),
               let sites = root["sites"] as? [[String: Any]],
               let brands = root["brands"] as? [String: [String: Any]],
               let matches = root["matches"] as? [String: [String: [Any]]] else { return }
@@ -88,6 +102,7 @@ final class ChargerStore {
                                food: food.map { (brand: $0.0, emoji: $0.1, metres: $0.2) }))
         }
         chargers = out
+        loaded = true
     }
 
     /// Chargers with somewhere to eat within a walk, nearest first. This is the whole

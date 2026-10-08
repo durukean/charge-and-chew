@@ -66,23 +66,89 @@ enum DataUpdater {
         Diag.log("dropped stale data overlay (\(overlayDate.isEmpty ? "undated" : overlayDate)) -- bundle is \(bundleDate)")
     }
 
+    /// The data shape a file declares (`"fmt":N` in its head). Files from before the field
+    /// existed are format 1. Mirrors DATA_FMT in index.html and data/build_data.py.
+    static func format(inHead head: String) -> Int {
+        guard let r = head.range(of: #""fmt":[0-9]+"#, options: .regularExpression),
+              let n = Int(head[r].split(separator: ":").last ?? "") else { return 1 }
+        return n
+    }
+
+    private static func head(of file: URL) -> String? {
+        guard let handle = try? FileHandle(forReadingFrom: file) else { return nil }
+        defer { try? handle.close() }
+        return (try? handle.read(upToCount: 512)).map { String(decoding: $0, as: UTF8.self) }
+    }
+
+    /// Smallest dataset accepted from the network. The real one has ~14,000 sites; a file
+    /// with a fraction of that is a broken build, not a quiet month.
+    private static let minSites = 5_000
+
+    /// Removes the downloaded copy so every reader falls back to the bundled data. Called
+    /// when the page reports that the data it was served would not load.
+    @discardableResult
+    static func discardOverlay(reason: String) -> Bool {
+        let file = overlayDir.appendingPathComponent("data.js")
+        guard FileManager.default.fileExists(atPath: file.path) else { return false }
+        try? FileManager.default.removeItem(at: file)
+        UserDefaults.standard.removeObject(forKey: generatedKey)
+        Diag.log("discarded data overlay: \(reason)")
+        return true
+    }
+
     static func refresh(bundled: URL?, completion: @escaping (Bool) -> Void) {
         let have = currentGenerated(bundled: bundled)
-        var req = URLRequest(url: remote)
-        req.timeoutInterval = 20
-        req.cachePolicy = .reloadIgnoringLocalCacheData
+        // The format this build's bundled page reads. A download in any other shape would
+        // break it, so it is never kept, however new.
+        let wantFmt = bundled.flatMap { head(of: $0) }.map { format(inHead: $0) } ?? 1
 
+        // Step 1: only the first 512 bytes. The server honours Range, so a launch with
+        // nothing new costs half a kilobyte instead of the whole 1 MB dataset.
+        var probe = URLRequest(url: remote)
+        probe.timeoutInterval = 15
+        probe.cachePolicy = .reloadIgnoringLocalCacheData
+        probe.setValue("bytes=0-511", forHTTPHeaderField: "Range")
+        URLSession.shared.dataTask(with: probe) { data, response, _ in
+            guard let data, let http = response as? HTTPURLResponse,
+                  http.statusCode == 206 || http.statusCode == 200 else { return completion(false) }
+            let h = String(decoding: data.prefix(512), as: UTF8.self)
+            guard let fresh = generatedDate(inHead: h), fresh > have,
+                  format(inHead: h) == wantFmt else { return completion(false) }
+            download(expecting: fresh, fmt: wantFmt, completion: completion)
+        }.resume()
+    }
+
+    /// Step 2: the full file, validated end to end before it may replace anything.
+    private static func download(expecting fresh: String, fmt: Int, completion: @escaping (Bool) -> Void) {
+        var req = URLRequest(url: remote)
+        req.timeoutInterval = 30
+        req.cachePolicy = .reloadIgnoringLocalCacheData
         URLSession.shared.dataTask(with: req) { data, response, _ in
             guard let data,
                   let http = response as? HTTPURLResponse, http.statusCode == 200,
                   data.count > 100_000                              // never overwrite with a error page
             else { return completion(false) }
 
-            let head = String(decoding: data.prefix(512), as: UTF8.self)
-            guard let fresh = generatedDate(inHead: head), fresh > have else { return completion(false) }
+            let h = String(decoding: data.prefix(512), as: UTF8.self)
+            guard generatedDate(inHead: h) == fresh, format(inHead: h) == fmt else { return completion(false) }
+            /* Size, status and date said nothing about whether the file was COMPLETE. A
+               truncated download that passed them became the copy every later launch read,
+               and the app opened to a red error screen for good -- reproduced in the
+               simulator. Decode it exactly as the app will before it may replace anything. */
+            guard let root = ChargerStore.decodePayload(String(decoding: data, as: UTF8.self)),
+                  let sites = root["sites"] as? [Any], sites.count >= minSites,
+                  root["matches"] is [String: Any], root["brands"] is [String: Any]
+            else {
+                Diag.log("rejected downloaded data.js: incomplete or malformed")
+                return completion(false)
+            }
 
             do {
                 try FileManager.default.createDirectory(at: overlayDir, withIntermediateDirectories: true)
+                // Re-downloadable, so keep it out of the user's iCloud backup.
+                var dir = overlayDir
+                var rv = URLResourceValues(); rv.isExcludedFromBackup = true
+                try? dir.setResourceValues(rv)
                 let tmp = overlayDir.appendingPathComponent("data.js.tmp")
                 let dest = overlayDir.appendingPathComponent("data.js")
                 // Write then move: a half-written data.js served on the next launch would

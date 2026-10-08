@@ -68,7 +68,9 @@ def main():
         kept = thin(pts)
         data[ref] = kept
         print(f"{ref}: {len(pts)} pts -> {len(kept)} after thinning", flush=True)
-        json.dump(data, open(path, "w"), separators=(",", ":"))
+        with open(path + ".tmp", "w") as f:       # write-then-rename, never a half-written cache
+            json.dump(data, f, separators=(",", ":"))
+        os.replace(path + ".tmp", path)
         time.sleep(6)
     print(f"\nDone: {len(data)} interstates, {sum(len(v) for v in data.values())} points")
 

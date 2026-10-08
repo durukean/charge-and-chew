@@ -420,6 +420,38 @@ if _ov_ad:
     check('host.hasSuffix(".google.com")' in _ov_wv and 'host.hasSuffix("google.com")' not in _ov_wv,
           "openExternal matches google.com by bare suffix again — evilgoogle.com would pass")
 
+# ---- bad data can neither ship nor stick (audit 2026-10-07) ----
+# A truncated or differently-shaped download used to become the copy every launch read: the
+# app opened to an error screen for good. Reproduced on the simulator before the fix, and
+# both cases (truncated; complete but fmt 2) recover by themselves after it.
+_bd = open(os.path.join(HERE, "data", "build_data.py")).read()
+_fmt_page = re.search(r"(?m)^const DATA_FMT = (\d+);", _html)
+_fmt_pipe = re.search(r"(?m)^DATA_FMT = (\d+)", _bd)
+check(_fmt_page and _fmt_pipe and _fmt_page.group(1) == _fmt_pipe.group(1),
+      "DATA_FMT in index.html and data/build_data.py disagree (or one is missing)")
+_fmt_data = re.search(r'"fmt":(\d+)', open(os.path.join(HERE, "data.js")).read(300))
+check(_fmt_page and (_fmt_data.group(1) if _fmt_data else "1") == _fmt_page.group(1),
+      "data.js declares a format index.html does not read")
+check(re.search(r"(?m)^\s*if \(dataBad\) \{", _html) and "cmd: 'dataFailed'" in _html,
+      "the page no longer reports unreadable data to the iOS shell")
+# The shrink guard sliced the raw file and json.loads'd it, which cannot read the escaped
+# JSON.parse('...') form; the exception was swallowed and every check silently skipped.
+check(re.search(r"(?m)^\s*old = load_data\(out_path\)", _bd) is not None
+      and "old = None" not in _bd,
+      "build_data.py no longer reads the old data.js with data_reader (shrink guard dead again)")
+if _ov_ad:
+    _refresh = _ov_du[_ov_du.find("private static func download("):]
+    _dec, _wr = _refresh.find("ChargerStore.decodePayload("), _refresh.find("data.write(to: tmp")
+    check(0 <= _dec < _wr, "DataUpdater writes a download without decoding it first")
+    check(re.search(r"format\(inHead: h\) == wantFmt", _ov_du) is not None,
+          "DataUpdater accepts a download in a different data format")
+    check(re.search(r'(?m)^\s*case "dataFailed":', _swf("NativeBridge.swift")) is not None
+          and re.search(r"(?m)^\s*bridge\.onDataFailed = ", _ov_wv) is not None,
+          "the shell no longer falls back to bundled data when the page reports bad data")
+_wf = open(os.path.join(HERE, ".github", "workflows", "refresh-data.yml")).read()
+check("fetch_pois.py || true" not in _wf and "fetch_highways.py || true" not in _wf,
+      "the refresh workflow swallows fetch failures with || true again")
+
 # ---- instant category results, merged with the live lookup ----
 # The bundled chains answer immediately; the live lookup then ADDS independents. Merge, not
 # replace: OSM tags a Dairy Queen as fast_food, so an ice_cream lookup never returns one and a

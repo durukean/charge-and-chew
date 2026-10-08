@@ -62,6 +62,8 @@ final class NativeBridge: NSObject {
     var onTheme: ((Bool) -> Void)?
     /// Location is denied at the system level. The page cannot fix that; only Settings can.
     var onLocationDenied: (() -> Void)?
+    /// The page could not load its data (missing, truncated or a format it does not read).
+    var onDataFailed: ((String) -> Void)?
     private let haptic = UIImpactFeedbackGenerator(style: .light)
     /// Requests parked until the user answers the permission sheet.
     private var waiting: [(id: Int, watch: Bool)] = []
@@ -117,6 +119,10 @@ final class NativeBridge: NSObject {
 
 extension NativeBridge: WKScriptMessageHandler {
     func userContentController(_ c: WKUserContentController, didReceive message: WKScriptMessage) {
+        // Only the app's own top-level page may drive native features (location, share).
+        // The shim is main-frame-only, but the handler itself is reachable from any frame.
+        guard message.frameInfo.isMainFrame,
+              message.frameInfo.securityOrigin.protocol == AppSchemeHandler.scheme else { return }
         guard let body = message.body as? [String: Any],
               let cmd = body["cmd"] as? String else { return }
         let id = body["id"] as? Int ?? 0
@@ -136,6 +142,8 @@ extension NativeBridge: WKScriptMessageHandler {
             haptic.impactOccurred()
         case "log":
             Diag.log("js: \(opts["msg"] as? String ?? "")")
+        case "dataFailed":
+            onDataFailed?(opts["why"] as? String ?? "unknown")
         default: break
         }
     }

@@ -65,6 +65,12 @@ final class WebViewController: UIViewController {
         bridge.onShare = { [weak self] url, title in self?.share(url, title: title) }
         bridge.onTheme = { [weak self] isDark in self?.applyTheme(dark: isDark) }
         bridge.onLocationDenied = { [weak self] in self?.offerLocationSettings() }
+        // A downloaded data.js the page cannot read: drop it and reload from the bundled copy.
+        // Reloads only if there WAS a download to drop, so a broken bundle cannot loop.
+        bridge.onDataFailed = { [weak self] why in
+            guard DataUpdater.discardOverlay(reason: why) else { return }
+            self?.webView.reload()
+        }
         controller.add(bridge, name: NativeBridge.name)
         self.bridge = bridge
 

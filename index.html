@@ -954,8 +954,19 @@ if (typeof L === 'undefined') {
     'line-height:1.5">The map library didn\u2019t load.<br>Check your connection and reload.</div>';
   return;
 }
-if (!D) { document.getElementById('splash').innerHTML =
-  '<div style="color:#ff5a5f;font-size:14px">data.js failed to load</div>'; return; }
+/* The data shape this page reads (see DATA_FMT in data/build_data.py; a file without fmt is
+   1). In the iOS app data.js may be a newer DOWNLOADED copy while this page is the one
+   bundled with the binary, so a missing, truncated or differently-shaped file is reported
+   to the shell, which drops the download and reloads from the bundled copy instead of
+   leaving the user on an error screen for good. */
+const DATA_FMT = 1;
+const dataBad = !D ? 'missing or unreadable' : (D.fmt || 1) !== DATA_FMT ? 'format ' + D.fmt : '';
+if (dataBad) {
+  try { window.webkit.messageHandlers.cc.postMessage({ cmd: 'dataFailed', id: 0, opts: { why: dataBad } }); }
+  catch (e) { /* not in the app */ }
+  document.getElementById('splash').innerHTML =
+    '<div style="color:#ff5a5f;font-size:14px">data.js failed to load</div>'; return;
+}
 
 // state names for /near/<chain>/<state>/ landings — mirrors STATES in build.py
 const STATE_NAME = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado", "CT":"Connecticut","DE":"Delaware","DC":"Washington DC","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho", "IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine", "MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri", "MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico", "NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon", "PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas", "UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"};

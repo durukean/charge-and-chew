@@ -12,6 +12,16 @@ WALK_M = 800
 
 # brand -> (emoji, category) — mirror of fetch_pois.BRANDS (kept in sync manually)
 from fetch_pois import BRANDS as RAW_BRANDS  # (emoji, cat, regex)
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from data_reader import load_data
+
+# Shape version of data.js. The web page (DATA_FMT in index.html) and the iOS app refuse a
+# data.js whose fmt differs from what they were built for. BUMP IT for any change a reader
+# would misread -- and note that iOS builds up to 1.0.4 predate the check: they download
+# https://chargeandchew.com/data.js unconditionally, so a new shape must not replace that
+# URL until those versions are gone (serve it under a new name instead).
+DATA_FMT = 1
 
 # ── car database: model -> [battery kWh usable, max DC kW, connector bit] ──
 # connector: 1=CCS1, 2=NACS  (all can use the other via adapter; native listed)
@@ -207,6 +217,7 @@ def main():
         c.pop("col", None)
 
     payload = {
+        "fmt": DATA_FMT,          # first, so it sits in the 512-byte head the app reads
         "generated": time.strftime("%Y-%m-%d"),
         "walkM": WALK_M,
         "sites": chargers,
@@ -219,11 +230,14 @@ def main():
     # so a bad build here silently breaks the whole site.
     out_path = os.path.join(HERE, "..", "data.js")
     if os.path.exists(out_path):
+        # This used to slice the raw file and json.loads it, which cannot read the escaped
+        # JSON.parse('...') form; the exception was swallowed and every check below was
+        # silently skipped for months. Not being able to read the old file is now fatal.
         try:
-            old_raw = open(out_path).read()
-            old = json.loads(old_raw[old_raw.index("{"): old_raw.rindex("}") + 1])
-        except Exception:
-            old = None
+            old = load_data(out_path)
+        except Exception as e:
+            raise SystemExit(f"ABORT: cannot read the existing data.js to compare against ({e}). "
+                             "Fix or delete it deliberately; data.js not written.")
         if old:
             drop_sites = 1 - len(chargers) / max(1, len(old.get("sites", [])))
             drop_match = 1 - len(matches) / max(1, len(old.get("matches", {})))

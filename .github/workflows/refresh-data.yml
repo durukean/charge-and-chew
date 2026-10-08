@@ -37,9 +37,19 @@ jobs:
           AFDC_API_KEY: ${{ secrets.AFDC_API_KEY }}
         run: |
           python3 data/fetch_chargers.py
-          # POIs and highway geometry are committed caches; these only fill gaps
-          [ -f data/pois.json ] && python3 data/fetch_pois.py || true
-          [ -f data/highways.json ] && python3 data/fetch_highways.py || true
+          # POIs and highway geometry are committed caches; these only fill gaps. A routine
+          # gap-fill may fail (Overpass is flaky) and the cached file is used -- but loudly,
+          # as a run annotation, not swallowed by `|| true`. A requested full refetch (cache
+          # deleted above) must succeed: it used to be skipped because the [ -f ] test ran
+          # after the delete, and the build then died on the missing file.
+          if [ -f data/pois.json ]; then
+            python3 data/fetch_pois.py || echo "::warning::fetch_pois failed; building from the cached data/pois.json"
+          else
+            python3 data/fetch_pois.py
+          fi
+          if [ -f data/highways.json ]; then
+            python3 data/fetch_highways.py || echo "::warning::fetch_highways failed; using the cached data/highways.json"
+          fi
           python3 data/build_data.py
           python3 build.py --base https://chargeandchew.com
 
