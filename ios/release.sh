@@ -18,6 +18,17 @@ TEAM=T37B6B6S7K
 KEY_ID=$ASC_KEY_ID
 ISSUER=$ASC_ISSUER_ID
 
+# What ships must be what is committed. sync-web.sh copies the WORKING TREE into the bundle,
+# so an uncommitted edit -- or one made while this script runs -- would land in the binary
+# with no commit behind it. Checked before the build-number bump below touches project.yml.
+if ! git -C .. diff --quiet HEAD -- index.html data.js manifest.json vendor favicon.svg \
+       icon-192.png icon-512.png apple-touch-icon.png data_reader.py \
+       ios/ChargeAndChew ios/Widget ios/project.yml ios/make-widget-index.py ios/sync-web.sh; then
+  echo "error: uncommitted changes in files that ship in the app; commit them first:" >&2
+  git -C .. diff --stat HEAD -- index.html data.js ios >&2
+  exit 1
+fi
+
 ./sync-web.sh
 xcodegen generate --spec project.yml --project .
 

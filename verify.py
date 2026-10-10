@@ -93,6 +93,8 @@ sm = os.path.join(HERE, "sitemap.xml")
 if os.path.exists(sm):
     locs = re.findall(r"<loc>([^<]+)</loc>", open(sm).read())
     check(len(locs) > 50, f"sitemap has only {len(locs)} URLs")
+    _lm = re.findall(r"<lastmod>(\d{4}-\d{2}-\d{2})</lastmod>", open(sm).read())
+    check(len(_lm) >= len(locs) - 2, f"sitemap dates only {len(_lm)} of {len(locs)} URLs")
     soft(len(locs) < 2600, f"sitemap has {len(locs)} URLs — above the level real traffic has validated")
     # every sitemap URL must exist on disk and must NOT be noindex
     missing, noindexed = [], []

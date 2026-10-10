@@ -891,7 +891,13 @@ if _retired:
 
 # ---- sitemap / robots ----
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-sm += f"<url><loc>{BASE}/</loc></url>\n" + "".join(f"<url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"
+# <lastmod> tells crawlers which pages a monthly refresh actually touched. Data pages carry the
+# dataset's date; privacy and support do not change with the data, so they carry none rather
+# than a date that would be false.
+def _sm_url(u):
+    static = u.endswith(("/privacy/", "/support/"))
+    return f"<url><loc>{u}</loc>" + ("" if static else f"<lastmod>{D['generated']}</lastmod>") + "</url>\n"
+sm += _sm_url(f"{BASE}/") + "".join(_sm_url(u) for u in urls) + "</urlset>\n"
 open(os.path.join(HERE, "sitemap.xml"), "w").write(sm)
 # /admin/ reads private analytics; it is noindex too, but keep crawlers out of it entirely.
 open(os.path.join(HERE, "robots.txt"), "w").write(
