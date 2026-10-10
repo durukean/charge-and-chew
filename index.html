@@ -1274,7 +1274,11 @@ function restoreArea() {
   if (Date.now() - (a.t || 0) > 14 * 864e5) { localStorage.removeItem('cc_area'); return false; }
   if (a.r) { radiusMi = a.r; $('ccRad').querySelectorAll('button')
     .forEach(x => x.classList.toggle('on', +x.dataset.mi === a.r)); }
-  setCenter(a.lat, a.lon, a.label || 'Last area', a.kind || 'place');
+  /* A remembered "my location" can be two weeks old. Restoring it as kind 'me' drew the
+     blue you-are-here dot on a spot you may have left days ago; show it as a place instead. */
+  const kind = a.kind === 'me' ? 'pin' : (a.kind || 'place');
+  const label = a.kind === 'me' && (!a.label || a.label === 'My location') ? 'Where you were' : (a.label || 'Last area');
+  setCenter(a.lat, a.lon, label, kind);
   if (!wideLayout()) setSheet('mid');
   fitToCenter();
   return true;
@@ -2424,7 +2428,13 @@ function maybeOfferSearchHere() {
   const c = map.getCenter();
   // far enough that the current results plainly no longer describe the view
   const movedFar = !center || hav(center.lat, center.lon, c.lat, c.lng) > radiusMi * MI * 0.55;
-  $('searchHere').hidden = !movedFar || map.getZoom() < 7;
+  const btn = $('searchHere');
+  btn.hidden = !movedFar || map.getZoom() < 7;
+  if (btn.hidden || !btn.offsetParent) return;
+  /* Sit just under whatever floats at the top of the map. A fixed 14 px put it over the
+     search pill on a phone, covering what you were typing. */
+  const top = $('overlayTop').getBoundingClientRect().bottom - btn.offsetParent.getBoundingClientRect().top;
+  btn.style.top = Math.max(14, Math.round(top) + 8) + 'px';
 }
 map.on('moveend zoomend', maybeOfferSearchHere);
 $('searchHere').onclick = () => {
@@ -4323,7 +4333,9 @@ async function runRoute(opts) {
   opts = opts || {};
   const f = $('fromIn').value.trim(), t = $('toIn').value.trim();
   if (!f || !t) return toast('Enter a start and a destination');
-  if (!navigator.onLine) return toast('Route planning needs a connection');
+  /* No early "needs a connection" refusal: both places and the route itself are cached once
+     planned, so a saved trip opens offline. Only a route never planned before needs the
+     network, and the catch below says so. */
   $('goBtn').disabled = true; $('routeInfo').textContent = 'Routing…';
   const myNav = ++navGen;
   const stale = () => {
@@ -4360,7 +4372,10 @@ async function runRoute(opts) {
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
     if (opts.poi) await runLivePoi(opts.poi, 'route');
-  } catch (e) { if (!stale()) $('routeInfo').textContent = e.message; }
+  } catch (e) {
+    if (!stale()) $('routeInfo').textContent = navigator.onLine ? e.message
+      : 'No connection — only routes planned before work offline';
+  }
   finally { $('goBtn').disabled = false; }
 }
 $('goBtn').onclick = () => runRoute();
@@ -4406,7 +4421,7 @@ function applyCorridor(verts, mi, hr) {
   $('routePanel').classList.add('collapsed');
   $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
     $('routeInfo').onclick = null;
-    $('routeInfo').textContent = `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${ids.size} Superchargers within ${corridorMi} mi`;
+    $('routeInfo').textContent = `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${ids.size} fast charger${ids.size === 1 ? '' : 's'} within ${corridorMi} mi`;
     setTimeout(() => map.invalidateSize({ pan: false }), 220); };
   render(); setSheet('mid'); syncUrl();
   settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);

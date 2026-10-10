@@ -644,6 +644,15 @@ _rad = _html[_html.find("$('ccRad').querySelectorAll('button').forEach(b => b.on
 check("if (term) runLivePoi(intentFromTerm(term));" in _rad and "sortBy = keepSort;" in _rad,
       "changing the radius throws away a category search or the chosen sort again")
 
+# ---- small behaviour fixes from the audit (each checked in a browser) ----
+check("Route planning needs a connection" not in _html and "only routes planned before work offline" in _html,
+      "route planning refuses offline again, although a planned trip is fully cached")
+check("const kind = a.kind === 'me' ? 'pin' : (a.kind || 'place');" in _html,
+      "a two-week-old 'my location' is restored with the live you-are-here dot again")
+check(" Superchargers within ${corridorMi} mi" not in _html, "the route summary calls every network 'Superchargers' again")
+check("btn.style.top = Math.max(14, Math.round(top) + 8) + 'px';" in _html,
+      "'Search this area' can cover the search box on a phone again")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
