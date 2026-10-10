@@ -2347,7 +2347,14 @@ $('ccX').onclick = () => {
 $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); radiusMi = +b.dataset.mi;
-  if (center) setCenter(center.lat, center.lon, center.label, center.kind);
+  if (!center) return;
+  /* The same search over a bigger or smaller circle. Going through setCenter() threw away a
+     live category search and reset the sort: "36 banks within 10 mi" became "78 stops
+     within 25 mi" after tapping 25. Keep both, and re-ask for the new circle. */
+  const term = livePoiTerm, keepSort = sortBy;
+  setCenter(center.lat, center.lon, center.label, center.kind);
+  if (keepSort !== sortBy) { sortBy = keepSort; $('sortLbl').textContent = SORT_LABEL[sortBy]; render(); }
+  if (term) runLivePoi(intentFromTerm(term));
 });
 
 function locate(target, opts) {
@@ -4418,6 +4425,9 @@ function syncUrl() {
   F.h24 ? p.set('h24', '1') : p.delete('h24');
   F.free ? p.set('free', '1') : p.delete('free');
   F.noiso ? p.set('noiso', '1') : p.delete('noiso');
+  // Both used to be left out, so a shared "EVgo only, no dealerships" view opened unfiltered.
+  F.nodlr ? p.set('nodlr', '1') : p.delete('nodlr');
+  netPick ? p.set('netpick', netPick) : p.delete('netpick');
   stateScope ? p.set('state', stateScope) : p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
@@ -4656,12 +4666,23 @@ const q = new URLSearchParams(location.search);
   if (key) active.add(key);
 });
 if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
-if (['tesla', 'other'].includes(q.get('net'))) { netFilter = q.get('net'); syncNetSeg(); }
+/* A link that describes a view opens exactly that view. The recipient's own saved filters
+   used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
+   here: their own preferences come back on their next plain visit. */
+const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'state', 'poi', 'net', 'netpick',
+                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
+if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
+if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
+if (q.get('netpick') && SITES.some(s => s.net === q.get('netpick'))) {
+  netPick = q.get('netpick'); netFilter = /tesla/i.test(netPick) ? 'tesla' : 'other';
+}
+syncNetSeg(); renderLegend();
 if (q.get('minkw')) F.kw = +q.get('minkw') || 0;
 if (q.get('minstalls')) F.stalls = +q.get('minstalls') || 0;
 if (q.get('h24')) F.h24 = 1;
 if (q.get('free')) F.free = 1;
 if (q.get('noiso')) F.noiso = 1;
+if (q.get('nodlr')) F.nodlr = 1;
 syncFilterUI();
 if (q.get('r')) {
   radiusMi = +q.get('r') || 25;

@@ -634,6 +634,16 @@ check(".oh.n{background:rgba(180,83,9,.14);color:var(--warn)}" in _html,
       "the 'Closed' hours pill is back to amber-on-amber (1.6:1)")
 check("#ccX::after" in _html, "the smallest controls lost their enlarged tap area")
 
+# ---- shared links and the radius buttons (audit 2026-10-07; both checked in a browser) ----
+check("F.nodlr ? p.set('nodlr', '1')" in _html and "netPick ? p.set('netpick', netPick)" in _html
+      and "if (q.get('nodlr')) F.nodlr = 1;" in _html and "q.get('netpick')" in _html,
+      "a shared link drops 'No dealerships' or the exact network again")
+check(re.search(r"if \(VIEW_KEYS\.some\(k => q\.has\(k\)\)\) \{ F = Object\.assign\(\{\}, FDEF\);", _html) is not None,
+      "a shared view merges the recipient's own saved filters in again — they see fewer stops")
+_rad = _html[_html.find("$('ccRad').querySelectorAll('button').forEach(b => b.onclick"):][:900]
+check("if (term) runLivePoi(intentFromTerm(term));" in _rad and "sortBy = keepSort;" in _rad,
+      "changing the radius throws away a category search or the chosen sort again")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
