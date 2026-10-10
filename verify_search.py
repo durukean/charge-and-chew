@@ -281,40 +281,54 @@ window.__ready = function () {{
   }}, 250);
 }})(this)"></iframe>""")
 
-    prof = tempfile.mkdtemp()
+    def run_probe():
+        prof = tempfile.mkdtemp()
+        try:
+            domfile = os.path.join(prof, "dom.html")
+            cmd = [binpath, "--headless=new", "--disable-gpu", "--no-sandbox",
+                   f"--user-data-dir={prof}", "--virtual-time-budget=90000",
+                   "--disable-features=ServiceWorker", "--dump-dom",
+                   f"http://127.0.0.1:{port}/__search_probe.html"]
+            with open(domfile, "w") as fh:
+                proc = subprocess.Popen(cmd, stdout=fh, stderr=subprocess.DEVNULL)
+                # Generous: measured 45-101 s under load, and a slow CI runner must not turn a
+                # correct parser into a failed data refresh. It exits as soon as the dump lands.
+                deadline = time.time() + 240
+                while time.time() < deadline:
+                    if proc.poll() is not None:
+                        break
+                    if os.path.getsize(domfile) > 400:
+                        time.sleep(2)
+                        proc.terminate()
+                        break
+                    time.sleep(0.5)
+                else:
+                    proc.kill()
+            return open(domfile, encoding="utf-8", errors="replace").read()
+        finally:
+            shutil.rmtree(prof, ignore_errors=True)
+
+    # An EMPTY probe (Chrome dumped before the app had exported its parser) is an
+    # environment hiccup, not a parser bug: it happened once in ~20 runs on a busy machine
+    # with the code unchanged, and because this suite gates the monthly data refresh a
+    # flake costs a month of data. Retry that case only; a probe that produced results, or
+    # an explicit ERR, is final.
     try:
-        domfile = os.path.join(prof, "dom.html")
-        cmd = [binpath, "--headless=new", "--disable-gpu", "--no-sandbox",
-               f"--user-data-dir={prof}", "--virtual-time-budget=90000",
-               "--disable-features=ServiceWorker", "--dump-dom",
-               f"http://127.0.0.1:{port}/__search_probe.html"]
-        with open(domfile, "w") as fh:
-            proc = subprocess.Popen(cmd, stdout=fh, stderr=subprocess.DEVNULL)
-            # Generous: measured 45-101 s under load, and a slow CI runner must not turn a
-            # correct parser into a failed data refresh. It exits as soon as the dump lands.
-            deadline = time.time() + 240
-            while time.time() < deadline:
-                if proc.poll() is not None:
-                    break
-                if os.path.getsize(domfile) > 400:
-                    time.sleep(2)
-                    proc.terminate()
-                    break
-                time.sleep(0.5)
-            else:
-                proc.kill()
-        dom = open(domfile, encoding="utf-8", errors="replace").read()
+        for attempt in range(3):
+            dom = run_probe()
+            m = re.search(r'<div id="out">(.*?)</div>', dom, re.S)
+            if m and m.group(1).strip() not in ("pending", ""):
+                break
+            print(f"  (probe empty on attempt {attempt + 1}; retrying)")
     finally:
-        shutil.rmtree(prof, ignore_errors=True)
         httpd.shutdown()
         try:
             os.remove(probe)
         except OSError:
             pass
 
-    m = re.search(r'<div id="out">(.*?)</div>', dom, re.S)
     if not m or m.group(1).strip() in ("pending", ""):
-        print("FAIL: parser probe produced no result (is __parseQuery still exported?)")
+        print("FAIL: parser probe produced no result in 3 attempts (is __parseQuery still exported?)")
         return 1
     if m.group(1).startswith("ERR"):
         print("FAIL:", m.group(1)[:200])
