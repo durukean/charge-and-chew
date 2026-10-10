@@ -74,7 +74,13 @@ enum StopAnswer {
         let miles = String(format: "%.1f", dist / 1609.34)
         let place = want.flatMap { w in c.food.first { $0.brand.lowercased().contains(w) } } ?? c.food.first
         let eat = place.map { "\($0.brand), about \(walkMin($0.metres)) minutes\u{2019} walk" } ?? "somewhere to eat"
-        return Result(spoken: "\(c.name) in \(c.city), \(miles) miles away. \(c.kw) kilowatts, \(c.stalls) stalls, with \(eat).",
+        // "0 kilowatts" and "1 stalls" were read aloud for real stops: say only what is known,
+        // in words that fit the number.
+        var spec: [String] = []
+        if c.kw > 0 { spec.append("\(c.kw) kilowatts") }
+        if c.stalls == 1 { spec.append("one stall") } else if c.stalls > 1 { spec.append("\(c.stalls) stalls") }
+        let specText = spec.isEmpty ? "" : spec.joined(separator: ", ") + ", "
+        return Result(spoken: "\(c.name) in \(c.city), \(miles) miles away. \(specText)with \(eat).",
                       charger: c, miles: miles)
     }
 

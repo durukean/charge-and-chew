@@ -11,7 +11,12 @@ enum Diag {
             .appendingPathComponent("cc-boot.log")
     }()
 
-    static func reset() { try? "".write(to: url, atomically: true, encoding: .utf8) }
+    static func reset() {
+        #if !DEBUG
+        return                      // nor an empty log file left in the user's Documents
+        #endif
+        try? "".write(to: url, atomically: true, encoding: .utf8)
+    }
 
     static func log(_ message: String) {
         #if !DEBUG

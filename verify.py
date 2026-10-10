@@ -488,6 +488,12 @@ if _ov_ad:
     check(re.search(r"(?m)^\s*guard userTapped else", _ov_wv) is not None
           and 'scheme == "tel" || scheme == "mailto"' in _ov_wv,
           "non-web links can open without a tap again (tel:, sms:, other apps)")
+    _ai_src = _swf("AppIntents.swift")
+    check('spec.append("one stall")' in _ai_src and "if c.kw > 0" in _ai_src,
+          "Siri reads '0 kilowatts' / '1 stalls' aloud again")
+    _dg = _swf("Diag.swift")
+    check(re.search(r"static func reset\(\) \{\s*#if !DEBUG\s*return", _dg) is not None,
+          "release builds create an empty boot log in the user's Documents again")
     # A bare hasSuffix("google.com") also matches "evilgoogle.com".
     check('host.hasSuffix(".google.com")' in _ov_wv and 'host.hasSuffix("google.com")' not in _ov_wv,
           "openExternal matches google.com by bare suffix again — evilgoogle.com would pass")
