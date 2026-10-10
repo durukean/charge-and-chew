@@ -40,6 +40,8 @@ if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandl
 </script>
 <link rel="stylesheet" href="/vendor/leaflet.css">
 <script src="/vendor/leaflet.js"></script>
+<!-- Map tiles are the largest paint; open the connection while data.js is still parsing. -->
+<link rel="preconnect" href="https://server.arcgisonline.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -474,7 +476,8 @@ svg{display:block}
 .iconbtn.sm{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);
   color:var(--dim);display:grid;place-items:center;flex-shrink:0}
 #list{overflow-y:auto;overscroll-behavior:contain;padding:0 12px 16px;flex:1}
-.row{display:flex;gap:12px;padding:13px;border-radius:16px;margin-bottom:8px;background:var(--surface);
+.row{content-visibility:auto;contain-intrinsic-size:auto 128px;   /* off-screen rows skip layout */
+  display:flex;gap:12px;padding:13px;border-radius:16px;margin-bottom:8px;background:var(--surface);
   border:1px solid var(--line);box-shadow:var(--sh2);cursor:pointer;transition:.12s;align-items:flex-start}
 :root[data-theme="dark"] .row{background:var(--surface2);box-shadow:none}
 .row:active{transform:scale(.99)}
@@ -1149,6 +1152,23 @@ function fetchTimeout(url, ms, init) {
 // match value is [dLat,dLon] integer deltas x1e4 from the charger
 const mLatLng = (s, v) => Array.isArray(v) ? [s.lat + v[0] / 1e4, s.lon + v[1] / 1e4] : null;
 const mDist = (s, v) => { if (typeof v === 'number') return v; const p = mLatLng(s, v); return p ? hav(s.lat, s.lon, p[0], p[1]) : 9e9; };
+/* The walk from a stop to a bundled chain never changes, but the default sort recomputed it
+   (a haversine per matched chain, for every stop in scope) on every tap. Cached on first use.
+   Live-lookup keys are added and removed at runtime, so they are never cached. */
+const BUNDLED_KEYS = new Set(Object.keys(BRANDS));
+// Indexed by site position, then by chain key: an array slot is far cheaper than a Map lookup
+// on the hot path, which runs for every matched chain of every stop in scope.
+const SITE_POS = new Map(SITES.map((s, i) => [s.id, i]));
+const walkCache = new Array(SITES.length);
+function walkTo(s, k, v) {
+  if (!BUNDLED_KEYS.has(k)) return mDist(s, v);
+  const i = SITE_POS.get(s.id);
+  let c = walkCache[i];
+  if (c === undefined) c = walkCache[i] = Object.create(null);
+  let d = c[k];
+  if (d === undefined) d = c[k] = mDist(s, v);
+  return d;
+}
 const isTesla = s => /tesla/i.test(s.net);
 const CONN_NAME = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO' };
 function connList(bits) {
@@ -1692,7 +1712,9 @@ function inScope(s) {
 function bestWalk(s) {
   const m = MATCH[s.id] || {};
   const keys = chainQuery() ? chainKeysOn(m) : Object.keys(m);
-  return keys.length ? Math.min(...keys.map(k => mDist(s, m[k]))) : 9e9;
+  let best = 9e9;
+  for (let i = 0; i < keys.length; i++) { const d = walkTo(s, keys[i], m[keys[i]]); if (d < best) best = d; }
+  return best;
 }
 const routeIdx = id => (route && route.order.has(id)) ? route.order.get(id) : 9e9;
 const chargeOr = s => { const v = chargeMin(s); return (v === null || v === undefined) ? 9e9 : v; };
@@ -1717,11 +1739,31 @@ function countWithoutNarrowing() {
    the first render and 62 ms of every chip tap after it, on a desktop.
    The decorated sort is stable exactly as Array.prototype.sort is, so ties keep the same
    order and the list is identical -- verified against the old ordering in four states. */
+/* Only the first LIST_MAX are ever shown in order (markers and clusters do not care), so with
+   more than that in scope only those are fully sorted: the cut-off comes from a native numeric
+   sort of the keys, then just the winners are ordered. Ties keep their original order, exactly
+   as the stable full sort did. A key that is not a number (a stop with no stall count) sorts
+   last instead of making the comparator inconsistent. */
+const LIST_MAX = 300;
 function sortByKey(arr, key) {
-  const d = new Array(arr.length);
-  for (let i = 0; i < arr.length; i++) d[i] = [key(arr[i]), arr[i]];
-  d.sort((a, b) => a[0] - b[0]);
-  for (let i = 0; i < d.length; i++) arr[i] = d[i][1];
+  const n = arr.length, k = new Float64Array(n);
+  for (let i = 0; i < n; i++) { const v = key(arr[i]); k[i] = v === v ? v : Infinity; }
+  const byKey = (a, b) => (k[a] - k[b]) || (a - b);
+  let head;
+  if (n <= LIST_MAX * 2) {
+    head = Array.from({ length: n }, (_, i) => i).sort(byKey);
+  } else {
+    const cut = k.slice().sort()[LIST_MAX - 1];
+    head = []; const tail = [];
+    for (let i = 0; i < n; i++) (k[i] < cut ? head : tail).push(i);
+    for (let j = 0; j < tail.length && head.length < LIST_MAX; j++) {
+      if (k[tail[j]] === cut) { head.push(tail[j]); tail[j] = -1; }   // ties, in order
+    }
+    head.sort(byKey);
+    for (const i of tail) if (i >= 0) head.push(i);
+  }
+  const src = arr.slice();
+  for (let i = 0; i < n; i++) arr[i] = src[head[i]];
   return arr;
 }
 function visibleSites() {
@@ -1977,17 +2019,17 @@ function renderList(vis) {
     return;
   }
   const showIdx = !!route;
-  $('list').innerHTML = vis.slice(0, 300).map((s, i) => {
+  $('list').innerHTML = vis.slice(0, LIST_MAX).map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
-    ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+    ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || walkTo(s, a[0], a[1]) - walkTo(s, b[0], b[1]));
     // "Discount Tire ≥3min" tells you something; "Tire Shop ≥3min" does not
     const lp = livePoiFor[s.id];
     const chains = ent.slice(0, 4).map(([k, v]) => {
       const isLive = k === livePoiKey && lp && lp.name;
       const label = isLive ? lp.name : k;              // the real shop, not the category
-      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)} ≥${walkMin(mDist(s, v))}min</span>`;
+      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)} ≥${walkMin(walkTo(s, k, v))}min</span>`;
     }).join('');
     const extra = ent.length > 4 ? `<span style="color:var(--dim2)">+${ent.length - 4}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
@@ -2011,8 +2053,8 @@ function renderList(vis) {
       </div>
       <button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button>
     </div>`;
-  }).join('') + (vis.length > 300
-    ? `<div class="empty">Showing the first 300 of ${vis.length}. Narrow the filter to see more.</div>` : '');
+  }).join('') + (vis.length > LIST_MAX
+    ? `<div class="empty">Showing the first ${LIST_MAX} of ${vis.length.toLocaleString()}. Narrow the filter to see more.</div>` : '');
 
   $('list').querySelectorAll('.row').forEach(r => {
     r.onclick = e => {
@@ -4504,8 +4546,18 @@ probeBasemap();
 $('baseSeg').querySelectorAll('button').forEach(b => b.onclick = () => setBasePref(b.dataset.base));
 (function () {
   const row = $('chiprow');
-  const sync = () => row.classList.toggle('at-end',
-    row.scrollLeft + row.clientWidth >= row.scrollWidth - 2);
+  /* Coalesced to one read per frame. As a MutationObserver callback it read three layout
+     properties right after render() rebuilt 300 result rows, forcing a full synchronous
+     layout of the page on every tap. */
+  let queued = false;
+  const sync = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      row.classList.toggle('at-end', row.scrollLeft + row.clientWidth >= row.scrollWidth - 2);
+    });
+  };
   row.addEventListener('scroll', sync, { passive: true });
   addEventListener('resize', sync);
   new MutationObserver(sync).observe(row, { childList: true, subtree: true });

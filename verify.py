@@ -617,6 +617,39 @@ for _needle, _why in [
     ("CAT_LABEL", "category chip labels gone"),
 ]:
     check(_needle in _html, _why)
+# ---- tap speed (fix 6, 2026-10-10) ----
+# Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
+# ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
+check(re.search(r"const d = walkTo\(s, keys\[i\], m\[keys\[i\]\]\)", _html) is not None,
+      "bestWalk recomputes every walk on every tap again instead of using the walk cache")
+check("if (!BUNDLED_KEYS.has(k)) return mDist(s, v);" in _html,
+      "the walk cache would also cache live-lookup keys, which change at runtime")
+check("requestAnimationFrame(() => {\n      queued = false;" in _html,
+      "the chip-row edge check forces a synchronous layout after every render again")
+check("content-visibility:auto" in _html[_html.find(".row{"):_html.find(".row{") + 120],
+      "result rows below the fold are laid out on every tap again")
+if _node and "function sortByKey(arr, key)" in _html:
+    _a = _html.index("const LIST_MAX = 300;")
+    _fn3 = _html[_a:_html.index("\n}\n", _html.index("function sortByKey(arr, key)")) + 3]
+    _js3 = _fn3 + r"""
+// The partial sort must give exactly the first LIST_MAX of a stable full sort.
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const f = [];
+for (const n of [0, 1, 5, 299, 300, 601, 1000, 14000]) {
+  for (const ties of [false, true]) {
+    const arr = Array.from({length: n}, (_, i) => ({ i, v: ties ? Math.floor(rnd() * 20) : (rnd() < 0.02 ? undefined : rnd()) }));
+    const key = o => o.v === undefined ? NaN : o.v;
+    const ref = arr.slice().sort((a, b) => { const x = key(a), y = key(b);
+      const xa = x === x ? x : Infinity, ya = y === y ? y : Infinity; return (xa - ya) || (a.i - b.i); });
+    const got = sortByKey(arr.slice(), key);
+    const want = ref.slice(0, LIST_MAX).map(o => o.i).join(), have = got.slice(0, LIST_MAX).map(o => o.i).join();
+    if (want !== have) f.push(`n=${n} ties=${ties}: first ${LIST_MAX} differ`);
+    if (got.length !== n || new Set(got).size !== n) f.push(`n=${n}: items lost or duplicated`);
+  }
+}
+console.log(f.length ? f.join("\n") : "OK");"""
+    _r3 = subprocess.run([_node, "-e", _js3], capture_output=True, text=True)
+    check(_r3.stdout.strip() == "OK", "sortByKey no longer matches a stable sort:\n  " + (_r3.stdout + _r3.stderr).strip()[:400])
 check(_html.count("if (!chainQuery()) return true;") == 1
       and "return chainKeysOn(m).length > 0;" in _html,
       "passesChain no longer routes through the shared chain predicate")
