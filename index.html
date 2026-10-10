@@ -234,6 +234,12 @@ svg{display:block}
 #centerCard .rad button{font-size:11px;font-weight:700;color:var(--dim);padding:4px 8px;border-radius:6px}
 #centerCard .rad button.on{background:var(--accent);color:var(--accent-ink)}
 #centerCard .x{color:var(--dim2);padding:3px;display:grid;place-items:center}
+/* The smallest controls measured 18-34 px on a phone, well under the ~44 px a thumb needs.
+   An invisible extension enlarges what can be tapped without moving or resizing anything.
+   Neighbours in a row only grow vertically, so one never steals the other's taps. */
+#ccX,#placeClr,#routeInfo .rclear,.fbar .fb button,#centerCard .rad button,.pp-chain .go{position:relative}
+#ccX::after,#placeClr::after,#routeInfo .rclear::after,.fbar .fb button::after{content:'';position:absolute;inset:-10px}
+#centerCard .rad button::after,.pp-chain .go::after{content:'';position:absolute;inset:-9px -1px}
 
 /* Panning the map and expecting results to follow is the behaviour every map app has
    trained people to expect. Dropping a pin required finding a button first and then
@@ -445,7 +451,7 @@ svg{display:block}
 .pp-poi-s{margin-top:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .oh{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
 .oh.y{background:rgba(21,128,61,.13);color:var(--accent)}
-.oh.n{background:rgba(180,83,9,.14);color:var(--amber)}
+.oh.n{background:rgba(180,83,9,.14);color:var(--warn)}   /* amber text was 1.6:1 on its tint */
 .ohn{font-size:11.5px;color:var(--dim)}
 .pp-poi-l{display:flex;gap:12px;margin-top:7px}
 .pp-poi-l a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none}
@@ -492,8 +498,12 @@ svg{display:block}
 :root[data-theme="dark"] .wring.none{background:var(--surface3);color:var(--dim2)}
 .row .body{flex:1;min-width:0}
 .row .n{display:flex;gap:8px;align-items:center}
-.row .n b{font-size:14.5px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
+.row .n b,.row .n .rowname{font-size:14.5px;font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap;letter-spacing:-.2px}
+/* The station name is the row's keyboard handle: a real button, styled as the plain title it
+   replaced. Rows were click-only, so a keyboard user could not open a single charger. */
+.row .n .rowname{background:none;border:0;padding:0;margin:0;font-family:inherit;color:inherit;
+  text-align:left;cursor:pointer;border-radius:4px}
 .row .n s{text-decoration:none;color:var(--dim);font-size:11px;white-space:nowrap;font-weight:700;
   font-family:var(--mono);background:var(--surface2);border-radius:7px;padding:3px 7px}
 :root[data-theme="dark"] .row .n s{background:var(--surface3)}
@@ -804,7 +814,7 @@ svg{display:block}
       <button class="mbtn primary" id="locBtn" title="Use my location" aria-label="Use my location"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2"/></svg></button>
     </div>
 
-    <div id="hero">
+    <div id="hero" role="dialog" aria-modal="true" aria-label="Welcome">
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <div class="hero-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></div>
@@ -831,7 +841,7 @@ svg{display:block}
   </section>
 </div>
 
-<div id="picker" class="modal">
+<div id="picker" class="modal" role="dialog" aria-modal="true" aria-label="Pick chains">
   <div class="pk">
     <h3><span>Pick chains</span><button class="iconbtn sm" id="pkClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="searchbox">
@@ -846,7 +856,7 @@ svg{display:block}
   </div>
 </div>
 
-<div id="filters" class="modal">
+<div id="filters" class="modal" role="dialog" aria-modal="true" aria-label="Filters">
   <div class="pk">
     <h3><span>Filters</span><button class="iconbtn sm" id="filtClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="fgroup">
@@ -892,7 +902,7 @@ svg{display:block}
   </div>
 </div>
 
-<div id="carPicker" class="modal">
+<div id="carPicker" class="modal" role="dialog" aria-modal="true" aria-label="Your EV">
   <div class="pk">
     <h3><span>Your EV</span><button class="iconbtn sm" id="carClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <p class="subnote">Pick your car for connector compatibility and an estimated charge time at each stop. Specs are approximations (usable battery, typical peak DC rate). Stored on this device only.</p>
@@ -907,7 +917,7 @@ svg{display:block}
   </div>
 </div>
 
-<div id="about"><div class="box">
+<div id="about" role="dialog" aria-modal="true" aria-label="About Charge and Chew"><div class="box">
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
   <p>13,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
   <p><b>Map style:</b> Esri by default, which needs no account. CARTO's basemap looks better but
@@ -1325,7 +1335,7 @@ function popupHtml(s) {
        and the arrow stays walking directions. Searching the name AT the coordinates is
        what makes Google resolve to that specific branch rather than the brand in general. */
     const gmaps = at ? gPlace(label, at[0].toFixed(5), at[1].toFixed(5)) : '';
-    return `<div class="pp-chain${at ? ' tap' : ''}"${at ? ` data-poi="${esc(k)}" data-at="${coord}"` : ''}>
+    return `<div class="pp-chain${at ? ' tap' : ''}"${at ? ` data-poi="${esc(k)}" data-at="${coord}" role="button" tabindex="0" aria-label="${esc(k)} details"` : ''}>
       <span>${BRANDS[k].e} ${at
         ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</a>`
         : (active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label))}</span>
@@ -1369,7 +1379,7 @@ function popupHtml(s) {
        <span>~${cm} min 10–80%</span></div>` + dwellAdvice(s, cm))
     : '';
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
-      <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}">${favs.has(s.id) ? '★' : '☆'}</button></div>
+      <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-net"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</div>
     <div class="pp-meta">${s.stalls ? s.stalls + (s.stalls === 1 ? ' stall · ' : ' stalls · ') : ''}${s.kw ? s.kw + ' kW · ' : ''}${connList(s.conn)}${s.price ? ' · ' + esc(s.price) : ''}${s.h24 ? ' · 24h' : ''}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
@@ -1469,7 +1479,10 @@ map.on('popupopen', e => {
   if (b) b.onclick = () => {
     toggleFav(+b.dataset.fav);
     const on = favs.has(+b.dataset.fav);
-    b.classList.toggle('on', on); b.textContent = on ? '★' : '☆';
+    b.classList.toggle('on', on);
+    b.innerHTML = `<span aria-hidden="true">${on ? '★' : '☆'}</span>`;
+    b.setAttribute('aria-pressed', String(on));
+    b.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + ((byId[+b.dataset.fav] || {}).name || 'this stop'));
   };
   track('open-charger');
   const src = e.popup._source;
@@ -2047,7 +2060,7 @@ function renderList(vis) {
     return `<div class="row" data-id="${s.id}">
       ${lead}
       <div class="body">
-        <div class="n"><b>${esc(s.name)}</b><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
+        <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map">${esc(s.name)}</button><s>${s.kw ? s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
         <div class="sub"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${s.stalls === 1 ? '<span class="tag one">1 stall</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
@@ -2064,7 +2077,13 @@ function renderList(vis) {
          panel off-screen. Wait for the movement to end — but a flyTo to where the map
          already is never fires moveend, so keep a timer as a floor. */
       let opened = false;
-      const show = () => { if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup(); };
+      const byKeyboard = e.detail === 0;   // Enter/Space on the name button
+      const show = () => {
+        if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup();
+        // From the keyboard, carry focus into the panel that just opened.
+        if (byKeyboard) { const pe = mk[s.id].getPopup() && mk[s.id].getPopup().getElement();
+          const f = pe && pe.querySelector('a[href], button, [tabindex="0"]'); if (f) f.focus(); }
+      };
       map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
       map.once('moveend', show);
       setTimeout(show, 900);
@@ -2506,7 +2525,7 @@ function renderLegend() {
      (the same netPick the search uses for "evgo near target"), shown in the filter bar as
      "<network> only" with its own x. */
   const rows = top.map(k =>
-    `<div role="button" tabindex="0" data-net="${esc(k)}" class="${netPick === k ? 'on' : ''}"><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
+    `<div role="button" tabindex="0" aria-pressed="${netPick === k}" data-net="${esc(k)}" class="${netPick === k ? 'on' : ''}"><b style="background:${counts[k].col}"></b><span>${esc(k)}</span><i>${counts[k].n.toLocaleString()}</i></div>`
   ).join('');
   $('legendList').innerHTML = rows + `<div style="margin-top:2px"><b style="background:#8892a0"></b><span>other networks</span></div>`;
   $('filtNetList').innerHTML = rows;   // same list inside Filters, where the phone finds it
@@ -4122,7 +4141,7 @@ function showSugg() {
   $('placeIn').setAttribute('aria-expanded', 'true');
 }
 function hideSugg() {
-  $('sugg').hidden = true; suggIdx = -1;
+  $('sugg').hidden = true; suggIdx = -1; $('placeIn').removeAttribute('aria-activedescendant');
   $('placeIn').setAttribute('aria-expanded', 'false');
 }
 function runSugg(q, hold) {
@@ -4147,7 +4166,14 @@ $('placeIn').addEventListener('keydown', e => {
     suggIdx += e.key === 'ArrowDown' ? 1 : -1;
     if (suggIdx < 0) suggIdx = opts.length - 1;
     if (suggIdx >= opts.length) suggIdx = 0;
-    opts.forEach((o, i) => o.classList.toggle('cur', i === suggIdx));
+    opts.forEach((o, i) => {
+      o.classList.toggle('cur', i === suggIdx);
+      o.id = 'sugg-' + i;
+      o.setAttribute('aria-selected', String(i === suggIdx));
+    });
+    // The input keeps focus while arrows move the highlight; this tells a screen reader which
+    // option is current. Without it the highlight was visual only.
+    $('placeIn').setAttribute('aria-activedescendant', 'sugg-' + suggIdx);
     opts[suggIdx].scrollIntoView({ block: 'nearest' });
     return;
   }
@@ -4213,6 +4239,13 @@ function poiDetailHtml(p) {
   ].filter(Boolean).join('');
   return `<div class="pp-det">${state}${p.addr ? '<br>' + esc(p.addr) : ''}${links ? '<br>' + links : ''}</div>`;
 }
+/* Enter and Space activate anything presented as a button that is not a native one (legend
+   and network rows, a popup's chain rows). They were focusable but did nothing. */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const t = e.target;
+  if (t && t.matches && t.matches('[role="button"]:not(button):not(a)')) { e.preventDefault(); t.click(); }
+});
 /* Delegated: popups are rebuilt on every open, so per-element handlers would be lost. */
 document.addEventListener('click', async e => {
   // both links on the row are plain links; only the rest of the row expands the details
@@ -4524,6 +4557,54 @@ function selectChain(k) {
   render(); syncUrl(); setSheet('mid'); fitToResults();
 }
 function showHero() { buildHero(); $('hero').classList.add('show'); }
+
+/* ───────── dialogs ─────────
+   Five overlays behave as dialogs: Escape closes the top one, focus moves in when it opens,
+   Tab stays inside while it is open, and focus returns to where it was when it closes.
+   None of that happened before -- Escape did nothing and a keyboard or screen-reader user
+   kept tabbing through the page hidden underneath. Listed top-most first. */
+const DIALOGS = [
+  { id: 'about', open: () => location.hash === '#about', close: () => $('about').querySelector('.close').click() },
+  { id: 'carPicker', open: () => $('carPicker').classList.contains('show'), close: () => $('carClose').click() },
+  { id: 'filters', open: () => $('filters').classList.contains('show'), close: () => $('filtClose').click() },
+  { id: 'picker', open: () => $('picker').classList.contains('show'), close: () => $('pkClose').click() },
+  { id: 'hero', open: () => $('hero').classList.contains('show'), close: () => $('heroClose').click() },
+];
+const topDialog = () => DIALOGS.find(d => d.open());
+const focusables = el => [...el.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex="0"]')]
+  .filter(x => x.offsetParent !== null || x === document.activeElement);
+(function () {
+  const before = {};
+  const sync = d => {
+    const isOpen = d.open();
+    if (isOpen && !before[d.id]) {
+      before[d.id] = document.activeElement || document.body;
+      // The car and chain pickers focus their own search box; leave that alone. A timer, not
+      // requestAnimationFrame, which does not run in a background tab.
+      setTimeout(() => {
+        const el = $(d.id);
+        if (!el.contains(document.activeElement)) { const f = focusables(el)[0]; if (f) f.focus(); }
+      }, 0);
+    } else if (!isOpen && before[d.id]) {
+      const back = before[d.id]; before[d.id] = null;
+      if (back && back.isConnected && back.focus) back.focus();
+    }
+  };
+  for (const d of DIALOGS) {
+    if (d.id === 'about') addEventListener('hashchange', () => sync(d));
+    else new MutationObserver(() => sync(d)).observe($(d.id), { attributes: true, attributeFilter: ['class'] });
+  }
+  document.addEventListener('keydown', e => {
+    const d = topDialog(); if (!d) return;
+    if (e.key === 'Escape') { e.preventDefault(); d.close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables($(d.id)); if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (!$(d.id).contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+})();
 function hideHero() { $('hero').classList.remove('show'); localStorage.setItem('cc_hero', '0'); }
 $('heroTrip').onclick = () => {
   hideHero(); track('hero-trip');

@@ -617,6 +617,23 @@ for _needle, _why in [
     ("CAT_LABEL", "category chip labels gone"),
 ]:
     check(_needle in _html, _why)
+# ---- keyboard and screen-reader access (fix 6, 2026-10-10; each checked with real keys) ----
+check('<button type="button" class="rowname"' in _html,
+      "result rows have no keyboard handle again — a keyboard user cannot open a charger")
+check("t.matches('[role=\"button\"]:not(button):not(a)')" in _html,
+      "Enter/Space no longer activate role=button rows (legend, networks, popup chains)")
+for _dlg in ("hero", "picker", "filters", "carPicker", "about"):
+    check(re.search(r'id="%s"[^>]*role="dialog" aria-modal="true"' % _dlg, _html) is not None,
+          f"#{_dlg} is no longer marked up as a modal dialog")
+check("if (e.key === 'Escape') { e.preventDefault(); d.close(); return; }" in _html
+      and "if (back && back.isConnected && back.focus) back.focus();" in _html,
+      "dialogs no longer close on Escape or return focus to where it was")
+check("$('placeIn').setAttribute('aria-activedescendant'" in _html,
+      "the highlighted search suggestion is not announced to screen readers again")
+check(".oh.n{background:rgba(180,83,9,.14);color:var(--warn)}" in _html,
+      "the 'Closed' hours pill is back to amber-on-amber (1.6:1)")
+check("#ccX::after" in _html, "the smallest controls lost their enlarged tap area")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
