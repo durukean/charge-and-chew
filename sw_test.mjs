@@ -16,7 +16,8 @@ globalThis.self = {
   addEventListener:(t,f)=>{(listeners[t]=listeners[t]||[]).push(f)},
   location:{origin:'https://chargeandchew.com'}, skipWaiting(){}, clients:{claim(){}},
 };
-globalThis.caches = { open:async n=>mkCache(n), keys:async()=>[...store.keys()], delete:async n=>store.delete(n) };
+globalThis.caches = { open:async n=>mkCache(n), keys:async()=>[...store.keys()], delete:async n=>store.delete(n),
+  async match(req){ const k=typeof req==='string'?req:req.url; for (const m of store.values()) if (m.get(k)) return mkRes(m.get(k)); return undefined; } };
 let nextSize = 0;
 globalThis.fetch = async () => mkRes({size:nextSize});
 globalThis.Response = class { static error(){return{error:true}} };
@@ -86,6 +87,37 @@ report('data: unchanged -> re-download?', revisitFetch === 0, 'no   OK (served f
 report('data: new ?v= -> fetches new?', newDataFetch === 1, 'yes  OK', 'NO (stale data served)');
 report('data: old copy dropped?', kept.length === 1 && kept[0].endsWith('v=bbbbbbbbbb'), 'yes  OK',
        'NO (' + kept.length + ' copies)');
+
+/* ---- an app update must not throw the dataset away ----
+   The data cache used to carry the worker's VERSION, so every shell release (about twenty in
+   a month) evicted the ~1 MB data.js although its content-hashed URL had not changed. */
+const DATA_URL = 'https://chargeandchew.com/data.js?v=bbbbbbbbbb';
+const dataName = [...store.keys()].find(k => k.endsWith('-data') || k === 'cc-data');
+report('data cache unversioned?', dataName === 'cc-data', 'yes  OK', 'NO (' + dataName + ')');
+store.delete('cc-data');
+store.set('cc-v1-data', new Map([[DATA_URL, { size: 4_000_000 }]]));   // left by an older worker
+store.set('cc-v1-shell', new Map([['https://chargeandchew.com/', { size: 1 }]]));
+let act; for (const f of listeners['activate']) f({ waitUntil: p => { act = p; } });
+await act;
+report('update keeps cached dataset?', !!(store.get('cc-data') && store.get('cc-data').get(DATA_URL)),
+       'yes  OK', 'NO (dataset re-downloaded after every update)');
+report('old caches removed?', !store.has('cc-v1-data') && !store.has('cc-v1-shell'), 'yes  OK', 'NO');
+
+/* ---- a slow network must not hold the page hostage ---- */
+async function navReq(fetchImpl) {
+  globalThis.fetch = fetchImpl;
+  let out, waits = [];
+  const ev = { request: { url: 'https://chargeandchew.com/', method: 'GET', mode: 'navigate', headers: { get: () => 'text/html' } },
+               respondWith: p => { out = p; }, waitUntil: p => waits.push(p) };
+  for (const f of listeners['fetch']) f(ev);
+  const t0 = Date.now(); const res = await out; return { res, ms: Date.now() - t0 };
+}
+store.set('cc-v49-shell', new Map([['https://chargeandchew.com/', { size: 111 }]]));   // cached page
+const slow = await navReq(() => new Promise(r => setTimeout(() => r(mkRes({ size: 222 })), 8000)));
+report('slow network -> cached page?', slow.res && slow.res.__size === 111 && slow.ms < 5000,
+       `yes  OK (${slow.ms} ms)`, `NO (${slow.ms} ms, size ${slow.res && slow.res.__size})`);
+const fast = await navReq(async () => mkRes({ size: 333 }));
+report('fast network -> fresh page?', fast.res && fast.res.__size === 333, 'yes  OK', 'NO');
 
 console.log('  cache name in use:            ', [...store.keys()].join(',') || '(none)');
 if (failed) { console.log(`\nservice worker: ${failed} check(s) FAILED`); process.exit(1); }

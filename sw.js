@@ -4,9 +4,13 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v48';
+const VERSION = 'cc-v49';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
-const DATA  = `${VERSION}-data`;    // data.js — big, versioned by ?v= in the URL
+/* NOT versioned. data.js is addressed by a hash of its content (?v=), so a new dataset is a new
+   URL whatever this worker's version is. Versioning this cache threw the ~1 MB dataset away on
+   every app update -- about twenty times in a month -- although the data had not changed. */
+const DATA  = 'cc-data';
+const NAV_TIMEOUT = 3500;           // ms before a slow page load falls back to the cached copy
 const TILES = `${VERSION}-tiles`;   // map tiles for areas already viewed
 const TILE_LIMIT = 400;
 
@@ -25,7 +29,15 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => !k.startsWith(VERSION)).map(k => caches.delete(k)));
+    // Carry the dataset over from a versioned cache left by an older worker, once.
+    const fresh = await caches.open(DATA);
+    for (const k of keys.filter(k => k !== DATA && k.endsWith('-data'))) {
+      const old = await caches.open(k);
+      for (const req of await old.keys()) {
+        if (!(await fresh.match(req))) { const r = await old.match(req); if (r) await fresh.put(req, r); }
+      }
+    }
+    await Promise.all(keys.filter(k => !k.startsWith(VERSION) && k !== DATA).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -95,12 +107,21 @@ self.addEventListener('fetch', event => {
   }
 
   // ---- pages: network-first so updates land, cache as offline fallback
+  /* With no timeout, opening the app on one bar of signal waited for the network to give up
+     entirely before the cached copy was used. After NAV_TIMEOUT the cached page is served and
+     the network answer still refreshes the cache for next time. */
   if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
+    const net = fetch(request).then(async res => {
+      if (res && res.ok) await (await caches.open(SHELL)).put(request, res.clone());
+      return res;
+    });
+    if (event.waitUntil) event.waitUntil(net.catch(() => {}));
     event.respondWith((async () => {
       try {
-        const res = await fetch(request);
-        if (res && res.ok) (await caches.open(SHELL)).put(request, res.clone());
-        return res;
+        const first = await Promise.race([net, new Promise(r => setTimeout(r, NAV_TIMEOUT, 'slow'))]);
+        if (first !== 'slow') return first;
+        const hit = await caches.match(request);
+        return hit || await net;
       } catch {
         return (await caches.match(request)) || (await caches.match('/index.html')) ||
                new Response('<h1>Offline</h1><p>Open the app once while online to use it offline.</p>',
