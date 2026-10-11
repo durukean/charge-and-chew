@@ -638,7 +638,7 @@ check("if (e.key === 'Escape') { e.preventDefault(); d.close(); return; }" in _h
       "dialogs no longer close on Escape or return focus to where it was")
 check("$('placeIn').setAttribute('aria-activedescendant'" in _html,
       "the highlighted search suggestion is not announced to screen readers again")
-check(".oh.n{background:rgba(180,83,9,.14);color:var(--warn)}" in _html,
+check(".oh.n{background:var(--warn-bg);color:var(--warn)}" in _html,
       "the 'Closed' hours pill is back to amber-on-amber (1.6:1)")
 check("#ccX::after" in _html, "the smallest controls lost their enlarged tap area")
 
@@ -752,6 +752,18 @@ _al = re.search(r"let allowed = \[([^\]]*)\]", _wvc)
 if _vk and _al:
     _missing = set(re.findall(r"'(\w+)'", _vk.group(1))) - set(re.findall(r'"(\w+)"', _al.group(1)))
     check(not _missing, f"iOS deep links drop these view parameters: {sorted(_missing)}")
+
+# ---- UI polish (2026-10-12): layout bugs found by the visual review ----
+_flt = _html[_html.find('<div id="filters" class="modal"'):]
+check(_flt.find('<div class="pkgrid">') != -1 and _flt.find('<div class="pkgrid">') < _flt.find('<div class="pkfoot">')
+      and ".pkgrid{overflow-y:auto;padding:0 16px 16px;flex:1;min-height:0" in _html,
+      "the Filters sheet has no scrolling body again — its lower half and Show results are unreachable on a phone")
+check("#carGrid{display:grid" in _html, "the car picker lost its grid: options become a ragged staircase")
+_pp = _html[_html.find("function popupPad(m)"):][:900]
+check("if (wideLayout()) {" in _pp, "desktop popups are clamped to the phone's visible band again (~150 px tall)")
+check("-webkit-line-clamp:2" in _html[_html.find(".row .n b,.row .n .rowname{"):][:400],
+      "result titles are single-line again — cut to ~12 characters on a phone")
+check("lower48.length >= v.length * 0.95" in _html, "fitToResults frames Alaska/Hawaii again, squeezing the US into a strip")
 
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"

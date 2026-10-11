@@ -169,7 +169,7 @@ location.replace('/?chain=IHOP&nosw=1');
         "chips_rendered": 'class="chip' in dom,
         # These strings also live in index.html as fallback markup, so match the *rendered*
         # splash rather than the source: an error only counts if it replaced the splash body.
-        "no_boot_error": not re.search(r'id="splash"[^>]*>\s*<div[^>]*color:#b91c1c', dom),
+        "no_boot_error": not re.search(r'id="splash"[^>]*>\s*<div[^>]*color:(?:#b91c1c|var\(--bad\))', dom),
         "data_actually_loaded": dom.count('class="row"') > 3,
         "boots_with_corrupted_saved_settings": dom_bad.count('class="row"') > 3,
     }
