@@ -661,6 +661,46 @@ check(" Superchargers within ${corridorMi} mi" not in _html, "the route summary 
 check("btn.style.top = Math.max(14, Math.round(top) + 8) + 'px';" in _html,
       "'Search this area' can cover the search box on a phone again")
 
+# ---- plugs: CCS / Tesla / CHAdeMO filter, per-plug speed, route planning (2026-10-11) ----
+check("if (F.plug && !(s.conn & F.plug)) return false;" in _html
+      and "if (F.kw && kwFor(s, F.plug) < F.kw) return false;" in _html,
+      "the plug filter (or plug-specific speed) no longer applies — routes would mix in unusable plugs")
+check('id="routePlugSeg"' in _html and "setPlug(+b.dataset.v)" in _html,
+      "the route planner lost its plug picker")
+check("p.set('plug'" in _html and "'plug'," in _html[_html.find("const VIEW_KEYS"):][:200]
+      and "PLUG_PARAM[(q.get('plug')" in _html,
+      "a shared ?plug= link no longer opens with that plug")
+check("routeCountText()" in _html, "the route summary counts every plug again while the list is filtered")
+if _node and "function kwFor(s, bit)" in _html:
+    _k = _html[_html.index("function kwFor(s, bit)"):_html.index("/* Speed bands,")]
+    _r4 = subprocess.run([_node, "-e", _k + r"""
+const f = [];
+const tesla = { kw: 250, conn: 3, pk: [62, 250, 0] }, ccs = { kw: 350, conn: 1 }, nopk = { kw: 150, conn: 5 };
+if (kwFor(tesla, 1) !== 62) f.push('CCS at a Tesla site should be 62, got ' + kwFor(tesla, 1));
+if (kwFor(tesla, 2) !== 250) f.push('NACS should be 250');
+if (kwFor(tesla, 0) !== 250) f.push('no plug -> site max');
+if (kwFor(ccs, 1) !== 350) f.push('single-plug site -> its kw');
+if (kwFor(nopk, 4) !== 150) f.push('unknown per-plug -> site kw');
+console.log(f.length ? f.join('\n') : 'OK');"""], capture_output=True, text=True)
+    check(_r4.stdout.strip() == "OK", "kwFor() gives the wrong plug speed:\n  " + (_r4.stdout + _r4.stderr).strip()[:300])
+# The pipeline must merge only one network's duplicate listings, and keep their plugs.
+_bdsrc = open(os.path.join(HERE, "data", "build_data.py")).read()
+check('key = (round(s["lat"], 4), round(s["lon"], 4), s.get("net"))' in _bdsrc,
+      "de-duplication keys on coordinates alone again — a Tesla site sharing an EA station's spot vanishes")
+_mp = _bdsrc[_bdsrc.index("PLUG_BITS = (1, 2, 4)"):_bdsrc.index("def clean(sites):")]
+_ns = {}
+exec(_mp, _ns)
+_a = {"conn": 2, "kw": 250}; _ns["merge_plugs"](_a, {"conn": 1, "kw": 62})
+check(_a["conn"] == 3 and _a.get("pk") == [62, 250, 0] and _a["kw"] == 250,
+      f"merge_plugs loses a plug or its speed: {_a}")
+_b = {"conn": 1, "kw": 50}; _ns["merge_plugs"](_b, {"conn": 1, "kw": 150})
+check(_b["conn"] == 1 and "pk" not in _b and _b["kw"] == 150, f"merge_plugs on one plug type: {_b}")
+# Per-plug speeds in the data: [CCS, NACS, CHAdeMO] ints, only on multi-plug sites.
+_bad_pk = [x["id"] for x in (D or {}).get("sites", []) if "pk" in x and not (
+    isinstance(x["pk"], list) and len(x["pk"]) == 3 and all(isinstance(v, int) and v >= 0 for v in x["pk"])
+    and bin(x.get("conn", 0)).count("1") > 1)]
+check(not _bad_pk, f"{len(_bad_pk)} sites carry a malformed per-plug speed list, e.g. {_bad_pk[:3]}")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.

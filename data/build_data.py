@@ -103,6 +103,29 @@ def pretty_name(name, host=""):
         n = _re.sub(r'\b(Ev|Dc|Ac|Hq|Us|Ii|Iii|Iv)\b', lambda m: m.group(0).upper(), n)
     return n[:60]
 
+PLUG_BITS = (1, 2, 4)            # CCS, NACS (Tesla), CHAdeMO -- the order of "pk"
+
+
+def plug_kw(s):
+    """{plug bit: max kW} for one listing. "pk" is only stored when a site has several plug
+    types; otherwise its one plug runs at the site's kw."""
+    if s.get("pk"):
+        return {b: kw for b, kw in zip(PLUG_BITS, s["pk"]) if s.get("conn", 0) & b}
+    return {b: s.get("kw") or 0 for b in PLUG_BITS if s.get("conn", 0) & b}
+
+
+def merge_plugs(keep, other):
+    """Fold another listing of the same station into keep: union of plugs, per-plug max kW."""
+    a = plug_kw(keep)
+    for b, kw in plug_kw(other).items():
+        a[b] = max(a.get(b, 0), kw)
+    keep["conn"] = keep.get("conn", 0) | other.get("conn", 0)
+    keep["kw"] = max(keep.get("kw") or 0, other.get("kw") or 0)
+    keep.pop("pk", None)
+    if len(a) > 1:
+        keep["pk"] = [a.get(b, 0) for b in PLUG_BITS]
+
+
 def clean(sites):
     """Drop unusable rows, de-duplicate co-located listings, tidy names, flag dealerships."""
     stats = dict(start=len(sites), low_kw=0, truck=0, private=0, dup=0, renamed=0, dealer=0, unnamed=0)
@@ -134,11 +157,20 @@ def clean(sites):
     def richness(x):
         return (x.get("kw") or 0, x.get("stalls") or 0, len(x.get("name") or ""))
 
+    # Duplicates are listings of ONE station, so only the same network is merged -- and the
+    # dropped listing's plugs are kept, not thrown away. Keying on coordinates alone merged a
+    # Tesla Supercharger into the Electrify America station that shares its coordinates
+    # (Boca Raton, Cadillac MI: 10 sites gone), and keeping only the "richest" listing lost a
+    # plug type at 77 places -- a CCS cabinet listed separately from a CHAdeMO one, say.
     best = {}
     for s in kept:
-        key = (round(s["lat"], 4), round(s["lon"], 4))
-        if key not in best or richness(s) > richness(best[key]):
+        key = (round(s["lat"], 4), round(s["lon"], 4), s.get("net"))
+        if key not in best:
             best[key] = s
+        elif richness(s) > richness(best[key]):
+            merge_plugs(s, best[key]); best[key] = s
+        else:
+            merge_plugs(best[key], s)
     stage1 = list(best.values())
 
     by_name = {}
@@ -151,7 +183,10 @@ def clean(sites):
         group.sort(key=richness, reverse=True)   # keep the richest of each cluster
         picked = []
         for s in group:
-            if all(hav(s["lat"], s["lon"], p["lat"], p["lon"]) > 200 for p in picked):
+            near = [p for p in picked if hav(s["lat"], s["lon"], p["lat"], p["lon"]) <= 200]
+            if near:
+                merge_plugs(near[0], s)            # same station: keep its plugs
+            else:
                 picked.append(s)
         deduped.extend(picked)
     stats["dup"] = len(kept) - len(deduped)

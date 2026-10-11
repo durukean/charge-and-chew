@@ -197,6 +197,17 @@ CASES = [
     # Another way of saying a drive.
     ("halfway between la and sf", dict(trip="Los Angeles, CA|San Francisco, CA")),
     ("starbucks between dallas and houston", dict(trip="Dallas|Houston", chains=["Starbucks"])),
+    # Plugs. "ccs" never names a place, on either side of a trip.
+    ("ccs chargers near me",       dict(plug=1, here=True, place="")),
+    ("la to vegas ccs",            dict(plug=1, trip="Los Angeles, CA|Las Vegas, NV")),
+    ("ccs la to vegas",            dict(plug=1, trip="Los Angeles, CA|Las Vegas, NV")),
+    ("la to vegas with ccs chargers", dict(plug=1, trip="Los Angeles, CA|Las Vegas, NV")),
+    ("ccs from sf to sacramento",  dict(plug=1, trip="San Francisco, CA|Sacramento")),
+    ("chademo in portland or",     dict(plug=4, place="portland, OR")),
+    ("nacs near costco",           dict(plug=2, chains=["Costco"], place="")),
+    ("ccs starbucks in dallas",    dict(plug=1, chains=["Starbucks"], place="dallas")),
+    ("starbucks in dallas",        dict(plug=0)),
+    ("ccs",                        dict(plug=1, place="", poi=None)),
 
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
@@ -250,7 +261,7 @@ window.__ready = function () {{
        probe has to do the same or it tests a code path nobody runs. */
     var pq = (tp && tp.filter) ? P(tp.filter) : p;
     var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free,
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0,
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,

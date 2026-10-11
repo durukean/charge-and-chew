@@ -74,6 +74,7 @@ def distill(fs):
         # connectors + max DC power from the detailed units, fall back to summary
         conn = 0
         maxkw = 0
+        pk = {}     # plug bit -> max kW: a Tesla site's CCS plug can be far slower than its NACS
         for unit in (s.get("ev_charging_units") or []):
             if unit.get("charging_level") != "dc_fast":
                 continue
@@ -82,7 +83,9 @@ def distill(fs):
                 if bit and (c.get("port_count") or 0) > 0:
                     conn |= bit
                     if c.get("power_kw"):
-                        maxkw = max(maxkw, int(round(c["power_kw"])))
+                        kw = int(round(c["power_kw"]))
+                        maxkw = max(maxkw, kw)
+                        pk[bit] = max(pk.get(bit, 0), kw)
         if conn == 0:  # fall back to the flat connector list
             for cname in (s.get("ev_connector_types") or []):
                 conn |= CONN_BIT.get(cname, 0)
@@ -108,6 +111,9 @@ def distill(fs):
             "stalls": s.get("ev_dc_fast_num") or 0,
             "kw": maxkw,
             "conn": conn,
+            # per-plug kW as [CCS, NACS, CHAdeMO], only where there is more than one plug type
+            # (a single-plug site runs at "kw"); 0 = that plug's power is not listed
+            **({"pk": [pk.get(b, 0) for b in (1, 2, 4)]} if bin(conn).count("1") > 1 and pk else {}),
             "price": price,
             "h24": 1 if "24 hour" in hours.lower() else 0,
         })
