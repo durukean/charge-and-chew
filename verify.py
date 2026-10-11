@@ -775,6 +775,10 @@ check(".ftog::after{" in _html, "filter toggles lost their on/off switch")
 check("function centerStyle(kind)" in _html and "'#ffb020'" not in _html,
       "the area centre pin is amber again — the same colour as ChargePoint stops")
 
+check(re.search(r"let opened = false;[\s\S]{0,600}?userMovedMap = true;", _html) is not None
+      and "userMovedMap = true;          // an open stop" in _html,
+      "opening a stop no longer stops the sheet's re-fit — on an iPhone the popup header lands under the search bar")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.

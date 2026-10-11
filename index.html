@@ -1643,6 +1643,7 @@ function keepPopupOnScreen() {
 }
 
 map.on('popupopen', e => {
+  userMovedMap = true;          // an open stop must not be yanked away by a later re-fit
   const el = e.popup.getElement();
   const b = el && el.querySelector('[data-fav]');
   if (b) b.onclick = () => {
@@ -2282,6 +2283,11 @@ function renderList(vis) {
          panel off-screen. Wait for the movement to end — but a flyTo to where the map
          already is never fires moveend, so keep a timer as a floor. */
       let opened = false;
+      /* Opening a stop is the user directing the map. Without this, collapsing the sheet
+         below fired its transitionend re-fit ~340 ms later, which jumped the map back to
+         the whole area mid-flight -- and on a real iPhone the popup then opened with its
+         header under the search bar. */
+      userMovedMap = true;
       const byKeyboard = e.detail === 0;   // Enter/Space on the name button
       const show = () => {
         if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup();
