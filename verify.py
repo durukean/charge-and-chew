@@ -765,6 +765,16 @@ check("-webkit-line-clamp:2" in _html[_html.find(".row .n b,.row .n .rowname{"):
       "result titles are single-line again — cut to ~12 characters on a phone")
 check("lower48.length >= v.length * 0.95" in _html, "fitToResults frames Alaska/Hawaii again, squeezing the US into a strip")
 
+check("if (filtered && (!passesNet(s) || !passesSpec(s)" in _html,
+      "chip counts ignore the active filters again ('Starbucks 17' beside an empty list)")
+check("f.focus({ preventScroll: true })" in _html,
+      "opening a dialog can scroll it again (the welcome card lost its top on short phones)")
+check("color-scheme:dark;" in _html and "color-scheme:light;" in _html,
+      "native scrollbars and controls no longer follow the theme")
+check(".ftog::after{" in _html, "filter toggles lost their on/off switch")
+check("function centerStyle(kind)" in _html and "'#ffb020'" not in _html,
+      "the area centre pin is amber again — the same colour as ChargePoint stops")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
@@ -966,7 +976,8 @@ for _needle, _why in [
 # An arrow has to become "to" BEFORE normalise(), which strips punctuation.
 check("' to ')" in _html and "->" in _html,
       "arrow syntax is normalised away before parseTrip sees it")
-check("or 'LA to Las Vegas'" in _html, "the search placeholder does not mention trips")
+check(re.search(r'id="placeIn" placeholder="[^"]*\'LA to (Las )?Vegas\'', _html) is not None,
+      "the search placeholder does not mention trips")
 check("#routeToggle{color:var(--accent)" in _html,
       "the route button reads as a fourth grey utility icon again")
 

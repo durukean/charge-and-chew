@@ -53,6 +53,8 @@ if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandl
   --accent:#15803d; --accent-ink:#ffffff;   /* brand green, darkened to 5.0:1 on white */
   --warn-ink:#ffffff;
   --overlay:rgba(15,18,22,.46);   /* one backdrop for every sheet and dialog */
+  --amber-text:#d97706;           /* the wordmark amber as TEXT on white: #f59e0b was 2.2:1 */
+  color-scheme:light;
   --good:#0a7d55; --good-bg:#effaf4; --warn:#b45309; --warn-bg:#fef3e2; --bad:#b91c1c; --bad-bg:#fdeaea;
   --amber:#f59e0b;
   --glass:rgba(255,255,255,.92);
@@ -68,6 +70,8 @@ if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandl
   --accent:#4ade80; --accent-ink:#0b0e13;   /* 10:1 on the dark surface */
   --warn-ink:#231a05;
   --overlay:rgba(2,4,8,.72);
+  --amber-text:#fbbf24;
+  color-scheme:dark;
   --good:#4ade80; --good-bg:rgba(74,222,128,.13); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
   --bad:#f87171; --bad-bg:rgba(248,113,113,.13);
   --amber:#fbbf24;
@@ -224,12 +228,13 @@ svg{display:block}
   height:44px;align-items:center}
 .seg button{padding:0 12px;height:36px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--dim)}
 .seg button.on{background:var(--surface);color:var(--txt);box-shadow:var(--sh2)}
-#routeInfo{font-size:12.5px;color:var(--warn);margin-top:8px;min-height:16px;padding:0 2px}
+:root[data-theme="dark"] .seg button.on{background:var(--surface3);box-shadow:inset 0 0 0 1px var(--line2)}
+#routeInfo{font-size:12.5px;color:var(--dim);margin-top:8px;min-height:16px;padding:0 2px}
 #routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
 #routePanel.collapsed #routeInfo{margin:0;display:flex;align-items:center;gap:10px;padding:12px 13px;
   color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;min-height:0}
 #routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--warn);font-weight:500}
+#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--dim);font-weight:500}
 #routePanel.collapsed #routeInfo .ed{color:var(--accent);font-size:12px;font-weight:700;flex-shrink:0}
 #routeInfo .rclear{display:none}
 #routePanel.collapsed #routeInfo .rclear{display:inline-flex;align-items:center;justify-content:center;border:0;background:none;color:var(--dim);font-size:18px;line-height:1;cursor:pointer;width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-left:2px}
@@ -300,7 +305,7 @@ svg{display:block}
 .mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
   display:flex;flex-direction:column;gap:9px}
 .mbtn#routeToggle{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
-.mbtn#routeToggle.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mbtn#routeToggle.on{background:var(--surface);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent),var(--sh2)}
 .mbtn{width:46px;height:46px;border-radius:16px;background:var(--surface);border:1px solid var(--line);
   color:var(--txt);display:grid;place-items:center;box-shadow:var(--sh);transition:.15s}
 .mbtn:active{transform:scale(.92)}
@@ -414,7 +419,7 @@ svg{display:block}
     background:var(--surface2);animation:none;gap:8px}
   #app.phone #sheet #centerCard .lbl{font-size:13px}
   #app.phone #sheet #centerCard .sub{display:none}      /* the title above already says it */
-  #app.phone #sheet #centerCard .rad button{height:28px;padding:0 9px;font-size:12px}
+  #app.phone #sheet #centerCard .rad button{height:34px;padding:0 11px;font-size:12.5px}
   #app.phone #sheet .chiprow{padding:2px 12px 9px;flex-shrink:0;margin:0}
   #app.phone #sheet .chiprow .chip{height:36px;padding:0 12px;font-size:12.5px}
   /* Sticky offsets ignore the row's 12 px side padding, so chips scrolled past the pinned
@@ -591,7 +596,7 @@ svg{display:block}
 .pkitem:active{transform:scale(.97)}
 .pkitem.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .pkitem .e{font-size:17px;flex-shrink:0}
-.pkitem .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pkitem .nm{flex:1;min-width:0;overflow:hidden;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pkitem .c{font-size:10.5px;color:var(--dim2);font-weight:600}
 .pkitem.on .c{color:color-mix(in srgb,var(--accent-ink) 82%,var(--accent))}
 .caritem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:var(--surface2);
@@ -610,6 +615,11 @@ svg{display:block}
 .ftog{display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border-radius:12px;
   background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left}
 .ftog.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+/* A switch at the end, so each row reads as on/off before it is tapped -- they looked like
+   plain grey buttons. */
+.ftog::after{content:'';margin-left:auto;flex-shrink:0;width:32px;height:19px;border-radius:999px;
+  background:radial-gradient(circle at 9.5px 50%,var(--surface) 6.5px,transparent 7px),var(--line2);transition:background .15s}
+.ftog.on::after{background:radial-gradient(circle at 22.5px 50%,var(--accent) 6.5px,transparent 7px),var(--accent-ink)}
 .tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700;
   background:var(--surface3);color:var(--dim)}
 .tag.free{background:var(--good-bg);color:var(--good)}
@@ -652,7 +662,7 @@ svg{display:block}
 .herocard .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);
   background:var(--surface2);border:1px solid var(--line);padding:5px 11px;border-radius:20px;margin-bottom:14px}
 .herocard h1{font-size:26px;font-weight:800;letter-spacing:-1px;line-height:1.14;margin-bottom:8px}
-.herocard h1 .c{color:var(--accent)}.herocard h1 .h{color:var(--amber)}
+.herocard h1 .c{color:var(--accent)}.herocard h1 .h{color:var(--amber-text)}
 .herocard h1 i{color:var(--dim2);font-style:normal;margin:0 2px;font-weight:600}
 .herocard p{color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:16px}
 .herogrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
@@ -668,6 +678,18 @@ svg{display:block}
 #heroTrip{width:100%;min-height:46px;border-radius:13px;background:var(--surface2);
   border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));color:var(--txt);
   font-weight:700;font-size:14px;margin:14px 0 9px;padding:11px 14px;line-height:1.35}
+/* Short phones (iPhone SE, or any phone with Safari's toolbars showing): the card ran past
+   the fold and its top, close button included, started off-screen. Tighter, not hidden. */
+@media (max-height:700px){
+  .hero-mark{display:none}                 /* the logo is in the search bar right behind */
+  .herocard{padding-top:18px;padding-bottom:16px}
+  .herocard h1{font-size:22px;margin-bottom:6px}
+  .herocard p{font-size:13px;margin-bottom:10px}
+  .herogrid{gap:6px;margin-bottom:8px}
+  .heropick{padding-top:8px;padding-bottom:8px}
+  #heroTrip{min-height:40px}
+  #heroAll{height:42px}
+}
 #heroAll{width:100%;height:46px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
   font-weight:700;font-size:14.5px;margin-bottom:9px}
 #heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
@@ -679,15 +701,19 @@ svg{display:block}
 #about .box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;
   max-width:470px;max-height:82vh;overflow-y:auto;font-size:13.5px;color:var(--dim);line-height:1.6}
 #about h2{color:var(--txt);font-size:20px;font-weight:800;margin-bottom:12px;letter-spacing:-.4px}
-#about h2 .c{color:var(--accent)}#about h2 .h{color:var(--amber)}
+#about h2 .c{color:var(--accent)}#about h2 .h{color:var(--amber-text)}
 #about p{margin-bottom:12px}
 #about b{color:var(--txt)}
 #about a{color:var(--accent);text-decoration:none}
 /* Inline links in the about sheet were an 11px-tall target; give them room to be tapped. */
-@media(pointer:coarse){#about .chainlinks a,#about p>a{display:inline-block;padding:6px 0;min-height:32px}}
+@media(pointer:coarse){#about .chainlinks a{padding:8px 12px;min-height:36px;display:inline-flex;align-items:center}
+  #about p>a{padding:6px 0;margin:-6px 0}}
 .chainlinks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .chainlinks a{background:var(--surface2);border:1px solid var(--line);border-radius:100px;
   padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none}
+/* Close at the top as well: the only way out used to be a link several screens down. */
+#about .xclose{position:sticky;top:0;float:right;margin:-8px -8px 0 8px;width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim);z-index:1}
 #about .close{display:block;text-align:center;margin-top:6px;padding:12px;background:var(--surface2);
   border-radius:12px;color:var(--txt);font-weight:700;text-decoration:none}
 
@@ -770,7 +796,7 @@ svg{display:block}
         <a class="mark" href="#about" title="About Charge &amp; Chew" aria-label="About Charge and Chew">
           <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg2" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask2"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask2)"><rect width="64" height="64" fill="url(#ccg2)"/></g></svg>
         </a>
-        <input id="placeIn" placeholder="Search a chain or place — or 'LA to Las Vegas'" autocomplete="off" autocorrect="off" spellcheck="false"
+        <input id="placeIn" placeholder="Chain, place, or 'LA to Vegas'" aria-label="Search a chain, a place, or a trip like LA to Las Vegas" autocomplete="off" autocorrect="off" spellcheck="false"
                enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sugg" aria-autocomplete="list">
         <button class="clr" id="placeClr" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <span class="vdiv"></span>
@@ -966,15 +992,15 @@ svg{display:block}
 </div>
 
 <div id="about" role="dialog" aria-modal="true" aria-label="About Charge and Chew"><div class="box">
+  <a class="xclose" href="#" aria-label="Close About"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
   <p>13,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
-  <p><b>Map style:</b> Esri by default, which needs no account. CARTO's basemap looks better but
-  now requires an API key for this site — without one it stamps "API key required" across every tile,
-  so only pick it if you have a key configured.</p>
+  <p><b>Map style:</b> Esri by default. CARTO is a different look; if its map shows "API key
+  required", switch back to Automatic.</p>
   <div class="seg" id="baseSeg" style="margin:-4px 0 14px">
     <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
   </div>
-  <p><b>Theme:</b> auto follows the sun where you are — light through the day, dark after sunset — or tap the theme button to pin it to light or dark.</p>
+  <p><b>Theme:</b> Auto follows the sun where you are — light by day, dark after sunset. Pin it to light or dark in Filters → Appearance.</p>
   <p><b>Search for anything:</b> tap the search box to see examples. The 90 chains below are precomputed
   and instant, but you can also search a category or a brand we don't track — "ice cream", "bank", "tire shop", "pharmacy", "gym", "Chase",
   "GameStop". Those are looked up live from OpenStreetMap for the area you're viewing, so pick an
@@ -1219,7 +1245,7 @@ function narrowings() {
   else if (netFilter === 'tesla') out.push({ k: 'net', label: 'Tesla only' });
   else if (netFilter === 'other') out.push({ k: 'net', label: 'Non-Tesla only' });
   if (onlyMine && car) out.push({ k: 'car', label: 'Fits ' + car });
-  if (showL2) out.push({ k: 'l2', label: '+ Level 2' });
+  if (showL2) out.push({ k: 'l2', label: 'Level 2' });
   Object.keys(FDEF).forEach(k => { if (F[k]) out.push({ k: 'f:' + k, label: FLABEL[k]() }); });
   return out;
 }
@@ -1810,6 +1836,7 @@ function applyTheme() {
   }
   setAttribution(bm.attrib);
   $('themeBtn').innerHTML = themePref === 'auto' ? ICON_AUTO : curDark ? ICON_MOON : ICON_SUN;
+  if (centerLayer && center) centerLayer.setStyle(centerStyle(center.kind));
   if (!booting) render();   // boot renders once, after the URL has been applied
 }
 $('themeBtn').onclick = () => {
@@ -2041,12 +2068,16 @@ for (const c of ['food', 'store']) {
    POI lookup writes new keys into MATCH without the scope changing at all. */
 let matchVer = 0;
 let scopeCountSig = false, scopeCounts = null, scopeCatCount = null;
+/* Chip counts describe what a tap would show, so they follow the filters too: "Starbucks 17"
+   beside an empty list (because of a 350 kW filter) was a promise the list could not keep. */
+const narSig = () => JSON.stringify(F) + netFilter + (netPick || '') + (onlyMine && car ? car : '');
 function scopeSig() {
-  if (route) return 'r:' + route.ids.size + ':' + corridorMi + ':' + matchVer;
-  if (stateScope) return 's:' + stateScope + ':' + matchVer;
+  const f = narrowings().length ? ':' + narSig() : '';
+  if (route) return 'r:' + route.ids.size + ':' + corridorMi + ':' + matchVer + f;
+  if (stateScope) return 's:' + stateScope + ':' + matchVer + f;
   if (center) return 'c:' + center.lat.toFixed(3) + ',' + center.lon.toFixed(3)
-                   + ':' + radiusMi + ':' + matchVer;
-  return null;                        // national: the precomputed totals are already right
+                   + ':' + radiusMi + ':' + matchVer + f;
+  return f ? 'n' + f + ':' + matchVer : null;   // national and unfiltered: precomputed totals
 }
 function ensureScopeCounts() {
   const sig = scopeSig();
@@ -2054,9 +2085,11 @@ function ensureScopeCounts() {
   scopeCountSig = sig;
   if (!sig) { scopeCounts = null; scopeCatCount = null; return; }
   const c = {}, cc = { food: 0, store: 0 };
+  const filtered = narrowings().length > 0;
   for (const s of SITES) {
     if (!inScope(s)) continue;
     const m = MATCH[s.id]; if (!m) continue;
+    if (filtered && (!passesNet(s) || !passesSpec(s) || (onlyMine && carInfo() && compat(s) === null))) continue;
     for (const k in m) c[k] = (c[k] || 0) + 1;
     if (hasCat(m, 'food')) cc.food++;
     if (hasCat(m, 'store')) cc.store++;
@@ -2167,7 +2200,8 @@ function renderList(vis) {
   fbar.hidden = !nar.length;
   fbar.innerHTML = nar.length
     ? nar.map(n => `<span class="fb">${esc(n.label)}<button data-clear="${esc(n.k)}" aria-label="Remove filter: ${esc(n.label)}" title="Remove">×</button></span>`).join('')
-      + (nar.length > 1 ? '<button class="fball" data-clear="*">Show all chargers</button>' : '')
+      // Not when the list is empty: the empty state carries the same button, centred.
+      + (nar.length > 1 && vis.length ? '<button class="fball" data-clear="*">Show all chargers</button>' : '')
     : '';
 
   /* The moment the app just proved useful is the only moment worth asking. */
@@ -2473,6 +2507,14 @@ $('pkClear').onclick = () => { active.clear(); anyCat = null; drawPicker(); rend
 $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 
 /* ───────── center: locate / pin / place ───────── */
+/* The area's centre. A searched place or pin was amber -- the colour of ChargePoint, the most
+   common network, and of the Level 2 rings -- so it vanished among the stops it centres.
+   Ink on light tiles, white on dark: no network uses either. "You are here" stays blue. */
+function centerStyle(kind) {
+  if (kind === 'me') return { radius: 7, color: '#fff', weight: 2.5, fillColor: '#4c9dff', fillOpacity: 1 };
+  return { radius: 7.5, weight: 2.5, fillOpacity: 1,
+           color: curDark ? '#0e1116' : '#ffffff', fillColor: curDark ? '#f8fafc' : '#1f2937' };
+}
 function setCenter(lat, lon, label, kind) {
   track('area-search', kind);            // 'me' | 'pin' | 'place' — not where
   /* A new area makes anything still in flight for the old one wrong: a slow "ice cream"
@@ -2484,8 +2526,7 @@ function setCenter(lat, lon, label, kind) {
   route = null; clearRoute();
   if (centerLayer) map.removeLayer(centerLayer);
   if (radiusLayer) map.removeLayer(radiusLayer);
-  centerLayer = L.circleMarker([lat, lon], { radius: 7, color: '#fff', weight: 2.5,
-    fillColor: kind === 'me' ? '#4c9dff' : '#ffb020', fillOpacity: 1 }).addTo(map);
+  centerLayer = L.circleMarker([lat, lon], centerStyle(kind)).addTo(map);
   radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: '#4c9dff', weight: 1.2,
     opacity: .5, fillColor: '#4c9dff', fillOpacity: .045, interactive: false }).addTo(map);
   $('centerCard').classList.add('show');
@@ -4339,7 +4380,7 @@ function showSugg() {
   if (!raw) {
     html = SUGGESTIONS.map(s => s.h
       ? `<div class="sg-h">${esc(s.h)}</div>`
-      : `<button type="button" role="option" data-q="${esc(s.q)}"><i>${s.i}</i>${esc(s.q)}<small>${esc(s.note)}</small></button>`).join('');
+      : `<button type="button" role="option" data-q="${esc(s.q)}"><i>${s.i}</i>${esc(s.q.charAt(0).toUpperCase() + s.q.slice(1))}<small>${esc(s.note)}</small></button>`).join('');
   } else {
     const hits = liveSugg(raw);
     if (!hits.length) return hideSugg();
@@ -4828,7 +4869,9 @@ const focusables = el => [...el.querySelectorAll('a[href], button:not([disabled]
       // requestAnimationFrame, which does not run in a background tab.
       setTimeout(() => {
         const el = $(d.id);
-        if (!el.contains(document.activeElement)) { const f = focusables(el)[0]; if (f) f.focus(); }
+        // preventScroll: focusing while a card still slides in scrolled the welcome screen
+        // 86 px down, hiding its top (and close button) on a short phone.
+        if (!el.contains(document.activeElement)) { const f = focusables(el)[0]; if (f) f.focus({ preventScroll: true }); }
       }, 0);
     } else if (!isOpen && before[d.id]) {
       const back = before[d.id]; before[d.id] = null;
