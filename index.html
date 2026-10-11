@@ -494,6 +494,10 @@ svg{display:block}
   border-radius:22px 22px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.14);display:flex;flex-direction:column;
   flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
 :root[data-theme="dark"] #sheet{box-shadow:0 -8px 34px rgba(0,0,0,.55)}
+/* Every start on a phone ends with the sheet at mid height. Painting it collapsed first and
+   growing it once the data arrived moved the whole map and its buttons: a 0.16 layout shift
+   on every load, above the 0.1 "good" line. Start where it will end up. */
+@media (max-width:759px){#sheet{height:40vh;height:40dvh}}
 .handle{padding:9px 0 5px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
 .handle i{width:38px;height:4px;border-radius:2px;background:var(--line2);display:block}
 .sheethead{display:flex;align-items:center;gap:9px;padding:0 15px 10px;flex-shrink:0}
@@ -1064,6 +1068,53 @@ window.addEventListener('error', function () {
   }, 2500);
 });
 </script>
+<script>
+/* The map and its first tiles start HERE, before the ~1 MB dataset below is downloaded and
+   parsed. They used to wait for it: the map -- the largest thing on screen -- painted only
+   after the data, ~2.2 s into a throttled phone load. Nothing about the base map depends on
+   the data. The app script adopts this map (window.__ccMap) instead of creating one, and
+   re-requests the same tile URLs from cache when it builds its own layers.
+   The theme guess (by hour) and the first view (link, else last area, else the US) only
+   decide which tiles are fetched first; the app script then applies the real ones. */
+window.CC_BASEMAPS = {
+  carto: {
+    light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    opts:  { maxZoom: 19, subdomains: 'abcd' },
+    attrib: '© <a href="https://carto.com">CARTO</a>, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors' },
+  esri: {
+    light: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    dark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    // Esri's canvas basemaps ship without labels; the reference layer carries place names.
+    refLight: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
+    refDark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
+    // Esri's canvas has no tiles past z16; upscale rather than going blank at deep zoom.
+    opts:  { maxZoom: 19, maxNativeZoom: 16 },
+    // verbatim from the service's own copyrightText — Esri requires basemap AND data credit
+    attrib: '<a href="https://www.esri.com">Esri</a>, HERE, Garmin, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, and the GIS user community' } };
+(function () {
+  try {
+    if (typeof L === 'undefined') return;
+    var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+    var pref = get('cc_theme'), hr = new Date().getHours();
+    var dark = pref === 'dark' || (pref !== 'light' && (hr < 7 || hr >= 19));
+    var bm = window.CC_BASEMAPS[get('cc_basepref') === 'carto' ? 'carto' : 'esri'];
+    var view = [[39.3, -96.5], 4];
+    var at = (new URLSearchParams(location.search).get('at') || '').split(',').map(Number);
+    var r = +new URLSearchParams(location.search).get('r') || 25;
+    if (at.length === 2 && isFinite(at[0]) && isFinite(at[1])) view = [at, r <= 10 ? 11 : r <= 25 ? 10 : 9];
+    else {
+      var a = JSON.parse(get('cc_area') || 'null');
+      if (a && isFinite(a.lat) && Date.now() - (a.t || 0) < 14 * 864e5) view = [[a.lat, a.lon], (a.r || 25) <= 10 ? 11 : 10];
+    }
+    var m = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true, zoomSnap: 0.5 })
+      .setView(view[0], view[1]);
+    var layers = [L.tileLayer(bm[dark ? 'dark' : 'light'], Object.assign({}, bm.opts, { alt: '' })).addTo(m)];
+    if (bm.refLight) layers.push(L.tileLayer(bm[dark ? 'refDark' : 'refLight'], Object.assign({}, bm.opts, { alt: '' })).addTo(m));
+    window.__ccMap = m; window.__ccEarlyTiles = layers;
+  } catch (e) { window.__ccMap = null; }
+})();
+</script>
 <script src="data.js?v=18e80b5299"></script>
 <script>
 (() => {
@@ -1414,9 +1465,8 @@ const saveFavs = () => {
    Barbara drawn 266 px wide on a 440 px phone, exactly half of the 532 one step in would need.
    Half steps fit it properly. Tiles stay sharp: Leaflet rounds the tile level, so N.5 loads
    level N+1 tiles scaled DOWN (0.71x) rather than level N scaled up. */
-const map = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true,
-                           zoomSnap: 0.5 })
-  .setView([39.3, -96.5], 4);
+const map = window.__ccMap || L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true,
+                           zoomSnap: 0.5 }).setView([39.3, -96.5], 4);
 /* Framing the country for the viewport we actually have. Deliberately a WIDE, SHORT band
    rather than true CONUS bounds: fitBounds always contains what you give it, so the real
    bounding box on a tall phone zooms out until Canada and South America fill the screen.
@@ -1696,22 +1746,7 @@ function track(name, detail) {
    the whole map silently turns into that message. (OSM's volunteer servers do the same
    with an "Access blocked" tile.) We probe one dense land tile at startup and fall back
    to Esri's key-free canvas if CARTO is blocked for this visitor. */
-const BASEMAPS = {
-  carto: {
-    light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    opts:  { maxZoom: 19, subdomains: 'abcd' },
-    attrib: '© <a href="https://carto.com">CARTO</a>, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors' },
-  esri: {
-    light: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-    dark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-    // Esri's canvas basemaps ship without labels; the reference layer carries place names.
-    refLight: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
-    refDark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
-    // Esri's canvas has no tiles past z16; upscale rather than going blank at deep zoom.
-    opts:  { maxZoom: 19, maxNativeZoom: 16 },
-    // verbatim from the service's own copyrightText — Esri requires basemap AND data credit
-    attrib: '<a href="https://www.esri.com">Esri</a>, HERE, Garmin, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, and the GIS user community' } };
+const BASEMAPS = window.CC_BASEMAPS;   // defined in the early-map script above data.js
 let basePref = ['auto', 'carto', 'esri'].includes(localStorage.getItem('cc_basepref'))
   ? localStorage.getItem('cc_basepref') : 'auto';   // auto | carto | esri
 let baseProvider = basePref !== 'auto' ? basePref : 'esri';
@@ -1837,6 +1872,7 @@ function applyTheme() {
   if (baseProvider === 'esri') {
     labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], { ...bm.opts, alt: '' }).addTo(map);
   }
+  if (window.__ccEarlyTiles) { window.__ccEarlyTiles.forEach(l => map.removeLayer(l)); window.__ccEarlyTiles = null; }
   setAttribution(bm.attrib);
   $('themeBtn').innerHTML = themePref === 'auto' ? ICON_AUTO : curDark ? ICON_MOON : ICON_SUN;
   if (centerLayer && center) centerLayer.setStyle(centerStyle(center.kind));
@@ -2308,7 +2344,7 @@ function renderList(vis) {
 }
 
 /* ───────── sheet ───────── */
-let sheetState = 'peek';
+let sheetState = 'mid';   // where every phone start ends up; see the #sheet CSS
 let phoneLayout = false;
 function sheetPx(s) {
   const h = window.innerHeight;

@@ -782,6 +782,19 @@ check(re.search(r"let opened = false;[\s\S]{0,600}?userMovedMap = true;", _html)
 check("if (scoped && !inScope(s)) continue;" in _html[_html.find("function renderLegend()"):][:1200],
       "network counts are national again while viewing an area ('Tesla 3,280' beside 37 stops)")
 
+# ---- first load (2026-10-12): throttled phone, map paint 2.2 s -> 0.73 s, layout shift 0.162 -> 0.015 ----
+_early = _html.find("window.__ccMap = m;")
+check(0 < _early < _html.find('<script src="data.js?v='),
+      "the map no longer starts before data.js — its first paint waits for the 1 MB dataset again")
+check("const map = window.__ccMap || L.map(" in _html, "the app creates a second map instead of adopting the early one")
+check("const BASEMAPS = window.CC_BASEMAPS;" in _html and _html.count("World_Light_Gray_Base") == 1,
+      "tile URLs are defined twice again (early script and app) and can drift apart")
+check("window.__ccEarlyTiles.forEach(l => map.removeLayer(l))" in _html,
+      "the early tile layers are never removed — two base layers stack")
+check(re.search(r"@media \(max-width:759px\)\{#sheet\{height:40vh", _html) is not None
+      and "let sheetState = 'mid';" in _html,
+      "the phone sheet starts collapsed and jumps open again (a 0.16 layout shift on every load)")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.
