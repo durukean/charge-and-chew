@@ -97,6 +97,11 @@ def pretty_name(name, host=""):
         n = _CODE_TAIL.sub('', n).strip(' -–—·,')
     if not n:
         n = host or name or "Charging station"
+    # Some networks put the site name in the station name too: "KEY CENTER KEY CENTER",
+    # "Kinsale EV Kinsale EV" (41 fast and 213 Level 2 sites). Keep one copy.
+    w = n.split()
+    if len(w) % 2 == 0 and len(w) >= 2 and [x.lower() for x in w[:len(w) // 2]] == [x.lower() for x in w[len(w) // 2:]]:
+        n = " ".join(w[:len(w) // 2])
     letters = [c for c in n if c.isalpha()]
     if letters and sum(c.isupper() for c in letters) / len(letters) > 0.85 and len(n) > 6:
         n = n.title()                       # ALL CAPS -> Title Case
