@@ -789,7 +789,7 @@ check(0 < _early < _html.find('<script src="data.js?v='),
 check("const map = window.__ccMap || L.map(" in _html, "the app creates a second map instead of adopting the early one")
 check("const BASEMAPS = window.CC_BASEMAPS;" in _html and _html.count("World_Light_Gray_Base") == 1,
       "tile URLs are defined twice again (early script and app) and can drift apart")
-check("window.__ccEarlyTiles.forEach(l => map.removeLayer(l))" in _html,
+check("if (window.__ccEarlyTiles) { window.__ccEarlyTiles.forEach(l => map.removeLayer(l));" in _html,
       "the early tile layers are never removed — two base layers stack")
 check(re.search(r"@media \(max-width:759px\)\{#sheet\{height:40vh", _html) is not None
       and "let sheetState = 'mid';" in _html,
