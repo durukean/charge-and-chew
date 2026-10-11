@@ -863,7 +863,7 @@ svg{display:block}
     <button id="searchHere" type="button" hidden>Search this area</button>
     <div id="legend" class="collapsed">
       <button id="legendToggle" aria-expanded="false">
-        <span class="sw" style="background:#ff6b5a"></span> Networks
+        <span class="sw" style="background:#ff6b5a"></span> <span id="netLabel">Networks</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div id="legendList"></div>
@@ -959,7 +959,7 @@ svg{display:block}
       <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
     </div>
     <div class="fgroup">
-      <label>Network</label>
+      <label id="filtNetLabel">Network</label>
       <div id="filtNetList" class="netlist"></div>
       <p class="fhint">Tap a network to show only its chargers; tap again for all.</p>
     </div>
@@ -1999,6 +1999,7 @@ function render() {
     if (filtering) m.bringToFront();
   }
   renderList(vis);
+  renderLegend();
   const rc = document.querySelector('#routeInfo .rcount');
   if (rc) rc.textContent = routeCountText();
   renderChips(chipScroll);
@@ -2750,14 +2751,29 @@ function groupedChains() {
 }
 
 /* ───────── network legend ───────── */
+/* Network counts for what is in view -- the area, route or state -- not the whole country:
+   "Tesla Supercharger 3,280" beside Austin's 37 stops answered a question nobody asked.
+   Recounted only when the view changes. */
+let legendSig = '';
 function renderLegend() {
+  const scoped = !!(route || stateScope || center);
+  const sig = (route ? 'r' + route.ids.size + ':' + corridorMi : stateScope ? 's' + stateScope
+    : center ? 'c' + center.lat.toFixed(3) + ',' + center.lon.toFixed(3) + ':' + radiusMi : 'n')
+    + '|' + SITES.length + '|' + (netPick || '');
+  if (sig === legendSig) return;
+  legendSig = sig;
+  $('netLabel').textContent = scoped ? 'Networks here' : 'Networks';
+  $('filtNetLabel').textContent = scoped ? 'Network (here)' : 'Network';
   const counts = {};
   for (const s of SITES) {
+    if (scoped && !inScope(s)) continue;
     const k = s.net || 'Other';
     if (!counts[k]) counts[k] = { n: 0, col: netCol(s) };
     counts[k].n++;
   }
   const top = Object.keys(counts).sort((a, b) => counts[b].n - counts[a].n).slice(0, 10);
+  if (netPick && !top.includes(netPick)) top.unshift(netPick);   // the one you picked stays listed
+  if (netPick && !counts[netPick]) counts[netPick] = { n: 0, col: NETCOL[netPick] || NETFALLBACK };
   /* Rows are buttons, not just swatches: on a phone a list of named networks with counts
      reads as tappable, and tapping one did nothing. Now it narrows to exactly that network
      (the same netPick the search uses for "evgo near target"), shown in the filter bar as
