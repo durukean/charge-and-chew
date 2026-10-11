@@ -10,6 +10,7 @@ python3 data/fetch_chargers.py
 
 # 2. rematch + rebuild
 python3 data/build_data.py
+python3 data/build_level2.py || echo "warning: Level 2 layer not rebuilt; keeping the previous level2.js"
 python3 build.py --base https://chargeandchew.com
 python3 verify.py
 python3 verify_ui.py

@@ -158,7 +158,10 @@ final class WebViewController: UIViewController {
         /* Keep this in step with what index.html reads at boot. `from`/`to`/`c` rebuild a
            route and `poi` re-runs a live category lookup against it -- without them a
            shared "LA to Las Vegas near ice cream" link opened in the app as a bare map. */
-        let allowed = ["at", "r", "chain", "any", "net", "from", "to", "c", "poi", "state"]
+        // Every view parameter the web app shares; a link from the site with ?plug=ccs or
+        // ?l2=1 must open the same view in the app, not quietly drop the filter.
+        let allowed = ["at", "r", "chain", "any", "net", "netpick", "plug", "l2", "from", "to", "c", "poi", "state",
+                       "minkw", "minstalls", "h24", "free", "noiso", "nodlr"]
         c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { allowed.contains($0.name) }
         if let u = c.url { Diag.log("deep link -> \(u.absoluteString)"); webView.load(URLRequest(url: u)) }
     }

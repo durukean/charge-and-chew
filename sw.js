@@ -4,7 +4,7 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v49';
+const VERSION = 'cc-v50';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 /* NOT versioned. data.js is addressed by a hash of its content (?v=), so a new dataset is a new
    URL whatever this worker's version is. Versioning this cache threw the ~1 MB dataset away on
@@ -89,16 +89,20 @@ self.addEventListener('fetch', event => {
 
   if (!sameOrigin) return;   // Nominatim / OSRM / analytics: always live, never cached
 
-  // ---- the dataset: cache-first (URL carries ?v=N, so a new build is a new entry)
-  if (url.pathname.endsWith('/data.js')) {
+  // ---- the datasets: cache-first (URL carries a content hash, so a new build is a new entry).
+  // data.js always; level2.js once someone has switched the Level 2 layer on.
+  if (url.pathname.endsWith('/data.js') || url.pathname.endsWith('/level2.js')) {
     event.respondWith((async () => {
       const c = await caches.open(DATA);
       const hit = await c.match(request);
       if (hit) return hit;
       const res = await fetch(request);
       if (res && res.ok) {
-        // keep only the current version of the data
-        for (const k of await c.keys()) if (k.url !== request.url) c.delete(k);
+        // keep only the current version of THIS file -- dropping every other URL would make
+        // caching level2.js evict data.js
+        for (const k of await c.keys()) {
+          if (k.url !== request.url && new URL(k.url).pathname === url.pathname) c.delete(k);
+        }
         c.put(request, res.clone());
       }
       return res;

@@ -208,6 +208,13 @@ CASES = [
     ("ccs starbucks in dallas",    dict(plug=1, chains=["Starbucks"], place="dallas")),
     ("starbucks in dallas",        dict(plug=0)),
     ("ccs",                        dict(plug=1, place="", poi=None)),
+    # Level 2 ("regular") chargers switch the optional layer on; the words are never a place.
+    ("level 2 chargers near target", dict(l2=True, chains=["Target"], place="")),
+    ("j1772 in austin",              dict(l2=True, place="austin")),
+    ("la to vegas level 2",          dict(l2=True, trip="Los Angeles, CA|Las Vegas, NV")),
+    ("level 2 la to vegas",          dict(l2=True, trip="Los Angeles, CA|Las Vegas, NV")),
+    ("destination chargers near me", dict(l2=True, here=True, place="")),
+    ("chargers in austin",           dict(l2=False)),
 
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
@@ -261,7 +268,7 @@ window.__ready = function () {{
        probe has to do the same or it tests a code path nobody runs. */
     var pq = (tp && tp.filter) ? P(tp.filter) : p;
     var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0,
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0, l2: !!(pq.l2 || p.l2),
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,

@@ -514,6 +514,7 @@ svg{display:block}
 .row .n s.spd.ultra{color:var(--good);background:var(--good-bg)}
 .row .n s.spd.fast{color:var(--accent)}
 .row .n s.spd.slow{color:var(--warn);background:var(--warn-bg)}
+.row .n s.spd.l2{color:var(--dim);background:none;border:1px dashed var(--line2)}
 .pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
 .row .sub{color:var(--dim2);font-size:11.5px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -881,6 +882,11 @@ svg{display:block}
       <p class="fhint">Higher kW means a shorter stop — 150 kW+ is a typical road-trip charger. With a plug chosen below, this is that plug's speed.</p>
     </div>
     <div class="fgroup">
+      <label>Charger type</label>
+      <div class="ftoggles"><button class="ftog" id="l2Tog" aria-pressed="false">🔌 Include Level 2 (slower, at the chains)</button></div>
+      <p class="fhint">Level 2 adds about 20–25 miles per hour parked: worth it over a sit-down meal or a big shop, not a coffee. Shown as hollow rings.</p>
+    </div>
+    <div class="fgroup">
       <label>Plug</label>
       <div class="seg wide" data-f="plug">
         <button data-v="0" class="on">Any</button><button data-v="1">CCS</button><button data-v="2">Tesla</button><button data-v="4">CHAdeMO</button>
@@ -1132,18 +1138,74 @@ const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
    intent rather than a hidden filter. The network and car filters used to live outside
    activeFilterCount(), so "0 stops" could be caused by a filter that nothing on screen
    mentioned and that Reset did not clear. Anything that hides a stop belongs here. */
+/* ───────── Level 2 layer ─────────
+   Optional and off by default: ~13,000 Level 2 chargers at the chains, in their own file
+   (level2.js) fetched only when switched on. When loaded they join SITES at the END, so
+   every fast charger keeps its index (the walk cache is indexed by it) and switching off is
+   a truncation. */
+const L2_URL = 'level2.js?v=37d9412ec6';
+const DC_COUNT = SITES.length;
+let showL2 = false, l2Loading = null;
+function loadL2Data() {
+  if (window.PITSTOP_L2) return Promise.resolve(window.PITSTOP_L2);
+  if (l2Loading) return l2Loading;
+  l2Loading = new Promise((ok, bad) => {
+    const sc = document.createElement('script');
+    sc.src = L2_URL; sc.async = true;
+    sc.onload = () => window.PITSTOP_L2 ? ok(window.PITSTOP_L2) : bad(new Error('empty'));
+    sc.onerror = () => bad(new Error('offline'));
+    document.head.appendChild(sc);
+  }).catch(e => { l2Loading = null; throw e; });
+  return l2Loading;
+}
+async function setL2(on, quiet) {
+  if (on === showL2) return;
+  if (on) {
+    let L2;
+    try { L2 = await loadL2Data(); }
+    catch (e) { if (!quiet) toast('Couldn\u2019t load Level 2 chargers — check your connection'); syncL2UI(); return; }
+    if ((L2.fmt || 1) !== DATA_FMT) { syncL2UI(); return; }
+    for (const s of L2.sites) {
+      if (byId[s.id]) continue;
+      s.lvl = 2;
+      SITE_POS.set(s.id, SITES.length);
+      SITES.push(s); byId[s.id] = s;
+      if (L2.matches[s.id]) MATCH[s.id] = L2.matches[s.id];
+      addMarker(s);
+    }
+    showL2 = true;
+    if (!quiet) toast(`Level 2 on — ${L2.sites.length.toLocaleString()} slower chargers at the chains, for long stops`);
+  } else {
+    for (let i = DC_COUNT; i < SITES.length; i++) {
+      const s = SITES[i];
+      if (mk[s.id]) { map.removeLayer(mk[s.id]); delete mk[s.id]; }
+      delete byId[s.id]; delete MATCH[s.id]; SITE_POS.delete(s.id);
+    }
+    SITES.length = DC_COUNT; walkCache.length = DC_COUNT;
+    showL2 = false;
+  }
+  matchVer++;
+  try { localStorage.setItem('cc_l2', showL2 ? '1' : '0'); } catch (e) {}
+  syncL2UI();
+  if (route) applyCorridor(route.verts, route.mi, route.hr); else { render(); syncUrl(); }
+}
+function syncL2UI() {
+  const b = $('l2Tog'); if (b) { b.classList.toggle('on', showL2); b.setAttribute('aria-pressed', String(showL2)); }
+}
 function narrowings() {
   const out = [];
   if (netPick) out.push({ k: 'net', label: netPick + ' only' });
   else if (netFilter === 'tesla') out.push({ k: 'net', label: 'Tesla only' });
   else if (netFilter === 'other') out.push({ k: 'net', label: 'Non-Tesla only' });
   if (onlyMine && car) out.push({ k: 'car', label: 'Fits ' + car });
+  if (showL2) out.push({ k: 'l2', label: '+ Level 2' });
   Object.keys(FDEF).forEach(k => { if (F[k]) out.push({ k: 'f:' + k, label: FLABEL[k]() }); });
   return out;
 }
 function clearNarrowing(k) {
   if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg(); renderLegend(); }
   else if (k === 'car') { onlyMine = false; localStorage.setItem('cc_onlymine', '0'); renderCarBar(); }
+  else if (k === 'l2') { setL2(false); return; }
   else if (k.startsWith('f:')) { F[k.slice(2)] = FDEF[k.slice(2)]; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
   render(); syncUrl();
 }
@@ -1202,12 +1264,12 @@ function walkTo(s, k, v) {
   return d;
 }
 const isTesla = s => /tesla/i.test(s.net);
-const CONN_NAME = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO' };
+const CONN_NAME = { 1: 'CCS', 2: 'NACS', 4: 'CHAdeMO', 8: 'J1772' };
 function connList(bits) {
-  return [1, 2, 4].filter(b => bits & b).map(b => CONN_NAME[b]).join(' · ');
+  return [1, 2, 4, 8].filter(b => bits & b).map(b => CONN_NAME[b]).join(' · ');
 }
 /* Plugs as people name them ("Tesla", not "NACS"), and the URL words for them. */
-const PLUG_NAME = { 1: 'CCS', 2: 'Tesla', 4: 'CHAdeMO' };
+const PLUG_NAME = { 1: 'CCS', 2: 'Tesla', 4: 'CHAdeMO', 8: 'J1772' };
 const PLUG_PARAM = { ccs: 1, tesla: 2, nacs: 2, chademo: 4 };
 /* Power of one plug type at a stop. "kw" is the site's fastest plug, but a Tesla site's CCS
    plug can run at a fraction of its NACS ones, so with a plug chosen that is what counts.
@@ -1220,6 +1282,9 @@ function kwFor(s, bit) {
 }
 /* Speed bands, so 350 vs 62 kW reads at a glance instead of being a number to compare. */
 const speedTier = kw => !kw ? '' : kw >= 250 ? 'ultra' : kw >= 150 ? 'fast' : kw >= 50 ? 'std' : 'slow';
+/* Range added per hour on Level 2, at a typical ~3.5 mi/kWh. When the power is not listed
+   (common), a range for the usual 6-7.7 kW units rather than a made-up exact figure. */
+const l2Miles = s => s.kw ? `~${Math.round(s.kw * 3.5 / 5) * 5} mi` : '~20–25 mi';
 const TIER_NAME = { ultra: 'Ultra-fast', fast: 'Fast', std: 'Standard', slow: 'Slow' };
 // car = [battery kWh, max DC kW, connector bit]
 function carInfo() { return car && CARS[car] ? CARS[car] : null; }
@@ -1227,6 +1292,12 @@ function carInfo() { return car && CARS[car] ? CARS[car] : null; }
 function compat(s) {
   const c = carInfo(); if (!c) return null;
   const carBit = c[2];
+  if (s.lvl === 2) {
+    /* Level 2: every non-Tesla EV takes J1772 natively, and every Tesla ships with a J1772
+       adapter; a Tesla destination charger needs an adapter for anything else. */
+    if (carBit === 2) return s.conn & 2 ? 'native' : s.conn & 8 ? 'adapter' : null;
+    return s.conn & 8 ? 'native' : s.conn & 2 ? 'adapter' : null;
+  }
   if (s.conn & carBit) return 'native';
   // CCS<->NACS interoperate via adapter; CHAdeMO (4) is native-only
   if (carBit !== 4 && (s.conn & 1 || s.conn & 2)) return 'adapter';
@@ -1234,6 +1305,7 @@ function compat(s) {
 }
 function chargeMin(s) {
   const c = carInfo(); if (!c) return null;
+  if (s.lvl === 2) return null;   // a 10-80% time is a fast-charger idea; Level 2 is miles per hour parked
   const [bat, cmax] = c;
   const eff = Math.min(cmax, kwFor(s, s.conn & c[2] ? c[2] : 0) || cmax);
   if (!eff) return null;
@@ -1422,9 +1494,12 @@ function popupHtml(s) {
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-net"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</div>
-    <div class="pp-meta">${[s.stalls ? s.stalls + (s.stalls === 1 ? ' stall' : ' stalls') : '',
-      s.kw ? TIER_NAME[speedTier(s.kw)] : '', s.price ? esc(s.price) : '', s.h24 ? '24h' : ''].filter(Boolean).join(' · ')}</div>
-    <div class="pp-plugs">${[1, 2, 4].filter(b => s.conn & b).map(b =>
+    <div class="pp-meta">${(s.lvl === 2
+      ? [`<b>Level 2</b>`, s.stalls ? s.stalls + (s.stalls === 1 ? ' port' : ' ports') : '', `adds ${l2Miles(s)} per hour parked`,
+         s.price ? esc(s.price) : '', s.h24 ? '24h' : '']
+      : [s.stalls ? s.stalls + (s.stalls === 1 ? ' stall' : ' stalls') : '',
+         s.kw ? TIER_NAME[speedTier(s.kw)] : '', s.price ? esc(s.price) : '', s.h24 ? '24h' : '']).filter(Boolean).join(' · ')}</div>
+    <div class="pp-plugs">${[1, 2, 4, 8].filter(b => s.conn & b).map(b =>
       `<span><b>${PLUG_NAME[b]}</b> ${kwFor(s, b) ? kwFor(s, b) + ' kW' : 'kW not listed'}</span>`).join('')}</div>
     ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
     ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
@@ -1442,7 +1517,7 @@ function popupHtml(s) {
     </div>`;
 }
 
-SITES.forEach(s => {
+function addMarker(s) {
   const m = L.circleMarker([s.lat, s.lon], { renderer: canvas, radius: 3.5, weight: 1,
     color: '#6b7482', fillColor: '#6b7482', fillOpacity: .6 }).addTo(map);
   // registered BEFORE bindPopup so it runs before Leaflet's own click-to-open handler,
@@ -1451,7 +1526,8 @@ SITES.forEach(s => {
   m.bindPopup(() => popupHtml(s), { maxWidth: 300, autoPanPadding: [24, 24] });
   m._sid = s.id;
   mk[s.id] = m;
-});
+}
+SITES.forEach(addMarker);
 
 /* show the matched chain POIs around a charger so distance is visible */
 function clearPOIs() { poiLayer.clearLayers(); }
@@ -1859,6 +1935,13 @@ function render() {
     m._k = key;
     if (state === 'h') { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
     if (state === 'g') { m.setStyle({ radius: 2.2, weight: 0, fillColor: T.ghost, fillOpacity: .55, opacity: 1 }); continue; }
+    if (s.lvl === 2) {
+      // Level 2: a hollow ring in the network colour, smaller than a fast charger's dot,
+      // so the two never read as the same thing.
+      m.setStyle({ radius: filtering ? 5 : 3.2, weight: filtering ? 2 : 1.4, color: netCol(s),
+        fillColor: T.hotStroke, fillOpacity: .9, opacity: .95 });
+      continue;
+    }
     m.setStyle({ radius: filtering ? 6.5 : 4.2, weight: filtering ? 1.8 : 1,
       color: T.hotStroke, fillColor: netCol(s),
       fillOpacity: filtering ? .97 : .78, opacity: filtering ? 1 : .9 });
@@ -2107,7 +2190,9 @@ function renderList(vis) {
     return `<div class="row" data-id="${s.id}">
       ${lead}
       <div class="body">
-        <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map">${esc(s.name)}</button><s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))] || 'Power not listed'}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug) ? kwFor(s, F.plug) + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s></div>
+        <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map">${esc(s.name)}</button>${s.lvl === 2
+          ? `<s class="spd l2" title="Level 2: adds ${l2Miles(s)} of range per hour parked">L2${s.kw ? ' · ' + s.kw + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '🔌' : ''}</s>`
+          : `<s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))] || 'Power not listed'}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug) ? kwFor(s, F.plug) + 'kW' : ''}${s.stalls ? ' · ' + s.stalls + '⚡' : ''}</s>`}</div>
         <div class="sub"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${s.stalls === 1 ? '<span class="tag one">1 stall</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
@@ -2621,7 +2706,7 @@ const NET_WORDS = [
    place text and went to the geocoder: "where can i charge near costco" looked up a place
    called "charge", "denny's 24 hours" one called "24 hours". normalise() has already turned
    "24/7" into "24 7" and "drive-thru" into "drive thru". */
-const NOISE = /\b(ccs|nacs|chademo|ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|charge|recharge|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s|24 hours|24 hour|24 hrs|24h|24 7|open late|drive thru|drive through|drive in|drive-thru|drive-through|drive-in)\b/g;
+const NOISE = /\b(level 2|level two|lvl 2|l2|j1772|ccs|nacs|chademo|ev|electric|car|cars|supercharger|superchargers|charger|chargers|charging|charge|recharge|station|stations|fast|dc|dcfc|plug|plugs|point|points|near|nearby|around|close to|next to|by|at|in|the|a|an|with|and|me|my|find|show|where|is|are|s|24 hours|24 hour|24 hrs|24h|24 7|open late|drive thru|drive through|drive in|drive-thru|drive-through|drive-in)\b/g;
 // Same words as a set, for callers that need to test one word at a time (a /g regex is
 // stateful across .test calls, which makes it the wrong tool for that).
 const NOISE_WORD = new Set(NOISE.source.replace(/\\b|[()]/g, '').split('|').map(w => w.trim()));
@@ -2774,6 +2859,10 @@ function parseQuery(raw) {
   const free = /\sfree\s/.test(t);
   /* A plug: "ccs chargers near me", "la to vegas ccs". The word never names a place, so it is
      taken out of the text before the place is worked out. ("tesla" stays a network word.) */
+  // "level 2 chargers near target", "j1772 near me": switch the Level 2 layer on.
+  const l2re = /\s(level 2|level two|lvl 2|l2|j1772|destination charg\w*)\s/;
+  const l2 = l2re.test(t);
+  if (l2) t = t.replace(l2re, ' ');
   let plug = 0;
   for (const [re, bit] of [[/\s(ccs ?1?|ccs combo|combo ?1|j1772 combo|sae combo)\s/, 1], [/\s(nacs|j3400)\s/, 2], [/\s(chademo|cha ?de ?mo)\s/, 4]]) {
     if (re.test(t)) { if (!plug) plug = bit; t = t.replace(re, ' '); }
@@ -2795,7 +2884,7 @@ function parseQuery(raw) {
   else if (CITY_ALIAS[place]) place = CITY_ALIAS[place];
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2 };
 }
 
 window.__parseQuery = parseQuery;
@@ -3079,6 +3168,7 @@ $('placeIn').addEventListener('keydown', async e => {
   if (p.plug && F.plug !== p.plug) {
     F.plug = p.plug; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
   }
+  if (p.l2 && !showL2) await setL2(true);
 
   render(); syncUrl();
 
@@ -4503,6 +4593,7 @@ function syncUrl() {
   // Both used to be left out, so a shared "EVgo only, no dealerships" view opened unfiltered.
   F.nodlr ? p.set('nodlr', '1') : p.delete('nodlr');
   F.plug ? p.set('plug', ({ 1: 'ccs', 2: 'tesla', 4: 'chademo' })[F.plug]) : p.delete('plug');
+  showL2 ? p.set('l2', '1') : p.delete('l2');
   netPick ? p.set('netpick', netPick) : p.delete('netpick');
   stateScope ? p.set('state', stateScope) : p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
@@ -4600,13 +4691,14 @@ function setPlug(v) {
   syncFilterUI(); render(); syncUrl();
 }
 $('routePlugSeg').querySelectorAll('button').forEach(b => b.onclick = () => { track('route-plug', b.textContent); setPlug(+b.dataset.v); });
+$('l2Tog').onclick = () => { track('level2', showL2 ? 'off' : 'on'); setL2(!showL2); };
 function syncFilterUI() {
   // [data-f] only: the Appearance segment in the same sheet is not a result filter
   document.querySelectorAll('#filters .seg.wide[data-f]').forEach(seg => {
     const key = seg.dataset.f;
     seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.v === (F[key] || 0)));
   });
-  document.querySelectorAll('#filters .ftog').forEach(b => b.classList.toggle('on', !!F[b.dataset.f]));
+  document.querySelectorAll('#filters .ftog[data-f]').forEach(b => b.classList.toggle('on', !!F[b.dataset.f]));
   $('routePlugSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.v === (F.plug || 0)));
   const n = activeFilterCount();
   $('filtN').textContent = n || '';
@@ -4618,7 +4710,7 @@ document.querySelectorAll('#filters .seg.wide[data-f] button').forEach(b => b.on
   localStorage.setItem('cc_filters', JSON.stringify(F));
   syncFilterUI(); render(); syncUrl();
 });
-document.querySelectorAll('#filters .ftog').forEach(b => b.onclick = () => {
+document.querySelectorAll('#filters .ftog[data-f]').forEach(b => b.onclick = () => {
   track('filter', b.dataset.f);
   F[b.dataset.f] = F[b.dataset.f] ? 0 : 1;
   localStorage.setItem('cc_filters', JSON.stringify(F));
@@ -4751,7 +4843,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
 /* A link that describes a view opens exactly that view. The recipient's own saved filters
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
-const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'state', 'poi', 'net', 'netpick', 'plug',
+const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
                    'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
@@ -4765,6 +4857,10 @@ if (q.get('h24')) F.h24 = 1;
 if (q.get('free')) F.free = 1;
 if (q.get('noiso')) F.noiso = 1;
 if (q.get('nodlr')) F.nodlr = 1;
+/* Level 2 comes on from a link that asks for it, or from the visitor's own choice on a plain
+   visit -- never from someone else's saved preference riding along a shared view. */
+const wantL2 = VIEW_KEYS.some(k => q.has(k)) ? q.get('l2') === '1'
+  : (() => { try { return localStorage.getItem('cc_l2') === '1'; } catch (e) { return false; } })();
 if (PLUG_PARAM[(q.get('plug') || '').toLowerCase()]) F.plug = PLUG_PARAM[q.get('plug').toLowerCase()];
 syncFilterUI();
 if (q.get('r')) {
@@ -4822,6 +4918,9 @@ else {
   else fitUS();
   if (localStorage.getItem('cc_hero') !== '0') showHero();
 }
+/* Started after the first render on purpose: fast chargers appear at once, and the layer
+   joins when its file arrives (re-applying a route if one is drawn by then). */
+if (wantL2) setL2(true, true);
 
 /* ───────── offline / installable ───────── */
 function setOnline(on) {

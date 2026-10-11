@@ -88,6 +88,18 @@ report('data: new ?v= -> fetches new?', newDataFetch === 1, 'yes  OK', 'NO (stal
 report('data: old copy dropped?', kept.length === 1 && kept[0].endsWith('v=bbbbbbbbbb'), 'yes  OK',
        'NO (' + kept.length + ' copies)');
 
+/* ---- level2.js is cached alongside data.js, never instead of it ---- */
+{
+  let out;
+  const ev = { request: { url: 'https://chargeandchew.com/level2.js?v=cccccccccc', method: 'GET', mode: 'no-cors',
+                          headers: { get: () => '' } }, respondWith: p => { out = p }, waitUntil: () => {} };
+  for (const f of listeners['fetch']) f(ev);
+  await out;
+  const keys = [...dataCache().keys()];
+  report('level2 cached beside data?', keys.some(k => k.includes('/level2.js')) && keys.some(k => k.includes('/data.js')),
+         'yes  OK', 'NO (' + keys.join(',') + ')');
+}
+
 /* ---- an app update must not throw the dataset away ----
    The data cache used to carry the worker's VERSION, so every shell release (about twenty in
    a month) evicted the ~1 MB data.js although its content-hashed URL had not changed. */

@@ -921,4 +921,17 @@ if os.path.exists(_dj):
     if _h2 != _h:
         open(_ix, "w", encoding="utf-8").write(_h2)
     print(f"data.js version {_ver}")
+# The optional Level 2 layer is loaded by URL from script, so the same content hash goes into
+# the one constant that builds that URL.
+_l2 = os.path.join(HERE, "level2.js")
+if os.path.exists(_l2):
+    _ver2 = hashlib.sha256(open(_l2, "rb").read()).hexdigest()[:10]
+    _ix = os.path.join(HERE, "index.html")
+    _h = open(_ix, encoding="utf-8").read()
+    _h2, _n = re.subn(r"const L2_URL = 'level2\.js\?v=[^']*';", f"const L2_URL = 'level2.js?v={_ver2}';", _h)
+    if _n != 1:
+        sys.exit(f"build.py: expected exactly one L2_URL constant in index.html, found {_n}")
+    if _h2 != _h:
+        open(_ix, "w", encoding="utf-8").write(_h2)
+    print(f"level2.js version {_ver2}")
 print(f"Generated {len(urls)} pages + sitemap.xml + robots.txt (base {BASE})")

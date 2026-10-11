@@ -701,6 +701,58 @@ _bad_pk = [x["id"] for x in (D or {}).get("sites", []) if "pk" in x and not (
     and bin(x.get("conn", 0)).count("1") > 1)]
 check(not _bad_pk, f"{len(_bad_pk)} sites carry a malformed per-plug speed list, e.g. {_bad_pk[:3]}")
 
+# ---- the optional Level 2 layer (2026-10-11) ----
+_l2p = os.path.join(HERE, "level2.js")
+check(os.path.exists(_l2p), "level2.js is missing (run data/build_level2.py)")
+if os.path.exists(_l2p):
+    try:
+        _L2 = load_data(_l2p, prefix="window.PITSTOP_L2")
+    except Exception as e:
+        _L2 = None; fail.append(f"level2.js is not valid: {e}")
+    if _L2:
+        _l2s = _L2.get("sites", [])
+        check(len(_l2s) > 8000, f"level2.js has only {len(_l2s)} sites")
+        check(_L2.get("fmt") == 1, "level2.js has an unknown format")
+        _dcids = {x["id"] for x in (D or {}).get("sites", [])}
+        check(not any(x["id"] in _dcids for x in _l2s), "a Level 2 site duplicates a fast charger id")
+        check(all(x.get("conn", 0) & 10 and not x.get("conn", 0) & 5 for x in _l2s),
+              "a Level 2 site carries a fast-charging plug, or no Level 2 plug")
+        _bk = set((D or {}).get("brands", {}))
+        check(all(k in _bk for m in _L2.get("matches", {}).values() for k in m),
+              "level2.js matches a chain the app does not know")
+    _v2 = hashlib.sha256(open(_l2p, "rb").read()).hexdigest()[:10]
+    check(f"const L2_URL = 'level2.js?v={_v2}';" in _html,
+          "index.html loads a stale level2.js version (run build.py)")
+check("'level2.js'" in open(os.path.join(HERE, "publish.py")).read().replace('"', "'"),
+      "level2.js is not in the published allow-list")
+check("$ROOT/level2.js" in open(os.path.join(HERE, "ios", "sync-web.sh")).read(),
+      "the iOS app does not bundle level2.js")
+check("#filters .ftog[data-f]')" in _html and "#filters .ftog')" not in _html,
+      "the generic filter toggles capture the Level 2 switch again (its click did nothing)")
+check("SITES.length = DC_COUNT; walkCache.length = DC_COUNT;" in _html,
+      "switching Level 2 off no longer restores the fast-charger list exactly")
+if _node and "function compat(s)" in _html:
+    _cf = _html[_html.index("function compat(s)"):_html.index("function chargeMin(s)")]
+    _r5 = subprocess.run([_node, "-e", "let CAR; const carInfo = () => CAR;\n" + _cf + r"""
+const f = [], t = (car, s, want) => { CAR = car; const got = compat(s); if (got !== want) f.push(JSON.stringify([car[2], s, got, want])); };
+t([75, 250, 2], { lvl: 2, conn: 8 }, 'adapter');   // Tesla at J1772: ships with the adapter
+t([75, 250, 2], { lvl: 2, conn: 2 }, 'native');    // Tesla at a Tesla destination charger
+t([77, 230, 1], { lvl: 2, conn: 8 }, 'native');    // CCS car at J1772
+t([77, 230, 1], { lvl: 2, conn: 2 }, 'adapter');
+t([40, 50, 4],  { lvl: 2, conn: 8 }, 'native');    // CHAdeMO car (Leaf) charges on J1772
+t([77, 230, 1], { conn: 1 }, 'native');            // fast chargers unchanged
+t([77, 230, 1], { conn: 4 }, null);
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_r5.stdout.strip() == "OK", "compat() is wrong for Level 2 plugs:\n  " + (_r5.stdout + _r5.stderr).strip()[:300])
+
+# Every view parameter the web app reads must survive the iOS deep-link allow-list.
+_vk = re.search(r"const VIEW_KEYS = \[([^\]]*)\]", _html)
+_wvc = open(os.path.join(HERE, "ios", "ChargeAndChew", "WebViewController.swift")).read()
+_al = re.search(r"let allowed = \[([^\]]*)\]", _wvc)
+if _vk and _al:
+    _missing = set(re.findall(r"'(\w+)'", _vk.group(1))) - set(re.findall(r'"(\w+)"', _al.group(1)))
+    check(not _missing, f"iOS deep links drop these view parameters: {sorted(_missing)}")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.

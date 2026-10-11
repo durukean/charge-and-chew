@@ -51,6 +51,9 @@ jobs:
             python3 data/fetch_highways.py || echo "::warning::fetch_highways failed; using the cached data/highways.json"
           fi
           python3 data/build_data.py
+          # The optional Level 2 layer. Its own guards (count floor, max drop) refuse a bad
+          # build; a failure keeps last month's level2.js rather than blocking the fast data.
+          python3 data/build_level2.py || echo "::warning::Level 2 layer not rebuilt; keeping the previous level2.js"
           python3 build.py --base https://chargeandchew.com
 
       - name: Verify the built site before publishing

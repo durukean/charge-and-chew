@@ -11,9 +11,10 @@ The older bare-object-literal form is still read, so an old data.js does not bre
 """
 import ast, json
 
-def load_data(path):
+def load_data(path, prefix="window.PITSTOP_DATA"):
+    """data.js by default; level2.js is the same encoding under window.PITSTOP_L2."""
     raw = open(path, encoding="utf-8").read()
-    if not raw.startswith("window.PITSTOP_DATA"):
+    if not raw.startswith(prefix):
         raise ValueError("data.js has the wrong shape")
     marker = "JSON.parse("
     if marker in raw:
