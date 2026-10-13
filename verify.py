@@ -795,6 +795,15 @@ check(re.search(r"@media \(max-width:759px\)\{#sheet\{height:40vh", _html) is no
       and "let sheetState = 'mid';" in _html,
       "the phone sheet starts collapsed and jumps open again (a 0.16 layout shift on every load)")
 
+# Weekly refresh: a footer with the exact date would rewrite every page every week.
+check(re.search(r"Updated [A-Z][a-z]+ \d{4} ·", open(os.path.join(HERE, "near", "ihop", "index.html")).read()) is not None,
+      "generated pages print the exact data date again — every weekly refresh would rewrite all of them")
+check("'17 9 * * 1'" in open(os.path.join(HERE, ".github", "workflows", "refresh-data.yml")).read(),
+      "the data refresh is no longer weekly")
+# Filters holds plug, speed, Level 2 and networks: it must lead the chip row, not hide off-screen.
+_cr = _html[_html.find('<div class="chiprow" id="chiprow">'):]
+check(_cr.find('id="filtBtn"') < _cr.find('id="catchips"'), "the Filters chip is no longer first in the chip row")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.

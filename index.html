@@ -814,15 +814,17 @@ svg{display:block}
       <div id="carBar"></div>
 
       <div class="chiprow" id="chiprow">
+        <!-- First, not fifth: plug, speed, Level 2 and the network list all live in Filters,
+             and on a phone the fifth chip of a sideways-scrolling row started off-screen. -->
+        <button class="chip qchip" id="filtBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
+          Filters<span class="cnt" id="filtN"></span></button>
         <div style="display:contents" id="catchips"></div>
         <div class="qf" id="netSeg">
           <button class="chip qchip" data-net="tesla" aria-pressed="false">⚡ Tesla</button>
           <button class="chip qchip" data-net="other" aria-pressed="false">Other networks</button>
         </div>
         <button class="chip qchip" id="savedChip" aria-pressed="false" aria-label="Show only saved stops"><span aria-hidden="true">⭐</span><span class="n" id="favN"></span></button>
-        <button class="chip qchip" id="filtBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M3 5h18M6.5 12h11M10 19h4"/></svg>
-          Filters<span class="cnt" id="filtN"></span></button>
         <div style="display:contents" id="chips"></div>
       </div>
 

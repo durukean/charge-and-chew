@@ -203,7 +203,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 <header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a><a href="{root}trip/">Road trips</a></nav></header>
 {body}
-<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {D['generated']} · <a href="{root}privacy/">Privacy</a> · <a href="{root}support/">Support</a>.
+<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {UPDATED} · <a href="{root}privacy/">Privacy</a> · <a href="{root}support/">Support</a>.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -218,6 +218,11 @@ Walk times are minimums from straight-line distance at ~3 mph; the real walk is 
 # made that no longer qualifies; it is deleted at the end instead of living on with old data
 # (near/domino-s/me was still serving August numbers in October).
 WRITTEN = set()
+# The footer names the MONTH of the data, not the day. The refresh runs weekly; a full date
+# rewrote every one of ~1,800 pages each week (about 6 MB of history per run) even when only
+# a handful had new chargers. The sitemap's lastmod still carries the exact build date.
+import datetime as _dt
+UPDATED = _dt.date.fromisoformat(D['generated']).strftime('%B %Y')
 GENERATED_DIRS = ("near", "along", "trip")
 
 

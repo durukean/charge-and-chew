@@ -42,7 +42,7 @@ python3 data/build_data.py        # clean + match    -> data.js
 python3 build.py --base https://chargeandchew.com   # -> near/, along/, sitemap.xml, robots.txt
 ```
 
-`refresh.sh` does all of it; a GitHub Action runs it monthly and pushes the result.
+`refresh.sh` does all of it; a GitHub Action runs it every Monday and pushes the result, and the deploy workflow publishes it.
 
 ### Things that will bite you
 
