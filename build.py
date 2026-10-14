@@ -81,27 +81,37 @@ CSS = """
   --bg:#f4f5f7;--surface:#fff;--surface2:#f1f3f5;--surface3:#e8ebee;--line:#e7eaee;--line2:#d5dae0;
   --txt:#191c1f;--dim:#5b6470;--dim2:#5f6879;--accent:#15803d;--accent-ink:#fff;
   --good:#0a7d55;--good-bg:#effaf4;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fef3e2;
-  --sh:0 1px 8px rgba(25,28,31,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
+  --sh:0 1px 8px rgba(25,28,31,.1);--mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#d97706;
+  color-scheme:light;
 }
-@media(prefers-color-scheme:dark){:root{
+/* Same theme as the map: the head script copies the choice saved there (cc_theme) onto
+   data-theme; with no choice the OS decides. */
+:root[data-theme="dark"]{
   --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
-  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b95a3;--accent:#4ade80;--accent-ink:#0b0e13;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b949f;--accent:#4ade80;--accent-ink:#0b0e13;--amber-text:#fbbf24;
   --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
-  --sh:0 2px 10px rgba(0,0,0,.35);
+  --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1116;--surface:#171a20;--surface2:#1e222a;--surface3:#272c35;--line:#262b33;--line2:#363d48;
+  --txt:#eef1f5;--dim:#a2abb7;--dim2:#8b949f;--accent:#4ade80;--accent-ink:#0b0e13;--amber-text:#fbbf24;
+  --good:#4ade80;--good-bg:rgba(74,222,128,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
 }}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);line-height:1.5;
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-family:var(--sans);
   -webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:8px}
 .wrap{max-width:880px;margin:0 auto;padding:20px 16px 64px}
 header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 header .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px;letter-spacing:-.3px;
   color:var(--txt);text-decoration:none}
 header .logo .mk{width:32px;height:32px;display:grid;place-items:center;flex-shrink:0}
 header .logo .mk svg{width:32px;height:32px}
-header .logo .c{color:#16a34a}header .logo .h{color:var(--amber)}
+header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber-text)}
 header nav{margin-left:auto;display:flex;gap:14px}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
 h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
@@ -109,12 +119,13 @@ h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-s
 .lead b{color:var(--txt)}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
   margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
-.card .ring{width:50px;height:50px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
+.card .ring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
-.card .ring b{font-size:13px;font-weight:800;font-family:var(--mono);line-height:1.1}
-.card .ring span{font-size:9px;font-weight:600;opacity:.75}
+.card .ring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
+.card .ring span{font-size:9.5px;font-weight:600;opacity:.88}
 .card .body{flex:1;min-width:0}
 .card .n{font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:10px;
   align-items:baseline;letter-spacing:-.2px}
@@ -128,8 +139,8 @@ h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-s
 .card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
 .card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
 .card .c b{color:var(--txt);font-weight:700}
-.card .l{margin-top:10px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
-.card .l a{text-decoration:none;font-weight:700;padding:7px 12px;border-radius:9px;
+.card .l{margin-top:10px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px;
   background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
 .card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
@@ -165,8 +176,20 @@ table.trip small{color:var(--dim2);font-size:12.5px}
 .faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
-@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}
+  header nav{gap:6px}header nav a{padding:12px 6px}footer a{display:inline-block;padding:10px 2px}}
 """
+
+# Shared by every generated page and 404.html: one theme-color per scheme (two unlabelled tags
+# left the browser to pick either), the map's saved theme applied before the first paint, and
+# the app's fonts loaded without holding that paint up.
+HEAD_THEME = """<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f5f7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1116">
+<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">"""
+
 
 def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
     robots = '<meta name="robots" content="noindex,follow">' if thin else ''
@@ -182,7 +205,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#f4f5f7">
+{HEAD_THEME}
 <title>{esc(title)} | {BRAND}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{BASE}/{canonical}">
@@ -197,7 +220,6 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 <meta property="og:image" content="{og_url}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d1117">
 {jsonld}
 <link rel="stylesheet" href="{root}assets/pages.css"></head><body><div class="wrap">
 <header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
