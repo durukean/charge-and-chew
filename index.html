@@ -2626,6 +2626,8 @@ function locate(target, opts) {
   // If location is unavailable or refused we must still show the filtered results rather
   // than leaving the user staring at an unchanged map.
   function fallback(msg) {
+    // "On the way to Tahoe" without a location: the destination is filled; ask for a start.
+    if (opts.thenRoute) { toast('Type where you\u2019re starting from'); setTimeout(() => $('fromIn').focus(), 300); return; }
     toast(msg);
     if (opts.silentDeny && active.size) { setSheet('mid'); fitToResults(); }
   }
@@ -2638,6 +2640,7 @@ function locate(target, opts) {
     if (target === 'route') {
       $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
       toast('Start set to your location');
+      if (opts.thenRoute) runRoute(opts.thenRoute);
     } else {
       /* Say WHERE we think you are, and how sure. A browser without GPS positions you from
          IP or wifi, which is routinely a different state — labelling that "My location"
@@ -2954,7 +2957,14 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
   'for', 'from', 'or', 'any', 'some', 'i', 'im', 'you', 'we', 'can', 'get', 'got',
   'need', 'want', 'looking', 'look', 'please', 'there', 'that', 'this', 'go', 'going',
   // What kind of stop, not where: "costco gas", "walmart supercenter", "free chargers in sf".
-  'gas', 'fuel', 'free', 'supercenter', 'restaurant', 'restaurants', 'locations']);
+  'gas', 'fuel', 'free', 'supercenter', 'restaurant', 'restaurants', 'locations',
+  // Amenities, not places: "chargers with bathrooms" geocoded a place called "bathrooms".
+  'bathroom', 'bathrooms', 'restroom', 'restrooms', 'toilet', 'toilets', 'wifi', 'wi-fi', 'shade', 'covered']);
+/* One generic word alone is a kind of place, not a place: "chargers near the beach" sent the
+   map to whichever "Beach" the geocoder liked. Only when it is the WHOLE place text, so Long
+   Beach, Lake Tahoe and Downtown Disney are untouched. */
+const GENERIC_PLACE = new Set(['beach', 'mall', 'downtown', 'airport', 'park', 'lake', 'highway', 'freeway',
+  'interstate', 'city', 'town', 'center', 'centre', 'coast', 'mountains', 'freeway exit', 'exit']);
 
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
@@ -3006,6 +3016,15 @@ function parseQuery(raw) {
   const free = /\sfree\s/.test(t);
   /* A plug: "ccs chargers near me", "la to vegas ccs". The word never names a place, so it is
      taken out of the text before the place is worked out. ("tesla" stays a network word.) */
+  /* "350kw chargers in denver", "150 kw near me": a speed floor, snapped down to the Filters
+     steps. "350kw" used to stay in the place text and the geocoder looked up "350kw denver". */
+  let kw = 0;
+  const kwm = t.match(/\s(\d{2,3})\s?kw\b(?:\s?\+)?/);
+  if (kwm) {
+    const v = +kwm[1];
+    kw = [350, 250, 150, 50].find(x => v >= x) || 50;
+    t = t.replace(kwm[0], ' ');
+  }
   // "level 2 chargers near target", "j1772 near me": switch the Level 2 layer on.
   const l2re = /\s(level 2|level two|lvl 2|l2|j1772|destination charg\w*)\s/;
   const l2 = l2re.test(t);
@@ -3023,6 +3042,8 @@ function parseQuery(raw) {
   // Strip surviving non-place words; if nothing meaningful is left, there is no place.
   place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
   if (keepSt && place.split(' ').pop() === keepSt[1]) place += ', ' + keepSt[2].toUpperCase();
+  if (GENERIC_PLACE.has(place)) place = '';
+  place = expandAbbrev(place);
   /* "chargers in sf", "starbucks in la": two-letter nicknames fell under the 3-letter floor
      below, so the place vanished and the search quietly became "near me". "dc" never even
      got that far -- NOISE strips it as in "DC fast" -- so it only counts after "in"/"near"
@@ -3031,7 +3052,7 @@ function parseQuery(raw) {
   else if (CITY_ALIAS[place]) place = CITY_ALIAS[place];
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2 };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2, kw: kw };
 }
 
 window.__parseQuery = parseQuery;
@@ -3059,7 +3080,11 @@ const TRIP_REJECT = new Set([...NON_PLACE,
   'take', 'taking', 'drive', 'driving', 'drove', 'head', 'heading', 'headed', 'travel',
   'traveling', 'travelling', 'road', 'way', 'ride', 'riding', 'flying', 'walk']);
 
+/* "ft worth", "mt shasta", "pt reyes": the geocoder wants the word, and the trip card should
+   read "Fort Worth", not "Ft Worth". Only as the first word, where it is unambiguous. */
+const expandAbbrev = t => String(t).replace(/^ft\.? /, 'fort ').replace(/^mt\.? /, 'mount ').replace(/^pt\.? /, 'point ');
 function tripSide(raw) {
+  raw = expandAbbrev(raw);
   /* A city nickname wins before noise is stripped. "dc" is ALSO a noise word -- "DC fast
      charger" -- so stripping first erased it, left the side empty, and "dc to nyc" stopped
      being a trip at all: it searched around NYC instead. */
@@ -3139,6 +3164,14 @@ function parseTrip(raw) {
   const t = normalise(String(raw).replace(/\s*(?:->|—>|–>|→|>)\s*/g, ' to ')
                                  .replace(/\s+[-–—]\s+/g, ' to '));
   let a, b;
+  /* "where to charge on the way to tahoe", "on my way to vegas": a destination with no start
+     means a drive from wherever you are. It used to geocode "way tahoe". */
+  const wm = !/(?:^|\s)from\s/.test(t) && t.match(/(?:^|\s)(?:on the way|on my way|heading|driving|drive|road trip)\s+to\s+(.+?)\s*$/);
+  if (wm) {
+    const sp = splitDest(wm[1]);
+    const B = tripSide(sp.dest);
+    return B ? { from: '', to: B, filter: sp.filter, fromHere: true } : null;
+  }
   const fm = t.match(/(?:^|\s)from\s+(.+?)\s+to\s+(.+?)\s*$/);
   // "halfway between la and sf", "chargers between dallas and houston": also a drive.
   const bm = !fm && t.match(/(?:^|\s)between\s+(.+?)\s+and\s+(.+?)\s*$/);
@@ -3292,6 +3325,13 @@ $('placeIn').addEventListener('keydown', async e => {
     $('overlayTop').classList.add('routing');
     $('fromIn').value = trip.from; $('toIn').value = trip.to;
   }
+  if (trip && trip.fromHere) {
+    render(); syncUrl();
+    track('search-trip-here');
+    const tripPoi = (!p.chains.length && trip.filter) ? detectPoiIntent(trip.filter) : null;
+    locate('route', { thenRoute: tripPoi ? { poi: tripPoi } : {} });
+    return;
+  }
 
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {
@@ -3316,6 +3356,9 @@ $('placeIn').addEventListener('keydown', async e => {
     F.plug = p.plug; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
   }
   if (p.l2 && !showL2) await setL2(true);
+  if (p.kw && F.kw !== p.kw) {
+    F.kw = p.kw; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
+  }
 
   render(); syncUrl();
 

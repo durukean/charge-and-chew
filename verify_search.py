@@ -215,6 +215,24 @@ CASES = [
     ("level 2 la to vegas",          dict(l2=True, trip="Los Angeles, CA|Las Vegas, NV")),
     ("destination chargers near me", dict(l2=True, here=True, place="")),
     ("chargers in austin",           dict(l2=False)),
+    # ── Round three of real typing.
+    # Speed in words is a filter, never part of the place ("350kw denver" was geocoded).
+    ("350kw chargers in denver",     dict(kw=350, place="denver")),
+    ("150 kw chargers near me",      dict(kw=150, here=True, place="")),
+    ("200kw near costco",            dict(kw=150, chains=["Costco"], place="")),
+    ("chargers in denver",           dict(kw=0)),
+    # One generic word is a kind of place; amenities are never places.
+    ("chargers near the beach",      dict(place="")),
+    ("chargers with bathrooms",      dict(place="")),
+    ("chargers in long beach",       dict(place="long beach")),
+    ("starbucks near the airport",   dict(chains=["Starbucks"], place="")),
+    # Abbreviations the geocoder and the trip card want spelled out.
+    ("ft worth to austin",           dict(trip="Fort Worth|Austin")),
+    ("chargers in mt shasta",        dict(place="mount shasta")),
+    # A destination with no start: a drive from where you are.
+    ("where to charge on the way to tahoe", dict(trip="|Tahoe")),
+    ("on my way to vegas with in n out",    dict(trip="|Las Vegas, NV", chains=["In-N-Out"])),
+    ("driving to san diego",         dict(trip="|San Diego")),
 
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
@@ -268,7 +286,7 @@ window.__ready = function () {{
        probe has to do the same or it tests a code path nobody runs. */
     var pq = (tp && tp.filter) ? P(tp.filter) : p;
     var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0, l2: !!(pq.l2 || p.l2),
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0, l2: !!(pq.l2 || p.l2), kw: pq.kw || p.kw || 0,
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,
