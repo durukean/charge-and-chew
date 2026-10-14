@@ -243,9 +243,13 @@ svg{display:block}
 #routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
 #routePanel.collapsed #routeInfo{margin:0;display:flex;align-items:center;gap:10px;padding:12px 13px;
   color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;min-height:0}
-#routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;overflow:hidden;line-height:1.35;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}   /* "· 171 CCS chargers" was what got cut */
-#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--dim);font-weight:500}
+#routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;line-height:1.35}
+/* Trip on one line, numbers on the next: wrapped as one string, the line broke after a
+   dangling "·" and clipped the count, which is the part people look for. */
+#routePanel.collapsed #routeInfo .sum b,#routePanel.collapsed #routeInfo .sum i{display:block;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+#routePanel.collapsed #routeInfo .sum b{font-weight:600}
+#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--dim);font-weight:500;font-size:12px}
 #routePanel.collapsed #routeInfo .ed{color:var(--accent);font-size:12px;font-weight:700;flex-shrink:0}
 #routeInfo .rclear{display:none}
 #routePanel.collapsed #routeInfo .rclear{display:inline-flex;align-items:center;justify-content:center;border:0;background:none;color:var(--dim);font-size:18px;line-height:1;cursor:pointer;width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-left:2px}
@@ -348,8 +352,10 @@ svg{display:block}
 .pp-car .cc{font-weight:700;font-size:11px}
 .pp-car .cc.native{color:var(--good)}.pp-car .cc.adapter{color:var(--warn)}.pp-car .cc.null{color:var(--bad)}
 .pp-host{color:var(--warn);font-size:11.5px;margin-bottom:8px}
-.pp-list{max-height:170px;overflow-y:auto;margin-top:6px}
-.pp-chain{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:12.5px}
+.pp-list{max-height:170px;overflow-y:auto;overflow-x:hidden;margin-top:6px}
+.pp-chain{display:flex;align-items:baseline;gap:12px;padding:3px 0;font-size:12.5px}
+/* The name takes the slack, so the walk times line up in one column instead of floating. */
+.pp-chain>span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pp-chain .d{color:var(--dim);white-space:nowrap;font-family:var(--mono);font-size:11px}
 .pp-links{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;gap:8px}
 .pp-links a{flex:1;text-align:center;color:var(--txt);font-size:12px;text-decoration:none;font-weight:700;
@@ -503,7 +509,7 @@ svg{display:block}
   padding:6px 11px;font-size:11.5px;font-weight:800;cursor:pointer;min-height:28px}
 #sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
   border-radius:22px 22px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.14);display:flex;flex-direction:column;
-  flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1);padding-bottom:env(safe-area-inset-bottom)}
+  flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1)}
 :root[data-theme="dark"] #sheet{box-shadow:0 -8px 34px rgba(0,0,0,.55)}
 /* Every start on a phone ends with the sheet at mid height. Painting it collapsed first and
    growing it once the data arrived moved the whole map and its buttons: a 0.16 layout shift
@@ -520,7 +526,9 @@ svg{display:block}
 .sortbtn .ci{color:var(--accent);opacity:.7}
 .iconbtn.sm{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);
   color:var(--dim);display:grid;place-items:center;flex-shrink:0}
-#list{overflow-y:auto;overscroll-behavior:contain;padding:0 12px 16px;flex:1}
+/* The home-indicator inset belongs inside the scroller: on the sheet it cut every row off in a
+   straight line 34 pt above the bottom of an iPhone, like a web page, not a list. */
+#list{overflow-y:auto;overscroll-behavior:contain;padding:0 12px calc(16px + env(safe-area-inset-bottom));flex:1}
 .row{content-visibility:auto;contain-intrinsic-size:auto 128px;   /* off-screen rows skip layout */
   display:flex;gap:12px;padding:13px;border-radius:16px;margin-bottom:8px;background:var(--surface);
   border:1px solid var(--line);box-shadow:var(--sh2);cursor:pointer;transition:.12s;align-items:flex-start}
@@ -550,15 +558,18 @@ svg{display:block}
    in words, so it is never colour alone. */
 /* Four treatments that differ in more than hue: ultra is solid, fast a tint, standard
    neutral, slow amber. Two greens a shade apart were indistinguishable, and identical in dark. */
-.row s.spd.ultra{color:var(--accent-ink);background:var(--good)}
-.row s.spd.fast{color:var(--good);background:var(--good-bg)}
-.row s.spd.slow{color:var(--warn);background:var(--warn-bg)}
-.row s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
+/* :root lifts these over the dark-theme plain badge above, which otherwise won and left
+   near-black text on dark grey on every 250 kW+ stop. */
+:root .row s.spd.ultra{color:var(--accent-ink);background:var(--good)}
+:root .row s.spd.fast{color:var(--good);background:var(--good-bg)}
+:root .row s.spd.slow{color:var(--warn);background:var(--warn-bg)}
+:root .row s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
 .pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
 .row .sub{color:var(--dim2);font-size:11.5px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
 .row .sub .st{font-weight:600;color:var(--dim)}
 .row .sub .where{min-width:0}
+.row .sub .nw{white-space:nowrap}   /* "0.3 mi" and "away" landed on separate lines */
 .row .sub .tag,.row .sub .cbadge{margin-left:0}
 .row .sub .netdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:10.5px;
@@ -635,7 +646,7 @@ svg{display:block}
 /* A switch at the end, so each row reads as on/off before it is tapped -- they looked like
    plain grey buttons. */
 .ftog::after{content:'';margin-left:auto;flex-shrink:0;width:32px;height:19px;border-radius:999px;
-  background:radial-gradient(circle at 9.5px 50%,var(--surface) 6.5px,transparent 7px),var(--dim2);transition:background .15s}
+  background:radial-gradient(circle at 9.5px 50%,#fff 6.5px,transparent 7px),var(--dim2);transition:background .15s}
 .ftog.on::after{background:radial-gradient(circle at 22.5px 50%,var(--accent) 6.5px,transparent 7px),var(--accent-ink)}
 .tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700;
   background:var(--surface3);color:var(--dim)}
@@ -740,7 +751,8 @@ svg{display:block}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);
   transform:translateX(-50%) translateY(14px);background:var(--txt);color:var(--bg);font-size:13px;
   font-weight:600;padding:11px 19px;border-radius:13px;box-shadow:var(--sh);z-index:4000;opacity:0;
-  pointer-events:none;transition:.25s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+  pointer-events:none;transition:.25s;max-width:min(90vw,420px);width:max-content;text-align:center;line-height:1.35}
+/* Long toasts wrap: the cut-off half was usually the instruction ("…or tap the map"). */
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ═══ wide screens: sidebar + map (also how the Tesla in-car browser sees it) ═══ */
@@ -759,7 +771,7 @@ svg{display:block}
     border-right:1px solid var(--line);box-shadow:none;min-height:0}
   .handle{display:none}
   .sheethead{padding:14px 15px 10px}
-  #list{padding:0 12px 18px}
+  #list{padding:0 12px calc(18px + env(safe-area-inset-bottom))}
 
   #mapWrap{grid-column:2;grid-row:1 / span 2}
   .mapctl{bottom:22px;right:18px}
@@ -907,7 +919,7 @@ svg{display:block}
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <div class="hero-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg3" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask3"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask3)"><rect width="64" height="64" fill="url(#ccg3)"/></g></svg></div>
-        <span class="badge">⚡ Free · 13,000+ US fast chargers</span>
+        <span class="badge">⚡ Free · 14,000+ US fast chargers</span>
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
         <div class="herogrid" id="heroGrid"></div>
@@ -1023,9 +1035,9 @@ svg{display:block}
 <div id="about" role="dialog" aria-modal="true" aria-label="About Charge and Chew"><div class="box">
   <a class="xclose" href="#" aria-label="Close About"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
-  <p>13,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
-  <p><b>Map style:</b> Esri by default. CARTO is a different look; if its map shows "API key
-  required", switch back to Automatic.</p>
+  <p>14,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
+  <p><b>Map style:</b> Automatic uses Esri, falling back to CARTO if Esri is unavailable. If a
+  map ever comes up blank, switch back to Automatic.</p>
   <div class="seg" id="baseSeg" style="margin:-4px 0 14px">
     <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
   </div>
@@ -1039,7 +1051,7 @@ svg{display:block}
   The route is drawn first, then we ask OpenStreetMap what is within a walk of each stop on it, so the answer is
   every charger on the way that has one — not just the ones near where the map happens to be pointing.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
-  <p>Chargers are colour-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
+  <p>Chargers are color-coded by network on the map (Tesla coral, ChargePoint amber, Electrify America green, EVgo teal…) — deliberately no red, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>What the wait is good for:</b> when you've set your car we compare the estimated charge time to
@@ -1080,7 +1092,7 @@ window.addEventListener('error', function () {
     var s = document.getElementById('splash');
     if (!s || s.classList.contains('gone') || s.querySelector('#ccReset')) return;
     s.innerHTML = '<div style="max-width:300px;text-align:center;font-size:14px;line-height:1.5">' +
-      'Charge &amp; Chew couldn\u2019t start.<br>Resetting saved favourites and settings usually fixes it.' +
+      'Charge &amp; Chew couldn\u2019t start.<br>Resetting saved favorites and settings usually fixes it.' +
       '<br><button id="ccReset" style="margin-top:14px;padding:10px 18px;border-radius:10px;border:0;' +
       'background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:15px">Reset and reload</button></div>';
     document.getElementById('ccReset').onclick = function () {
@@ -1511,7 +1523,8 @@ function toast(msg) {
      leaving an invisible, tappable reload button over the results list. Every ordinary
      toast resets both. */
   t.style.pointerEvents = ''; t.onclick = null;
-  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
+  // Long enough to read: a fixed 2.2 s cut the longer ones off mid-sentence.
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), Math.max(2200, Math.min(5000, String(msg).length * 55)));
 }
 const saveFavs = () => {
   localStorage.setItem('cc_favs', JSON.stringify([...favs]));
@@ -2248,15 +2261,20 @@ function renderChips(keep) {
      chips it started off-screen on a phone, so the row did not show what was filtering the
      list. Only then -- an ordinary re-render keeps the user's own scroll position. */
   const sig = [...active].join('|');
-  if (sig !== lastActiveSig) {
-    lastActiveSig = sig;
+  if (sig !== lastActiveSig) { lastActiveSig = sig; alignActiveChip = true; }
+  /* Keep doing it until the user scrolls the row: the renders right after a search re-sort
+     the chips by their count in the new area, so restoring the old scroll offset slid the
+     picked chip half off the left edge. */
+  if (alignActiveChip) {
     const on = el.querySelector('.chip.on'), row = $('chiprow');
     if (on) { row.scrollLeft += on.getBoundingClientRect().left - row.getBoundingClientRect().left - 12; return; }
   }
   // A write forces layout too; the row is almost always at 0, so skip the no-op.
   if (keep) $('chiprow').scrollLeft = keep;
 }
-let lastActiveSig = '';
+let lastActiveSig = '', alignActiveChip = false;
+['pointerdown', 'wheel', 'touchstart'].forEach(ev =>
+  $('chiprow').addEventListener(ev, () => { alignActiveChip = false; }, { passive: true }));
 
 /* Delegated so it covers the filter bar and the empty-state button alike. */
 document.addEventListener('click', e => {
@@ -2313,7 +2331,10 @@ function renderList(vis) {
     const couldHelp = nar.length ? countWithoutNarrowing() : 0;
     const fix = couldHelp
       ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <strong>' + esc(nar[0].label) + '</strong> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
-      : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}Try another chain, a bigger radius, or a wider route corridor.`;
+      : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}` +
+        (route ? 'Try another chain or a wider route corridor.'
+          : center && radiusMi < 50 ? `Try another chain, or look further out.<button class="fball" id="widenR">Search ${radiusMi < 25 ? 25 : 50} miles around</button>`
+          : 'Try another chain or another area.');
     /* "No saved stops yet" with a 1 on the star chip is a contradiction; the stop is just
        outside the current area. Say so, and offer the way out. */
     $('list').innerHTML = cat === 'fav'
@@ -2322,6 +2343,8 @@ function renderList(vis) {
              <button class="fball" id="favAll">Show all saved stops</button></div>`
           : '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
+    const wr = $('widenR');
+    if (wr) wr.onclick = () => { const b = $('ccRad').querySelector(`button[data-mi="${radiusMi < 25 ? 25 : 50}"]`); if (b) b.click(); };
     const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); fitToResults(); };
     return;
   }
@@ -2364,7 +2387,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map">${esc(s.name)}</button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ' · ' + dist : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
+        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where"><span class="netdot" style="background:${netCol(s)}"></span>${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
     </div>`;
@@ -3492,7 +3515,8 @@ $('placeIn').addEventListener('keydown', async e => {
       const intent = { tags: ['amenity=bank'], name: p.place, label: p.place, brandOnly: true };
       if (center) runLivePoi(intent);
       else { toast(err.message + ' — pick an area and try again'); setTimeout(openPicker, 700); }
-    } else toast(err.message);
+    } else toast(/^Couldn't find/.test(err.message)
+      ? err.message + ' \u2014 try a chain, a city, or \u201cLA to Vegas\u201d' : err.message);
   } finally { $('placeBox').classList.remove('busy'); }
 });
 
@@ -4619,6 +4643,8 @@ $('placeIn').addEventListener('keydown', e => {
   }
 }, true);
 $('placeIn').addEventListener('focus', showSugg);
+// A new search starts clean: an open popup survived it and ended up half under the sheet.
+$('placeIn').addEventListener('focus', () => map.closePopup());
 $('placeIn').addEventListener('input', showSugg);
 // pointerdown, not click: blur fires first and would hide the panel before the click lands
 $('sugg').addEventListener('pointerdown', e => {
@@ -4706,6 +4732,15 @@ document.addEventListener('click', async e => {
 
 /* ───────── route ───────── */
 $('routeToggle').onclick = () => {
+  /* With a route on screen the button opens and folds the editor; it never hides the route
+     card, which holds the only x that clears the route (hiding it left a line on the map
+     and no way to remove it). */
+  if (route) {
+    if ($('routePanel').classList.contains('show') && $('routePanel').classList.contains('collapsed')) $('routeInfo').click();
+    else showRouteSummary();
+    setTimeout(() => map.invalidateSize({ pan: false }), 220);
+    return;
+  }
   const on = $('routePanel').classList.toggle('show');
   $('overlayTop').classList.toggle('routing', on);
   $('routeToggle').classList.toggle('on', on);
@@ -4839,24 +4874,36 @@ function applyCorridor(verts, mi, hr, hwy) {
      size — the old guard skipped the fit and never retried, so the recipient landed on a
      national view with the route as a squiggle. Retry until the map is really laid out. */
   fitRouteWhenReady();
+  showRouteSummary();
+  render(); setSheet('mid'); syncUrl();
+  settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
+}
+
+/* The folded route card: trip, numbers, Edit, and the x that clears it. Shown whenever a
+   route is on screen and the editor is closed. */
+function showRouteSummary() {
+  const { mi, hr, hwy } = route;
   // A start taken from the GPS is coordinates in the field; the card should say what it means.
   const endLabel = v => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
   const trip = hwy ? `Along ${hwy}` : `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
-  $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
-    `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · <span class="rcount">${routeCountText()}</span> ≤${corridorMi}mi</i></span>` +
+  const miles = Math.round(mi).toLocaleString('en-US');
+  const time = `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m`;
+  $('routeInfo').innerHTML = `<span class="sum"><b>${esc(trip)}</b><i><span class="rcount">${routeCountText()}</span> within ${corridorMi}\u00a0mi` +
+    ` · ${miles} mi · ${time}</i></span>` +
     `<span class="ed">Edit</span><button class="rclear" id="rClear" title="Clear route" aria-label="Clear route">×</button>`;
-  $('overlayTop').classList.add('routed');
-  $('rClear').onclick = e => { e.stopPropagation(); dropRoute(); toast('Route cleared'); };
-  $('routePanel').classList.add('collapsed');
+  $('routePanel').classList.add('show', 'collapsed');
+  $('overlayTop').classList.add('routing', 'routed');
+  $('routeToggle').classList.add('on');
+  $('rClear').onclick = e => { e.stopPropagation(); dropRoute(); $('placeIn').value = ''; $('placeBox').classList.remove('has'); toast('Route cleared'); };
   $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
     $('routeInfo').onclick = null;
+    // On a phone the full-height sheet covered everything below the two fields.
+    if (!wideLayout() && sheetState === 'full') setSheet('mid');
     // A highway has no start or destination: the empty fields need saying what is shown.
     $('routeInfo').textContent = (hwy ? `All of ${hwy} · ` : '') +
-      `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${routeCountText()} within ${corridorMi} mi` +
+      `${miles} mi · ${time} · ${routeCountText()} within ${corridorMi} mi` +
       (hwy ? ' — or enter a start and destination for one drive' : '');
     setTimeout(() => map.invalidateSize({ pan: false }), 220); };
-  render(); setSheet('mid'); syncUrl();
-  settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
 }
 
 /* ───────── share / url ───────── */

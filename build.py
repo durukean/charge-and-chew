@@ -113,6 +113,7 @@ header .logo .mk{width:32px;height:32px;display:grid;place-items:center;flex-shr
 header .logo .mk svg{width:32px;height:32px}
 header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber-text)}
 header nav{margin-left:auto;display:flex;gap:14px}
+@media(max-width:480px){header nav{margin-left:-6px}}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
 h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
 .lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
@@ -135,7 +136,7 @@ h1{font-size:clamp(22px,3.4vw,30px);line-height:1.18;margin-bottom:10px;letter-s
 .card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
   background:var(--surface2);border-radius:7px;padding:3px 8px}
 .card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
-.card .host{color:var(--warn);font-size:12.5px;margin-top:2px}
+.card .host{color:var(--dim);font-weight:600;font-size:12.5px;margin-top:2px}
 .card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
 .card .c span{background:var(--surface2);border-radius:8px;padding:3px 9px}
 .card .c b{color:var(--txt);font-weight:700}
@@ -156,7 +157,15 @@ h2{font-size:18px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:800}
 .stats b{color:var(--txt)}
 /* Wide content must scroll inside its own box; the page body must never scroll sideways. */
 .tripwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 22px;
-  border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--sh)}
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh);
+  /* A shadow at whichever edge has more table behind it: on a phone the last column was cut
+     mid-word with nothing saying the table scrolls. */
+  background:linear-gradient(90deg,var(--surface) 30%,transparent) left/40px 100% no-repeat local,
+    linear-gradient(270deg,var(--surface) 30%,transparent) right/40px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.18),transparent) left/12px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.18),transparent) right/12px 100% no-repeat scroll,
+    var(--surface)}
+h2+p,h2+.lead{margin-bottom:12px}
 table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
 table.trip th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--dim2);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line)}
@@ -408,7 +417,7 @@ def site_card(s, focus, root):
             if focus_d is not None else '<div class="ring">⚡</div>')
     net = f'<div class="host">{esc(s.get("net", ""))}</div>' if s.get("net") else ""
     spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "",
-                                  f"{s['stalls']} stalls" if s.get('stalls') else ""] if x)
+                                  f"{s['stalls']} stall{'s' if s['stalls'] != 1 else ''}" if s.get('stalls') else ""] if x)
     extra = f'<span>+{len(m) - 6}</span>' if len(m) > 6 else ""
     return f"""<div class="card">{ring}<div class="body">
 <div class="n"><span>{esc(s['name'])}</span><small>{spec}</small></div>
@@ -449,7 +458,7 @@ for key, b in brands.items():
         state_chain[sites[sid]["st"]][key] += 1
     n = len(hits)
     chain_index_links.append((n, key, cs))
-    state_links = "".join(f'<a href="{st.lower()}/">{STATES.get(st, st)} <small>{len(v)}</small></a>'
+    state_links = "".join(f'<a href="{st.lower()}/">{STATES.get(st, st)} <small>{len(v):,}</small></a>'
                           for st, v in sorted(by_state.items(), key=lambda x: -len(x[1])))
     # national page: top 40 closest, then state links
     sx = page_stats(key, hits)
@@ -488,14 +497,14 @@ for key, b in brands.items():
         shown = v[:STATE_CARD_CAP]
         cards = "".join(site_card(sites[sid], key, "../../../") for d, sid in shown)
         if len(v) > STATE_CARD_CAP:
-            cards += (f'<p class="more">Showing the {STATE_CARD_CAP} closest of {len(v)}. '
+            cards += (f'<p class="more">Showing the {STATE_CARD_CAP} closest of {len(v):,}. '
                       f'<a href="../../../?chain={esc(key)}&amp;state={st}">Open the map to see them all →</a></p>')
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
-        title = f"EV fast chargers near {key} in {sn} ({len(v)})"
-        desc = f"All {len(v)} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
+        title = f"EV fast chargers near {key} in {sn} ({len(v):,})"
+        desc = f"All {len(v):,} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
         body = f"""<h1>{b['e']} EV fast chargers near {esc(key)} in {sn}</h1>
-<p class="lead"><b>{len(v)} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
+<p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {stats_html}
 {cards}
@@ -632,12 +641,12 @@ if os.path.exists(HW_PATH):
         big = sum(1 for k in kws if k >= 150)
         h24 = sum(1 for f in found if sites[f[1]].get("h24"))
         title = f"EV chargers with food along {disp}"
-        desc = (f"{len(found)} public DC fast chargers within {CORRIDOR_MI:g} miles of {disp}, "
-                f"{len(withchain)} of them within a 10-minute walk of a restaurant or store. "
+        desc = (f"{len(found):,} public DC fast chargers within {CORRIDOR_MI:g} miles of {disp}, "
+                f"{len(withchain):,} of them within a 10-minute walk of a restaurant or store. "
                 f"Ordered along the route through {len(states)} states.")
         body = f'''<h1>EV fast chargers along {disp}</h1>
-<p class="lead"><b>{len(found)} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {disp}, and
-<b>{len(withchain)}</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
+<p class="lead"><b>{len(found):,} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {disp}, and
+<b>{len(withchain):,}</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
 order along the route, {" → ".join(states[:12])}{" …" if len(states) > 12 else ""}.</p>
 <a class="cta" href="../../?hwy={disp}">Open {disp} in the map →</a>
 <p class="stats">Typical power along this corridor is <b>{med} kW</b>, with <b>{big}</b> stops at
@@ -742,7 +751,7 @@ if os.path.exists(TRIP_PATH):
             if best is not None and best <= maxm:
                 found.append((bi, sid, best))
         if len(found) < 10:
-            print(f"  skip trip {tk}: only {len(found)} chargers")
+            print(f"  skip trip {tk}: only {len(found):,} chargers")
             continue
         found.sort()
         is_food = lambda k: brands.get(k, {}).get("cat") == "food"
@@ -780,7 +789,7 @@ if os.path.exists(TRIP_PATH):
             eats = ", ".join(f"{brands[k]['e']} {esc(k)} ≥{mins(d)} min" for d, k in fk)
             rows.append(f"<tr><td><b>mile {int(round(cum[bi]))}</b></td>"
                         f"<td><b>{esc(sx['city'])}, {sx['st']}</b><br><small>{esc(sx['name'])}</small></td>"
-                        f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stalls</small></td>"
+                        f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stall{'s' if sx.get('stalls', 0) != 1 else ''}</small></td>"
                         f"<td>{eats or '&mdash;'}</td></tr>")
         stops_tbl = (f'<div class="tripwrap"><table class="trip"><thead><tr><th>At</th>'
                      f'<th>Where</th><th>Charger</th><th>Food within a walk</th></tr></thead>'
@@ -819,8 +828,8 @@ if os.path.exists(TRIP_PATH):
         # Google truncates near 60 characters and the suffix adds 16, so lead with the two
         # cities -- that is what people type -- and keep the whole thing inside the budget.
         title = f"{a.split(',')[0]} to {b.split(',')[0]} EV charging stops"
-        desc = (f"{len(found)} DC fast chargers within {TRIP_MI:g} miles of the {t['mi']:g}-mile drive "
-                f"from {a} to {b}, and the {len(withfood)} of them with a restaurant within a "
+        desc = (f"{len(found):,} DC fast chargers within {TRIP_MI:g} miles of the {t['mi']:,.0f}-mile drive "
+                f"from {a} to {b}, and the {len(withfood):,} of them with a restaurant within a "
                 f"10-minute walk. In route order.")
         break_sec = ("<h2>Good places to break the drive</h2>"
                      f"<p>Split into roughly {legs} legs, these are the strongest stops near each "
@@ -832,8 +841,8 @@ if os.path.exists(TRIP_PATH):
                   if len(withfood) > NBINS else "")
         body = (f"<h1>EV charging stops from {esc(a)} to {esc(b)}</h1>\n"
                 f'<p class="lead">The drive is <b>{t["mi"]:g} miles</b>, about <b>{drive}</b>. Along it '
-                f"sit <b>{len(found)} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
-                f"&mdash; and <b>{len(withfood)}</b> of those have somewhere to eat within a "
+                f"sit <b>{len(found):,} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
+                f"&mdash; and <b>{len(withfood):,}</b> of those have somewhere to eat within a "
                 "10-minute walk, so the charging stop and the meal are the same stop.</p>\n"
                 f'<a class="cta" href="{map_url}">Plan this trip on the map &rarr;</a>\n'
                 f"{break_sec}\n"
@@ -888,7 +897,7 @@ PRIVACY_BODY = """<h1>Privacy</h1>
 <p class="lead">Charge &amp; Chew has no accounts, no sign-in and no advertising. Here is exactly what
 happens with your data, on the website and in the iOS app.</p>
 <h2>Your location</h2>
-<p>Used only when you tap the locate button, to centre the map on you. It is never sent to us.
+<p>Used only when you tap the locate button, to center the map on you. It is never sent to us.
 Some of it reaches the map services the app needs, none of which is ours: a town-level position
 (rounded to about a kilometre) goes to <a href="https://nominatim.openstreetmap.org">OpenStreetMap's
 Nominatim</a> to put a place name on the area; your start and destination go to the

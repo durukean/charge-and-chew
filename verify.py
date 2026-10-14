@@ -283,6 +283,19 @@ check(_zm is not None and int(_zm.group(1)) < 400,
 check("getPane('routePane').style.pointerEvents = 'none'" in _html,
       "the route pane accepts pointer events again — taps on chargers under the line would "
       "hit the line instead")
+# ---- speed badges in dark mode ----
+# The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
+# stop showed near-black text on dark grey. Each tier rule must be at least as specific.
+_dk = re.search(r':root\[data-theme="dark"\] \.row s\.spd\{', _html)
+for _t in ("ultra", "fast", "slow"):
+    check(_dk is None or re.search(r"(?m)^:root \.row s\.spd\." + _t + r"\{", _html) is not None,
+          f"the .{_t} speed badge rule is less specific than the dark-theme badge rule again — "
+          "unreadable badges in dark mode")
+# ---- the route card can never be hidden while a route is on screen ----
+# Closing the editor used to hide the card, leaving the line on the map with no x to clear it.
+check(re.search(r"\$\('routeToggle'\)\.onclick = \(\) => \{[^}]*?if \(route\) \{", _html, re.S) is not None
+      and "showRouteSummary();" in _html,
+      "closing the route editor can hide the route card again (no way to clear the route)")
 # ---- chip counts must describe the CURRENT scope ----
 # With a route on screen the chips advertised the national figure: "Any food 10,458" and
 # then 210 results. A number the app cannot honour is the same class of bug as a
