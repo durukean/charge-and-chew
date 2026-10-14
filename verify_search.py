@@ -230,7 +230,8 @@ CASES = [
     ("ft worth to austin",           dict(trip="Fort Worth|Austin")),
     ("chargers in mt shasta",        dict(place="mount shasta")),
     # A destination with no start: a drive from where you are.
-    ("where to charge on the way to tahoe", dict(trip="|Tahoe")),
+    ("where to charge on the way to tahoe", dict(trip="|South Lake Tahoe, CA")),
+    ("sacramento to lake tahoe",     dict(trip="Sacramento|South Lake Tahoe, CA")),
     ("on my way to vegas with in n out",    dict(trip="|Las Vegas, NV", chains=["In-N-Out"])),
     ("driving to san diego",         dict(trip="|San Diego")),
 

@@ -1208,6 +1208,7 @@ let seedFor = null;
    is dropped: searching Austin (slow) then Denver (fast) used to end on Austin, and a route
    finishing late wiped out a newer search. */
 let navGen = 0;
+let routeFromMe = false;   // the route's start was filled from the device location
 // Live category lookup generation. Up here, not beside runLivePoi: setCenter() bumps it and
 // can run long before that line does.
 let livePoiGen = 0;
@@ -2638,7 +2639,10 @@ function locate(target, opts) {
     $('locBtn').classList.remove('busy');
     const la = p.coords.latitude, lo = p.coords.longitude;
     if (target === 'route') {
-      $('fromIn').value = `${la.toFixed(4)}, ${lo.toFixed(4)}`;
+      // ~110 m: plenty for a route start, and the field ends up in a shareable link (?from=),
+      // where 4 decimals (~11 m) gave away the sender's address.
+      $('fromIn').value = `${la.toFixed(3)}, ${lo.toFixed(3)}`;
+      routeFromMe = true;
       toast('Start set to your location');
       if (opts.thenRoute) runRoute(opts.thenRoute);
     } else {
@@ -2670,6 +2674,7 @@ function locate(target, opts) {
 }
 $('locBtn').onclick = () => locate('center');
 $('useLoc').onclick = () => locate('route');
+$('fromIn').addEventListener('input', () => { routeFromMe = false; });   // typed over: no longer "Your location"
 
 /* "Search this area" — appears once you have moved the map meaningfully away from what is
    currently being shown, and searches the middle of the view at a radius matching the
@@ -3075,7 +3080,10 @@ const CITY_ALIAS = {
   atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
   stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV',
   // California coast shorthand. Neither collides with a state code, unlike "sd" or "sc".
-  sb: 'Santa Barbara, CA', slo: 'San Luis Obispo, CA' };
+  sb: 'Santa Barbara, CA', slo: 'San Luis Obispo, CA',
+  /* "on my way to tahoe" routed 764 miles to Idaho County, ID: a bare "Tahoe" is ambiguous to
+     the geocoder, never to a driver. South Lake Tahoe is where the chargers and the food are. */
+  tahoe: 'South Lake Tahoe, CA', 'lake tahoe': 'South Lake Tahoe, CA' };
 const TRIP_REJECT = new Set([...NON_PLACE,
   'take', 'taking', 'drive', 'driving', 'drove', 'head', 'heading', 'headed', 'travel',
   'traveling', 'travelling', 'road', 'way', 'ride', 'riding', 'flying', 'walk']);
@@ -4764,7 +4772,9 @@ function applyCorridor(verts, mi, hr) {
      size — the old guard skipped the fit and never retried, so the recipient landed on a
      national view with the route as a squiggle. Retry until the map is really laid out. */
   fitRouteWhenReady();
-  const trip = `${$('fromIn').value.trim()} → ${$('toIn').value.trim()}`;
+  // A start taken from the GPS is coordinates in the field; the card should say what it means.
+  const endLabel = v => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
+  const trip = `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
   $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
     `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · <span class="rcount">${routeCountText()}</span> ≤${corridorMi}mi</i></span>` +
     `<span class="ed">Edit</span><button class="rclear" id="rClear" title="Clear route" aria-label="Clear route">×</button>`;
