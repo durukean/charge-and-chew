@@ -234,6 +234,13 @@ CASES = [
     ("sacramento to lake tahoe",     dict(trip="Sacramento|South Lake Tahoe, CA")),
     ("on my way to vegas with in n out",    dict(trip="|Las Vegas, NV", chains=["In-N-Out"])),
     ("driving to san diego",         dict(trip="|San Diego")),
+    # Interstates are corridors, never places.
+    ("chargers on i-5 with in n out", dict(hwy="I-5", chains=["In-N-Out"], place="")),
+    ("superchargers on i95",         dict(hwy="I-95", net="tesla", place="")),
+    ("interstate 10",                dict(hwy="I-10", place="")),
+    ("I-75 ccs",                     dict(hwy="I-75", plug=1, place="")),
+    ("i want chargers near me",      dict(hwy=None, here=True)),
+    ("la to sf on i-5",              dict(trip="Los Angeles, CA|San Francisco, CA")),
 
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
@@ -287,7 +294,7 @@ window.__ready = function () {{
        probe has to do the same or it tests a code path nobody runs. */
     var pq = (tp && tp.filter) ? P(tp.filter) : p;
     var poi = window.__detectPoiIntent((tp && tp.filter) ? tp.filter : qs[i]);
-    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0, l2: !!(pq.l2 || p.l2), kw: pq.kw || p.kw || 0,
+    r.push({{q: qs[i], here: !!p.here, chains: pq.chains, net: p.net, place: p.place, free: !!p.free, plug: pq.plug || p.plug || 0, l2: !!(pq.l2 || p.l2), kw: pq.kw || p.kw || 0, hwy: p.hwy || null,
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,

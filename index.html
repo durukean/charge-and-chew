@@ -1247,6 +1247,41 @@ const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
    every fast charger keeps its index (the walk cache is indexed by it) and switching off is
    a truncation. */
 const L2_URL = 'level2.js?v=2b85258e06';
+/* Interstates as corridors: "I-5" in the search box, or ?hwy=I-5 from an /along/ page, draws the
+   highway and lists the stops along it, with every filter (plug, chain, speed) working as on a
+   route. The geometry (a point every ~3 km, built by build.py) loads only when asked for. */
+const HWY_URL = 'highways.js?v=769a595bee';
+let hwyLoading = null;
+const normHwy = t => { const m = String(t).match(/(\d{1,3})/); return m ? 'I-' + (+m[1]) : null; };
+function loadHwys() {
+  if (window.CC_HWYS) return Promise.resolve(window.CC_HWYS);
+  if (hwyLoading) return hwyLoading;
+  hwyLoading = new Promise((ok, bad) => {
+    const sc = document.createElement('script');
+    sc.src = HWY_URL; sc.async = true;
+    sc.onload = () => window.CC_HWYS ? ok(window.CC_HWYS) : bad(new Error('empty'));
+    sc.onerror = () => bad(new Error('offline'));
+    document.head.appendChild(sc);
+  }).catch(e => { hwyLoading = null; throw e; });
+  return hwyLoading;
+}
+async function openHighway(ref) {
+  const myNav = ++navGen;
+  let H;
+  try { H = await loadHwys(); } catch (e) { toast('Couldn\u2019t load highway data — check your connection'); return; }
+  if (myNav !== navGen) return;
+  const verts = H[ref];
+  if (!verts) { toast(`${ref} isn\u2019t one of the interstates we map yet — try a city-to-city trip`); return; }
+  let mi = 0;
+  for (let i = 1; i < verts.length; i++) mi += hav(verts[i - 1][0], verts[i - 1][1], verts[i][0], verts[i][1]) / MI;
+  track('highway', ref);
+  $('routePanel').classList.add('show');
+  $('routeToggle').classList.add('on');
+  $('overlayTop').classList.add('routing');
+  $('fromIn').value = ''; $('toIn').value = '';
+  clearCenter();
+  applyCorridor(verts, mi, mi / 62, ref);   // ~62 mph average on an interstate
+}
 const DC_COUNT = SITES.length;
 let showL2 = false, l2Loading = null;
 function loadL2Data() {
@@ -1290,7 +1325,7 @@ async function setL2(on, quiet) {
   matchVer++;
   try { localStorage.setItem('cc_l2', showL2 ? '1' : '0'); } catch (e) {}
   syncL2UI();
-  if (route) applyCorridor(route.verts, route.mi, route.hr); else { render(); syncUrl(); }
+  if (route) applyCorridor(route.verts, route.mi, route.hr, route.hwy); else { render(); syncUrl(); }
 }
 function syncL2UI() {
   const b = $('l2Tog'); if (b) { b.classList.toggle('on', showL2); b.setAttribute('aria-pressed', String(showL2)); }
@@ -2229,10 +2264,10 @@ function renderList(vis) {
   /* The area card right under the title already names the place and the radius; repeating
      it here pushed the part that matters ("near IHOP") off the end on a phone. */
   let scope = '';
-  if (route) scope = ' on route';
+  if (route) scope = route.hwy ? 'on ' + route.hwy : 'on route';
 
   $('sheetTitle').innerHTML = (filtering || route || center)
-    ? `${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'} <em>${filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : ''}${esc(scope)}</em>`
+    ? `${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'} <em>${[filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : '', esc(scope)].filter(Boolean).join(' ')}</em>`
     : `${vis.length.toLocaleString()} fast chargers${narrowings().length ? '' : ' <em>· every network, no filters</em>'}`;
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
@@ -3030,6 +3065,10 @@ function parseQuery(raw) {
     kw = [350, 250, 150, 50].find(x => v >= x) || 50;
     t = t.replace(kwm[0], ' ');
   }
+  // "I-5", "i95", "interstate 10", "on i-75 with starbucks": an interstate corridor.
+  let hwy = null;
+  const hm = t.match(/\s(?:i|ih|interstate)\s?-?\s?(\d{1,3})\s/);
+  if (hm) { hwy = 'I-' + (+hm[1]); t = t.replace(hm[0], ' '); }
   // "level 2 chargers near target", "j1772 near me": switch the Level 2 layer on.
   const l2re = /\s(level 2|level two|lvl 2|l2|j1772|destination charg\w*)\s/;
   const l2 = l2re.test(t);
@@ -3057,7 +3096,7 @@ function parseQuery(raw) {
   else if (CITY_ALIAS[place]) place = CITY_ALIAS[place];
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2, kw: kw };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2, kw: kw, hwy: hwy };
 }
 
 window.__parseQuery = parseQuery;
@@ -3333,13 +3372,6 @@ $('placeIn').addEventListener('keydown', async e => {
     $('overlayTop').classList.add('routing');
     $('fromIn').value = trip.from; $('toIn').value = trip.to;
   }
-  if (trip && trip.fromHere) {
-    render(); syncUrl();
-    track('search-trip-here');
-    const tripPoi = (!p.chains.length && trip.filter) ? detectPoiIntent(trip.filter) : null;
-    locate('route', { thenRoute: tripPoi ? { poi: tripPoi } : {} });
-    return;
-  }
 
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {
@@ -3366,6 +3398,20 @@ $('placeIn').addEventListener('keydown', async e => {
   if (p.l2 && !showL2) await setL2(true);
   if (p.kw && F.kw !== p.kw) {
     F.kw = p.kw; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
+  }
+  /* Both after the chain, network and filter handling above: they used to return before it,
+     so "on i-5 with in n out" and "on my way to vegas with in n out" dropped the chain. */
+  if (p.hwy && !trip) {
+    render(); syncUrl();
+    await openHighway(p.hwy);
+    return;
+  }
+  if (trip && trip.fromHere) {
+    render(); syncUrl();
+    track('search-trip-here');
+    const tripPoi = (!p.chains.length && trip.filter) ? detectPoiIntent(trip.filter) : null;
+    locate('route', { thenRoute: tripPoi ? { poi: tripPoi } : {} });
+    return;
   }
 
   render(); syncUrl();
@@ -4671,7 +4717,7 @@ function clearRoute() {
 $('corridorSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
   $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); corridorMi = +b.dataset.mi;
-  if (route) applyCorridor(route.verts, route.mi, route.hr);
+  if (route) applyCorridor(route.verts, route.mi, route.hr, route.hwy);
 });
 /* Return in "Start" moves to "Destination"; Return in "Destination" runs the route. The
    phone keyboard labels those keys "next" and "go" (enterkeyhint), so they must do it. */
@@ -4739,7 +4785,7 @@ function routeCountText() {
   for (const id of route.ids) { const s = byId[id]; if (s && passesNet(s) && passesSpec(s)) n++; }
   return `${n} ${F.plug ? PLUG_NAME[F.plug] + ' ' : ''}charger${n === 1 ? '' : 's'}`;
 }
-function applyCorridor(verts, mi, hr) {
+function applyCorridor(verts, mi, hr, hwy) {
   track('route');
   livePoiGen++;
   clearRoute();
@@ -4767,14 +4813,14 @@ function applyCorridor(verts, mi, hr) {
      carrying them over would list stops matched against somewhere you are no longer
      searching — and would put a ?poi= in the URL that a shared link cannot rebuild. */
   clearLivePoi();
-  route = { verts, ids, order, mi, hr };
+  route = { verts, ids, order, mi, hr, hwy: hwy || null };
   /* On a shared link this runs during boot, when the map can still report a near-zero
      size — the old guard skipped the fit and never retried, so the recipient landed on a
      national view with the route as a squiggle. Retry until the map is really laid out. */
   fitRouteWhenReady();
   // A start taken from the GPS is coordinates in the field; the card should say what it means.
   const endLabel = v => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
-  const trip = `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
+  const trip = hwy ? `Along ${hwy}` : `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
   $('routeInfo').innerHTML = `<span class="sum">${esc(trip)} <i>· ${Math.round(mi)} mi · ` +
     `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m · <span class="rcount">${routeCountText()}</span> ≤${corridorMi}mi</i></span>` +
     `<span class="ed">Edit</span><button class="rclear" id="rClear" title="Clear route" aria-label="Clear route">×</button>`;
@@ -4810,8 +4856,9 @@ function syncUrl() {
   stateScope ? p.set('state', stateScope) : p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
-  if (route) { p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
-  else { p.delete('from'); p.delete('to'); p.delete('c'); }
+  if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
+  else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
+  else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
 $('shareBtn').onclick = async () => {
@@ -5062,7 +5109,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
 /* A link that describes a view opens exactly that view. The recipient's own saved filters
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
-const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
+const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'hwy', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
                    'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
@@ -5114,6 +5161,10 @@ if (q.get('at')) {
       settleFit(() => L.latLngBounds(inState.map(s => [s.lat, s.lon])), [24, 24], 11);
     };
   }
+}
+if (q.get('hwy') && normHwy(q.get('hwy'))) {
+  if (q.get('c')) corridorMi = +q.get('c') || 5;
+  boot = () => openHighway(normHwy(q.get('hwy')));
 }
 if (q.get('from') && q.get('to')) {
   $('routePanel').classList.add('show'); $('routeToggle').classList.add('on');

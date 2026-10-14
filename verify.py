@@ -804,6 +804,33 @@ check("'17 9 * * 1'" in open(os.path.join(HERE, ".github", "workflows", "refresh
 _cr = _html[_html.find('<div class="chiprow" id="chiprow">'):]
 check(_cr.find('id="filtBtn"') < _cr.find('id="catchips"'), "the Filters chip is no longer first in the chip row")
 
+# ---- interstates as corridors (2026-10-14) ----
+_hwp = os.path.join(HERE, "highways.js")
+check(os.path.exists(_hwp), "highways.js is missing (build.py writes it)")
+if os.path.exists(_hwp):
+    _hwraw = open(_hwp).read()
+    _hw = json.loads(_hwraw[_hwraw.index("{"):_hwraw.rindex("}") + 1])
+    check(len(_hw) >= 20, f"highways.js has only {len(_hw)} interstates")
+    # Ordered along the road, not by latitude: the drawn length must be close to the real one.
+    import math as _m
+    def _km(a, b):
+        p = _m.pi / 180
+        x = _m.sin((b[0] - a[0]) * p / 2) ** 2 + _m.cos(a[0] * p) * _m.cos(b[0] * p) * _m.sin((b[1] - a[1]) * p / 2) ** 2
+        return 12742 * _m.asin(_m.sqrt(x))
+    for _ref, _real in (("I-95", 3069), ("I-5", 2223), ("I-75", 2856)):
+        if _ref in _hw:
+            _len = sum(_km(_hw[_ref][i - 1], _hw[_ref][i]) for i in range(1, len(_hw[_ref])))
+            check(0.85 * _real < _len < 1.15 * _real,
+                  f"{_ref} draws {_len:.0f} km against a real {_real} km — the points are out of road order")
+    _v3 = hashlib.sha256(open(_hwp, "rb").read()).hexdigest()[:10]
+    check(f"const HWY_URL = 'highways.js?v={_v3}';" in _html, "index.html loads a stale highways.js (run build.py)")
+check("highways.js" in open(os.path.join(HERE, "publish.py")).read(), "highways.js is not published")
+check('href="../../?hwy=I-75"' in open(os.path.join(HERE, "along", "i-75", "index.html")).read(),
+      "the /along/ pages no longer open their interstate in the map")
+check(re.search(r"const blk|  if \(p\.hwy && !trip\) \{", _html) is not None
+      and _html.find("if (p.hwy && !trip) {") > _html.find("if (p.kw && F.kw !== p.kw) {"),
+      "the highway search runs before the query's chain/filters are applied (the chain is dropped)")
+
 # ---- tap speed (fix 6, 2026-10-10) ----
 # Tap-to-paint on a 4x-throttled phone profile: chain chip ~200 -> ~85 ms, "Any food"
 # ~375-510 -> ~225 ms, with the rendered 300-row list verified identical in nine scenarios.

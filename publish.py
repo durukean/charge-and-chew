@@ -21,7 +21,7 @@ from urllib.parse import urlparse
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "_site")
 
-FILES = ["index.html", "404.html", "data.js", "level2.js", "sw.js", "manifest.json", "robots.txt",
+FILES = ["index.html", "404.html", "data.js", "level2.js", "highways.js", "sw.js", "manifest.json", "robots.txt",
          "sitemap.xml", "favicon.ico", "favicon.svg", "apple-touch-icon.png",
          "icon-192.png", "icon-512.png", "icon-maskable-512.png", "og.png", "CNAME"]
 DIRS = ["near", "along", "trip", "privacy", "support", "admin", "og", "vendor", "assets"]

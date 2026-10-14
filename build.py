@@ -6,7 +6,7 @@
    sitemap.xml, robots.txt
 Run after data/fetch_pois.py.  Usage: python3 build.py [--base https://chargeandchew.com]
 """
-import json, os, re, sys, html, shutil
+import json, math, os, re, sys, html, shutil
 from urllib.parse import quote
 from collections import Counter
 
@@ -512,6 +512,41 @@ add("near/index.html")
 # ---- interstate corridor pages: "chargers with food along I-95" ----
 # Real search intent that nothing serves well. Only ~30 pages, each genuinely unique, so
 # these are indexed even while the chain x state set is throttled back.
+def _hav_km(a, b, c, e):
+    R, p = 6371.0, math.pi / 180
+    x = math.sin((c - a) * p / 2) ** 2 + math.cos(a * p) * math.cos(c * p) * math.sin((e - b) * p / 2) ** 2
+    return 2 * R * math.asin(math.sqrt(x))
+
+
+def chain_highway(pts, cell_km=1.5):
+    # 1) one point per ~cell: merges the two carriageways and the dense city sections
+    c=cell_km/111.0; seen={}; 
+    for la,lo in pts:
+        k=(round(la/c),round(lo/(c/max(0.2,math.cos(math.radians(la))))))
+        seen.setdefault(k,(la,lo))
+    P=list(seen.values()); n=len(P)
+    if n<3: return P
+    # 2) start at an end: the point farthest from the centroid along the longer axis
+    la_span=max(p[0] for p in P)-min(p[0] for p in P); lo_span=(max(p[1] for p in P)-min(p[1] for p in P))*0.8
+    start=min(range(n),key=lambda i:P[i][0]) if la_span>=lo_span else min(range(n),key=lambda i:P[i][1])
+    # 3) greedy nearest neighbour
+    g={}; G=0.2
+    for i,(la,lo) in enumerate(P): g.setdefault((int(la/G),int(lo/G)),[]).append(i)
+    used=[False]*n; order=[start]; used[start]=True; cur=start
+    for _ in range(n-1):
+        la,lo=P[cur]; best=None; r=1
+        while best is None and r<60:
+            for di in range(-r,r+1):
+                for dj in range(-r,r+1):
+                    for j in g.get((int(la/G)+di,int(lo/G)+dj),()):
+                        if not used[j]:
+                            d=_hav_km(la,lo,*P[j])
+                            if best is None or d<best[0]: best=(d,j)
+            r*=2
+        if best is None: break
+        used[best[1]]=True; order.append(best[1]); cur=best[1]
+    return [P[i] for i in order]
+
 HW_PATH = os.path.join(HERE, "data", "highways.json")
 CORRIDOR_MI = 3.0
 INTERSTATE_MIN_KW = 50
@@ -582,7 +617,7 @@ if os.path.exists(HW_PATH):
 <p class="lead"><b>{len(found)} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {disp}, and
 <b>{len(withchain)}</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
 order along the route, {" → ".join(states[:12])}{" …" if len(states) > 12 else ""}.</p>
-<a class="cta" href="../../">Open the map →</a>
+<a class="cta" href="../../?hwy={disp}">Open {disp} in the map →</a>
 <p class="stats">Typical power along this corridor is <b>{med} kW</b>, with <b>{big}</b> stops at
 150 kW or more and <b>{h24}</b> listed as open 24 hours. Chargers under {INTERSTATE_MIN_KW} kW are
 left out — on an interstate run they cost more time than they save.</p>
@@ -617,6 +652,22 @@ along the route, with the restaurants and stores within a 10-minute walk of each
              "order, with nearby food and shopping for each stop.", body, "along/")
         add("along/index.html")
         print(f"Interstate corridor pages: {len(hw_links)}")
+
+    # The same highways for the app: "I-5" in the search box, or ?hwy=I-5 from the page above,
+    # draws the interstate as a corridor. The stored points are sorted by latitude or longitude,
+    # not along the road -- drawn as-is, I-95 was a 50,000 km scribble. chain_highway() keeps
+    # one point per ~1.5 km (merging the two carriageways) and walks them nearest-first from
+    # one end: path lengths then match the real roads (I-95 3,048 km, I-5 2,203 km).
+    hw_out = {}
+    for disp, sl, n in hw_links:
+        kept = []
+        for a, b in chain_highway(highways[disp.replace("-", " ")]):
+            if not kept or _hav_km(kept[-1][0], kept[-1][1], a, b) >= 3.0:   # a point every ~3 km
+                kept.append([round(a, 3), round(b, 3)])
+        hw_out[disp] = kept
+    open(os.path.join(HERE, "highways.js"), "w").write(
+        "window.CC_HWYS = " + json.dumps(hw_out, separators=(",", ":")) + ";\n")
+    print(f"highways.js: {len(hw_out)} interstates, {sum(len(v) for v in hw_out.values())} points")
 
 # ---- trip pages: "EV charging stops from Los Angeles to Las Vegas" ----
 # The interstate pages answer "what is on I-15". These answer the question people actually
@@ -926,6 +977,17 @@ if os.path.exists(_dj):
     if _h2 != _h:
         open(_ix, "w", encoding="utf-8").write(_h2)
     print(f"data.js version {_ver}")
+_hw = os.path.join(HERE, "highways.js")
+if os.path.exists(_hw):
+    _ver3 = hashlib.sha256(open(_hw, "rb").read()).hexdigest()[:10]
+    _ix = os.path.join(HERE, "index.html")
+    _h = open(_ix, encoding="utf-8").read()
+    _h2, _n = re.subn(r"const HWY_URL = 'highways\.js\?v=[^']*';", f"const HWY_URL = 'highways.js?v={_ver3}';", _h)
+    if _n != 1:
+        sys.exit(f"build.py: expected exactly one HWY_URL constant in index.html, found {_n}")
+    if _h2 != _h:
+        open(_ix, "w", encoding="utf-8").write(_h2)
+    print(f"highways.js version {_ver3}")
 # The optional Level 2 layer is loaded by URL from script, so the same content hash goes into
 # the one constant that builds that URL.
 _l2 = os.path.join(HERE, "level2.js")
