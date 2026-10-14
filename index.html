@@ -7,14 +7,19 @@
 /* Pinch-zoom stays available on the website (blocking it fails WCAG 1.4.4 and Android Chrome
    honours the block). Only the iOS app, whose bridge is injected before this runs, locks it:
    there the page is the whole app and a stray pinch would zoom the entire interface. */
-if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc)
+if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc) {
   document.querySelector('meta[name=viewport]').content += ', maximum-scale=1.0, user-scalable=no';
+  document.documentElement.classList.add('native');   // before the splash paints, see html.native #splash
+}
 /* Paint the splash in the right theme: the full rule (sunrise/sunset) runs once the data has
    loaded, so until then use the saved choice or the same 7pm-7am guess the early map uses —
    otherwise a night visit opens on a white flash. */
 try {
   var t = localStorage.getItem('cc_theme'), h = new Date().getHours();
-  if (t === 'dark' || (t !== 'light' && (h < 7 || h >= 19))) document.documentElement.dataset.theme = 'dark';
+  // In the app, the shell passes the theme the page last chose and paints its own splash in it.
+  var last = window.__ccLastDark;
+  if (t === 'dark' || (t !== 'light' && (typeof last === 'boolean' ? last : (h < 7 || h >= 19))))
+    document.documentElement.dataset.theme = 'dark';
 } catch (e) {}
 </script>
 <meta name="apple-itunes-app" content="app-id=6809134093">
@@ -110,6 +115,10 @@ svg{display:block}
 .splash-logo{font-size:clamp(26px,7vw,40px);font-weight:800;letter-spacing:-1.2px}
 .splash-logo .c{color:var(--accent)}.splash-logo .h{color:var(--amber-text)}
 .splash-mark svg{width:64px;height:64px;display:block}
+/* In the app the native splash (a 96 pt mark, dead centre) fades out over this one; with the
+   mark in a different place the two overlapped across the wordmark. Same mark, same spot. */
+html.native #splash{justify-content:flex-start;padding-top:calc(50vh - 48px)}
+html.native .splash-mark svg{width:96px;height:96px}
 .splash-logo .amp{color:var(--dim2);margin:0 .1em;font-weight:600}
 .splash-bar{width:150px;height:3px;background:var(--surface3);border-radius:2px;overflow:hidden}
 .splash-bar i{display:block;height:100%;width:38%;background:var(--accent);border-radius:2px;animation:slide 1.1s ease-in-out infinite}
@@ -4927,6 +4936,7 @@ function syncUrl() {
   stateScope ? p.set('state', stateScope) : p.delete('state');
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
+  p.delete('stop');   // a one-time "open this stop" from the widget, not part of the view
   if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
   else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
   else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
@@ -5180,7 +5190,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
 /* A link that describes a view opens exactly that view. The recipient's own saved filters
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
-const VIEW_KEYS = ['chain', 'any', 'at', 'from', 'hwy', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
+const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
                    'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
@@ -5244,6 +5254,21 @@ if (q.get('from') && q.get('to')) {
   // A shared "route + ice cream" link has to rebuild both halves, in that order.
   const bootPoi = q.get('poi') ? intentFromTerm(q.get('poi')) : null;
   boot = () => runRoute(bootPoi ? { poi: bootPoi } : {});
+}
+/* ?stop=<id> opens that stop's panel: the home-screen widget shows one stop, and tapping it
+   used to land on a list of 147 with the one you tapped nowhere in particular. */
+if (q.get('stop') && byId[+q.get('stop')]) {
+  const sid = +q.get('stop'), first = boot;
+  boot = () => {
+    if (first) first();
+    setTimeout(() => {
+      const row = document.querySelector(`#list .row[data-id="${sid}"]`);
+      if (row) return row.click();
+      userMovedMap = true;
+      map.setView([byId[sid].lat, byId[sid].lon], 14);
+      setTimeout(() => { if (mk[sid]) { popupPad(mk[sid]); mk[sid].openPopup(); } }, 300);
+    }, 700);
+  };
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size || anyCat) { setSheet('mid'); fitToResults(); }

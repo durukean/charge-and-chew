@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import SafariServices
+import LinkPresentation
 
 /// Hosts the app. The web layer is the UI; everything native lives behind it -- the loopback
 /// server, CoreLocation, the share sheet, haptics, and the data refresh.
@@ -16,6 +17,9 @@ final class WebViewController: UIViewController {
 
     private static let lightBG = UIColor(red: 0.96, green: 0.96, blue: 0.97, alpha: 1)
     private static let darkBG  = UIColor(red: 0.04, green: 0.05, blue: 0.07, alpha: 1)
+    /// The theme the page chose last time. The page follows the sun, not the system, so the
+    /// system setting is the wrong guess for the splash about half the time.
+    private static let lastDarkKey = "cc.lastDark"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +27,21 @@ final class WebViewController: UIViewController {
         // line logged at launch -- the stale-overlay prune and the CC_TEST_INTENT Siri output
         // included. The log is reset once, at the true start of launch, in AppDelegate.
         Diag.log("viewDidLoad; webRoot=\(webRoot?.path ?? "NIL")")
-        // Until the page reports its own theme, follow the system so the splash does not
-        // flash the wrong colour on the way in.
-        dark = traitCollection.userInterfaceStyle == .dark
+        // Until the page reports its own theme, use the one it chose last time (the system
+        // setting on a first launch), and hand the same guess to the page's own splash.
+        let d = UserDefaults.standard
+        dark = d.object(forKey: Self.lastDarkKey) != nil ? d.bool(forKey: Self.lastDarkKey)
+                                                         : traitCollection.userInterfaceStyle == .dark
         view.backgroundColor = dark ? Self.darkBG : Self.lightBG
+        overrideUserInterfaceStyle = dark ? .dark : .light
         buildWebView()
         buildSplash()
         startServing()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.window?.overrideUserInterfaceStyle = overrideUserInterfaceStyle   // no window at viewDidLoad
     }
 
     // MARK: - web view
@@ -48,6 +60,9 @@ final class WebViewController: UIViewController {
         controller.addUserScript(WKUserScript(source: NativeBridge.shimJS,
                                               injectionTime: .atDocumentStart,
                                               forMainFrameOnly: true))
+        controller.addUserScript(WKUserScript(source: "window.__ccLastDark = \(dark);",
+                                              injectionTime: .atDocumentStart,
+                                              forMainFrameOnly: true))
         cfg.userContentController = controller
 
         webView = AppWebView(frame: .zero, configuration: cfg)
@@ -60,6 +75,9 @@ final class WebViewController: UIViewController {
         // whole app feel like a website in a box, which is exactly the wrong impression.
         webView.scrollView.bounces = false
         webView.scrollView.contentInsetAdjustmentBehavior = .never
+        applyTextSize()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTextSize),
+                                               name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         let bridge = NativeBridge(webView: webView)
         bridge.onShare = { [weak self] url, title in self?.share(url, title: title) }
@@ -160,7 +178,7 @@ final class WebViewController: UIViewController {
            shared "LA to Las Vegas near ice cream" link opened in the app as a bare map. */
         // Every view parameter the web app shares; a link from the site with ?plug=ccs or
         // ?l2=1 must open the same view in the app, not quietly drop the filter.
-        let allowed = ["at", "r", "chain", "any", "net", "netpick", "plug", "l2", "hwy", "from", "to", "c", "poi", "state",
+        let allowed = ["at", "r", "stop", "chain", "any", "net", "netpick", "plug", "l2", "hwy", "from", "to", "c", "poi", "state",
                        "minkw", "minstalls", "h24", "free", "noiso", "nodlr"]
         c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { allowed.contains($0.name) }
         if let u = c.url { Diag.log("deep link -> \(u.absoluteString)"); webView.load(URLRequest(url: u)) }
@@ -175,6 +193,27 @@ final class WebViewController: UIViewController {
         self.dark = dark
         view.backgroundColor = dark ? Self.darkBG : Self.lightBG
         setNeedsStatusBarAppearanceUpdate()
+        UserDefaults.standard.set(dark, forKey: Self.lastDarkKey)
+        /* The keyboard, alerts, the share sheet and the in-app Safari sheet take their look
+           from the native trait collection, not the page's CSS: a light keyboard under a dark
+           app every evening. The window carries it to everything presented from it. */
+        let style: UIUserInterfaceStyle = dark ? .dark : .light
+        overrideUserInterfaceStyle = style
+        view.window?.overrideUserInterfaceStyle = style
+    }
+
+    /// Larger Text in Settings. The page is sized in CSS pixels and ignores Dynamic Type, so
+    /// scale the whole page, modestly: past ~1.2 the phone layout runs out of width.
+    @objc private func applyTextSize() {
+        let zoom: CGFloat
+        switch traitCollection.preferredContentSizeCategory {
+        case .extraLarge: zoom = 1.06
+        case .extraExtraLarge: zoom = 1.12
+        case .extraExtraExtraLarge: zoom = 1.16
+        case let c where c.isAccessibilityCategory: zoom = 1.2
+        default: zoom = 1
+        }
+        if webView.pageZoom != zoom { webView.pageZoom = zoom }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle { dark ? .lightContent : .darkContent }
 
@@ -195,7 +234,8 @@ final class WebViewController: UIViewController {
     }
 
     private func share(_ url: URL, title: String) {
-        let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        let sheet = UIActivityViewController(activityItems: [ShareItem(url: url, title: title)],
+                                             applicationActivities: nil)
         present(sheet, animated: true)
     }
 
@@ -224,8 +264,13 @@ final class WebViewController: UIViewController {
             // otherwise Google serves a mobile web page whose main feature is a nag to
             // install the app. Apple Maps is on every iPhone and gives real turn-by-turn,
             // so that is the fallback -- not Safari.
-            if url.path.hasPrefix("/maps/dir"), !UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!),
-               let apple = appleMapsDirections(from: url) {
+            let hasGoogleMaps = UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)
+            if url.path.hasPrefix("/maps/dir"), !hasGoogleMaps, let apple = appleMapsDirections(from: url) {
+                UIApplication.shared.open(apple); return
+            }
+            // A place (the "Reviews" button, a chain's name): Google's web page is an install
+            // nag over a sponsored result, so Apple Maps' place card instead.
+            if url.path.hasPrefix("/maps/search"), !hasGoogleMaps, let apple = appleMapsPlace(from: url) {
                 UIApplication.shared.open(apple); return
             }
             UIApplication.shared.open(url); return
@@ -243,6 +288,21 @@ final class WebViewController: UIViewController {
         var c = URLComponents(string: "maps://")!
         c.queryItems = [URLQueryItem(name: "daddr", value: dest),
                         URLQueryItem(name: "dirflg", value: walking ? "w" : "d")]
+        return c.url
+    }
+
+    /// google.com/maps/search/<name>/@LAT,LON,17z -> maps://?q=<name>&sll=LAT,LON
+    private func appleMapsPlace(from url: URL) -> URL? {
+        let parts = url.pathComponents            // ["/", "maps", "search", name, "@lat,lon,17z"]
+        guard parts.count >= 4, parts[2] == "search" else { return nil }
+        var c = URLComponents(string: "maps://")!
+        var items = [URLQueryItem(name: "q", value: parts[3])]
+        if parts.count >= 5, parts[4].hasPrefix("@") {
+            let ll = parts[4].dropFirst().split(separator: ",").prefix(2).joined(separator: ",")
+            items.append(URLQueryItem(name: "sll", value: ll))
+            items.append(URLQueryItem(name: "z", value: "17"))
+        }
+        c.queryItems = items
         return c.url
     }
 
@@ -314,5 +374,22 @@ extension WebViewController: WKUIDelegate {
             } else { openExternal(url, userTapped: tapped) }
         }
         return nil
+    }
+}
+
+/// A shared link with the view's own title and the app icon, instead of the site's generic
+/// homepage card fetched over the network while the sheet jumps around.
+private final class ShareItem: NSObject, UIActivityItemSource {
+    let url: URL, title: String
+    init(url: URL, title: String) { self.url = url; self.title = title }
+    func activityViewControllerPlaceholderItem(_ c: UIActivityViewController) -> Any { url }
+    func activityViewController(_ c: UIActivityViewController, itemForActivityType t: UIActivity.ActivityType?) -> Any? { url }
+    func activityViewController(_ c: UIActivityViewController, subjectForActivityType t: UIActivity.ActivityType?) -> String { title }
+    func activityViewControllerLinkMetadata(_ c: UIActivityViewController) -> LPLinkMetadata? {
+        let m = LPLinkMetadata()
+        m.originalURL = url; m.url = url
+        m.title = title.isEmpty ? "Charge & Chew" : title
+        if let icon = UIImage(named: "LaunchMark") { m.iconProvider = NSItemProvider(object: icon) }
+        return m
     }
 }

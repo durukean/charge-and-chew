@@ -83,7 +83,17 @@ final class WidgetLocation: NSObject, CLLocationManagerDelegate {
 struct StopView: View {
     @Environment(\.widgetFamily) var family
     let entry: StopEntry
-    private let green = Color(red: 0.29, green: 0.87, blue: 0.5)
+    // The app's two greens: the bright one was 1.7:1 on a white widget.
+    private let green = Color(UIColor { $0.userInterfaceStyle == .dark
+        ? UIColor(red: 0.29, green: 0.87, blue: 0.5, alpha: 1)
+        : UIColor(red: 0.08, green: 0.5, blue: 0.24, alpha: 1) })
+
+    /// "1.2 mi · 250 kW · 40 stalls"; the small widget drops the stalls, which truncated.
+    private func stats(_ c: Charger) -> String {
+        var s = String(format: "%.1f mi · %d kW", entry.miles, c.kw)
+        if family != .systemSmall, c.stalls > 0 { s += " · \(c.stalls) stall\(c.stalls == 1 ? "" : "s")" }
+        return s
+    }
 
     var body: some View {
         Group {
@@ -95,9 +105,11 @@ struct StopView: View {
                             .font(.caption2.weight(.bold)).foregroundStyle(.secondary).lineLimit(1)
                     }
                     Text(c.name).font(.system(size: family == .systemSmall ? 14 : 16, weight: .bold))
-                        .lineLimit(2).minimumScaleFactor(0.85)
-                    Text(String(format: "%.1f mi · %d kW · %d stalls", entry.miles, c.kw, c.stalls))
-                        .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                        .lineLimit(2).minimumScaleFactor(0.85).layoutPriority(1)
+                    Text(stats(c)).font(.caption.monospacedDigit()).foregroundStyle(.secondary).lineLimit(1)
+                    if family != .systemSmall {
+                        Text("\(c.net) · \(c.city), \(c.st)").font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                    }
                     // Small widgets stack the chips: two side by side truncated "IHOP" to "IH…".
                     let chips = Array(c.food.prefix(family == .systemSmall ? 2 : 3).enumerated())
                     let chip: (Charger.Place) -> AnyView = { f in AnyView(
@@ -108,21 +120,29 @@ struct StopView: View {
                     if family == .systemSmall {
                         VStack(alignment: .leading, spacing: 4) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
                     } else {
-                        HStack(spacing: 6) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
+                        // Three when they fit, else two: the first used to truncate while the
+                        // others showed in full.
+                        ViewThatFits(in: .horizontal) {
+                            HStack(spacing: 6) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
+                            HStack(spacing: 6) { ForEach(chips.prefix(2), id: \.offset) { _, f in chip(f) } }
+                        }
                     }
                     Spacer(minLength: 0)
                 }
-                .widgetURL(URL(string: "ccapp://stop?at=\(c.lat),\(c.lon)&r=10"))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                // stop= opens that stop's panel, not just the area around it.
+                .widgetURL(URL(string: "ccapp://stop?at=\(c.lat),\(c.lon)&r=10&stop=\(c.id)"))
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 6) {
                         Image(systemName: "bolt.fill").foregroundStyle(green)
                         Text("Charge & Chew").font(.caption2.weight(.bold)).foregroundStyle(.secondary)
                     }
-                    Text("Open the app and tap locate once — this will show the nearest fast charger with food.")
+                    Text("Allow location for Charge & Chew and its widgets to see the nearest fast charger with food.")
                         .font(.caption).foregroundStyle(.secondary)
                     Spacer(minLength: 0)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .widgetURL(URL(string: "ccapp://open"))
             }
         }
