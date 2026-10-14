@@ -4829,7 +4829,10 @@ function applyCorridor(verts, mi, hr, hwy) {
   $('routePanel').classList.add('collapsed');
   $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
     $('routeInfo').onclick = null;
-    $('routeInfo').textContent = `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${routeCountText()} within ${corridorMi} mi`;
+    // A highway has no start or destination: the empty fields need saying what is shown.
+    $('routeInfo').textContent = (hwy ? `All of ${hwy} · ` : '') +
+      `${Math.round(mi)} mi · ${Math.floor(hr)}h ${Math.round((hr%1)*60)}m · ${routeCountText()} within ${corridorMi} mi` +
+      (hwy ? ' — or enter a start and destination for one drive' : '');
     setTimeout(() => map.invalidateSize({ pan: false }), 220); };
   render(); setSheet('mid'); syncUrl();
   settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
