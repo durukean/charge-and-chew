@@ -294,6 +294,10 @@ check('<div class="pp-more" hidden>' in _html and "data-more" in _html,
 # A plain visit opens where you are.
 check(re.search(r"(?m)^  startFromLocation\(restored\);", _html) is not None,
       "a plain visit no longer starts from the visitor's location")
+# Two marks on the map, not a colour per network: Tesla's T disc and one green for the rest.
+check(re.search(r"isTesla\(s\) && s\.lvl !== 2 \? new TeslaMarker\(", _html) is not None
+      and "ctx.fillText('T'" in _html,
+      "Tesla chargers lost their T marker — the map is back to a colour per network")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

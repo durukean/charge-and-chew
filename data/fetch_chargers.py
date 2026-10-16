@@ -18,8 +18,8 @@ KEY = os.environ.get("AFDC_API_KEY", "DEMO_KEY")
 HOST = "https://developer.nlr.gov"
 
 # AFDC network code -> (display name, marker colour)
-# Mirror of NETCOL in index.html (the app overrides these at render time; keep both
-# in sync so a fresh fetch matches). No pure red — red pins read as "out of service".
+# The colour here is legacy: the app draws two kinds of marker (Tesla's T disc, one green
+# for everything else -- netCol/netDot in index.html) and ignores it. No pure red.
 NETWORKS = {
     "Tesla":               ("Tesla Supercharger", "#ff6b5a"),
     "Tesla Destination":   ("Tesla Destination",  "#ff6b5a"),
