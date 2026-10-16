@@ -371,6 +371,28 @@ html.native .splash-mark svg{width:96px;height:96px}
   padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
 .pp-links a:last-child{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .pp-links a.rep{flex:0 0 auto;color:var(--dim2);background:none;border-color:transparent;padding:8px 4px}
+/* The stop card: speed, stalls, network on one line; the three nearest places as chips. */
+.pp-sum{display:flex;flex-wrap:wrap;align-items:center;gap:5px 9px;font-size:12.5px;color:var(--dim);margin:2px 0 8px}
+.pp-sum s.spd{font-size:12px;padding:3px 8px}
+.pp-sum .tag{margin-left:0}
+.pp-nn{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--txt);min-width:0}
+.pp-nn .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.pp-warn1{color:var(--warn);font-size:12px;margin:0 0 8px;line-height:1.4}
+.pp-near{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 2px}
+.pp-nb{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--line);
+  border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none;
+  max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-nb b{color:var(--dim);font-weight:600;font-family:var(--mono);font-size:11px}
+.pp-nb.on{border-color:var(--accent)}
+.leaflet-container a.pp-nb{color:var(--txt)}   /* Leaflet paints every popup link blue */
+.pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
+.pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
+  border:1px solid var(--line);color:var(--txt);font:700 12px var(--sans);cursor:pointer}
+.pp-links .pp-morebtn[aria-expanded="true"]{background:var(--surface3)}
+.pp-more{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.pp-h{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim2);margin:8px 0 2px}
+.pp-sec{display:flex;gap:16px;margin-top:10px}
+.pp-sec a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none}
 .poi-div{background:none!important;border:none!important}
 .poi-div span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;
   background:var(--surface);border:2px solid var(--amber);font-size:15px;box-shadow:var(--sh2)}
@@ -560,19 +582,19 @@ html.native .splash-mark svg{width:96px;height:96px}
    replaced. Rows were click-only, so a keyboard user could not open a single charger. */
 .row .n .rowname{background:none;border:0;padding:0;margin:0;font-family:inherit;color:inherit;
   text-align:left;cursor:pointer;border-radius:4px}
-.row s.spd{text-decoration:none;color:var(--dim);font-size:11px;white-space:nowrap;font-weight:700;
+.row s.spd,.pp-sum s.spd{text-decoration:none;color:var(--dim);font-size:11px;white-space:nowrap;font-weight:700;
   font-family:var(--mono);background:var(--surface2);border-radius:6px;padding:2px 7px;line-height:1.5}
-:root[data-theme="dark"] .row s.spd{background:var(--surface3)}
+:root[data-theme="dark"] .row s.spd,:root[data-theme="dark"] .pp-sum s.spd{background:var(--surface3)}
 /* Speed bands on the kW badge. Colour carries it at a glance; the title and the popup say it
    in words, so it is never colour alone. */
 /* Four treatments that differ in more than hue: ultra is solid, fast a tint, standard
    neutral, slow amber. Two greens a shade apart were indistinguishable, and identical in dark. */
 /* :root lifts these over the dark-theme plain badge above, which otherwise won and left
    near-black text on dark grey on every 250 kW+ stop. */
-:root .row s.spd.ultra{color:var(--accent-ink);background:var(--good)}
-:root .row s.spd.fast{color:var(--good);background:var(--good-bg)}
-:root .row s.spd.slow{color:var(--warn);background:var(--warn-bg)}
-:root .row s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
+:root .row s.spd.ultra,:root .pp-sum s.spd.ultra{color:var(--accent-ink);background:var(--good)}
+:root .row s.spd.fast,:root .pp-sum s.spd.fast{color:var(--good);background:var(--good-bg)}
+:root .row s.spd.slow,:root .pp-sum s.spd.slow{color:var(--warn);background:var(--warn-bg)}
+:root .row s.spd.l2,:root .pp-sum s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
 .pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
 .row .sub{color:var(--dim2);font-size:11.5px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
@@ -820,7 +842,9 @@ html.native .splash-mark svg{width:96px;height:96px}
      scroll back out (html is overflow:hidden). */
   .searchpill input,.rfield input,.pk .searchbox input{font-size:16px}
   #filtNetList div[data-net]{min-height:44px;padding:0 10px;font-size:13.5px}
-  .pp-links a{padding:13px 8px}.pp-links a.rep{padding:13px 4px}
+  .pp-links a{padding:13px 8px}.pp-links a.rep{padding:13px 4px}.pp-links .pp-morebtn{padding:13px 18px}
+  .pp-nb{padding:9px 12px;font-size:13px}
+  .pp-sec a{display:inline-block;padding:10px 0}
   .pp-poi-l a,.pp-det a{display:inline-block;padding:10px 0}
   #heroSkip{padding:14px 6px}
   #icGo,#icNo,#sugg button{min-height:44px}
@@ -1592,7 +1616,10 @@ map.getContainer().addEventListener('touchstart', e => { if (e.touches.length > 
 map.on('dblclick', () => { userMovedMap = true; });
 
 
-const canvas = L.canvas({ padding: .6 });
+/* tolerance: how far from a dot a tap still counts as hitting it. The dots are drawn a few
+   pixels wide and a fingertip is ~40 px, so with none most taps landed on the map instead. */
+const TOUCH = window.matchMedia('(pointer:coarse)').matches;
+const canvas = L.canvas({ padding: .6, tolerance: TOUCH ? 14 : 6 });
 /* The route has to sit UNDER the chargers. Leaflet puts the circleMarkers' canvas and a
    polyline's SVG in the same overlayPane, and the route is added last -- so an 8px line was
    painted over every dot along the corridor and, being a real SVG path, swallowed the taps
@@ -1615,11 +1642,13 @@ function reportUrl(s) {
 }
 function popupHtml(s) {
   const m = MATCH[s.id] || {};
-  /* Every chain match carries the POI's own position, so each row can offer walking
-     directions to that exact branch with no lookup at all — and tapping the row fetches
-     its hours and phone from OSM on demand, which is not worth precomputing for 70,094
-     matches but is cheap for the one you asked about. */
-  const rows = Object.entries(m).map(([k, v]) => { const d = mDist(s, v);
+  /* The panel used to open with everything at once -- plugs, address, three warnings, a
+     disclaimer, a scrolling list of every chain within 800 m, three buttons -- which buried
+     the two things people open a stop for: is it fast, and what is next to it. Those stay
+     on top; the rest is one tap away under More. */
+  const ent = Object.entries(m)
+    .sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+  const rows = ent.map(([k, v]) => { const d = mDist(s, v);
     const isLive = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name;
     const label = isLive ? livePoiFor[s.id].name : k;
     const at = mLatLng(s, v);
@@ -1669,31 +1698,50 @@ function popupHtml(s) {
     ? (cp === null
         ? `<div class="pp-car"><span class="cc null">${cpTxt} — this stop has no connector your car can use</span></div>`
         : `<div class="pp-car"><span class="cc ${cp}">${cpTxt}</span>
-       <span>~${cm} min 10–80%</span></div>` + dwellAdvice(s, cm))
+       <span>~${cm} min 10–80%</span></div>`)
     : '';
+  const kw = kwFor(s, F.plug);
+  const badge = s.lvl === 2 ? '<s class="spd l2">Level 2</s>'
+    : kw ? `<s class="spd ${speedTier(kw)}" title="${TIER_NAME[speedTier(kw)]}">${kw} kW</s>` : '';
+  const units = s.stalls ? s.stalls + ' ' + (s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : (s.stalls === 1 ? 'stall' : 'stalls')) : '';
+  const warns = [
+    s.dlr ? '🏢 At a car dealership — access and hours may be restricted' : '',
+    s.stalls === 1 && s.lvl !== 2 ? '⏳ Single stall — if someone is plugged in, you wait' : ''].filter(Boolean);
+  // The three nearest places (the ones you searched for first), each a tap from its map page.
+  const near = ent.slice(0, 3).map(([k, v]) => {
+    const at = mLatLng(s, v), d = mDist(s, v);
+    const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
+    const inner = `${BRANDS[k].e} ${esc(label)} <b>${walkMin(d)} min</b>`;
+    return at ? `<a class="pp-nb${active.has(k) ? ' on' : ''}" href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
+              : `<span class="pp-nb">${inner}</span>`;
+  }).join('');
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-    <div class="pp-net"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</div>
-    <div class="pp-meta">${(s.lvl === 2
-      ? [`<b>Level 2</b>`, s.stalls ? s.stalls + (s.stalls === 1 ? ' port' : ' ports') : '', `adds ${l2Miles(s)} per hour parked`,
-         s.price ? esc(s.price) : '', s.h24 ? '24h' : '']
-      : [s.stalls ? s.stalls + (s.stalls === 1 ? ' stall' : ' stalls') : '',
-         s.kw ? TIER_NAME[speedTier(s.kw)] : '', s.price ? esc(s.price) : '', s.h24 ? '24h' : '']).filter(Boolean).join(' · ')}</div>
-    <div class="pp-plugs">${[1, 2, 4, 8].filter(b => s.conn & b).map(b =>
-      `<span><b>${PLUG_NAME[b]}</b> ${kwFor(s, b) ? kwFor(s, b) + ' kW' : 'kW not listed'}</span>`).join('')}</div>
-    ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
-    ${s.dlr ? '<div class="pp-host">🏢 At a car dealership — access and hours may be restricted</div>' : ''}
-    ${!Object.keys(m).length ? '<div class="pp-warn">🌙 Nothing we track within a 10-minute walk — likely an isolated stop, worth checking before a night charge.</div>' : ''}
-    ${s.stalls === 1 ? '<div class="pp-warn">⏳ Single stall — if someone is plugged in, you wait. Have a backup in mind.</div>' : ''}
-    <div class="pp-note">Live availability and prices aren\u2019t shown here — check the network\u2019s own app before you rely on a stop.</div>
+    <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn"><span class="dot" style="background:${netCol(s)}"></span>${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}</div>
     ${carLine}
+    ${warns.length ? `<div class="pp-warn1">${warns[0]}</div>` : ''}
     ${poiBlock}
-    <div class="pp-list">${rows}</div>
+    ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
+      : '<div class="pp-warn1">🌙 Nothing we track within a 10-minute walk — likely an isolated stop</div>'}
     <div class="pp-links">
-      <a target="_blank" rel="noopener" href="${reportUrl(s)}" class="rep" title="Wrong info? Tell us">Report</a>
-      <a target="_blank" rel="noopener" href="${gPlace(/non-network/i.test(s.net) ? s.name : s.net, s.lat.toFixed(5), s.lon.toFixed(5))}"
-         title="Google reviews for this charger — the closest thing to a reliability check">Reviews</a>
+      <button type="button" class="pp-morebtn" data-more aria-expanded="false">More</button>
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}">Directions</a>
+    </div>
+    <div class="pp-more" hidden>
+      ${s.lvl === 2 ? `<div class="pp-meta">Adds ${l2Miles(s)} of range per hour parked</div>`
+        : s.kw ? `<div class="pp-meta">${TIER_NAME[speedTier(s.kw)]}${s.price ? ' · ' + esc(s.price) : ''}</div>` : ''}
+      <div class="pp-plugs">${[1, 2, 4, 8].filter(b => s.conn & b).map(b =>
+        `<span><b>${PLUG_NAME[b]}</b> ${kwFor(s, b) ? kwFor(s, b) + ' kW' : 'kW not listed'}</span>`).join('')}</div>
+      ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
+      ${warns.slice(1).map(w => `<div class="pp-warn1">${w}</div>`).join('')}
+      ${cm != null ? dwellAdvice(s, cm) : ''}
+      ${ent.length ? `<div class="pp-h">Within a 10-minute walk</div><div class="pp-list">${rows}</div>` : ''}
+      <div class="pp-note">Live availability and prices aren\u2019t shown here — check the network\u2019s own app before you rely on a stop.</div>
+      <div class="pp-sec">
+        <a target="_blank" rel="noopener" href="${gPlace(/non-network/i.test(s.net) ? s.name : s.net, s.lat.toFixed(5), s.lon.toFixed(5))}"
+           title="Google reviews for this charger — the closest thing to a reliability check">Reviews</a>
+        <a target="_blank" rel="noopener" href="${reportUrl(s)}" title="Wrong info? Tell us">Report a problem</a>
+      </div>
     </div>`;
 }
 
@@ -1714,9 +1762,10 @@ function clearPOIs() { poiLayer.clearLayers(); }
 function showPOIs(s) {
   clearPOIs();
   const m = MATCH[s.id]; if (!m) return;
-  let keys = Object.keys(m);
-  if (chainQuery()) keys = chainKeysOn(m);
-  keys = keys.slice(0, 16);
+  // The same three places the card lists: sixteen emoji and dashed lines at once was a lot
+  // to take in for one tap.
+  let keys = Object.keys(m).sort((a, b) => (active.has(b) - active.has(a)) || mDist(s, m[a]) - mDist(s, m[b]));
+  keys = keys.slice(0, 3);
   const pts = [[s.lat, s.lon]];
   for (const k of keys) {
     const ll = mLatLng(s, m[k]);
@@ -1775,6 +1824,8 @@ function keepPopupOnScreen() {
 
 map.on('popupopen', e => {
   userMovedMap = true;          // an open stop must not be yanked away by a later re-fit
+  // Before showPOIs moves the map below: that move must already see the stop as open.
+  $('app').classList.add('popup-open'); $('searchHere').hidden = true;
   const el = e.popup.getElement();
   const b = el && el.querySelector('[data-fav]');
   if (b) b.onclick = () => {
@@ -1784,6 +1835,18 @@ map.on('popupopen', e => {
     b.innerHTML = `<span aria-hidden="true">${on ? '★' : '☆'}</span>`;
     b.setAttribute('aria-pressed', String(on));
     b.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + ((byId[+b.dataset.fav] || {}).name || 'this stop'));
+  };
+  const more = el && el.querySelector('[data-more]');
+  if (more) more.onclick = () => {
+    const box = el.querySelector('.pp-more'), open = box.hidden;
+    box.hidden = !open;
+    more.setAttribute('aria-expanded', String(open));
+    more.textContent = open ? 'Less' : 'More';
+    // The panel changed height; re-anchor it to the dot. Not update(): that re-renders the
+    // content from popupHtml and would close the section again.
+    e.popup._updateLayout(); e.popup._updatePosition();
+    keepPopupOnScreen();
+    if (open) track('stop-more');
   };
   track('open-charger');
   const src = e.popup._source;
@@ -2102,15 +2165,16 @@ function render() {
     if (m._k === key) { if (state === 'a') m.bringToFront(); continue; }
     m._k = key;
     if (state === 'h') { m.setStyle({ radius: 0, opacity: 0, fillOpacity: 0 }); continue; }
-    if (state === 'g') { m.setStyle({ radius: 2.2, weight: 0, fillColor: T.ghost, fillOpacity: .55, opacity: 1 }); continue; }
+    if (state === 'g') { m.setStyle({ radius: 2.6, weight: 0, fillColor: T.ghost, fillOpacity: .55, opacity: 1 }); continue; }
     if (s.lvl === 2) {
       // Level 2: a hollow ring in the network colour, smaller than a fast charger's dot,
       // so the two never read as the same thing.
-      m.setStyle({ radius: filtering ? 5 : 3.2, weight: filtering ? 2 : 1.4, color: netCol(s),
+      m.setStyle({ radius: filtering ? 6 : 4.2, weight: filtering ? 2 : 1.5, color: netCol(s),
         fillColor: T.hotStroke, fillOpacity: .9, opacity: .95 });
       continue;
     }
-    m.setStyle({ radius: filtering ? 6.5 : 4.2, weight: filtering ? 1.8 : 1,
+    // Big enough to see what you are aiming at; the tap area is wider still (tolerance).
+    m.setStyle({ radius: filtering ? 8 : TOUCH ? 6 : 5.2, weight: filtering ? 2 : 1.2,
       color: T.hotStroke, fillColor: netCol(s),
       fillOpacity: filtering ? .97 : .78, opacity: filtering ? 1 : .9 });
     if (filtering) m.bringToFront();
@@ -2717,14 +2781,16 @@ function locate(target, opts) {
   function fallback(msg) {
     // "On the way to Tahoe" without a location: the destination is filled; ask for a start.
     if (opts.thenRoute) { toast('Type where you\u2019re starting from'); setTimeout(() => $('fromIn').focus(), 300); return; }
+    if (opts.onFail) return opts.onFail();   // the automatic one at start-up: no complaint
     toast(msg);
     if (opts.silentDeny && active.size) { setSheet('mid'); fitToResults(); }
   }
   if (!navigator.geolocation) return fallback('Location not supported — try a city name');
-  $('locBtn').classList.add('busy'); toast('Finding you…');
+  $('locBtn').classList.add('busy'); if (!opts.quiet) toast('Finding you…');
 
   const ok = p => {
     $('locBtn').classList.remove('busy');
+    if (opts.stale && opts.stale()) return;   // they searched or picked something meanwhile
     const la = p.coords.latitude, lo = p.coords.longitude;
     if (target === 'route') {
       // ~110 m: plenty for a route start, and the field ends up in a shareable link (?from=),
@@ -2777,6 +2843,9 @@ function viewRadiusMi() {
 }
 function maybeOfferSearchHere() {
   if (route || pinMode) return $('searchHere').hidden = true;
+  // Opening a stop frames it with its nearby places; that move is not "looking elsewhere",
+  // and the button landed on top of the open card.
+  if ($('app').classList.contains('popup-open')) return $('searchHere').hidden = true;
   /* Resizing the sheet resizes the map, which moves its centre and fires moveend. That is
      not the user looking somewhere else, and "Search this area" popping up because they
      pulled the list up was confusing on a phone. */
@@ -5272,17 +5341,39 @@ if (q.get('stop') && byId[+q.get('stop')]) {
 }
 if (boot) setTimeout(boot, 80);
 else if (active.size || anyCat) { setSheet('mid'); fitToResults(); }
-else if (restoreArea()) {
-  if (q.get('poi')) runLivePoi(intentFromTerm(q.get('poi')));
-}
 else {
-  /* On a phone the map was the full screen height with a sliver of list under it, which
-     gives the map a ~1:4 aspect no country fits into, and hides the results that are the
-     actual point. Open the sheet first so the map has its final size, THEN frame the
-     country — fitting first leaves the US sitting low once the sheet takes its space. */
-  if (!wideLayout()) { setSheet('mid'); setTimeout(fitUS, 460); }   // sheet animates for ~300ms
-  else fitUS();
-  if (localStorage.getItem('cc_hero') !== '0') showHero();
+  /* A plain visit opens where you are. The last area (or the whole country) shows at once,
+     and the map moves to you when the position arrives. The welcome card is for when we
+     cannot have it: shown on top of a location prompt it was two questions at once. */
+  const restored = restoreArea();
+  if (restored && q.get('poi')) runLivePoi(intentFromTerm(q.get('poi')));
+  if (!restored) {
+    /* On a phone the map was the full screen height with a sliver of list under it, which
+       gives the map a ~1:4 aspect no country fits into, and hides the results that are the
+       actual point. Open the sheet first so the map has its final size, THEN frame the
+       country — fitting first leaves the US sitting low once the sheet takes its space. */
+    if (!wideLayout()) { setSheet('mid'); setTimeout(fitUS, 460); }   // sheet animates for ~300ms
+    else fitUS();
+  }
+  startFromLocation(restored);
+}
+function startFromLocation(restored) {
+  const myNav = navGen;
+  let settled = false;
+  const fail = () => {
+    if (settled) return; settled = true;
+    if (!restored && navGen === myNav && localStorage.getItem('cc_hero') !== '0') showHero();
+  };
+  if (!navigator.geolocation) return fail();
+  // An unanswered prompt must not hold the welcome card back forever.
+  setTimeout(fail, 9000);
+  const go = () => locate('center', { quiet: true, onFail: fail,
+    stale: () => { settled = true; return navGen !== myNav || !!route; } });
+  // Already refused: do not ask again on every visit (browsers would just fail, slowly).
+  if (navigator.permissions && navigator.permissions.query) {
+    navigator.permissions.query({ name: 'geolocation' })
+      .then(r => r.state === 'denied' ? fail() : go(), go);
+  } else go();
 }
 /* Started after the first render on purpose: fast chargers appear at once, and the layer
    joins when its file arrives (re-applying a route if one is drawn by then). */

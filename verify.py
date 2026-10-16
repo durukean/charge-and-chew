@@ -283,6 +283,17 @@ check(_zm is not None and int(_zm.group(1)) < 400,
 check("getPane('routePane').style.pointerEvents = 'none'" in _html,
       "the route pane accepts pointer events again — taps on chargers under the line would "
       "hit the line instead")
+# ---- taps, the stop card, and where a visit starts (2026-10-16) ----
+# Dots a few px wide with zero tap tolerance: most taps on a phone hit the map instead.
+_tol = re.search(r"L\.canvas\(\{[^}]*tolerance: TOUCH \? (\d+) : (\d+)", _html)
+check(_tol is not None and int(_tol.group(1)) >= 10 and int(_tol.group(2)) >= 4,
+      "charger dots lost their tap tolerance — taps beside a dot miss it again")
+# The card opens short: details stay behind More.
+check('<div class="pp-more" hidden>' in _html and "data-more" in _html,
+      "the stop card opens with every detail at once again (no collapsed More section)")
+# A plain visit opens where you are.
+check(re.search(r"(?m)^  startFromLocation\(restored\);", _html) is not None,
+      "a plain visit no longer starts from the visitor's location")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.
@@ -1076,7 +1087,7 @@ check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
       "a picked suggestion renders as 'Las Vegas Nv' — the state code is not restored")
 # The hero card is taller than a phone viewport. Centring it puts the title and the close
 # button off-screen with no way to scroll them back.
-check("function keepPopupOnScreen" in _html and _html.count("keepPopupOnScreen();") == 1,
+check("function keepPopupOnScreen" in _html and re.search(r"animate: false \}\);\s*keepPopupOnScreen\(\);", _html) is not None,
       "the post-fit popup nudge is gone — on a phone the popup's right half falls off screen")
 check(_html.count('enterkeyhint=') == 5 and 'autocorrect="off"' in _html,
       "phone-keyboard attributes are missing — Return keys say the wrong thing and autocorrect mangles place names")
