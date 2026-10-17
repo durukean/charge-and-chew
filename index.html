@@ -397,6 +397,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-sum .tag{margin-left:0}
 .pp-nn{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--txt);min-width:0}
 .pp-nn .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.pp-mile{font-weight:600;color:var(--accent)}
 .pp-warn1{color:var(--warn);font-size:12px;margin:0 0 8px;line-height:1.4}
 .pp-near{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 2px}
 .pp-nb{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--line);
@@ -587,6 +588,11 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row:active{transform:scale(.99)}
 .row .idx{width:26px;height:26px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
   font-size:12px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:2px}
+/* On a route: the mile marker, the same footprint as the walk ring it replaces. */
+.row .idx.mi{width:48px;height:48px;border-radius:14px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;margin-top:0;gap:0}
+.row .idx.mi b{font:800 13px/1.1 var(--mono)}
+.row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
 .wring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;background:var(--good-bg);color:var(--good);gap:0}
 .wring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
@@ -1833,7 +1839,7 @@ function popupHtml(s) {
   }).join('');
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-    <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}</div>
+    <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}${route && route.mileAt && route.mileAt.has(s.id) ? `<span class="pp-mile">mile ${route.mileAt.get(s.id)} of ${Math.round(route.mi).toLocaleString('en-US')}</span>` : ''}</div>
     ${carLine}
     ${warns.length ? `<div class="pp-warn1">${warns[0]}</div>` : ''}
     ${poiBlock}
@@ -2632,7 +2638,9 @@ function renderList(vis) {
           ? `<span class="cbadge null">✕ no plug</span>`
           : `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : '⚡'} ~${cm}m</span>`) : '';
     const bw = bestWalk(s);
-    const lead = showIdx ? `<div class="idx">${i + 1}</div>`
+    // On a route the lead is where the stop is on the drive, not its place in the list.
+    const mile = showIdx && route.mileAt && route.mileAt.has(s.id) ? route.mileAt.get(s.id) : '?';
+    const lead = showIdx ? `<div class="idx mi" title="Mile ${mile} of ${Math.round(route.mi)}"><span>mile</span><b>${mile}</b></div>`
       : bw < 9e9 ? `<div class="wring" title="Walk to the nearest place, at least"><b>${walkMin(bw)}</b><span>min</span></div>`
       : `<div class="wring none">⚡</div>`;
     /* Phone-first row: the name gets two lines (it used to be cut to ~12 characters, sharing
@@ -5173,7 +5181,15 @@ function applyCorridor(verts, mi, hr, hwy) {
      carrying them over would list stops matched against somewhere you are no longer
      searching — and would put a ?poi= in the URL that a shared link cannot rebuild. */
   clearLivePoi();
-  route = { verts, ids, order, mi, hr, hwy: hwy || null };
+  /* Miles from the start to each point of the line, scaled to the route's own length (the
+     road distance, which the straight segments between points slightly undercount). A stop's
+     mile marker is the value at its nearest point. */
+  const cum = new Float64Array(verts.length);
+  for (let i = 1; i < verts.length; i++) cum[i] = cum[i - 1] + hav(verts[i - 1][0], verts[i - 1][1], verts[i][0], verts[i][1]);
+  const k = cum[verts.length - 1] > 0 ? mi / (cum[verts.length - 1] / MI) : 1;
+  const mileAt = new Map();
+  for (const [id, bi] of order) mileAt.set(id, Math.round(cum[bi] / MI * k));
+  route = { verts, ids, order, mi, hr, hwy: hwy || null, mileAt };
   /* On a shared link this runs during boot, when the map can still report a near-zero
      size — the old guard skipped the fit and never retried, so the recipient landed on a
      national view with the route as a squiggle. Retry until the map is really laid out. */

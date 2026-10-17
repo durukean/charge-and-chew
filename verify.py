@@ -308,6 +308,9 @@ check(re.search(r"/\\bTesla\\/\|QtCarBrowser/\.test\(navigator\.userAgent\)", _h
 check(re.search(r"if \(!p\.chains\.length && !p\.anyCat && q0\.chains && chainSig\(\) === q0\.chains\) \{ active\.clear\(\);", _html) is not None
       and "lastQuerySet = {" in _html,
       "a new search silently keeps the previous search's chain/plug filters again")
+# Route stops lead with their mile marker along the drive, not a list index.
+check("const mileAt = new Map();" in _html and 'class="idx mi"' in _html,
+      "route rows lost their mile markers")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.
