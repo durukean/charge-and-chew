@@ -824,6 +824,23 @@ if os.path.exists(TRIP_PATH):
         tesla = sum(1 for f in found if "Tesla" in (sites[f[1]].get("net") or ""))
         hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
         drive = f"{hrs}h {mns:02d}m"
+        # The longest stretch with no fast charger near the route (the same rule as the map's
+        # route list): where the chargers run out is what a long drive needs to know.
+        scale = t["mi"] / max(total_mi, 1)
+        end_mi = round(t["mi"])
+        marks = sorted(round(cum[f[0]] * scale) for f in found) + [end_mi]
+        g_len, g_from, g_to, prev = 0, 0, 0, 0
+        for m_ in marks:
+            if m_ - prev > g_len:
+                g_len, g_from, g_to = m_ - prev, prev, m_
+            prev = m_
+        if g_len >= 60:
+            where = (f"from the start to mile {g_to}" if g_from == 0 else
+                     f"from mile {g_from} to the end" if g_to == end_mi else
+                     f"between mile {g_from} and mile {g_to}")
+            gap_txt = f" The longest stretch without one is <b>{g_len} miles</b>, {where}."
+        else:
+            gap_txt = f" There is one at least every <b>{max(g_len, 1)} miles</b> of the way."
 
         # Google truncates near 60 characters and the suffix adds 16, so lead with the two
         # cities -- that is what people type -- and keep the whole thing inside the budget.
@@ -849,7 +866,7 @@ if os.path.exists(TRIP_PATH):
                 f'<p class="stats">Typical power along this route is <b>{med} kW</b>, with <b>{big}</b> '
                 f"stops at 150 kW or more and <b>{tesla}</b> on the Tesla network. Chargers under "
                 f"{TRIP_MIN_KW} kW are left out &mdash; on a drive this length they cost more time "
-                "than they save.</p>\n"
+                f"than they save.{gap_txt}</p>\n"
                 "<h2>Every stop with food within a walk</h2>\n"
                 f"<p>In order along the route{spread}.</p>\n"
                 f'{"".join(cards)}\n'
