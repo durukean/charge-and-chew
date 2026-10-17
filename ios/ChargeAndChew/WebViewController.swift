@@ -60,6 +60,12 @@ final class WebViewController: UIViewController {
         controller.addUserScript(WKUserScript(source: NativeBridge.shimJS,
                                               injectionTime: .atDocumentStart,
                                               forMainFrameOnly: true))
+        // The build, for About: "App 1.0.6 (25)" is the first thing a support email needs.
+        let info = Bundle.main.infoDictionary ?? [:]
+        let ver = "\(info["CFBundleShortVersionString"] as? String ?? "?") (\(info["CFBundleVersion"] as? String ?? "?"))"
+        controller.addUserScript(WKUserScript(source: "window.__ccAppVersion = \"\(ver)\";",
+                                              injectionTime: .atDocumentStart,
+                                              forMainFrameOnly: true))
         controller.addUserScript(WKUserScript(source: "window.__ccLastDark = \(dark);",
                                               injectionTime: .atDocumentStart,
                                               forMainFrameOnly: true))

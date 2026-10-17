@@ -797,7 +797,12 @@ html.native .splash-mark svg{width:96px;height:96px}
   padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none}
 /* Close at the top as well: the only way out used to be a link several screens down. */
 #about .xclose{position:sticky;top:0;float:right;margin:-8px -8px 0 8px;width:38px;height:38px;border-radius:12px;
-  display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim);z-index:1}
+  display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim);z-index:1;
+  box-shadow:0 0 0 7px var(--surface)}   /* a clean halo: text scrolling under it showed through at the edges */
+#about .about-ver{color:var(--dim2);font-size:12px;margin-top:4px}
+#about .about-small{color:var(--dim);font-size:12.5px;line-height:1.5}
+#about .about-list{margin:-4px 0 14px 18px;color:var(--dim);font-size:13.5px;line-height:1.5}
+#about .about-list li{margin-bottom:4px}
 #about .close{display:block;text-align:center;margin-top:6px;padding:12px;background:var(--surface2);
   border-radius:12px;color:var(--txt);font-weight:700;text-decoration:none}
 
@@ -1118,34 +1123,25 @@ if (document.documentElement.classList.contains('car')) {
 <div id="about" role="dialog" aria-modal="true" aria-label="About Charge and Chew"><div class="box">
   <a class="xclose" href="#" aria-label="Close About"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
   <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
-  <p>14,000+ public DC fast chargers across the US — Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more (from the US DOE database) — matched against the restaurants and stores within a 10-minute walk, so you can plan a stop around what you'll actually do while the car charges.</p>
-  <p><b>Map style:</b> Automatic uses Esri, falling back to CARTO if Esri is unavailable. If a
-  map ever comes up blank, switch back to Automatic.</p>
+  <p>Every public fast charger in the US — 14,000+ — and what's within a 10-minute walk of it, so you can plan a stop around what you'll do while the car charges.</p>
+  <p><b>Try searching</b> <em>Starbucks</em> · <em>chargers in Denver</em> · <em>LA to Las Vegas with In-N-Out</em> · <em>I-5</em> · <em>ice cream</em> (shops we don't track are looked up live for the area you're viewing). Tap ☆ on a stop to save it.</p>
+  <p><b>On the map</b> each big network has its own mark — Tesla's red T, ChargePoint's C, Electrify America's EA, EVgo's e — and smaller networks share a slate dot. They're our own marks, not the networks' logos.</p>
+  <p><b>Good to know</b></p>
+  <ul class="about-list">
+    <li>Walk times are straight-line minimums at ~3&nbsp;mph; charge times are rough 10–80% estimates.</li>
+    <li><i>Needs adapter</i>: your car connects with a common adapter. At a Tesla Supercharger your brand must also be allowed — check the Tesla app.</li>
+    <li><i>Isolated</i>: nothing we track within a 10-minute walk. Worth a thought before a night charge.</li>
+    <li>No live availability or prices — check the network's own app before you rely on a stop.</li>
+  </ul>
+  <p><b>Map style</b> — if the map ever comes up blank, choose Automatic.</p>
   <div class="seg" id="baseSeg" style="margin:-4px 0 14px">
     <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
   </div>
-  <p><b>Theme:</b> Auto follows the sun where you are — light by day, dark after sunset. Pin it to light or dark in Filters → Appearance.</p>
-  <p><b>Search for anything:</b> tap the search box to see examples. The 90 chains below are precomputed
-  and instant, but you can also search a category or a brand we don't track — "ice cream", "bank", "tire shop", "pharmacy", "gym", "Chase",
-  "GameStop". Those are looked up live from OpenStreetMap for the area you're viewing, so pick an
-  area first and give it a few seconds. Precomputing every brand isn't possible: it would add
-  roughly 1.6&nbsp;MB to the download for a few hundred more.</p>
-  <p><b>A category along a drive:</b> the two combine — <em>"LA to Las Vegas near ice cream"</em>, <em>"Denver to Moab with a coffee shop"</em>.
-  The route is drawn first, then we ask OpenStreetMap what is within a walk of each stop on it, so the answer is
-  every charger on the way that has one — not just the ones near where the map happens to be pointing.</p>
-  <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ☆ on a stop to save it.</p>
-  <p>On the map, each big network has its own mark in its own colour — Tesla's red T, ChargePoint's orange C, Electrify America's EA, EVgo's e, and so on (the key is bottom left) — and smaller networks share a plain slate dot. These are our own marks, not the networks' logos, and we're not affiliated with any of them. Every stop shown is a live, public charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
-  <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
-  <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
-  <p><b>What the wait is good for:</b> when you've set your car we compare the estimated charge time to
-  what's actually within a walk — a sit-down place needs about 45 minutes, a quick meal 20, a coffee 10 —
-  and count the walk in both directions. So a 48-minute charge with an IHOP six minutes away is called a
-  quick meal, not a sit-down one. Rough guidance, not a reservation.</p>
-  <p><b>Compatibility notes:</b> "needs adapter" means your car can physically connect with a common adapter — for Tesla Superchargers your car's brand must also be allowed on that site (check the Tesla app). Charge times are rough 10–80% estimates; walk times are minimums based on straight-line distance.</p>
-  <p>Spotted something wrong — a dead charger, a closed restaurant, bad data? <a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem →</b></a></p>
-  <p>Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.
+  <p class="about-small">Chargers: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> (under 24&nbsp;kW, private and truck-only sites left out; dealership lots flagged). Places: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Map: Esri. Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
+  <p><a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem</b></a> ·
   <a href="privacy/"><b>Privacy</b></a> · <a href="support/"><b>Support</b></a><span class="web-only"> ·
   <a href="https://apps.apple.com/us/app/charge-chew-ev-stops/id6809134093" target="_blank" rel="noopener"><b>iPhone app</b></a></span></p>
+  <div class="web-only">
   <p><b>Popular chains:</b></p>
   <div class="chainlinks"><a href="near/ihop/">🥞 IHOP</a><a href="near/waffle-house/">🧇 Waffle House</a><a href="near/denny-s/">🍳 Denny's</a><a href="near/cracker-barrel/">🪵 Cracker Barrel</a><a href="near/in-n-out/">🍔 In-N-Out</a><a href="near/whataburger/">🍔 Whataburger</a><a href="near/chick-fil-a/">🐔 Chick-fil-A</a><a href="near/starbucks/">☕ Starbucks</a><a href="near/dunkin/">🍩 Dunkin'</a><a href="near/mcdonald-s/">🍟 McDonald's</a><a href="near/chipotle/">🌯 Chipotle</a><a href="near/panera-bread/">🥖 Panera Bread</a><a href="near/culver-s/">🍦 Culver's</a><a href="near/buc-ee-s/">🦫 Buc-ee's</a><a href="near/wawa/">🦆 Wawa</a><a href="near/sheetz/">⛽ Sheetz</a><a href="near/circle-k/">⛽ Circle K</a><a href="near/love-s/">⛽ Love's</a><a href="near/pilot/">⛽ Pilot</a><a href="near/walmart/">🛒 Walmart</a><a href="near/target/">🎯 Target</a><a href="near/costco/">📦 Costco</a><a href="near/sam-s-club/">🏪 Sam's Club</a><a href="near/kroger/">🛒 Kroger</a><a href="near/publix/">🛒 Publix</a><a href="near/h-e-b/">🛒 H-E-B</a><a href="near/whole-foods/">🥬 Whole Foods</a><a href="near/trader-joe-s/">🛍️ Trader Joe's</a><a href="near/meijer/">🛒 Meijer</a><a href="near/dollar-general/">🏪 Dollar General</a></div>
   <p><b>Road trips:</b></p>
@@ -1153,6 +1149,8 @@ if (document.documentElement.classList.contains('car')) {
   <p><a href="trip/"><b>All road trip charging guides →</b></a><br>
   <a href="near/"><b>Browse all 90 chains &amp; every state →</b></a><br>
   <a href="along/"><b>Or browse chargers along the interstates →</b></a></p>
+  </div>
+  <p class="about-ver" id="aboutVer"></p>
   <a class="close" href="#">Close</a>
 </div></div>
 
@@ -1268,6 +1266,15 @@ if (typeof L === 'undefined') {
    to the shell, which drops the download and reloads from the bundled copy instead of
    leaving the user on an error screen for good. */
 const DATA_FMT = 1;
+/* About says how fresh the data is and, in the app, which build you are on: the first two
+   questions in any support email. */
+(() => {   // the About markup is above this script, so it exists already
+  const el = document.getElementById('aboutVer'); if (!el) return;
+  const d = window.PITSTOP_DATA && window.PITSTOP_DATA.generated;
+  const when = d ? new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+  el.textContent = [when && 'Charger data updated ' + when, window.__ccAppVersion && 'App ' + window.__ccAppVersion]
+    .filter(Boolean).join(' · ');
+})();
 const dataBad = !D ? 'missing or unreadable' : (D.fmt || 1) !== DATA_FMT ? 'format ' + D.fmt : '';
 if (dataBad) {
   try { window.webkit.messageHandlers.cc.postMessage({ cmd: 'dataFailed', id: 0, opts: { why: dataBad } }); }
@@ -2767,7 +2774,9 @@ function renderCarBar() {
 function openCarPicker() {
   $('carPicker').classList.add('show');
   drawCarGrid();
-  setTimeout(() => $('carSearch').focus(), 100);
+  // Not on a touch screen: iOS ignores focus() outside a tap, so it drew a focus ring with no
+  // keyboard, which looks broken. A tap on the field is one tap either way.
+  if (!TOUCH) setTimeout(() => $('carSearch').focus(), 100);
 }
 function drawCarGrid() {
   const q = $('carSearch').value.trim().toLowerCase();
@@ -2910,7 +2919,7 @@ function locate(target, opts) {
   // than leaving the user staring at an unchanged map.
   function fallback(msg) {
     // "On the way to Tahoe" without a location: the destination is filled; ask for a start.
-    if (opts.thenRoute) { toast('Type where you\u2019re starting from'); setTimeout(() => $('fromIn').focus(), 300); return; }
+    if (opts.thenRoute) { toast('Type where you\u2019re starting from'); if (!TOUCH) setTimeout(() => $('fromIn').focus(), 300); return; }
     if (opts.onFail) return opts.onFail();   // the automatic one at start-up: no complaint
     toast(msg);
     if (opts.silentDeny && active.size) { setSheet('mid'); fitToResults(); }
@@ -5351,7 +5360,7 @@ $('heroTrip').onclick = () => {
   $('routePanel').classList.add('show');
   $('routeToggle').classList.add('on');
   $('overlayTop').classList.add('routing');
-  setTimeout(() => $('fromIn').focus(), 120);
+  if (!TOUCH) setTimeout(() => $('fromIn').focus(), 120);
 };
 $('heroAll').onclick = () => { hideHero(); openPicker(); };
 $('heroSkip').onclick = hideHero;
