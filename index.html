@@ -405,6 +405,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pp-nb b{color:var(--dim);font-weight:600;font-family:var(--mono);font-size:11px}
 .pp-nb.on{border-color:var(--accent)}
+.pp-nb .ohs{font-style:normal;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
+.pp-nb .ohs.y{color:var(--good);background:var(--good-bg)}
+.pp-nb .ohs.n{color:var(--dim);background:var(--surface3)}
 .leaflet-container a.pp-nb{color:var(--txt)}   /* Leaflet paints every popup link blue */
 .pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
 .pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
@@ -1850,7 +1853,8 @@ function popupHtml(s) {
     const at = mLatLng(s, v), d = mDist(s, v);
     const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
     const inner = `${BRANDS[k].e} ${esc(label)} <b>${walkMin(d)} min</b>`;
-    return at ? `<a class="pp-nb${active.has(k) ? ' on' : ''}" href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
+    const hk = at && k !== livePoiKey ? ` data-hk="${esc(k)}" data-at="${at[0].toFixed(5)},${at[1].toFixed(5)}"` : '';
+    return at ? `<a class="pp-nb${active.has(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
   }).join('');
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
@@ -2057,6 +2061,7 @@ map.on('popupopen', e => {
   };
   track('open-charger');
   noteUse();
+  if (el) fillHours(el);
   const src = e.popup._source;
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
@@ -5033,15 +5038,55 @@ async function chainDetail(name, lat, lon) {
     const dd = hav(+lat, +lon, la, lo);
     if (dd < bestD) { bestD = dd; best = t; }
   }
-  const out = best ? {
-    name: best.name || best.brand || name,
-    addr: [[best['addr:housenumber'], best['addr:street']].filter(Boolean).join(' '), best['addr:city']].filter(Boolean).join(', '),
-    hours: best.opening_hours || '', phone: best.phone || best['contact:phone'] || '',
-    site: best.website || best['contact:website'] || '',
-    at: lat + ',' + lon
-  } : null;
+  const out = placeDetail(best, name, lat, lon);
   poiDetailCache.set(ck, out);
   return out;
+}
+function placeDetail(t, name, lat, lon) {
+  return t ? {
+    name: t.name || t.brand || name,
+    addr: [[t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), t['addr:city']].filter(Boolean).join(', '),
+    hours: t.opening_hours || '', phone: t.phone || t['contact:phone'] || '',
+    site: t.website || t['contact:website'] || '',
+    at: lat + ',' + lon
+  } : null;
+}
+/* "Is it open?" on the stop card's three places, without a tap: one OpenStreetMap query for
+   all three (cached a week, like every lookup), each answered from the nearest element of
+   that name. A place whose hours OSM doesn't list just shows no tag -- never a guess. */
+async function fillHours(el) {
+  const todo = [...el.querySelectorAll('.pp-nb[data-hk]')].map(c => {
+    const [la, lo] = c.dataset.at.split(',');
+    return { c, k: c.dataset.hk, la, lo, ck: c.dataset.hk + '@' + la + ',' + lo };
+  });
+  const need = todo.filter(t => !poiDetailCache.has(t.ck));
+  if (need.length) {
+    const safe = k => k.replace(/[^A-Za-z0-9 ]/g, '.');
+    const q = '[out:json][timeout:20];(' + need.map(t =>
+      `nwr(around:150,${t.la},${t.lo})["name"~"${safe(t.k)}",i];`).join('') + ');out center 30;';
+    let els;
+    try { els = await overpassFetch(q, 0); } catch (e) { return; }
+    for (const t of need) {
+      const re = new RegExp(safe(t.k), 'i');
+      let best = null, bestD = Infinity;
+      for (const e of els) {
+        const tg = e.tags || {};
+        if (!re.test(tg.name || tg.brand || '')) continue;
+        const la = e.lat !== undefined ? e.lat : (e.center || {}).lat;
+        const lo = e.lon !== undefined ? e.lon : (e.center || {}).lon;
+        if (la === undefined) continue;
+        const d = hav(+t.la, +t.lo, la, lo);
+        if (d < bestD && d < 150) { bestD = d; best = tg; }
+      }
+      poiDetailCache.set(t.ck, placeDetail(best, t.k, t.la, t.lo));
+    }
+  }
+  if (!el.isConnected) return;
+  for (const t of todo) {
+    const p = poiDetailCache.get(t.ck), oh = p && hoursNow(p.hours);
+    if (!oh || t.c.querySelector('.ohs')) continue;
+    t.c.insertAdjacentHTML('beforeend', `<i class="ohs ${oh.open ? 'y' : 'n'}" title="${esc(oh.note || '')}">${oh.open ? 'open' : 'closed'}</i>`);
+  }
 }
 function poiDetailHtml(p) {
   if (!p) return '<div class="pp-det">No extra details in OpenStreetMap for this one.</div>';
