@@ -91,7 +91,7 @@ def trip_cards(tmp, only):
     """One card per cached road trip, keyed by the same slug build.py uses."""
     path = os.path.join(HERE, "data", "trips.json")
     if not os.path.exists(path):
-        print("  (no data/trips.json — run make_trips.py first)"); return 0
+        print("  (no data/trips.json — run tools/add_trips.py first)"); return 0
     made = 0
     for t in json.load(open(path)).values():
         a, b = t["a"].split(",")[0], t["b"].split(",")[0]
