@@ -713,7 +713,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   .pk h3{touch-action:none}
 }
 .pk.dragging{transition:none!important}
-.pk h3{font-size:18px;font-weight:800;padding:18px 16px 12px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
+.pk h3{font-family:var(--display);font-size:20px;font-weight:700;padding:18px 16px 12px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
 .pk h3 span{flex:1}
 .pk .subnote{padding:0 16px 12px;color:var(--dim);font-size:12.5px;line-height:1.5}
 .pk .searchbox{display:flex;align-items:center;gap:9px;margin:0 16px 12px;background:var(--surface2);
@@ -903,6 +903,10 @@ html.native .splash-mark svg{width:96px;height:96px}
   .pk{max-width:560px;max-height:78vh;border-radius:20px;border-bottom:1px solid var(--line)}
 }
 @media(min-width:1500px){ #app{--side:440px} }
+/* The phone rule that keeps the area card clear of the floating map buttons does not apply
+   beside a sidebar -- and car mode forces the touch rules on, which squeezed the card to
+   "Los Angeles, ..." on the car's screen. */
+@media(min-width:900px){ #centerCard.show{margin-right:0!important} }
 
 /* touch screens (phones, and the Tesla centre screen): bigger hit areas */
 @media(pointer:coarse){
