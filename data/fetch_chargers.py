@@ -19,7 +19,7 @@ HOST = "https://developer.nlr.gov"
 
 # AFDC network code -> (display name, marker colour)
 # The colour here is legacy: the app draws two kinds of marker (Tesla's T disc, one green
-# for everything else -- netCol/netDot in index.html) and ignores it. No pure red.
+# for everything else -- netCol/netDot in index.html) and ignores it.
 NETWORKS = {
     "Tesla":               ("Tesla Supercharger", "#ff6b5a"),
     "Tesla Destination":   ("Tesla Destination",  "#ff6b5a"),

@@ -318,10 +318,10 @@ html.native .splash-mark svg{width:96px;height:96px}
 #legendList div[data-netall]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
 #legendList div[data-netall].on{background:var(--surface2);color:var(--txt);font-weight:700}
 #legendList .lg.ring{border:2px solid var(--accent);background:transparent}
-/* Tesla's mark wherever a network is named: the map's dark disc with a T. */
-.tdot{display:inline-grid;place-items:center;border-radius:50%;background:#1f2937;color:#fff;
+/* Tesla's mark wherever a network is named: the map's red disc with a T. */
+.tdot{display:inline-grid;place-items:center;border-radius:50%;background:#e31937;color:#fff;
   font:800 9px/1 var(--sans);flex-shrink:0}
-:root[data-theme="dark"] .tdot{background:#f1f5f9;color:#0e1116}
+:root[data-theme="dark"] .tdot{background:#e82127}
 .netdot.tdot{width:12px;height:12px;font-size:8px;margin-right:5px;vertical-align:-1px}
 .pp-nn .dot.tdot{width:14px;height:14px;font-size:9px}
 #legendList span,#filtNetList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1094,7 +1094,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   The route is drawn first, then we ask OpenStreetMap what is within a walk of each stop on it, so the answer is
   every charger on the way that has one — not just the ones near where the map happens to be pointing.</p>
   <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
-  <p>On the map, a dark disc with a <b>T</b> is a Tesla Supercharger and a green dot is any other fast-charging network; the network's name is on every stop. No red anywhere, because a red map pin reads as "out of service" when in fact every stop here is a live charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
+  <p>On the map, a red disc with a <b>T</b> is a Tesla Supercharger and a green dot is any other fast-charging network; the network's name is on every stop. Every stop shown is a live, public charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
   <p><b>What the wait is good for:</b> when you've set your car we compare the estimated charge time to
@@ -1968,11 +1968,12 @@ function syncBasePref() {
     b.classList.toggle('on', b.dataset.base === basePref));
 }
 /* Two kinds of fast charger on the map, not twenty: a colour per network meant a legend
-   to decode before the map said anything. Tesla gets its own marker (a dark disc with a
-   T), everything else one green. The network's name is still on every row and card.
-   No red: users read red map pins as "out of service". */
-const NETCOL_T = { light: '#1f2937', dark: '#f1f5f9' };     // Tesla disc
-const NETINK_T = { light: '#ffffff', dark: '#0e1116' };     // the T on it
+   to decode before the map said anything. Tesla gets its own marker (a disc in Tesla's red
+   with a white T -- not Tesla's logo, which is their trademark), everything else one green.
+   The network's name is still on every row and card. Red is Tesla's alone: with the T in
+   it, it reads as the brand rather than as "out of service". */
+const NETCOL_T = { light: '#e31937', dark: '#e82127' };     // Tesla disc: Tesla's red, so it reads as Tesla at a glance
+const NETINK_T = { light: '#ffffff', dark: '#ffffff' };     // the T on it
 const NETCOL_O = { light: '#16a34a', dark: '#4ade80' };     // every other network
 const netCol = s => (isTesla(s) ? NETCOL_T : NETCOL_O)[curDark ? 'dark' : 'light'];
 /* The dot next to a network name in rows, cards and the legend: the same two marks. */
