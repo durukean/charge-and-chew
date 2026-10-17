@@ -91,14 +91,14 @@ CSS = """
    data-theme; with no choice the OS decides. */
 :root[data-theme="dark"]{
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
-  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#968d83;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
+  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
   --chew:#fbbf24;--chew-bg:rgba(251,191,36,.13);
   --good:#3ddc84;--good-bg:rgba(61,220,132,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
   --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
 }
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
-  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#968d83;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
+  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
   --chew:#fbbf24;--chew-bg:rgba(251,191,36,.13);
   --good:#3ddc84;--good-bg:rgba(61,220,132,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
   --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
