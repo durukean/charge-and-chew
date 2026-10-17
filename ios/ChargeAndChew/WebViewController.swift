@@ -16,8 +16,8 @@ final class WebViewController: UIViewController {
     private static let siteHost = "chargeandchew.com"
     private var webRoot: URL? { Bundle.main.url(forResource: "Web", withExtension: nil) }
 
-    private static let lightBG = UIColor(red: 0.96, green: 0.96, blue: 0.97, alpha: 1)
-    private static let darkBG  = UIColor(red: 0.04, green: 0.05, blue: 0.07, alpha: 1)
+    private static let lightBG = UIColor(red: 0.965, green: 0.953, blue: 0.933, alpha: 1)   // #f6f3ee
+    private static let darkBG  = UIColor(red: 0.071, green: 0.067, blue: 0.063, alpha: 1)   // #121110
     /// The theme the page chose last time. The page follows the sun, not the system, so the
     /// system setting is the wrong guess for the splash about half the time.
     private static let lastDarkKey = "cc.lastDark"
