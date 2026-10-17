@@ -408,6 +408,9 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-nb .ohs{font-style:normal;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
 .pp-nb .ohs.y{color:var(--good);background:var(--good-bg)}
 .pp-nb .ohs.n{color:var(--dim);background:var(--surface3)}
+.pp-setcar{display:block;width:100%;text-align:left;background:none;border:0;padding:2px 0 8px;margin:0;cursor:pointer;
+  color:var(--dim);font:500 12px var(--sans)}
+.pp-setcar b{color:var(--accent);font-weight:700}
 .leaflet-container a.pp-nb{color:var(--txt)}   /* Leaflet paints every popup link blue */
 .pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
 .pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
@@ -1860,7 +1863,7 @@ function popupHtml(s) {
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}${route && route.mileAt && route.mileAt.has(s.id) ? `<span class="pp-mile">mile ${route.mileAt.get(s.id)} of ${Math.round(route.mi).toLocaleString('en-US')}</span>` : ''}</div>
-    ${carLine}
+    ${carLine || (s.lvl !== 2 && s.kw ? '<button type="button" class="pp-setcar" data-setcar>⏱ How long would I charge here? <b>Set your car</b></button>' : '')}
     ${warns.length ? `<div class="pp-warn1">${warns[0]}</div>` : ''}
     ${poiBlock}
     ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
@@ -2039,6 +2042,8 @@ map.on('popupopen', e => {
     b.setAttribute('aria-pressed', String(on));
     b.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + ((byId[+b.dataset.fav] || {}).name || 'this stop'));
   };
+  const sc = el && el.querySelector('[data-setcar]');
+  if (sc) sc.onclick = () => { track('setcar-from-stop'); map.closePopup(); openCarPicker(); };
   const more = el && el.querySelector('[data-more]');
   if (more) more.onclick = () => {
     const box = el.querySelector('.pp-more'), open = box.hidden;
@@ -2061,7 +2066,7 @@ map.on('popupopen', e => {
   };
   track('open-charger');
   noteUse();
-  if (el) fillHours(el);
+  if (el) fillHours(el, e.popup._source && byId[e.popup._source._sid]);
   const src = e.popup._source;
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
@@ -5054,7 +5059,7 @@ function placeDetail(t, name, lat, lon) {
 /* "Is it open?" on the stop card's three places, without a tap: one OpenStreetMap query for
    all three (cached a week, like every lookup), each answered from the nearest element of
    that name. A place whose hours OSM doesn't list just shows no tag -- never a guess. */
-async function fillHours(el) {
+async function fillHours(el, stop) {
   const todo = [...el.querySelectorAll('.pp-nb[data-hk]')].map(c => {
     const [la, lo] = c.dataset.at.split(',');
     return { c, k: c.dataset.hk, la, lo, ck: c.dataset.hk + '@' + la + ',' + lo };
@@ -5082,10 +5087,17 @@ async function fillHours(el) {
     }
   }
   if (!el.isConnected) return;
+  /* On a route the question is whether it is open when you get there, not now: a stop at
+     mile 180 is three hours away. Arrival is estimated from the route's average speed. */
+  const ahead = stop && route && route.mileAt && route.mileAt.has(stop.id) && route.mi > 0
+    ? route.mileAt.get(stop.id) * route.hr / route.mi : 0;
+  const when = ahead >= 0.5 ? new Date(Date.now() + ahead * 3600e3) : null;
+  const at = when ? when.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '';
   for (const t of todo) {
-    const p = poiDetailCache.get(t.ck), oh = p && hoursNow(p.hours);
+    const p = poiDetailCache.get(t.ck), oh = p && hoursNow(p.hours, when || undefined);
     if (!oh || t.c.querySelector('.ohs')) continue;
-    t.c.insertAdjacentHTML('beforeend', `<i class="ohs ${oh.open ? 'y' : 'n'}" title="${esc(oh.note || '')}">${oh.open ? 'open' : 'closed'}</i>`);
+    const word = oh.open ? 'open' : 'closed';
+    t.c.insertAdjacentHTML('beforeend', `<i class="ohs ${oh.open ? 'y' : 'n'}" title="${esc(when ? word + ' when you arrive, about ' + at : oh.note || '')}">${when ? word + ' ~' + at : word}</i>`);
   }
 }
 function poiDetailHtml(p) {

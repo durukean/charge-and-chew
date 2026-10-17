@@ -318,7 +318,7 @@ check("$('list').innerHTML = gapNote() + " in _html and "function gapNote()" in 
 check("gapNote() + breaksCard(vis) + vis.slice(0, LIST_MAX)" in _html and "function breakPicks(vis)" in _html,
       "long routes no longer suggest where to break the drive")
 # The stop card says which of its places are open, in one cached lookup per stop.
-check(re.search(r"(?m)^  if \(el\) fillHours\(el\);", _html) is not None and "async function fillHours(el)" in _html,
+check(re.search(r"(?m)^  if \(el\) fillHours\(el[,)]", _html) is not None and "async function fillHours(el" in _html,
       "the stop card no longer shows whether its places are open")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
