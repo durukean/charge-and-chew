@@ -5828,7 +5828,10 @@ else {
        gives the map a ~1:4 aspect no country fits into, and hides the results that are the
        actual point. Open the sheet first so the map has its final size, THEN frame the
        country — fitting first leaves the US sitting low once the sheet takes its space. */
-    if (!wideLayout()) { setSheet('mid'); setTimeout(fitUS, 460); }   // sheet animates for ~300ms
+    // ...unless the visitor's location came back first: in the app it arrives within that
+    // delay, and the late US fit then threw the map back to the whole country around a
+    // list of local stops.
+    if (!wideLayout()) { setSheet('mid'); setTimeout(() => { if (!center && !route) fitUS(); }, 460); }   // sheet animates for ~300ms
     else fitUS();
   }
   startFromLocation(restored);

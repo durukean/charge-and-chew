@@ -320,6 +320,9 @@ check("gapNote() + breaksCard(vis) + vis.slice(0, LIST_MAX)" in _html and "funct
 # The stop card says which of its places are open, in one cached lookup per stop.
 check(re.search(r"(?m)^  if \(el\) fillHours\(el[,)]", _html) is not None and "async function fillHours(el" in _html,
       "the stop card no longer shows whether its places are open")
+# The delayed national fit at boot must not override a location that arrived first.
+check("setTimeout(() => { if (!center && !route) fitUS(); }, 460)" in _html,
+      "the boot-time US fit can override the visitor's location again (map on the whole US, list local)")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.
