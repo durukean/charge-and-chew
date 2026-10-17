@@ -596,8 +596,12 @@ html.native .splash-mark svg{width:96px;height:96px}
 :root[data-theme="dark"] .wring.none{background:var(--surface3);color:var(--dim2)}
 .row .body{flex:1;min-width:0}
 .row .n{display:flex;gap:6px;align-items:flex-start}
-.row .n b,.row .n .rowname{font-size:14.5px;font-weight:700;flex:1;min-width:0;overflow:hidden;line-height:1.3;
-  letter-spacing:-.2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.row.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.row .n b,.row .n .rowname{font-size:14.5px;font-weight:700;flex:1;min-width:0;line-height:1.3;letter-spacing:-.2px}
+/* The clamp sits on the text, not the button: a <button> ignores line-clamp, so long names
+   were cut off mid-word with no ellipsis. */
+.row .n b,.row .n .rowname>span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow-wrap:break-word}
 /* The station name is the row's keyboard handle: a real button, styled as the plain title it
    replaced. Rows were click-only, so a keyboard user could not open a single charger. */
 .row .n .rowname{background:none;border:0;padding:0;margin:0;font-family:inherit;color:inherit;
@@ -620,7 +624,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .sub{color:var(--dim2);font-size:11.5px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
 .row .sub .st{font-weight:600;color:var(--dim)}
 .row .sub .where{min-width:0}
-.row .sub .nw{white-space:nowrap}   /* "0.3 mi" and "away" landed on separate lines */
+.row .sub .nw{white-space:nowrap}
+.nocaps{text-transform:none}   /* "0.3 mi" and "away" landed on separate lines */
 .row .sub .tag,.row .sub .cbadge{margin-left:0}
 .row .sub .netdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:10.5px;
@@ -805,6 +810,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   pointer-events:none;transition:.25s;max-width:min(90vw,420px);width:max-content;text-align:center;line-height:1.35}
 /* Long toasts wrap: the cut-off half was usually the instruction ("…or tap the map"). */
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.top{bottom:auto;top:calc(env(safe-area-inset-top) + 16px)}
 
 /* ═══ wide screens: sidebar + map (also how the Tesla in-car browser sees it) ═══ */
 @media(min-width:900px){
@@ -1039,7 +1045,7 @@ if (document.documentElement.classList.contains('car')) {
     <h3><span>Filters</span><button class="iconbtn sm" id="filtClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="pkgrid">
     <div class="fgroup">
-      <label>Minimum charging speed (kW)</label>
+      <label>Minimum charging speed <span class="nocaps">(kW)</span></label>
       <div class="seg wide" data-f="kw">
         <button data-v="0" class="on">Any</button><button data-v="50">50+</button><button data-v="150">150+</button><button data-v="250">250+</button><button data-v="350">350+</button>
       </div>
@@ -1127,7 +1133,7 @@ if (document.documentElement.classList.contains('car')) {
   <p><b>A category along a drive:</b> the two combine — <em>"LA to Las Vegas near ice cream"</em>, <em>"Denver to Moab with a coffee shop"</em>.
   The route is drawn first, then we ask OpenStreetMap what is within a walk of each stop on it, so the answer is
   every charger on the way that has one — not just the ones near where the map happens to be pointing.</p>
-  <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ⭐ to save a stop.</p>
+  <p><b>How to use it:</b> leave every chain unselected to browse it as a plain map of all US fast chargers, set your car for connector compatibility and charge-time estimates, tap chains to filter, search a place or drop a pin to explore an area, or plan a route to see every matching stop along the way. Tap ☆ on a stop to save it.</p>
   <p>On the map, each big network has its own mark in its own colour — Tesla's red T, ChargePoint's orange C, Electrify America's EA, EVgo's e, and so on (the key is bottom left) — and smaller networks share a plain slate dot. These are our own marks, not the networks' logos, and we're not affiliated with any of them. Every stop shown is a live, public charger. We drop listings whose reported power is under 24&nbsp;kW, heavy-truck-only depots, duplicates and anything marked private or non-public, and we flag dealership lots because access and hours are often restricted. A few stations report no power figure at all; we keep those and simply leave the kW blank rather than guess.</p>
   <p>Basemap tiles come from Esri. Charger data from the US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> database; chain locations from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Walk times are straight-line estimates at ~3&nbsp;mph and charge times are rough estimates — always verify before relying on them. Coverage and pricing come from public data and can be out of date.</p>
   <p><b>Isolated stops:</b> surveys consistently find most EV drivers will detour for a charger that isn't in an empty, unlit lot. We flag stops with nothing we track within a 10-minute walk so you can judge — it's a proxy from our own data, not a safety rating.</p>
@@ -1318,6 +1324,7 @@ let seedFor = null;
    is dropped: searching Austin (slow) then Denver (fast) used to end on Austin, and a route
    finishing late wiped out a newer search. */
 let navGen = 0;
+let openStopId = null;   // the stop whose panel is open (its list row is marked)
 let routeFromMe = false;   // the route's start was filled from the device location
 // Live category lookup generation. Up here, not beside runLivePoi: setCenter() bumps it and
 // can run long before that line does.
@@ -1595,6 +1602,8 @@ function safeUrl(u) {
 function toast(msg) {
   native('log', { msg: 'toast: ' + String(arguments[0]) });   // phone-side console
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  // With Filters or a picker open the toast sat on its Reset / Show results buttons.
+  t.classList.toggle('top', !!document.querySelector('.modal.show'));
   /* The update prompt makes this element tappable and sets a reload handler, and its own
      cleanup lives in the timer cleared below. Any later toast used to cancel that cleanup,
      leaving an invisible, tappable reload button over the results list. Every ordinary
@@ -1972,6 +1981,15 @@ map.on('popupclose', clearPOIs);
    what you are looking at, so get them out of the way. */
 map.on('popupopen', () => document.getElementById('app').classList.add('popup-open'));
 map.on('popupclose', () => document.getElementById('app').classList.remove('popup-open'));
+/* The list row of the open stop is marked, so on a wide screen you can see which entry the
+   panel on the map belongs to. */
+function markOpenRow() {
+  document.querySelectorAll('#list .row.sel').forEach(r => r.classList.remove('sel'));
+  const r = openStopId != null && document.querySelector(`#list .row[data-id="${openStopId}"]`);
+  if (r) r.classList.add('sel');
+}
+map.on('popupopen', e => { const src = e.popup._source; openStopId = src && src._sid != null ? src._sid : null; markOpenRow(); });
+map.on('popupclose', () => { openStopId = null; markOpenRow(); });
 
 function toggleFav(id) {
   track('save-stop');
@@ -2447,6 +2465,12 @@ function renderChips(keep) {
   if (keep) $('chiprow').scrollLeft = keep;
 }
 let lastActiveSig = '', alignActiveChip = false;
+$('chiprow').addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;   // a trackpad already scrolls sideways
+  const row = $('chiprow');
+  if (row.scrollWidth <= row.clientWidth) return;
+  row.scrollLeft += e.deltaY; alignActiveChip = false; e.preventDefault();
+}, { passive: false });
 ['pointerdown', 'wheel', 'touchstart'].forEach(ev =>
   $('chiprow').addEventListener(ev, () => { alignActiveChip = false; }, { passive: true }));
 
@@ -2515,7 +2539,7 @@ function renderList(vis) {
       ? (favs.size
           ? `<div class="empty"><b>None of your ${favs.size} saved stop${favs.size === 1 ? ' is' : 's are'} in this area</b>
              <button class="fball" id="favAll">Show all saved stops</button></div>`
-          : '<div class="empty"><b>No saved stops yet</b>Tap ⭐ on any stop to save it here.</div>')
+          : '<div class="empty"><b>No saved stops yet</b>Tap ☆ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
     const wr = $('widenR');
     if (wr) wr.onclick = () => { const b = $('ccRad').querySelector(`button[data-mi="${radiusMi < 25 ? 25 : 50}"]`); if (b) b.click(); };
@@ -2557,10 +2581,10 @@ function renderList(vis) {
       : (kwFor(s, F.plug) ? `<s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))]}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug)} kW</s>` : '');
     const stallTxt = s.stalls && !(s.stalls === 1 && s.lvl !== 2)
       ? `${s.stalls} ${s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : 'stalls'}` : '';
-    return `<div class="row" data-id="${s.id}">
+    return `<div class="row${s.id === openStopId ? ' sel' : ''}" data-id="${s.id}">
       ${lead}
       <div class="body">
-        <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map">${esc(s.name)}</button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
+        <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map"><span>${esc(s.name)}</span></button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
         <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${netDot(s, 'netdot')}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
@@ -2713,7 +2737,12 @@ $('savedChip').onclick = () => {
   cat = cat === 'fav' ? 'all' : 'fav';
   $('savedChip').classList.toggle('on', cat === 'fav');
   render();
-  if (cat === 'fav' && favs.size) setSheet('mid');
+  if (cat === 'fav' && favs.size) {
+    setSheet('mid');
+    // With no area or route, frame the saved stops: the map otherwise stayed where it was,
+    // often with none of them in view.
+    if (!center && !route && !stateScope) fitToResults();
+  }
 };
 
 /* ───────── car profile ───────── */
@@ -2725,7 +2754,7 @@ function renderCarBar() {
   bar.className = 'show';
   bar.innerHTML =
     `<button class="cartag" id="carEdit">🚗 <span class="m">${esc(car)}</span>
-      <span class="spec">${c[1]}kW · ${CONN_LABEL[c[2]]}</span></button>
+      <span class="spec">${c[1]} kW · ${CONN_LABEL[c[2]]}</span></button>
      <button class="mine ${onlyMine ? 'on' : ''}" id="mineToggle">⚡ Fits my car</button>`;
   $('carBtn').classList.add('on');
   $('carEdit').onclick = openCarPicker;
@@ -2747,7 +2776,7 @@ function drawCarGrid() {
     const c = CARS[k];
     return `<button class="caritem ${k === car ? 'on' : ''}" data-car="${esc(k)}">
       <span class="m">${esc(k)}</span>
-      <span class="spec">${c[0]}kWh · ${c[1]}kW · ${CONN_LABEL[c[2]]}</span></button>`;
+      <span class="spec">${c[0]} kWh · ${c[1]} kW · ${CONN_LABEL[c[2]]}</span></button>`;
   }).join('') || '<div class="empty">No match. Pick "Other CCS EV" or "Other Tesla/NACS EV".</div>';
   $('carGrid').querySelectorAll('[data-car]').forEach(b => b.onclick = () => {
     track('car-set');
