@@ -2056,6 +2056,7 @@ map.on('popupopen', e => {
     if (!box.hidden) track('car-navigate');
   };
   track('open-charger');
+  noteUse();
   const src = e.popup._source;
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
 });
@@ -2067,6 +2068,27 @@ map.on('popupopen', () => document.getElementById('app').classList.add('popup-op
 map.on('popupclose', () => document.getElementById('app').classList.remove('popup-open'));
 /* The list row of the open stop is marked, so on a wide screen you can see which entry the
    panel on the map belongs to. */
+/* Ask for an App Store rating once, after the app has plainly been useful: stops opened on
+   at least two different days, five in all, and not mid-task -- the ask waits for the
+   panel to close. iOS decides whether to actually show it (at most three times a year). */
+let reviewQueued = false;
+function noteUse() {
+  if (!NATIVE) return;
+  try {
+    const n = +(localStorage.getItem('cc_opens') || 0) + 1;
+    localStorage.setItem('cc_opens', String(n));
+    const day = new Date().toISOString().slice(0, 10);
+    const days = (localStorage.getItem('cc_days') || '').split(',').filter(Boolean);
+    if (!days.includes(day)) { days.push(day); localStorage.setItem('cc_days', days.slice(-7).join(',')); }
+    if (n >= 5 && days.length >= 2 && !localStorage.getItem('cc_review_asked') && !reviewQueued) {
+      reviewQueued = true;
+      map.once('popupclose', () => setTimeout(() => {
+        try { localStorage.setItem('cc_review_asked', day); } catch (e) {}
+        native('review'); track('review-ask');
+      }, 900));
+    }
+  } catch (e) { /* storage blocked: never ask */ }
+}
 function markOpenRow() {
   document.querySelectorAll('#list .row.sel').forEach(r => r.classList.remove('sel'));
   const r = openStopId != null && document.querySelector(`#list .row[data-id="${openStopId}"]`);

@@ -64,6 +64,8 @@ final class NativeBridge: NSObject {
     var onLocationDenied: (() -> Void)?
     /// The page could not load its data (missing, truncated or a format it does not read).
     var onDataFailed: ((String) -> Void)?
+    /// The page decided the app has been useful enough to ask for a rating.
+    var onReview: (() -> Void)?
     private let haptic = UIImpactFeedbackGenerator(style: .light)
     /// Requests parked until the user answers the permission sheet.
     private var waiting: [(id: Int, watch: Bool)] = []
@@ -142,6 +144,8 @@ extension NativeBridge: WKScriptMessageHandler {
             haptic.impactOccurred()
         case "log":
             Diag.log("js: \(opts["msg"] as? String ?? "")")
+        case "review":
+            onReview?()
         case "dataFailed":
             onDataFailed?(opts["why"] as? String ?? "unknown")
         default: break

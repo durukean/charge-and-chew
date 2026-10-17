@@ -2,6 +2,7 @@ import UIKit
 import WebKit
 import SafariServices
 import LinkPresentation
+import StoreKit
 
 /// Hosts the app. The web layer is the UI; everything native lives behind it -- the loopback
 /// server, CoreLocation, the share sheet, haptics, and the data refresh.
@@ -89,6 +90,13 @@ final class WebViewController: UIViewController {
         bridge.onShare = { [weak self] url, title in self?.share(url, title: title) }
         bridge.onTheme = { [weak self] isDark in self?.applyTheme(dark: isDark) }
         bridge.onLocationDenied = { [weak self] in self?.offerLocationSettings() }
+        // iOS shows the rating sheet at most three times a year and may skip it entirely;
+        // the page only asks once, after real use.
+        bridge.onReview = { [weak self] in
+            guard let scene = self?.view.window?.windowScene else { Diag.log("review: no scene"); return }
+            Diag.log("review: requested")
+            AppStore.requestReview(in: scene)
+        }
         // A downloaded data.js the page cannot read: drop it and reload from the bundled copy.
         // Reloads only if there WAS a download to drop, so a broken bundle cannot loop.
         bridge.onDataFailed = { [weak self] why in
