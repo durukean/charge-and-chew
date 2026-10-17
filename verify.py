@@ -303,6 +303,11 @@ check(re.search(r"markOf\(s\) \? new MarkMarker\(", _html) is not None
 check(re.search(r"/\\bTesla\\/\|QtCarBrowser/\.test\(navigator\.userAgent\)", _html) is not None
       and "r.media.mediaText = 'all'" in _html,
       "car mode is gone — the Tesla browser gets desktop-sized controls again")
+# A typed search drops what the previous search set and this one doesn't name ("chargers in
+# sf" after "starbucks" kept Starbucks); anything changed by hand since is kept.
+check(re.search(r"if \(!p\.chains\.length && !p\.anyCat && q0\.chains && chainSig\(\) === q0\.chains\) \{ active\.clear\(\);", _html) is not None
+      and "lastQuerySet = {" in _html,
+      "a new search silently keeps the previous search's chain/plug filters again")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

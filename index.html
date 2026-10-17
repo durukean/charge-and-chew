@@ -1386,6 +1386,7 @@ let seedFor = null;
    finishing late wiped out a newer search. */
 let navGen = 0;
 let openStopId = null;   // the stop whose panel is open (its list row is marked)
+let lastQuerySet = null; // what the last typed search set, so the next one can undo it
 let routeFromMe = false;   // the route's start was filled from the device location
 // Live category lookup generation. Up here, not beside runLivePoi: setCenter() bumps it and
 // can run long before that line does.
@@ -3698,6 +3699,24 @@ $('placeIn').addEventListener('keydown', async e => {
     $('fromIn').value = trip.from; $('toIn').value = trip.to;
   }
 
+  /* A filter the LAST search set is dropped when this one doesn't name it: "chargers in sf"
+     after "starbucks" kept Starbucks, and a drive after "ccs near in n out" quietly stayed
+     CCS-only. Only if it is still exactly what that search left: anything chosen or changed
+     by hand since (a chip, Filters) is the user's and stays. */
+  const q0 = lastQuerySet;
+  const chainSig = () => anyCat ? 'any:' + anyCat : [...active].sort().join('|');
+  if (q0) {
+    let fChanged = false;
+    if (!p.chains.length && !p.anyCat && q0.chains && chainSig() === q0.chains) { active.clear(); anyCat = null; }
+    if (!p.net && q0.net && (netPick || netFilter) === q0.net) {
+      netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg();
+    }
+    if (!p.plug && q0.plug && F.plug === q0.plug) { F.plug = FDEF.plug; fChanged = true; }
+    if (!p.kw && q0.kw && F.kw === q0.kw) { F.kw = FDEF.kw; fChanged = true; }
+    if (!p.free && q0.free && F.free) { F.free = FDEF.free; fChanged = true; }
+    if (fChanged) { localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
+  }
+
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {
     active.clear(); anyCat = null;
@@ -3724,6 +3743,10 @@ $('placeIn').addEventListener('keydown', async e => {
   if (p.kw && F.kw !== p.kw) {
     F.kw = p.kw; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
   }
+  lastQuerySet = {
+    chains: p.chains.length || p.anyCat ? chainSig() : null,
+    net: p.net ? (netPick || netFilter) : null,
+    plug: p.plug || null, kw: p.kw || null, free: !!p.free };
   /* Both after the chain, network and filter handling above: they used to return before it,
      so "on i-5 with in n out" and "on my way to vegas with in n out" dropped the chain. */
   if (p.hwy && !trip) {
