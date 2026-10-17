@@ -1889,7 +1889,8 @@ function popupHtml(s) {
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}${route && route.mileAt && route.mileAt.has(s.id) ? `<span class="pp-mile">mile ${route.mileAt.get(s.id)} of ${Math.round(route.mi).toLocaleString('en-US')}</span>` : ''}</div>
-    ${carLine || (s.lvl !== 2 && s.kw ? '<button type="button" class="pp-setcar" data-setcar>How long would I charge here? <b>Set your car</b></button>' : '')}
+    ${carLine ? carLine + (cm != null ? dwellAdvice(s, cm) : '')
+      : (s.lvl !== 2 && s.kw ? '<button type="button" class="pp-setcar" data-setcar>How long would I charge here? <b>Set your car</b></button>' : '')}
     ${warns.length ? `<div class="pp-warn1">${warns[0]}</div>` : ''}
     ${poiBlock}
     ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
@@ -1909,7 +1910,6 @@ function popupHtml(s) {
         `<span><b>${PLUG_NAME[b]}</b> ${kwFor(s, b) ? kwFor(s, b) + ' kW' : 'kW not listed'}</span>`).join('')}</div>
       ${s.street ? `<div class="pp-meta">${esc(s.street)}, ${esc(s.city)}, ${s.st}</div>` : ''}
       ${warns.slice(1).map(w => `<div class="pp-warn1">${w}</div>`).join('')}
-      ${cm != null ? dwellAdvice(s, cm) : ''}
       ${ent.length ? `<div class="pp-h">Within a 10-minute walk</div><div class="pp-list">${rows}</div>` : ''}
       <div class="pp-note">Live availability and prices aren\u2019t shown here — check the network\u2019s own app before you rely on a stop.</div>
       <div class="pp-sec">
