@@ -311,6 +311,9 @@ check(re.search(r"if \(!p\.chains\.length && !p\.anyCat && q0\.chains && chainSi
 # Route stops lead with their mile marker along the drive, not a list index.
 check("const mileAt = new Map();" in _html and 'class="idx mi"' in _html,
       "route rows lost their mile markers")
+# A route says where its longest charger gap is (geography, never a charging plan).
+check("$('list').innerHTML = gapNote() + vis.slice(0, LIST_MAX)" in _html and "function gapNote()" in _html,
+      "route lists no longer flag the longest stretch without a fast charger")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

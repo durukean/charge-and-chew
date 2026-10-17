@@ -592,6 +592,9 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .idx.mi{width:48px;height:48px;border-radius:14px;display:flex;flex-direction:column;align-items:center;
   justify-content:center;margin-top:0;gap:0}
 .row .idx.mi b{font:800 13px/1.1 var(--mono)}
+.gapnote{margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);
+  font-size:12.5px;line-height:1.45}
+.gapnote b{font-weight:800}
 .row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
 .wring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;background:var(--good-bg);color:var(--good);gap:0}
@@ -2615,7 +2618,7 @@ function renderList(vis) {
     return;
   }
   const showIdx = !!route;
-  $('list').innerHTML = vis.slice(0, LIST_MAX).map((s, i) => {
+  $('list').innerHTML = gapNote() + vis.slice(0, LIST_MAX).map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
@@ -5197,6 +5200,26 @@ function applyCorridor(verts, mi, hr, hwy) {
   showRouteSummary();
   render(); setSheet('mid'); syncUrl();
   settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
+}
+
+/* The longest stretch of the route with no fast charger you could use (any network, the
+   plug filter respected; chain filters ignored, since a charger is a charger when you need
+   one). Geography, not a charging plan: it says where the gap is, never when to charge. */
+function gapNote() {
+  if (!route || !route.mileAt) return '';
+  const ms = [];
+  for (const [id, m] of route.mileAt) {
+    const s = byId[id];
+    if (s && s.lvl !== 2 && (!F.plug || (s.conn & F.plug))) ms.push(m);
+  }
+  ms.sort((a, b) => a - b);
+  const end = Math.round(route.mi);
+  let prev = 0, g = { len: 0, from: 0, to: 0 };
+  for (const m of ms.concat(end)) { if (m - prev > g.len) g = { len: m - prev, from: prev, to: m }; prev = m; }
+  if (g.len < 60) return '';
+  const where = g.from === 0 ? `from the start to mile ${g.to}`
+    : g.to === end ? `from mile ${g.from} to the end` : `between mile ${g.from} and mile ${g.to}`;
+  return `<div class="gapnote">Longest stretch with no ${F.plug ? PLUG_NAME[F.plug] + ' ' : ''}fast charger within ${corridorMi}\u00a0mi: <b>${g.len} mi</b>, ${where}.</div>`;
 }
 
 /* The folded route card: trip, numbers, Edit, and the x that clears it. Shown whenever a
