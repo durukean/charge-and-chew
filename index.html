@@ -352,8 +352,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 .mbtn{width:46px;height:46px;border-radius:16px;background:var(--surface);border:1px solid var(--line);
   color:var(--txt);display:grid;place-items:center;box-shadow:var(--sh);transition:.15s}
 .mbtn:active{transform:scale(.92)}
-.mbtn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.mbtn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mbtn.on{color:var(--accent);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--sh)}
+.mbtn.primary{color:var(--accent)}
 .mbtn.busy{animation:pulse 1s infinite}
 @keyframes pulse{50%{opacity:.5}}
 
@@ -399,7 +399,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-nn .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .pp-mile{font-weight:600;color:var(--accent)}
 .pp-warn1{color:var(--warn);font-size:12px;margin:0 0 8px;line-height:1.4}
-.pp-near{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 2px}
+.pp-near{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 2px}
 .pp-nb{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--line);
   border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none;
   max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -491,8 +491,11 @@ html.native .splash-mark svg{width:96px;height:96px}
   #app.phone #legend{display:none}
   #app.phone .leaflet-control-attribution{max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
   #app.phone .sheethead{padding-bottom:4px}
-  #app.phone #sheet #centerCard.show{margin:0 12px 6px;padding:4px 6px 4px 12px;border-radius:12px;box-shadow:none;
-    background:var(--surface2);animation:none;gap:8px}
+  /* The area is a line under the count, not a second card stacked on the sheet. */
+  #app.phone #sheet #centerCard.show{margin:-2px 12px 6px;padding:0 0 0 2px;border-radius:0;box-shadow:none;
+    background:none;border:0;animation:none;gap:8px}
+  #app.phone #sheet #centerCard .ic{color:var(--dim)}
+  #app.phone #sheet #centerCard .lbl{font-weight:600;color:var(--dim)}
   #app.phone #sheet #centerCard .lbl{font-size:13px}
   #app.phone #sheet #centerCard .sub{display:none}      /* the title above already says it */
   #app.phone #sheet #centerCard .rad button{height:34px;padding:0 11px;font-size:12.5px}
@@ -596,7 +599,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   font-size:12px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:2px}
 /* On a route: the mile marker, the same footprint as the walk ring it replaces. */
 .row .idx.mi{width:48px;height:48px;border-radius:14px;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;margin-top:0;gap:0}
+  justify-content:center;margin-top:0;gap:0;
+  /* a tint, not a slab: a column of solid green squares outweighed the stops themselves */
+  background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent)}
 .row .idx.mi b{font:800 13px/1.1 var(--mono)}
 .gapnote{margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);
   font-size:12.5px;line-height:1.45}
@@ -615,6 +620,13 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk .bt span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(pointer:coarse){.brk{padding:12px 8px}}
 .row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
+/* The row's lead: the network's mark, as on the map. */
+.lmark{width:44px;flex-shrink:0;display:flex;justify-content:center;padding-top:1px}
+.lmark .lm{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.lmark .lm.bmark{font-size:15px}.lmark .lm.bmark.two{font-size:12px}
+.lmark .lm.other{background:var(--surface3);color:var(--dim)}
+.lmark .lm.l2{border:2.5px solid var(--accent);background:transparent}
+.ui-i{display:inline-block;vertical-align:-3px;flex-shrink:0}
 .wring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;background:var(--good-bg);color:var(--good);gap:0}
 .wring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
@@ -910,7 +922,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   .searchpill input,.rfield input,.pk .searchbox input{font-size:16px}
   #filtNetList div[data-net]{min-height:44px;padding:0 10px;font-size:13.5px}
   .pp-links a{padding:13px 8px}.pp-links a.rep{padding:13px 4px}.pp-links .pp-morebtn{padding:13px 18px}
-  .pp-nb{padding:9px 12px;font-size:13px}
+  .pp-nb{padding:8px 10px;font-size:12.5px}
   .pp-sec a{display:inline-block;padding:10px 0}
   .pp-poi-l a,.pp-det a{display:inline-block;padding:10px 0}
   #heroSkip{padding:14px 6px}
@@ -1849,8 +1861,8 @@ function popupHtml(s) {
     : kw ? `<s class="spd ${speedTier(kw)}" title="${TIER_NAME[speedTier(kw)]}">${kw} kW</s>` : '';
   const units = s.stalls ? s.stalls + ' ' + (s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : (s.stalls === 1 ? 'stall' : 'stalls')) : '';
   const warns = [
-    s.dlr ? '🏢 At a car dealership — access and hours may be restricted' : '',
-    s.stalls === 1 && s.lvl !== 2 ? '⏳ Single stall — if someone is plugged in, you wait' : ''].filter(Boolean);
+    s.dlr ? 'At a car dealership — access and hours may be restricted' : '',
+    s.stalls === 1 && s.lvl !== 2 ? 'Single stall — if someone is plugged in, you wait' : ''].filter(Boolean);
   // The three nearest places (the ones you searched for first), each a tap from its map page.
   const near = ent.slice(0, 3).map(([k, v]) => {
     const at = mLatLng(s, v), d = mDist(s, v);
@@ -1863,11 +1875,11 @@ function popupHtml(s) {
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}${route && route.mileAt && route.mileAt.has(s.id) ? `<span class="pp-mile">mile ${route.mileAt.get(s.id)} of ${Math.round(route.mi).toLocaleString('en-US')}</span>` : ''}</div>
-    ${carLine || (s.lvl !== 2 && s.kw ? '<button type="button" class="pp-setcar" data-setcar>⏱ How long would I charge here? <b>Set your car</b></button>' : '')}
+    ${carLine || (s.lvl !== 2 && s.kw ? '<button type="button" class="pp-setcar" data-setcar>How long would I charge here? <b>Set your car</b></button>' : '')}
     ${warns.length ? `<div class="pp-warn1">${warns[0]}</div>` : ''}
     ${poiBlock}
     ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
-      : '<div class="pp-warn1">🌙 Nothing we track within a 10-minute walk — likely an isolated stop</div>'}
+      : '<div class="pp-warn1">Nothing we track within a 10-minute walk — likely an isolated stop</div>'}
     <div class="pp-links">
       <button type="button" class="pp-morebtn" data-more aria-expanded="false">More</button>
       ${CAR ? '<button type="button" class="pp-navbtn" data-carnav>Navigate</button>'
@@ -1957,7 +1969,9 @@ function addMarker(s) {
   // registered BEFORE bindPopup so it runs before Leaflet's own click-to-open handler,
   // which is what makes the padding apply to map clicks as well as list taps
   m.on('click', () => popupPad(m));
-  m.bindPopup(() => popupHtml(s), { maxWidth: 300, autoPanPadding: [24, 24] });
+  // A floor on the width: sized to its content the card came out narrow enough to stack
+  // its place chips one per line.
+  m.bindPopup(() => popupHtml(s), { maxWidth: 300, minWidth: 268, autoPanPadding: [24, 24] });
   m._sid = s.id;
   mk[s.id] = m;
 }
@@ -2472,7 +2486,17 @@ const counts = {};
 for (const k in BRANDS) counts[k] = 0;
 for (const id in MATCH) for (const k in MATCH[id]) counts[k]++;
 const CHAIN_KEYS = Object.keys(BRANDS).filter(k => counts[k] > 0).sort((a, b) => counts[b] - counts[a]);
-const CAT_LABEL = { food: '🍴 Any food', store: '🛒 Any store' };
+const CAT_LABEL = { food: 'Any food', store: 'Any store' };
+/* Interface icons are line icons; emoji are kept for what they name (a chain). */
+const SVGI = d => `<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const CAT_ICON = {
+  food: SVGI('<path d="M7 3v8a2 2 0 0 0 2 2v8M7 3v5M11 3v5M9 3v5M17 3c-1.7 0-3 2-3 5s1.3 4 3 4v9"/>'),
+  store: SVGI('<path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>') };
+const AREA_ICON = {
+  me: SVGI('<circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="8"/>'),
+  pin: SVGI('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  place: SVGI('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>'),
+  state: SVGI('<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>') };
 const inCat = (k, c) => !!(BRANDS[k] && BRANDS[k].cat === c);
 const hasCat = (m, c) => { for (const k in m) if (inCat(k, c)) return true; return false; };
 const catCount = {};
@@ -2545,7 +2569,7 @@ function renderChips(keep) {
      actually have — naming a chain is the narrower, later thought. */
   $('catchips').innerHTML = (cat === 'fav' ? [] : ['food', 'store'])
     .map(c => `<button class="chip catchip ${anyCat === c ? 'on' : ''}" data-cat="${c}"
-      aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_LABEL[c]}
+      aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_ICON[c]} ${CAT_LABEL[c]}
       <span class="cnt">${chipCatCount(c).toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
@@ -2685,12 +2709,13 @@ function renderList(vis) {
       ? (cp === null
           ? `<span class="cbadge null">✕ no plug</span>`
           : `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : '⚡'} ~${cm}m</span>`) : '';
-    const bw = bestWalk(s);
     // On a route the lead is where the stop is on the drive, not its place in the list.
     const mile = showIdx && route.mileAt && route.mileAt.has(s.id) ? route.mileAt.get(s.id) : '?';
     const lead = showIdx ? `<div class="idx mi" title="Mile ${mile} of ${Math.round(route.mi)}"><span>mile</span><b>${mile}</b></div>`
-      : bw < 9e9 ? `<div class="wring" title="Walk to the nearest place, at least"><b>${walkMin(bw)}</b><span>min</span></div>`
-      : `<div class="wring none">⚡</div>`;
+      /* The row leads with whose charger it is -- the same mark as on the map -- rather than a
+         walk-time ring that repeated the times on the place chips below. */
+      : `<div class="lmark" title="${esc(s.net)}">${s.lvl === 2 ? '<span class="lm l2"></span>'
+          : MARKS[s.net] ? netDot(s, 'lm') : '<span class="lm other"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span>'}</div>`;
     /* Phone-first row: the name gets two lines (it used to be cut to ~12 characters, sharing
        its line with the speed badge and a full-height star column), the speed leads the
        detail line, and that line wraps instead of swallowing the distance and the tags. */
@@ -2703,7 +2728,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map"><span>${esc(s.name)}</span></button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${netDot(s, 'netdot')}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
+        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${showIdx ? netDot(s, 'netdot') : ''}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
     </div>`;
@@ -2981,10 +3006,10 @@ function setCenter(lat, lon, label, kind) {
   if (centerLayer) map.removeLayer(centerLayer);
   if (radiusLayer) map.removeLayer(radiusLayer);
   centerLayer = L.circleMarker([lat, lon], centerStyle(kind)).addTo(map);
-  radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: '#4c9dff', weight: 1.2,
-    opacity: .5, fillColor: '#4c9dff', fillOpacity: .045, interactive: false }).addTo(map);
+  radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: curDark ? '#8aa4c8' : '#5b7aa6', weight: 1.4,
+    opacity: .55, dashArray: '2 6', fill: false, interactive: false }).addTo(map);
   $('centerCard').classList.add('show');
-  $('ccIcon').textContent = kind === 'me' ? '🔵' : kind === 'pin' ? '📌' : '🔎';
+  $('ccIcon').innerHTML = AREA_ICON[kind === 'me' ? 'me' : kind === 'pin' ? 'pin' : 'place'];
   $('ccLabel').textContent = label;
   sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
   /* Remember where you were. Without this every visit restarted at the national view and
@@ -5742,7 +5767,7 @@ if (q.get('at')) {
       stateScope = st;
       $('centerCard').classList.add('show');
       $('centerCard').classList.add('statewide');
-      $('ccIcon').textContent = '🗺️';
+      $('ccIcon').innerHTML = AREA_ICON.state;
       $('ccLabel').textContent = STATE_NAME[st] || st;
       render(); setSheet('mid'); syncUrl();
       settleFit(() => L.latLngBounds(inState.map(s => [s.lat, s.lon])), [24, 24], 11);
