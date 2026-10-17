@@ -298,6 +298,11 @@ check(re.search(r"(?m)^  startFromLocation\(restored\);", _html) is not None,
 check(re.search(r"isTesla\(s\) && s\.lvl !== 2 \? new TeslaMarker\(", _html) is not None
       and "ctx.fillText('T'" in _html,
       "Tesla chargers lost their T marker — the map is back to a colour per network")
+# Car mode (the Tesla browser): detected from the user agent, and it switches on the touch and
+# reduced-motion rules whatever pointer the car reports.
+check(re.search(r"/\\bTesla\\/\|QtCarBrowser/\.test\(navigator\.userAgent\)", _html) is not None
+      and "r.media.mediaText = 'all'" in _html,
+      "car mode is gone — the Tesla browser gets desktop-sized controls again")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.
