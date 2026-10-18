@@ -90,14 +90,14 @@ try {
   --bg:#121110; --surface:#1b1a18; --surface2:#24221f; --surface3:#2e2b27;
   --line:#2c2925; --line2:#3b3732;
   --txt:#f4f1ec; --dim:#b3aba1; --dim2:#9f968c;
-  --accent:#3ddc84; --accent-ink:#0b1a10;
+  --accent:#34c97a; --accent-ink:#0b1a10;
   --chew:#fbbf24; --chew-bg:rgba(251,191,36,.13);
   --ink:#f4f1ec; --ink-on:#121110;
   --warn-ink:#231a05;
   --overlay:rgba(6,5,4,.72);
   --amber-text:#fbbf24;
   color-scheme:dark;
-  --good:#3ddc84; --good-bg:rgba(61,220,132,.13); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
+  --good:#34c97a; --good-bg:rgba(52,201,122,.13); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
   --bad:#f87171; --bad-bg:rgba(248,113,113,.13);
   --amber:#fbbf24; --star:#fbbf24;
   --glass:rgba(27,26,24,.9);
@@ -327,7 +327,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 #legendList div[data-net],#filtNetList div[data-net]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
 #filtNetList{display:flex;flex-direction:column;gap:2px}
 #legendList div[data-net].on,#filtNetList div[data-net].on{background:var(--surface2);color:var(--txt);font-weight:700}
-#legendList .lg,#filtNetList .lg{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+#legendList .lg,#filtNetList .lg{width:16px;height:16px;border-radius:50%;flex-shrink:0}
 #legendList div[data-netall]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
 #legendList div[data-netall].on{background:var(--surface2);color:var(--txt);font-weight:700}
 #legendList .lg.ring{border:2px solid var(--accent);background:transparent}
@@ -395,7 +395,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-chain{display:flex;align-items:baseline;gap:12px;padding:3px 0;font-size:12.5px}
 /* The name takes the slack, so the walk times line up in one column instead of floating. */
 .pp-chain>span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pp-chain .d{color:var(--dim);white-space:nowrap;font-family:var(--mono);font-size:11px}
+.pp-chain .d{color:var(--chew);white-space:nowrap;font-weight:700;font-size:11.5px}
 .pp-links{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;gap:8px}
 .pp-links a{flex:1;text-align:center;color:var(--txt);font-size:12px;text-decoration:none;font-weight:700;
   padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
@@ -415,7 +415,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-nb{display:inline-flex;align-items:center;gap:5px;background:var(--chew-bg);border:1px solid transparent;
   border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none;
   max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pp-nb b{color:var(--chew);font-weight:700;font-family:var(--mono);font-size:11px}
+.pp-nb b{color:var(--chew);font-weight:700;font-size:11.5px}
 .pp-nb.on{border-color:var(--chew)}
 .pp-nb .ohs{font-style:normal;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
 .pp-nb .ohs.y{color:var(--good);background:var(--good-bg)}
@@ -445,7 +445,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   border-radius:50%;font:800 12px/1 var(--display);font-style:normal;
   color:#fff;background:rgba(15,122,67,.95);border:2px solid rgba(255,253,250,.92);
   box-shadow:0 2px 8px rgba(0,0,0,.28);cursor:pointer}
-:root[data-theme="dark"] .clus i{background:rgba(61,220,132,.92);color:#0b1a10;
+:root[data-theme="dark"] .clus i{background:rgba(52,201,122,.92);color:#0b1a10;
   border-color:rgba(18,17,16,.85)}
 .clus.big i{font-size:12.5px}
 .heropick .c small{font-weight:600;font-size:10.5px;color:var(--dim2);text-transform:none}
@@ -543,7 +543,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-chain .pl:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .pp-chain.tap{cursor:pointer;border-radius:8px;margin:0 -6px;padding-left:6px;padding-right:6px}
 .pp-chain.tap:hover{background:var(--surface2)}
-.pp-chain .go{margin-left:8px;color:var(--accent);text-decoration:none;font-weight:800;
+.pp-chain .go{margin-left:8px;color:var(--chew);text-decoration:none;font-weight:800;
   font-size:14px;padding:2px 5px;border-radius:6px;flex-shrink:0}
 .pp-chain .go:hover{background:var(--surface2)}
 .pp-det{font-size:11.5px;color:var(--dim);padding:2px 0 7px 22px;line-height:1.5}
@@ -551,12 +551,11 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-det a{color:var(--accent);font-weight:700;text-decoration:none;margin-right:10px}
 /* The place you actually searched for: which one, open or not, how to reach it. */
 /* What the charge time is actually good for, given what is within a walk. */
-.pp-dwell{background:rgba(21,128,61,.10);border:1px solid rgba(21,128,61,.22);color:var(--txt);
+/* What the charge is good for is about food, so it wears food's amber. */
+.pp-dwell{background:var(--chew-bg);border:0;color:var(--txt);
   border-radius:10px;padding:7px 10px;margin:7px 0 2px;font-size:12px;line-height:1.45}
-.pp-dwell b{font-weight:800}
-.pp-dwell.tight{background:rgba(180,83,9,.10);border-color:rgba(180,83,9,.24);color:var(--dim)}
-:root[data-theme="dark"] .pp-dwell{background:rgba(74,222,128,.10);border-color:rgba(74,222,128,.20)}
-:root[data-theme="dark"] .pp-dwell.tight{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.22)}
+.pp-dwell b{font-weight:800;color:var(--chew)}
+.pp-dwell.tight{background:var(--surface2);color:var(--dim)}
 .pp-poi{background:var(--surface2);border:1px solid var(--line);border-radius:11px;
   padding:9px 11px;margin:9px 0 4px}
 .pp-poi-h{font-weight:800;font-size:13.5px}
@@ -2229,7 +2228,7 @@ function syncBasePref() {
 }
 const MTHEME = {
   light: { base: '#a39a90', ghost: '#d6cfc5', hot: '#0f7a43', hotStroke: '#fffdfa' },
-  dark:  { base: '#5a534b', ghost: '#2c2824', hot: '#3ddc84', hotStroke: '#121110' } };
+  dark:  { base: '#5a534b', ghost: '#2c2824', hot: '#34c97a', hotStroke: '#121110' } };
 let themePref = ['auto', 'light', 'dark'].includes(localStorage.getItem('cc_theme'))
   ? localStorage.getItem('cc_theme') : 'auto';
 let curDark = false, tiles = null, labelTiles = null;

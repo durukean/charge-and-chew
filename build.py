@@ -97,16 +97,16 @@ CSS = """
    data-theme; with no choice the OS decides. */
 :root[data-theme="dark"]{
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
-  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
+  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#34c97a;--accent-ink:#0b1a10;--amber-text:#fbbf24;
   --chew:#fbbf24;--chew-bg:rgba(251,191,36,.13);
-  --good:#3ddc84;--good-bg:rgba(61,220,132,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --good:#34c97a;--good-bg:rgba(52,201,122,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
   --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
 }
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
-  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#3ddc84;--accent-ink:#0b1a10;--amber-text:#fbbf24;
+  --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#34c97a;--accent-ink:#0b1a10;--amber-text:#fbbf24;
   --chew:#fbbf24;--chew-bg:rgba(251,191,36,.13);
-  --good:#3ddc84;--good-bg:rgba(61,220,132,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
+  --good:#34c97a;--good-bg:rgba(52,201,122,.13);--amber:#fbbf24;--warn:#fbbf24;--warn-bg:rgba(251,191,36,.13);
   --sh:0 3px 14px rgba(0,0,0,.36);color-scheme:dark;
 }}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -125,7 +125,7 @@ header .logo .c{color:var(--accent)}header .logo .h{color:var(--amber-text)}
 header nav{margin-left:auto;display:flex;gap:14px}
 @media(max-width:480px){header nav{margin-left:-6px}}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
-h1{font-family:var(--display);font-size:clamp(24px,3.6vw,34px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
+h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
 .lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
 .lead b{color:var(--txt)}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
