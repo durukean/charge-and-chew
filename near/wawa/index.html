@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Wawa">Open on the map →</a>
 <p class="stats">Of the 495 fast chargers with a Wawa nearby across the US: The typical stop here delivers <b>250 kW</b>, and 390 of them do 150 kW or more; <b>319</b> are close enough that the Wawa is a two-minute walk or less; <b>470</b> are listed as open 24 hours. The fastest is <b>Wawa - Tesla Supercharger</b> in North Wales at 500 kW; the closest walk is 1 min at <b>Woodbridge Township, NJ - Tesla Supercharger</b>. Most are on Tesla Supercharger (256), ChargePoint (51), Electrify America (38).</p>
 <h2>By state</h2><div class="chips"><a href="fl/">Florida <small>149</small></a><a href="nj/">New Jersey <small>97</small></a><a href="pa/">Pennsylvania <small>84</small></a><a href="va/">Virginia <small>77</small></a><a href="md/">Maryland <small>58</small></a><a href="de/">Delaware <small>24</small></a><a href="in/">Indiana <small>4</small></a><a href="oh/">Ohio <small>1</small></a><a href="dc/">Washington DC <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Woodbridge Township, NJ - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">440 King Georges Road, Woodbridge, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🔨 Home Depot ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.53612,-74.29748" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Philadelphia #8065</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3995 Aramingo Ave, Philadelphia, PA</div><div class="host">EVgo</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🍎 Applebee&#x27;s ≥7 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.99734,-75.08835" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cherry Hill, NJ Rechargery @ Wawa - Marlton Pike East</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1824 Marlton Pike E, Cherry Hill, NJ</div><div class="host">IONNA</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>👑 Burger King ≥4 min</span><span>💊 CVS ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.90646,-74.97418" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mountain Lakes, NJ Rechargery Relay @ Wawa - US-46</span><small>400 kW · 8 stalls</small></div>
-<div class="a">370 US-46, Mountain Lakes, NJ</div><div class="host">IONNA</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.88533,-74.46363" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Store 0219 (Bristol, PA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">3260 Bath Road, Bristol, PA</div><div class="host">Electrify America</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🥪 Subway ≥7 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>👑 Burger King ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.12696,-74.8816" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Store 8062 (Phoenixville, PA)</span><small>400 kW · 4 stalls</small></div>
-<div class="a">1600 Egypt Rd, Phoenixville, PA</div><div class="host">Electrify America</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.13437,-75.45137" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Claymont #0854</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2621 Philadelphia Pike, Claymont, DE</div><div class="host">EVgo</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>👑 Burger King ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=DE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.79428,-75.46908" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Largo, FL Rechargery @ Wawa - Missouri Ave N</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1215 Missouri Ave N., Largo, FL</div><div class="host">IONNA</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.92883,-82.78813" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Store 8070 (Upper Darby, PA)</span><small>400 kW · 4 stalls</small></div>
-<div class="a">8240 West Chester Pike, Upper Darby, PA</div><div class="host">Electrify America</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.96571,-75.28085" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Parsippany, NJ - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">350 New Road, Parsippany, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.8497,-74.35131" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Freehold, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">909 Route 33, Freehold, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.23858,-74.22768" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sterling, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">23055 Oakgrove Road, Sterling, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.97783,-77.41192" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>North Wales, PA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">593 Dekalb Pike, North Wales, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.21926,-75.2473" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Parsippany #8302</span><small>350 kW · 4 stalls</small></div>
-<div class="a">350 New Road, Parsippany, NJ</div><div class="host">EVgo</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.84968,-74.35092" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Staunton, VA - Richmond Avenue - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1031 Richmond Avenue, Staunton, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.13614,-79.04392" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Store 268 (Bristol TWP, PA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5900 Bristol Pike, Bristol, PA</div><div class="host">Electrify America</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.11764,-74.84468" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Jacksonville, FL Rechargery Relay @ Wawa - Baymeadows Rd</span><small>400 kW · 10 stalls</small></div>
-<div class="a">8742 Baymeadows Rd, Jacksonville, FL</div><div class="host">IONNA</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.21999,-81.57618" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chester, VA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">11701 Jefferson Davis Highway, Chester, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🏪 Dollar General ≥2 min</span><span>🍗 Bojangles ≥9 min</span><span>🚗 Sonic ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.36726,-77.41694" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Maple Shade, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">2801 Route 73, Maple Shade, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍗 KFC ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.93744,-74.97037" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cherry Hill, NJ - Haddonfield Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">904 Haddonfield Road, Cherry Hill, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Shake Shack ≥3 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🛒 Wegmans ≥5 min</span><span>💻 Best Buy ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.92587,-75.03242" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Abingdon, MD - Woodsdale Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">3500 Woodsdale Road, Abingdon, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🛒 Wegmans ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.46559,-76.31107" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Monroe Township, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">Route 33 &amp; Butcher Road, Monroe Township, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>☕ Starbucks ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.26712,-74.47189" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>White Plains, MD - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4210 Crain Highway, White Plains, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🚜 Tractor Supply ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.59569,-76.93737" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ocean City, MD - Ocean Gateway - Tesla Supercharger</span><small>250 kW · 11 stalls</small></div>
-<div class="a">12502 Ocean Gateway, Ocean City, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍗 Popeyes ≥3 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🍩 Dunkin&#x27; ≥10 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.33899,-75.119" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Capitol Heights #0597</span><small>100 kW · 2 stalls</small></div>
-<div class="a">1401 Hampton Park Blvd, Capitol Heights, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥪 Subway ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.87044,-76.85116" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rosedale, MD - Pulaski Highway - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">8731 Pulaski Hwy, Rosedale, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🌯 Chipotle ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.33639,-76.48203" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Odessa, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">12048 FL-54, Odessa, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🌯 Chipotle ≥7 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.19008,-82.61619" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Seffner, FL - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">11623 E Dr Martin Luther King Jr Blvd, Seffner, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🛒 Publix ≥5 min</span><span>🍕 Pizza Hut ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.98057,-82.30267" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>(Wawa) - Alachua, FL - Northwest US Highway 441 - Tesla Supe</span><small>325 kW · 16 stalls</small></div>
-<div class="a">16304 NW US Hwy 441, Alachua, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🛒 Publix ≥8 min</span><span>⛽ RaceTrac ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.80311,-82.5273" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Orlando, FL Rechargery @ Wawa - Futures Dr</span><small>400 kW · 8 stalls</small></div>
-<div class="a">8927 Futures Dr, Orlando, FL</div><div class="host">IONNA</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>⛽ RaceTrac ≥2 min</span><span>👑 Burger King ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.43916,-81.42731" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Barnegat, NJ - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">945 West Bay Avenue, Barnegat, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🏪 Dollar General ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.75943,-74.25346" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Towson, MD - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1300 E Joppa Road, Towson, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥪 Subway ≥4 min</span><span>🥖 Panera Bread ≥7 min</span><span>🎯 Target ≥7 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.39623,-76.57561" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pottstown, PA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">260 West Schuylkill Road, Pottstown, PA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>💊 CVS ≥8 min</span><span>🍦 Ice cream shop ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.23304,-75.65792" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa North Wales #0157</span><small>350 kW · 4 stalls</small></div>
-<div class="a">593 DeKalb Pike, North Wales, PA</div><div class="host">EVgo</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.21917,-75.24739" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fredericksburg, VA - Plank Road - Tesla Supercharger</span><small>325 kW · 14 stalls</small></div>
-<div class="a">4527 Plank Rd, Fredericksburg, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.28978,-77.53775" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Newport News, VA - Jefferson Avenue - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">12093 Jefferson Ave, Newport News, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🥬 Whole Foods ≥6 min</span><span>🍔 Shake Shack ≥7 min</span><span>🛒 Aldi ≥7 min</span><span>🍗 KFC ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.10046,-76.49262" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kearny, NJ - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">200 Harrison Avenue, Kearny, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🛒 Walmart ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.74896,-74.13562" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flemington, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">20 NJ-31, Flemington, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🎯 Target ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.50497,-74.85163" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Augusta, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1 NJ-15, Augusta, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.11887,-74.71257" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Edison, NJ - U.S. Route 1 - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">580 U.S. Route 1, Edison, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦆 <b>Wawa</b> ≥1 min</span><span>💊 CVS ≥4 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>💊 Walgreens ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🌮 Taco Bell ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wawa&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.50619,-74.39366" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Woodbridge Township, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">440 King Georges Road, Woodbridge, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.53612,-74.29748" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Philadelphia #8065</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3995 Aramingo Ave, Philadelphia, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🍎 Applebee&#x27;s <i>7 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.99734,-75.08835" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Cherry Hill, NJ Rechargery @ Wawa - Marlton Pike East</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">1824 Marlton Pike E, Cherry Hill, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>💊 CVS <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.90646,-74.97418" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Mountain Lakes, NJ Rechargery Relay @ Wawa - US-46</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">370 US-46, Mountain Lakes, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.88533,-74.46363" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Wawa Store 0219 (Bristol, PA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">3260 Bath Road, Bristol, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🥪 Subway <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>👑 Burger King <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.12696,-74.8816" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Wawa Store 8062 (Phoenixville, PA)</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1600 Egypt Rd, Phoenixville, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.13437,-75.45137" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Claymont #0854</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2621 Philadelphia Pike, Claymont, DE</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>👑 Burger King <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.79428,-75.46908" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=DE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Largo, FL Rechargery @ Wawa - Missouri Ave N</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">1215 Missouri Ave N., Largo, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.92883,-82.78813" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Wawa Store 8070 (Upper Darby, PA)</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">8240 West Chester Pike, Upper Darby, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.96571,-75.28085" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Parsippany, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">350 New Road, Parsippany, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.8497,-74.35131" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Freehold, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">909 Route 33, Freehold, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.23858,-74.22768" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sterling, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">23055 Oakgrove Road, Sterling, VA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.97783,-77.41192" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North Wales, PA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">593 Dekalb Pike, North Wales, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.21926,-75.2473" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Parsippany #8302</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">350 New Road, Parsippany, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.84968,-74.35092" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Staunton, VA - Richmond Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1031 Richmond Avenue, Staunton, VA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🌶️ Chili&#x27;s <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🚒 Firehouse Subs <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.13614,-79.04392" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Wawa Store 268 (Bristol TWP, PA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">5900 Bristol Pike, Bristol, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.11764,-74.84468" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Jacksonville, FL Rechargery Relay @ Wawa - Baymeadows Rd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">8742 Baymeadows Rd, Jacksonville, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍳 Denny&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.21999,-81.57618" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chester, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11701 Jefferson Davis Highway, Chester, VA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>🍗 Bojangles <i>9 min</i></span><span>🚗 Sonic <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.36726,-77.41694" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Maple Shade, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2801 Route 73, Maple Shade, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.93744,-74.97037" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cherry Hill, NJ - Haddonfield Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">904 Haddonfield Road, Cherry Hill, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Shake Shack <i>3 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>🛒 Wegmans <i>5 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.92587,-75.03242" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Abingdon, MD - Woodsdale Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3500 Woodsdale Road, Abingdon, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🛒 Wegmans <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.46559,-76.31107" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Monroe Township, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">Route 33 &amp; Butcher Road, Monroe Township, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>☕ Starbucks <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.26712,-74.47189" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">White Plains, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4210 Crain Highway, White Plains, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.59569,-76.93737" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ocean City, MD - Ocean Gateway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>11 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">12502 Ocean Gateway, Ocean City, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>10 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.33899,-75.119" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Capitol Heights #0597</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1401 Hampton Park Blvd, Capitol Heights, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🚗 Sonic <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.87044,-76.85116" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Rosedale, MD - Pulaski Highway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8731 Pulaski Hwy, Rosedale, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.33639,-76.48203" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Odessa, FL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">12048 FL-54, Odessa, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.19008,-82.61619" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Seffner, FL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11623 E Dr Martin Luther King Jr Blvd, Seffner, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🛒 Publix <i>5 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.98057,-82.30267" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">(Wawa) - Alachua, FL - Northwest US Highway 441 - Tesla Supe</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">16304 NW US Hwy 441, Alachua, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🛒 Publix <i>8 min</i></span><span>⛽ RaceTrac <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.80311,-82.5273" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Orlando, FL Rechargery @ Wawa - Futures Dr</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">8927 Futures Dr, Orlando, FL</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>⛽ RaceTrac <i>2 min</i></span><span>👑 Burger King <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.43916,-81.42731" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Barnegat, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">945 West Bay Avenue, Barnegat, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🏪 Dollar General <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.75943,-74.25346" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Towson, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1300 E Joppa Road, Towson, MD</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🥖 Panera Bread <i>7 min</i></span><span>🎯 Target <i>7 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.39623,-76.57561" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pottstown, PA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">260 West Schuylkill Road, Pottstown, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>💊 CVS <i>8 min</i></span><span>🍦 Ice cream shop <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.23304,-75.65792" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa North Wales #0157</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">593 DeKalb Pike, North Wales, PA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.21917,-75.24739" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fredericksburg, VA - Plank Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>14 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4527 Plank Rd, Fredericksburg, VA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.28978,-77.53775" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Newport News, VA - Jefferson Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">12093 Jefferson Ave, Newport News, VA</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🥬 Whole Foods <i>6 min</i></span><span>🍔 Shake Shack <i>7 min</i></span><span>🛒 Aldi <i>7 min</i></span><span>🍗 KFC <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.10046,-76.49262" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kearny, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">200 Harrison Avenue, Kearny, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🛒 Walmart <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.74896,-74.13562" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Flemington, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">20 NJ-31, Flemington, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.50497,-74.85163" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Augusta, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1 NJ-15, Augusta, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.11887,-74.71257" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Edison, NJ - U.S. Route 1 - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">580 U.S. Route 1, Edison, NJ</div>
+<div class="c"><span>🦆 <b>Wawa</b> <i>1 min</i></span><span>💊 CVS <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.50619,-74.39366" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wawa&amp;state=NJ">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Wawa within walking distance in the US?</summary><p>495 public DC fast chargers in the US have a Wawa within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Wawa charging stop is fastest in the US?</summary><p>Wawa - Tesla Supercharger in North Wales at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

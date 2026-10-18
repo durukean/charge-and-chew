@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=RaceTrac">Open on the map →</a>
 <p class="stats">Of the 156 fast chargers with a RaceTrac nearby across the US: The typical stop here delivers <b>250 kW</b>, and 125 of them do 150 kW or more; <b>38</b> are close enough that the RaceTrac is a two-minute walk or less; <b>135</b> are listed as open 24 hours. The fastest is <b>Orlando, FL Rechargery @ Wawa - Futures Dr</b> in Orlando at 400 kW; the closest walk is 1 min at <b>RaceTrac</b>. Most are on Tesla Supercharger (49), ChargePoint (26), Racetrac (10).</p>
 <h2>By state</h2><div class="chips"><a href="fl/">Florida <small>69</small></a><a href="ga/">Georgia <small>49</small></a><a href="tx/">Texas <small>28</small></a><a href="la/">Louisiana <small>6</small></a><a href="ky/">Kentucky <small>1</small></a><a href="al/">Alabama <small>1</small></a><a href="tn/">Tennessee <small>1</small></a><a href="oh/">Ohio <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>RaceTrac</span><small>180 kW · 1 stall</small></div>
-<div class="a">6421 Broadway Blvd, Garland, TX</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>🚗 Sonic ≥5 min</span><span>🧇 Waffle House ≥5 min</span><span>🌶️ Chili&#x27;s ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.83623,-96.59617" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Carbon</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3510 Carbon Road, Irving, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>⛽ QuikTrip ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.87871,-96.99238" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Griffin</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1638 US-41, Griffin, GA</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>🍕 Pizza Hut ≥5 min</span><span>🥪 Subway ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.19668,-84.28262" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>PIB</span><small>180 kW · 4 stalls</small></div>
-<div class="a">2180 Peachtree Industrial Boulevard, Duluth, GA</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🧇 Waffle House ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.02159,-84.11958" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wylie</span><small>180 kW · 2 stalls</small></div>
-<div class="a">801 South State Hwy 78, Wylie, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🏪 Dollar General ≥7 min</span><span>🍕 Pizza Hut ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.01746,-96.5298" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Forney</span><small>180 kW · 2 stalls</small></div>
-<div class="a">30 North Fm 548, Forney, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>💊 CVS ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.74022,-96.44851" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lantana</span><small>180 kW · 4 stalls</small></div>
-<div class="a">5595 Haverhill Road, Greenacres, FL</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.59569,-80.12257" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>(Suncoast) - Land O&#x27; Lakes, FL - Focus Loop - Tesla Supercha</span><small>325 kW · 8 stalls</small></div>
-<div class="a">16934 Focus Lp, Land O&#x27; Lakes, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.19283,-82.53928" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>RaceTrac Gas Station</span><small>180 kW · 1 stall</small></div>
-<div class="a">4055 S Great Southwest Pkwy, Grand Prairie, TX</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🛒 Kroger ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67261,-97.04343" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dublin</span><small>180 kW · 8 stalls</small></div>
-<div class="a">2262 S Highway 441, Dublin, GA</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍗 Zaxby&#x27;s ≥3 min</span><span>🧇 Waffle House ≥6 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>⛽ Pilot ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.48433,-82.93619" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia Power Ptree Cfa DC</span><small>62 kW · 1 stall</small></div>
-<div class="a">2720 GA-54, Peachtree City, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🍔 Five Guys ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.39592,-84.60065" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Florida Power &amp; Light - EVolution - Dunkin</span><small>120 kW · 4 stalls</small></div>
-<div class="a">4525 W New Haven Ave, Melbourne, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>⛽ Circle K ≥4 min</span><span>🍗 Zaxby&#x27;s ≥6 min</span><span>🏪 Sam&#x27;s Club ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.07821,-80.70221" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bardin</span><small>180 kW · 2 stalls</small></div>
-<div class="a">4055 South Great Southwest Parkway, Grand Prairie, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67298,-97.04454" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5888 Highway 53, Braselton, GA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.11936,-83.76261" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Duluth, GA - Peachtree Industrial Boulevard - Tesla Supercha</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2220 Peachtree Industrial Blvd, Duluth, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🐼 Panda Express ≥3 min</span><span>🧇 Waffle House ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.0208,-84.11983" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fs Ford Sm Power Link</span><small>120 kW · 2 stalls</small></div>
-<div class="a">3800 Stone Mountain Hwy, Snellville, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🍗 Zaxby&#x27;s ≥7 min</span><span>🍕 Little Caesars ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.83984,-84.06208" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fayetteville, GA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1135 GA-85, Fayetteville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.47203,-84.44249" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cutler Bay, FL - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">11101 Southwest 184 Strett, Cutler Bay, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=25.59835,-80.37168" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Dealership DC Fast Charger</span><small>24 kW · 1 stall</small></div>
-<div class="a">1550 Mansell Rd, Alpharetta, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>⛽ QuikTrip ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>🏪 Sam&#x27;s Club ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.04104,-84.32269" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2946 (Ft Lauderdale, FL)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">2500 W Broward Blvd, Fort Lauderdale, FL</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🌯 Chipotle ≥4 min</span><span>🦆 Wawa ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.12003,-80.17423" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia State</span><small>102 kW · 1 stall</small></div>
-<div class="a">100 Auburn Avenue Northeast, Atlanta, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥪 Subway ≥4 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.75637,-84.38341" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Orlando, FL Rechargery @ Wawa - Futures Dr</span><small>400 kW · 8 stalls</small></div>
-<div class="a">8927 Futures Dr, Orlando, FL</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>👑 Burger King ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.43916,-81.42731" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Adairsville, GA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">7867 Adairsville Hwy, Adairsville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.3779,-84.91569" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Optimus Energy Newnan Bk</span><small>160 kW · 1 stall</small></div>
-<div class="a">856 Poplar Road, Newnan, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>👑 Burger King ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.35957,-84.75048" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Grapevine Mills</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3955 Grapevine Mills Parkway, Grapevine, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>☕ Starbucks ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.98054,-97.03912" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Brunswick, GA Rechargery Relay - Shupe Wy</span><small>400 kW · 16 stalls</small></div>
-<div class="a">399 Canal Rd, Brunswick, GA</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🌯 Chipotle ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.2319,-81.49963" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Dunkin&#x27;</span><small>240 kW · 2 stalls</small></div>
-<div class="a">1470 SW 8th St, Boynton Beach, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>🔧 Lowe&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.51635,-80.07706" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ford of Dalton</span><small>180 kW · 6 stalls</small></div>
-<div class="a">925 Shugart Rd, Dalton, GA</div><div class="host">Red E</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🔨 Home Depot ≥6 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.79391,-84.99716" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Advent Health Pasco ER</span><small>150 kW · 2 stalls</small></div>
-<div class="a">16625 State Rd 54, Lutz, FL</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🌶️ Chili&#x27;s ≥7 min</span><span>☕ Starbucks ≥8 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.19186,-82.54083" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Nissan of Newnan</span><small>50 kW · 1 stall</small></div>
-<div class="a">783 Bullsboro Dr, Newnan, GA</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🥞 IHOP ≥6 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.39607,-84.75195" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ocala, FL - West Silver Springs Boulevard - Tesla Supercharg</span><small>250 kW · 8 stalls</small></div>
-<div class="a">3312 West Silver Springs Boulevard, Ocala, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>⛽ Circle K ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.18528,-82.17736" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Alpharetta Public Safety - Tesla Supercharger (Alpharetta Ci</span><small>325 kW · 4 stalls</small></div>
-<div class="a">2565 Old Milton Pkwy, Alpharetta, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🥬 Whole Foods ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06793,-84.28455" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Rolls Royce Dallas Showroom</span><small>50 kW · 1 stall</small></div>
-<div class="a">5300 Lemmon Ave, Dallas, TX</div><div class="host">Abm</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🍔 Whataburger ≥4 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>💊 CVS ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.8264,-96.82175" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 3349 (Port Charlotte, FL)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">375 Kings Hwy, Port Charlotte, FL</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🍔 Five Guys ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🍦 Culver&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.02385,-82.04687" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 3163 (Hollywood, FL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">301 S State RD 7, Hollywood, FL</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🛒 Walmart ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.00829,-80.20575" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;S 238 - Ky #238</span><small>320 kW · 2 stalls</small></div>
-<div class="a">1090 Cedar Grove Road, Shepherdsville, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97925,-85.69377" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;s 627 (Davenport, FL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">Love’s Travel Shop 45000 US-27, Davenport, FL</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍔 Wendy&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.24366,-81.65724" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 4627 (Denton, TX)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2750 W. University, Denton, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥2 min</span><span>🏪 Sam&#x27;s Club ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.23157,-97.16808" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Optimus Energy Opelika Bk</span><small>160 kW · 1 stall</small></div>
-<div class="a">1400 Columbus Parkway, Opelika, AL</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥3 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>⛽ Circle K ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥪 Subway ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64374,-85.34751" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>7Charge - Daytona Beach</span><small>180 kW · 4 stalls</small></div>
-<div class="a">2100 LPGA Blvd, Daytona Beach, FL</div><div class="host">7Charge</div>
-<div class="c"><span>⛽ <b>RaceTrac</b> ≥3 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥬 Sprouts ≥5 min</span><span>🦫 Buc-ee&#x27;s ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=RaceTrac&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.22437,-81.09454" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">RaceTrac</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">6421 Broadway Blvd, Garland, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>🚗 Sonic <i>5 min</i></span><span>🧇 Waffle House <i>5 min</i></span><span>🌶️ Chili&#x27;s <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.83623,-96.59617" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Carbon</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">3510 Carbon Road, Irving, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>⛽ QuikTrip <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.87871,-96.99238" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Griffin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Racetrac</span></div>
+<div class="a">1638 US-41, Griffin, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.19668,-84.28262" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">PIB</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Racetrac</span></div>
+<div class="a">2180 Peachtree Industrial Boulevard, Duluth, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🧇 Waffle House <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.02159,-84.11958" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Wylie</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">801 South State Hwy 78, Wylie, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>🍕 Pizza Hut <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.01746,-96.5298" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Forney</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">30 North Fm 548, Forney, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.74022,-96.44851" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Lantana</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Racetrac</span></div>
+<div class="a">5595 Haverhill Road, Greenacres, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.59569,-80.12257" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">(Suncoast) - Land O&#x27; Lakes, FL - Focus Loop - Tesla Supercha</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">16934 Focus Lp, Land O&#x27; Lakes, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🌶️ Chili&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.19283,-82.53928" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">RaceTrac Gas Station</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">4055 S Great Southwest Pkwy, Grand Prairie, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🛒 Kroger <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.67261,-97.04343" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dublin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>Racetrac</span></div>
+<div class="a">2262 S Highway 441, Dublin, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>3 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>⛽ Pilot <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.48433,-82.93619" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia Power Ptree Cfa DC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2720 GA-54, Peachtree City, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍔 Five Guys <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.39592,-84.60065" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Florida Power &amp; Light - EVolution - Dunkin</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>FPL EVolution</span></div>
+<div class="a">4525 W New Haven Ave, Melbourne, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>⛽ Circle K <i>4 min</i></span><span>🍗 Zaxby&#x27;s <i>6 min</i></span><span>🏪 Sam&#x27;s Club <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.07821,-80.70221" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bardin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">4055 South Great Southwest Parkway, Grand Prairie, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🚗 Sonic <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.67298,-97.04454" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5888 Highway 53, Braselton, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.11936,-83.76261" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Duluth, GA - Peachtree Industrial Boulevard - Tesla Supercha</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2220 Peachtree Industrial Blvd, Duluth, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🧇 Waffle House <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.0208,-84.11983" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Fs Ford Sm Power Link</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">3800 Stone Mountain Hwy, Snellville, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🍗 Bojangles <i>2 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>🍗 Zaxby&#x27;s <i>7 min</i></span><span>🍕 Little Caesars <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.83984,-84.06208" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fayetteville, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1135 GA-85, Fayetteville, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>🍗 Zaxby&#x27;s <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.47203,-84.44249" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cutler Bay, FL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11101 Southwest 184 Strett, Cutler Bay, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=25.59835,-80.37168" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Dealership DC Fast Charger</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1550 Mansell Rd, Alpharetta, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>⛽ QuikTrip <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>🏪 Sam&#x27;s Club <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.04104,-84.32269" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2946 (Ft Lauderdale, FL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">2500 W Broward Blvd, Fort Lauderdale, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🦆 Wawa <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.12003,-80.17423" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia State</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">100 Auburn Avenue Northeast, Atlanta, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.75637,-84.38341" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Orlando, FL Rechargery @ Wawa - Futures Dr</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">8927 Futures Dr, Orlando, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>👑 Burger King <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.43916,-81.42731" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Adairsville, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7867 Adairsville Hwy, Adairsville, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.3779,-84.91569" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Optimus Energy Newnan Bk</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">856 Poplar Road, Newnan, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.35957,-84.75048" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Grapevine Mills</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">3955 Grapevine Mills Parkway, Grapevine, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>☕ Starbucks <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.98054,-97.03912" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Brunswick, GA Rechargery Relay - Shupe Wy</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>16 stalls</b><span>IONNA</span></div>
+<div class="a">399 Canal Rd, Brunswick, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>4 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.2319,-81.49963" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dunkin&#x27;</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>FPL EVolution</span></div>
+<div class="a">1470 SW 8th St, Boynton Beach, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.51635,-80.07706" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ford of Dalton</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">925 Shugart Rd, Dalton, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.79391,-84.99716" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Advent Health Pasco ER</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">16625 State Rd 54, Lutz, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>7 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.19186,-82.54083" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Nissan of Newnan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">783 Bullsboro Dr, Newnan, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.39607,-84.75195" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ocala, FL - West Silver Springs Boulevard - Tesla Supercharg</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3312 West Silver Springs Boulevard, Ocala, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>⛽ Circle K <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.18528,-82.17736" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Alpharetta Public Safety - Tesla Supercharger (Alpharetta Ci</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2565 Old Milton Pkwy, Alpharetta, GA</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>🥬 Whole Foods <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.06793,-84.28455" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Abm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Rolls Royce Dallas Showroom</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Abm</span></div>
+<div class="a">5300 Lemmon Ave, Dallas, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🍔 Whataburger <i>4 min</i></span><span>🥪 Jersey Mike&#x27;s <i>5 min</i></span><span>💊 CVS <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.8264,-96.82175" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 3349 (Port Charlotte, FL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">375 Kings Hwy, Port Charlotte, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍦 Culver&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.02385,-82.04687" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 3163 (Hollywood, FL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">301 S State RD 7, Hollywood, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.00829,-80.20575" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Love&#x27;S 238 - Ky #238</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">1090 Cedar Grove Road, Shepherdsville, KY</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.97925,-85.69377" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Love&#x27;s 627 (Davenport, FL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">Love’s Travel Shop 45000 US-27, Davenport, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.24366,-81.65724" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 4627 (Denton, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">2750 W. University, Denton, TX</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.23157,-97.16808" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Optimus Energy Opelika Bk</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1400 Columbus Parkway, Opelika, AL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>3 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.64374,-85.34751" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="7Charge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">7Charge - Daytona Beach</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>7Charge</span></div>
+<div class="a">2100 LPGA Blvd, Daytona Beach, FL</div>
+<div class="c"><span>⛽ <b>RaceTrac</b> <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🥬 Sprouts <i>5 min</i></span><span>🦫 Buc-ee&#x27;s <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.22437,-81.09454" target="_blank" rel="noopener">Directions</a><a href="../../?chain=RaceTrac&amp;state=FL">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a RaceTrac within walking distance in the US?</summary><p>156 public DC fast chargers in the US have a RaceTrac within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which RaceTrac charging stop is fastest in the US?</summary><p>Orlando, FL Rechargery @ Wawa - Futures Dr in Orlando at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

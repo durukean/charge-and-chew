@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -36,106 +36,126 @@
 <p class="stats">Typical power along this route is <b>150 kW</b>, with <b>55</b> stops at 150 kW or more and <b>23</b> on the Tesla network. Chargers under 50 kW are left out &mdash; on a drive this length they cost more time than they save. There is one at least every <b>17 miles</b> of the way.</p>
 <h2>Every stop with food within a walk</h2>
 <p>In order along the route &mdash; the strongest stop in each stretch of the drive, so the list covers the whole route rather than filling up with the city you left.</p>
-<div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Target Dorchester</span><small>350 kW · 8 stalls</small></div>
-<div class="a">7 Allstate Rd, Dorchester, MA</div><div class="host">EVgo</div>
-<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥6 min</span><span>🎯 Target ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🍝 Olive Garden ≥6 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.33014,-71.06304" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Gigahub BOS William F McClellan Highway, Boston, MA</span><small>400 kW · 20 stalls</small></div>
-<div class="a">450 William F McClellan Highway, Boston, MA</div><div class="host">bp pulse</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥3 min</span><span>🍩 Dunkin&#x27; ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.39425,-71.01383" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Nouria Lynn</span><small>319 kW · 1 stall</small></div>
-<div class="a">535 Lynnway, Lynn, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍗 KFC ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.45594,-70.95821" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Redstone Shopping Center (Stoneham, MA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">65 Main Street, Stoneham, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>💊 CVS ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🎯 Target ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49714,-71.10121" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Reading, MA Rechargery Relay - Walkers Brook Dr</span><small>400 kW · 6 stalls</small></div>
-<div class="a">39 Walkers Brook Dr., Reading, MA</div><div class="host">IONNA</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥2 min</span><span>🌶️ Chili&#x27;s ≥3 min</span><span>🔨 Home Depot ≥5 min</span><span>💊 Walgreens ≥7 min</span><span>👑 Burger King ≥8 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.51827,-71.09483" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Peabody MA Mercedes Benz HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">57 Newbury St, Peabody, MA</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.52605,-70.99476" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Danvers, MA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">301 Newbury St, Danvers, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🤠 <b>Texas Roadhouse</b> ≥3 min</span><span>💊 CVS ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.58543,-70.9661" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairfield Inn Amesbury</span><small>240 kW · 10 stalls</small></div>
-<div class="a">35 Clark&#x27;s Road, Amesbury, MA</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥2 min</span><span>🥪 Subway ≥6 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>⛽ Circle K ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.84501,-70.90633" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1762 (Seabrook, NH)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">700 Lafayette Rd, Seabrook, NH</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🛒 Walmart ≥1 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.8937,-70.86584" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Parkman Brook Shopping Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">20 Portsmouth Ave, Stratham, NH</div><div class="host">EVgo</div>
-<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>⛽ Circle K ≥5 min</span><span>💊 CVS ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.99723,-70.92276" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Portsmouth, NH - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">2255 Lafayette Rd, Portsmouth, NH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥2 min</span><span>🌯 Chipotle ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🛒 Walmart ≥10 min</span><span>⛽ Circle K ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.03406,-70.77956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Portsmouth, NH Rechargery Relay - Woodbury Ave</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1600 Woodbury Avenue, Portsmouth, NH</div><div class="host">IONNA</div>
-<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥2 min</span><span>🥬 Whole Foods ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.08975,-70.79255" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kittery Premium Outlets MB.HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">375 US-1, Kittery, ME</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥6 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.11487,-70.7305" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Simon Kittery Premium Outlets (Kittery, ME)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">375 US-1, Kittery, ME</div><div class="host">Electrify America</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.11713,-70.72796" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wells, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1517 Post Rd, Wells, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍦 <b>Dairy Queen</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.32075,-70.5806" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Target - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">430 Mariner Way, Biddeford, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥4 min</span><span>🎯 Target ≥1 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.47317,-70.5146" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Saco, ME - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">532 Main Street, Saco, ME</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Dairy Queen ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.51091,-70.43444" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1788 (Scarborough, ME)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">500 Gallery Blvd., Scarborough, ME</div><div class="host">Electrify America</div>
-<div class="c"><span>🤠 <b>Texas Roadhouse</b> ≥3 min</span><span>🛒 Walmart ≥2 min</span><span>🐦 Red Robin ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🏪 Sam&#x27;s Club ≥6 min</span><span>🔧 Lowe&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.62294,-70.345" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Mb Scarborough Cpe250-2</span><small>62 kW · 1 stall</small></div>
-<div class="a">137 U.S. 1, Scarborough, ME</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.59911,-70.32338" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>High St. Lot</span><small>350 kW · 4 stalls</small></div>
-<div class="a">98 High St., Portland, ME</div><div class="host">EVgo</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥1 min</span><span>💊 CVS ≥5 min</span><span>💊 Walgreens ≥7 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>☕ Starbucks ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.65287,-70.26187" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Target Dorchester</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">7 Allstate Rd, Dorchester, MA</div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> <i>6 min</i></span><span>🎯 Target <i>2 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🍝 Olive Garden <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.33014,-71.06304" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Gigahub BOS William F McClellan Highway, Boston, MA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>20 stalls</b><span>bp pulse</span></div>
+<div class="a">450 William F McClellan Highway, Boston, MA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.39425,-71.01383" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Nouria Lynn</div>
+<div class="sp"><s class="spd ultra">319 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">535 Lynnway, Lynn, MA</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🍗 KFC <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.45594,-70.95821" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Redstone Shopping Center (Stoneham, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">65 Main Street, Stoneham, MA</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>💊 CVS <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🎯 Target <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49714,-71.10121" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Reading, MA Rechargery Relay - Walkers Brook Dr</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">39 Walkers Brook Dr., Reading, MA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>3 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>👑 Burger King <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.51827,-71.09483" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Peabody MA Mercedes Benz HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">57 Newbury St, Peabody, MA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.52605,-70.99476" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Danvers, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">301 Newbury St, Danvers, MA</div>
+<div class="c"><span>🤠 <b>Texas Roadhouse</b> <i>3 min</i></span><span>💊 CVS <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.58543,-70.9661" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Fairfield Inn Amesbury</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>10 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">35 Clark&#x27;s Road, Amesbury, MA</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>2 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>⛽ Circle K <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.84501,-70.90633" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1762 (Seabrook, NH)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">700 Lafayette Rd, Seabrook, NH</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.8937,-70.86584" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Parkman Brook Shopping Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">20 Portsmouth Ave, Stratham, NH</div>
+<div class="c"><span>🌯 <b>Chipotle</b> <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>⛽ Circle K <i>5 min</i></span><span>💊 CVS <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.99723,-70.92276" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Portsmouth, NH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2255 Lafayette Rd, Portsmouth, NH</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>2 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🛒 Walmart <i>10 min</i></span><span>⛽ Circle K <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.03406,-70.77956" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Portsmouth, NH Rechargery Relay - Woodbury Ave</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>IONNA</span></div>
+<div class="a">1600 Woodbury Avenue, Portsmouth, NH</div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> <i>2 min</i></span><span>🥬 Whole Foods <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.08975,-70.79255" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kittery Premium Outlets MB.HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">375 US-1, Kittery, ME</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.11487,-70.7305" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Simon Kittery Premium Outlets (Kittery, ME)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">375 US-1, Kittery, ME</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.11713,-70.72796" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Wells, ME - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1517 Post Rd, Wells, ME</div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.32075,-70.5806" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Target - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">430 Mariner Way, Biddeford, ME</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>4 min</i></span><span>🎯 Target <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.47317,-70.5146" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Saco, ME - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">532 Main Street, Saco, ME</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Dairy Queen <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.51091,-70.43444" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1788 (Scarborough, ME)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">500 Gallery Blvd., Scarborough, ME</div>
+<div class="c"><span>🤠 <b>Texas Roadhouse</b> <i>3 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🐦 Red Robin <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🏪 Sam&#x27;s Club <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.62294,-70.345" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mb Scarborough Cpe250-2</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">137 U.S. 1, Scarborough, ME</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.59911,-70.32338" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">High St. Lot</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">98 High St., Portland, ME</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>1 min</i></span><span>💊 CVS <i>5 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>☕ Starbucks <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.65287,-70.26187" target="_blank" rel="noopener">Directions</a><a href="../../?from=Boston%2C%20MA&amp;to=Portland%2C%20ME&amp;c=5&amp;any=food">Show on map</a></div>
 </div></div>
 <h2>Other road trips</h2><div class="chips"><a href="../atlanta-to-nashville/">Atlanta &rarr; Nashville <small>74</small></a><a href="../atlanta-to-orlando/">Atlanta &rarr; Orlando <small>118</small></a><a href="../atlanta-to-savannah/">Atlanta &rarr; Savannah <small>66</small></a><a href="../austin-to-houston/">Austin &rarr; Houston <small>64</small></a><a href="../boston-to-portland/">Boston &rarr; Portland <small>82</small></a><a href="../charlotte-to-atlanta/">Charlotte &rarr; Atlanta <small>96</small></a><a href="../chicago-to-detroit/">Chicago &rarr; Detroit <small>113</small></a><a href="../chicago-to-indianapolis/">Chicago &rarr; Indianapolis <small>63</small></a><a href="../dallas-to-austin/">Dallas &rarr; Austin <small>69</small></a><a href="../dallas-to-houston/">Dallas &rarr; Houston <small>52</small></a><a href="../dallas-to-oklahoma-city/">Dallas &rarr; Oklahoma City <small>68</small></a><a href="../denver-to-colorado-springs/">Denver &rarr; Colorado Springs <small>66</small></a><a href="../denver-to-salt-lake-city/">Denver &rarr; Salt Lake City <small>95</small></a><a href="../denver-to-kansas-city/">Denver &rarr; Kansas City <small>79</small></a><a href="../detroit-to-cleveland/">Detroit &rarr; Cleveland <small>60</small></a><a href="../houston-to-san-antonio/">Houston &rarr; San Antonio <small>58</small></a><a href="../houston-to-new-orleans/">Houston &rarr; New Orleans <small>49</small></a><a href="../kansas-city-to-st-louis/">Kansas City &rarr; St. Louis <small>45</small></a><a href="../las-vegas-to-salt-lake-city/">Las Vegas &rarr; Salt Lake City <small>107</small></a><a href="../las-vegas-to-flagstaff/">Las Vegas &rarr; Flagstaff <small>43</small></a><a href="../los-angeles-to-las-vegas/">Los Angeles &rarr; Las Vegas <small>213</small></a><a href="../los-angeles-to-phoenix/">Los Angeles &rarr; Phoenix <small>232</small></a><a href="../los-angeles-to-san-diego/">Los Angeles &rarr; San Diego <small>294</small></a><a href="../los-angeles-to-san-francisco/">Los Angeles &rarr; San Francisco <small>260</small></a><a href="../los-angeles-to-palm-springs/">Los Angeles &rarr; Palm Springs <small>196</small></a><a href="../miami-to-orlando/">Miami &rarr; Orlando <small>153</small></a><a href="../miami-to-key-west/">Miami &rarr; Key West <small>31</small></a><a href="../minneapolis-to-chicago/">Minneapolis &rarr; Chicago <small>158</small></a><a href="../nashville-to-memphis/">Nashville &rarr; Memphis <small>31</small></a><a href="../new-york-to-boston/">New York &rarr; Boston <small>237</small></a><a href="../new-york-to-washington/">New York &rarr; Washington <small>263</small></a><a href="../orlando-to-tampa/">Orlando &rarr; Tampa <small>73</small></a><a href="../philadelphia-to-pittsburgh/">Philadelphia &rarr; Pittsburgh <small>92</small></a><a href="../phoenix-to-las-vegas/">Phoenix &rarr; Las Vegas <small>53</small></a><a href="../phoenix-to-tucson/">Phoenix &rarr; Tucson <small>40</small></a><a href="../sacramento-to-south-lake-tahoe/">Sacramento &rarr; South Lake Tahoe <small>91</small></a><a href="../salt-lake-city-to-boise/">Salt Lake City &rarr; Boise <small>49</small></a><a href="../san-antonio-to-el-paso/">San Antonio &rarr; El Paso <small>40</small></a><a href="../san-francisco-to-portland/">San Francisco &rarr; Portland <small>244</small></a><a href="../san-francisco-to-south-lake-tahoe/">San Francisco &rarr; South Lake Tahoe <small>199</small></a><a href="../seattle-to-portland/">Seattle &rarr; Portland <small>139</small></a><a href="../seattle-to-spokane/">Seattle &rarr; Spokane <small>76</small></a><a href="../washington-to-charlotte/">Washington &rarr; Charlotte <small>148</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

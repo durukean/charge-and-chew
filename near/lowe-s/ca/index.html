@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>123 DC fast chargers</b> in California have a Lowe&#x27;s within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Open on the map →</a>
 <p class="stats">Of the 123 fast chargers with a Lowe&#x27;s nearby in California: The typical stop here delivers <b>250 kW</b>, and 72 of them do 150 kW or more; <b>10</b> are close enough that the Lowe&#x27;s is a two-minute walk or less; <b>107</b> are listed as open 24 hours. The fastest is <b>ARCO Lake Washington Boulevard, West Sacramento, CA</b> in West Sacramento at 400 kW; the closest walk is 1 min at <b>Midtown La Midtown DC</b>. Most are on Tesla Supercharger (31), ChargePoint (25), EVgo (22).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Midtown La Midtown DC</span><small>50 kW · 1 stall</small></div>
-<div class="a">4550 W Pico Blvd, Los Angeles, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>💊 CVS ≥4 min</span><span>🍗 Wingstop ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.0474,-118.33611" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lowe&#x27;s of Concord</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1935 Arnold Industrial Way, Concord, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00467,-122.04341" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lowe&#x27;s of Livermore</span><small>350 kW · 10 stalls</small></div>
-<div class="a">4255 1st St, Livermore, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.69482,-121.74513" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>US Bank Ventura</span><small>50 kW · 1 stall</small></div>
-<div class="a">576 S Mills Road, Ventura, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>⛽ Circle K ≥2 min</span><span>🐼 Panda Express ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.26559,-119.24574" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lowe&#x27;s of Hawthorne</span><small>350 kW · 8 stalls</small></div>
-<div class="a">2800 W 120th St, Hawhorne, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🎯 Target ≥3 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.923,-118.32345" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>SDSU River Park</span><small>180 kW · 4 stalls</small></div>
-<div class="a">25465 West River Park Rd, San Diego, CA</div><div class="host">Dirt Road</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>🪑 IKEA ≥2 min</span><span>🍦 Ice cream shop ≥5 min</span><span>📦 Costco ≥5 min</span><span>🥞 IHOP ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.78047,-117.12433" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Paso Robles, CA - Golden Hill Road - Tesla Supercharger</span><small>325 kW · 43 stalls</small></div>
-<div class="a">2421-2445 Golden Hill Road, Paso Robles, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.64556,-120.66011" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Menifee, CA - Tesla Supercharger</span><small>150 kW · 20 stalls</small></div>
-<div class="a">30340 Haun Road, Menifee, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🚗 Sonic ≥5 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.67964,-117.17363" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Chula Vista, CA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">910 Eastlake Parkway, Chula Vista, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🎯 Target ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64925,-116.96766" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Foodsco N. Bakersfield H</span><small>350 kW · 8 stalls</small></div>
-<div class="a">2505 Haley St, Bakersfield, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥2 min</span><span>☕ Dutch Bros ≥2 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39641,-118.97565" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>San Diego, CA - Fenton Parkway - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">2149 Fenton Parkway, San Diego, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>📦 Costco ≥2 min</span><span>🪑 IKEA ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.78151,-117.12778" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>El Centro, CA - North Imperial Avenue - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">2295 N Imperial Ave, El Centro, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.81409,-115.56788" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Los Banos, CA - Tesla Supercharger</span><small>325 kW · 10 stalls</small></div>
-<div class="a">1363 W Pacheco Blvd, Los Banos, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>🛒 Walmart ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.05567,-120.87516" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Ph Subaru</span><small>62 kW · 1 stall</small></div>
-<div class="a">17801 Gale Ave, City of Industry, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🍝 Olive Garden ≥4 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>📦 Costco ≥6 min</span><span>🎯 Target ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.99611,-117.91713" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hawthorne, CA - West 120th Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">2700 West 120th Avenue, Hawthorne, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🎯 Target ≥1 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>☕ Starbucks ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.9226,-118.32204" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Covina Town Square</span><small>350 kW · 16 stalls</small></div>
-<div class="a">1460 N Azusa Ave, Covina, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🌮 Taco Bell ≥1 min</span><span>🛒 Aldi ≥2 min</span><span>🛒 Walmart ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.1058,-117.90569" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Cityofmurrieta Bravol3Ctyhall</span><small>62 kW · 1 stall</small></div>
-<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56009,-117.20961" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Cityofmurrieta Charliel3Ctyhll</span><small>62 kW · 1 stall</small></div>
-<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56005,-117.20956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Cityofmurrieta Alphal3Ctyhall</span><small>62 kW · 1 stall</small></div>
-<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56016,-117.20968" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Gf4Eva Chevron G DC</span><small>62 kW · 1 stall</small></div>
-<div class="a">7110 Camino Arroyo Dr, Gilroy, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🤡 Jack in the Box ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>💻 Best Buy ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.00675,-121.55184" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2458 (Salinas, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1800 North Main St., Salinas, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🌯 Chipotle ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.71885,-121.65052" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Vacaville, CA - East Monte Vista Avenue - Tesla Supercharger</span><small>325 kW · 28 stalls</small></div>
-<div class="a">1661 E Monte Vista Ave, Vacaville, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.37057,-121.95956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T0914 (Rancho Santa Margarita, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">30602 Santa Margarita Parkway, Rancho Santa Margarita, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥3 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.64218,-117.59864" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T2359 (Los Banos, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1405 W Pacheco Blvd, Los Banos, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.05477,-120.87648" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>ARCO Lake Washington Boulevard, West Sacramento, CA</span><small>400 kW · 4 stalls</small></div>
-<div class="a">2270 Lake Washington Boulevard, West Sacramento, CA</div><div class="host">bp pulse</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🐼 Panda Express ≥5 min</span><span>☕ Starbucks ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.55789,-121.53932" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2527 (San Clemente, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">951 Avenida Pico, San Clemente, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.45483,-117.60665" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Costco Chino Hills (Chino Hills, CA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">13111 Peyton Drive, Chino Hills, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>📦 Costco ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>💊 CVS ≥3 min</span><span>🦬 Buffalo Wild Wings ≥9 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.01531,-117.74286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Antioch Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">1831 Auto Center Dr, Antioch, CA</div><div class="host">Non-networked</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>⛽ Speedway ≥3 min</span><span>📦 Costco ≥4 min</span><span>⭐ Carl&#x27;s Jr. ≥6 min</span><span>🍔 In-N-Out ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.0075,-121.83165" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Marketplace at Birdcage (Citrus Heights, CA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">6111 Sunrise Blvd, Citrus Heights, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>💻 Best Buy ≥1 min</span><span>🎯 Target ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.67476,-121.27605" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Fremont, CA - Pacific Commons Boulevard - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">43950 Pacific Commons Boulevard, Fremont, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍩 Krispy Kreme ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.50221,-121.96745" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>G&amp;M Oil Chevron #27</span><small>62 kW · 1 stall</small></div>
-<div class="a">14250 Bear Valley Rd, Victorville, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>💻 Best Buy ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🐦 Red Robin ≥6 min</span><span>🌶️ Chili&#x27;s ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.47099,-117.35262" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>DC Corridor Targetpdale</span><small>62 kW · 1 stall</small></div>
-<div class="a">39440 10th Street West, Palmdale, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🎯 Target ≥2 min</span><span>+24</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.59881,-118.1474" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2886 (Pico Rivera, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8500 Washington Blvd, Pico Rivera, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🌮 Del Taco ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.98645,-118.10495" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>BP Ford of Long Beach</span><small>120 kW · 4 stalls</small></div>
-<div class="a">2950 N Bellflower Blvd, Long Beach, CA</div><div class="host">EV Connect</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🍗 KFC ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.81006,-118.12418" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2536 (Tulare, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1110 E. Prosperity Ave., Tulare, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🌮 Taco Bell ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🌮 Del Taco ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.22745,-119.32921" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">198 El Camino Real, South San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🛒 Safeway ≥2 min</span><span>🍗 Popeyes ≥5 min</span><span>🥪 Subway ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>☕ Starbucks ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.6438,-122.4224" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Sc City Hall City Hall DC</span><small>50 kW · 1 stall</small></div>
-<div class="a">910 Calle Negocio, San Clemente, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>⛽ Circle K ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.45082,-117.60764" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Trinity Pkwy</span><small>160 kW · 1 stall</small></div>
-<div class="a">10537 Trinity Pkwy, Stockton, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🐼 Panda Express ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.05122,-121.37538" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Chase Bank - 1200 El Camino Real</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1200 El Camino Real, San Bruno, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐦 Red Robin ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🍔 Five Guys ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.63773,-122.42074" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Dexter</span><small>125 kW · 1 stall</small></div>
-<div class="a">18490 Dexter Ave, Lake Elsinore, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🍔 In-N-Out ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>👑 Burger King ≥2 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69256,-117.33515" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>99 Ranch - Chino Hills</span><small>50 kW · 6 stalls</small></div>
-<div class="a">2959 Chino Ave, Chino Hills, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🦬 Buffalo Wild Wings ≥5 min</span><span>💊 CVS ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>📦 Costco ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.01048,-117.74055" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Norm Reeves Honda Vista Service Center</span><small>75 kW · 2 stalls</small></div>
-<div class="a">401 W Vista Way, Vista, CA</div><div class="host">Loop</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🌶️ Chili&#x27;s ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🍦 Ice cream shop ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🍳 Denny&#x27;s ≥5 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.19787,-117.24915" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Gilroy, CA - Renz Lane - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">914 Renz Ln, Gilroy, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🤡 Jack in the Box ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>💻 Best Buy ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.00678,-121.55071" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Conejo Gateway Plaza</span><small>350 kW · 8 stalls</small></div>
-<div class="a">737 N Wendy Dr, Thousand Oaks, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18939,-118.94164" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Palmdale, CA - 10th St W - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
-<div class="a">39626 10th St W, Palmdale, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍩 Krispy Kreme ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+26</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.60224,-118.14598" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out W Huntington</span><small>125 kW · 1 stall</small></div>
-<div class="a">560 West Huntington Drive, Monrovia, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥖 Panera Bread ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.13999,-118.01121" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 3352 (Stockton, CA)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">10355 Trinity Parkway, Stockton, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🐼 Panda Express ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.05091,-121.37581" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Quality Inn</span><small>25 kW · 1 stall</small></div>
-<div class="a">1010 E Prosperity Ave, Tulare, CA</div><div class="host">Non-networked</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥞 IHOP ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🌮 Del Taco ≥3 min</span><span>⛽ Circle K ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.2256,-119.3336" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Eastlake Village Center East</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2305 Otay Lakes Road, Chula Vista, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍩 Krispy Kreme ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥪 Subway ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64889,-116.96529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Fh Delivery 12339 Fh Svc</span><small>62 kW · 1 stall</small></div>
-<div class="a">16850 S Highland Ave, Fontana, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🥬 Sprouts ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>☕ Dutch Bros ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.13405,-117.43728" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Eastlake Village Center</span><small>60 kW · 12 stalls</small></div>
-<div class="a">2290 Otay Lakes Rd, Chula Vista, CA</div><div class="host">Go To U</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🌯 Chipotle ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.64718,-116.96552" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2077 (Lake Elsinore, CA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">29260 Central Avenue, Lake Elsinore, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🌮 Del Taco ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69454,-117.33339" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Fh Delivery 123Fc Fh Svc</span><small>62 kW · 1 stall</small></div>
-<div class="a">16850 S Highland Ave, Fontana, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🥬 Sprouts ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>☕ Dutch Bros ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.13396,-117.43697" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Temecula, CA - Winchester Road - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">40486 Winchester Rd, Temecula, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍩 Krispy Kreme ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥3 min</span><span>🌮 Del Taco ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.52942,-117.15321" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Westar - Crossroads Santa Maria</span><small>350 kW · 8 stalls</small></div>
-<div class="a">2118 SOUTH BRADLEY ROAD, Santa Maria, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍩 Krispy Kreme ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.92167,-120.4217" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Pleasanton, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">6770 Santa Rita Rd, Pleasanton, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🐼 Panda Express ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.69998,-121.87096" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Calvine Hospitality</span><small>50 kW · 8 stalls</small></div>
-<div class="a">8058 Orchard Loop, Elk Grove, CA</div><div class="host">Evolv Charging</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Del Taco ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.45516,-121.40818" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Fh Delivery 121A4 Fh Svc</span><small>62 kW · 1 stall</small></div>
-<div class="a">16850 S Highland Ave, Fontana, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🥬 Sprouts ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>☕ Dutch Bros ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.1338,-117.4371" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Carwood Skypark</span><small>100 kW · 8 stalls</small></div>
-<div class="a">2485 Notre Dame Blvd, Chico, CA</div><div class="host">Evolv Charging</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.71534,-121.79391" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Fresno, CA - N Blackstone Ave - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">7965 North Blackstone Avenue, Fresno, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥5 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍔 In-N-Out ≥3 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.85036,-119.79126" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Midtown La Midtown DC</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">4550 W Pico Blvd, Los Angeles, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>💊 CVS <i>4 min</i></span><span>🍗 Wingstop <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.0474,-118.33611" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Lowe&#x27;s of Concord</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1935 Arnold Industrial Way, Concord, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.00467,-122.04341" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Lowe&#x27;s of Livermore</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>EVgo</span></div>
+<div class="a">4255 1st St, Livermore, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>1 min</i></span><span>🌶️ Chili&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.69482,-121.74513" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">US Bank Ventura</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVCS</span></div>
+<div class="a">576 S Mills Road, Ventura, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.26559,-119.24574" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Lowe&#x27;s of Hawthorne</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">2800 W 120th St, Hawhorne, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.923,-118.32345" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Dirt Road"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">SDSU River Park</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Dirt Road</span></div>
+<div class="a">25465 West River Park Rd, San Diego, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>🪑 IKEA <i>2 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>📦 Costco <i>5 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.78047,-117.12433" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Paso Robles, CA - Golden Hill Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>43 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2421-2445 Golden Hill Road, Paso Robles, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.64556,-120.66011" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Menifee, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">30340 Haun Road, Menifee, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍔 In-N-Out <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🚗 Sonic <i>5 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.67964,-117.17363" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chula Vista, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">910 Eastlake Parkway, Chula Vista, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.64925,-116.96766" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Foodsco N. Bakersfield H</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">2505 Haley St, Bakersfield, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>2 min</i></span><span>☕ Dutch Bros <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.39641,-118.97565" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Diego, CA - Fenton Parkway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2149 Fenton Parkway, San Diego, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>📦 Costco <i>2 min</i></span><span>🪑 IKEA <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.78151,-117.12778" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">El Centro, CA - North Imperial Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2295 N Imperial Ave, El Centro, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.81409,-115.56788" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Los Banos, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1363 W Pacheco Blvd, Los Banos, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>⭐ Carl&#x27;s Jr. <i>5 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.05567,-120.87516" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ph Subaru</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">17801 Gale Ave, City of Industry, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>📦 Costco <i>6 min</i></span><span>🎯 Target <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.99611,-117.91713" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hawthorne, CA - West 120th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2700 West 120th Avenue, Hawthorne, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🎯 Target <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.9226,-118.32204" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Covina Town Square</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>16 stalls</b><span>EVgo</span></div>
+<div class="a">1460 N Azusa Ave, Covina, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🛒 Walmart <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.1058,-117.90569" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cityofmurrieta Bravol3Ctyhall</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56009,-117.20961" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cityofmurrieta Charliel3Ctyhll</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56005,-117.20956" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cityofmurrieta Alphal3Ctyhall</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1 Town Square Murrieta City Hall, Murrieta, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56016,-117.20968" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gf4Eva Chevron G DC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">7110 Camino Arroyo Dr, Gilroy, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.00675,-121.55184" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2458 (Salinas, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1800 North Main St., Salinas, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>5 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.71885,-121.65052" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Vacaville, CA - East Monte Vista Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>28 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1661 E Monte Vista Ave, Vacaville, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>3 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.37057,-121.95956" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T0914 (Rancho Santa Margarita, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">30602 Santa Margarita Parkway, Rancho Santa Margarita, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.64218,-117.59864" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T2359 (Los Banos, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1405 W Pacheco Blvd, Los Banos, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🎯 Target <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.05477,-120.87648" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">ARCO Lake Washington Boulevard, West Sacramento, CA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>bp pulse</span></div>
+<div class="a">2270 Lake Washington Boulevard, West Sacramento, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>☕ Starbucks <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.55789,-121.53932" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2527 (San Clemente, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">951 Avenida Pico, San Clemente, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.45483,-117.60665" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Costco Chino Hills (Chino Hills, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">13111 Peyton Drive, Chino Hills, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>📦 Costco <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>9 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.01531,-117.74286" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Antioch Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">1831 Auto Center Dr, Antioch, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>📦 Costco <i>4 min</i></span><span>⭐ Carl&#x27;s Jr. <i>6 min</i></span><span>🍔 In-N-Out <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.0075,-121.83165" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Marketplace at Birdcage (Citrus Heights, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">6111 Sunrise Blvd, Citrus Heights, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>💻 Best Buy <i>1 min</i></span><span>🎯 Target <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>5 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.67476,-121.27605" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fremont, CA - Pacific Commons Boulevard - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">43950 Pacific Commons Boulevard, Fremont, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍩 Krispy Kreme <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.50221,-121.96745" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">G&amp;M Oil Chevron #27</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">14250 Bear Valley Rd, Victorville, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>💻 Best Buy <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🐦 Red Robin <i>6 min</i></span><span>🌶️ Chili&#x27;s <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.47099,-117.35262" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">DC Corridor Targetpdale</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">39440 10th Street West, Palmdale, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>+24</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.59881,-118.1474" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2886 (Pico Rivera, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">8500 Washington Blvd, Pico Rivera, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🌮 Del Taco <i>4 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.98645,-118.10495" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">BP Ford of Long Beach</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">2950 N Bellflower Blvd, Long Beach, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🍗 KFC <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.81006,-118.12418" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2536 (Tulare, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1110 E. Prosperity Ave., Tulare, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🌮 Del Taco <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.22745,-119.32921" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Safeway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">198 El Camino Real, South San Francisco, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.6438,-122.4224" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Sc City Hall City Hall DC</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">910 Calle Negocio, San Clemente, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>⭐ Carl&#x27;s Jr. <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.45082,-117.60764" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Trinity Pkwy</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">10537 Trinity Pkwy, Stockton, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.05122,-121.37538" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Chase Bank - 1200 El Camino Real</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1200 El Camino Real, San Bruno, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐦 Red Robin <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🍔 Five Guys <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.63773,-122.42074" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Dexter</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">18490 Dexter Ave, Lake Elsinore, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🍔 In-N-Out <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.69256,-117.33515" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">99 Ranch - Chino Hills</div>
+<div class="sp"><s class="spd std">50 kW</s><b>6 stalls</b><span>EVCS</span></div>
+<div class="a">2959 Chino Ave, Chino Hills, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🦬 Buffalo Wild Wings <i>5 min</i></span><span>💊 CVS <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>📦 Costco <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.01048,-117.74055" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Loop"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Norm Reeves Honda Vista Service Center</div>
+<div class="sp"><s class="spd std">75 kW</s><b>2 stalls</b><span>Loop</span></div>
+<div class="a">401 W Vista Way, Vista, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🌶️ Chili&#x27;s <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍳 Denny&#x27;s <i>5 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.19787,-117.24915" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Gilroy, CA - Renz Lane - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">914 Renz Ln, Gilroy, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.00678,-121.55071" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Conejo Gateway Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">737 N Wendy Dr, Thousand Oaks, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.18939,-118.94164" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Palmdale, CA - 10th St W - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">39626 10th St W, Palmdale, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍩 Krispy Kreme <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+26</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.60224,-118.14598" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out W Huntington</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">560 West Huntington Drive, Monrovia, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🌶️ Chili&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.13999,-118.01121" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 3352 (Stockton, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">10355 Trinity Parkway, Stockton, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.05091,-121.37581" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Quality Inn</div>
+<div class="sp"><s class="spd slow">25 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">1010 E Prosperity Ave, Tulare, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍗 KFC <i>3 min</i></span><span>🌮 Del Taco <i>3 min</i></span><span>⛽ Circle K <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.2256,-119.3336" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Eastlake Village Center East</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2305 Otay Lakes Road, Chula Vista, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🍩 Krispy Kreme <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.64889,-116.96529" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Fh Delivery 12339 Fh Svc</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">16850 S Highland Ave, Fontana, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>🥬 Sprouts <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>☕ Dutch Bros <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.13405,-117.43728" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Go To U"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Eastlake Village Center</div>
+<div class="sp"><s class="spd std">60 kW</s><b>12 stalls</b><span>Go To U</span></div>
+<div class="a">2290 Otay Lakes Rd, Chula Vista, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.64718,-116.96552" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2077 (Lake Elsinore, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">29260 Central Avenue, Lake Elsinore, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🌮 Del Taco <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.69454,-117.33339" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Fh Delivery 123Fc Fh Svc</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">16850 S Highland Ave, Fontana, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🥬 Sprouts <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>☕ Dutch Bros <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.13396,-117.43697" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Temecula, CA - Winchester Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">40486 Winchester Rd, Temecula, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍩 Krispy Kreme <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>3 min</i></span><span>🌮 Del Taco <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.52942,-117.15321" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Westar - Crossroads Santa Maria</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">2118 SOUTH BRADLEY ROAD, Santa Maria, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🍩 Krispy Kreme <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.92167,-120.4217" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pleasanton, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6770 Santa Rita Rd, Pleasanton, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.69998,-121.87096" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evolv Charging"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Calvine Hospitality</div>
+<div class="sp"><s class="spd std">50 kW</s><b>8 stalls</b><span>Evolv Charging</span></div>
+<div class="a">8058 Orchard Loop, Elk Grove, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🤠 Texas Roadhouse <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.45516,-121.40818" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Fh Delivery 121A4 Fh Svc</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">16850 S Highland Ave, Fontana, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🥬 Sprouts <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>☕ Dutch Bros <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.1338,-117.4371" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evolv Charging"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Carwood Skypark</div>
+<div class="sp"><s class="spd std">100 kW</s><b>8 stalls</b><span>Evolv Charging</span></div>
+<div class="a">2485 Notre Dame Blvd, Chico, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.71534,-121.79391" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fresno, CA - N Blackstone Ave - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7965 North Blackstone Avenue, Fresno, CA</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍔 In-N-Out <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.85036,-119.79126" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 123. <a href="../../../?chain=Lowe&#x27;s&amp;state=CA">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in California</h2><div class="chips"><a href="../../starbucks/ca/">☕ Starbucks <small>1387</small></a><a href="../../ice-cream-shop/ca/">🍦 Ice cream shop <small>922</small></a><a href="../../subway/ca/">🥪 Subway <small>867</small></a><a href="../../mcdonald-s/ca/">🍟 McDonald&#x27;s <small>861</small></a><a href="../../taco-bell/ca/">🌮 Taco Bell <small>586</small></a><a href="../../chipotle/ca/">🌯 Chipotle <small>541</small></a><a href="../../cvs/ca/">💊 CVS <small>535</small></a><a href="../../jack-in-the-box/ca/">🤡 Jack in the Box <small>523</small></a><a href="../../panda-express/ca/">🐼 Panda Express <small>506</small></a><a href="../../carl-s-jr/ca/">⭐ Carl&#x27;s Jr. <small>438</small></a><a href="../../target/ca/">🎯 Target <small>408</small></a><a href="../../burger-king/ca/">👑 Burger King <small>400</small></a><a href="../../in-n-out/ca/">🍔 In-N-Out <small>313</small></a><a href="../../denny-s/ca/">🍳 Denny&#x27;s <small>303</small></a><a href="../../walgreens/ca/">💊 Walgreens <small>269</small></a><a href="../../panera-bread/ca/">🥖 Panera Bread <small>255</small></a><a href="../../chick-fil-a/ca/">🐔 Chick-fil-A <small>244</small></a><a href="../../kfc/ca/">🍗 KFC <small>242</small></a><a href="../../ihop/ca/">🥞 IHOP <small>236</small></a><a href="../../wendy-s/ca/">🍔 Wendy&#x27;s <small>236</small></a><a href="../../walmart/ca/">🛒 Walmart <small>233</small></a><a href="../../wingstop/ca/">🍗 Wingstop <small>230</small></a><a href="../../domino-s/ca/">🍕 Domino&#x27;s <small>224</small></a><a href="../../jersey-mike-s/ca/">🥪 Jersey Mike&#x27;s <small>220</small></a><a href="../../home-depot/ca/">🔨 Home Depot <small>212</small></a><a href="../../safeway/ca/">🛒 Safeway <small>210</small></a><a href="../../trader-joe-s/ca/">🛍️ Trader Joe&#x27;s <small>209</small></a><a href="../../del-taco/ca/">🌮 Del Taco <small>195</small></a><a href="../../popeyes/ca/">🍗 Popeyes <small>193</small></a><a href="../../peet-s-coffee/ca/">☕ Peet&#x27;s Coffee <small>193</small></a><a href="../../best-buy/ca/">💻 Best Buy <small>184</small></a><a href="../../little-caesars/ca/">🍕 Little Caesars <small>172</small></a><a href="../../costco/ca/">📦 Costco <small>166</small></a><a href="../../five-guys/ca/">🍔 Five Guys <small>162</small></a><a href="../../circle-k/ca/">⛽ Circle K <small>143</small></a><a href="../../sprouts/ca/">🥬 Sprouts <small>143</small></a><a href="../../raising-cane-s/ca/">🐕 Raising Cane&#x27;s <small>139</small></a><a href="../../chili-s/ca/">🌶️ Chili&#x27;s <small>138</small></a><a href="../../whole-foods/ca/">🥬 Whole Foods <small>134</small></a><a href="../../pizza-hut/ca/">🍕 Pizza Hut <small>130</small></a><a href="../../buffalo-wild-wings/ca/">🦬 Buffalo Wild Wings <small>120</small></a><a href="../../applebee-s/ca/">🍎 Applebee&#x27;s <small>110</small></a><a href="../../olive-garden/ca/">🍝 Olive Garden <small>101</small></a><a href="../../dutch-bros/ca/">☕ Dutch Bros <small>96</small></a><a href="../../dunkin/ca/">🍩 Dunkin&#x27; <small>94</small></a><a href="../../aldi/ca/">🛒 Aldi <small>90</small></a><a href="../../red-robin/ca/">🐦 Red Robin <small>81</small></a><a href="../../shake-shack/ca/">🍔 Shake Shack <small>78</small></a><a href="../../krispy-kreme/ca/">🍩 Krispy Kreme <small>77</small></a><a href="../../arby-s/ca/">🥩 Arby&#x27;s <small>76</small></a><a href="../../speedway/ca/">⛽ Speedway <small>76</small></a><a href="../../sonic/ca/">🚗 Sonic <small>57</small></a><a href="../../firehouse-subs/ca/">🚒 Firehouse Subs <small>48</small></a><a href="../../tractor-supply/ca/">🚜 Tractor Supply <small>42</small></a><a href="../../sam-s-club/ca/">🏪 Sam&#x27;s Club <small>35</small></a><a href="../../dairy-queen/ca/">🍦 Dairy Queen <small>30</small></a><a href="../../dollar-general/ca/">🏪 Dollar General <small>30</small></a><a href="../../texas-roadhouse/ca/">🤠 Texas Roadhouse <small>22</small></a><a href="../../ikea/ca/">🪑 IKEA <small>21</small></a><a href="../../pilot/ca/">⛽ Pilot <small>21</small></a><a href="../../love-s/ca/">⛽ Love&#x27;s <small>18</small></a><a href="../../ta-travel-center/ca/">⛽ TA Travel Center <small>14</small></a><a href="../../flying-j/ca/">⛽ Flying J <small>13</small></a><a href="../../cracker-barrel/ca/">🪵 Cracker Barrel <small>8</small></a><a href="../../portillo-s/ca/">🌭 Portillo&#x27;s <small>4</small></a></div>
 <h2>Lowe&#x27;s in other states</h2><div class="chips"><a href="../">All states</a></div>

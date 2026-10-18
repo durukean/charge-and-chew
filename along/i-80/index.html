@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,306 +38,366 @@ order along the route, CA → NV → UT → WY → NE → IA → IL → IN → M
 150 kW or more and <b>449</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, CA - Letterman Drive - Tesla Supercharger</span><small>75 kW · 6 stalls</small></div>
-<div class="a">1 Letterman Drive, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>💊 Walgreens ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79889,-122.44845" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0739 Mission Street (San Francisco, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">3350 Mission Street, San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>👑 Burger King ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walgreens&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.74291,-122.42203" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, CA - Van Ness Avenue - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
-<div class="a">601 Van Ness Avenue, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥2 min</span><span>💊 CVS ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍗 KFC ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥪 Subway ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.7811,-122.42202" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0995 Webster Street (San Francisco, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">1335 Webster St., San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>👑 Burger King ≥3 min</span><span>💊 Walgreens ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Popeyes&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78365,-122.4313" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, CA - Geary Boulevard - Tesla Supercharger</span><small>250 kW · 34 stalls</small></div>
-<div class="a">2675 Geary Blvd, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78206,-122.44697" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Market</span><small>50 kW · 2 stalls</small></div>
-<div class="a">450 Rhode Island St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥8 min</span><span>🛒 Safeway ≥8 min</span><span>☕ Starbucks ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76443,-122.40282" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Market</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1765 California St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>💊 CVS ≥4 min</span><span>🛍️ Trader Joe&#x27;s ≥7 min</span><span>🍕 Domino&#x27;s ≥8 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78992,-122.42381" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Lucky San Francisco #756</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1750 Fulton St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>☕ Peet&#x27;s Coffee ≥8 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🎯 Target ≥8 min</span><span>🍗 Popeyes ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77604,-122.44565" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hudson Pacific 1455 Lobby</span><small>62 kW · 1 stall</small></div>
-<div class="a">1455 Market St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🥬 Whole Foods ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🥪 Subway ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77575,-122.41819" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, CA - 16th Street - Tesla Supercharger</span><small>75 kW · 12 stalls</small></div>
-<div class="a">2300 16th Street, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥1 min</span><span>🛒 Safeway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>💻 Best Buy ≥5 min</span><span>📦 Costco ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76582,-122.40985" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>2860 16th St</span><small>350 kW · 26 stalls</small></div>
-<div class="a">2860 16th St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥3 min</span><span>💻 Best Buy ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span><span>☕ Starbucks ≥8 min</span><span>🛒 Safeway ≥8 min</span><span>☕ Peet&#x27;s Coffee ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76549,-122.41673" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>The Mart SF</span><small>50 kW · 1 stall</small></div>
-<div class="a">1355 Market St, San Francisco, CA</div><div class="host">Non-networked</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥3 min</span><span>🥬 Whole Foods ≥4 min</span><span>🥪 Subway ≥6 min</span><span>💊 CVS ≥9 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walgreens&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77712,-122.41647" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Revel Mission District</span><small>320 kW · 6 stalls</small></div>
-<div class="a">199 Erie St, San Francisco, CA</div><div class="host">Revel</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span><span>💻 Best Buy ≥8 min</span><span>🥬 Whole Foods ≥8 min</span><span>☕ Starbucks ≥9 min</span><span>🛒 Safeway ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76892,-122.41975" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bayview Plaza San Francisco</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3911 3rd St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.74134,-122.38799" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Potrero Center</span><small>350 kW · 8 stalls</small></div>
-<div class="a">2300 16th Street, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥1 min</span><span>🛒 Safeway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>💻 Best Buy ≥5 min</span><span>📦 Costco ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.76582,-122.4095" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>1001 Harrison St</span><small>350 kW · 14 stalls</small></div>
-<div class="a">1001 Harrison St., San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥8 min</span><span>☕ Peet&#x27;s Coffee ≥8 min</span><span>🛍️ Trader Joe&#x27;s ≥9 min</span><span>🍦 Ice cream shop ≥9 min</span><span>💊 Walgreens ≥10 min</span><span>🪑 IKEA ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77695,-122.40423" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, CA - Lombard Street - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">1965 Lombard St, San Francisco, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Shake Shack</b> ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🥞 IHOP ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Shake Shack&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.7999,-122.43382" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>San Francisco, Rechargery Relay - CA Folsom St</span><small>400 kW · 10 stalls</small></div>
-<div class="a">1401 Folsom St, San Francisco, CA</div><div class="host">IONNA</div>
-<div class="c"><span>📦 <b>Costco</b> ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>💻 Best Buy ≥6 min</span><span>🛍️ Trader Joe&#x27;s ≥6 min</span><span>💊 Walgreens ≥8 min</span><span>☕ Starbucks ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Costco&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77252,-122.41282" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Market</span><small>50 kW · 2 stalls</small></div>
-<div class="a">399 4th St, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>🌯 Chipotle ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>🎯 Target ≥6 min</span><span>💊 Walgreens ≥8 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78127,-122.40007" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVgo 350 Pacific Hub</span><small>350 kW · 4 stalls</small></div>
-<div class="a">350 Pacific Ave, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🛒 Safeway ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🥪 Subway ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79776,-122.40186" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rincon Center</span><small>62 kW · 1 stall</small></div>
-<div class="a">121 Spear St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🥪 Subway ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79188,-122.39305" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>101 Lombard St Levis Rapid</span><small>50 kW · 1 stall</small></div>
-<div class="a">101 Lombard St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥2 min</span><span>🍦 Ice cream shop ≥8 min</span><span>💊 Walgreens ≥9 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.80371,-122.40447" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Northpark Gaw 750 Front S-1</span><small>62 kW · 1 stall</small></div>
-<div class="a">16 Front St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥2 min</span><span>🛒 Safeway ≥2 min</span><span>🍦 Ice cream shop ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🌯 Chipotle ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79819,-122.39965" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Harrison Street Flagship (San Francisco, CA)</span><small>350 kW · 20 stalls</small></div>
-<div class="a">928 Harrison Street, San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥5 min</span><span>🍦 Ice cream shop ≥8 min</span><span>☕ Starbucks ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>💊 Walgreens ≥8 min</span><span>🎯 Target ≥9 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.77856,-122.40272" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>560 Mission</span><small>62 kW · 1 stall</small></div>
-<div class="a">560 Mission St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78889,-122.39953" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>303 Second St. Kilroy</span><small>62 kW · 1 stall</small></div>
-<div class="a">303 2nd St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌯 <b>Chipotle</b> ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>☕ Peet&#x27;s Coffee ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.7856,-122.3963" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hills Plaza Hp EV</span><small>62 kW · 1 stall</small></div>
-<div class="a">345 Spear St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥3 min</span><span>🌯 Chipotle ≥7 min</span><span>🍦 Ice cream shop ≥8 min</span><span>💊 Walgreens ≥8 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78978,-122.38988" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ic Sf B2 Evc</span><small>50 kW · 1 stall</small></div>
-<div class="a">440 Stevenson St, San Francisco, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥1 min</span><span>🪑 IKEA ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>👑 Burger King ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78318,-122.40968" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T1507 (Richmond, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4500 Macdonald Ave, Richmond, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🔨 Home Depot ≥7 min</span><span>☕ Starbucks ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.93182,-122.32935" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Richmond, CA - Meeker Avenue - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
-<div class="a">2157 Meeker Avenue, Richmond, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>CVS</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.91989,-122.34859" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Del Norte Plaza</span><small>350 kW · 12 stalls</small></div>
-<div class="a">11279 San Pablo Ave, El Cerrito, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍳 <b>Denny&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Safeway ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🥞 IHOP ≥5 min</span><span>💊 Walgreens ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Denny&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.92056,-122.31572" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Site Centers Hilltop Plaza (Richmond, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3401 Blume Drive, Richmond, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.98352,-122.31927" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hanlees Hilltop Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">3277 Auto Plaza, Richmond, CA</div><div class="host">Non-networked</div>
-<div class="c"><span>🥞 <b>IHOP</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=IHOP&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.98521,-122.32138" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hilltop Hyundai</span><small>62 kW · 1 stall</small></div>
-<div class="a">3280 Auto Plaza, Richmond, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥞 <b>IHOP</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍎 Applebee&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=IHOP&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.98521,-122.31985" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Richmond, CA - Pierce Street - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">3288 Pierce St, Richmond, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌯 <b>Chipotle</b> ≥7 min</span><span>👑 Burger King ≥8 min</span><span>☕ Peet&#x27;s Coffee ≥8 min</span><span>🍗 Popeyes ≥9 min</span><span>☕ Starbucks ≥9 min</span><span>💊 CVS ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.89843,-122.3089" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>El Cerrito, CA - Tesla Supercharger</span><small>75 kW · 14 stalls</small></div>
-<div class="a">280 El Cerrito Plaza, El Cerrito, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Trader Joe&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.89864,-122.30062" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Joes EV Charging</span><small>400 kW · 4 stalls</small></div>
-<div class="a">600 Gilman St, Berkeley, CA</div><div class="host">EV Connect</div>
-<div class="c"><span>🎯 <b>Target</b> ≥6 min</span><span>🥬 Whole Foods ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.87813,-122.30604" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Berkeley Tob Gilman St</span><small>50 kW · 1 stall</small></div>
-<div class="a">600 Gilman St, Berkeley, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🎯 <b>Target</b> ≥6 min</span><span>🥬 Whole Foods ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.87813,-122.30604" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pinole, CA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">1552 Fitzgerald Drive, Pinole, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⭐ <b>Carl&#x27;s Jr.</b> ≥1 min</span><span>🍗 KFC ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Carl&#x27;s Jr.&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.99074,-122.30168" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Solar Express</span><small>60 kW · 2 stalls</small></div>
-<div class="a">2434 San Pablo ave, Berkeley, CA</div><div class="host">Noodoe</div>
-<div class="c"><span>🤡 <b>Jack in the Box</b> ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Jack in the Box&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.86214,-122.29018" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Bay Area CoRoasters</span><small>120 kW · 10 stalls</small></div>
-<div class="a">2322 Fifth St, Berkeley, CA</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>Circle K</b> ≥8 min</span><span>👑 Burger King ≥9 min</span><span>🤡 Jack in the Box ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Circle K&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.86232,-122.29742" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Berkeley Bowl Produce-Berkeley Bowl West (Berkeley, CA)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">920 Heinz Ave, Berkeley, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.85394,-122.29073" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Ashby Plaza</span><small>350 kW · 8 stalls</small></div>
-<div class="a">1025 Ashby Ave, Berkeley, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥5 min</span><span>🥪 Subway ≥8 min</span><span>☕ Starbucks ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.85213,-122.28898" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Berkeley - Telegraph</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3000 Telegraph Ave, Berkeley, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>🤡 Jack in the Box ≥6 min</span><span>💊 Walgreens ≥8 min</span><span>🍦 Ice cream shop ≥9 min</span><span>💊 CVS ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.85553,-122.26077" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Emeryville, CA - Shellmound Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">5959 Shellmound Street, Emeryville, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>👑 Burger King ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.84038,-122.29406" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Public Market</span><small>50 kW · 2 stalls</small></div>
-<div class="a">5959 Shellmound St, Emeryville, CA</div><div class="host">EVgo</div>
-<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🛍️ Trader Joe&#x27;s ≥4 min</span><span>👑 Burger King ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.84018,-122.29383" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Emeryville, CA - Christie Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">5795 Christie Avenue, Emeryville, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.83752,-122.29541" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T2829 (Alameda, CA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2700 5th Street, Alameda, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.78958,-122.28003" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>IKEA San Francisco (Emeryville, CA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">4400 Shellmound St, Emeryville, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🎯 <b>Target</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>💊 CVS ≥2 min</span><span>🪑 IKEA ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>💻 Best Buy ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.82891,-122.2913" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Oakland, CA - 2nd Street - Tesla Supercharger</span><small>75 kW · 12 stalls</small></div>
-<div class="a">255 2nd Street, Oakland, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79418,-122.27239" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Market</span><small>50 kW · 4 stalls</small></div>
-<div class="a">230 Bay Pl, Oakland, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>🍦 Ice cream shop ≥7 min</span><span>💊 Walgreens ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>🥬 Sprouts ≥8 min</span><span>☕ Starbucks ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.81333,-122.26058" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Jack London Square</span><small>350 kW · 8 stalls</small></div>
-<div class="a">409 Washington St., Oakland, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥2 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>🐼 Panda Express ≥9 min</span><span>🍗 Popeyes ≥9 min</span><span>🥪 Subway ≥10 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79818,-122.27696" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>US Bank Oakland</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1970 Franklin Street, Oakland, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥4 min</span><span>🌮 Taco Bell ≥6 min</span><span>💊 Walgreens ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>🥪 Subway ≥9 min</span><span>🐼 Panda Express ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.80833,-122.26681" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Citi Trends Oakland</span><small>350 kW · 8 stalls</small></div>
-<div class="a">900 Market St, Oakland, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Popeyes ≥9 min</span><span>🥪 Subway ≥9 min</span><span>🐼 Panda Express ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.80375,-122.28204" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ava Charge - City Center West Garage</span><small>360 kW · 31 stalls</small></div>
-<div class="a">1231 Jefferson Street, Oakland, CA</div><div class="host">EV Connect</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>🍗 KFC ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Popeyes&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.80475,-122.27562" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>BOA Emeryville CA4-137 (Emeryville, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">4120 San Pablo Avenue, Emeryville, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥞 <b>IHOP</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🐼 Panda Express ≥3 min</span><span>🍗 KFC ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Little Caesars ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=IHOP&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.83268,-122.27974" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Temescal (TCL)</span><small>100 kW · 2 stalls</small></div>
-<div class="a">5110 Telegraph Ave, Oakland, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🤡 Jack in the Box ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.8376,-122.26167" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sprouts</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1300 Pinole Valley Rd, Pinole, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🌯 Chipotle ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥6 min</span><span>🛍️ Trader Joe&#x27;s ≥7 min</span><span>💊 Walgreens ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00011,-122.28698" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Save Mart-Lucky 718 (Hercules, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1590 Sycamore Ave, Hercules, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>🤡 Jack in the Box ≥7 min</span><span>☕ Starbucks ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00789,-122.2697" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 2874 (Hercules, CA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">4080 San Pablo Ave, Hercules, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>🤡 Jack in the Box ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🔨 Home Depot ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.01479,-122.27165" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Francisco, CA - Letterman Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1 Letterman Drive, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>💊 Walgreens <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79889,-122.44845" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0739 Mission Street (San Francisco, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">3350 Mission Street, San Francisco, CA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>1 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>👑 Burger King <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.74291,-122.42203" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walgreens&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Francisco, CA - Van Ness Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">601 Van Ness Avenue, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.7811,-122.42202" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0995 Webster Street (San Francisco, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">1335 Webster St., San Francisco, CA</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78365,-122.4313" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Popeyes&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Francisco, CA - Geary Boulevard - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>34 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2675 Geary Blvd, San Francisco, CA</div>
+<div class="c"><span>🎯 <b>Target</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78206,-122.44697" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">450 Rhode Island St, San Francisco, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>8 min</i></span><span>🛒 Safeway <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.76443,-122.40282" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1765 California St, San Francisco, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>💊 CVS <i>4 min</i></span><span>🛍️ Trader Joe&#x27;s <i>7 min</i></span><span>🍕 Domino&#x27;s <i>8 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78992,-122.42381" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Lucky San Francisco #756</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1750 Fulton St, San Francisco, CA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>8 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>☕ Peet&#x27;s Coffee <i>8 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🎯 Target <i>8 min</i></span><span>🍗 Popeyes <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77604,-122.44565" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hudson Pacific 1455 Lobby</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1455 Market St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🥬 Whole Foods <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🥪 Subway <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77575,-122.41819" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Francisco, CA - 16th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2300 16th Street, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>1 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>📦 Costco <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.76582,-122.40985" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">2860 16th St</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>26 stalls</b><span>EVgo</span></div>
+<div class="a">2860 16th St, San Francisco, CA</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>3 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>🛒 Safeway <i>8 min</i></span><span>☕ Peet&#x27;s Coffee <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.76549,-122.41673" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">The Mart SF</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">1355 Market St, San Francisco, CA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>3 min</i></span><span>🥬 Whole Foods <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>💊 CVS <i>9 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77712,-122.41647" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walgreens&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Revel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Revel Mission District</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>6 stalls</b><span>Revel</span></div>
+<div class="a">199 Erie St, San Francisco, CA</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>💻 Best Buy <i>8 min</i></span><span>🥬 Whole Foods <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>🛒 Safeway <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.76892,-122.41975" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Bayview Plaza San Francisco</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3911 3rd St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.74134,-122.38799" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Potrero Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">2300 16th Street, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>1 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>📦 Costco <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.76582,-122.4095" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">1001 Harrison St</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>14 stalls</b><span>EVgo</span></div>
+<div class="a">1001 Harrison St., San Francisco, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>8 min</i></span><span>☕ Peet&#x27;s Coffee <i>8 min</i></span><span>🛍️ Trader Joe&#x27;s <i>9 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span><span>💊 Walgreens <i>10 min</i></span><span>🪑 IKEA <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77695,-122.40423" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">San Francisco, CA - Lombard Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1965 Lombard St, San Francisco, CA</div>
+<div class="c"><span>🍔 <b>Shake Shack</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.7999,-122.43382" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Shake Shack&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">San Francisco, Rechargery Relay - CA Folsom St</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">1401 Folsom St, San Francisco, CA</div>
+<div class="c"><span>📦 <b>Costco</b> <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>5 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🛍️ Trader Joe&#x27;s <i>6 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77252,-122.41282" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Costco&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">399 4th St, San Francisco, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🎯 Target <i>6 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78127,-122.40007" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">EVgo 350 Pacific Hub</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">350 Pacific Ave, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🛒 Safeway <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🥪 Subway <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79776,-122.40186" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Rincon Center</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">121 Spear St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🥪 Subway <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79188,-122.39305" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">101 Lombard St Levis Rapid</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">101 Lombard St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>💊 Walgreens <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.80371,-122.40447" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Northpark Gaw 750 Front S-1</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">16 Front St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>2 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79819,-122.39965" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Harrison Street Flagship (San Francisco, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>20 stalls</b><span>Electrify America</span></div>
+<div class="a">928 Harrison Street, San Francisco, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🎯 Target <i>9 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.77856,-122.40272" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">560 Mission</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">560 Mission St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78889,-122.39953" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">303 Second St. Kilroy</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">303 2nd St, San Francisco, CA</div>
+<div class="c"><span>🌯 <b>Chipotle</b> <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>☕ Peet&#x27;s Coffee <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.7856,-122.3963" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hills Plaza Hp EV</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">345 Spear St, San Francisco, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>3 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78978,-122.38988" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ic Sf B2 Evc</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">440 Stevenson St, San Francisco, CA</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>1 min</i></span><span>🪑 IKEA <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78318,-122.40968" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T1507 (Richmond, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">4500 Macdonald Ave, Richmond, CA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🔨 Home Depot <i>7 min</i></span><span>☕ Starbucks <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.93182,-122.32935" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Richmond, CA - Meeker Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2157 Meeker Avenue, Richmond, CA</div>
+<div class="c"><span>💊 <b>CVS</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.91989,-122.34859" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Del Norte Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>12 stalls</b><span>EVgo</span></div>
+<div class="a">11279 San Pablo Ave, El Cerrito, CA</div>
+<div class="c"><span>🍳 <b>Denny&#x27;s</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.92056,-122.31572" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Denny&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Site Centers Hilltop Plaza (Richmond, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">3401 Blume Drive, Richmond, CA</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.98352,-122.31927" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Hanlees Hilltop Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">3277 Auto Plaza, Richmond, CA</div>
+<div class="c"><span>🥞 <b>IHOP</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.98521,-122.32138" target="_blank" rel="noopener">Directions</a><a href="../../?chain=IHOP&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hilltop Hyundai</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3280 Auto Plaza, Richmond, CA</div>
+<div class="c"><span>🥞 <b>IHOP</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.98521,-122.31985" target="_blank" rel="noopener">Directions</a><a href="../../?chain=IHOP&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Richmond, CA - Pierce Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3288 Pierce St, Richmond, CA</div>
+<div class="c"><span>🌯 <b>Chipotle</b> <i>7 min</i></span><span>👑 Burger King <i>8 min</i></span><span>☕ Peet&#x27;s Coffee <i>8 min</i></span><span>🍗 Popeyes <i>9 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>💊 CVS <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.89843,-122.3089" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chipotle&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">El Cerrito, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>14 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">280 El Cerrito Plaza, El Cerrito, CA</div>
+<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.89864,-122.30062" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Trader Joe&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Joes EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">600 Gilman St, Berkeley, CA</div>
+<div class="c"><span>🎯 <b>Target</b> <i>6 min</i></span><span>🥬 Whole Foods <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.87813,-122.30604" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Berkeley Tob Gilman St</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">600 Gilman St, Berkeley, CA</div>
+<div class="c"><span>🎯 <b>Target</b> <i>6 min</i></span><span>🥬 Whole Foods <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.87813,-122.30604" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pinole, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1552 Fitzgerald Drive, Pinole, CA</div>
+<div class="c"><span>⭐ <b>Carl&#x27;s Jr.</b> <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.99074,-122.30168" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Carl&#x27;s Jr.&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Noodoe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Solar Express</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Noodoe</span></div>
+<div class="a">2434 San Pablo ave, Berkeley, CA</div>
+<div class="c"><span>🤡 <b>Jack in the Box</b> <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.86214,-122.29018" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Jack in the Box&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bay Area CoRoasters</div>
+<div class="sp"><s class="spd std">120 kW</s><b>10 stalls</b><span>EV Connect</span></div>
+<div class="a">2322 Fifth St, Berkeley, CA</div>
+<div class="c"><span>⛽ <b>Circle K</b> <i>8 min</i></span><span>👑 Burger King <i>9 min</i></span><span>🤡 Jack in the Box <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.86232,-122.29742" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Circle K&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Berkeley Bowl Produce-Berkeley Bowl West (Berkeley, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">920 Heinz Ave, Berkeley, CA</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.85394,-122.29073" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Ashby Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">1025 Ashby Ave, Berkeley, CA</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>5 min</i></span><span>🥪 Subway <i>8 min</i></span><span>☕ Starbucks <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.85213,-122.28898" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Berkeley - Telegraph</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3000 Telegraph Ave, Berkeley, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span><span>💊 CVS <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.85553,-122.26077" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Emeryville, CA - Shellmound Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5959 Shellmound Street, Emeryville, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.84038,-122.29406" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Public Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">5959 Shellmound St, Emeryville, CA</div>
+<div class="c"><span>☕ <b>Peet&#x27;s Coffee</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🛍️ Trader Joe&#x27;s <i>4 min</i></span><span>👑 Burger King <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.84018,-122.29383" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Peet&#x27;s Coffee&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Emeryville, CA - Christie Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5795 Christie Avenue, Emeryville, CA</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.83752,-122.29541" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T2829 (Alameda, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">2700 5th Street, Alameda, CA</div>
+<div class="c"><span>🎯 <b>Target</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.78958,-122.28003" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">IKEA San Francisco (Emeryville, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">4400 Shellmound St, Emeryville, CA</div>
+<div class="c"><span>🎯 <b>Target</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🪑 IKEA <i>3 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.82891,-122.2913" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Oakland, CA - 2nd Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">255 2nd Street, Oakland, CA</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79418,-122.27239" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">230 Bay Pl, Oakland, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>🥬 Sprouts <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.81333,-122.26058" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Jack London Square</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">409 Washington St., Oakland, CA</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>🐼 Panda Express <i>9 min</i></span><span>🍗 Popeyes <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79818,-122.27696" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">US Bank Oakland</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVCS</span></div>
+<div class="a">1970 Franklin Street, Oakland, CA</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>4 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>🥪 Subway <i>9 min</i></span><span>🐼 Panda Express <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.80833,-122.26681" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Citi Trends Oakland</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">900 Market St, Oakland, CA</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍗 Popeyes <i>9 min</i></span><span>🥪 Subway <i>9 min</i></span><span>🐼 Panda Express <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.80375,-122.28204" target="_blank" rel="noopener">Directions</a><a href="../../?chain=KFC&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ava Charge - City Center West Garage</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>31 stalls</b><span>EV Connect</span></div>
+<div class="a">1231 Jefferson Street, Oakland, CA</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🍗 KFC <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.80475,-122.27562" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Popeyes&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">BOA Emeryville CA4-137 (Emeryville, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">4120 San Pablo Avenue, Emeryville, CA</div>
+<div class="c"><span>🥞 <b>IHOP</b> <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍗 KFC <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Little Caesars <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.83268,-122.27974" target="_blank" rel="noopener">Directions</a><a href="../../?chain=IHOP&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Temescal (TCL)</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">5110 Telegraph Ave, Oakland, CA</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🤡 Jack in the Box <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.8376,-122.26167" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Sprouts</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1300 Pinole Valley Rd, Pinole, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>6 min</i></span><span>🛍️ Trader Joe&#x27;s <i>7 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.00011,-122.28698" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Save Mart-Lucky 718 (Hercules, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1590 Sycamore Ave, Hercules, CA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🤡 Jack in the Box <i>7 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.00789,-122.2697" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 2874 (Hercules, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">4080 San Pablo Ave, Hercules, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.01479,-122.27165" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

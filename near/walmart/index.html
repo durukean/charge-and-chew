@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Walmart">Open on the map →</a>
 <p class="stats">Of the 1849 fast chargers with a Walmart nearby across the US: The typical stop here delivers <b>250 kW</b>, and 1300 of them do 150 kW or more; <b>461</b> are close enough that the Walmart is a two-minute walk or less; <b>1670</b> are listed as open 24 hours. The fastest is <b>Target - Tesla Supercharger</b> in Greenwood at 500 kW; the closest walk is 1 min at <b>Walmart EV Charging</b>. Most are on Tesla Supercharger (430), Electrify America (374), ChargePoint (247).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>233</small></a><a href="tx/">Texas <small>132</small></a><a href="fl/">Florida <small>132</small></a><a href="ny/">New York <small>74</small></a><a href="ga/">Georgia <small>73</small></a><a href="il/">Illinois <small>71</small></a><a href="nc/">North Carolina <small>62</small></a><a href="oh/">Ohio <small>57</small></a><a href="va/">Virginia <small>57</small></a><a href="co/">Colorado <small>54</small></a><a href="wa/">Washington <small>49</small></a><a href="az/">Arizona <small>48</small></a><a href="mo/">Missouri <small>46</small></a><a href="ok/">Oklahoma <small>43</small></a><a href="mi/">Michigan <small>43</small></a><a href="mn/">Minnesota <small>42</small></a><a href="pa/">Pennsylvania <small>39</small></a><a href="ut/">Utah <small>37</small></a><a href="wi/">Wisconsin <small>37</small></a><a href="nj/">New Jersey <small>35</small></a><a href="ma/">Massachusetts <small>34</small></a><a href="or/">Oregon <small>34</small></a><a href="in/">Indiana <small>33</small></a><a href="sc/">South Carolina <small>31</small></a><a href="al/">Alabama <small>28</small></a><a href="md/">Maryland <small>28</small></a><a href="tn/">Tennessee <small>27</small></a><a href="ne/">Nebraska <small>22</small></a><a href="nm/">New Mexico <small>21</small></a><a href="la/">Louisiana <small>21</small></a><a href="id/">Idaho <small>20</small></a><a href="nv/">Nevada <small>20</small></a><a href="ar/">Arkansas <small>19</small></a><a href="ia/">Iowa <small>17</small></a><a href="nh/">New Hampshire <small>15</small></a><a href="wv/">West Virginia <small>15</small></a><a href="ct/">Connecticut <small>15</small></a><a href="me/">Maine <small>13</small></a><a href="ky/">Kentucky <small>11</small></a><a href="ks/">Kansas <small>10</small></a><a href="ms/">Mississippi <small>10</small></a><a href="hi/">Hawaii <small>8</small></a><a href="wy/">Wyoming <small>6</small></a><a href="nd/">North Dakota <small>6</small></a><a href="mt/">Montana <small>5</small></a><a href="vt/">Vermont <small>3</small></a><a href="sd/">South Dakota <small>3</small></a><a href="ak/">Alaska <small>3</small></a><a href="de/">Delaware <small>3</small></a><a href="dc/">Washington DC <small>2</small></a><a href="ri/">Rhode Island <small>2</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">11700 US Highway 380, Cross Roads, TX</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍗 Wingstop ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.22801,-96.98402" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1606 S Signal Butte Rd, Mesa, AZ</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🐼 Panda Express ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍔 In-N-Out ≥5 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.38506,-111.59993" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3501 S Florida Ave, Lakeland, FL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.00078,-81.95949" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">2555 W Apache Trl, Apache Junction, AZ</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🤡 Jack in the Box ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 KFC ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.41382,-111.57534" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">432 S George Nigh Expy, McAlester, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🏪 Dollar General ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.9192,-95.74048" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">9020 Ulmerton Rd, Largo, FL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🦆 Wawa ≥2 min</span><span>☕ Starbucks ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍗 Popeyes ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.8931,-82.76422" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1380 W Elliot Rd, Tempe, AZ</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.35104,-111.96106" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1400 N Walton Blvd, Bentonville, AR</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.38915,-94.21932" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">906 SW Regional Airport Blvd, Bentonville, AR</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.33725,-94.22391" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3510 SE 14th St, Bentonville, AR</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🏪 Sam&#x27;s Club ≥2 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.35429,-94.17109" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">8250 Razorback Rd, Colorado Springs, CO</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>🐦 Red Robin ≥4 min</span><span>🪵 Cracker Barrel ≥4 min</span><span>🍝 Olive Garden ≥5 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.94987,-104.79967" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">16960 W Maple Rd, Omaha, NE</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍕 Casey&#x27;s ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍦 Culver&#x27;s ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=NE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.29474,-96.18013" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">8745 State Rd 54, New Port Richey, FL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🥬 Sprouts ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.20781,-82.66833" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">23106 US Highway 19 N, Clearwater, FL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🥬 Sprouts ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.9828,-82.73252" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">2200 Holly Springs Pkwy, Holly Springs, GA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18541,-84.50443" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1360 Draper Pkwy, Draper, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🥞 IHOP ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.52674,-111.85249" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">136 W State Rd 73, Saratoga Springs, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>+15</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.38949,-111.91968" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1035 Hickory Creek Blvd, Hickory Creek, TX</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🍔 Whataburger ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.12795,-97.04632" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3116 S Garnett Rd, Tulsa, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍔 Whataburger ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11824,-95.85356" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">850 S Barrington Rd, Streamwood, IL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🛒 Aldi ≥3 min</span><span>🌭 Portillo&#x27;s ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🍗 KFC ≥6 min</span><span>🌮 Taco Bell ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.01526,-88.14814" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 10 stalls</small></div>
-<div class="a">3626 Touhy Ave, Skokie, IL</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.01283,-87.71914" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">700 American Blvd E, Bloomington, MN</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.8608,-93.26568" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">6437 N MacArthur Blvd, Warr Acres, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.53804,-97.62107" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1725 W Hunt Hwy, San Tan Valley, AZ</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🍕 Little Caesars ≥3 min</span><span>👑 Burger King ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.17634,-111.58466" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">9320 N Pennsylvania Pl, The Village, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.56503,-97.54757" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3301 Tower Rd, Aurora, CO</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🔨 Home Depot ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🌮 Del Taco ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.76167,-104.77437" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3131 N Cedar Ave, Fresno, CA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>👑 Burger King ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.77897,-119.75621" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">5018 Ames Ave, Omaha, NE</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=NE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.30212,-95.99146" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">4010 172nd St NE, Arlington, WA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.15052,-122.17544" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Stallbrook Marketplace (Bellingham, MA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">250 Hartford Avenue, Bellingham, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⛽ Speedway ≥7 min</span><span>🔨 Home Depot ≥7 min</span><span>🥬 Whole Foods ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.11624,-71.46529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2037 (Aberdeen, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">909 E Wishkah St, Aberdeen, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>☕ Dutch Bros ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍗 KFC ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.97531,-123.80674" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1201 SW 13th Ave, Battle Ground, WA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐦 Red Robin ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.7724,-122.54952" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">14505 NE Fourth Plain Blvd, Vancouver, WA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🐼 Panda Express ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>☕ Dutch Bros ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.66953,-122.52339" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">8713 64th St NE, Marysville, WA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.05565,-122.11257" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">326 W Main St, Freehold, NJ</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍝 Olive Garden ≥4 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.2437,-74.29352" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">250 W 65th St, Loveland, CO</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🌮 Taco Bell ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.45689,-105.08095" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">406 S Walton Blvd, Bentonville, AR</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>🍗 Wingstop ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.36817,-94.22484" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1632 N 2000 W, Clinton, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.13742,-112.06088" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">585 N State St, Lindon, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🍕 Little Caesars ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.3485,-111.73182" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1355 Sandhill Rd, Orem, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍩 Krispy Kreme ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🥞 IHOP ≥6 min</span><span>🍕 Pizza Hut ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.27266,-111.71022" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">11700 US Highway 380, Cross Roads, TX</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.22801,-96.98402" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1606 S Signal Butte Rd, Mesa, AZ</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍔 In-N-Out <i>5 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.38506,-111.59993" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3501 S Florida Ave, Lakeland, FL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🚒 Firehouse Subs <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.00078,-81.95949" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">2555 W Apache Trl, Apache Junction, AZ</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.41382,-111.57534" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">432 S George Nigh Expy, McAlester, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.9192,-95.74048" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">9020 Ulmerton Rd, Largo, FL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🦆 Wawa <i>2 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🍗 Popeyes <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.8931,-82.76422" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1380 W Elliot Rd, Tempe, AZ</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.35104,-111.96106" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1400 N Walton Blvd, Bentonville, AR</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.38915,-94.21932" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">906 SW Regional Airport Blvd, Bentonville, AR</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.33725,-94.22391" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3510 SE 14th St, Bentonville, AR</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🏪 Sam&#x27;s Club <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.35429,-94.17109" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">8250 Razorback Rd, Colorado Springs, CO</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🐦 Red Robin <i>4 min</i></span><span>🪵 Cracker Barrel <i>4 min</i></span><span>🍝 Olive Garden <i>5 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.94987,-104.79967" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">16960 W Maple Rd, Omaha, NE</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍕 Casey&#x27;s <i>4 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍦 Culver&#x27;s <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.29474,-96.18013" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=NE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">8745 State Rd 54, New Port Richey, FL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🥬 Sprouts <i>4 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.20781,-82.66833" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">23106 US Highway 19 N, Clearwater, FL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>🥬 Sprouts <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.9828,-82.73252" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">2200 Holly Springs Pkwy, Holly Springs, GA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.18541,-84.50443" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1360 Draper Pkwy, Draper, UT</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.52674,-111.85249" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">136 W State Rd 73, Saratoga Springs, UT</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>🍳 Denny&#x27;s <i>4 min</i></span><span>+15</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.38949,-111.91968" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1035 Hickory Creek Blvd, Hickory Creek, TX</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🍔 Whataburger <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.12795,-97.04632" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3116 S Garnett Rd, Tulsa, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍔 Whataburger <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11824,-95.85356" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">850 S Barrington Rd, Streamwood, IL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>🌭 Portillo&#x27;s <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.01526,-88.14814" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3626 Touhy Ave, Skokie, IL</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.01283,-87.71914" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">700 American Blvd E, Bloomington, MN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.8608,-93.26568" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">6437 N MacArthur Blvd, Warr Acres, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.53804,-97.62107" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1725 W Hunt Hwy, San Tan Valley, AZ</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>🍕 Little Caesars <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.17634,-111.58466" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">9320 N Pennsylvania Pl, The Village, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.56503,-97.54757" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3301 Tower Rd, Aurora, CO</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.76167,-104.77437" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3131 N Cedar Ave, Fresno, CA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>👑 Burger King <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.77897,-119.75621" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">5018 Ames Ave, Omaha, NE</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.30212,-95.99146" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=NE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">4010 172nd St NE, Arlington, WA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🥪 Jersey Mike&#x27;s <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.15052,-122.17544" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Stallbrook Marketplace (Bellingham, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">250 Hartford Avenue, Bellingham, MA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🔨 Home Depot <i>7 min</i></span><span>🥬 Whole Foods <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.11624,-71.46529" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2037 (Aberdeen, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">909 E Wishkah St, Aberdeen, WA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>☕ Dutch Bros <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍗 KFC <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.97531,-123.80674" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1201 SW 13th Ave, Battle Ground, WA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🐦 Red Robin <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.7724,-122.54952" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">14505 NE Fourth Plain Blvd, Vancouver, WA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>☕ Dutch Bros <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.66953,-122.52339" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">8713 64th St NE, Marysville, WA</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.05565,-122.11257" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">326 W Main St, Freehold, NJ</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>🏪 Sam&#x27;s Club <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.2437,-74.29352" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">250 W 65th St, Loveland, CO</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.45689,-105.08095" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">406 S Walton Blvd, Bentonville, AR</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>🍗 Wingstop <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.36817,-94.22484" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1632 N 2000 W, Clinton, UT</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.13742,-112.06088" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">585 N State St, Lindon, UT</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.3485,-111.73182" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">1355 Sandhill Rd, Orem, UT</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍩 Krispy Kreme <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.27266,-111.71022" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=UT">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Walmart within walking distance in the US?</summary><p>1849 public DC fast chargers in the US have a Walmart within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Walmart charging stop is fastest in the US?</summary><p>Target - Tesla Supercharger in Greenwood at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

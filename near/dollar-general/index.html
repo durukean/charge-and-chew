@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Dollar General">Open on the map →</a>
 <p class="stats">Of the 814 fast chargers with a Dollar General nearby across the US: The typical stop here delivers <b>179 kW</b>, and 476 of them do 150 kW or more; <b>128</b> are close enough that the Dollar General is a two-minute walk or less; <b>715</b> are listed as open 24 hours. The fastest is <b>Cracker Barrel - Tesla Supercharger</b> in Nashville at 500 kW; the closest walk is 1 min at <b>Northpoint Chrysler Dodge Jeep RAM</b>. Most are on ChargePoint (174), Tesla Supercharger (170), EV Connect (56).</p>
 <h2>By state</h2><div class="chips"><a href="tx/">Texas <small>59</small></a><a href="ga/">Georgia <small>46</small></a><a href="fl/">Florida <small>43</small></a><a href="oh/">Ohio <small>39</small></a><a href="ny/">New York <small>39</small></a><a href="pa/">Pennsylvania <small>39</small></a><a href="mi/">Michigan <small>35</small></a><a href="va/">Virginia <small>35</small></a><a href="md/">Maryland <small>31</small></a><a href="ca/">California <small>30</small></a><a href="il/">Illinois <small>28</small></a><a href="nc/">North Carolina <small>26</small></a><a href="ok/">Oklahoma <small>24</small></a><a href="tn/">Tennessee <small>24</small></a><a href="or/">Oregon <small>22</small></a><a href="mo/">Missouri <small>22</small></a><a href="sc/">South Carolina <small>20</small></a><a href="ky/">Kentucky <small>18</small></a><a href="az/">Arizona <small>17</small></a><a href="ks/">Kansas <small>16</small></a><a href="al/">Alabama <small>15</small></a><a href="nj/">New Jersey <small>15</small></a><a href="nm/">New Mexico <small>14</small></a><a href="mn/">Minnesota <small>14</small></a><a href="wi/">Wisconsin <small>14</small></a><a href="la/">Louisiana <small>13</small></a><a href="in/">Indiana <small>13</small></a><a href="de/">Delaware <small>12</small></a><a href="wv/">West Virginia <small>11</small></a><a href="ia/">Iowa <small>11</small></a><a href="ma/">Massachusetts <small>10</small></a><a href="ct/">Connecticut <small>8</small></a><a href="ne/">Nebraska <small>7</small></a><a href="vt/">Vermont <small>6</small></a><a href="ar/">Arkansas <small>6</small></a><a href="nv/">Nevada <small>5</small></a><a href="me/">Maine <small>4</small></a><a href="ms/">Mississippi <small>4</small></a><a href="wa/">Washington <small>4</small></a><a href="sd/">South Dakota <small>3</small></a><a href="nh/">New Hampshire <small>3</small></a><a href="wy/">Wyoming <small>3</small></a><a href="co/">Colorado <small>3</small></a><a href="ri/">Rhode Island <small>1</small></a><a href="ut/">Utah <small>1</small></a><a href="id/">Idaho <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Northpoint Chrysler Dodge Jeep RAM</span><small>180 kW · 2 stalls</small></div>
-<div class="a">4441 U.S. 5, Derby, VT</div><div class="host">Blink</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=VT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.95131,-72.15798" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cpud Cc Rider Dcfc</span><small>62 kW · 1 stall</small></div>
-<div class="a">207 W B St, Rainier, OR</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.08975,-122.93766" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>La Vale, MD - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">11601 Winchester Road, La Vale, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.63625,-78.84571" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Piedmont Emc Carrboro Plaza</span><small>62 kW · 1 stall</small></div>
-<div class="a">104 NC-54, Carrboro, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Circle K ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.91637,-79.09594" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Santiam Blvd Charger - Mill City</span><small>50 kW · 1 stall</small></div>
-<div class="a">320 NW Santiam Blvd, Mill City, OR</div><div class="host">EVCS</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.75649,-122.47993" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Big Y</span><small>25 kW · 1 stall</small></div>
-<div class="a">237 Mohawk Trail, Greenfield, MA</div><div class="host">Non-networked</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.58707,-72.62487" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dollar General - Byesville</span><small>400 kW · 4 stalls</small></div>
-<div class="a">205 Main St, Byesville, OH</div><div class="host">Francis Energy</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.9699,-81.53406" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>962 Ethan Allen Highway</span><small>180 kW · 4 stalls</small></div>
-<div class="a">962 Ethan Allen Highway, Georgia, VT</div><div class="host">Vialynk</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=VT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.69253,-73.10822" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Subway</span><small>240 kW · 4 stalls</small></div>
-<div class="a">17457 NE US Highway 301, Waldo, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>⛽ Pilot ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.81552,-82.16716" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia Power Hazlehurst</span><small>160 kW · 1 stall</small></div>
-<div class="a">341 Baxley Highway, Hazlehurst, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🛒 Walmart ≥3 min</span><span>⛽ Circle K ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.86344,-82.58461" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Country Mart - Tesla Supercharger</span><small>8 stalls</small></div>
-<div class="a">925 Plaza Dr, St. Clair, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>👑 Burger King ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.35633,-90.97995" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Van Kleecks Tire</span><small>240 kW · 4 stalls</small></div>
-<div class="a">1987 Ulster Ave, Lake Katrine, NY</div><div class="host">Vialynk</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.99116,-73.98683" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Millen, GA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">104 East Winthrop Avenue, Millen, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.80319,-81.94878" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>28 West Chevron Fast DC</span><small>62 kW · 1 stall</small></div>
-<div class="a">7520 Coliseum Blvd, Alexandria, LA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.29666,-92.52972" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Veterans Park Delhi Fast</span><small>62 kW · 1 stall</small></div>
-<div class="a">2074 N Aurelius Rd, Delhi charter Township, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>💊 CVS ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.64217,-84.52132" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - BGE - Pennsylvania Ave</span><small>50 kW · 4 stalls</small></div>
-<div class="a">1700 Pennsylvania Ave, Baltimore, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>👑 Burger King ≥9 min</span><span>💊 Walgreens ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.30365,-76.63563" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chuck Stevens Chevrolet of Bay Minette</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2427 US-31, Bay Minette, AL</div><div class="host">Blink</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.83974,-87.77474" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>North Augusta, SC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1014 Edgefield Rd, North Augusta, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 Bojangles ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>☕ Caribou Coffee ≥1 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56896,-81.93864" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - BGE - Eastport</span><small>50 kW · 4 stalls</small></div>
-<div class="a">269 Hillsmere Dr, Annapolis, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>☕ Starbucks ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.94785,-76.49309" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Elkins Fordland WV</span><small>120 kW · 4 stalls</small></div>
-<div class="a">696 Beverly Pike, Elkins, WV</div><div class="host">Red E</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>⛽ Sheetz ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>🥪 Subway ≥7 min</span><span>👑 Burger King ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.89704,-79.84777" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Saddle Brook, NJ - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">419 Market St, Saddle Brook, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍦 Dairy Queen ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍗 KFC ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.89723,-74.09751" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Norfolk, VA - N Military Hwy - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">6301 12826A N Military Hwy, Norfolk, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🍔 Wendy&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.89739,-76.22649" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Shark Charge Carolina Beach</span><small>120 kW · 2 stalls</small></div>
-<div class="a">STE J-1140 N Lake Park Blvd., Carolina Beach, NC</div><div class="host">ChargeLab</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🛒 Publix ≥4 min</span><span>💊 Walgreens ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.04587,-77.89825" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>SPINX - Store #175</span><small>50 kW · 1 stall</small></div>
-<div class="a">1504 Boiling Springs Rd, Boiling Springs, SC</div><div class="host">EVgo</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍗 Bojangles ≥1 min</span><span>🍳 Denny&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.00802,-81.95224" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Johnson City, TX - US-281 - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">405 US-281, Johnson City, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.26992,-98.39807" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>HondoGO - Highland, NY</span><small>200 kW · 4 stalls</small></div>
-<div class="a">3579 Rte 9W, Highland, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🥪 Subway ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.71358,-73.96419" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cave Spring Corners</span><small>100 kW · 4 stalls</small></div>
-<div class="a">3971 Brambleton Ave, Roanoke, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍕 Little Caesars ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.2337,-80.00772" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bandon, OR - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">120 Michigan Ave. NE, Bandon, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.12184,-124.39894" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Casey&#x27;s #3535 - Cridersville</span><small>400 kW · 4 stalls</small></div>
-<div class="a">100 S Dixie Hwy, Cridersville, OH</div><div class="host">Francis Energy</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Speedway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.65427,-84.13423" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>MATHEWS Ford Sandusky DCFC&#x27;s</span><small>180 kW · 4 stalls</small></div>
-<div class="a">610 East Perkins Avenue, Sandusky, OH</div><div class="host">Blink</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🛒 Kroger ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍕 Little Caesars ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.43256,-82.69123" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Allsups - Alamogordo</span><small>150 kW · 4 stalls</small></div>
-<div class="a">820 US-70, Alamogordo, NM</div><div class="host">Francis Energy</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Speedway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.86729,-105.98" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Jack Flash Arthur IL</span><small>320 kW · 2 stalls</small></div>
-<div class="a">809 E Columbia St, Arthur, IL</div><div class="host">Red E</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🥪 Subway ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.70972,-88.46291" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Emporia, KS - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1312 Industrial Road, Emporia, KS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🥪 Subway ≥7 min</span><span>👑 Burger King ≥7 min</span><span>🥩 Arby&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.41428,-96.21672" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ozinga New Buffalo Mi</span><small>50 kW · 1 stall</small></div>
-<div class="a">825 S Whittaker St, New Buffalo, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.78518,-86.73617" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Uvalde, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">515 E Main St, Uvalde, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🚜 Tractor Supply ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.21177,-99.77725" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>McQuillen Chevrolet GMC</span><small>150 kW · 2 stalls</small></div>
-<div class="a">604 Main St E, Girard, PA</div><div class="host">Non-networked</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Sheetz ≥3 min</span><span>🌮 Taco Bell ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>🍕 Little Caesars ≥9 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.00522,-80.31028" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cuban Cafe</span><small>50 kW · 2 stalls</small></div>
-<div class="a">6333 US 550, Cuba, NM</div><div class="host">Loop</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>⛽ Circle K ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.01231,-106.9678" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hollinswood Shopping Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">F 2101 W Patapsco Ave, Baltimore, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🍗 Royal Farms ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.25074,-76.64421" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hy-Vee - Tarkio</span><small>120 kW · 4 stalls</small></div>
-<div class="a">110 Chestnut St, Tarkio, MO</div><div class="host">Francis Energy</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🛒 Hy-Vee ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.43921,-95.3768" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Apopka Square</span><small>350 kW · 8 stalls</small></div>
-<div class="a">807 E Semoran Blvd # 899, Apopka, FL</div><div class="host">EVgo</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>⛽ RaceTrac ≥6 min</span><span>👑 Burger King ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.67343,-81.49408" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Northpoint Chrysler Dodge Jeep RAM</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">4441 U.S. 5, Derby, VT</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.95131,-72.15798" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=VT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cpud Cc Rider Dcfc</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">207 W B St, Rainier, OR</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.08975,-122.93766" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">La Vale, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11601 Winchester Road, La Vale, MD</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.63625,-78.84571" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Piedmont Emc Carrboro Plaza</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">104 NC-54, Carrboro, NC</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.91637,-79.09594" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Santiam Blvd Charger - Mill City</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVCS</span></div>
+<div class="a">320 NW Santiam Blvd, Mill City, OR</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.75649,-122.47993" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Big Y</div>
+<div class="sp"><s class="spd slow">25 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">237 Mohawk Trail, Greenfield, MA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.58707,-72.62487" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dollar General - Byesville</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">205 Main St, Byesville, OH</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.9699,-81.53406" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">962 Ethan Allen Highway</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">962 Ethan Allen Highway, Georgia, VT</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.69253,-73.10822" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=VT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Subway</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>FPL EVolution</span></div>
+<div class="a">17457 NE US Highway 301, Waldo, FL</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>⛽ Pilot <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.81552,-82.16716" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia Power Hazlehurst</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">341 Baxley Highway, Hazlehurst, GA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>⛽ Circle K <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.86344,-82.58461" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Country Mart - Tesla Supercharger</div>
+<div class="sp"><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">925 Plaza Dr, St. Clair, MO</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>👑 Burger King <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.35633,-90.97995" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Van Kleecks Tire</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">1987 Ulster Ave, Lake Katrine, NY</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.99116,-73.98683" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Millen, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">104 East Winthrop Avenue, Millen, GA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.80319,-81.94878" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">28 West Chevron Fast DC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">7520 Coliseum Blvd, Alexandria, LA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.29666,-92.52972" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Veterans Park Delhi Fast</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2074 N Aurelius Rd, Delhi charter Township, MI</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>💊 CVS <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.64217,-84.52132" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - BGE - Pennsylvania Ave</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Swtch</span></div>
+<div class="a">1700 Pennsylvania Ave, Baltimore, MD</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>👑 Burger King <i>9 min</i></span><span>💊 Walgreens <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.30365,-76.63563" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Chuck Stevens Chevrolet of Bay Minette</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">2427 US-31, Bay Minette, AL</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.83974,-87.77474" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North Augusta, SC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1014 Edgefield Rd, North Augusta, SC</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍗 Bojangles <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>☕ Caribou Coffee <i>1 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56896,-81.93864" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - BGE - Eastport</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Swtch</span></div>
+<div class="a">269 Hillsmere Dr, Annapolis, MD</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.94785,-76.49309" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Elkins Fordland WV</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">696 Beverly Pike, Elkins, WV</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>⛽ Sheetz <i>4 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🥪 Subway <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.89704,-79.84777" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=WV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Saddle Brook, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">419 Market St, Saddle Brook, NJ</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍦 Dairy Queen <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍗 KFC <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.89723,-74.09751" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Norfolk, VA - N Military Hwy - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6301 12826A N Military Hwy, Norfolk, VA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.89739,-76.22649" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Shark Charge Carolina Beach</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargeLab</span></div>
+<div class="a">STE J-1140 N Lake Park Blvd., Carolina Beach, NC</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🛒 Publix <i>4 min</i></span><span>💊 Walgreens <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.04587,-77.89825" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">SPINX - Store #175</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">1504 Boiling Springs Rd, Boiling Springs, SC</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍗 Bojangles <i>1 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.00802,-81.95224" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Johnson City, TX - US-281 - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">405 US-281, Johnson City, TX</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.26992,-98.39807" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">HondoGO - Highland, NY</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">3579 Rte 9W, Highland, NY</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.71358,-73.96419" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Cave Spring Corners</div>
+<div class="sp"><s class="spd std">100 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3971 Brambleton Ave, Roanoke, VA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍕 Little Caesars <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.2337,-80.00772" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bandon, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">120 Michigan Ave. NE, Bandon, OR</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.12184,-124.39894" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Casey&#x27;s #3535 - Cridersville</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">100 S Dixie Hwy, Cridersville, OH</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.65427,-84.13423" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">MATHEWS Ford Sandusky DCFC&#x27;s</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">610 East Perkins Avenue, Sandusky, OH</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🛒 Kroger <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍕 Little Caesars <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.43256,-82.69123" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Allsups - Alamogordo</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">820 US-70, Alamogordo, NM</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.86729,-105.98" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NM">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Jack Flash Arthur IL</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">809 E Columbia St, Arthur, IL</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🥪 Subway <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.70972,-88.46291" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Emporia, KS - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1312 Industrial Road, Emporia, KS</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🥪 Subway <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🥩 Arby&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.41428,-96.21672" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=KS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ozinga New Buffalo Mi</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">825 S Whittaker St, New Buffalo, MI</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.78518,-86.73617" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Uvalde, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">515 E Main St, Uvalde, TX</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.21177,-99.77725" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">McQuillen Chevrolet GMC</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">604 Main St E, Girard, PA</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Sheetz <i>3 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>🍕 Little Caesars <i>9 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.00522,-80.31028" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Loop"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Cuban Cafe</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Loop</span></div>
+<div class="a">6333 US 550, Cuba, NM</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>⛽ Circle K <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.01231,-106.9678" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=NM">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Hollinswood Shopping Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">F 2101 W Patapsco Ave, Baltimore, MD</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🍗 Royal Farms <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.25074,-76.64421" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Hy-Vee - Tarkio</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">110 Chestnut St, Tarkio, MO</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🛒 Hy-Vee <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.43921,-95.3768" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Apopka Square</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">807 E Semoran Blvd # 899, Apopka, FL</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>⛽ RaceTrac <i>6 min</i></span><span>👑 Burger King <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.67343,-81.49408" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=FL">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Dollar General within walking distance in the US?</summary><p>814 public DC fast chargers in the US have a Dollar General within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Dollar General charging stop is fastest in the US?</summary><p>Cracker Barrel - Tesla Supercharger in Nashville at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

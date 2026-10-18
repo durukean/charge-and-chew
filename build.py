@@ -131,27 +131,30 @@ h1{font-family:var(--display);font-size:clamp(24px,3.6vw,34px);line-height:1.18;
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
 .cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
-  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
-.card .ring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
-.card .ring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
-.card .ring span{font-size:9.5px;font-weight:600;opacity:.88}
+.card{display:flex;gap:13px;align-items:flex-start;padding:16px 2px;border-bottom:1px solid var(--line)}
+/* Mirrors the app's list row: the network's mark leads, speed coloured by tier, food amber. */
+.card .lead{flex-shrink:0;width:42px;display:flex;justify-content:center;padding-top:2px}
+.card .nm{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 15px/1 var(--display);
+  letter-spacing:-.3px;overflow:hidden}
+.card .nm.two{font-size:12px}
+.card .nm svg{width:100%;height:100%;display:block}
+.card .nm.other{background:var(--surface3);color:var(--dim)}
+.card .nm.other svg{width:18px;height:18px}
 .card .body{flex:1;min-width:0}
-.card .n{font-family:var(--display);font-weight:700;font-size:17px;display:flex;justify-content:space-between;gap:10px;
-  align-items:baseline;letter-spacing:-.2px}
-/* On a phone the kW badge squeezed long station names into a 3-4 line column; let it
-   drop below the title instead of fighting it for width. */
-@media(max-width:480px){.card .n{flex-wrap:wrap;row-gap:4px}.card .n small{order:2}}
-.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
-  background:var(--surface2);border-radius:7px;padding:3px 8px}
-.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
-.card .host{color:var(--dim);font-weight:600;font-size:12.5px;margin-top:2px}
-.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .n{font-family:var(--display);font-weight:700;font-size:17.5px;line-height:1.25;letter-spacing:-.2px}
+.card .sp{margin-top:6px;font-size:12.5px;color:var(--dim);display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px}
+.card .sp b{color:var(--txt);font-weight:600}
+.spd{text-decoration:none;font:700 11.5px/1.5 var(--mono);border-radius:6px;padding:2px 7px;background:var(--surface2);color:var(--dim)}
+.spd.ultra{background:var(--good);color:var(--accent-ink)}
+.spd.fast{background:var(--good-bg);color:var(--good)}
+.spd.slow{background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:4px}
+.card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}
-.card .c b{color:var(--txt);font-weight:700}
-.card .l{margin-top:10px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap}
-.card .l a{text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px;
+.card .c span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
+.card .c b{font-weight:700}
+.card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
   background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
 .card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 h2{font-family:var(--display);font-size:20px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:700}
@@ -176,6 +179,8 @@ h2{font-family:var(--display);font-size:20px;margin:30px 0 10px;letter-spacing:-
     radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.18),transparent) right/12px 100% no-repeat scroll,
     var(--surface)}
 h2+p,h2+.lead{margin-bottom:12px}
+
+}
 table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
 table.trip th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--dim2);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line)}
@@ -197,6 +202,14 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}
   header nav{gap:6px}header nav a{padding:12px 6px}footer a{display:inline-block;padding:10px 2px}}
+/* On a phone the table's last column was cut off mid-word; there each stop is a stack. */
+@media(max-width:520px){
+  table.trip,table.trip tbody{display:block;width:100%;min-width:0}
+  table.trip thead{display:none}
+  table.trip tr{display:block;padding:11px 14px;border-bottom:1px solid var(--line)}
+  table.trip tr:last-child{border-bottom:0}
+  table.trip td{display:block;padding:1px 0;border:0}
+  table.trip td:first-child{font-family:var(--display);font-size:15px}
 """
 
 # Shared by every generated page and 404.html: one theme-color per scheme (two unlabelled tags
@@ -204,7 +217,7 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 # the app's fonts loaded without holding that paint up.
 HEAD_THEME = """<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">"""
@@ -415,26 +428,47 @@ def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
     return "".join(ld_script(x) for x in blocks)
 
 
+def _read_marks():
+    src = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
+    tt = re.search(r"const TESLA_T = '([^']*)' \+\s*'([^']*)';", src)
+    path = tt.group(1) + tt.group(2)
+    out = {}
+    for m in re.finditer(r"'([^']+)':\s*\{ bg: '([^']+)', ink: '([^']+)', (?:t: '([^']+)'|path: TESLA_T) \}", src):
+        out[m.group(1)] = (m.group(2), m.group(3), m.group(4), None if m.group(4) else path)
+    return out
+NET_MARKS = _read_marks()
+BOLT_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg>'
+
+def mark_html(net):
+    m = NET_MARKS.get(net)
+    if not m:
+        return f'<span class="nm other" title="{esc(net)}">{BOLT_SVG}</span>'
+    bg, ink, t, path = m
+    inner = f'<svg viewBox="0 0 24 24"><path d="{path}" fill="currentColor"/></svg>' if path else esc(t)
+    return f'<span class="nm{" two" if t and len(t) > 1 else ""}" title="{esc(net)}" style="background:{bg};color:{ink}">{inner}</span>'
+
+def speed_tier(kw):
+    return "" if not kw else "ultra" if kw >= 250 else "fast" if kw >= 150 else "std" if kw >= 50 else "slow"
+
 def site_card(s, focus, root):
-    """Mirrors the app's result card: walk-time ring, mono spec badge, chain pills."""
+    """Mirrors the app's list row: network mark, speed badge by tier, food chips in amber."""
     m = matches.get(s["id"], {})
     chains = []
     for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[1]))[:6]:
-        label = f"{brands[k]['e']} {'<b>' + esc(k) + '</b>' if k == focus else esc(k)} ≥{mins(d)} min"
-        chains.append(f"<span>{label}</span>")
-    focus_d = m.get(focus)
-    ring = (f'<div class="ring"><b>≥{mins(focus_d)}</b><span>min</span></div>'
-            if focus_d is not None else '<div class="ring">⚡</div>')
-    net = f'<div class="host">{esc(s.get("net", ""))}</div>' if s.get("net") else ""
-    spec = " · ".join(x for x in [f"{s['kw']} kW" if s.get('kw') else "",
-                                  f"{s['stalls']} stall{'s' if s['stalls'] != 1 else ''}" if s.get('stalls') else ""] if x)
+        name = '<b>' + esc(k) + '</b>' if k == focus else esc(k)
+        chains.append(f"<span>{brands[k]['e']} {name} <i>{mins(d)} min</i></span>")
+    kw = s.get("kw") or 0
+    spd = f'<s class="spd {speed_tier(kw)}">{kw} kW</s>' if kw else ""
+    stalls = f"<b>{s['stalls']} stall{'s' if s['stalls'] != 1 else ''}</b>" if s.get("stalls") else ""
+    net = esc(s.get("net", ""))
     extra = f'<span>+{len(m) - 6}</span>' if len(m) > 6 else ""
-    return f"""<div class="card">{ring}<div class="body">
-<div class="n"><span>{esc(s['name'])}</span><small>{spec}</small></div>
-<div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>{net}
+    return f"""<div class="card"><div class="lead">{mark_html(s.get("net", ""))}</div><div class="body">
+<div class="n">{esc(s['name'])}</div>
+<div class="sp">{spd}{stalls}<span>{net}</span></div>
+<div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>
 <div class="c">{''.join(chains)}{extra}</div>
-<div class="l"><a class="pri" href="{root}?chain={esc(focus)}&amp;state={s['st']}">Show on map</a>\
-<a href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a>\
+<a href="{root}?chain={esc(focus)}&amp;state={s['st']}">Show on map</a></div>
 </div></div>"""
 
 # Indexing threshold, corrected 2026-08-25 by actual traffic rather than general advice.
@@ -544,7 +578,7 @@ states_html = "".join(
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 <p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <a class="cta" href="../">Open the interactive map →</a>
-<p><a class="cta" href="../along/">Browse by interstate instead →</a></p>
+<p><a class="cta sec" href="../along/">Browse by interstate instead →</a></p>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
 {states_html}"""
 page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")

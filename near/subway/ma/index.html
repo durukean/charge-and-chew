@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,291 +33,348 @@
 <p class="lead"><b>57 DC fast chargers</b> in Massachusetts have a Subway within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Subway&amp;state=MA">Open on the map →</a>
 <p class="stats">Of the 57 fast chargers with a Subway nearby in Massachusetts: The typical stop here delivers <b>150 kW</b>, and 29 of them do 150 kW or more; <b>18</b> are close enough that the Subway is a two-minute walk or less; <b>48</b> are listed as open 24 hours. The fastest is <b>Stallbrook Marketplace (Bellingham, MA)</b> in Bellingham at 350 kW; the closest walk is 1 min at <b>Brookline Websterst Left</b>. Most are on ChargePoint (21), Tesla Supercharger (13), Red E (8).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Brookline Websterst Left</span><small>125 kW · 1 stall</small></div>
-<div class="a">13 Webster Street, Brookline, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥2 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34126,-71.12157" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Brookline Websterst Right</span><small>125 kW · 1 stall</small></div>
-<div class="a">13 Webster Street, Brookline, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥2 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34134,-71.12153" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Stallbrook Marketplace (Bellingham, MA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">250 Hartford Avenue, Bellingham, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⛽ Speedway ≥7 min</span><span>🔨 Home Depot ≥7 min</span><span>🥬 Whole Foods ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.11624,-71.46529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Massdot Barnstable Pr#1</span><small>125 kW · 1 stall</small></div>
-<div class="a">2155 Iyannough Rd, Barnstable, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>👑 Burger King ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.68773,-70.33805" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wellington Circle Plaza</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4110 Mystic Valley Parkway, Medford, MA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.40601,-71.08314" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>East GAR Realty</span><small>120 kW · 6 stalls</small></div>
-<div class="a">1145 Grand Army of the Republic Hwy, Somerset, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>💊 CVS ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>🚗 Sonic ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.73301,-71.17467" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Massdot Barnstable Pr#2</span><small>125 kW · 1 stall</small></div>
-<div class="a">2155 Iyannough Road, Barnstable, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.68892,-70.3381" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Massdot Barn Exp #2</span><small>320 kW · 2 stalls</small></div>
-<div class="a">2145 Iyannough Road, Barnstable, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.68886,-70.33798" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sentryford</span><small>320 kW · 2 stalls</small></div>
-<div class="a">4100 Mystic Valley Pkwy, Medford, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.40548,-71.08462" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bettys Donuts Plaza</span><small>120 kW · 6 stalls</small></div>
-<div class="a">3 Main St, Blackstone, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.0162,-71.52651" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wan Wang</span><small>120 kW · 4 stalls</small></div>
-<div class="a">401 Park Ave, Worcester, MA</div><div class="host">Quickcharge</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>💊 Walgreens ≥5 min</span><span>⛽ Speedway ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.25744,-71.8225" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Nouria Stoughton</span><small>319 kW · 1 stall</small></div>
-<div class="a">28 Dykeman Way, Stoughton, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>🔨 Home Depot ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.12602,-71.06913" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Stoneham Ford Service Center</span><small>180 kW · 6 stalls</small></div>
-<div class="a">185 Main Street, Stoneham, MA</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>💊 CVS ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.48924,-71.10078" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Randolph Liquors</span><small>120 kW · 6 stalls</small></div>
-<div class="a">44 N Main St, Randolph, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>💊 CVS ≥3 min</span><span>🍔 Five Guys ≥4 min</span><span>🍗 Wingstop ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.16337,-71.0429" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Wakefield Public Parking</span><small>50 kW · 1 stall</small></div>
-<div class="a">9 Lincoln St, Wakefield, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>💊 Walgreens ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.50291,-71.06934" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>4 Municipal Way</span><small>100 kW · 2 stalls</small></div>
-<div class="a">4 Municipal Way, Wellesley, MA</div><div class="host">FLO</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.31386,-71.27442" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lawrence, MA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">141 Winthrop Ave, Lawrence, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>⛽ Speedway ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.68717,-71.14584" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Wild Oats Market</span><small>120 kW · 4 stalls</small></div>
-<div class="a">320 Main St, Williamstown, MA</div><div class="host">Quickcharge</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>💊 Walgreens ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.70372,-73.18678" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicopee, MA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">650 Memorial Drive, Chicopee, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.1749,-72.5782" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Amherst Public Lot</span><small>102 kW · 1 stall</small></div>
-<div class="a">North Prospect Street, Amherst, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>💊 CVS ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.37715,-72.52161" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Marlborough Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">740 Boston Post Rd, Marlborough, MA</div><div class="host">Non-networked</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>⛽ Speedway ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🎯 Target ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.35112,-71.50072" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicopee Marketplace (Chicopee, MA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">591 Memorial Drive, Chicopee, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🔨 Home Depot ≥1 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.17567,-72.57286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Town Of Maynard Parking</span><small>40 kW · 1 stall</small></div>
-<div class="a">10 Summer Street, Maynard, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>💊 CVS ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.43301,-71.45135" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Electric Era Charging Station</span><small>200 kW · 2 stalls</small></div>
-<div class="a">850 Washington Street, Weymouth, MA</div><div class="host">Electric Era</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 Walgreens ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.20081,-70.94207" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Gorettis Supermarket</span><small>120 kW · 6 stalls</small></div>
-<div class="a">1 Providence St, Millbury, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>💊 CVS ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>💊 Walgreens ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.19233,-71.75319" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundai Milford Hmi Guest</span><small>62 kW · 1 stall</small></div>
-<div class="a">154 E Main St, Milford, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🏪 Dollar General ≥2 min</span><span>🍔 Five Guys ≥4 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍗 KFC ≥6 min</span><span>🥞 IHOP ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.15044,-71.50586" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Leld Common</span><small>125 kW · 1 stall</small></div>
-<div class="a">5 Stevens St, Littleton, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥3 min</span><span>☕ Starbucks ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.54565,-71.47321" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Credit Union Way Center</span><small>120 kW · 6 stalls</small></div>
-<div class="a">1 Credit Union Way, Randolph, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍔 Five Guys ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>💊 CVS ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.16747,-71.04311" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Framingham, MA - Worcester Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">130 Worcester Rd, Framingham, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🛒 Walmart ≥5 min</span><span>💻 Best Buy ≥6 min</span><span>🍝 Olive Garden ≥6 min</span><span>🍔 Five Guys ≥6 min</span><span>🌯 Chipotle ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.29743,-71.39941" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Stoughton Lodging</span><small>120 kW · 6 stalls</small></div>
-<div class="a">200 Technology Center Dr, Stoughton, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍗 Popeyes ≥5 min</span><span>🍝 Olive Garden ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.15888,-71.06296" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Alltown Fresh Convenience Market (Plymouth, MA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">24 Long Pond Road, Plymouth, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🤠 Texas Roadhouse ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🔨 Home Depot ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.93312,-70.65719" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>EastPoint Plaza</span><small>120 kW · 4 stalls</small></div>
-<div class="a">910 Boston Post Road East, Marlborough, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>⛽ Speedway ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>🔨 Home Depot ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.35073,-71.49295" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Marcotte Ford L3-2</span><small>200 kW · 2 stalls</small></div>
-<div class="a">1025 Main Street, Holyoke, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍗 KFC ≥4 min</span><span>🌮 Taco Bell ≥7 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>👑 Burger King ≥9 min</span><span>🍳 Denny&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.18098,-72.62957" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Marcotte Ford L3-1</span><small>200 kW · 2 stalls</small></div>
-<div class="a">1025 Main Street, Holyoke, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍗 KFC ≥4 min</span><span>🌮 Taco Bell ≥7 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>👑 Burger King ≥9 min</span><span>🍳 Denny&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.18103,-72.62953" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Dedham, MA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">840 Providence Highway, Dedham, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>💊 CVS ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🥬 Whole Foods ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.23641,-71.17828" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Malden Catholic High</span><small>120 kW · 6 stalls</small></div>
-<div class="a">99 Crystal Street, Malden, MA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>⛽ Speedway ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.42724,-71.04525" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Gary Rome Lvl</span><small>62 kW · 1 stall</small></div>
-<div class="a">150 Whiting Farms Rd, Holyoke, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🍗 KFC ≥5 min</span><span>🌮 Taco Bell ≥8 min</span><span>🪵 Cracker Barrel ≥9 min</span><span>👑 Burger King ≥9 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.18238,-72.63702" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>625 Pleasant St</span><small>180 kW · 4 stalls</small></div>
-<div class="a">625 Pleasant St, Watertown, MA</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🍩 Dunkin&#x27; ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.36776,-71.21431" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Vendetti Motors</span><small>180 kW · 4 stalls</small></div>
-<div class="a">411 W Central St, Franklin, MA</div><div class="host">Vialynk</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>💊 CVS ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>👑 Burger King ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.08827,-71.41398" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Franklin, MA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">250 Franklin Village Drive, Franklin, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>👑 Burger King ≥5 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.09038,-71.42491" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairfield Inn Amesbury</span><small>240 kW · 10 stalls</small></div>
-<div class="a">35 Clark&#x27;s Road, Amesbury, MA</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>⛽ Circle K ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.84501,-70.90633" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>421 Park DC Spot</span><small>50 kW · 1 stall</small></div>
-<div class="a">421 Park Drive, Boston, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34534,-71.10384" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Medford, MA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">30 Commercial St, Medford, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🥖 Panera Bread ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍗 Wingstop ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.40935,-71.08637" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Auburn, MA - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">385 Southbridge St., Auburn, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>☕ Starbucks ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.20376,-71.83308" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Framingham, MA - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
-<div class="a">1 Worcester Rd, Framingham, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥7 min</span><span>💻 Best Buy ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.30365,-71.39413" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>26 Seyon Street</span><small>180 kW · 2 stalls</small></div>
-<div class="a">26 Seyon Street, Waltham, MA</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥7 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>💊 Walgreens ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.371,-71.21323" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Boston, MA - Boylston Street - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
-<div class="a">800 Boylston Street, Boston, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥7 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34726,-71.08173" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Framingham, MA - Concord Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">961 Concord St, Framingham, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥8 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🎯 Target ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.30551,-71.40278" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Massport</span><small>62 kW · 1 stall</small></div>
-<div class="a">11 Logan Express, Framingham, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥8 min</span><span>🥖 Panera Bread ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🎯 Target ≥5 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>💻 Best Buy ≥6 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.30473,-71.39386" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Boston, MA - Richard B. Ross Way - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
-<div class="a">1341 Boylston Street, Boston, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥9 min</span><span>🎯 Target ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34487,-71.09921" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Auburn Mall (Auburn, MA)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">385 Southbridge Street, Auburn, MA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥9 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.20236,-71.83795" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Worcester, MA - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">75 Quinsigamond Avenue, Worcester, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥9 min</span><span>🍗 Wingstop ≥7 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🍔 Wendy&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.24684,-71.80281" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Gmg Dcfc Hudson #1</span><small>125 kW · 1 stall</small></div>
-<div class="a">242 Washington Street, Hudson, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥9 min</span><span>💊 CVS ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.3785,-71.56415" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Gmg Dcfc Hudson #2</span><small>125 kW · 1 stall</small></div>
-<div class="a">242 Washington Street, Hudson, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥9 min</span><span>💊 CVS ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.37848,-71.56423" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Massdot Plym Exp</span><small>320 kW · 2 stalls</small></div>
-<div class="a">5 Long Pond Road, Plymouth, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥10 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>🥞 IHOP ≥8 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.93578,-70.66122" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Mashpee, MA - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">22 Steeple Street, Mashpee, MA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥10 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍩 Dunkin&#x27; ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.61745,-70.48842" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Massdot Plym</span><small>320 kW · 2 stalls</small></div>
-<div class="a">5 Long Pond Road, Plymouth, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥10 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>🥞 IHOP ≥8 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.93578,-70.66133" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Brookline Websterst Left</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">13 Webster Street, Brookline, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34126,-71.12157" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Brookline Websterst Right</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">13 Webster Street, Brookline, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34134,-71.12153" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Stallbrook Marketplace (Bellingham, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">250 Hartford Avenue, Bellingham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🔨 Home Depot <i>7 min</i></span><span>🥬 Whole Foods <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.11624,-71.46529" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massdot Barnstable Pr#1</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2155 Iyannough Rd, Barnstable, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.68773,-70.33805" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wellington Circle Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4110 Mystic Valley Parkway, Medford, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.40601,-71.08314" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">East GAR Realty</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">1145 Grand Army of the Republic Hwy, Somerset, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>💊 CVS <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>🚗 Sonic <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.73301,-71.17467" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massdot Barnstable Pr#2</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2155 Iyannough Road, Barnstable, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.68892,-70.3381" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massdot Barn Exp #2</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">2145 Iyannough Road, Barnstable, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.68886,-70.33798" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Sentryford</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">4100 Mystic Valley Pkwy, Medford, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.40548,-71.08462" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bettys Donuts Plaza</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">3 Main St, Blackstone, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.0162,-71.52651" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Quickcharge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Wan Wang</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Quickcharge</span></div>
+<div class="a">401 Park Ave, Worcester, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.25744,-71.8225" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Nouria Stoughton</div>
+<div class="sp"><s class="spd ultra">319 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">28 Dykeman Way, Stoughton, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>🔨 Home Depot <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.12602,-71.06913" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Stoneham Ford Service Center</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>6 stalls</b><span>EV Connect</span></div>
+<div class="a">185 Main Street, Stoneham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>💊 CVS <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.48924,-71.10078" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Randolph Liquors</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">44 N Main St, Randolph, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍔 Five Guys <i>4 min</i></span><span>🍗 Wingstop <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.16337,-71.0429" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Wakefield Public Parking</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">9 Lincoln St, Wakefield, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>💊 Walgreens <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.50291,-71.06934" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FLO"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">4 Municipal Way</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>FLO</span></div>
+<div class="a">4 Municipal Way, Wellesley, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.31386,-71.27442" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lawrence, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">141 Winthrop Ave, Lawrence, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>⛽ Speedway <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.68717,-71.14584" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Quickcharge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Wild Oats Market</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Quickcharge</span></div>
+<div class="a">320 Main St, Williamstown, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.70372,-73.18678" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chicopee, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">650 Memorial Drive, Chicopee, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.1749,-72.5782" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Amherst Public Lot</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">North Prospect Street, Amherst, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.37715,-72.52161" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Marlborough Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">740 Boston Post Rd, Marlborough, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🎯 Target <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.35112,-71.50072" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Chicopee Marketplace (Chicopee, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">591 Memorial Drive, Chicopee, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🔨 Home Depot <i>1 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.17567,-72.57286" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Town Of Maynard Parking</div>
+<div class="sp"><s class="spd slow">40 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">10 Summer Street, Maynard, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>💊 CVS <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.43301,-71.45135" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Electric Era"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Electric Era Charging Station</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>Electric Era</span></div>
+<div class="a">850 Washington Street, Weymouth, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 Walgreens <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.20081,-70.94207" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Gorettis Supermarket</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">1 Providence St, Millbury, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>💊 Walgreens <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.19233,-71.75319" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundai Milford Hmi Guest</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">154 E Main St, Milford, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>🍔 Five Guys <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.15044,-71.50586" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Leld Common</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5 Stevens St, Littleton, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>☕ Starbucks <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.54565,-71.47321" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Credit Union Way Center</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">1 Credit Union Way, Randolph, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.16747,-71.04311" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Framingham, MA - Worcester Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">130 Worcester Rd, Framingham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🍝 Olive Garden <i>6 min</i></span><span>🍔 Five Guys <i>6 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.29743,-71.39941" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Stoughton Lodging</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">200 Technology Center Dr, Stoughton, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🍝 Olive Garden <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.15888,-71.06296" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Alltown Fresh Convenience Market (Plymouth, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">24 Long Pond Road, Plymouth, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🤠 Texas Roadhouse <i>4 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.93312,-70.65719" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EastPoint Plaza</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">910 Boston Post Road East, Marlborough, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🔨 Home Depot <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.35073,-71.49295" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Marcotte Ford L3-2</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">1025 Main Street, Holyoke, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>👑 Burger King <i>9 min</i></span><span>🍳 Denny&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.18098,-72.62957" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Marcotte Ford L3-1</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">1025 Main Street, Holyoke, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>👑 Burger King <i>9 min</i></span><span>🍳 Denny&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.18103,-72.62953" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dedham, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">840 Providence Highway, Dedham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 CVS <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🥬 Whole Foods <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.23641,-71.17828" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Malden Catholic High</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">99 Crystal Street, Malden, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.42724,-71.04525" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gary Rome Lvl</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">150 Whiting Farms Rd, Holyoke, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🍗 KFC <i>5 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🪵 Cracker Barrel <i>9 min</i></span><span>👑 Burger King <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.18238,-72.63702" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">625 Pleasant St</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">625 Pleasant St, Watertown, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.36776,-71.21431" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Vendetti Motors</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">411 W Central St, Franklin, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>💊 CVS <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.08827,-71.41398" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Franklin, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">250 Franklin Village Drive, Franklin, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.09038,-71.42491" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Fairfield Inn Amesbury</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>10 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">35 Clark&#x27;s Road, Amesbury, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>⛽ Circle K <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.84501,-70.90633" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">421 Park DC Spot</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">421 Park Drive, Boston, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34534,-71.10384" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Medford, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">30 Commercial St, Medford, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.40935,-71.08637" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Auburn, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">385 Southbridge St., Auburn, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>☕ Starbucks <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.20376,-71.83308" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Framingham, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1 Worcester Rd, Framingham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>7 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.30365,-71.39413" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">26 Seyon Street</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">26 Seyon Street, Waltham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>💊 Walgreens <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.371,-71.21323" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Boston, MA - Boylston Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">800 Boylston Street, Boston, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34726,-71.08173" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Framingham, MA - Concord Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">961 Concord St, Framingham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>8 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🎯 Target <i>5 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.30551,-71.40278" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massport</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">11 Logan Express, Framingham, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>8 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🎯 Target <i>5 min</i></span><span>🐔 Chick-fil-A <i>6 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.30473,-71.39386" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Boston, MA - Richard B. Ross Way - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1341 Boylston Street, Boston, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>9 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34487,-71.09921" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Auburn Mall (Auburn, MA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">385 Southbridge Street, Auburn, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>9 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.20236,-71.83795" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Worcester, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">75 Quinsigamond Avenue, Worcester, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>9 min</i></span><span>🍗 Wingstop <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>🍔 Wendy&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.24684,-71.80281" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gmg Dcfc Hudson #1</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">242 Washington Street, Hudson, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>9 min</i></span><span>💊 CVS <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.3785,-71.56415" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gmg Dcfc Hudson #2</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">242 Washington Street, Hudson, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>9 min</i></span><span>💊 CVS <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.37848,-71.56423" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massdot Plym Exp</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">5 Long Pond Road, Plymouth, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>10 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>🥞 IHOP <i>8 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.93578,-70.66122" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mashpee, MA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">22 Steeple Street, Mashpee, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>10 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.61745,-70.48842" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Massdot Plym</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">5 Long Pond Road, Plymouth, MA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>10 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>🥞 IHOP <i>8 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.93578,-70.66133" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=MA">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in Massachusetts</h2><div class="chips"><a href="../../dunkin/ma/">🍩 Dunkin&#x27; <small>213</small></a><a href="../../cvs/ma/">💊 CVS <small>122</small></a><a href="../../starbucks/ma/">☕ Starbucks <small>115</small></a><a href="../../mcdonald-s/ma/">🍟 McDonald&#x27;s <small>114</small></a><a href="../../ice-cream-shop/ma/">🍦 Ice cream shop <small>74</small></a><a href="../../burger-king/ma/">👑 Burger King <small>62</small></a><a href="../../wendy-s/ma/">🍔 Wendy&#x27;s <small>58</small></a><a href="../../chipotle/ma/">🌯 Chipotle <small>56</small></a><a href="../../walgreens/ma/">💊 Walgreens <small>47</small></a><a href="../../target/ma/">🎯 Target <small>41</small></a><a href="../../home-depot/ma/">🔨 Home Depot <small>39</small></a><a href="../../panera-bread/ma/">🥖 Panera Bread <small>36</small></a><a href="../../taco-bell/ma/">🌮 Taco Bell <small>35</small></a><a href="../../walmart/ma/">🛒 Walmart <small>34</small></a><a href="../../aldi/ma/">🛒 Aldi <small>32</small></a><a href="../../five-guys/ma/">🍔 Five Guys <small>29</small></a><a href="../../speedway/ma/">⛽ Speedway <small>29</small></a><a href="../../domino-s/ma/">🍕 Domino&#x27;s <small>28</small></a><a href="../../chick-fil-a/ma/">🐔 Chick-fil-A <small>26</small></a><a href="../../kfc/ma/">🍗 KFC <small>23</small></a><a href="../../trader-joe-s/ma/">🛍️ Trader Joe&#x27;s <small>21</small></a><a href="../../best-buy/ma/">💻 Best Buy <small>21</small></a><a href="../../applebee-s/ma/">🍎 Applebee&#x27;s <small>20</small></a><a href="../../olive-garden/ma/">🍝 Olive Garden <small>19</small></a><a href="../../jersey-mike-s/ma/">🥪 Jersey Mike&#x27;s <small>19</small></a><a href="../../lowe-s/ma/">🔧 Lowe&#x27;s <small>19</small></a><a href="../../shake-shack/ma/">🍔 Shake Shack <small>18</small></a><a href="../../popeyes/ma/">🍗 Popeyes <small>15</small></a><a href="../../wegmans/ma/">🛒 Wegmans <small>14</small></a><a href="../../chili-s/ma/">🌶️ Chili&#x27;s <small>12</small></a><a href="../../whole-foods/ma/">🥬 Whole Foods <small>11</small></a><a href="../../dollar-general/ma/">🏪 Dollar General <small>10</small></a><a href="../../ihop/ma/">🥞 IHOP <small>8</small></a><a href="../../wingstop/ma/">🍗 Wingstop <small>7</small></a><a href="../../buffalo-wild-wings/ma/">🦬 Buffalo Wild Wings <small>7</small></a><a href="../../red-robin/ma/">🐦 Red Robin <small>7</small></a><a href="../../panda-express/ma/">🐼 Panda Express <small>6</small></a><a href="../../texas-roadhouse/ma/">🤠 Texas Roadhouse <small>6</small></a><a href="../../denny-s/ma/">🍳 Denny&#x27;s <small>5</small></a><a href="../../cracker-barrel/ma/">🪵 Cracker Barrel <small>5</small></a><a href="../../raising-cane-s/ma/">🐕 Raising Cane&#x27;s <small>5</small></a><a href="../../pizza-hut/ma/">🍕 Pizza Hut <small>5</small></a><a href="../../peet-s-coffee/ma/">☕ Peet&#x27;s Coffee <small>5</small></a><a href="../../costco/ma/">📦 Costco <small>4</small></a><a href="../../dairy-queen/ma/">🍦 Dairy Queen <small>4</small></a><a href="../../tractor-supply/ma/">🚜 Tractor Supply <small>4</small></a><a href="../../sonic/ma/">🚗 Sonic <small>3</small></a><a href="../../pilot/ma/">⛽ Pilot <small>3</small></a><a href="../../circle-k/ma/">⛽ Circle K <small>3</small></a><a href="../../firehouse-subs/ma/">🚒 Firehouse Subs <small>1</small></a><a href="../../little-caesars/ma/">🍕 Little Caesars <small>1</small></a></div>
 <h2>Subway in other states</h2><div class="chips"><a href="../">All states</a></div>

@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>78 DC fast chargers</b> in Ohio have a Speedway within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Speedway&amp;state=OH">Open on the map →</a>
 <p class="stats">Of the 78 fast chargers with a Speedway nearby in Ohio: The typical stop here delivers <b>180 kW</b>, and 46 of them do 150 kW or more; <b>12</b> are close enough that the Speedway is a two-minute walk or less; <b>75</b> are listed as open 24 hours. The fastest is <b>Casey&#x27;s #3535 - Cridersville</b> in Cridersville at 400 kW; the closest walk is 1 min at <b>Sheetz Store 394 (Mentor, OH)</b>. Most are on ChargePoint (23), Tesla Supercharger (18), EVgo (9).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheetz Store 394 (Mentor, OH)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7777 Reynolds Rd., Mentor, OH</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.65984,-81.37651" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Casey&#x27;s #3535 - Cridersville</span><small>400 kW · 4 stalls</small></div>
-<div class="a">100 S Dixie Hwy, Cridersville, OH</div><div class="host">Francis Energy</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🏪 Dollar General ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.65427,-84.13423" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>New Philadelphia, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1281 W High Ave, New Philadelphia, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49393,-81.47344" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cleveland, OH - W 150th Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">4277 W 150th St, Cleveland, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>👑 Burger King ≥6 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.43798,-81.80059" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Liberty Ford Brunswick</span><small>240 kW · 6 stalls</small></div>
-<div class="a">3101 Center Rd, Brunswick, OH</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.23891,-81.80222" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Shoppes on Bluebell - New Philadelphia</span><small>400 kW · 4 stalls</small></div>
-<div class="a">125 Bluebell Drive SW, New Philadelphia, OH</div><div class="host">Francis Energy</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>⛽ Sheetz ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49266,-81.47188" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Willoughby, OH Rechargery @ Sheetz - OH</span><small>400 kW · 10 stalls</small></div>
-<div class="a">4145 OH 306, Willoughby, OH</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.63913,-81.3726" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mentor, OH - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">7750 Reynolds Road, Mentor, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⛽ Sheetz ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.66008,-81.37919" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Upper Sandusky, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1745 E Wyandot Ave, Upper Sandusky, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.83454,-83.23717" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>McDonald&#x27;s 40 Triggs Rd</span><small>350 kW · 4 stalls</small></div>
-<div class="a">40 Triggs Rd., Brookville, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🏪 Dollar General ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🧇 Waffle House ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.84584,-84.42723" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mickey Mart #21 Right Charger</span><small>50 kW · 1 stall</small></div>
-<div class="a">750 OH-97, Bellville, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>⛽ Love&#x27;s ≥10 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.64607,-82.54288" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheffield Crossing Station (Sheffield, OH)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5231 Detroit Rd, Sheffield, OH</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🛒 Giant Eagle ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍗 KFC ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42689,-82.07973" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Sycamore Suites</span><small>80 kW · 6 stalls</small></div>
-<div class="a">621 Midway Blvd, Elyria, OH</div><div class="host">Universal</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍳 Denny&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.39897,-82.11797" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Pickerington EV</span><small>62 kW · 1 stall</small></div>
-<div class="a">10503 Blacklick-Eastern Rd NW, Pickerington, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 KFC ≥5 min</span><span>🐦 Red Robin ≥5 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.92835,-82.78561" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer West Chester, OH #147</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7390 Tylersville Rd., West Chester, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>🍗 Popeyes ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🤠 Texas Roadhouse ≥5 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.35644,-84.37517" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Estle Cadillac</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1515 N. Clinton St., Defiance, OH</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.30338,-84.35992" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>West Chester Township, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">7390 Tylersville Rd, West Chester Township, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🛒 Meijer ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🛒 Aldi ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🍗 Popeyes ≥7 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.35637,-84.37756" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Yark Chrysler Jeep Dodge Ram</span><small>180 kW · 2 stalls</small></div>
-<div class="a">6019 Central Avenue, Toledo, OH</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🛒 Walmart ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.67553,-83.68606" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>South Ridge Inn</span><small>80 kW · 6 stalls</small></div>
-<div class="a">32801 Lorain Rd, North Ridgeville, OH</div><div class="host">Universal</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍦 Culver&#x27;s ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>☕ Starbucks ≥7 min</span><span>⛽ Sheetz ≥9 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.38077,-81.98084" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer Troy, OH #112</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1900 W. Main St., Troy, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🛒 Meijer ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.05468,-84.24318" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>City Of Wooster N Buckeye</span><small>62 kW · 1 stall</small></div>
-<div class="a">132 E North St, Wooster, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🥪 Subway ≥7 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.79945,-81.93933" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">39115 Colorado Ave, Avon, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.46557,-82.06075" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheffield, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">5295 Detroit Road, Sheffield, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>⛽ Sheetz ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42699,-82.07635" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2320 Faircrest St, Canton, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75002,-81.40382" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>North Ridgeville, OH - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">32435 Cook Rd, North Ridgeville, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.38419,-81.97698" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Reynoldsburg, OH Rechargery - Brice Rd</span><small>400 kW · 12 stalls</small></div>
-<div class="a">2727 Brice Road, Reynoldsburg, OH</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🧇 Waffle House ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍗 KFC ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.92563,-82.83209" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Tim Lally Chevrolet</span><small>25 kW · 1 stall</small></div>
-<div class="a">24999 Miles Rd, Bedford Heights, OH</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🔧 Lowe&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42651,-81.50261" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Mark Wahlberg Chevrolet of Worthington</span><small>60 kW · 6 stalls</small></div>
-<div class="a">700 E Dublin Granville Rd, Columbus, OH</div><div class="host">Red E</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>⛽ Sheetz ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.08871,-83.00052" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Jeff Wyler Kia Colerain DC</span><small>50 kW · 1 stall</small></div>
-<div class="a">9189 Colerain Avenue, Cincinnati, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🧇 Waffle House ≥3 min</span><span>🥪 Subway ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>💊 CVS ≥4 min</span><span>🎯 Target ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.23651,-84.59288" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Mark Wahlberg Chevrolet - Worthington</span><small>24 kW · 1 stall</small></div>
-<div class="a">700 E Dublin Granville Rd, Columbus, OH</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>⛽ Sheetz ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.08883,-83.00056" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Dayton, OH - North Springboro Pike - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">5858 North Springboro Pike, Dayton, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🛒 Meijer ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🍗 Popeyes ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>👑 Burger King ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.67005,-84.22091" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3600 Interchange Road, Columbus, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>⛽ Pilot ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🧇 Waffle House ≥3 min</span><span>🍦 Ice cream shop ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.97308,-83.09956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Grla Hyundai Back Fence</span><small>62 kW · 1 stall</small></div>
-<div class="a">2874 Morse Rd, Columbus, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Circle K ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.05992,-82.94209" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Market at Hilliard</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1852 Hilliard Rome Rd, Hilliard, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🛒 Aldi ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🐦 Red Robin ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍗 KFC ≥2 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98929,-83.15023" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Columbus, OH – West 3rd Avenue - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">820 W 3rd Ave, Columbus, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛒 Giant Eagle ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98463,-83.02636" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Columbus, OH - Hilliard Rome Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1661 Hilliard Rome Road, Columbus, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🛒 Meijer ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🚒 Firehouse Subs ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>+20</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98298,-83.15299" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Bob Boyd Ford - DCFC</span><small>180 kW · 4 stalls</small></div>
-<div class="a">2840 North Columbus Street, Lancaster, OH</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🧇 Waffle House ≥1 min</span><span>🥪 Subway ≥6 min</span><span>🤠 Texas Roadhouse ≥8 min</span><span>🛒 Meijer ≥9 min</span><span>🛒 Walmart ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.74657,-82.64753" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Innovatures</span><small>180 kW · 4 stalls</small></div>
-<div class="a">7428 Tylersville Rd, West Chester Twp, OH</div><div class="host">ChargeLab</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🔨 Home Depot ≥2 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.35457,-84.37102" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Grla Hyundai Front Drive</span><small>62 kW · 1 stall</small></div>
-<div class="a">2850 Morse Rd, Columbus, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Circle K ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.05941,-82.94256" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Colony Park Station East</span><small>62 kW · 1 stall</small></div>
-<div class="a">124 N High St, Hillsboro, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.20229,-83.61159" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Reineke Ford of Findlay</span><small>240 kW · 4 stalls</small></div>
-<div class="a">12000 County Rd 99, Findlay, OH</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Sheetz ≥3 min</span><span>⛽ RaceTrac ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.08856,-83.65233" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Bucyrus Bucyrus-Main</span><small>62 kW · 1 stall</small></div>
-<div class="a">117 Washington Square, Bucyrus, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🥪 Subway ≥3 min</span><span>💊 CVS ≥5 min</span><span>🛒 Kroger ≥5 min</span><span>⛽ Circle K ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.8083,-82.97458" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Macedonia, OH - Tesla Supercharger</span><small>120 kW · 6 stalls</small></div>
-<div class="a">8210 Macedonia Commons Blvd., Macedonia, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥5 min</span><span>🥞 IHOP ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.31366,-81.51698" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Brentwood Plaza</span><small>350 kW · 4 stalls</small></div>
-<div class="a">939 Hempstead Dr, Cincinnati, OH</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>👑 Burger King ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.22365,-84.51823" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Dublin, OH - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">6175 Sawmill Road, Dublin, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>🍔 Five Guys ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🛒 Meijer ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.0932,-83.09232" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Lima, OH - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">1933 Roschman Ave., Lima, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72664,-84.0719" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2426 (Columbus, OH)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">5200 West Point Plaza, Columbus, OH</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>🍦 Culver&#x27;s ≥1 min</span><span>🍝 Olive Garden ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>+19</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98232,-83.14674" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Voss Village Cadillac</span><small>50 kW · 2 stalls</small></div>
-<div class="a">650 MIAMISBURG CENTERVILLE RD, DAYTON, OH</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>💊 CVS ≥5 min</span><span>⛽ Sheetz ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.62706,-84.17546" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Elyria Hyundai Showroom</span><small>62 kW · 1 stall</small></div>
-<div class="a">845 Leona St, Elyria, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>🏪 Dollar General ≥7 min</span><span>🍔 Wendy&#x27;s ≥10 min</span><span>🔧 Lowe&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.40351,-82.12388" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Brooklyn, OH - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">10315 Cascade Crossing, Brooklyn, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>⛽ Sheetz ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42265,-81.75838" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Coughlin Kia</span><small>112 kW · 1 stall</small></div>
-<div class="a">5342 Columbus Pike, Lewis Center, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.21916,-83.03436" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Mathews Ford - DCFC</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1155 Delaware Avenue, Marion, OH</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥7 min</span><span>💊 Walgreens ≥6 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>🛒 Kroger ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.56881,-83.12302" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Brownhonda</span><small>62 kW · 1 stall</small></div>
-<div class="a">5626 Central Avenue, Toledo, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥7 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🛒 Walmart ≥4 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.67589,-83.67672" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>TA US-42, London, OH</span><small>400 kW · 12 stalls</small></div>
-<div class="a">940 US-42, London, OH</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥7 min</span><span>🍗 Popeyes ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.95389,-83.37869" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Findlay, OH - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1051 Interstate Court, Findlay, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥7 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.05962,-83.67113" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Mega Lot Frank</span><small>62 kW · 1 stall</small></div>
-<div class="a">6451 Frank Ave NW, North Canton, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>💊 Walgreens ≥6 min</span><span>🛒 Giant Eagle ≥6 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>🏪 Sam&#x27;s Club ≥7 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.87423,-81.44121" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Mega Lot Stark State</span><small>62 kW · 1 stall</small></div>
-<div class="a">6451 Frank Ave NW, North Canton, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>💊 Walgreens ≥6 min</span><span>🛒 Giant Eagle ≥6 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>☕ Starbucks ≥7 min</span><span>🏪 Sam&#x27;s Club ≥7 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.87422,-81.44128" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Elyria Ford Express</span><small>120 kW · 2 stalls</small></div>
-<div class="a">1115 East Broad Street, Elyria, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.36019,-82.07444" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Honda-Colerain Hcexpress</span><small>62 kW · 1 stall</small></div>
-<div class="a">8950 Colerain Ave, Cincinnati, OH</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>☕ Starbucks ≥2 min</span><span>💊 CVS ≥2 min</span><span>🎯 Target ≥3 min</span><span>🔨 Home Depot ≥6 min</span><span>🧇 Waffle House ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.23431,-84.59058" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Oregon, OH - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">2839 N Curtice Rd, Curtice, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥8 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Speedway&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.61748,-83.48179" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sheetz Store 394 (Mentor, OH)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">7777 Reynolds Rd., Mentor, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.65984,-81.37651" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Casey&#x27;s #3535 - Cridersville</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">100 S Dixie Hwy, Cridersville, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.65427,-84.13423" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">New Philadelphia, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1281 W High Ave, New Philadelphia, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🤠 Texas Roadhouse <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.49393,-81.47344" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cleveland, OH - W 150th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4277 W 150th St, Cleveland, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>👑 Burger King <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.43798,-81.80059" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Liberty Ford Brunswick</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>6 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">3101 Center Rd, Brunswick, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.23891,-81.80222" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Shoppes on Bluebell - New Philadelphia</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">125 Bluebell Drive SW, New Philadelphia, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>⛽ Sheetz <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.49266,-81.47188" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Willoughby, OH Rechargery @ Sheetz - OH</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">4145 OH 306, Willoughby, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.63913,-81.3726" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mentor, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7750 Reynolds Road, Mentor, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>⛽ Sheetz <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.66008,-81.37919" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Upper Sandusky, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1745 E Wyandot Ave, Upper Sandusky, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.83454,-83.23717" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">McDonald&#x27;s 40 Triggs Rd</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">40 Triggs Rd., Brookville, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.84584,-84.42723" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mickey Mart #21 Right Charger</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">750 OH-97, Bellville, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>⛽ Love&#x27;s <i>10 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.64607,-82.54288" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sheffield Crossing Station (Sheffield, OH)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">5231 Detroit Rd, Sheffield, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>🛒 Giant Eagle <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🍗 KFC <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.42689,-82.07973" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sycamore Suites</div>
+<div class="sp"><s class="spd std">80 kW</s><b>6 stalls</b><span>Universal</span></div>
+<div class="a">621 Midway Blvd, Elyria, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍳 Denny&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.39897,-82.11797" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Pickerington EV</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">10503 Blacklick-Eastern Rd NW, Pickerington, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍗 KFC <i>5 min</i></span><span>🐦 Red Robin <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.92835,-82.78561" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer West Chester, OH #147</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">7390 Tylersville Rd., West Chester, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>🤠 Texas Roadhouse <i>5 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.35644,-84.37517" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Estle Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">1515 N. Clinton St., Defiance, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.30338,-84.35992" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">West Chester Township, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7390 Tylersville Rd, West Chester Township, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>🍗 Popeyes <i>7 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.35637,-84.37756" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Yark Chrysler Jeep Dodge Ram</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">6019 Central Avenue, Toledo, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🛒 Walmart <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.67553,-83.68606" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">South Ridge Inn</div>
+<div class="sp"><s class="spd std">80 kW</s><b>6 stalls</b><span>Universal</span></div>
+<div class="a">32801 Lorain Rd, North Ridgeville, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍦 Culver&#x27;s <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>⛽ Sheetz <i>9 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.38077,-81.98084" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer Troy, OH #112</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1900 W. Main St., Troy, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.05468,-84.24318" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">City Of Wooster N Buckeye</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">132 E North St, Wooster, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🍕 Domino&#x27;s <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🥪 Subway <i>7 min</i></span><span>🥩 Arby&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.79945,-81.93933" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">39115 Colorado Ave, Avon, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.46557,-82.06075" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sheffield, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5295 Detroit Road, Sheffield, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.42699,-82.07635" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2320 Faircrest St, Canton, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75002,-81.40382" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North Ridgeville, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">32435 Cook Rd, North Ridgeville, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.38419,-81.97698" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Reynoldsburg, OH Rechargery - Brice Rd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>IONNA</span></div>
+<div class="a">2727 Brice Road, Reynoldsburg, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🍗 KFC <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.92563,-82.83209" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Tim Lally Chevrolet</div>
+<div class="sp"><s class="spd slow">25 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">24999 Miles Rd, Bedford Heights, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.42651,-81.50261" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Mark Wahlberg Chevrolet of Worthington</div>
+<div class="sp"><s class="spd std">60 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">700 E Dublin Granville Rd, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>⛽ Sheetz <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.08871,-83.00052" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Jeff Wyler Kia Colerain DC</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">9189 Colerain Avenue, Cincinnati, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>💊 CVS <i>4 min</i></span><span>🎯 Target <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.23651,-84.59288" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Mark Wahlberg Chevrolet - Worthington</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">700 E Dublin Granville Rd, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>⛽ Sheetz <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.08883,-83.00056" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dayton, OH - North Springboro Pike - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5858 North Springboro Pike, Dayton, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>👑 Burger King <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.67005,-84.22091" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3600 Interchange Road, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.97308,-83.09956" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Grla Hyundai Back Fence</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2874 Morse Rd, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⛽ Circle K <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.05992,-82.94209" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Market at Hilliard</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1852 Hilliard Rome Rd, Hilliard, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🐦 Red Robin <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98929,-83.15023" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Columbus, OH – West 3rd Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">820 W 3rd Ave, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛒 Giant Eagle <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98463,-83.02636" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Columbus, OH - Hilliard Rome Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1661 Hilliard Rome Road, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🚒 Firehouse Subs <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+20</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98298,-83.15299" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Bob Boyd Ford - DCFC</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">2840 North Columbus Street, Lancaster, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🤠 Texas Roadhouse <i>8 min</i></span><span>🛒 Meijer <i>9 min</i></span><span>🛒 Walmart <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.74657,-82.64753" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Innovatures</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">7428 Tylersville Rd, West Chester Twp, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🔨 Home Depot <i>2 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.35457,-84.37102" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Grla Hyundai Front Drive</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2850 Morse Rd, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🥪 Subway <i>2 min</i></span><span>⛽ Circle K <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.05941,-82.94256" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Colony Park Station East</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">124 N High St, Hillsboro, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.20229,-83.61159" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Reineke Ford of Findlay</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">12000 County Rd 99, Findlay, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⛽ Sheetz <i>3 min</i></span><span>⛽ RaceTrac <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.08856,-83.65233" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Bucyrus Bucyrus-Main</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">117 Washington Square, Bucyrus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>💊 CVS <i>5 min</i></span><span>🛒 Kroger <i>5 min</i></span><span>⛽ Circle K <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.8083,-82.97458" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Macedonia, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8210 Macedonia Commons Blvd., Macedonia, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>5 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.31366,-81.51698" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Brentwood Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">939 Hempstead Dr, Cincinnati, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.22365,-84.51823" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dublin, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6175 Sawmill Road, Dublin, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.0932,-83.09232" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lima, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1933 Roschman Ave., Lima, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>1 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🤠 Texas Roadhouse <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72664,-84.0719" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2426 (Columbus, OH)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">5200 West Point Plaza, Columbus, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>🍦 Culver&#x27;s <i>1 min</i></span><span>🍝 Olive Garden <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>+19</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98232,-83.14674" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Voss Village Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">650 MIAMISBURG CENTERVILLE RD, DAYTON, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>💊 CVS <i>5 min</i></span><span>⛽ Sheetz <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.62706,-84.17546" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Elyria Hyundai Showroom</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">845 Leona St, Elyria, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>10 min</i></span><span>🔧 Lowe&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.40351,-82.12388" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Brooklyn, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">10315 Cascade Crossing, Brooklyn, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.42265,-81.75838" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Coughlin Kia</div>
+<div class="sp"><s class="spd std">112 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5342 Columbus Pike, Lewis Center, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.21916,-83.03436" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Mathews Ford - DCFC</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">1155 Delaware Avenue, Marion, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>7 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>🛒 Kroger <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.56881,-83.12302" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Brownhonda</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5626 Central Avenue, Toledo, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.67589,-83.67672" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA US-42, London, OH</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">940 US-42, London, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>7 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>⛽ TA Travel Center <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.95389,-83.37869" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Findlay, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1051 Interstate Court, Findlay, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>7 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.05962,-83.67113" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mega Lot Frank</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6451 Frank Ave NW, North Canton, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>8 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🛒 Giant Eagle <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🏪 Sam&#x27;s Club <i>7 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.87423,-81.44121" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mega Lot Stark State</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6451 Frank Ave NW, North Canton, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>8 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🛒 Giant Eagle <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>🏪 Sam&#x27;s Club <i>7 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.87422,-81.44128" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Elyria Ford Express</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">1115 East Broad Street, Elyria, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.36019,-82.07444" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Honda-Colerain Hcexpress</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">8950 Colerain Ave, Cincinnati, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>8 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🎯 Target <i>3 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.23431,-84.59058" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Oregon, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2839 N Curtice Rd, Curtice, OH</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>8 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🥩 Arby&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.61748,-83.48179" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Speedway&amp;state=OH">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 78. <a href="../../../?chain=Speedway&amp;state=OH">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in Ohio</h2><div class="chips"><a href="../../mcdonald-s/oh/">🍟 McDonald&#x27;s <small>152</small></a><a href="../../starbucks/oh/">☕ Starbucks <small>130</small></a><a href="../../wendy-s/oh/">🍔 Wendy&#x27;s <small>126</small></a><a href="../../subway/oh/">🥪 Subway <small>120</small></a><a href="../../chipotle/oh/">🌯 Chipotle <small>94</small></a><a href="../../arby-s/oh/">🥩 Arby&#x27;s <small>87</small></a><a href="../../taco-bell/oh/">🌮 Taco Bell <small>82</small></a><a href="../../ice-cream-shop/oh/">🍦 Ice cream shop <small>80</small></a><a href="../../burger-king/oh/">👑 Burger King <small>77</small></a><a href="../../panera-bread/oh/">🥖 Panera Bread <small>68</small></a><a href="../../aldi/oh/">🛒 Aldi <small>66</small></a><a href="../../dunkin/oh/">🍩 Dunkin&#x27; <small>58</small></a><a href="../../walmart/oh/">🛒 Walmart <small>57</small></a><a href="../../cvs/oh/">💊 CVS <small>51</small></a><a href="../../kfc/oh/">🍗 KFC <small>47</small></a><a href="../../kroger/oh/">🛒 Kroger <small>46</small></a><a href="../../lowe-s/oh/">🔧 Lowe&#x27;s <small>44</small></a><a href="../../sheetz/oh/">⛽ Sheetz <small>41</small></a><a href="../../dollar-general/oh/">🏪 Dollar General <small>39</small></a><a href="../../pizza-hut/oh/">🍕 Pizza Hut <small>38</small></a><a href="../../meijer/oh/">🛒 Meijer <small>38</small></a><a href="../../applebee-s/oh/">🍎 Applebee&#x27;s <small>37</small></a><a href="../../buffalo-wild-wings/oh/">🦬 Buffalo Wild Wings <small>34</small></a><a href="../../walgreens/oh/">💊 Walgreens <small>33</small></a><a href="../../five-guys/oh/">🍔 Five Guys <small>30</small></a><a href="../../home-depot/oh/">🔨 Home Depot <small>30</small></a><a href="../../raising-cane-s/oh/">🐕 Raising Cane&#x27;s <small>27</small></a><a href="../../waffle-house/oh/">🧇 Waffle House <small>26</small></a><a href="../../chick-fil-a/oh/">🐔 Chick-fil-A <small>26</small></a><a href="../../target/oh/">🎯 Target <small>25</small></a><a href="../../jersey-mike-s/oh/">🥪 Jersey Mike&#x27;s <small>25</small></a><a href="../../panda-express/oh/">🐼 Panda Express <small>24</small></a><a href="../../giant-eagle/oh/">🛒 Giant Eagle <small>24</small></a><a href="../../domino-s/oh/">🍕 Domino&#x27;s <small>23</small></a><a href="../../pilot/oh/">⛽ Pilot <small>23</small></a><a href="../../culver-s/oh/">🍦 Culver&#x27;s <small>22</small></a><a href="../../circle-k/oh/">⛽ Circle K <small>20</small></a><a href="../../sam-s-club/oh/">🏪 Sam&#x27;s Club <small>19</small></a><a href="../../ihop/oh/">🥞 IHOP <small>18</small></a><a href="../../popeyes/oh/">🍗 Popeyes <small>18</small></a><a href="../../texas-roadhouse/oh/">🤠 Texas Roadhouse <small>18</small></a><a href="../../cracker-barrel/oh/">🪵 Cracker Barrel <small>17</small></a><a href="../../dairy-queen/oh/">🍦 Dairy Queen <small>17</small></a><a href="../../olive-garden/oh/">🍝 Olive Garden <small>16</small></a><a href="../../tractor-supply/oh/">🚜 Tractor Supply <small>16</small></a><a href="../../firehouse-subs/oh/">🚒 Firehouse Subs <small>15</small></a><a href="../../wingstop/oh/">🍗 Wingstop <small>14</small></a><a href="../../little-caesars/oh/">🍕 Little Caesars <small>14</small></a><a href="../../red-robin/oh/">🐦 Red Robin <small>13</small></a><a href="../../best-buy/oh/">💻 Best Buy <small>13</small></a><a href="../../denny-s/oh/">🍳 Denny&#x27;s <small>12</small></a><a href="../../sonic/oh/">🚗 Sonic <small>12</small></a><a href="../../love-s/oh/">⛽ Love&#x27;s <small>12</small></a><a href="../../costco/oh/">📦 Costco <small>9</small></a><a href="../../hardee-s/oh/">⭐ Hardee&#x27;s <small>9</small></a><a href="../../shake-shack/oh/">🍔 Shake Shack <small>8</small></a><a href="../../chili-s/oh/">🌶️ Chili&#x27;s <small>8</small></a><a href="../../whole-foods/oh/">🥬 Whole Foods <small>7</small></a><a href="../../krispy-kreme/oh/">🍩 Krispy Kreme <small>7</small></a><a href="../../flying-j/oh/">⛽ Flying J <small>6</small></a><a href="../../trader-joe-s/oh/">🛍️ Trader Joe&#x27;s <small>5</small></a><a href="../../jack-in-the-box/oh/">🤡 Jack in the Box <small>5</small></a><a href="../../casey-s/oh/">🍕 Casey&#x27;s <small>5</small></a><a href="../../caribou-coffee/oh/">☕ Caribou Coffee <small>4</small></a><a href="../../ikea/oh/">🪑 IKEA <small>3</small></a><a href="../../ta-travel-center/oh/">⛽ TA Travel Center <small>2</small></a><a href="../../wawa/oh/">🦆 Wawa <small>1</small></a><a href="../../bojangles/oh/">🍗 Bojangles <small>1</small></a><a href="../../racetrac/oh/">⛽ RaceTrac <small>1</small></a></div>
 <h2>Speedway in other states</h2><div class="chips"><a href="../">All states</a></div>

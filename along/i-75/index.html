@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,306 +38,366 @@ order along the route, MI → OH → KY → TN → GA → FL.</p>
 150 kW or more and <b>345</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sault Ste. Marie, MI - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1138 3 Mile Road, Sault Ste. Marie, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🦬 Buffalo Wild Wings ≥5 min</span><span>🍎 Applebee&#x27;s ≥7 min</span><span>👑 Burger King ≥7 min</span><span>🥩 Arby&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.46467,-84.38573" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mackinaw City, MI</span><small>300 kW · 6 stalls</small></div>
-<div class="a">220 South Huron Avenue, Mackinaw City, MI</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍗 KFC ≥2 min</span><span>☕ Starbucks ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.7809,-84.73002" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 5017 Next Door Marathon Mackinaw City</span><small>320 kW · 4 stalls</small></div>
-<div class="a">309 S Nicolet St, Mackinaw City, MI</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥5 min</span><span>🍗 KFC ≥6 min</span><span>☕ Starbucks ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.77919,-84.73266" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Blarney Castle Ez Mart</span><small>62 kW · 1 stall</small></div>
-<div class="a">6174 M-68, Indian River, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.40393,-84.61207" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Gaylord, MI - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">250 Meijer Drive, Gaylord, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> ≥2 min</span><span>🛒 Meijer ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Buffalo Wild Wings&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.02559,-84.72219" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer Gaylord (Gaylord, MI)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">250 Meijer Dr, Gaylord, MI</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.02526,-84.72219" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Family Fare - Gaylord</span><small>400 kW · 4 stalls</small></div>
-<div class="a">829 W Main St, Gaylord, MI</div><div class="host">Francis Energy</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>⛽ Circle K ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.02521,-84.68337" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Grayling Public Parking</span><small>160 kW · 2 stalls</small></div>
-<div class="a">403 Cedar St, Grayling, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍦 <b>Dairy Queen</b> ≥8 min</span><span>⛽ Speedway ≥9 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.66199,-84.71563" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Grayling, MI</span><small>300 kW · 6 stalls</small></div>
-<div class="a">2384 I-75BL, Grayling, MI</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>💊 Walgreens ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.65091,-84.70892" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>2980 Cook Rd</span><small>180 kW · 4 stalls</small></div>
-<div class="a">2980 Cook Rd, West Branch, MI</div><div class="host">Shell Recharge</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.24907,-84.22661" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Richardson Ford</span><small>120 kW · 2 stalls</small></div>
-<div class="a">3781 S Huron Rd, Standish, MI</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍕 Little Caesars ≥4 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🏪 Dollar General ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.97472,-83.95933" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 4644 Express Stop Pinconning</span><small>240 kW · 4 stalls</small></div>
-<div class="a">520 Piconning Rd., Pinconning, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.85294,-84.02486" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bay City, MI - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">2980 E Wilder Rd, Bay City, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🪵 Cracker Barrel ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.62212,-83.93223" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer Bay City (Bay City, MI)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2980 Wilder Rd, Bay City, MI</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🪵 Cracker Barrel ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.62244,-83.93223" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Serra Chevrolet of Saginaw</span><small>50 kW · 1 stall</small></div>
-<div class="a">4200 Bay Rd, Saginaw, MI</div><div class="host">EV Connect</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>💻 Best Buy ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span><span>⛽ Speedway ≥6 min</span><span>🐼 Panda Express ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.46798,-83.97385" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Saginaw, MI</span><small>300 kW · 6 stalls</small></div>
-<div class="a">2772 Tittabawasee Road, Saginaw, MI</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.48251,-83.97203" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Garber Hyundai Express 250 #1</span><small>62 kW · 1 stall</small></div>
-<div class="a">5450 Bay Road, Saginaw, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍦 <b>Culver&#x27;s</b> ≥3 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🎯 Target ≥5 min</span><span>🚒 Firehouse Subs ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Culver&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.48635,-83.97351" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Garber Hyundai Express 250 #2</span><small>62 kW · 1 stall</small></div>
-<div class="a">5450 Bay Rd, Saginaw, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>🔨 Home Depot ≥6 min</span><span>🎯 Target ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.48673,-83.97359" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3475 E Washington, Saginaw, MI</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.4515,-83.89437" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Starbucks Bridgeport</span><small>200 kW · 4 stalls</small></div>
-<div class="a">6301 Dixie Hwy, Bridgeport, MI</div><div class="host">Non-networked</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.35458,-83.87178" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Lafontaine Ford of Birch Run</span><small>240 kW · 4 stalls</small></div>
-<div class="a">11661 S Beyer Rd, Birch Run, MI</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍦 <b>Culver&#x27;s</b> ≥5 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🦬 Buffalo Wild Wings ≥6 min</span><span>🚗 Sonic ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Culver&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.25403,-83.78157" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 4638 Express Stop BP Birch Run</span><small>240 kW · 2 stalls</small></div>
-<div class="a">8830 Main St, Birch Run, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dunkin&#x27;&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.24954,-83.77772" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Randy Wise Hyundai</span><small>60 kW · 4 stalls</small></div>
-<div class="a">4350 Lennon Road, Flint, MI</div><div class="host">Blink</div>
-<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Buffalo Wild Wings&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.98846,-83.76591" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 4649 Express Stop Flint MI</span><small>320 kW · 4 stalls</small></div>
-<div class="a">3930 Corunna Rd, Flint, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>👑 Burger King ≥5 min</span><span>🍕 Little Caesars ≥5 min</span><span>🛒 Kroger ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.00266,-83.73818" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Applebee&#x27;s - Flint</span><small>400 kW · 4 stalls</small></div>
-<div class="a">3129 Miller Rd, Flint, MI</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.98966,-83.73606" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 5085 1Stop Mobil Flint</span><small>160 kW · 2 stalls</small></div>
-<div class="a">2374 W Hill Rd, Flint, MI</div><div class="host">Red E</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥪 Subway ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.94438,-83.72679" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Lafontaine Ford Grand Blanc</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2229 W Hill Rd, Flint, MI</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>📦 Costco ≥6 min</span><span>🛒 Meijer ≥6 min</span><span>🥪 Subway ≥8 min</span><span>🌮 Taco Bell ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Arby&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.94349,-83.72159" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Al Serra Cadillac</span><small>50 kW · 2 stalls</small></div>
-<div class="a">6201 S Saginaw St, Grand Blanc, MI</div><div class="host">EV Connect</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥4 min</span><span>🍔 Five Guys ≥4 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>🥪 Subway ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panera Bread&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.94051,-83.64363" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Randy Wise Toyota - DCFC</span><small>60 kW · 2 stalls</small></div>
-<div class="a">8420 Holly Road, Grand Blanc, MI</div><div class="host">Blink</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥6 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🍦 Culver&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.90543,-83.62926" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Waterford Shell</span><small>150 kW · 4 stalls</small></div>
-<div class="a">4805 Dixie Hwy, Waterford Twp, MI</div><div class="host">Red E</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>👑 Burger King ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Arby&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.69,-83.38635" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Great Lakes Shopping Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4000 Baldwin Rd, Auburn Hills, MI</div><div class="host">EVgo</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>📦 Costco ≥7 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.70132,-83.29681" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Auburn Hills, MI - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">800 Brown Road, Auburn Hills, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>🎯 Target ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>🤠 Texas Roadhouse ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.70686,-83.28942" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>The Auburn Mile Shopping Center - Meijer</span><small>50 kW · 2 stalls</small></div>
-<div class="a">800 Brown Rd, Auburn Hills, MI</div><div class="host">Jule</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🐼 Panda Express ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>🎯 Target ≥3 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>🤠 Texas Roadhouse ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.70701,-83.28899" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Simon Property Group Great Lakes Crossing (Auburn Hills, MI)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">4000 Baldwin Rd, Auburn Hills, MI</div><div class="host">Electrify America</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥4 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🥪 Subway ≥6 min</span><span>🍗 Popeyes ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>👑 Burger King ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.7001,-83.30208" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Civic Center Auburn Hills</span><small>60 kW · 4 stalls</small></div>
-<div class="a">3378 Walton Blvd, Auburn Hills, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span><span>🍦 Dairy Queen ≥4 min</span><span>🥪 Subway ≥6 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span><span>☕ Starbucks ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.67802,-83.22472" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer S. Adams Rd. - Rochester Hills, MI #260</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3608 Marketplace Circle, Rochester Hills, MI</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🍔 Five Guys ≥5 min</span><span>🥖 Panera Bread ≥5 min</span><span>🥪 Subway ≥6 min</span><span>🛒 Walmart ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.64341,-83.20449" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Serra Ford Rochester Hills</span><small>180 kW · 2 stalls</small></div>
-<div class="a">2890 S Rochester Rd, Rochester Hills, MI</div><div class="host">Red E</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🚒 Firehouse Subs ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.63837,-83.1341" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer Rochester Hills MI</span><small>350 kW · 12 stalls</small></div>
-<div class="a">3175 S. Rochester Rd., Rochester Hills, MI</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🎯 Target ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.6351,-83.12721" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer Royal Oak, MI #34</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5111 Meijer Dr., Royal Oak, MI</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🔨 Home Depot ≥6 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>🛒 Kroger ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.53811,-83.18281" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>L425 Customer Lvl</span><small>62 kW · 1 stall</small></div>
-<div class="a">1814 Maplelawn Rd, Troy, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.55191,-83.17566" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Troy, MI</span><small>300 kW · 8 stalls</small></div>
-<div class="a">780 E Big Beaver Rd, Troy, MI</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🐼 Panda Express ≥5 min</span><span>🌮 Taco Bell ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.56174,-83.13091" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Clawson Shopping Center</span><small>160 kW · 4 stalls</small></div>
-<div class="a">1219 W 14 Mile Rd, Clawson, MI</div><div class="host">EV Gateway</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>💊 CVS ≥2 min</span><span>🌮 Del Taco ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.53231,-83.16406" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>L501 Power Link</span><small>120 kW · 2 stalls</small></div>
-<div class="a">777 John R Road, Troy, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍦 <b>Dairy Queen</b> ≥7 min</span><span>🐼 Panda Express ≥8 min</span><span>🚗 Sonic ≥9 min</span><span>👑 Burger King ≥9 min</span><span>🍩 Krispy Kreme ≥10 min</span><span>🥖 Panera Bread ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.54148,-83.10765" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Concord Market BP</span><small>240 kW · 4 stalls</small></div>
-<div class="a">32751 Concord Dr, Madison Heights, MI</div><div class="host">Red E</div>
-<div class="c"><span>🌶️ <b>Chili&#x27;s</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍩 Krispy Kreme ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chili&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.53342,-83.11234" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Oakland Plaza (Troy, MI)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">272 John R Rd, Troy, MI</div><div class="host">Electrify America</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.53451,-83.10508" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>12 and Stephenson Marathon</span><small>240 kW · 4 stalls</small></div>
-<div class="a">29011 Stephenson Hwy, Madison Heights, MI</div><div class="host">Red E</div>
-<div class="c"><span>🐼 <b>Panda Express</b> ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>🍦 Culver&#x27;s ≥6 min</span><span>⛽ Speedway ≥7 min</span><span>🔨 Home Depot ≥7 min</span><span>☕ Starbucks ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panda Express&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.50463,-83.11871" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Royal Oak Ford</span><small>240 kW · 2 stalls</small></div>
-<div class="a">27550 Woodward Ave, Royal Oak, MI</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> ≥4 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Trader Joe&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49329,-83.16134" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Sams Mart</span><small>200 kW · 4 stalls</small></div>
-<div class="a">404 W 11 Mile Rd, Madison Heights, MI</div><div class="host">Red E</div>
-<div class="c"><span>💊 <b>CVS</b> ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🍦 Ice cream shop ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49109,-83.10907" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sunoco Pleasant Ridge</span><small>240 kW · 2 stalls</small></div>
-<div class="a">23701 Woodward Ave, Pleasant Ridge, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥1 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🌯 Chipotle ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.46889,-83.14105" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Mobil Madison</span><small>160 kW · 4 stalls</small></div>
-<div class="a">25031 Dequindre Rd, Madison Heights, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.47669,-83.0851" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Chillbox 9031 I696 and Dequindre Rd</span><small>240 kW · 4 stalls</small></div>
-<div class="a">25700 Dequindre Rd, Warren, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.48196,-83.08409" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kroger Hazel Park</span><small>180 kW · 8 stalls</small></div>
-<div class="a">23101 John R Rd, Hazel Park, MI</div><div class="host">Red E</div>
-<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>💊 CVS ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.4623,-83.10429" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Detroit, MI - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">1301 8 Mile Rd, Detroit, MI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>🍎 Applebee&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.44534,-83.11802" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer W. Eight Mile Rd. - Detroit, MI #268</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1205 W. 8 Mile Rd., Detroit, MI</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>🍎 Applebee&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.44543,-83.11789" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Belmont Shopping Center</span><small>320 kW · 4 stalls</small></div>
-<div class="a">1900 8 Mile Rd, Detroit, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥4 min</span><span>🍗 Popeyes ≥4 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>👑 Burger King ≥6 min</span><span>🍗 KFC ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.4457,-83.08264" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>MC3</span><small>240 kW · 15 stalls</small></div>
-<div class="a">2475 W Grand Blvd, Detroit, MI</div><div class="host">Red E</div>
-<div class="c"><span>💊 <b>CVS</b> ≥4 min</span><span>🍗 KFC ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.3631,-83.09435" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Jefferson Chevrolet Detroit</span><small>60 kW · 2 stalls</small></div>
-<div class="a">2130 E Jefferson Ave, Detroit, MI</div><div class="host">Red E</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥8 min</span><span>🛒 Meijer ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.33683,-83.02531" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Eastern Market Public Lot</span><small>160 kW · 2 stalls</small></div>
-<div class="a">3033 Russel, Detroit, MI</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span><span>👑 Burger King ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.34911,-83.04301" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bob Maxey Ford of Detroit</span><small>80 kW · 4 stalls</small></div>
-<div class="a">1833 E Jefferson Ave, Detroit, MI</div><div class="host">Red E</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🏪 Dollar General ≥6 min</span><span>⛽ Speedway ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.33502,-83.03073" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Blue Energy 1 Beacon Park</span><small>62 kW · 1 stall</small></div>
-<div class="a">1971 Grand River Ave, Detroit, MI</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥7 min</span><span>🍦 Ice cream shop ≥7 min</span><span>🍕 Little Caesars ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>💊 CVS ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.33487,-83.05598" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sault Ste. Marie, MI - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1138 3 Mile Road, Sault Ste. Marie, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🦬 Buffalo Wild Wings <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.46467,-84.38573" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Mackinaw City, MI</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">220 South Huron Avenue, Mackinaw City, MI</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>☕ Starbucks <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.7809,-84.73002" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 5017 Next Door Marathon Mackinaw City</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">309 S Nicolet St, Mackinaw City, MI</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>5 min</i></span><span>🍗 KFC <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.77919,-84.73266" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Blarney Castle Ez Mart</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6174 M-68, Indian River, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🥪 Subway <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.40393,-84.61207" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Gaylord, MI - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">250 Meijer Drive, Gaylord, MI</div>
+<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> <i>2 min</i></span><span>🛒 Meijer <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.02559,-84.72219" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Buffalo Wild Wings&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Meijer Gaylord (Gaylord, MI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">250 Meijer Dr, Gaylord, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.02526,-84.72219" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Family Fare - Gaylord</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">829 W Main St, Gaylord, MI</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>⛽ Circle K <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.02521,-84.68337" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Grayling Public Parking</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">403 Cedar St, Grayling, MI</div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> <i>8 min</i></span><span>⛽ Speedway <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.66199,-84.71563" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Grayling, MI</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">2384 I-75BL, Grayling, MI</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.65091,-84.70892" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Shell Recharge" style="background:#fbce07;color:#1b1b1b">S</span></div><div class="body">
+<div class="n">2980 Cook Rd</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Shell Recharge</span></div>
+<div class="a">2980 Cook Rd, West Branch, MI</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.24907,-84.22661" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Richardson Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">3781 S Huron Rd, Standish, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>🥩 Arby&#x27;s <i>5 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.97472,-83.95933" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 4644 Express Stop Pinconning</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">520 Piconning Rd., Pinconning, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.85294,-84.02486" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bay City, MI - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2980 E Wilder Rd, Bay City, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🪵 Cracker Barrel <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.62212,-83.93223" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Meijer Bay City (Bay City, MI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2980 Wilder Rd, Bay City, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🪵 Cracker Barrel <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.62244,-83.93223" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Serra Chevrolet of Saginaw</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">4200 Bay Rd, Saginaw, MI</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🐼 Panda Express <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.46798,-83.97385" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Saginaw, MI</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">2772 Tittabawasee Road, Saginaw, MI</div>
+<div class="c"><span>🎯 <b>Target</b> <i>1 min</i></span><span>🚒 Firehouse Subs <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.48251,-83.97203" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Garber Hyundai Express 250 #1</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5450 Bay Road, Saginaw, MI</div>
+<div class="c"><span>🍦 <b>Culver&#x27;s</b> <i>3 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🏪 Sam&#x27;s Club <i>4 min</i></span><span>🎯 Target <i>5 min</i></span><span>🚒 Firehouse Subs <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.48635,-83.97351" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Culver&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Garber Hyundai Express 250 #2</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5450 Bay Rd, Saginaw, MI</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🎯 Target <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.48673,-83.97359" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3475 E Washington, Saginaw, MI</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.4515,-83.89437" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Starbucks Bridgeport</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>Non-networked</span></div>
+<div class="a">6301 Dixie Hwy, Bridgeport, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.35458,-83.87178" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Lafontaine Ford of Birch Run</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">11661 S Beyer Rd, Birch Run, MI</div>
+<div class="c"><span>🍦 <b>Culver&#x27;s</b> <i>5 min</i></span><span>🥩 Arby&#x27;s <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🦬 Buffalo Wild Wings <i>6 min</i></span><span>🚗 Sonic <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.25403,-83.78157" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Culver&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 4638 Express Stop BP Birch Run</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">8830 Main St, Birch Run, MI</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.24954,-83.77772" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dunkin&#x27;&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Randy Wise Hyundai</div>
+<div class="sp"><s class="spd std">60 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">4350 Lennon Road, Flint, MI</div>
+<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.98846,-83.76591" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Buffalo Wild Wings&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 4649 Express Stop Flint MI</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">3930 Corunna Rd, Flint, MI</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🍕 Little Caesars <i>5 min</i></span><span>🛒 Kroger <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.00266,-83.73818" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Applebee&#x27;s - Flint</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">3129 Miller Rd, Flint, MI</div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.98966,-83.73606" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Applebee&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 5085 1Stop Mobil Flint</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">2374 W Hill Rd, Flint, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.94438,-83.72679" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Lafontaine Ford Grand Blanc</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">2229 W Hill Rd, Flint, MI</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>📦 Costco <i>6 min</i></span><span>🛒 Meijer <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.94349,-83.72159" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Arby&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Al Serra Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">6201 S Saginaw St, Grand Blanc, MI</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>4 min</i></span><span>🍔 Five Guys <i>4 min</i></span><span>🏪 Sam&#x27;s Club <i>4 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>🥪 Subway <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.94051,-83.64363" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panera Bread&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Randy Wise Toyota - DCFC</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">8420 Holly Road, Grand Blanc, MI</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>6 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🍦 Culver&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.90543,-83.62926" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Waterford Shell</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">4805 Dixie Hwy, Waterford Twp, MI</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.69,-83.38635" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Arby&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Great Lakes Shopping Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4000 Baldwin Rd, Auburn Hills, MI</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>📦 Costco <i>7 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.70132,-83.29681" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Auburn Hills, MI - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">800 Brown Road, Auburn Hills, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>🎯 Target <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>🤠 Texas Roadhouse <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.70686,-83.28942" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Jule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">The Auburn Mile Shopping Center - Meijer</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Jule</span></div>
+<div class="a">800 Brown Rd, Auburn Hills, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>🤠 Texas Roadhouse <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.70701,-83.28899" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Simon Property Group Great Lakes Crossing (Auburn Hills, MI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">4000 Baldwin Rd, Auburn Hills, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🍗 Popeyes <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.7001,-83.30208" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Civic Center Auburn Hills</div>
+<div class="sp"><s class="spd std">60 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">3378 Walton Blvd, Auburn Hills, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span><span>🍦 Dairy Queen <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🍎 Applebee&#x27;s <i>6 min</i></span><span>🥪 Jersey Mike&#x27;s <i>7 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.67802,-83.22472" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer S. Adams Rd. - Rochester Hills, MI #260</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3608 Marketplace Circle, Rochester Hills, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🍔 Five Guys <i>5 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🛒 Walmart <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.64341,-83.20449" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Serra Ford Rochester Hills</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">2890 S Rochester Rd, Rochester Hills, MI</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🚒 Firehouse Subs <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.63837,-83.1341" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer Rochester Hills MI</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>12 stalls</b><span>EVgo</span></div>
+<div class="a">3175 S. Rochester Rd., Rochester Hills, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🎯 Target <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🔧 Lowe&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.6351,-83.12721" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer Royal Oak, MI #34</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5111 Meijer Dr., Royal Oak, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>🛒 Kroger <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.53811,-83.18281" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">L425 Customer Lvl</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1814 Maplelawn Rd, Troy, MI</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.55191,-83.17566" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Troy, MI</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>8 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">780 E Big Beaver Rd, Troy, MI</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🌮 Taco Bell <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.56174,-83.13091" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Clawson Shopping Center</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">1219 W 14 Mile Rd, Clawson, MI</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🌮 Del Taco <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.53231,-83.16406" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">L501 Power Link</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">777 John R Road, Troy, MI</div>
+<div class="c"><span>🍦 <b>Dairy Queen</b> <i>7 min</i></span><span>🐼 Panda Express <i>8 min</i></span><span>🚗 Sonic <i>9 min</i></span><span>👑 Burger King <i>9 min</i></span><span>🍩 Krispy Kreme <i>10 min</i></span><span>🥖 Panera Bread <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.54148,-83.10765" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dairy Queen&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Concord Market BP</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">32751 Concord Dr, Madison Heights, MI</div>
+<div class="c"><span>🌶️ <b>Chili&#x27;s</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍩 Krispy Kreme <i>4 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.53342,-83.11234" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chili&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Oakland Plaza (Troy, MI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">272 John R Rd, Troy, MI</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.53451,-83.10508" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">12 and Stephenson Marathon</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">29011 Stephenson Hwy, Madison Heights, MI</div>
+<div class="c"><span>🐼 <b>Panda Express</b> <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>🍦 Culver&#x27;s <i>6 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🔨 Home Depot <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.50463,-83.11871" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panda Express&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Royal Oak Ford</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">27550 Woodward Ave, Royal Oak, MI</div>
+<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> <i>4 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49329,-83.16134" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Trader Joe&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sams Mart</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">404 W 11 Mile Rd, Madison Heights, MI</div>
+<div class="c"><span>💊 <b>CVS</b> <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49109,-83.10907" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sunoco Pleasant Ridge</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">23701 Woodward Ave, Pleasant Ridge, MI</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>8 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>🥪 Jersey Mike&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.46889,-83.14105" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Mobil Madison</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">25031 Dequindre Rd, Madison Heights, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.47669,-83.0851" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Chillbox 9031 I696 and Dequindre Rd</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">25700 Dequindre Rd, Warren, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.48196,-83.08409" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kroger Hazel Park</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">23101 John R Rd, Hazel Park, MI</div>
+<div class="c"><span>🛒 <b>Kroger</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.4623,-83.10429" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Kroger&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Detroit, MI - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1301 8 Mile Rd, Detroit, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.44534,-83.11802" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Meijer W. Eight Mile Rd. - Detroit, MI #268</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1205 W. 8 Mile Rd., Detroit, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.44543,-83.11789" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Belmont Shopping Center</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">1900 8 Mile Rd, Detroit, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>👑 Burger King <i>6 min</i></span><span>🍗 KFC <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.4457,-83.08264" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">MC3</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>15 stalls</b><span>Red E</span></div>
+<div class="a">2475 W Grand Blvd, Detroit, MI</div>
+<div class="c"><span>💊 <b>CVS</b> <i>4 min</i></span><span>🍗 KFC <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.3631,-83.09435" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Jefferson Chevrolet Detroit</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">2130 E Jefferson Ave, Detroit, MI</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>8 min</i></span><span>🛒 Meijer <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.33683,-83.02531" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Eastern Market Public Lot</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">3033 Russel, Detroit, MI</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>👑 Burger King <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.34911,-83.04301" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bob Maxey Ford of Detroit</div>
+<div class="sp"><s class="spd std">80 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">1833 E Jefferson Ave, Detroit, MI</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🏪 Dollar General <i>6 min</i></span><span>⛽ Speedway <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.33502,-83.03073" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Blue Energy 1 Beacon Park</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1971 Grand River Ave, Detroit, MI</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>7 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>🍕 Little Caesars <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>💊 CVS <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.33487,-83.05598" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MI">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

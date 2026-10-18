@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,66 +33,78 @@
 <p class="lead"><b>12 DC fast chargers</b> in Utah have a Home Depot within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Home Depot&amp;state=UT">Open on the map →</a>
 <p class="stats">Of the 12 fast chargers with a Home Depot nearby in Utah: The typical stop here delivers <b>250 kW</b>, and 8 of them do 150 kW or more; <b>2</b> are close enough that the Home Depot is a two-minute walk or less; <b>12</b> are listed as open 24 hours. The fastest is <b>Walmart EV Charging</b> in Saratoga Springs at 400 kW; the closest walk is 2 min at <b>Walmart 1439 (Washington, UT)</b>. Most are on Tesla Supercharger (4), Electrify America (3), ChargePoint (3).</p>
-<div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1439 (Washington, UT)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">625 W. Telegraph St., Washington, UT</div><div class="host">Electrify America</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🐦 Red Robin ≥3 min</span><span>🚗 Sonic ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.12714,-113.51964" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Doug Smith Kia</span><small>120 kW · 5 stalls</small></div>
-<div class="a">499 Lindon Park Dr, Lindon, UT</div><div class="host">EV Gateway</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.32984,-111.73004" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Murdock Lindon Hyundai</span><small>62 kW · 1 stall</small></div>
-<div class="a">530 Lindon Park Dr, Lindon, UT</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.32882,-111.7319" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6686 (Salt Lake City, UT)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">1905 South 300 West, Salt Lake City, UT</div><div class="host">Electrify America</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥3 min</span><span>🏪 Sam&#x27;s Club ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>🥞 IHOP ≥5 min</span><span>💻 Best Buy ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72787,-111.89792" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Salt Lake City, UT - S 300 W - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1850 South 300 West, Salt Lake City, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥4 min</span><span>📦 Costco ≥2 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🥞 IHOP ≥7 min</span><span>⭐ Carl&#x27;s Jr. ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.7301,-111.90176" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Provo, UT - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1505 S 40 E, Provo, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥4 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🐼 Panda Express ≥7 min</span><span>🎯 Target ≥7 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.21418,-111.65676" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Richfield, UT - West 1250 South - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">1050 W 1250 S, Richfield, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Taco Bell ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.75089,-112.1031" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Murdock Genesis Sales South</span><small>125 kW · 1 stall</small></div>
-<div class="a">452 S Lindon Park Dr, Lindon, UT</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.32934,-111.73381" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1438 (Cedar City, UT)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1330 South Providence Center Drive, Cedar City, UT</div><div class="host">Electrify America</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥5 min</span><span>🛒 Walmart ≥1 min</span><span>🥪 Subway ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.65479,-113.08677" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Murdock Genesis Sales West</span><small>62 kW · 1 stall</small></div>
-<div class="a">452 S Lindon Park Dr, Lindon, UT</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.32904,-111.734" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Washington, UT - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">956 W Red Cliffs Dr, Washington, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 In-N-Out ≥3 min</span><span>💻 Best Buy ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.12737,-113.52578" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">136 W State Rd 73, Saratoga Springs, UT</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥7 min</span><span>🛒 Walmart ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+15</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Home Depot&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.38949,-111.91968" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1439 (Washington, UT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">625 W. Telegraph St., Washington, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🐦 Red Robin <i>3 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.12714,-113.51964" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Doug Smith Kia</div>
+<div class="sp"><s class="spd std">120 kW</s><b>5 stalls</b><span>EV Gateway</span></div>
+<div class="a">499 Lindon Park Dr, Lindon, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.32984,-111.73004" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Murdock Lindon Hyundai</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">530 Lindon Park Dr, Lindon, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.32882,-111.7319" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6686 (Salt Lake City, UT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">1905 South 300 West, Salt Lake City, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72787,-111.89792" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Salt Lake City, UT - S 300 W - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1850 South 300 West, Salt Lake City, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>4 min</i></span><span>📦 Costco <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🥞 IHOP <i>7 min</i></span><span>⭐ Carl&#x27;s Jr. <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.7301,-111.90176" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Provo, UT - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1505 S 40 E, Provo, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>4 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🐼 Panda Express <i>7 min</i></span><span>🎯 Target <i>7 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.21418,-111.65676" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Richfield, UT - West 1250 South - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1050 W 1250 S, Richfield, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.75089,-112.1031" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Murdock Genesis Sales South</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">452 S Lindon Park Dr, Lindon, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.32934,-111.73381" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1438 (Cedar City, UT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1330 South Providence Center Drive, Cedar City, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>5 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.65479,-113.08677" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Murdock Genesis Sales West</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">452 S Lindon Park Dr, Lindon, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.32904,-111.734" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Washington, UT - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">956 W Red Cliffs Dr, Washington, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>6 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 In-N-Out <i>3 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.12737,-113.52578" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">136 W State Rd 73, Saratoga Springs, UT</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>7 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>+15</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.38949,-111.91968" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Home Depot&amp;state=UT">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in Utah</h2><div class="chips"><a href="../../subway/ut/">🥪 Subway <small>70</small></a><a href="../../mcdonald-s/ut/">🍟 McDonald&#x27;s <small>61</small></a><a href="../../starbucks/ut/">☕ Starbucks <small>42</small></a><a href="../../wendy-s/ut/">🍔 Wendy&#x27;s <small>42</small></a><a href="../../walmart/ut/">🛒 Walmart <small>37</small></a><a href="../../ice-cream-shop/ut/">🍦 Ice cream shop <small>37</small></a><a href="../../burger-king/ut/">👑 Burger King <small>35</small></a><a href="../../arby-s/ut/">🥩 Arby&#x27;s <small>30</small></a><a href="../../domino-s/ut/">🍕 Domino&#x27;s <small>28</small></a><a href="../../panda-express/ut/">🐼 Panda Express <small>23</small></a><a href="../../taco-bell/ut/">🌮 Taco Bell <small>22</small></a><a href="../../jersey-mike-s/ut/">🥪 Jersey Mike&#x27;s <small>22</small></a><a href="../../chick-fil-a/ut/">🐔 Chick-fil-A <small>20</small></a><a href="../../walgreens/ut/">💊 Walgreens <small>19</small></a><a href="../../denny-s/ut/">🍳 Denny&#x27;s <small>18</small></a><a href="../../target/ut/">🎯 Target <small>18</small></a><a href="../../little-caesars/ut/">🍕 Little Caesars <small>18</small></a><a href="../../del-taco/ut/">🌮 Del Taco <small>17</small></a><a href="../../costco/ut/">📦 Costco <small>16</small></a><a href="../../kfc/ut/">🍗 KFC <small>16</small></a><a href="../../pizza-hut/ut/">🍕 Pizza Hut <small>16</small></a><a href="../../dutch-bros/ut/">☕ Dutch Bros <small>16</small></a><a href="../../in-n-out/ut/">🍔 In-N-Out <small>15</small></a><a href="../../five-guys/ut/">🍔 Five Guys <small>14</small></a><a href="../../carl-s-jr/ut/">⭐ Carl&#x27;s Jr. <small>13</small></a><a href="../../flying-j/ut/">⛽ Flying J <small>13</small></a><a href="../../chipotle/ut/">🌯 Chipotle <small>12</small></a><a href="../../sonic/ut/">🚗 Sonic <small>12</small></a><a href="../../jack-in-the-box/ut/">🤡 Jack in the Box <small>12</small></a><a href="../../lowe-s/ut/">🔧 Lowe&#x27;s <small>12</small></a><a href="../../ihop/ut/">🥞 IHOP <small>11</small></a><a href="../../raising-cane-s/ut/">🐕 Raising Cane&#x27;s <small>11</small></a><a href="../../wingstop/ut/">🍗 Wingstop <small>10</small></a><a href="../../cvs/ut/">💊 CVS <small>10</small></a><a href="../../applebee-s/ut/">🍎 Applebee&#x27;s <small>9</small></a><a href="../../sam-s-club/ut/">🏪 Sam&#x27;s Club <small>9</small></a><a href="../../best-buy/ut/">💻 Best Buy <small>9</small></a><a href="../../popeyes/ut/">🍗 Popeyes <small>8</small></a><a href="../../buffalo-wild-wings/ut/">🦬 Buffalo Wild Wings <small>8</small></a><a href="../../culver-s/ut/">🍦 Culver&#x27;s <small>7</small></a><a href="../../firehouse-subs/ut/">🚒 Firehouse Subs <small>7</small></a><a href="../../chili-s/ut/">🌶️ Chili&#x27;s <small>7</small></a><a href="../../olive-garden/ut/">🍝 Olive Garden <small>6</small></a><a href="../../texas-roadhouse/ut/">🤠 Texas Roadhouse <small>6</small></a><a href="../../red-robin/ut/">🐦 Red Robin <small>6</small></a><a href="../../pilot/ut/">⛽ Pilot <small>6</small></a><a href="../../speedway/ut/">⛽ Speedway <small>6</small></a><a href="../../tractor-supply/ut/">🚜 Tractor Supply <small>6</small></a><a href="../../zaxby-s/ut/">🍗 Zaxby&#x27;s <small>5</small></a><a href="../../shake-shack/ut/">🍔 Shake Shack <small>4</small></a><a href="../../cracker-barrel/ut/">🪵 Cracker Barrel <small>3</small></a><a href="../../krispy-kreme/ut/">🍩 Krispy Kreme <small>3</small></a><a href="../../trader-joe-s/ut/">🛍️ Trader Joe&#x27;s <small>2</small></a><a href="../../love-s/ut/">⛽ Love&#x27;s <small>2</small></a><a href="../../ta-travel-center/ut/">⛽ TA Travel Center <small>2</small></a><a href="../../panera-bread/ut/">🥖 Panera Bread <small>1</small></a><a href="../../whole-foods/ut/">🥬 Whole Foods <small>1</small></a><a href="../../dollar-general/ut/">🏪 Dollar General <small>1</small></a></div>
 <h2>Home Depot in other states</h2><div class="chips"><a href="../">All states</a></div>

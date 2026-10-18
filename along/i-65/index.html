@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,306 +38,366 @@ order along the route, IN → KY → TN → AL.</p>
 150 kW or more and <b>115</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gary, IN Rechargery Relay - Garfield St</span><small>400 kW · 8 stalls</small></div>
-<div class="a">2560 Garfield St, Gary, IN</div><div class="host">IONNA</div>
-<div class="c"><span>🍕 <b>Little Caesars</b> ≥1 min</span><span>🏪 Dollar General ≥2 min</span><span>💊 Walgreens ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Little Caesars&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.57208,-87.35926" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Merrillville, IN - Tesla Supercharger</span><small>250 kW · 22 stalls</small></div>
-<div class="a">611 West Lincoln Highway, Merrillville, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>💊 Walgreens ≥5 min</span><span>🐼 Panda Express ≥7 min</span><span>🛒 Aldi ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.46865,-87.34347" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundai Mvl Fast -Front Lot</span><small>62 kW · 1 stall</small></div>
-<div class="a">1000 81st Ave, Merrillville, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>💊 Walgreens ≥7 min</span><span>🍗 Wingstop ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.47158,-87.34796" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundai Mvl Fast - Back Lot</span><small>62 kW · 1 stall</small></div>
-<div class="a">8010-18 Tyler Cir, Merrillville, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>💊 Walgreens ≥7 min</span><span>🍗 Wingstop ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.47219,-87.34787" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Schepel Cadillac</span><small>50 kW · 1 stall</small></div>
-<div class="a">2929 W Lincoln Hwy, Merrillville, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.47028,-87.3718" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Team Chrysler Dodge Jeep Ram</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3111 W Lincoln Hwy, Merrillville, IN</div><div class="host">Red E</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.4701,-87.37339" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>NIPSCO/GOEVIN - Merrillville</span><small>150 kW · 4 stalls</small></div>
-<div class="a">611 US-30, Merrillville, IN</div><div class="host">In Charge</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍗 Wingstop ≥6 min</span><span>💊 Walgreens ≥7 min</span><span>🛒 Aldi ≥9 min</span><span>🐼 Panda Express ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.46794,-87.34533" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4154 West US Highway 24, Remington, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍗 KFC ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.76626,-87.12463" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Rohrman Auto Hyundai South</span><small>62 kW · 1 stall</small></div>
-<div class="a">304 Sagamore Pkwy S, Lafayette, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>💊 CVS ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.41921,-86.85897" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Rohrman Auto Super</span><small>62 kW · 1 stall</small></div>
-<div class="a">701 Sagamore Pkwy S, Lafayette, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Aldi</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.40946,-86.85724" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lafayette, IN Rechargery Relay @ Wawa - North Creasy Lane</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1 North Creasy Lane, Lafayette, IN</div><div class="host">IONNA</div>
-<div class="c"><span>🐕 <b>Raising Cane&#x27;s</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Raising Cane&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.41848,-86.83836" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lafayette, IN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
-<div class="a">4901 State Rd. 26E, Lafayette, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🪵 Cracker Barrel ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.41615,-86.81395" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1547 (Lafayette, IN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4205 Commerce Dr, Lafayette, IN</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>🍝 Olive Garden ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.41454,-86.82607" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Five Star Power Link 1-4</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2051 Sagamore Pkwy S, Lafayette, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🤠 Texas Roadhouse ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dunkin&#x27;&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.39781,-86.85386" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Five Star Power Link 2-3</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2051 Sagamore Parkway South, Lafayette, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🤠 Texas Roadhouse ≥6 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dunkin&#x27;&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.39773,-86.85377" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lebanon, IN - Tesla Supercharger</span><small>250 kW · 11 stalls</small></div>
-<div class="a">1375 S Lebanon St, Lebanon, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>⛽ Flying J ≥5 min</span><span>🏪 Dollar General ≥5 min</span><span>⛽ Pilot ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.03511,-86.46957" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">520 South State Road 39, Lebanon, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>⛽ Speedway ≥6 min</span><span>🏪 Dollar General ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.03274,-86.47335" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Whitestown, IN Rechargery Relay @ Wally&#x27;s - Perry Worth Roa</span><small>400 kW · 10 stalls</small></div>
-<div class="a">4227 Perry Worth Road, Whitestown, IN</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98104,-86.39223" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Zionsville, IN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">6650 Whitestown Parkway, Zionsville, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⛽ Circle K ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.95068,-86.3438" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Speedway, IN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">6311 Crawfordsville Road, Speedway, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍳 <b>Denny&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Denny&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.80073,-86.27036" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Indianapolis, IN - Capitol Avenue - Tesla Supercharger</span><small>75 kW · 12 stalls</small></div>
-<div class="a">109 South Capitol Avenue, Indianapolis, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.76541,-86.16125" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Indianapolis, IN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">5120 Victory Drive, Indianapolis, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>🍦 Culver&#x27;s ≥7 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.70233,-86.07959" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 5443 (Indianapolis, IN)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">4650 South Emerson Avenue, Indianapolis, IN</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.7002,-86.08414" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Hubler Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">8435 US Highway 31, Indianapolis, IN</div><div class="host">Non-networked</div>
-<div class="c"><span>🌭 <b>Portillo&#x27;s</b> ≥7 min</span><span>🌯 Chipotle ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Portillo&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.64479,-86.1318" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Indianapolis, IN - East Southport Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">5325 E Southport Rd, Indianapolis, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🛒 Aldi ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panera Bread&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.66506,-86.07606" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundaisouth Cpe250 Sales</span><small>62 kW · 1 stall</small></div>
-<div class="a">1300 US 31 S, Greenwood, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥1 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🍕 Pizza Hut ≥5 min</span><span>🛒 Aldi ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.59791,-86.10572" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundaisouth Cpe250 Pdi</span><small>62 kW · 1 stall</small></div>
-<div class="a">1300 US 31 S, Greenwood, IN</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🍕 Pizza Hut ≥5 min</span><span>🛒 Aldi ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.59786,-86.10604" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Skillman Ford - DCFC</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1250 U.S. 31 South, Greenwood, IN</div><div class="host">Blink</div>
-<div class="c"><span>🍕 <b>Pizza Hut</b> ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>🚜 Tractor Supply ≥6 min</span><span>👑 Burger King ≥8 min</span><span>🍗 Wingstop ≥8 min</span><span>💊 Walgreens ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pizza Hut&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.59953,-86.10689" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J 656 - eXtend</span><small>350 kW · 4 stalls</small></div>
-<div class="a">82 White Street, Whiteland, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.55007,-86.0362" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hubler Ford Franklin</span><small>180 kW · 4 stalls</small></div>
-<div class="a">2140 North Morton Street, Franklin, IN</div><div class="host">Blink</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>🛒 Meijer ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.50257,-86.06932" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Franklin</span><small>180 kW · 4 stalls</small></div>
-<div class="a">361 Paris Dr, Franklin, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🍦 <b>Culver&#x27;s</b> ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🧇 Waffle House ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Culver&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.48598,-86.01624" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Edinburgh</span><small>180 kW · 4 stalls</small></div>
-<div class="a">12161 N U.S Hwy 31, Edinburgh, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🪵 Cracker Barrel ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.31278,-85.96514" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Columbus, IN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">3545 W 450 St, Columbus, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Circle K</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Circle K&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.13368,-85.9611" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bob Poynter Ford</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1873 East Tipton Street, Seymour, IN</div><div class="host">Blink</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>🔨 Home Depot ≥6 min</span><span>🌶️ Chili&#x27;s ≥8 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.95956,-85.8581" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Seymour</span><small>180 kW · 4 stalls</small></div>
-<div class="a">249 N Sandy Creek Dr, Seymour, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>⛽ Circle K ≥6 min</span><span>🧇 Waffle House ≥6 min</span><span>☕ Starbucks ≥7 min</span><span>🌶️ Chili&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96122,-85.84498" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>John Jones Chev Buick of Scottsburg</span><small>50 kW · 1 stall</small></div>
-<div class="a">1351 State Hwy 56, Scottsburg, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🍕 <b>Pizza Hut</b> ≥8 min</span><span>🛒 Walmart ≥8 min</span><span>🥩 Arby&#x27;s ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span><span>🧇 Waffle House ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pizza Hut&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.68382,-85.8007" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">4222 Charlestown Rd, New Albany, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥2 min</span><span>🛒 Meijer ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 KFC ≥4 min</span><span>🍩 Dunkin&#x27; ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.35049,-85.79385" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1476 (Clarksville, IN)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1351 Veterans Pkwy, Clarksville, IN</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🏪 Sam&#x27;s Club ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.33054,-85.75879" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Jeffersonville, IN - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1586 Veterans Pkwy, Jeffersonville, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Five Guys</b> ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Krispy Kreme ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Five Guys&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.32773,-85.74516" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Allstate Ford Truck Sales</span><small>240 kW · 4 stalls</small></div>
-<div class="a">1357 Gardiner Ln, Louisville, KY</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥6 min</span><span>🍗 KFC ≥6 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🛒 Kroger ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.1976,-85.70153" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Louisville, KY - Preston Highway - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">9500 Preston Highway, Louisville, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥2 min</span><span>🛒 Meijer ≥3 min</span><span>🔧 Lowe&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.11183,-85.67736" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;S 238 - Ky #238</span><small>320 kW · 2 stalls</small></div>
-<div class="a">1090 Cedar Grove Road, Shepherdsville, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ RaceTrac ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97925,-85.69377" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Bob Swope Ford</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1307 North Dixie Highway, Elizabethtown, KY</div><div class="host">Blink</div>
-<div class="c"><span>🛒 <b>Aldi</b> ≥9 min</span><span>⛽ Speedway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Aldi&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.72022,-85.87948" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Elizabethtown, KY - North Mulberry Street - Tesla Supercharg</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1036 N Mulberry St, Elizabethtown, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🛒 Kroger ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.71069,-85.83403" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Swope Hyundai</span><small>120 kW · 2 stalls</small></div>
-<div class="a">1104 North Dixie Highway, Elizabethtown, KY</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span><span>🍦 Ice cream shop ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.71578,-85.87853" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Elizabethtown, KY - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">809 East Dixie Avenue, Elizabethtown, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.67165,-85.8456" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;S 716 - Ky #716</span><small>320 kW · 2 stalls</small></div>
-<div class="a">601 Ring Road, Elizabethtown, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.654,-85.88641" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>392</span><small>350 kW · 4 stalls</small></div>
-<div class="a">450 East Western Ave, Sonora, KY</div><div class="host">EVgo</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.52294,-85.88308" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;S 360 - Ky #360</span><small>320 kW · 2 stalls</small></div>
-<div class="a">4000 L and North Turnpike Road, Horse Cave, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.20078,-85.93542" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cave City Welcome Center - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">821 Mammoth Cave St, Cave City, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.13582,-85.97383" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Smiths Grove, KY - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">4001 Smiths Grove- Scottsville Rd, Smiths Grove, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥪 Subway ≥6 min</span><span>⛽ Speedway ≥7 min</span><span>⛽ TA Travel Center ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.03967,-86.2115" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>National Corvette Museum (Bowling Green, KY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">350 Corvette Dr., Bowling Green, KY</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>☕ Starbucks ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.0033,-86.37494" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Leachman Cadillac</span><small>50 kW · 1 stall</small></div>
-<div class="a">2012 SCOTTSVILLE RD, BOWLING GREEN, KY</div><div class="host">EV Connect</div>
-<div class="c"><span>🔨 <b>Home Depot</b> ≥8 min</span><span>💻 Best Buy ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Home Depot&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.95974,-86.4283" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Jim Johnson Nissan Hyundai</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2200 Scottsville Road, Bowling Green, KY</div><div class="host">Blink</div>
-<div class="c"><span>💻 <b>Best Buy</b> ≥7 min</span><span>🔨 Home Depot ≥8 min</span><span>🐼 Panda Express ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Best Buy&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.95884,-86.42781" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Chargepoint2 Unit</span><small>62 kW · 1 stall</small></div>
-<div class="a">2398 Scottsville Road, Bowling Green, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🐼 <b>Panda Express</b> ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>🍦 Ice cream shop ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panda Express&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.95509,-86.42496" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bowling Green, KY - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">1676 Westpark Drive, Bowling Green, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Meijer</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🔨 Home Depot ≥6 min</span><span>🛒 Aldi ≥7 min</span><span>⛽ Speedway ≥7 min</span><span>🎯 Target ≥10 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Meijer&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.95526,-86.43889" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Greenwood Ford Lincoln</span><small>120 kW · 4 stalls</small></div>
-<div class="a">3075 Scottsville Rd, Bowling Green, KY</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.94127,-86.42222" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4380 Nashville Road, Franklin, KY</div><div class="host">EVgo</div>
-<div class="c"><span>🍳 <b>Denny&#x27;s</b> ≥1 min</span><span>⛽ Flying J ≥1 min</span><span>👑 Burger King ≥4 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>🧇 Waffle House ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Denny&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.66327,-86.55359" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Nes Power Serra</span><small>102 kW · 1 stall</small></div>
-<div class="a">2340 Gallatin Pike N, Nashville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>💻 Best Buy ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.30853,-86.6831" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Nissan of Rivergate</span><small>50 kW · 1 stall</small></div>
-<div class="a">1550 Gallatin Pike N, Madison, TN</div><div class="host">Non-networked</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🥩 Arby&#x27;s ≥7 min</span><span>🍝 Olive Garden ≥8 min</span><span>☕ Dutch Bros ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.29057,-86.70486" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Gary, IN Rechargery Relay - Garfield St</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">2560 Garfield St, Gary, IN</div>
+<div class="c"><span>🍕 <b>Little Caesars</b> <i>1 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.57208,-87.35926" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Little Caesars&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Merrillville, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>22 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">611 West Lincoln Highway, Merrillville, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🐼 Panda Express <i>7 min</i></span><span>🛒 Aldi <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.46865,-87.34347" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundai Mvl Fast -Front Lot</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1000 81st Ave, Merrillville, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍗 Wingstop <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.47158,-87.34796" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundai Mvl Fast - Back Lot</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">8010-18 Tyler Cir, Merrillville, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍗 Wingstop <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.47219,-87.34787" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Schepel Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">2929 W Lincoln Hwy, Merrillville, IN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.47028,-87.3718" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Team Chrysler Dodge Jeep Ram</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">3111 W Lincoln Hwy, Merrillville, IN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.4701,-87.37339" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="In Charge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">NIPSCO/GOEVIN - Merrillville</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>In Charge</span></div>
+<div class="a">611 US-30, Merrillville, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🍗 Wingstop <i>6 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🛒 Aldi <i>9 min</i></span><span>🐼 Panda Express <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.46794,-87.34533" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4154 West US Highway 24, Remington, IN</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍗 KFC <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.76626,-87.12463" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Rohrman Auto Hyundai South</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">304 Sagamore Pkwy S, Lafayette, IN</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>💊 CVS <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.41921,-86.85897" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Rohrman Auto Super</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">701 Sagamore Pkwy S, Lafayette, IN</div>
+<div class="c"><span>🛒 <b>Aldi</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.40946,-86.85724" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Aldi&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Lafayette, IN Rechargery Relay @ Wawa - North Creasy Lane</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>IONNA</span></div>
+<div class="a">1 North Creasy Lane, Lafayette, IN</div>
+<div class="c"><span>🐕 <b>Raising Cane&#x27;s</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍗 KFC <i>3 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.41848,-86.83836" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Raising Cane&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lafayette, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4901 State Rd. 26E, Lafayette, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🪵 Cracker Barrel <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.41615,-86.81395" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1547 (Lafayette, IN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">4205 Commerce Dr, Lafayette, IN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>⛽ Speedway <i>4 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.41454,-86.82607" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Five Star Power Link 1-4</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">2051 Sagamore Pkwy S, Lafayette, IN</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🤠 Texas Roadhouse <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.39781,-86.85386" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dunkin&#x27;&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Five Star Power Link 2-3</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">2051 Sagamore Parkway South, Lafayette, IN</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🤠 Texas Roadhouse <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.39773,-86.85377" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dunkin&#x27;&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lebanon, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>11 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1375 S Lebanon St, Lebanon, IN</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>⛽ Flying J <i>5 min</i></span><span>🏪 Dollar General <i>5 min</i></span><span>⛽ Pilot <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.03511,-86.46957" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">520 South State Road 39, Lebanon, IN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🏪 Dollar General <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.03274,-86.47335" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Whitestown, IN Rechargery Relay @ Wally&#x27;s - Perry Worth Roa</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">4227 Perry Worth Road, Whitestown, IN</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98104,-86.39223" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Zionsville, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6650 Whitestown Parkway, Zionsville, IN</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>1 min</i></span><span>💊 CVS <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>⛽ Circle K <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.95068,-86.3438" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Speedway, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6311 Crawfordsville Road, Speedway, IN</div>
+<div class="c"><span>🍳 <b>Denny&#x27;s</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.80073,-86.27036" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Denny&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Indianapolis, IN - Capitol Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">109 South Capitol Avenue, Indianapolis, IN</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.76541,-86.16125" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Indianapolis, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5120 Victory Drive, Indianapolis, IN</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>🍦 Culver&#x27;s <i>7 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.70233,-86.07959" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 5443 (Indianapolis, IN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">4650 South Emerson Avenue, Indianapolis, IN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>⛽ Speedway <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.7002,-86.08414" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Hubler Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">8435 US Highway 31, Indianapolis, IN</div>
+<div class="c"><span>🌭 <b>Portillo&#x27;s</b> <i>7 min</i></span><span>🌯 Chipotle <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.64479,-86.1318" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Portillo&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Indianapolis, IN - East Southport Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5325 E Southport Rd, Indianapolis, IN</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥩 Arby&#x27;s <i>5 min</i></span><span>🛒 Aldi <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.66506,-86.07606" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panera Bread&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundaisouth Cpe250 Sales</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1300 US 31 S, Greenwood, IN</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>1 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>🛒 Aldi <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.59791,-86.10572" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundaisouth Cpe250 Pdi</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1300 US 31 S, Greenwood, IN</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>🛒 Aldi <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.59786,-86.10604" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Skillman Ford - DCFC</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">1250 U.S. 31 South, Greenwood, IN</div>
+<div class="c"><span>🍕 <b>Pizza Hut</b> <i>3 min</i></span><span>⛽ Speedway <i>4 min</i></span><span>🚜 Tractor Supply <i>6 min</i></span><span>👑 Burger King <i>8 min</i></span><span>🍗 Wingstop <i>8 min</i></span><span>💊 Walgreens <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.59953,-86.10689" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pizza Hut&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J 656 - eXtend</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">82 White Street, Whiteland, IN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.55007,-86.0362" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Hubler Ford Franklin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">2140 North Morton Street, Franklin, IN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>🛒 Meijer <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.50257,-86.06932" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Franklin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">361 Paris Dr, Franklin, IN</div>
+<div class="c"><span>🍦 <b>Culver&#x27;s</b> <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🧇 Waffle House <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.48598,-86.01624" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Culver&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Edinburgh</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">12161 N U.S Hwy 31, Edinburgh, IN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🪵 Cracker Barrel <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.31278,-85.96514" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Columbus, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3545 W 450 St, Columbus, IN</div>
+<div class="c"><span>⛽ <b>Circle K</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.13368,-85.9611" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Circle K&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Bob Poynter Ford</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">1873 East Tipton Street, Seymour, IN</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🌶️ Chili&#x27;s <i>8 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.95956,-85.8581" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Seymour</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">249 N Sandy Creek Dr, Seymour, IN</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>⛽ Circle K <i>6 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>🌶️ Chili&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96122,-85.84498" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">John Jones Chev Buick of Scottsburg</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">1351 State Hwy 56, Scottsburg, IN</div>
+<div class="c"><span>🍕 <b>Pizza Hut</b> <i>8 min</i></span><span>🛒 Walmart <i>8 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span><span>🧇 Waffle House <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.68382,-85.8007" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pizza Hut&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Meijer - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4222 Charlestown Rd, New Albany, IN</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>2 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.35049,-85.79385" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1476 (Clarksville, IN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1351 Veterans Pkwy, Clarksville, IN</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🏪 Sam&#x27;s Club <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.33054,-85.75879" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Jeffersonville, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1586 Veterans Pkwy, Jeffersonville, IN</div>
+<div class="c"><span>🍔 <b>Five Guys</b> <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Krispy Kreme <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.32773,-85.74516" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Five Guys&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Allstate Ford Truck Sales</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">1357 Gardiner Ln, Louisville, KY</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>6 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🛒 Kroger <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.1976,-85.70153" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Louisville, KY - Preston Highway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">9500 Preston Highway, Louisville, KY</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>2 min</i></span><span>🛒 Meijer <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.11183,-85.67736" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Love&#x27;S 238 - Ky #238</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">1090 Cedar Grove Road, Shepherdsville, KY</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ RaceTrac <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.97925,-85.69377" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Bob Swope Ford</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">1307 North Dixie Highway, Elizabethtown, KY</div>
+<div class="c"><span>🛒 <b>Aldi</b> <i>9 min</i></span><span>⛽ Speedway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.72022,-85.87948" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Aldi&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Elizabethtown, KY - North Mulberry Street - Tesla Supercharg</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1036 N Mulberry St, Elizabethtown, KY</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>🛒 Kroger <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.71069,-85.83403" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Swope Hyundai</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">1104 North Dixie Highway, Elizabethtown, KY</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span><span>🍦 Ice cream shop <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.71578,-85.87853" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Elizabethtown, KY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">809 East Dixie Avenue, Elizabethtown, KY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.67165,-85.8456" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Love&#x27;S 716 - Ky #716</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">601 Ring Road, Elizabethtown, KY</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.654,-85.88641" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">392</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">450 East Western Ave, Sonora, KY</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.52294,-85.88308" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Love&#x27;S 360 - Ky #360</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">4000 L and North Turnpike Road, Horse Cave, KY</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.20078,-85.93542" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cave City Welcome Center - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">821 Mammoth Cave St, Cave City, KY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🚗 Sonic <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.13582,-85.97383" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Smiths Grove, KY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4001 Smiths Grove- Scottsville Rd, Smiths Grove, KY</div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🥪 Subway <i>6 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>⛽ TA Travel Center <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.03967,-86.2115" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Buc-ee&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">National Corvette Museum (Bowling Green, KY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">350 Corvette Dr., Bowling Green, KY</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.0033,-86.37494" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Leachman Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">2012 SCOTTSVILLE RD, BOWLING GREEN, KY</div>
+<div class="c"><span>🔨 <b>Home Depot</b> <i>8 min</i></span><span>💻 Best Buy <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.95974,-86.4283" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Home Depot&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Jim Johnson Nissan Hyundai</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">2200 Scottsville Road, Bowling Green, KY</div>
+<div class="c"><span>💻 <b>Best Buy</b> <i>7 min</i></span><span>🔨 Home Depot <i>8 min</i></span><span>🐼 Panda Express <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.95884,-86.42781" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Best Buy&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Chargepoint2 Unit</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2398 Scottsville Road, Bowling Green, KY</div>
+<div class="c"><span>🐼 <b>Panda Express</b> <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>🍦 Ice cream shop <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.95509,-86.42496" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panda Express&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bowling Green, KY - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1676 Westpark Drive, Bowling Green, KY</div>
+<div class="c"><span>🛒 <b>Meijer</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🛒 Aldi <i>7 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🎯 Target <i>10 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.95526,-86.43889" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Meijer&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Greenwood Ford Lincoln</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">3075 Scottsville Rd, Bowling Green, KY</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.94127,-86.42222" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4380 Nashville Road, Franklin, KY</div>
+<div class="c"><span>🍳 <b>Denny&#x27;s</b> <i>1 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>🧇 Waffle House <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.66327,-86.55359" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Denny&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Nes Power Serra</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2340 Gallatin Pike N, Nashville, TN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>💻 Best Buy <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.30853,-86.6831" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Nissan of Rivergate</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">1550 Gallatin Pike N, Madison, TN</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>🥩 Arby&#x27;s <i>7 min</i></span><span>🍝 Olive Garden <i>8 min</i></span><span>☕ Dutch Bros <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.29057,-86.70486" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TN">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

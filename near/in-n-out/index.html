@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=In-N-Out">Open on the map →</a>
 <p class="stats">Of the 431 fast chargers with an In-N-Out nearby across the US: The typical stop here delivers <b>250 kW</b>, and 288 of them do 150 kW or more; <b>94</b> are close enough that the In-N-Out is a two-minute walk or less; <b>376</b> are listed as open 24 hours. The fastest is <b>Steak &#x27;n Shake - Tesla Supercharger</b> in Arlington at 500 kW; the closest walk is 1 min at <b>In-N-Out Valencia</b>. Most are on Tesla Supercharger (147), EVgo (65), ChargePoint (63).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>313</small></a><a href="tx/">Texas <small>38</small></a><a href="az/">Arizona <small>26</small></a><a href="co/">Colorado <small>17</small></a><a href="ut/">Utah <small>15</small></a><a href="nv/">Nevada <small>8</small></a><a href="wa/">Washington <small>5</small></a><a href="or/">Oregon <small>5</small></a><a href="id/">Idaho <small>4</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Valencia</span><small>350 kW · 4 stalls</small></div>
-<div class="a">27510 The Old Rd, Valencia, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>☕ Starbucks ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.42074,-118.58287" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Harvestmoon</span><small>160 kW · 1 stall</small></div>
-<div class="a">735 Harvest Moon Dr, Longmont, CO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>📦 Costco ≥1 min</span><span>🐼 Panda Express ≥7 min</span><span>🌮 Taco Bell ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.15187,-105.08539" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Beaumont, CA - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">1540 E. 2nd Street, Beaumont, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🚗 Sonic ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.92271,-116.95206" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Euclid</span><small>125 kW · 1 stall</small></div>
-<div class="a">540 N Euclid St, Anaheim, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.83873,-117.941" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Denver-- 4597 N. Central park blvd</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4597 Central Park Blvd, Denver, CO</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🤠 Texas Roadhouse ≥7 min</span><span>⛽ QuikTrip ≥7 min</span><span>🍝 Olive Garden ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.77968,-104.88333" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out 13864 Foothill Blvd.</span><small>350 kW · 4 stalls</small></div>
-<div class="a">13864 Foothill Blvd, Sylmar, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍗 KFC ≥2 min</span><span>☕ Starbucks ≥6 min</span><span>🐼 Panda Express ≥6 min</span><span>🥪 Subway ≥8 min</span><span>🤡 Jack in the Box ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.31117,-118.43555" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chipotle Central Park</span><small>125 kW · 1 stall</small></div>
-<div class="a">8968 East 46th Avenue, Denver, CO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🤠 Texas Roadhouse ≥6 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍝 Olive Garden ≥7 min</span><span>⛽ QuikTrip ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.77995,-104.88408" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Oakdale</span><small>125 kW · 1 stall</small></div>
-<div class="a">3401 Oakdale Road, Modesto, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌮 Del Taco ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>👑 Burger King ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.68832,-120.95847" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Lugonia</span><small>125 kW · 1 stall</small></div>
-<div class="a">1301 West Lugonia Avenue, Redlands, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🐦 Red Robin ≥5 min</span><span>🔨 Home Depot ≥6 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06963,-117.20274" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out Dexter</span><small>125 kW · 1 stall</small></div>
-<div class="a">18490 Dexter Ave, Lake Elsinore, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69256,-117.33515" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>LA Fitness - Lake Elsinore</span><small>50 kW · 4 stalls</small></div>
-<div class="a">18550 Dexter Ave, Lake Elsinore, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>⛽ Circle K ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.69196,-117.33429" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pleasanton, CA - Johnson Drive - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
-<div class="a">6000 Johnson Drive, Pleasanton, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>👑 Burger King ≥4 min</span><span>☕ Starbucks ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.70032,-121.90823" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rancho Las Palmas Shopping Center</span><small>350 kW · 10 stalls</small></div>
-<div class="a">42370 Bob Hope Dr, Rancho Mirage, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.73684,-116.40747" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Marketplace</span><small>350 kW · 6 stalls</small></div>
-<div class="a">9105 E Stockton Blvd, Elk Grove, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.42408,-121.39077" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Raley&#x27;s Fairfield Travis</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3001 Travis Blvd, Fairfield, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.25733,-122.06541" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairfield, CA - 3001 Travis Boulevard - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">3001 Travis Boulevard, Fairfield, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.25752,-122.06544" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pacifica Hacienda Center (Vista, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2010 Hacienda Dr, Vista, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌮 Taco Bell ≥8 min</span><span>🤡 Jack in the Box ≥9 min</span><span>🍗 Popeyes ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.18395,-117.28463" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ralph&#x27;s</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1000 N Western Ave, San Pedro, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.75282,-118.30835" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Anaheim Hills Village Center</span><small>50 kW · 7 stalls</small></div>
-<div class="a">5624 East La Palma Avenue, Anaheim, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8593,-117.79226" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Twin Falls, ID - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">2015 Neilsen Point Place, Twin Falls, ID</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>💻 Best Buy ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍦 Ice cream shop ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=ID">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.59796,-114.45525" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out 3Rd Way</span><small>160 kW · 1 stall</small></div>
-<div class="a">13511 Southeast 3rd Way, Vancouver, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.61964,-122.53396" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cardinaleway Super One</span><small>62 kW · 1 stall</small></div>
-<div class="a">2525 Wardlow Rd, Corona, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Del Taco ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.88239,-117.61326" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hillsboro, OR - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">18101 NW Evergreen Parkway, Beaverton, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🎯 Target ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.53859,-122.86617" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Glendale, CA - Harvey Drive - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">300 Harvey Drive, Glendale, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍗 Popeyes ≥7 min</span><span>🥪 Jersey Mike&#x27;s ≥9 min</span><span>🍗 KFC ≥9 min</span><span>🎯 Target ≥10 min</span><span>☕ Starbucks ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.14783,-118.22746" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>South Salt Lake, UT - S Main Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">2193 S Main Street, South Salt Lake, UT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🌮 Del Taco ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72425,-111.8909" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Vestar Shops at Rossmoor (Seal Beach, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">12489 Seal Beach Blvd, Seal Beach, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>💊 CVS ≥2 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.78155,-118.07304" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rialto Village</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1530 S Riverside Ave., Rialto, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07374,-117.37058" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Arcadia Coleman Landing (San Jose, CA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">760 Newhall Dr, San Jose, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.35051,-121.92286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairfield, CA - Holiday Ln - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
-<div class="a">1350 Holiday Lane, Fairfield, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.25655,-122.0651" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Tech Ridge Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">500 Canyon Ridge Dr, Austin, TX</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 H-E-B ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🐦 Red Robin ≥8 min</span><span>🦬 Buffalo Wild Wings ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.4051,-97.67333" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Comfort Inn Gilroy</span><small>120 kW · 8 stalls</small></div>
-<div class="a">8437 San Ysidro Ave, Gilroy, CA</div><div class="host">EV Gateway</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.02325,-121.56496" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Villa Ford</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2550 N Tustin St, Orange, CA</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🌮 Del Taco ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🤡 Jack in the Box ≥2 min</span><span>⛽ Speedway ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.83189,-117.83676" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ocpw-Pkgadmn Ev3 Fast</span><small>62 kW · 1 stall</small></div>
-<div class="a">313 The City Dr S MANCHESTER, Orange, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍩 Krispy Kreme ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🦬 Buffalo Wild Wings ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.78565,-117.89009" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chevron #2200</span><small>80 kW · 4 stalls</small></div>
-<div class="a">320 E Millbrae Ave, Millbrae, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🌯 Chipotle ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.60124,-122.3835" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ontario, CA - Ontario Mills Pkwy - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">4410 Ontario Mills Pkwy, Ontario, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥4 min</span><span>🌮 Del Taco ≥5 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.06896,-117.55629" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ukiah, CA - N State St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1315 North State Street, Ukiah, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.16783,-123.20999" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kroger Smiths 354 (Whitney, NV)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3850 E Flamingo Rd, Las Vegas, NV</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍕 Little Caesars ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11667,-115.09163" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>The Promenade at Casa Grande</span><small>50 kW · 1 stall</small></div>
-<div class="a">1005 N Promenade Pkwy, Casa Grande, AZ</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥4 min</span><span>🍝 Olive Garden ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.88052,-111.68335" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Irvine Company Tmp Dcfc E</span><small>62 kW · 1 stall</small></div>
-<div class="a">2993 El Camino Real, Tustin, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🍦 Dairy Queen ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Shake Shack ≥3 min</span><span>🥬 Sprouts ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.72369,-117.7931" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cardinaleway Super Two</span><small>62 kW · 1 stall</small></div>
-<div class="a">2525 Wardlow Rd, Corona, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍔 <b>In-N-Out</b> ≥1 min</span><span>🥞 IHOP ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Del Taco ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=In-N-Out&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.88265,-117.61387" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">In-N-Out Valencia</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">27510 The Old Rd, Valencia, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>☕ Starbucks <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.42074,-118.58287" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Harvestmoon</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">735 Harvest Moon Dr, Longmont, CO</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>📦 Costco <i>1 min</i></span><span>🐼 Panda Express <i>7 min</i></span><span>🌮 Taco Bell <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.15187,-105.08539" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Beaumont, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1540 E. 2nd Street, Beaumont, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.92271,-116.95206" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Euclid</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">540 N Euclid St, Anaheim, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.83873,-117.941" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">In-N-Out Denver-- 4597 N. Central park blvd</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4597 Central Park Blvd, Denver, CO</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🤠 Texas Roadhouse <i>7 min</i></span><span>⛽ QuikTrip <i>7 min</i></span><span>🍝 Olive Garden <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.77968,-104.88333" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">In-N-Out 13864 Foothill Blvd.</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">13864 Foothill Blvd, Sylmar, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🐼 Panda Express <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>🤡 Jack in the Box <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.31117,-118.43555" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Chipotle Central Park</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">8968 East 46th Avenue, Denver, CO</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🤠 Texas Roadhouse <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🍝 Olive Garden <i>7 min</i></span><span>⛽ QuikTrip <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.77995,-104.88408" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Oakdale</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3401 Oakdale Road, Modesto, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌮 Del Taco <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.68832,-120.95847" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Lugonia</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1301 West Lugonia Avenue, Redlands, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🐦 Red Robin <i>5 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.06963,-117.20274" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out Dexter</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">18490 Dexter Ave, Lake Elsinore, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.69256,-117.33515" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">LA Fitness - Lake Elsinore</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>EVCS</span></div>
+<div class="a">18550 Dexter Ave, Lake Elsinore, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.69196,-117.33429" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pleasanton, CA - Johnson Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6000 Johnson Drive, Pleasanton, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.70032,-121.90823" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Rancho Las Palmas Shopping Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>EVgo</span></div>
+<div class="a">42370 Bob Hope Dr, Rancho Mirage, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.73684,-116.40747" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Marketplace</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">9105 E Stockton Blvd, Elk Grove, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.42408,-121.39077" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Raley&#x27;s Fairfield Travis</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3001 Travis Blvd, Fairfield, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.25733,-122.06541" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fairfield, CA - 3001 Travis Boulevard - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3001 Travis Boulevard, Fairfield, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.25752,-122.06544" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Pacifica Hacienda Center (Vista, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2010 Hacienda Dr, Vista, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🤡 Jack in the Box <i>9 min</i></span><span>🍗 Popeyes <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.18395,-117.28463" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Ralph&#x27;s</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1000 N Western Ave, San Pedro, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.75282,-118.30835" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Anaheim Hills Village Center</div>
+<div class="sp"><s class="spd std">50 kW</s><b>7 stalls</b><span>EVCS</span></div>
+<div class="a">5624 East La Palma Avenue, Anaheim, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.8593,-117.79226" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Twin Falls, ID - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2015 Neilsen Point Place, Twin Falls, ID</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.59796,-114.45525" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=ID">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out 3Rd Way</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">13511 Southeast 3rd Way, Vancouver, WA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.61964,-122.53396" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cardinaleway Super One</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2525 Wardlow Rd, Corona, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.88239,-117.61326" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hillsboro, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">18101 NW Evergreen Parkway, Beaverton, OR</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.53859,-122.86617" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Glendale, CA - Harvey Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">300 Harvey Drive, Glendale, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍗 Popeyes <i>7 min</i></span><span>🥪 Jersey Mike&#x27;s <i>9 min</i></span><span>🍗 KFC <i>9 min</i></span><span>🎯 Target <i>10 min</i></span><span>☕ Starbucks <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.14783,-118.22746" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">South Salt Lake, UT - S Main Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2193 S Main Street, South Salt Lake, UT</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🌮 Del Taco <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72425,-111.8909" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Vestar Shops at Rossmoor (Seal Beach, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">12489 Seal Beach Blvd, Seal Beach, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.78155,-118.07304" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Rialto Village</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1530 S Riverside Ave., Rialto, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.07374,-117.37058" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Arcadia Coleman Landing (San Jose, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">760 Newhall Dr, San Jose, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.35051,-121.92286" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fairfield, CA - Holiday Ln - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1350 Holiday Lane, Fairfield, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.25655,-122.0651" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Tech Ridge Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">500 Canyon Ridge Dr, Austin, TX</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 H-E-B <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🐦 Red Robin <i>8 min</i></span><span>🦬 Buffalo Wild Wings <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.4051,-97.67333" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Comfort Inn Gilroy</div>
+<div class="sp"><s class="spd std">120 kW</s><b>8 stalls</b><span>EV Gateway</span></div>
+<div class="a">8437 San Ysidro Ave, Gilroy, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.02325,-121.56496" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Villa Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">2550 N Tustin St, Orange, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🌮 Del Taco <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.83189,-117.83676" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ocpw-Pkgadmn Ev3 Fast</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">313 The City Dr S MANCHESTER, Orange, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍩 Krispy Kreme <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🦬 Buffalo Wild Wings <i>5 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.78565,-117.89009" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Chevron #2200</div>
+<div class="sp"><s class="spd std">80 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">320 E Millbrae Ave, Millbrae, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.60124,-122.3835" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ontario, CA - Ontario Mills Pkwy - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4410 Ontario Mills Pkwy, Ontario, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>5 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.06896,-117.55629" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ukiah, CA - N State St - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1315 North State Street, Ukiah, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.16783,-123.20999" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Kroger Smiths 354 (Whitney, NV)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">3850 E Flamingo Rd, Las Vegas, NV</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍕 Little Caesars <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11667,-115.09163" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">The Promenade at Casa Grande</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">1005 N Promenade Pkwy, Casa Grande, AZ</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>4 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.88052,-111.68335" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Irvine Company Tmp Dcfc E</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2993 El Camino Real, Tustin, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🍦 Dairy Queen <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 Shake Shack <i>3 min</i></span><span>🥬 Sprouts <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.72369,-117.7931" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Cardinaleway Super Two</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2525 Wardlow Rd, Corona, CA</div>
+<div class="c"><span>🍔 <b>In-N-Out</b> <i>1 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.88265,-117.61387" target="_blank" rel="noopener">Directions</a><a href="../../?chain=In-N-Out&amp;state=CA">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have an In-N-Out within walking distance in the US?</summary><p>431 public DC fast chargers in the US have an In-N-Out within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which In-N-Out charging stop is fastest in the US?</summary><p>Steak &#x27;n Shake - Tesla Supercharger in Arlington at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

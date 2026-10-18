@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Bojangles">Open on the map →</a>
 <p class="stats">Of the 204 fast chargers with a Bojangles nearby across the US: The typical stop here delivers <b>240 kW</b>, and 134 of them do 150 kW or more; <b>46</b> are close enough that the Bojangles is a two-minute walk or less; <b>183</b> are listed as open 24 hours. The fastest is <b>Raleigh, NC Rechargery Relay @ Refuel - Glenwood Ave Ste</b> in Raleigh at 400 kW; the closest walk is 1 min at <b>Bojangles Restaurant</b>. Most are on Tesla Supercharger (67), ChargePoint (49), EVgo (16).</p>
 <h2>By state</h2><div class="chips"><a href="nc/">North Carolina <small>74</small></a><a href="ga/">Georgia <small>29</small></a><a href="sc/">South Carolina <small>28</small></a><a href="va/">Virginia <small>24</small></a><a href="tn/">Tennessee <small>17</small></a><a href="al/">Alabama <small>9</small></a><a href="fl/">Florida <small>7</small></a><a href="md/">Maryland <small>3</small></a><a href="tx/">Texas <small>2</small></a><a href="pa/">Pennsylvania <small>2</small></a><a href="nv/">Nevada <small>2</small></a><a href="il/">Illinois <small>2</small></a><a href="ky/">Kentucky <small>2</small></a><a href="ms/">Mississippi <small>1</small></a><a href="wv/">West Virginia <small>1</small></a><a href="oh/">Ohio <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bojangles Restaurant</span><small>240 kW · 2 stalls</small></div>
-<div class="a">4401 Ogeechee Rd, Savannah, GA</div><div class="host">Non-networked</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍗 KFC ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.04705,-81.16973" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>North Augusta, SC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1014 Edgefield Rd, North Augusta, SC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>☕ Caribou Coffee ≥1 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56896,-81.93864" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Raleigh, NC Rechargery Relay @ Refuel - Glenwood Ave Ste</span><small>400 kW · 6 stalls</small></div>
-<div class="a">8710 Glenwood Ave Ste 100, Raleigh, NC</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.88701,-78.74379" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Manchester, TN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">2224 Hillsboro Blvd., Manchester, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.45859,-86.05735" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Plymouth, NC - Tesla Supercharger</span><small>120 kW · 8 stalls</small></div>
-<div class="a">840 U.S. 64, Plymouth, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍕 Pizza Hut ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.85064,-76.75615" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia Power Cleveland</span><small>125 kW · 1 stall</small></div>
-<div class="a">66 E Kytle St, Cleveland, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.59534,-83.76211" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheetz 407 (Wytheville, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1340 North Fourth Street, Wytheville, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.9595,-81.0951" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Optimus Cpo Btc Lancaster</span><small>350 kW · 1 stall</small></div>
-<div class="a">1205 North Main Street, Lancaster, SC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🛒 Aldi ≥2 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>🌮 Taco Bell ≥7 min</span><span>🛒 Walmart ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.73631,-80.77752" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>SPINX - Store #175</span><small>50 kW · 1 stall</small></div>
-<div class="a">1504 Boiling Springs Rd, Boiling Springs, SC</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>🍳 Denny&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.00802,-81.95224" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Goldsboro, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1001 North Spence Avenue, Goldsboro, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>🌶️ Chili&#x27;s ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.38645,-77.94838" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Tom Station 1 Tom</span><small>62 kW · 1 stall</small></div>
-<div class="a">119 N Elm St, Marshville, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>⛽ Speedway ≥5 min</span><span>🏪 Dollar General ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.98667,-80.3683" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>1445 East Main St</span><small>60 kW · 2 stalls</small></div>
-<div class="a">1445 East Main St, Lincolnton, NC</div><div class="host">EV Connect</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Cook Out ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.4777,-81.23474" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2190 Philpott Highway 58, South Boston, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.67468,-78.92792" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Garner, NC Rechargery - NC-42</span><small>400 kW · 10 stalls</small></div>
-<div class="a">5447 Veterans Pkwy, Garner, NC</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.60536,-78.56655" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Long Chevrolet, Buick, GMC</span><small>50 kW · 1 stall</small></div>
-<div class="a">1900 Congress Pkwy S, Athens, TN</div><div class="host">EV Connect</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🛒 Walmart ≥9 min</span><span>🍗 Zaxby&#x27;s ≥9 min</span><span>🚗 Sonic ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.44647,-84.63111" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mu Station 1 (L)</span><small>360 kW · 2 stalls</small></div>
-<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🧇 Waffle House ≥3 min</span><span>🏪 Dollar General ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.143,-83.28" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Spinx</span><small>50 kW · 1 stall</small></div>
-<div class="a">7495 Augusta Rd, Piedmont, SC</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>💊 CVS ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.72768,-82.38854" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Henderson, NC - E Andrews Ave - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1419 E Andrews Ave, Henderson, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.31958,-78.38126" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 8 stalls</small></div>
-<div class="a">781 Moores Ferry Road, Skippers, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.60658,-77.56026" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Gpm Investments</span><small>160 kW · 1 stall</small></div>
-<div class="a">171 Weaver Blvd, Weaverville, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Publix ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>🍗 KFC ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.70466,-82.5695" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hub-Chargepoint Station 3 (Rm)</span><small>360 kW · 1 stall</small></div>
-<div class="a">1827 Griffith Dr, Harriman, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Kroger ≥3 min</span><span>💊 Walgreens ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.88989,-84.54783" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hub-Chargepoint Station 4 (Rr)</span><small>360 kW · 1 stall</small></div>
-<div class="a">1827 Griffith Dr, Harriman, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Kroger ≥3 min</span><span>💊 Walgreens ≥5 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.88987,-84.54786" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mu Station 2 (M)</span><small>200 kW · 1 stall</small></div>
-<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🧇 Waffle House ≥4 min</span><span>🏪 Dollar General ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.14304,-83.28024" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tcemc Sandpiper</span><small>125 kW · 1 stall</small></div>
-<div class="a">7877 US-70, La Grange, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.28643,-77.75821" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Rock Hill, SC Rechargery Relay - Cherry Rd</span><small>400 kW · 16 stalls</small></div>
-<div class="a">2371 Cherry Road, Rock Hill, SC</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Del Taco ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.97008,-80.99411" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lowe&#x27;s - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">380 Highland Crossing, East Ellijay, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.65958,-84.4887" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hope Mills, NC Rechargery Relay @ Circle K - Chicken Foot Ro</span><small>400 kW · 4 stalls</small></div>
-<div class="a">674 Chicken Foot Road, Hope Mills, NC</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>⛽ Circle K ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Sheetz ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.93556,-78.92143" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Grand Prairie, TX Rechargery Relay - S Carrier Pkwy</span><small>400 kW · 10 stalls</small></div>
-<div class="a">4125 South Carrier Parkway, Grand Prairie, TX</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>💊 CVS ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.6725,-97.0059" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Wynne Ford</span><small>120 kW · 4 stalls</small></div>
-<div class="a">1020 W Mercury Blvd, Hampton, VA</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍔 Cook Out ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.04398,-76.37971" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Clemmons, NC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2501 Lewisville Clemmons Rd, Clemmons, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🛒 Aldi ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.03052,-80.38129" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mu Station 3 (R)</span><small>200 kW · 1 stall</small></div>
-<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🧇 Waffle House ≥4 min</span><span>🏪 Dollar General ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.14305,-83.28032" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Henderson, NC</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1520 Dabney Dr., Henderson, NC</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.33448,-78.43552" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>PART</span><small>50 kW · 1 stall</small></div>
-<div class="a">824 N Main St, Graham, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🍗 Popeyes ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.05667,-79.39913" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hope Mills, NC - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
-<div class="a">630 Chicken Foot Rd, Hope Mills, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>⛽ Circle K ≥2 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Sheetz ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.93657,-78.92278" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mocksville, NC - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1449 Yadkinville Rd, Mocksville, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.91853,-80.58568" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>City Of Wilson Chicfila2Dcfast</span><small>125 kW · 1 stall</small></div>
-<div class="a">5100 Raleigh Rd Pkwy W, Wilson, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.76444,-78.01002" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Abingdon, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">25016 Lee Highway, Abingdon, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍗 Royal Farms ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.71247,-81.9291" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3008 Highway 321, Cayce, SC</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.92978,-81.07742" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia Power Captain D Madi</span><small>62 kW · 1 stall</small></div>
-<div class="a">1910 Eatonton Rd, Madison, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>⛽ Pilot ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.56115,-83.47664" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>County Ford</span><small>240 kW · 4 stalls</small></div>
-<div class="a">105 Auto Park Dr, Graham, NC</div><div class="host">Red E</div>
-<div class="c"><span>🍗 <b>Bojangles</b> ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Bojangles&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.05839,-79.4016" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bojangles Restaurant</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">4401 Ogeechee Rd, Savannah, GA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🍗 KFC <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.04705,-81.16973" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North Augusta, SC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1014 Edgefield Rd, North Augusta, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>☕ Caribou Coffee <i>1 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56896,-81.93864" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Raleigh, NC Rechargery Relay @ Refuel - Glenwood Ave Ste</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">8710 Glenwood Ave Ste 100, Raleigh, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.88701,-78.74379" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Manchester, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2224 Hillsboro Blvd., Manchester, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.45859,-86.05735" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Plymouth, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">120 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">840 U.S. 64, Plymouth, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.85064,-76.75615" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia Power Cleveland</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">66 E Kytle St, Cleveland, GA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.59534,-83.76211" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sheetz 407 (Wytheville, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1340 North Fourth Street, Wytheville, VA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.9595,-81.0951" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Optimus Cpo Btc Lancaster</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1205 North Main Street, Lancaster, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>🛒 Walmart <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.73631,-80.77752" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">SPINX - Store #175</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">1504 Boiling Springs Rd, Boiling Springs, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.00802,-81.95224" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Goldsboro, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1001 North Spence Avenue, Goldsboro, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>6 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.38645,-77.94838" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Tom Station 1 Tom</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">119 N Elm St, Marshville, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>⛽ Speedway <i>5 min</i></span><span>🏪 Dollar General <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.98667,-80.3683" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">1445 East Main St</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">1445 East Main St, Lincolnton, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 Cook Out <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.4777,-81.23474" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2190 Philpott Highway 58, South Boston, VA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.67468,-78.92792" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Garner, NC Rechargery - NC-42</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">5447 Veterans Pkwy, Garner, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.60536,-78.56655" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Long Chevrolet, Buick, GMC</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">1900 Congress Pkwy S, Athens, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>🛒 Walmart <i>9 min</i></span><span>🍗 Zaxby&#x27;s <i>9 min</i></span><span>🚗 Sonic <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.44647,-84.63111" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mu Station 1 (L)</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.143,-83.28" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Spinx</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">7495 Augusta Rd, Piedmont, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.72768,-82.38854" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Henderson, NC - E Andrews Ave - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1419 E Andrews Ave, Henderson, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.31958,-78.38126" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">781 Moores Ferry Road, Skippers, VA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.60658,-77.56026" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gpm Investments</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">171 Weaver Blvd, Weaverville, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Publix <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.70466,-82.5695" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hub-Chargepoint Station 3 (Rm)</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1827 Griffith Dr, Harriman, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🛒 Kroger <i>3 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.88989,-84.54783" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hub-Chargepoint Station 4 (Rr)</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1827 Griffith Dr, Harriman, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🛒 Kroger <i>3 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.88987,-84.54786" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mu Station 2 (M)</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🧇 Waffle House <i>4 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.14304,-83.28024" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Tcemc Sandpiper</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">7877 US-70, La Grange, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.28643,-77.75821" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Rock Hill, SC Rechargery Relay - Cherry Rd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>16 stalls</b><span>IONNA</span></div>
+<div class="a">2371 Cherry Road, Rock Hill, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🌮 Del Taco <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.97008,-80.99411" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lowe&#x27;s - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">380 Highland Crossing, East Ellijay, GA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.65958,-84.4887" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Hope Mills, NC Rechargery Relay @ Circle K - Chicken Foot Ro</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>IONNA</span></div>
+<div class="a">674 Chicken Foot Road, Hope Mills, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Sheetz <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.93556,-78.92143" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Grand Prairie, TX Rechargery Relay - S Carrier Pkwy</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">4125 South Carrier Parkway, Grand Prairie, TX</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.6725,-97.0059" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Wynne Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">1020 W Mercury Blvd, Hampton, VA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍔 Cook Out <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.04398,-76.37971" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Clemmons, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2501 Lewisville Clemmons Rd, Clemmons, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.03052,-80.38129" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mu Station 3 (R)</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5290 South Davy Crockett Parkway, Morristown, TN</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🧇 Waffle House <i>4 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.14305,-83.28032" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Henderson, NC</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1520 Dabney Dr., Henderson, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.33448,-78.43552" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">PART</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">824 N Main St, Graham, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.05667,-79.39913" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hope Mills, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">630 Chicken Foot Rd, Hope Mills, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⛽ Sheetz <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.93657,-78.92278" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mocksville, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1449 Yadkinville Rd, Mocksville, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.91853,-80.58568" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">City Of Wilson Chicfila2Dcfast</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5100 Raleigh Rd Pkwy W, Wilson, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.76444,-78.01002" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Abingdon, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">25016 Lee Highway, Abingdon, VA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍗 Royal Farms <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.71247,-81.9291" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3008 Highway 321, Cayce, SC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.92978,-81.07742" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia Power Captain D Madi</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1910 Eatonton Rd, Madison, GA</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.56115,-83.47664" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">County Ford</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">105 Auto Park Dr, Graham, NC</div>
+<div class="c"><span>🍗 <b>Bojangles</b> <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.05839,-79.4016" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Bojangles&amp;state=NC">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Bojangles within walking distance in the US?</summary><p>204 public DC fast chargers in the US have a Bojangles within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Bojangles charging stop is fastest in the US?</summary><p>Raleigh, NC Rechargery Relay @ Refuel - Glenwood Ave Ste in Raleigh at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

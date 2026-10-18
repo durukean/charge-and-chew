@@ -47,27 +47,30 @@ h1{font-family:var(--display);font-size:clamp(24px,3.6vw,34px);line-height:1.18;
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
 .cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;
-  margin-bottom:9px;box-shadow:var(--sh);display:flex;gap:13px;align-items:flex-start}
-.card .ring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;background:var(--good-bg);color:var(--good)}
-.card .ring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
-.card .ring span{font-size:9.5px;font-weight:600;opacity:.88}
+.card{display:flex;gap:13px;align-items:flex-start;padding:16px 2px;border-bottom:1px solid var(--line)}
+/* Mirrors the app's list row: the network's mark leads, speed coloured by tier, food amber. */
+.card .lead{flex-shrink:0;width:42px;display:flex;justify-content:center;padding-top:2px}
+.card .nm{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 15px/1 var(--display);
+  letter-spacing:-.3px;overflow:hidden}
+.card .nm.two{font-size:12px}
+.card .nm svg{width:100%;height:100%;display:block}
+.card .nm.other{background:var(--surface3);color:var(--dim)}
+.card .nm.other svg{width:18px;height:18px}
 .card .body{flex:1;min-width:0}
-.card .n{font-family:var(--display);font-weight:700;font-size:17px;display:flex;justify-content:space-between;gap:10px;
-  align-items:baseline;letter-spacing:-.2px}
-/* On a phone the kW badge squeezed long station names into a 3-4 line column; let it
-   drop below the title instead of fighting it for width. */
-@media(max-width:480px){.card .n{flex-wrap:wrap;row-gap:4px}.card .n small{order:2}}
-.card .n small{color:var(--dim);font-weight:700;font-size:11.5px;white-space:nowrap;font-family:var(--mono);
-  background:var(--surface2);border-radius:7px;padding:3px 8px}
-.card .a{color:var(--dim2);font-size:12.5px;margin-top:3px}
-.card .host{color:var(--dim);font-weight:600;font-size:12.5px;margin-top:2px}
-.card .c{font-size:12.5px;margin-top:8px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--dim)}
+.card .n{font-family:var(--display);font-weight:700;font-size:17.5px;line-height:1.25;letter-spacing:-.2px}
+.card .sp{margin-top:6px;font-size:12.5px;color:var(--dim);display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px}
+.card .sp b{color:var(--txt);font-weight:600}
+.spd{text-decoration:none;font:700 11.5px/1.5 var(--mono);border-radius:6px;padding:2px 7px;background:var(--surface2);color:var(--dim)}
+.spd.ultra{background:var(--good);color:var(--accent-ink)}
+.spd.fast{background:var(--good-bg);color:var(--good)}
+.spd.slow{background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
+.card .a{color:var(--dim2);font-size:12.5px;margin-top:4px}
+.card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}
-.card .c b{color:var(--txt);font-weight:700}
-.card .l{margin-top:10px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap}
-.card .l a{text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px;
+.card .c span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
+.card .c b{font-weight:700}
+.card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
+.card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
   background:var(--surface2);border:1px solid var(--line);color:var(--txt)}
 .card .l a.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 h2{font-family:var(--display);font-size:20px;margin:30px 0 10px;letter-spacing:-.3px;font-weight:700}
@@ -92,6 +95,8 @@ h2{font-family:var(--display);font-size:20px;margin:30px 0 10px;letter-spacing:-
     radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.18),transparent) right/12px 100% no-repeat scroll,
     var(--surface)}
 h2+p,h2+.lead{margin-bottom:12px}
+
+}
 table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
 table.trip th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--dim2);font-weight:700;padding:11px 14px;border-bottom:1px solid var(--line)}
@@ -113,3 +118,11 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
   line-height:1.6}
 @media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}
   header nav{gap:6px}header nav a{padding:12px 6px}footer a{display:inline-block;padding:10px 2px}}
+/* On a phone the table's last column was cut off mid-word; there each stop is a stack. */
+@media(max-width:520px){
+  table.trip,table.trip tbody{display:block;width:100%;min-width:0}
+  table.trip thead{display:none}
+  table.trip tr{display:block;padding:11px 14px;border-bottom:1px solid var(--line)}
+  table.trip tr:last-child{border-bottom:0}
+  table.trip td{display:block;padding:1px 0;border:0}
+  table.trip td:first-child{font-family:var(--display);font-size:15px}

@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,66 +33,78 @@
 <p class="lead"><b>12 DC fast chargers</b> in Iowa have a Chick-fil-A within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Chick-fil-A&amp;state=IA">Open on the map →</a>
 <p class="stats">Of the 12 fast chargers with a Chick-fil-A nearby in Iowa: The typical stop here delivers <b>180 kW</b>, and 10 of them do 150 kW or more; <b>3</b> are close enough that the Chick-fil-A is a two-minute walk or less; <b>7</b> are listed as open 24 hours. The fastest is <b>Brixmor-Haymarket Square (Des Moines, IA)</b> in Des Moines at 350 kW; the closest walk is 1 min at <b>Ankeny Iowa</b>. Most are on ChargeLab (3), Blink (3), Non-networked (2).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ankeny Iowa</span><small>150 kW · 4 stalls</small></div>
-<div class="a">1010 National Road, Ankeny, IA</div><div class="host">ChargeLab</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.70536,-93.58187" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Casey&#x27;s General</span><small>150 kW · 2 stalls</small></div>
-<div class="a">1010 SE National Dr, Ankeny, IA</div><div class="host">Non-networked</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.7052,-93.58201" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Waterloo, IA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1422 Flammang Drive, Waterloo, IA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥2 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🛒 Hy-Vee ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.45932,-92.32878" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Waterloo Hy-Vee</span><small>150 kW · 4 stalls</small></div>
-<div class="a">1422 Flammang Drive, Waterloo, IA</div><div class="host">ChargeLab</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥3 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🛒 Hy-Vee ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.45899,-92.32862" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Karl Chevrolet Ankeny IA</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1101 SE Oralabor Rd, Ankeny, IA</div><div class="host">Red E</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥5 min</span><span>💊 Walgreens ≥2 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🍕 Casey&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.70207,-93.58045" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Kwik Star 280 Davenport</span><small>150 kW · 4 stalls</small></div>
-<div class="a">301 W Kimberley Rd, Davenport, IA</div><div class="host">ChargeLab</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥6 min</span><span>👑 Burger King ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>🥖 Panera Bread ≥4 min</span><span>🥩 Arby&#x27;s ≥9 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.55924,-90.57588" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Brixmor-Haymarket Square (Des Moines, IA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4365 Merle Hay Rd, Des Moines, IA</div><div class="host">Electrify America</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥7 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍕 Casey&#x27;s ≥5 min</span><span>🍗 Popeyes ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.63984,-93.69711" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Kimberly Car City</span><small>180 kW · 2 stalls</small></div>
-<div class="a">625 West Kimberly Road, Davenport, IA</div><div class="host">Blink</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥8 min</span><span>🥪 Subway ≥2 min</span><span>🍗 KFC ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>🍝 Olive Garden ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.55983,-90.58279" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Finnin Ford - DCFC</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3600 Dodge Street, Dubuque, IA</div><div class="host">Blink</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥8 min</span><span>🛒 Hy-Vee ≥5 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>🎯 Target ≥6 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span><span>💻 Best Buy ≥8 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49066,-90.72812" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>McGrath Chevrolet - Dubuque</span><small>25 kW · 1 stall</small></div>
-<div class="a">3255 University Ave, Dubuque, IA</div><div class="host">Non-networked</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥8 min</span><span>💊 Walgreens ≥2 min</span><span>🍝 Olive Garden ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🌯 Chipotle ≥7 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49395,-90.7142" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Smart Hyundai of Davenport</span><small>60 kW · 4 stalls</small></div>
-<div class="a">101 West 37th Street, Davenport, IA</div><div class="host">Blink</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥8 min</span><span>👑 Burger King ≥3 min</span><span>🍝 Olive Garden ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>🥩 Arby&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.55768,-90.57564" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Sioux City, IA - Southern Hills Drive - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4727 Southern Hills Drive, Sioux City, IA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥9 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🐦 Red Robin ≥6 min</span><span>🍝 Olive Garden ≥6 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.44123,-96.34594" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ankeny Iowa</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">1010 National Road, Ankeny, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.70536,-93.58187" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Casey&#x27;s General</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">1010 SE National Dr, Ankeny, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.7052,-93.58201" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Waterloo, IA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1422 Flammang Drive, Waterloo, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>1 min</i></span><span>🛒 Hy-Vee <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.45932,-92.32878" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Waterloo Hy-Vee</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">1422 Flammang Drive, Waterloo, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>1 min</i></span><span>🛒 Hy-Vee <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.45899,-92.32862" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Karl Chevrolet Ankeny IA</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">1101 SE Oralabor Rd, Ankeny, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>5 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>2 min</i></span><span>🍕 Casey&#x27;s <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.70207,-93.58045" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kwik Star 280 Davenport</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">301 W Kimberley Rd, Davenport, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>6 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.55924,-90.57588" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Brixmor-Haymarket Square (Des Moines, IA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">4365 Merle Hay Rd, Des Moines, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>7 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍕 Casey&#x27;s <i>5 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.63984,-93.69711" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Kimberly Car City</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">625 West Kimberly Road, Davenport, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>8 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🍝 Olive Garden <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.55983,-90.58279" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Finnin Ford - DCFC</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">3600 Dodge Street, Dubuque, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>8 min</i></span><span>🛒 Hy-Vee <i>5 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>🎯 Target <i>6 min</i></span><span>🥪 Jersey Mike&#x27;s <i>7 min</i></span><span>💻 Best Buy <i>8 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49066,-90.72812" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">McGrath Chevrolet - Dubuque</div>
+<div class="sp"><s class="spd slow">25 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">3255 University Ave, Dubuque, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>8 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49395,-90.7142" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Smart Hyundai of Davenport</div>
+<div class="sp"><s class="spd std">60 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">101 West 37th Street, Davenport, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>8 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍝 Olive Garden <i>4 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🥩 Arby&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.55768,-90.57564" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sioux City, IA - Southern Hills Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4727 Southern Hills Drive, Sioux City, IA</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>9 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🐦 Red Robin <i>6 min</i></span><span>🍝 Olive Garden <i>6 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.44123,-96.34594" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Chick-fil-A&amp;state=IA">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in Iowa</h2><div class="chips"><a href="../../casey-s/ia/">🍕 Casey&#x27;s <small>57</small></a><a href="../../mcdonald-s/ia/">🍟 McDonald&#x27;s <small>43</small></a><a href="../../hy-vee/ia/">🛒 Hy-Vee <small>36</small></a><a href="../../subway/ia/">🥪 Subway <small>35</small></a><a href="../../burger-king/ia/">👑 Burger King <small>31</small></a><a href="../../starbucks/ia/">☕ Starbucks <small>25</small></a><a href="../../taco-bell/ia/">🌮 Taco Bell <small>23</small></a><a href="../../culver-s/ia/">🍦 Culver&#x27;s <small>20</small></a><a href="../../arby-s/ia/">🥩 Arby&#x27;s <small>20</small></a><a href="../../wendy-s/ia/">🍔 Wendy&#x27;s <small>17</small></a><a href="../../walmart/ia/">🛒 Walmart <small>17</small></a><a href="../../walgreens/ia/">💊 Walgreens <small>16</small></a><a href="../../hardee-s/ia/">⭐ Hardee&#x27;s <small>15</small></a><a href="../../panera-bread/ia/">🥖 Panera Bread <small>14</small></a><a href="../../applebee-s/ia/">🍎 Applebee&#x27;s <small>14</small></a><a href="../../aldi/ia/">🛒 Aldi <small>14</small></a><a href="../../kfc/ia/">🍗 KFC <small>13</small></a><a href="../../target/ia/">🎯 Target <small>12</small></a><a href="../../pizza-hut/ia/">🍕 Pizza Hut <small>12</small></a><a href="../../olive-garden/ia/">🍝 Olive Garden <small>11</small></a><a href="../../dollar-general/ia/">🏪 Dollar General <small>11</small></a><a href="../../ice-cream-shop/ia/">🍦 Ice cream shop <small>11</small></a><a href="../../jersey-mike-s/ia/">🥪 Jersey Mike&#x27;s <small>9</small></a><a href="../../chipotle/ia/">🌯 Chipotle <small>8</small></a><a href="../../chili-s/ia/">🌶️ Chili&#x27;s <small>8</small></a><a href="../../buffalo-wild-wings/ia/">🦬 Buffalo Wild Wings <small>8</small></a><a href="../../sam-s-club/ia/">🏪 Sam&#x27;s Club <small>8</small></a><a href="../../home-depot/ia/">🔨 Home Depot <small>8</small></a><a href="../../best-buy/ia/">💻 Best Buy <small>8</small></a><a href="../../domino-s/ia/">🍕 Domino&#x27;s <small>7</small></a><a href="../../pilot/ia/">⛽ Pilot <small>7</small></a><a href="../../ta-travel-center/ia/">⛽ TA Travel Center <small>7</small></a><a href="../../ihop/ia/">🥞 IHOP <small>6</small></a><a href="../../dunkin/ia/">🍩 Dunkin&#x27; <small>6</small></a><a href="../../panda-express/ia/">🐼 Panda Express <small>6</small></a><a href="../../caribou-coffee/ia/">☕ Caribou Coffee <small>6</small></a><a href="../../popeyes/ia/">🍗 Popeyes <small>5</small></a><a href="../../wingstop/ia/">🍗 Wingstop <small>5</small></a><a href="../../texas-roadhouse/ia/">🤠 Texas Roadhouse <small>5</small></a><a href="../../quiktrip/ia/">⛽ QuikTrip <small>5</small></a><a href="../../tractor-supply/ia/">🚜 Tractor Supply <small>5</small></a><a href="../../cvs/ia/">💊 CVS <small>4</small></a><a href="../../cracker-barrel/ia/">🪵 Cracker Barrel <small>3</small></a><a href="../../five-guys/ia/">🍔 Five Guys <small>3</small></a><a href="../../firehouse-subs/ia/">🚒 Firehouse Subs <small>3</small></a><a href="../../little-caesars/ia/">🍕 Little Caesars <small>3</small></a><a href="../../lowe-s/ia/">🔧 Lowe&#x27;s <small>3</small></a><a href="../../kwik-trip/ia/">⛽ Kwik Trip <small>3</small></a><a href="../../denny-s/ia/">🍳 Denny&#x27;s <small>2</small></a><a href="../../sonic/ia/">🚗 Sonic <small>2</small></a><a href="../../dairy-queen/ia/">🍦 Dairy Queen <small>2</small></a><a href="../../red-robin/ia/">🐦 Red Robin <small>2</small></a><a href="../../love-s/ia/">⛽ Love&#x27;s <small>2</small></a><a href="../../whole-foods/ia/">🥬 Whole Foods <small>1</small></a><a href="../../trader-joe-s/ia/">🛍️ Trader Joe&#x27;s <small>1</small></a><a href="../../flying-j/ia/">⛽ Flying J <small>1</small></a></div>
 <h2>Chick-fil-A in other states</h2><div class="chips"><a href="../">All states</a></div>

@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Safeway">Open on the map →</a>
 <p class="stats">Of the 469 fast chargers with a Safeway nearby across the US: The typical stop here delivers <b>250 kW</b>, and 324 of them do 150 kW or more; <b>129</b> are close enough that the Safeway is a two-minute walk or less; <b>432</b> are listed as open 24 hours. The fastest is <b>Clayton Valley Shopping Center - Tesla Supercharger</b> in Concord at 500 kW; the closest walk is 1 min at <b>Albertsons Safeway 2874 (Hercules, CA)</b>. Most are on Tesla Supercharger (124), Electrify America (88), EVgo (77).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>210</small></a><a href="wa/">Washington <small>96</small></a><a href="co/">Colorado <small>46</small></a><a href="or/">Oregon <small>34</small></a><a href="md/">Maryland <small>29</small></a><a href="az/">Arizona <small>17</small></a><a href="nv/">Nevada <small>8</small></a><a href="hi/">Hawaii <small>7</small></a><a href="va/">Virginia <small>6</small></a><a href="nm/">New Mexico <small>5</small></a><a href="dc/">Washington DC <small>4</small></a><a href="wy/">Wyoming <small>2</small></a><a href="id/">Idaho <small>2</small></a><a href="ak/">Alaska <small>1</small></a><a href="de/">Delaware <small>1</small></a><a href="mt/">Montana <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 2874 (Hercules, CA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">4080 San Pablo Ave, Hercules, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>🤡 Jack in the Box ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>🔨 Home Depot ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.01479,-122.27165" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Langston Landing</span><small>350 kW · 6 stalls</small></div>
-<div class="a">322 Washington Ave S, Kent, WA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.38041,-122.24653" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0985 Noriega St. (San Francisco, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2350 Noriega St., San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75397,-122.48867" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway #1600 (Bellevue, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">300 Bellevue Wayne, Bellevue, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🐼 Panda Express ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61332,-122.20062" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Mclean #1920</span><small>200 kW · 4 stalls</small></div>
-<div class="a">1688 Anderson Rd, McLean, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.92247,-77.20139" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Washington, DC - Wisconsin Ave NW - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
-<div class="a">1855 Wisconsin Ave NW, Washington, DC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥2 min</span><span>🥪 Subway ≥6 min</span><span>💊 CVS ≥7 min</span><span>🥬 Whole Foods ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=DC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.91642,-77.06697" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Musich - Crystal Springs Village SC (San Mateo, CA</span><small>350 kW · 4 stalls</small></div>
-<div class="a">100 Deanza Blvd, San Mateo, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.52048,-122.33819" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Salida, CO</span><small>300 kW · 4 stalls</small></div>
-<div class="a">232 G Street, Salida, CO</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍦 Ice cream shop ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.53656,-105.99454" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0739 Mission Street (San Francisco, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">3350 Mission Street, San Francisco, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>👑 Burger King ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.74291,-122.42203" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hollister, CA - Airline Hwy - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">1700 Airline Hwy, Hollister, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.83778,-121.39127" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Bruceville</span><small>125 kW · 1 stall</small></div>
-<div class="a">10050 Bruceville Rd, Elk Grove, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Dutch Bros ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.39243,-121.41835" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway San Francisco #2646</span><small>50 kW · 4 stalls</small></div>
-<div class="a">735 7th Ave, San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍗 KFC ≥9 min</span><span>🌮 Taco Bell ≥9 min</span><span>🤡 Jack in the Box ≥9 min</span><span>👑 Burger King ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.7751,-122.46511" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Santa Rosa #1576</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2300 Mendocino Ave, Santa Rosa, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.46324,-122.71737" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dixon, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1285 Stratford Ave, Dixon, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.45788,-121.83993" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Kenmore #3500 - 6850 N E Bothell Way</span><small>350 kW · 7 stalls</small></div>
-<div class="a">6850 N E Bothell Way, Kenmore, WA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.75833,-122.24799" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0929 (San Jose, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">2558 Berryessa Road, San Jose, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.38814,-121.85853" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway San Mateo (El Camino) #0970</span><small>350 kW · 8 stalls</small></div>
-<div class="a">1655 S El Camino Real, San Mateo, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 CVS ≥4 min</span><span>🌮 Taco Bell ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.55292,-122.31403" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 1589 (Leavenworth, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">116 River Bend DR, Leavenworth, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.59736,-120.64588" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 4160 (Lovelock, NV)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">965 Dartmouth Avenue, Lovelock, NV</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.18013,-118.47624" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Idaho Springs, CO</span><small>300 kW · 10 stalls</small></div>
-<div class="a">2325 Miner Street, Idaho Springs, CO</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥10 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.74149,-105.50682" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 1960 (Madras, OR)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">80 NE Cedar St., Madras, OR</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🚗 Sonic ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.64422,-121.12891" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Recreation Station - Reedsport</span><small>50 kW · 1 stall</small></div>
-<div class="a">1549 US-101 S, Reedsport, OR</div><div class="host">EVCS</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🏪 Dollar General ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.69853,-124.11181" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway San Jose #1483</span><small>350 kW · 8 stalls</small></div>
-<div class="a">1530 Hamilton Ave, San Jose, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🥪 Subway ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.29356,-121.91034" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0965 (Willits, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">845 S. Main Street, Willits, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.40408,-123.3501" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0273 (Anderson, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2601 Balls Ferry Road, Anderson, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.45348,-122.28917" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lake Oswego OR1-110 (Lake Oswego, OR)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">400 4th St, Lake Oswego, OR</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥4 min</span><span>💊 CVS ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥4 min</span><span>🥬 Whole Foods ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.42054,-122.66756" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hood River, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">2249 Cascade Avenue, Hood River, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.7096,-121.53461" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 1557 (North Bend, OR)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1735 Virginia Ave, North Bend, OR</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.40588,-124.23631" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Washington #1276</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6500 Piney Branch Rd NW, Washington, DC</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>💊 CVS ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>🛒 Walmart ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=DC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96888,-77.02633" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Truckee, CA - Donner Pass Road - Tesla Supercharger</span><small>150 kW · 11 stalls</small></div>
-<div class="a">11290 Donner Pass Rd, Truckee, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.32744,-120.20741" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons Safeway 0955 (Concord, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2600 Willow Pass Rd, Concord, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>💊 CVS ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>☕ Starbucks ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥6 min</span><span>🌯 Chipotle ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97853,-122.02915" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 0928 Patterson Blvd (Pleasant Hill, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">600 Patterson Blvd., Pleasant Hill, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.93447,-122.07315" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertsons-Safeway 0998 (Healdsburg, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1115 Vine St, Healdsburg, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>💊 CVS ≥6 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.60976,-122.87287" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Vallejo, CA - Robles Way - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">122 Robles Way, Vallejo, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.08447,-122.21124" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Monta Loma Plaza</span><small>350 kW · 4 stalls</small></div>
-<div class="a">580 N Rengstorff Ave, Mountain View, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.41114,-122.09347" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway South San Francisco #3116</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2255 Gellert Blvd, South San Francisco, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.64587,-122.45204" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Willits</span><small>200 kW · 2 stalls</small></div>
-<div class="a">871 S Main St, Willits, CA</div><div class="host">Evrange</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.40295,-123.3506" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway 1502 (Pleasanton, CA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">1701 Santa Rita Road, Pleasanton, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🍗 KFC ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.67564,-121.87458" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Arlington #4007</span><small>200 kW · 4 stalls</small></div>
-<div class="a">3713 Lee Hwy, Arlington, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍕 Pizza Hut ≥3 min</span><span>💊 Walgreens ≥8 min</span><span>💊 CVS ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.89701,-77.10486" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kapolei Shopping Center provided by Hawaiian Electric</span><small>50 kW · 2 stalls</small></div>
-<div class="a">91-590 Farrington Hwy, Kapolei, HI</div><div class="host">Opconnect</div>
-<div class="c"><span>🛒 <b>Safeway</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍗 KFC ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Safeway&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=21.33992,-158.07955" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 2874 (Hercules, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">4080 San Pablo Ave, Hercules, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.01479,-122.27165" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Langston Landing</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">322 Washington Ave S, Kent, WA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.38041,-122.24653" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0985 Noriega St. (San Francisco, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2350 Noriega St., San Francisco, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.75397,-122.48867" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway #1600 (Bellevue, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">300 Bellevue Wayne, Bellevue, WA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61332,-122.20062" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway Mclean #1920</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1688 Anderson Rd, McLean, VA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.92247,-77.20139" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Washington, DC - Wisconsin Ave NW - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1855 Wisconsin Ave NW, Washington, DC</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>2 min</i></span><span>🥪 Subway <i>6 min</i></span><span>💊 CVS <i>7 min</i></span><span>🥬 Whole Foods <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.91642,-77.06697" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=DC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Musich - Crystal Springs Village SC (San Mateo, CA</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">100 Deanza Blvd, San Mateo, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.52048,-122.33819" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Salida, CO</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>4 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">232 G Street, Salida, CO</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.53656,-105.99454" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0739 Mission Street (San Francisco, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">3350 Mission Street, San Francisco, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>👑 Burger King <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.74291,-122.42203" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hollister, CA - Airline Hwy - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1700 Airline Hwy, Hollister, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.83778,-121.39127" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Safeway Bruceville</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">10050 Bruceville Rd, Elk Grove, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Dutch Bros <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.39243,-121.41835" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway San Francisco #2646</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">735 7th Ave, San Francisco, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍗 KFC <i>9 min</i></span><span>🌮 Taco Bell <i>9 min</i></span><span>🤡 Jack in the Box <i>9 min</i></span><span>👑 Burger King <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.7751,-122.46511" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway Santa Rosa #1576</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2300 Mendocino Ave, Santa Rosa, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.46324,-122.71737" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dixon, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1285 Stratford Ave, Dixon, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.45788,-121.83993" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Albertsons Kenmore #3500 - 6850 N E Bothell Way</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>7 stalls</b><span>EVgo</span></div>
+<div class="a">6850 N E Bothell Way, Kenmore, WA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.75833,-122.24799" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0929 (San Jose, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">2558 Berryessa Road, San Jose, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍳 Denny&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.38814,-121.85853" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway San Mateo (El Camino) #0970</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">1655 S El Camino Real, San Mateo, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>💊 CVS <i>4 min</i></span><span>🌮 Taco Bell <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.55292,-122.31403" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 1589 (Leavenworth, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">116 River Bend DR, Leavenworth, WA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.59736,-120.64588" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 4160 (Lovelock, NV)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">965 Dartmouth Avenue, Lovelock, NV</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.18013,-118.47624" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Idaho Springs, CO</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>10 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">2325 Miner Street, Idaho Springs, CO</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>10 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.74149,-105.50682" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 1960 (Madras, OR)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">80 NE Cedar St., Madras, OR</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🚗 Sonic <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.64422,-121.12891" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Recreation Station - Reedsport</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVCS</span></div>
+<div class="a">1549 US-101 S, Reedsport, OR</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.69853,-124.11181" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway San Jose #1483</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">1530 Hamilton Ave, San Jose, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🥪 Subway <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.29356,-121.91034" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0965 (Willits, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">845 S. Main Street, Willits, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.40408,-123.3501" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0273 (Anderson, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2601 Balls Ferry Road, Anderson, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.45348,-122.28917" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Lake Oswego OR1-110 (Lake Oswego, OR)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">400 4th St, Lake Oswego, OR</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>💊 CVS <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>4 min</i></span><span>🥬 Whole Foods <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.42054,-122.66756" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hood River, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2249 Cascade Avenue, Hood River, OR</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.7096,-121.53461" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 1557 (North Bend, OR)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1735 Virginia Ave, North Bend, OR</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.40588,-124.23631" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway Washington #1276</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">6500 Piney Branch Rd NW, Washington, DC</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>🛒 Walmart <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96888,-77.02633" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=DC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Truckee, CA - Donner Pass Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>11 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11290 Donner Pass Rd, Truckee, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.32744,-120.20741" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons Safeway 0955 (Concord, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2600 Willow Pass Rd, Concord, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>💊 CVS <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>6 min</i></span><span>🌯 Chipotle <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.97853,-122.02915" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 0928 Patterson Blvd (Pleasant Hill, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">600 Patterson Blvd., Pleasant Hill, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.93447,-122.07315" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Albertsons-Safeway 0998 (Healdsburg, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1115 Vine St, Healdsburg, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>💊 CVS <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.60976,-122.87287" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Vallejo, CA - Robles Way - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">122 Robles Way, Vallejo, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.08447,-122.21124" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Monta Loma Plaza</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">580 N Rengstorff Ave, Mountain View, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.41114,-122.09347" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway South San Francisco #3116</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">2255 Gellert Blvd, South San Francisco, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.64587,-122.45204" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evrange"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Willits</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>Evrange</span></div>
+<div class="a">871 S Main St, Willits, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.40295,-123.3506" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway 1502 (Pleasanton, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">1701 Santa Rita Road, Pleasanton, CA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.67564,-121.87458" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway Arlington #4007</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3713 Lee Hwy, Arlington, VA</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>💊 CVS <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.89701,-77.10486" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Opconnect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kapolei Shopping Center provided by Hawaiian Electric</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Opconnect</span></div>
+<div class="a">91-590 Farrington Hwy, Kapolei, HI</div>
+<div class="c"><span>🛒 <b>Safeway</b> <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=21.33992,-158.07955" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Safeway&amp;state=HI">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Safeway within walking distance in the US?</summary><p>469 public DC fast chargers in the US have a Safeway within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Safeway charging stop is fastest in the US?</summary><p>Clayton Valley Shopping Center - Tesla Supercharger in Concord at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

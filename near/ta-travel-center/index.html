@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=TA Travel Center">Open on the map →</a>
 <p class="stats">Of the 150 fast chargers with a TA Travel Center nearby across the US: The typical stop here delivers <b>325 kW</b>, and 130 of them do 150 kW or more; <b>48</b> are close enough that the TA Travel Center is a two-minute walk or less; <b>147</b> are listed as open 24 hours. The fastest is <b>TA Gause Boulevard, Slidell, LA</b> in Slidell at 400 kW; the closest walk is 1 min at <b>TA Gause Boulevard, Slidell, LA</b>. Most are on Tesla Supercharger (53), EVgo (29), bp pulse (19).</p>
 <h2>By state</h2><div class="chips"><a href="tx/">Texas <small>18</small></a><a href="ca/">California <small>14</small></a><a href="fl/">Florida <small>13</small></a><a href="il/">Illinois <small>11</small></a><a href="ga/">Georgia <small>10</small></a><a href="pa/">Pennsylvania <small>9</small></a><a href="ia/">Iowa <small>7</small></a><a href="nv/">Nevada <small>6</small></a><a href="ok/">Oklahoma <small>5</small></a><a href="co/">Colorado <small>5</small></a><a href="ny/">New York <small>5</small></a><a href="nm/">New Mexico <small>4</small></a><a href="al/">Alabama <small>3</small></a><a href="mi/">Michigan <small>3</small></a><a href="or/">Oregon <small>3</small></a><a href="la/">Louisiana <small>2</small></a><a href="oh/">Ohio <small>2</small></a><a href="mn/">Minnesota <small>2</small></a><a href="wa/">Washington <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="tn/">Tennessee <small>2</small></a><a href="wi/">Wisconsin <small>2</small></a><a href="ut/">Utah <small>2</small></a><a href="va/">Virginia <small>2</small></a><a href="md/">Maryland <small>2</small></a><a href="az/">Arizona <small>2</small></a><a href="sc/">South Carolina <small>2</small></a><a href="nj/">New Jersey <small>2</small></a><a href="ne/">Nebraska <small>2</small></a><a href="mo/">Missouri <small>2</small></a><a href="ct/">Connecticut <small>1</small></a><a href="ky/">Kentucky <small>1</small></a><a href="mt/">Montana <small>1</small></a><a href="in/">Indiana <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Gause Boulevard, Slidell, LA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1682 Gause Boulevard, Slidell, LA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.28673,-89.75061" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Henderson, NV - Tesla Supercharger</span><small>150 kW · 12 stalls</small></div>
-<div class="a">2800 S Boulder Hwy, Henderson, NV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🚗 Sonic ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.9714,-114.91145" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Lancaster Road, Hebron, OH</span><small>400 kW · 8 stalls</small></div>
-<div class="a">10679 Lancaster Road, Hebron, OH</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>⛽ Pilot ≥8 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.9396,-82.53493" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairfield, TX - Tesla Supercharger</span><small>250 kW · 15 stalls</small></div>
-<div class="a">1015 W Commerce St, Fairfield, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍔 Whataburger ≥1 min</span><span>⛽ Love&#x27;s ≥7 min</span><span>👑 Burger King ≥7 min</span><span>🚗 Sonic ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.72536,-96.17763" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Thompson Road, Baytown, TX</span><small>400 kW · 12 stalls</small></div>
-<div class="a">6800 Thompson Road, Baytown, TX</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>⛽ Flying J ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.7969,-95.03121" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Carlin, NV Rechargery Relay - 10th St</span><small>400 kW · 6 stalls</small></div>
-<div class="a">730 10th St, Carlin, NV</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>⛽ Pilot ≥2 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Love&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.71919,-116.10754" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Truck Stop</span><small>62 kW · 1 stall</small></div>
-<div class="a">14197 US-441, Lake City, FL</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>⛽ Love&#x27;s ≥9 min</span><span>👑 Burger King ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.99591,-82.59666" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Xcel Energy - Mankato, MN</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3010 Adam St, Mankato, MN</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.16972,-93.92543" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Nacogdoches, TX - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">2615 NW Stallings Dr, Nacogdoches, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.6519,-94.67961" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA County Road 210, Jacksonville, FL</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1650 County Road 210, Jacksonville, FL</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.06593,-81.49671" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>North Bend, WA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">46600 SE North Bend Way, North Bend, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Popeyes ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46807,-121.71644" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pleasanton, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">109963 I-37, Pleasanton, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.99582,-98.43224" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Oakley, KS - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">3689 US-40, Oakley, KS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.11878,-100.81231" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA US-301 S, Baldwin, FL</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1024 US-301 S, Baldwin, FL</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🥪 Subway ≥2 min</span><span>⛽ Pilot ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.28523,-81.98346" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Dungeness Drive, Brunswick, GA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">185 Dungeness Drive, Brunswick, GA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.13818,-81.58059" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gea-1 Station 2 (Ta)</span><small>400 kW · 2 stalls</small></div>
-<div class="a">195 Van Hill Rd, Greeneville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🏪 Dollar General ≥6 min</span><span>⛽ Pilot ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.3257,-82.8345" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Grand Bay Wilmer Road, Grand Bay, AL</span><small>400 kW · 12 stalls</small></div>
-<div class="a">9201 Grand Bay Wilmer Road, Grand Bay, AL</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>⭐ Hardee&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.49882,-88.33435" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA State Highway 77, Hillsboro, TX</span><small>400 kW · 12 stalls</small></div>
-<div class="a">160 State Highway 77, Hillsboro, TX</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🦫 Buc-ee&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.04576,-97.09159" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gea-1 Station 3 (Ta)</span><small>400 kW · 2 stalls</small></div>
-<div class="a">195 Van Hill Rd, Greeneville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🏪 Dollar General ≥6 min</span><span>⛽ Pilot ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.32565,-82.83443" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Janesville Travel Center - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">3222 US-14, Janesville, WI</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>💻 Best Buy ≥2 min</span><span>🥪 Subway ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.71475,-88.97842" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA US-42, London, OH</span><small>400 kW · 12 stalls</small></div>
-<div class="a">940 US-42, London, OH</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥6 min</span><span>🥪 Subway ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.95389,-83.37869" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA SE North Bend Way, North Bend, WA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">46600 SE North Bend Way, North Bend, WA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Popeyes ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46831,-121.71645" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hitchin&#x27; Post - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">500 I-45, Huntsville, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>⛽ Pilot ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.73873,-95.59036" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EZ Trip Plaza</span><small>50 kW · 6 stalls</small></div>
-<div class="a">20662 Tracey Ave, Buttonwillow, CA</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.40171,-119.39767" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mitten Inc Mitten</span><small>125 kW · 1 stall</small></div>
-<div class="a">1001 US-40, Oakley, KS</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🚗 Sonic ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.11918,-100.80947" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>McDonalds #7056 Rogers</span><small>350 kW · 6 stalls</small></div>
-<div class="a">21300 Rogers Dr, Rogers, MN 55374, MN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>🎯 Target ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.19563,-93.54936" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Winton Parkway, Livingston, CA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">435 Winton Parkway, Livingston, CA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.38794,-120.7378" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Carthage, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1086 US-59, Carthage, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.13035,-94.333" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">16600 West South Ave., Tonkawa, OK</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.69559,-97.34976" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>DC Corridor Buttonw DC</span><small>62 kW · 1 stall</small></div>
-<div class="a">20673 Tracy Ave, Buttonwillow, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.4006,-119.39778" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Knighton Road, Redding, CA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">19483 Knighton Road, Redding, CA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🍗 Popeyes ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.50528,-122.33433" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ta Express</span><small>62 kW · 1 stall</small></div>
-<div class="a">6411 Hwy 2, Hosston, LA</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.89609,-93.86501" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>TA US-17, Richmond Hill, GA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">4401 US-17, Richmond Hill, GA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🍗 Popeyes ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.92576,-81.33295" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Carlin, NV - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1010 Fir St, Carlin, NV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>⛽ Love&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72038,-116.10644" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">246 Allegheny Blvd, Brookville, PA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>⛽ Flying J ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.17323,-79.098" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Eatonton Road, Madison, GA</span><small>400 kW · 12 stalls</small></div>
-<div class="a">2021 Eatonon Road, Madison, GA</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🍗 Popeyes ≥1 min</span><span>⛽ Circle K ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.55287,-83.47478" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Buttonwillow, CA</span><small>300 kW · 9 stalls</small></div>
-<div class="a">20673 Tracy Avenue, Buttonwillow, CA</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.40036,-119.39812" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>TA Bonnie View Road, Dallas, TX</span><small>400 kW · 12 stalls</small></div>
-<div class="a">7751 Bonnie View Road, Dallas, TX</div><div class="host">bp pulse</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>⛽ Flying J ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.65413,-96.75174" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Buttonwillow, CA - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">20673 Tracy Ave., Buttonwillow, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>⛽ Circle K ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.40014,-119.39785" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;s 581 (Salina, UT)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1915 South State Street, Salina, UT</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>TA Travel Center</b> ≥2 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=TA Travel Center&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.93144,-111.85365" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Gause Boulevard, Slidell, LA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">1682 Gause Boulevard, Slidell, LA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🤠 Texas Roadhouse <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.28673,-89.75061" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Henderson, NV - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2800 S Boulder Hwy, Henderson, NV</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>🚗 Sonic <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.9714,-114.91145" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Lancaster Road, Hebron, OH</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>bp pulse</span></div>
+<div class="a">10679 Lancaster Road, Hebron, OH</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>⛽ Pilot <i>8 min</i></span><span>🍕 Pizza Hut <i>8 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.9396,-82.53493" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fairfield, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>15 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1015 W Commerce St, Fairfield, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍔 Whataburger <i>1 min</i></span><span>⛽ Love&#x27;s <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🚗 Sonic <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.72536,-96.17763" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Thompson Road, Baytown, TX</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">6800 Thompson Road, Baytown, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>⛽ Flying J <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.7969,-95.03121" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Carlin, NV Rechargery Relay - 10th St</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">730 10th St, Carlin, NV</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>⛽ Love&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.71919,-116.10754" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Truck Stop</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">14197 US-441, Lake City, FL</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>⛽ Love&#x27;s <i>9 min</i></span><span>👑 Burger King <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.99591,-82.59666" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Xcel Energy - Mankato, MN</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">3010 Adam St, Mankato, MN</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.16972,-93.92543" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Nacogdoches, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2615 NW Stallings Dr, Nacogdoches, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.6519,-94.67961" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA County Road 210, Jacksonville, FL</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">1650 County Road 210, Jacksonville, FL</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.06593,-81.49671" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North Bend, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">46600 SE North Bend Way, North Bend, WA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.46807,-121.71644" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pleasanton, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">109963 I-37, Pleasanton, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.99582,-98.43224" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Oakley, KS - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3689 US-40, Oakley, KS</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🚗 Sonic <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.11878,-100.81231" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=KS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA US-301 S, Baldwin, FL</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">1024 US-301 S, Baldwin, FL</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.28523,-81.98346" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Dungeness Drive, Brunswick, GA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">185 Dungeness Drive, Brunswick, GA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.13818,-81.58059" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gea-1 Station 2 (Ta)</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">195 Van Hill Rd, Greeneville, TN</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🏪 Dollar General <i>6 min</i></span><span>⛽ Pilot <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.3257,-82.8345" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Grand Bay Wilmer Road, Grand Bay, AL</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">9201 Grand Bay Wilmer Road, Grand Bay, AL</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.49882,-88.33435" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA State Highway 77, Hillsboro, TX</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">160 State Highway 77, Hillsboro, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🦫 Buc-ee&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.04576,-97.09159" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gea-1 Station 3 (Ta)</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">195 Van Hill Rd, Greeneville, TN</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🏪 Dollar General <i>6 min</i></span><span>⛽ Pilot <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.32565,-82.83443" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Janesville Travel Center - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3222 US-14, Janesville, WI</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>💻 Best Buy <i>2 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.71475,-88.97842" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=WI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA US-42, London, OH</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">940 US-42, London, OH</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>🥪 Subway <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.95389,-83.37869" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA SE North Bend Way, North Bend, WA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">46600 SE North Bend Way, North Bend, WA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.46831,-121.71645" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hitchin&#x27; Post - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">500 I-45, Huntsville, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>⛽ Pilot <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.73873,-95.59036" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EZ Trip Plaza</div>
+<div class="sp"><s class="spd std">50 kW</s><b>6 stalls</b><span>Non-networked</span></div>
+<div class="a">20662 Tracey Ave, Buttonwillow, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.40171,-119.39767" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mitten Inc Mitten</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1001 US-40, Oakley, KS</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🚗 Sonic <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.11918,-100.80947" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=KS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">McDonalds #7056 Rogers</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">21300 Rogers Dr, Rogers, MN 55374, MN</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍳 Denny&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🎯 Target <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>5 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.19563,-93.54936" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Winton Parkway, Livingston, CA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">435 Winton Parkway, Livingston, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.38794,-120.7378" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Carthage, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1086 US-59, Carthage, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.13035,-94.333" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">16600 West South Ave., Tonkawa, OK</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.69559,-97.34976" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">DC Corridor Buttonw DC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">20673 Tracy Ave, Buttonwillow, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.4006,-119.39778" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Knighton Road, Redding, CA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">19483 Knighton Road, Redding, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.50528,-122.33433" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ta Express</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6411 Hwy 2, Hosston, LA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.89609,-93.86501" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA US-17, Richmond Hill, GA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">4401 US-17, Richmond Hill, GA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.92576,-81.33295" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Carlin, NV - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1010 Fir St, Carlin, NV</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>⛽ Love&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72038,-116.10644" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">246 Allegheny Blvd, Brookville, PA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>⛽ Flying J <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.17323,-79.098" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Eatonton Road, Madison, GA</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">2021 Eatonon Road, Madison, GA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.55287,-83.47478" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Buttonwillow, CA</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>9 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">20673 Tracy Avenue, Buttonwillow, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.40036,-119.39812" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">TA Bonnie View Road, Dallas, TX</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>bp pulse</span></div>
+<div class="a">7751 Bonnie View Road, Dallas, TX</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>⛽ Flying J <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.65413,-96.75174" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Buttonwillow, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">20673 Tracy Ave., Buttonwillow, CA</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.40014,-119.39785" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Love&#x27;s 581 (Salina, UT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1915 South State Street, Salina, UT</div>
+<div class="c"><span>⛽ <b>TA Travel Center</b> <i>2 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>5 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.93144,-111.85365" target="_blank" rel="noopener">Directions</a><a href="../../?chain=TA Travel Center&amp;state=UT">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a TA Travel Center within walking distance in the US?</summary><p>150 public DC fast chargers in the US have a TA Travel Center within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which TA Travel Center charging stop is fastest in the US?</summary><p>TA Gause Boulevard, Slidell, LA in Slidell at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

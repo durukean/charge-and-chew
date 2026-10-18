@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Taco Bell">Open on the map →</a>
 <p class="stats">Of the 2696 fast chargers with a Taco Bell nearby across the US: The typical stop here delivers <b>240 kW</b>, and 1770 of them do 150 kW or more; <b>583</b> are close enough that the Taco Bell is a two-minute walk or less; <b>2402</b> are listed as open 24 hours. The fastest is <b>WinCo Foods - Tesla Supercharger</b> in Orem at 500 kW; the closest walk is 1 min at <b>Love&#x27;S 418 - Ky #418</b>. Most are on Tesla Supercharger (749), ChargePoint (445), Electrify America (295).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>586</small></a><a href="fl/">Florida <small>152</small></a><a href="tx/">Texas <small>124</small></a><a href="mi/">Michigan <small>108</small></a><a href="ga/">Georgia <small>105</small></a><a href="wa/">Washington <small>102</small></a><a href="ny/">New York <small>100</small></a><a href="il/">Illinois <small>94</small></a><a href="va/">Virginia <small>82</small></a><a href="oh/">Ohio <small>82</small></a><a href="co/">Colorado <small>77</small></a><a href="or/">Oregon <small>74</small></a><a href="nc/">North Carolina <small>71</small></a><a href="pa/">Pennsylvania <small>67</small></a><a href="mo/">Missouri <small>64</small></a><a href="az/">Arizona <small>54</small></a><a href="mn/">Minnesota <small>53</small></a><a href="tn/">Tennessee <small>53</small></a><a href="wi/">Wisconsin <small>51</small></a><a href="md/">Maryland <small>47</small></a><a href="nj/">New Jersey <small>45</small></a><a href="in/">Indiana <small>42</small></a><a href="al/">Alabama <small>42</small></a><a href="ma/">Massachusetts <small>35</small></a><a href="ok/">Oklahoma <small>34</small></a><a href="nv/">Nevada <small>33</small></a><a href="ct/">Connecticut <small>31</small></a><a href="ky/">Kentucky <small>27</small></a><a href="ia/">Iowa <small>23</small></a><a href="ut/">Utah <small>22</small></a><a href="sc/">South Carolina <small>21</small></a><a href="wv/">West Virginia <small>20</small></a><a href="ar/">Arkansas <small>18</small></a><a href="la/">Louisiana <small>16</small></a><a href="nm/">New Mexico <small>16</small></a><a href="nh/">New Hampshire <small>15</small></a><a href="me/">Maine <small>15</small></a><a href="ms/">Mississippi <small>12</small></a><a href="ks/">Kansas <small>11</small></a><a href="id/">Idaho <small>11</small></a><a href="de/">Delaware <small>10</small></a><a href="hi/">Hawaii <small>10</small></a><a href="wy/">Wyoming <small>9</small></a><a href="ne/">Nebraska <small>9</small></a><a href="mt/">Montana <small>6</small></a><a href="nd/">North Dakota <small>6</small></a><a href="ak/">Alaska <small>6</small></a><a href="sd/">South Dakota <small>2</small></a><a href="ri/">Rhode Island <small>1</small></a><a href="vt/">Vermont <small>1</small></a><a href="pr/">PR <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;S 418 - Ky #418</span><small>320 kW · 2 stalls</small></div>
-<div class="a">750 Carol Malone Blvd, Grayson, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.34077,-82.94232" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>HondoGo - Ellenville, NY</span><small>200 kW · 4 stalls</small></div>
-<div class="a">41 N Main St, Ellenville, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.72181,-74.39258" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">5570 E. Travel Plaza Way, Tucson, AZ</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>⛽ Circle K ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.12574,-110.87418" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Costa Mesa, CA - Bristol Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1400 Bristol St, Costa Mesa, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.66639,-117.88286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">4220 Brooklake Rd. NE, Brooks, OR</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.04872,-122.97493" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1600 East Pine Street, Central Point, OR</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥪 Subway ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍗 KFC ≥3 min</span><span>🚗 Sonic ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.37791,-122.89905" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Raju Countryside Market (Lost Hills, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">21959 CA-46, Lost Hills, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.61541,-119.65834" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dunkin&#x27;</span><small>240 kW · 4 stalls</small></div>
-<div class="a">3960 W Oakland Park Blvd, Lauderdale Lakes, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍗 KFC ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.16445,-80.20187" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Taco Bell - ChargeNet</span><small>180 kW · 10 stalls</small></div>
-<div class="a">771 Stony Point Rd, Santa Rosa, CA</div><div class="host">Chargenet</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.42732,-122.74179" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Holbrook, AZ</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1606 Navajo Boulevard, Holbrook, AZ</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🏪 Dollar General ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.91831,-110.15016" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Taco Bell - Reston, VA</span><small>240 kW · 4 stalls</small></div>
-<div class="a">11257 Roger Bacon Dr, Reston, VA</div><div class="host">Evrange</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>💊 CVS ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.95094,-77.33469" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Orlando, FL - 5910 Central Florida Pkwy - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">5910 Central Florida Pkwy, Orlando, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>💊 CVS ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.40591,-81.45793" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">403 Sw Frontage Road, Winona, MS</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.48549,-89.76979" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fergus Falls</span><small>180 kW · 4 stalls</small></div>
-<div class="a">623 Frontier Dr, Fergus Falls, MN</div><div class="host">ChargeLab</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>☕ Caribou Coffee ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.29012,-96.11827" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Buscemi Chesterfield</span><small>240 kW · 4 stalls</small></div>
-<div class="a">29230, Chesterfield, MI</div><div class="host">EV Gateway</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.67395,-82.8155" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>MHC</span><small>62 kW · 1 stall</small></div>
-<div class="a">1124 International Pkwy, Tracy, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.73933,-121.53074" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Claymont, DE - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">605 Naamans Road, Brandywine, DE</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🔨 Home Depot ≥2 min</span><span>💊 CVS ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=DE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.81749,-75.45727" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rohnert Parl Taco Bell</span><small>75 kW · 6 stalls</small></div>
-<div class="a">5000 Redwood Dr, Rohnert Park, CA</div><div class="host">Chargenet</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🔨 Home Depot ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.36471,-122.71321" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>South San Fransisco Taco Bell</span><small>75 kW · 6 stalls</small></div>
-<div class="a">465 El Camino Real, South San Francisco, CA</div><div class="host">Chargenet</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🛒 Safeway ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.6468,-122.42917" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Taco Bell Ellensburg (Ellensburg, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1406 Canyon Road, Ellensburg, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Circle K ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.9789,-120.54343" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cracker Barrel</span><small>50 kW · 2 stalls</small></div>
-<div class="a">24400 Highway 59, Kingwood, TX</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>🍔 Whataburger ≥5 min</span><span>🛒 H-E-B ≥5 min</span><span>🤠 Texas Roadhouse ≥5 min</span><span>🚗 Sonic ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.06707,-95.24707" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Waffle House Ocala</span><small>184 kW · 4 stalls</small></div>
-<div class="a">22 NW 34th Ave, Ocala, FL</div><div class="host">Blink</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🍗 Popeyes ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.18694,-82.17896" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">699 State Route 203, East St. Louis, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.65208,-90.13191" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pleasant Grove Pointe</span><small>350 kW · 8 stalls</small></div>
-<div class="a">933 Pleasant Grove Boulevard, Roseville, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🚗 Sonic ≥1 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.78187,-121.28657" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kimball, TN - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">300 Kimball Crossing Drive, Kimball, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.03979,-85.68506" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">882 Georgia Highway 100, Tallapoosa, GA</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🏪 Dollar General ≥5 min</span><span>🧇 Waffle House ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.68282,-85.26289" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Vernon, CT - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">145 Talcottville Rd, Vernon, CT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍦 Ice cream shop ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.83105,-72.49583" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sutherlin, OR - Tesla Supercharger</span><small>250 kW · 51 stalls</small></div>
-<div class="a">116 Clover Leaf Loop, Sutherlin, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>👑 Burger King ≥5 min</span><span>☕ Dutch Bros ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.3869,-123.34154" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">11471 State Route 613W, Findlay, OH</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.13724,-83.66061" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pvhg Hiexpress</span><small>125 kW · 1 stall</small></div>
-<div class="a">321 Center Street, Ludlow, MA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥6 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>🍗 KFC ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.16602,-72.48203" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wesco Reed City MI</span><small>320 kW · 2 stalls</small></div>
-<div class="a">4921 S 220th Ave, Reed City, MI</div><div class="host">Red E</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.88599,-85.52324" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mt. Hope, WV - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">5481 Robert C. Byrd Drive, Mt. Hope, WV</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=WV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.84684,-81.19598" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Piedmont Emc Arby&#x27;S</span><small>62 kW · 1 stall</small></div>
-<div class="a">1314 Mebane Oaks Rd, Mebane, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍔 Cook Out ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.06814,-79.27032" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Niagara Falls</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7200 Niagara Falls Blvd, Niagara Falls, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🎯 Target ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.08827,-78.98118" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>ChargeNet - Taco Bell</span><small>75 kW · 6 stalls</small></div>
-<div class="a">39199 Cedar Blvd, Newark, CA</div><div class="host">Chargenet</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.52276,-122.00455" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Denny&#x27;S River</span><small>200 kW · 1 stall</small></div>
-<div class="a">1 River St, Cortland, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.6066,-76.16619" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fruita, CO Rechargery Relay - Kokopelli Blvd</span><small>400 kW · 10 stalls</small></div>
-<div class="a">585 Kokopelli Blvd, Fruita, CO</div><div class="host">IONNA</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥪 Subway ≥3 min</span><span>☕ Starbucks ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.15079,-108.73734" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Adairsville, GA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">7867 Adairsville Hwy, Adairsville, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍗 Zaxby&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>⛽ RaceTrac ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.3779,-84.91569" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fergus Falls, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">623 Frontier Dr, Fergus Falls, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>☕ Caribou Coffee ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.28999,-96.11831" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Parma, OH - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">7526 Broadview Rd, Parma, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.36081,-81.68557" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Love&#x27;S 418 - Ky #418</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>ChargePoint</span></div>
+<div class="a">750 Carol Malone Blvd, Grayson, KY</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.34077,-82.94232" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">HondoGo - Ellenville, NY</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">41 N Main St, Ellenville, NY</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.72181,-74.39258" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">5570 E. Travel Plaza Way, Tucson, AZ</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>⛽ Circle K <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.12574,-110.87418" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Costa Mesa, CA - Bristol Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1400 Bristol St, Costa Mesa, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.66639,-117.88286" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">4220 Brooklake Rd. NE, Brooks, OR</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.04872,-122.97493" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1600 East Pine Street, Central Point, OR</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍗 KFC <i>3 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.37791,-122.89905" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Raju Countryside Market (Lost Hills, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">21959 CA-46, Lost Hills, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.61541,-119.65834" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dunkin&#x27;</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>FPL EVolution</span></div>
+<div class="a">3960 W Oakland Park Blvd, Lauderdale Lakes, FL</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.16445,-80.20187" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargenet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Taco Bell - ChargeNet</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>10 stalls</b><span>Chargenet</span></div>
+<div class="a">771 Stony Point Rd, Santa Rosa, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.42732,-122.74179" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Holbrook, AZ</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1606 Navajo Boulevard, Holbrook, AZ</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.91831,-110.15016" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evrange"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Taco Bell - Reston, VA</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Evrange</span></div>
+<div class="a">11257 Roger Bacon Dr, Reston, VA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>💊 CVS <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.95094,-77.33469" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Orlando, FL - 5910 Central Florida Pkwy - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5910 Central Florida Pkwy, Orlando, FL</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>💊 CVS <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.40591,-81.45793" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">403 Sw Frontage Road, Winona, MS</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.48549,-89.76979" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Fergus Falls</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">623 Frontier Dr, Fergus Falls, MN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>☕ Caribou Coffee <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.29012,-96.11827" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Buscemi Chesterfield</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">29230, Chesterfield, MI</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.67395,-82.8155" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">MHC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1124 International Pkwy, Tracy, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.73933,-121.53074" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Claymont, DE - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">605 Naamans Road, Brandywine, DE</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🔨 Home Depot <i>2 min</i></span><span>💊 CVS <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.81749,-75.45727" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=DE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargenet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Rohnert Parl Taco Bell</div>
+<div class="sp"><s class="spd std">75 kW</s><b>6 stalls</b><span>Chargenet</span></div>
+<div class="a">5000 Redwood Dr, Rohnert Park, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.36471,-122.71321" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargenet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">South San Fransisco Taco Bell</div>
+<div class="sp"><s class="spd std">75 kW</s><b>6 stalls</b><span>Chargenet</span></div>
+<div class="a">465 El Camino Real, South San Francisco, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🛒 Safeway <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.6468,-122.42917" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Taco Bell Ellensburg (Ellensburg, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1406 Canyon Road, Ellensburg, WA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.9789,-120.54343" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Cracker Barrel</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">24400 Highway 59, Kingwood, TX</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>🍔 Whataburger <i>5 min</i></span><span>🛒 H-E-B <i>5 min</i></span><span>🤠 Texas Roadhouse <i>5 min</i></span><span>🚗 Sonic <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.06707,-95.24707" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Waffle House Ocala</div>
+<div class="sp"><s class="spd fast">184 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">22 NW 34th Ave, Ocala, FL</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.18694,-82.17896" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">699 State Route 203, East St. Louis, IL</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.65208,-90.13191" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pleasant Grove Pointe</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">933 Pleasant Grove Boulevard, Roseville, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🚗 Sonic <i>1 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.78187,-121.28657" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kimball, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">300 Kimball Crossing Drive, Kimball, TN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.03979,-85.68506" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">882 Georgia Highway 100, Tallapoosa, GA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🏪 Dollar General <i>5 min</i></span><span>🧇 Waffle House <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.68282,-85.26289" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Vernon, CT - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">145 Talcottville Rd, Vernon, CT</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.83105,-72.49583" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sutherlin, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>51 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">116 Clover Leaf Loop, Sutherlin, OR</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>👑 Burger King <i>5 min</i></span><span>☕ Dutch Bros <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.3869,-123.34154" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">11471 State Route 613W, Findlay, OH</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.13724,-83.66061" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Pvhg Hiexpress</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">321 Center Street, Ludlow, MA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>🍗 KFC <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.16602,-72.48203" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Wesco Reed City MI</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">4921 S 220th Ave, Reed City, MI</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>👑 Burger King <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.88599,-85.52324" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mt. Hope, WV - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5481 Robert C. Byrd Drive, Mt. Hope, WV</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.84684,-81.19598" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=WV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Piedmont Emc Arby&#x27;S</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1314 Mebane Oaks Rd, Mebane, NC</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍔 Cook Out <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.06814,-79.27032" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Niagara Falls</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">7200 Niagara Falls Blvd, Niagara Falls, NY</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.08827,-78.98118" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargenet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">ChargeNet - Taco Bell</div>
+<div class="sp"><s class="spd std">75 kW</s><b>6 stalls</b><span>Chargenet</span></div>
+<div class="a">39199 Cedar Blvd, Newark, CA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.52276,-122.00455" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Denny&#x27;S River</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1 River St, Cortland, NY</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.6066,-76.16619" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Fruita, CO Rechargery Relay - Kokopelli Blvd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">585 Kokopelli Blvd, Fruita, CO</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.15079,-108.73734" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Adairsville, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7867 Adairsville Hwy, Adairsville, GA</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>⛽ RaceTrac <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.3779,-84.91569" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fergus Falls, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">623 Frontier Dr, Fergus Falls, MN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>☕ Caribou Coffee <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.28999,-96.11831" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Parma, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7526 Broadview Rd, Parma, OH</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.36081,-81.68557" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OH">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Taco Bell within walking distance in the US?</summary><p>2696 public DC fast chargers in the US have a Taco Bell within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Taco Bell charging stop is fastest in the US?</summary><p>WinCo Foods - Tesla Supercharger in Orem at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

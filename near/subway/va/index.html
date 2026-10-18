@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>123 DC fast chargers</b> in Virginia have a Subway within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Subway&amp;state=VA">Open on the map →</a>
 <p class="stats">Of the 123 fast chargers with a Subway nearby in Virginia: The typical stop here delivers <b>250 kW</b>, and 84 of them do 150 kW or more; <b>35</b> are close enough that the Subway is a two-minute walk or less; <b>116</b> are listed as open 24 hours. The fastest is <b>Ashland, VA Rechargery @ Wawa - N Washington Hwy</b> in Ashland at 400 kW; the closest walk is 1 min at <b>Pilot Travel Center</b>. Most are on Tesla Supercharger (41), EVgo (32), Electrify America (16).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6721 Emmaus Church Road, Tallysville, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Flying J ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.49997,-77.08942" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1014 Mt. Olive Road, Tom&#x27;s Brook, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96702,-78.43865" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>FasCharge 16 FasMart Valero Richmond</span><small>160 kW · 2 stalls</small></div>
-<div class="a">1700 Ashland Rd, Richmond, VA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🌮 Taco Bell ≥8 min</span><span>🏪 Dollar General ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.67378,-77.67425" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>The Shops at Southgate</span><small>50 kW · 2 stalls</small></div>
-<div class="a">100 E Fairfax St, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🥬 Whole Foods ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.88009,-77.17221" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Stoney Creek, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">13306 Saint John Church Rd, Stony Creek, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.97793,-77.39492" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>University of Virginia - Central Grounds Garage</span><small>50 kW · 1 stall</small></div>
-<div class="a">400 Emmet St S, Charlottesville, VA</div><div class="host">Non-networked</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥7 min</span><span>🌯 Chipotle ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.03632,-78.50659" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3634 N Valley Pike, Harrisonburg, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.48004,-78.81899" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Village Center at Dulles</span><small>200 kW · 4 stalls</small></div>
-<div class="a">2445 Centreville Rd, Herndon, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>💊 CVS ≥1 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.94998,-77.41006" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sthr Hyundai</span><small>62 kW · 1 stall</small></div>
-<div class="a">7300 Williamson Road, Hollins, VA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🛒 Kroger ≥3 min</span><span>🍕 Little Caesars ≥4 min</span><span>👑 Burger King ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.34739,-79.95413" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Timberlake Station Shopping Center - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">7701 Timberlake Rd, Lynchburg, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍗 Bojangles ≥3 min</span><span>⛽ Sheetz ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.35409,-79.22534" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3541 Lee Jackson Highway, Staunton, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.0199,-79.141" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 8 stalls</small></div>
-<div class="a">781 Moores Ferry Road, Skippers, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Bojangles ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.60658,-77.56026" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Barcroft Plaza</span><small>100 kW · 2 stalls</small></div>
-<div class="a">6345 Columbia Pike, Falls Church, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🛒 Harris Teeter ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.83619,-77.15616" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Haymarket, VA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">15315 Washington Street, Haymarket, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81512,-77.6427" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kings Park Shopping Center</span><small>100 kW · 2 stalls</small></div>
-<div class="a">8970 Burke Lake Rd, Springfield, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81011,-77.25288" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sterling, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">23055 Oakgrove Road, Sterling, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.97783,-77.41192" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tappahannock, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1804 Tappahannock, Tappahannock, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.90382,-76.86568" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Piggly Wiggly - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1304 S Boston Rd, Danville, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>💊 CVS ≥5 min</span><span>👑 Burger King ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.58027,-79.34325" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Falls Church, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">7501 Leesburg Place, Falls Church, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🛍️ Trader Joe&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.90235,-77.20352" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheetz 491 - Zion Crossroads, VA</span><small>350 kW · 4 stalls</small></div>
-<div class="a">135 Market Street, Zion Crossroads, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.97972,-78.21062" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">23866 Rogers Clark Blvd, Ruther Glen, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Flying J ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🍦 Dairy Queen ≥2 min</span><span>⛽ Pilot ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.93837,-77.46735" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Petersburg, VA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">3199 S Crater Rd, Petersburg, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>⛽ Sheetz ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.18969,-77.37022" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Fox Mill Shopping Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2551 John Milton Dr, Herndon, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.92651,-77.37633" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4610 County Drive, Disputanta, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Pilot ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>⛽ Sheetz ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.1843,-77.31841" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lexington, VA - Hotel Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">22 Hotel Dr, Lexington, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79823,-79.41814" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lynchburg Nissan</span><small>24 kW · 1 stall</small></div>
-<div class="a">18588 Forest Rd, Forest, VA</div><div class="host">In Charge</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 CVS ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.38606,-79.24361" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Newport News #0685</span><small>200 kW · 2 stalls</small></div>
-<div class="a">772 J Clyde Morris Blvd, Newport News, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍗 KFC ≥5 min</span><span>👑 Burger King ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.08031,-76.45993" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tyson&#x27;s Corner Center (McLean, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8000 Tysons Corner Center, McLean, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🌯 Chipotle ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.91694,-77.22058" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Marlow Ford</span><small>120 kW · 2 stalls</small></div>
-<div class="a">1021 US-211, Luray, VA</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Circle K ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.66,-78.48891" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T1858 (Charlottesville, VA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">312 Connor Dr, Charlottesville, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🌯 Chipotle ≥1 min</span><span>🎯 Target ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🛒 Harris Teeter ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.12784,-78.4415" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tower Shopping Center</span><small>200 kW · 2 stalls</small></div>
-<div class="a">6801 Bland St, Springfield, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍗 KFC ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.78128,-77.18501" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>JBG Smith Burke Centre (Burke, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5727 Burke Centre Pkwy, Burke, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🌯 Chipotle ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>💊 CVS ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.79889,-77.32094" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ashburn, VA - Van Metre Drive - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">43101 Van Metre Dr, Ashburn, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍗 Royal Farms ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.02853,-77.51116" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Stuarts Draft, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">2870 Stuarts Draft Hwy, Stuarts Draft, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🏪 Dollar General ≥4 min</span><span>💊 Walgreens ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.03862,-79.02631" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Coliseum Crossing</span><small>50 kW · 4 stalls</small></div>
-<div class="a">2101 Coliseum Drive, Hampton, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.04807,-76.39219" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Leesburg, VA - Compass Creek Parkway - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">565 Compass Point Plz SE, Leesburg, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.08242,-77.56289" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Farmville Downtown Plaza Lot</span><small>24 kW · 1 stall</small></div>
-<div class="a">Main Street, Farmville, VA</div><div class="host">Abm</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>☕ Starbucks ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.30184,-78.39272" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheehy Ford of Warrenton - DCFC</span><small>120 kW · 4 stalls</small></div>
-<div class="a">6443 Lee Highway, Warrenton, VA</div><div class="host">Blink</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🥞 IHOP ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.73435,-77.76931" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Norfolk, VA - 1146 N Military Hwy - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1146 N Military Hwy, Norfolk, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🦆 Wawa ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🍕 Little Caesars ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+23</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.86134,-76.20926" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Tysons, VA</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1961 Chain Bridge Road, Tysons, VA</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🥖 Panera Bread ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.91653,-77.22115" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Exxon Lovingston</span><small>180 kW · 4 stalls</small></div>
-<div class="a">40 Front St, Lovingston, VA</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75275,-78.87564" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>The Fashion Centre at Pentagon City</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1100 S Hayes St, Arlington, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>💊 Walgreens ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.86148,-77.06185" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Abingdon, VA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">25016 Lee Highway, Abingdon, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍗 Royal Farms ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.71247,-81.9291" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Arlington, VA - Crystal Drive - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2011 Crystal Drive, Arlington, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.85322,-77.04866" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>703 England</span><small>360 kW · 4 stalls</small></div>
-<div class="a">703 England St, Ashland, VA</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🌯 Chipotle ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>+21</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75779,-77.47033" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Target Chesapeake #T2203</span><small>350 kW · 4 stalls</small></div>
-<div class="a">233 Carmichael Way, Chesapeake, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.65876,-76.23285" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2258 (Alexandria, VA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">7910 Richmond Hwy., Alexandria, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>📦 Costco ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍗 Popeyes ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥8 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.74252,-77.0867" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Target Lynchburg</span><small>50 kW · 2 stalls</small></div>
-<div class="a">4028 Wards Rd, Lynchburg, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥1 min</span><span>🍝 Olive Garden ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.34585,-79.19093" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheehy Ford Springfield - DCFC</span><small>120 kW · 2 stalls</small></div>
-<div class="a">6727 Loisdale Road, Springfield, VA</div><div class="host">Blink</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🍗 Wingstop ≥6 min</span><span>🥪 Jersey Mike&#x27;s ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.77167,-77.17979" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6518 (Bristol, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">13249 Lee Highway, Bristol, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🏪 Sam&#x27;s Club ≥2 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Newport News, VA - Highway 17 - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">772 J Clyde Morris Blvd, Newport News, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🦆 Wawa ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍗 KFC ≥6 min</span><span>🌮 Taco Bell ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.08108,-76.45942" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Old Keene Mill Shopping Center</span><small>100 kW · 2 stalls</small></div>
-<div class="a">8424 Old Keene Mill Rd, Springfield, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥3 min</span><span>🛒 Aldi ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.7789,-77.23682" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Lexington, VA - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
-<div class="a">880 N Lee Hwy, Lexington, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79702,-79.41908" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Norfolk, VA - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
-<div class="a">5900 E Virginia Beach Blvd, Norfolk, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🥖 Panera Bread ≥1 min</span><span>🦆 Wawa ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>+22</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.86059,-76.2074" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>MOM&#x27;s Organic Market</span><small>50 kW · 1 stall</small></div>
-<div class="a">14470 Smoketown Rd, Woodbridge, VA</div><div class="host">Non-networked</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>👑 Burger King ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍝 Olive Garden ≥3 min</span><span>🌶️ Chili&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.6384,-77.2995" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Sheetz 407 (Wytheville, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1340 North Fourth Street, Wytheville, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>⛽ Sheetz ≥1 min</span><span>🍗 Bojangles ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.9595,-81.0951" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Norfolk #8645</span><small>200 kW · 2 stalls</small></div>
-<div class="a">1146 N Military Hwy, Norfolk, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍕 Little Caesars ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>+23</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.86059,-76.2093" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Dairy Queen</span><small>125 kW · 1 stall</small></div>
-<div class="a">433 N Main St, Kilmarnock, VA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>💊 CVS ≥6 min</span><span>💊 Walgreens ≥7 min</span><span>🍕 Little Caesars ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.71984,-76.38529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Annandale Shopping Center</span><small>100 kW · 2 stalls</small></div>
-<div class="a">7040 Columbia Pike, Annandale, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍕 Pizza Hut ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.83392,-77.18789" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa #655</span><small>200 kW · 2 stalls</small></div>
-<div class="a">5231 Brook Rd, Richmond, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🦆 Wawa ≥1 min</span><span>🍗 Bojangles ≥2 min</span><span>🏪 Dollar General ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.60428,-77.45439" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">6721 Emmaus Church Road, Tallysville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.49997,-77.08942" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1014 Mt. Olive Road, Tom&#x27;s Brook, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96702,-78.43865" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FasCharge 16 FasMart Valero Richmond</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">1700 Ashland Rd, Richmond, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🏪 Dollar General <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.67378,-77.67425" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">The Shops at Southgate</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">100 E Fairfax St, Falls Church, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🥬 Whole Foods <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.88009,-77.17221" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Stoney Creek, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">13306 Saint John Church Rd, Stony Creek, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.97793,-77.39492" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">University of Virginia - Central Grounds Garage</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">400 Emmet St S, Charlottesville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>7 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.03632,-78.50659" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3634 N Valley Pike, Harrisonburg, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.48004,-78.81899" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Village Center at Dulles</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2445 Centreville Rd, Herndon, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🚒 Firehouse Subs <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.94998,-77.41006" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Sthr Hyundai</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">7300 Williamson Road, Hollins, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🛒 Kroger <i>3 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.34739,-79.95413" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Timberlake Station Shopping Center - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7701 Timberlake Rd, Lynchburg, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍗 Bojangles <i>3 min</i></span><span>⛽ Sheetz <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.35409,-79.22534" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3541 Lee Jackson Highway, Staunton, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.0199,-79.141" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">781 Moores Ferry Road, Skippers, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍗 Bojangles <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.60658,-77.56026" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Barcroft Plaza</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">6345 Columbia Pike, Falls Church, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🛒 Harris Teeter <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.83619,-77.15616" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Haymarket, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">15315 Washington Street, Haymarket, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81512,-77.6427" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Kings Park Shopping Center</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">8970 Burke Lake Rd, Springfield, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81011,-77.25288" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sterling, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">23055 Oakgrove Road, Sterling, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.97783,-77.41192" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tappahannock, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1804 Tappahannock, Tappahannock, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.90382,-76.86568" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Piggly Wiggly - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1304 S Boston Rd, Danville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>💊 CVS <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.58027,-79.34325" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Falls Church, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7501 Leesburg Place, Falls Church, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🛍️ Trader Joe&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.90235,-77.20352" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sheetz 491 - Zion Crossroads, VA</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">135 Market Street, Zion Crossroads, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.97972,-78.21062" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">23866 Rogers Clark Blvd, Ruther Glen, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🍦 Dairy Queen <i>2 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.93837,-77.46735" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Petersburg, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3199 S Crater Rd, Petersburg, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>⛽ Sheetz <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.18969,-77.37022" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Fox Mill Shopping Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2551 John Milton Dr, Herndon, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.92651,-77.37633" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4610 County Drive, Disputanta, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>⛽ Sheetz <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.1843,-77.31841" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lexington, VA - Hotel Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">22 Hotel Dr, Lexington, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79823,-79.41814" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="In Charge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Lynchburg Nissan</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>In Charge</span></div>
+<div class="a">18588 Forest Rd, Forest, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 CVS <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.38606,-79.24361" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Newport News #0685</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">772 J Clyde Morris Blvd, Newport News, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍗 KFC <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.08031,-76.45993" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Tyson&#x27;s Corner Center (McLean, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">8000 Tysons Corner Center, McLean, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.91694,-77.22058" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Marlow Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">1021 US-211, Luray, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.66,-78.48891" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T1858 (Charlottesville, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">312 Connor Dr, Charlottesville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🛒 Harris Teeter <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.12784,-78.4415" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Tower Shopping Center</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">6801 Bland St, Springfield, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.78128,-77.18501" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">JBG Smith Burke Centre (Burke, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">5727 Burke Centre Pkwy, Burke, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.79889,-77.32094" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ashburn, VA - Van Metre Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">43101 Van Metre Dr, Ashburn, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍗 Royal Farms <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.02853,-77.51116" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Stuarts Draft, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2870 Stuarts Draft Hwy, Stuarts Draft, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>💊 Walgreens <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.03862,-79.02631" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Coliseum Crossing</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2101 Coliseum Drive, Hampton, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.04807,-76.39219" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Leesburg, VA - Compass Creek Parkway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">565 Compass Point Plz SE, Leesburg, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.08242,-77.56289" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Abm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Farmville Downtown Plaza Lot</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>Abm</span></div>
+<div class="a">Main Street, Farmville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>☕ Starbucks <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.30184,-78.39272" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Sheehy Ford of Warrenton - DCFC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">6443 Lee Highway, Warrenton, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>🥞 IHOP <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.73435,-77.76931" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Norfolk, VA - 1146 N Military Hwy - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1146 N Military Hwy, Norfolk, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+23</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.86134,-76.20926" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Tysons, VA</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1961 Chain Bridge Road, Tysons, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.91653,-77.22115" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Exxon Lovingston</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">40 Front St, Lovingston, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.75275,-78.87564" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">The Fashion Centre at Pentagon City</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1100 S Hayes St, Arlington, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.86148,-77.06185" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Abingdon, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">25016 Lee Highway, Abingdon, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍗 Royal Farms <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍗 Bojangles <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.71247,-81.9291" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Arlington, VA - Crystal Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2011 Crystal Drive, Arlington, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.85322,-77.04866" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">703 England</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">703 England St, Ashland, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>+21</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.75779,-77.47033" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Target Chesapeake #T2203</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">233 Carmichael Way, Chesapeake, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.65876,-76.23285" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2258 (Alexandria, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">7910 Richmond Hwy., Alexandria, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>📦 Costco <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>8 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.74252,-77.0867" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Target Lynchburg</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">4028 Wards Rd, Lynchburg, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.34585,-79.19093" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Sheehy Ford Springfield - DCFC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">6727 Loisdale Road, Springfield, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>🍗 Wingstop <i>6 min</i></span><span>🥪 Jersey Mike&#x27;s <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.77167,-77.17979" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6518 (Bristol, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">13249 Lee Highway, Bristol, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🏪 Sam&#x27;s Club <i>2 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Newport News, VA - Highway 17 - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">772 J Clyde Morris Blvd, Newport News, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🌮 Taco Bell <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.08108,-76.45942" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Old Keene Mill Shopping Center</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">8424 Old Keene Mill Rd, Springfield, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>3 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.7789,-77.23682" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lexington, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">880 N Lee Hwy, Lexington, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79702,-79.41908" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Norfolk, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5900 E Virginia Beach Blvd, Norfolk, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🦆 Wawa <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>+22</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.86059,-76.2074" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">MOM&#x27;s Organic Market</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">14470 Smoketown Rd, Woodbridge, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.6384,-77.2995" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sheetz 407 (Wytheville, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1340 North Fourth Street, Wytheville, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🍗 Bojangles <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.9595,-81.0951" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Norfolk #8645</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1146 N Military Hwy, Norfolk, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>+23</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.86059,-76.2093" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Dairy Queen</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">433 N Main St, Kilmarnock, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>💊 CVS <i>6 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍕 Little Caesars <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.71984,-76.38529" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Annandale Shopping Center</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">7040 Columbia Pike, Annandale, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍕 Pizza Hut <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.83392,-77.18789" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa #655</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">5231 Brook Rd, Richmond, VA</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🍗 Bojangles <i>2 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.60428,-77.45439" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=VA">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 123. <a href="../../../?chain=Subway&amp;state=VA">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in Virginia</h2><div class="chips"><a href="../../starbucks/va/">☕ Starbucks <small>151</small></a><a href="../../mcdonald-s/va/">🍟 McDonald&#x27;s <small>146</small></a><a href="../../ice-cream-shop/va/">🍦 Ice cream shop <small>132</small></a><a href="../../dunkin/va/">🍩 Dunkin&#x27; <small>110</small></a><a href="../../cvs/va/">💊 CVS <small>87</small></a><a href="../../chipotle/va/">🌯 Chipotle <small>85</small></a><a href="../../taco-bell/va/">🌮 Taco Bell <small>82</small></a><a href="../../chick-fil-a/va/">🐔 Chick-fil-A <small>81</small></a><a href="../../wendy-s/va/">🍔 Wendy&#x27;s <small>81</small></a><a href="../../burger-king/va/">👑 Burger King <small>80</small></a><a href="../../wawa/va/">🦆 Wawa <small>77</small></a><a href="../../domino-s/va/">🍕 Domino&#x27;s <small>61</small></a><a href="../../walmart/va/">🛒 Walmart <small>57</small></a><a href="../../sheetz/va/">⛽ Sheetz <small>56</small></a><a href="../../popeyes/va/">🍗 Popeyes <small>54</small></a><a href="../../five-guys/va/">🍔 Five Guys <small>51</small></a><a href="../../arby-s/va/">🥩 Arby&#x27;s <small>50</small></a><a href="../../jersey-mike-s/va/">🥪 Jersey Mike&#x27;s <small>49</small></a><a href="../../lowe-s/va/">🔧 Lowe&#x27;s <small>46</small></a><a href="../../panera-bread/va/">🥖 Panera Bread <small>45</small></a><a href="../../pizza-hut/va/">🍕 Pizza Hut <small>45</small></a><a href="../../walgreens/va/">💊 Walgreens <small>45</small></a><a href="../../target/va/">🎯 Target <small>44</small></a><a href="../../kfc/va/">🍗 KFC <small>43</small></a><a href="../../ihop/va/">🥞 IHOP <small>39</small></a><a href="../../aldi/va/">🛒 Aldi <small>38</small></a><a href="../../home-depot/va/">🔨 Home Depot <small>36</small></a><a href="../../firehouse-subs/va/">🚒 Firehouse Subs <small>35</small></a><a href="../../dollar-general/va/">🏪 Dollar General <small>35</small></a><a href="../../panda-express/va/">🐼 Panda Express <small>34</small></a><a href="../../hardee-s/va/">⭐ Hardee&#x27;s <small>34</small></a><a href="../../applebee-s/va/">🍎 Applebee&#x27;s <small>30</small></a><a href="../../waffle-house/va/">🧇 Waffle House <small>28</small></a><a href="../../buffalo-wild-wings/va/">🦬 Buffalo Wild Wings <small>28</small></a><a href="../../little-caesars/va/">🍕 Little Caesars <small>26</small></a><a href="../../bojangles/va/">🍗 Bojangles <small>24</small></a><a href="../../cook-out/va/">🍔 Cook Out <small>24</small></a><a href="../../chili-s/va/">🌶️ Chili&#x27;s <small>22</small></a><a href="../../best-buy/va/">💻 Best Buy <small>22</small></a><a href="../../olive-garden/va/">🍝 Olive Garden <small>21</small></a><a href="../../sonic/va/">🚗 Sonic <small>21</small></a><a href="../../kroger/va/">🛒 Kroger <small>21</small></a><a href="../../wingstop/va/">🍗 Wingstop <small>19</small></a><a href="../../costco/va/">📦 Costco <small>18</small></a><a href="../../trader-joe-s/va/">🛍️ Trader Joe&#x27;s <small>18</small></a><a href="../../pilot/va/">⛽ Pilot <small>17</small></a><a href="../../tractor-supply/va/">🚜 Tractor Supply <small>16</small></a><a href="../../cracker-barrel/va/">🪵 Cracker Barrel <small>15</small></a><a href="../../royal-farms/va/">🍗 Royal Farms <small>14</small></a><a href="../../dairy-queen/va/">🍦 Dairy Queen <small>13</small></a><a href="../../red-robin/va/">🐦 Red Robin <small>13</small></a><a href="../../circle-k/va/">⛽ Circle K <small>13</small></a><a href="../../publix/va/">🛒 Publix <small>12</small></a><a href="../../shake-shack/va/">🍔 Shake Shack <small>11</small></a><a href="../../speedway/va/">⛽ Speedway <small>11</small></a><a href="../../wegmans/va/">🛒 Wegmans <small>11</small></a><a href="../../zaxby-s/va/">🍗 Zaxby&#x27;s <small>10</small></a><a href="../../texas-roadhouse/va/">🤠 Texas Roadhouse <small>10</small></a><a href="../../harris-teeter/va/">🛒 Harris Teeter <small>10</small></a><a href="../../whole-foods/va/">🥬 Whole Foods <small>9</small></a><a href="../../peet-s-coffee/va/">☕ Peet&#x27;s Coffee <small>9</small></a><a href="../../sam-s-club/va/">🏪 Sam&#x27;s Club <small>9</small></a><a href="../../denny-s/va/">🍳 Denny&#x27;s <small>8</small></a><a href="../../raising-cane-s/va/">🐕 Raising Cane&#x27;s <small>7</small></a><a href="../../safeway/va/">🛒 Safeway <small>6</small></a><a href="../../ikea/va/">🪑 IKEA <small>6</small></a><a href="../../love-s/va/">⛽ Love&#x27;s <small>6</small></a><a href="../../flying-j/va/">⛽ Flying J <small>5</small></a><a href="../../sprouts/va/">🥬 Sprouts <small>4</small></a><a href="../../caribou-coffee/va/">☕ Caribou Coffee <small>3</small></a><a href="../../krispy-kreme/va/">🍩 Krispy Kreme <small>3</small></a><a href="../../ta-travel-center/va/">⛽ TA Travel Center <small>2</small></a></div>
 <h2>Subway in other states</h2><div class="chips"><a href="../">All states</a></div>

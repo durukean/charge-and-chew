@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -36,91 +36,108 @@
 <p class="stats">Typical power along this route is <b>250 kW</b>, with <b>34</b> stops at 150 kW or more and <b>11</b> on the Tesla network. Chargers under 50 kW are left out &mdash; on a drive this length they cost more time than they save. There is one at least every <b>43 miles</b> of the way.</p>
 <h2>Every stop with food within a walk</h2>
 <p>In order along the route &mdash; the strongest stop in each stretch of the drive, so the list covers the whole route rather than filling up with the city you left.</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Taubman Country Club Plaza (Kansas City, MO)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">400 Nichols Rd, Kansas City, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍔 Shake Shack ≥3 min</span><span>🌯 Chipotle ≥8 min</span><span>☕ Starbucks ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.04208,-94.59301" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T1201 (Independence, MO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">17810 E 39th St, Independence, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>💊 CVS ≥2 min</span><span>⛽ QuikTrip ≥2 min</span><span>🎯 Target ≥2 min</span><span>🛒 Walmart ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.04954,-94.37021" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Blue Springs, MO Rechargery Relay - NE Coronado</span><small>400 kW · 10 stalls</small></div>
-<div class="a">1005 NE Coronado Dr, Blue Springs, MO</div><div class="host">IONNA</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.02608,-94.24913" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Casey&#x27;s - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">807 S Broadway, Oak Grove, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🧇 <b>Waffle House</b> ≥6 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>💊 Walgreens ≥6 min</span><span>🚗 Sonic ≥6 min</span><span>🍗 Zaxby&#x27;s ≥7 min</span><span>🍕 Pizza Hut ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.00775,-94.12883" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6676 Highway 13, Higginsville, MO</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.00295,-93.73511" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Concordia, MO - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">101 N Main Street, Concordia, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥5 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🏪 Dollar General ≥7 min</span><span>🍕 Pizza Hut ≥7 min</span><span>⛽ TA Travel Center ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.98983,-93.5668" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1701 Ashley Road, Boonville, MO</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>⛽ Love&#x27;s ≥8 min</span><span>⭐ Hardee&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.93879,-92.77376" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Columbia, MO</span><small>300 kW · 6 stalls</small></div>
-<div class="a">2300 Bernadette Drive, Columbia, MO</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>🍔 Five Guys ≥7 min</span><span>🍦 Culver&#x27;s ≥8 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96508,-92.3781" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>SuperSonic Site</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1401 Creekwood PKWY, Columbia, MO</div><div class="host">EV Connect</div>
-<div class="c"><span>🍕 <b>Pizza Hut</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>🍗 KFC ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96487,-92.28763" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Callaway Tech Callaway</span><small>102 kW · 1 stall</small></div>
-<div class="a">County Rd 211, Kingdom City, MO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥3 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>👑 Burger King ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.94312,-91.94244" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Warrenton, MO Rechargery @ Schnucks - E Veterans Memorial Pk</span><small>400 kW · 6 stalls</small></div>
-<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div><div class="host">IONNA</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥2 min</span><span>💊 Walgreens ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🤡 Jack in the Box ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81987,-91.14325" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Commerce Bank - Wentzville</span><small>50 kW · 1 stall</small></div>
-<div class="a">1994 Wentzville Pkwy, Wentzville, MO</div><div class="host">EVgo</div>
-<div class="c"><span>🤡 <b>Jack in the Box</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>⛽ QuikTrip ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>+20</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81358,-90.87496" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">6100 Ronald Reagan Dr, Lake St. Louis, MO</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🐼 <b>Panda Express</b> ≥3 min</span><span>🛒 Walmart ≥1 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🚗 Sonic ≥7 min</span><span>🔧 Lowe&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.7724,-90.78661" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Chesterfield, MO - North Outer 40 Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">17057 North Outer 40 Road, Chesterfield, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🛒 Walmart ≥7 min</span><span>🎯 Target ≥7 min</span><span>🏪 Sam&#x27;s Club ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.67056,-90.58952" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>RPT Heritage Place (St. Louis, MO)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">12545 Olive Blvd, St. Louis, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>🥪 Subway ≥8 min</span><span>💊 Walgreens ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.67641,-90.46235" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Brentwood, MO - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">8702 Rose Avenue, Brentwood, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>💊 CVS ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥3 min</span><span>🥬 Whole Foods ≥4 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.62687,-90.34415" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">699 State Route 203, East St. Louis, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.65208,-90.13191" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Taubman Country Club Plaza (Kansas City, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">400 Nichols Rd, Kansas City, MO</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍔 Shake Shack <i>3 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.04208,-94.59301" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T1201 (Independence, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">17810 E 39th St, Independence, MO</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>💊 CVS <i>2 min</i></span><span>⛽ QuikTrip <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.04954,-94.37021" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Blue Springs, MO Rechargery Relay - NE Coronado</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">1005 NE Coronado Dr, Blue Springs, MO</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.02608,-94.24913" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Casey&#x27;s - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">807 S Broadway, Oak Grove, MO</div>
+<div class="c"><span>🧇 <b>Waffle House</b> <i>6 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🚗 Sonic <i>6 min</i></span><span>🍗 Zaxby&#x27;s <i>7 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.00775,-94.12883" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">6676 Highway 13, Higginsville, MO</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.00295,-93.73511" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Concordia, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">101 N Main Street, Concordia, MO</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>5 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>⛽ TA Travel Center <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.98983,-93.5668" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1701 Ashley Road, Boonville, MO</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>⛽ Love&#x27;s <i>8 min</i></span><span>⭐ Hardee&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.93879,-92.77376" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Columbia, MO</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">2300 Bernadette Drive, Columbia, MO</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span><span>🍔 Five Guys <i>7 min</i></span><span>🍦 Culver&#x27;s <i>8 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96508,-92.3781" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">SuperSonic Site</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">1401 Creekwood PKWY, Columbia, MO</div>
+<div class="c"><span>🍕 <b>Pizza Hut</b> <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🍗 KFC <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96487,-92.28763" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Callaway Tech Callaway</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">County Rd 211, Kingdom City, MO</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>3 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🥩 Arby&#x27;s <i>5 min</i></span><span>👑 Burger King <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.94312,-91.94244" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Warrenton, MO Rechargery @ Schnucks - E Veterans Memorial Pk</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>2 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🤡 Jack in the Box <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81987,-91.14325" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Commerce Bank - Wentzville</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">1994 Wentzville Pkwy, Wentzville, MO</div>
+<div class="c"><span>🤡 <b>Jack in the Box</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>⛽ QuikTrip <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>+20</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81358,-90.87496" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">6100 Ronald Reagan Dr, Lake St. Louis, MO</div>
+<div class="c"><span>🐼 <b>Panda Express</b> <i>3 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🚗 Sonic <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.7724,-90.78661" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chesterfield, MO - North Outer 40 Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">17057 North Outer 40 Road, Chesterfield, MO</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>4 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🛒 Walmart <i>7 min</i></span><span>🎯 Target <i>7 min</i></span><span>🏪 Sam&#x27;s Club <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.67056,-90.58952" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">RPT Heritage Place (St. Louis, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">12545 Olive Blvd, St. Louis, MO</div>
+<div class="c"><span>🦬 <b>Buffalo Wild Wings</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🐔 Chick-fil-A <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>💊 Walgreens <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.67641,-90.46235" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Brentwood, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8702 Rose Avenue, Brentwood, MO</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>3 min</i></span><span>🥬 Whole Foods <i>4 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.62687,-90.34415" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">699 State Route 203, East St. Louis, IL</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.65208,-90.13191" target="_blank" rel="noopener">Directions</a><a href="../../?from=Kansas%20City%2C%20MO&amp;to=St.%20Louis%2C%20MO&amp;c=5&amp;any=food">Show on map</a></div>
 </div></div>
 <h2>Other road trips</h2><div class="chips"><a href="../atlanta-to-nashville/">Atlanta &rarr; Nashville <small>74</small></a><a href="../atlanta-to-orlando/">Atlanta &rarr; Orlando <small>118</small></a><a href="../atlanta-to-savannah/">Atlanta &rarr; Savannah <small>66</small></a><a href="../austin-to-houston/">Austin &rarr; Houston <small>64</small></a><a href="../boston-to-portland/">Boston &rarr; Portland <small>82</small></a><a href="../charlotte-to-atlanta/">Charlotte &rarr; Atlanta <small>96</small></a><a href="../chicago-to-detroit/">Chicago &rarr; Detroit <small>113</small></a><a href="../chicago-to-indianapolis/">Chicago &rarr; Indianapolis <small>63</small></a><a href="../dallas-to-austin/">Dallas &rarr; Austin <small>69</small></a><a href="../dallas-to-houston/">Dallas &rarr; Houston <small>52</small></a><a href="../dallas-to-oklahoma-city/">Dallas &rarr; Oklahoma City <small>68</small></a><a href="../denver-to-colorado-springs/">Denver &rarr; Colorado Springs <small>66</small></a><a href="../denver-to-salt-lake-city/">Denver &rarr; Salt Lake City <small>95</small></a><a href="../denver-to-kansas-city/">Denver &rarr; Kansas City <small>79</small></a><a href="../detroit-to-cleveland/">Detroit &rarr; Cleveland <small>60</small></a><a href="../houston-to-san-antonio/">Houston &rarr; San Antonio <small>58</small></a><a href="../houston-to-new-orleans/">Houston &rarr; New Orleans <small>49</small></a><a href="../kansas-city-to-st-louis/">Kansas City &rarr; St. Louis <small>45</small></a><a href="../las-vegas-to-salt-lake-city/">Las Vegas &rarr; Salt Lake City <small>107</small></a><a href="../las-vegas-to-flagstaff/">Las Vegas &rarr; Flagstaff <small>43</small></a><a href="../los-angeles-to-las-vegas/">Los Angeles &rarr; Las Vegas <small>213</small></a><a href="../los-angeles-to-phoenix/">Los Angeles &rarr; Phoenix <small>232</small></a><a href="../los-angeles-to-san-diego/">Los Angeles &rarr; San Diego <small>294</small></a><a href="../los-angeles-to-san-francisco/">Los Angeles &rarr; San Francisco <small>260</small></a><a href="../los-angeles-to-palm-springs/">Los Angeles &rarr; Palm Springs <small>196</small></a><a href="../miami-to-orlando/">Miami &rarr; Orlando <small>153</small></a><a href="../miami-to-key-west/">Miami &rarr; Key West <small>31</small></a><a href="../minneapolis-to-chicago/">Minneapolis &rarr; Chicago <small>158</small></a><a href="../nashville-to-memphis/">Nashville &rarr; Memphis <small>31</small></a><a href="../new-york-to-boston/">New York &rarr; Boston <small>237</small></a><a href="../new-york-to-washington/">New York &rarr; Washington <small>263</small></a><a href="../orlando-to-tampa/">Orlando &rarr; Tampa <small>73</small></a><a href="../philadelphia-to-pittsburgh/">Philadelphia &rarr; Pittsburgh <small>92</small></a><a href="../phoenix-to-las-vegas/">Phoenix &rarr; Las Vegas <small>53</small></a><a href="../phoenix-to-tucson/">Phoenix &rarr; Tucson <small>40</small></a><a href="../sacramento-to-south-lake-tahoe/">Sacramento &rarr; South Lake Tahoe <small>91</small></a><a href="../salt-lake-city-to-boise/">Salt Lake City &rarr; Boise <small>49</small></a><a href="../san-antonio-to-el-paso/">San Antonio &rarr; El Paso <small>40</small></a><a href="../san-francisco-to-portland/">San Francisco &rarr; Portland <small>244</small></a><a href="../san-francisco-to-south-lake-tahoe/">San Francisco &rarr; South Lake Tahoe <small>199</small></a><a href="../seattle-to-portland/">Seattle &rarr; Portland <small>139</small></a><a href="../seattle-to-spokane/">Seattle &rarr; Spokane <small>76</small></a><a href="../washington-to-charlotte/">Washington &rarr; Charlotte <small>148</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

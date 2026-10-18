@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,306 +38,366 @@ order along the route, TX → OK → MO → IL.</p>
 150 kW or more and <b>80</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>QuikTrip - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1526 Old Iowa Park Rd, Wichita Falls, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=QuikTrip&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.92725,-98.51234" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Grubbs Hyundai of Wichita Falls</span><small>120 kW · 2 stalls</small></div>
-<div class="a">315 Central East Freeway, Wichita Falls, TX</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.89105,-98.4885" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Lawton Chrysler Jeep Dodge RAM</span><small>180 kW · 2 stalls</small></div>
-<div class="a">215 SE Interstate Dr, Lawton, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.60562,-98.37825" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;s Travel Stop #86</span><small>50 kW · 12 stalls</small></div>
-<div class="a">1326 S 4th St, Chickasha, OK</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🌮 Taco Bell ≥8 min</span><span>🥩 Arby&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.03731,-97.93717" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Chickasha Plaza - Tesla Supercharger (Francis Energy)</span><small>325 kW · 4 stalls</small></div>
-<div class="a">1702 S 1st St, Chickasha, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Walmart ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>💊 Walgreens ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Arby&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.03254,-97.93311" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;s 167-Chickasha</span><small>200 kW · 12 stalls</small></div>
-<div class="a">1890 H.E. Bailey Turnpike, Chickasha, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.08268,-97.88868" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Crest Fresh Market - Tesla Supercharger (Francis Energy)</span><small>325 kW · 4 stalls</small></div>
-<div class="a">10601 S May Ave, Oklahoma City, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🏪 Dollar General ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.36294,-97.56768" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>CPG Properties</span><small>50 kW · 4 stalls</small></div>
-<div class="a">1045 S Meridian, Oklahoma City, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍔 Whataburger ≥3 min</span><span>👑 Burger King ≥6 min</span><span>🥞 IHOP ≥7 min</span><span>🪵 Cracker Barrel ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.45408,-97.60142" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Westminster Village</span><small>60 kW · 8 stalls</small></div>
-<div class="a">10601 S Western Ave, Oklahoma City, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍗 <b>Wingstop</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Walmart ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wingstop&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.36258,-97.53042" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Metro Ford OKC</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2800 W I-44 Service Rd, Oklahoma City, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍕 <b>Casey&#x27;s</b> ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🏪 Sam&#x27;s Club ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Casey&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.51038,-97.56481" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Simon Penn Square Mall (Oklahoma City, OK)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1901 NW Expressway, Oklahoma City, OK</div><div class="host">Electrify America</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🐔 Chick-fil-A ≥8 min</span><span>🥞 IHOP ≥8 min</span><span>🌶️ Chili&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.52352,-97.54286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Oak 233014046303</span><small>62 kW · 1 stall</small></div>
-<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.52263,-97.54815" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Oak 233614054209</span><small>62 kW · 1 stall</small></div>
-<div class="a">2100 Northwest Expy, Oklahoma City, OK</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.52268,-97.54833" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Oak 232914044301</span><small>62 kW · 1 stall</small></div>
-<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥4 min</span><span>🛒 Walmart ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.52266,-97.54805" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Oak 233514053519</span><small>62 kW · 1 stall</small></div>
-<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.52262,-97.54808" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">9320 N Pennsylvania Pl, The Village, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.56503,-97.54757" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>JINYA Ramen Bar - Tesla Supercharger (JINYA Ramen Bar)</span><small>325 kW · 4 stalls</small></div>
-<div class="a">6800 N Western Ave, Oklahoma City, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> ≥5 min</span><span>☕ Starbucks ≥6 min</span><span>🍦 Ice cream shop ≥9 min</span><span>🥬 Whole Foods ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Trader Joe&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.54066,-97.52898" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Oklahoma City, OK - 36th Street - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">625 NE 36th St, Oklahoma City, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.50877,-97.50143" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4801 NE 122nd St, Edmond, OK</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>⛽ Flying J ≥1 min</span><span>🚗 Sonic ≥2 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.59579,-97.43648" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Williams - Chandler</span><small>200 kW · 8 stalls</small></div>
-<div class="a">1812 E 1st St, Chandler, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.71064,-96.8615" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Love&#x27;s 178-Chandler</span><small>200 kW · 12 stalls</small></div>
-<div class="a">179 Turner Turnpike, Stroud, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.72676,-96.83516" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 324 (Bristow, OK)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">105 W. Hwy 16, Bristow, OK</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🚜 Tractor Supply ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.84323,-96.3958" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Williams - Bristow</span><small>200 kW · 4 stalls</small></div>
-<div class="a">201 E 7th Ave, Bristow, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.83453,-96.38792" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Tulsa, OK</span><small>50 kW · 2 stalls</small></div>
-<div class="a">5505 W 55th St South, Tulsa, OK</div><div class="host">EV Connect</div>
-<div class="c"><span>⭐ <b>Carl&#x27;s Jr.</b> ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🏪 Dollar General ≥6 min</span><span>☕ Starbucks ≥8 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>🧇 Waffle House ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Carl&#x27;s Jr.&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.0822,-96.05338" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Tulsa, OK - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
-<div class="a">7380 S Olympia Ave, Tulsa, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Jersey Mike&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.05429,-96.00461" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Riverside Ford of Tulsa - DCFC</span><small>120 kW · 4 stalls</small></div>
-<div class="a">745 West 51st Street, Tulsa, OK</div><div class="host">Blink</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.09048,-96.00001" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Reasor&#x27;s - Brookside</span><small>50 kW · 12 stalls</small></div>
-<div class="a">3915 S Peoria, Tulsa, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥2 min</span><span>🍔 Five Guys ≥5 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🐕 Raising Cane&#x27;s ≥6 min</span><span>🍗 KFC ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.10566,-95.97517" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Tandy YMCA</span><small>50 kW · 4 stalls</small></div>
-<div class="a">5005 S Darlington Ave, Tulsa, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥6 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>☕ Dutch Bros ≥8 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🤡 Jack in the Box ≥8 min</span><span>🐕 Raising Cane&#x27;s ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=QuikTrip&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.09075,-95.91608" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Heller Investments</span><small>50 kW · 4 stalls</small></div>
-<div class="a">3515 E 31st St, Tulsa, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🥪 Subway ≥2 min</span><span>💊 Walgreens ≥4 min</span><span>🛒 Aldi ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11892,-95.93744" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Tulsa, OK - East 41st Street - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">5726 E 41st St, Tulsa, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Whataburger</b> ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🦬 Buffalo Wild Wings ≥6 min</span><span>💻 Best Buy ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whataburger&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.10378,-95.91209" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">3116 S Garnett Rd, Tulsa, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🍔 Whataburger ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11824,-95.85356" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">121 North 129 E Ave, Tulsa, OK</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16264,-95.83236" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Catoosa, OK - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">777 W. Cherokee St., Catoosa, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🧇 Waffle House ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>💊 Walgreens ≥6 min</span><span>🚒 Firehouse Subs ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16763,-95.76597" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Cherokee Nation-HRC Light Duty</span><small>60 kW · 2 stalls</small></div>
-<div class="a">777 W Cherokee St, Catoosa, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🧇 <b>Waffle House</b> ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🚒 Firehouse Subs ≥6 min</span><span>💊 Walgreens ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16747,-95.76593" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">19801 Robson Rd, Catoosa, OK</div><div class="host">Walmart Charge</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍝 Olive Garden ≥3 min</span><span>🥞 IHOP ≥5 min</span><span>🚒 Firehouse Subs ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🐼 Panda Express ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16532,-95.75624" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Jack Kissee Ford</span><small>150 kW · 2 stalls</small></div>
-<div class="a">760 S Lynn Riggs Blvd, Claremore, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🐔 <b>Chick-fil-A</b> ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span><span>⛽ QuikTrip ≥7 min</span><span>☕ Starbucks ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chick-fil-A&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.3038,-95.62234" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Cedar Point Church</span><small>50 kW · 8 stalls</small></div>
-<div class="a">1660 N Lynn Riggs Blvd, Claremore, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🏪 <b>Dollar General</b> ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dollar General&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.32475,-95.60731" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 50 (Vinita, OK)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">268 S. 7th St., Vinita, OK</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>🥪 Subway ≥5 min</span><span>🍕 Pizza Hut ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.63134,-95.14162" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Cherokee Nation-Vinita</span><small>60 kW · 2 stalls</small></div>
-<div class="a">945 E Illinois Ave, Vinita, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Pizza Hut ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.6332,-95.1414" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Joplin, MO - Highway 43 - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">4240 Hwy 43, Joplin, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍦 Dairy Queen ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.00809,-94.55126" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Service Garage Front Charger</span><small>62 kW · 1 stall</small></div>
-<div class="a">3111 E 32nd St, Joplin, MO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥3 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🤠 Texas Roadhouse ≥6 min</span><span>🚗 Sonic ≥7 min</span><span>☕ Starbucks ≥7 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.0572,-94.47647" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">11570 State Hwy FF, Joplin, MO</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ QuikTrip ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.05508,-94.42872" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 7249 (Mount Vernon, MO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">500 W Mount Vernon Blvd, Mount Vernon, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🏪 Dollar General ≥9 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.09273,-93.82565" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4939 West Chestnut Expressway, Springfield, MO</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>⛽ Flying J ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.21323,-93.38133" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Springfield, MO - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">3050 N. Kentwood Ave., Springfield, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🧇 <b>Waffle House</b> ≥2 min</span><span>🪵 Cracker Barrel ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.2522,-93.26524" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Springfield, MO - N Mulroy Road - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">3284 N Mulroy Rd, Springfield, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.25331,-93.18278" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bucees Springfield MB.HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">3284 North Mulroy Road, Springfield, MO</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.25211,-93.17956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>14963 Mo-38</span><small>120 kW · 2 stalls</small></div>
-<div class="a">14963 MO-38, Marshfield, MO</div><div class="host">EV Connect</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥7 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🍗 KFC ≥8 min</span><span>🚗 Sonic ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>💊 Walgreens ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.34079,-92.93414" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Casey&#x27;s Lebanon (Lebanon, MO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">669 West Elm St, Lebanon, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🍕 <b>Casey&#x27;s</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Casey&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.67072,-92.66491" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Saint Robert, MO - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">340 Marshall Dr, St Robert, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍕 <b>Casey&#x27;s</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥1 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>🧇 Waffle House ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Casey&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.81536,-92.14107" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Rolla, MO - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">1705 Martin Springs Drive, Rolla, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍳 <b>Denny&#x27;s</b> ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Denny&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.94004,-91.80165" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>IHOP Restaurant - Rolla MO</span><small>120 kW · 4 stalls</small></div>
-<div class="a">1735 N Bishop Ave, Rolla, MO</div><div class="host">Blink</div>
-<div class="c"><span>🥞 <b>IHOP</b> ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>🥖 Panera Bread ≥5 min</span><span>🐔 Chick-fil-A ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=IHOP&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.95999,-91.77075" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 65 (Sullivan, MO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">350 Park Ridge Road, Sullivan, MO</div><div class="host">Electrify America</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>👑 Burger King ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.2222,-91.1552" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">825 North Loop Road, Sullivan, MO</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍗 KFC ≥4 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.22557,-91.15757" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Laura Ford of Sullivan, LLC - DCFC</span><small>300 kW · 6 stalls</small></div>
-<div class="a">47 North Service Road West, Sullivan, MO</div><div class="host">Blink</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🥪 Subway ≥6 min</span><span>🍎 Applebee&#x27;s ≥8 min</span><span>🛒 Aldi ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.21916,-91.1648" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Laura Chrysler Dodge Jeep RAM</span><small>180 kW · 2 stalls</small></div>
-<div class="a">7 North Service Road West, Sullivan, MO</div><div class="host">Blink</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🛒 Aldi ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Arby&#x27;s&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.22064,-91.16292" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1475 Thornton Street, Pacific, MO</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>⭐ Hardee&#x27;s ≥5 min</span><span>🍗 KFC ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.48673,-90.75841" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Eureka Pointe Eureka</span><small>102 kW · 1 stall</small></div>
-<div class="a">245 E 5th St, Eureka, MO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥1 min</span><span>⛽ QuikTrip ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panera Bread&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.5067,-90.62086" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Fenton, MO - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">950 Assembly Pkwy, Fenton, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>⛽ QuikTrip ≥7 min</span><span>🍩 Krispy Kreme ≥7 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.54436,-90.46543" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Fenton, MO Rechargery Relay @ Wally&#x27;s - Assembly Parkway</span><small>400 kW · 10 stalls</small></div>
-<div class="a">980 Assembly Parkway, Fenton, MO</div><div class="host">IONNA</div>
-<div class="c"><span>🤡 <b>Jack in the Box</b> ≥3 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>⛽ QuikTrip ≥7 min</span><span>🍩 Krispy Kreme ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Jack in the Box&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.54428,-90.465" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">QuikTrip - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1526 Old Iowa Park Rd, Wichita Falls, TX</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.92725,-98.51234" target="_blank" rel="noopener">Directions</a><a href="../../?chain=QuikTrip&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Grubbs Hyundai of Wichita Falls</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">315 Central East Freeway, Wichita Falls, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.89105,-98.4885" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Lawton Chrysler Jeep Dodge RAM</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Francis Energy</span></div>
+<div class="a">215 SE Interstate Dr, Lawton, OK</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.60562,-98.37825" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Love&#x27;s Travel Stop #86</div>
+<div class="sp"><s class="spd std">50 kW</s><b>12 stalls</b><span>Non-networked</span></div>
+<div class="a">1326 S 4th St, Chickasha, OK</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.03731,-97.93717" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chickasha Plaza - Tesla Supercharger (Francis Energy)</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1702 S 1st St, Chickasha, OK</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.03254,-97.93311" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Arby&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Love&#x27;s 167-Chickasha</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>12 stalls</b><span>Francis Energy</span></div>
+<div class="a">1890 H.E. Bailey Turnpike, Chickasha, OK</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.08268,-97.88868" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Crest Fresh Market - Tesla Supercharger (Francis Energy)</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">10601 S May Ave, Oklahoma City, OK</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.36294,-97.56768" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">CPG Properties</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">1045 S Meridian, Oklahoma City, OK</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍔 Whataburger <i>3 min</i></span><span>👑 Burger King <i>6 min</i></span><span>🥞 IHOP <i>7 min</i></span><span>🪵 Cracker Barrel <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.45408,-97.60142" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Westminster Village</div>
+<div class="sp"><s class="spd std">60 kW</s><b>8 stalls</b><span>Francis Energy</span></div>
+<div class="a">10601 S Western Ave, Oklahoma City, OK</div>
+<div class="c"><span>🍗 <b>Wingstop</b> <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.36258,-97.53042" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wingstop&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Metro Ford OKC</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Francis Energy</span></div>
+<div class="a">2800 W I-44 Service Rd, Oklahoma City, OK</div>
+<div class="c"><span>🍕 <b>Casey&#x27;s</b> <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🏪 Sam&#x27;s Club <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.51038,-97.56481" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Casey&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Simon Penn Square Mall (Oklahoma City, OK)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1901 NW Expressway, Oklahoma City, OK</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🐔 Chick-fil-A <i>8 min</i></span><span>🥞 IHOP <i>8 min</i></span><span>🌶️ Chili&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.52352,-97.54286" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Oak 233014046303</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.52263,-97.54815" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Oak 233614054209</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2100 Northwest Expy, Oklahoma City, OK</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.52268,-97.54833" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Oak 232914044301</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>4 min</i></span><span>🛒 Walmart <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.52266,-97.54805" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Oak 233514053519</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5101 N Pennsylvania Ave, Oklahoma City, OK</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.52262,-97.54808" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">9320 N Pennsylvania Pl, The Village, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.56503,-97.54757" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">JINYA Ramen Bar - Tesla Supercharger (JINYA Ramen Bar)</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6800 N Western Ave, Oklahoma City, OK</div>
+<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> <i>5 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span><span>🥬 Whole Foods <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.54066,-97.52898" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Trader Joe&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Oklahoma City, OK - 36th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">625 NE 36th St, Oklahoma City, OK</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.50877,-97.50143" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4801 NE 122nd St, Edmond, OK</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.59579,-97.43648" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Williams - Chandler</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>8 stalls</b><span>Francis Energy</span></div>
+<div class="a">1812 E 1st St, Chandler, OK</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.71064,-96.8615" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Love&#x27;s 178-Chandler</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>12 stalls</b><span>Francis Energy</span></div>
+<div class="a">179 Turner Turnpike, Stroud, OK</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.72676,-96.83516" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 324 (Bristow, OK)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">105 W. Hwy 16, Bristow, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🚜 Tractor Supply <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.84323,-96.3958" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Williams - Bristow</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">201 E 7th Ave, Bristow, OK</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.83453,-96.38792" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Tulsa, OK</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">5505 W 55th St South, Tulsa, OK</div>
+<div class="c"><span>⭐ <b>Carl&#x27;s Jr.</b> <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🏪 Dollar General <i>6 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>🥩 Arby&#x27;s <i>8 min</i></span><span>🧇 Waffle House <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.0822,-96.05338" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Carl&#x27;s Jr.&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tulsa, OK - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">7380 S Olympia Ave, Tulsa, OK</div>
+<div class="c"><span>🥪 <b>Jersey Mike&#x27;s</b> <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.05429,-96.00461" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Jersey Mike&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Riverside Ford of Tulsa - DCFC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">745 West 51st Street, Tulsa, OK</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.09048,-96.00001" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Reasor&#x27;s - Brookside</div>
+<div class="sp"><s class="spd std">50 kW</s><b>12 stalls</b><span>Francis Energy</span></div>
+<div class="a">3915 S Peoria, Tulsa, OK</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>2 min</i></span><span>🍔 Five Guys <i>5 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>🐕 Raising Cane&#x27;s <i>6 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.10566,-95.97517" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Tandy YMCA</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">5005 S Darlington Ave, Tulsa, OK</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>6 min</i></span><span>🥩 Arby&#x27;s <i>6 min</i></span><span>☕ Dutch Bros <i>8 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🤡 Jack in the Box <i>8 min</i></span><span>🐕 Raising Cane&#x27;s <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.09075,-95.91608" target="_blank" rel="noopener">Directions</a><a href="../../?chain=QuikTrip&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Heller Investments</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Francis Energy</span></div>
+<div class="a">3515 E 31st St, Tulsa, OK</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>🛒 Aldi <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11892,-95.93744" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tulsa, OK - East 41st Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5726 E 41st St, Tulsa, OK</div>
+<div class="c"><span>🍔 <b>Whataburger</b> <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>6 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.10378,-95.91209" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whataburger&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3116 S Garnett Rd, Tulsa, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍔 Whataburger <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11824,-95.85356" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">121 North 129 E Ave, Tulsa, OK</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16264,-95.83236" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Catoosa, OK - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">777 W. Cherokee St., Catoosa, OK</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🚒 Firehouse Subs <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16763,-95.76597" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Cherokee Nation-HRC Light Duty</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Francis Energy</span></div>
+<div class="a">777 W Cherokee St, Catoosa, OK</div>
+<div class="c"><span>🧇 <b>Waffle House</b> <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🚒 Firehouse Subs <i>6 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16747,-95.76593" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Waffle House&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">19801 Robson Rd, Catoosa, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>🚒 Firehouse Subs <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16532,-95.75624" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Jack Kissee Ford</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>Francis Energy</span></div>
+<div class="a">760 S Lynn Riggs Blvd, Claremore, OK</div>
+<div class="c"><span>🐔 <b>Chick-fil-A</b> <i>4 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>⛽ QuikTrip <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.3038,-95.62234" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chick-fil-A&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Cedar Point Church</div>
+<div class="sp"><s class="spd std">50 kW</s><b>8 stalls</b><span>Francis Energy</span></div>
+<div class="a">1660 N Lynn Riggs Blvd, Claremore, OK</div>
+<div class="c"><span>🏪 <b>Dollar General</b> <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.32475,-95.60731" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dollar General&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 50 (Vinita, OK)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">268 S. 7th St., Vinita, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.63134,-95.14162" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Cherokee Nation-Vinita</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Francis Energy</span></div>
+<div class="a">945 E Illinois Ave, Vinita, OK</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Pizza Hut <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.6332,-95.1414" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Joplin, MO - Highway 43 - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4240 Hwy 43, Joplin, MO</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🍦 Dairy Queen <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.00809,-94.55126" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Service Garage Front Charger</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3111 E 32nd St, Joplin, MO</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🤠 Texas Roadhouse <i>6 min</i></span><span>🚗 Sonic <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.0572,-94.47647" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">11570 State Hwy FF, Joplin, MO</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ QuikTrip <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.05508,-94.42872" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 7249 (Mount Vernon, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">500 W Mount Vernon Blvd, Mount Vernon, MO</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🏪 Dollar General <i>9 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.09273,-93.82565" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4939 West Chestnut Expressway, Springfield, MO</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>⛽ Flying J <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.21323,-93.38133" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Springfield, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3050 N. Kentwood Ave., Springfield, MO</div>
+<div class="c"><span>🧇 <b>Waffle House</b> <i>2 min</i></span><span>🪵 Cracker Barrel <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.2522,-93.26524" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Waffle House&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Springfield, MO - N Mulroy Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3284 N Mulroy Rd, Springfield, MO</div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.25331,-93.18278" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bucees Springfield MB.HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">3284 North Mulroy Road, Springfield, MO</div>
+<div class="c"><span>🦫 <b>Buc-ee&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.25211,-93.17956" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Buc-ee&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">14963 Mo-38</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">14963 MO-38, Marshfield, MO</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>7 min</i></span><span>🍕 Pizza Hut <i>8 min</i></span><span>🍗 KFC <i>8 min</i></span><span>🚗 Sonic <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>💊 Walgreens <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.34079,-92.93414" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Casey&#x27;s Lebanon (Lebanon, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">669 West Elm St, Lebanon, MO</div>
+<div class="c"><span>🍕 <b>Casey&#x27;s</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.67072,-92.66491" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Casey&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Saint Robert, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">340 Marshall Dr, St Robert, MO</div>
+<div class="c"><span>🍕 <b>Casey&#x27;s</b> <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>1 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>🧇 Waffle House <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.81536,-92.14107" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Casey&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Rolla, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1705 Martin Springs Drive, Rolla, MO</div>
+<div class="c"><span>🍳 <b>Denny&#x27;s</b> <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.94004,-91.80165" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Denny&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">IHOP Restaurant - Rolla MO</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">1735 N Bishop Ave, Rolla, MO</div>
+<div class="c"><span>🥞 <b>IHOP</b> <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>🐔 Chick-fil-A <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.95999,-91.77075" target="_blank" rel="noopener">Directions</a><a href="../../?chain=IHOP&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 65 (Sullivan, MO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">350 Park Ridge Road, Sullivan, MO</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.2222,-91.1552" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">825 North Loop Road, Sullivan, MO</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>🍎 Applebee&#x27;s <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.22557,-91.15757" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Laura Ford of Sullivan, LLC - DCFC</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Blink</span></div>
+<div class="a">47 North Service Road West, Sullivan, MO</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🍎 Applebee&#x27;s <i>8 min</i></span><span>🛒 Aldi <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.21916,-91.1648" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Laura Chrysler Dodge Jeep RAM</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">7 North Service Road West, Sullivan, MO</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🛒 Aldi <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.22064,-91.16292" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Arby&#x27;s&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1475 Thornton Street, Pacific, MO</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>⭐ Hardee&#x27;s <i>5 min</i></span><span>🍗 KFC <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.48673,-90.75841" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Eureka Pointe Eureka</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">245 E 5th St, Eureka, MO</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>1 min</i></span><span>⛽ QuikTrip <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.5067,-90.62086" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panera Bread&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fenton, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">950 Assembly Pkwy, Fenton, MO</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>3 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>⛽ QuikTrip <i>7 min</i></span><span>🍩 Krispy Kreme <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.54436,-90.46543" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Fenton, MO Rechargery Relay @ Wally&#x27;s - Assembly Parkway</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>IONNA</span></div>
+<div class="a">980 Assembly Parkway, Fenton, MO</div>
+<div class="c"><span>🤡 <b>Jack in the Box</b> <i>3 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>⛽ QuikTrip <i>7 min</i></span><span>🍩 Krispy Kreme <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.54428,-90.465" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Jack in the Box&amp;state=MO">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

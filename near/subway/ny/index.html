@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>151 DC fast chargers</b> in New York have a Subway within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Subway&amp;state=NY">Open on the map →</a>
 <p class="stats">Of the 151 fast chargers with a Subway nearby in New York: The typical stop here delivers <b>200 kW</b>, and 109 of them do 150 kW or more; <b>46</b> are close enough that the Subway is a two-minute walk or less; <b>133</b> are listed as open 24 hours. The fastest is <b>Trident 911 Central Ave</b> in Albany at 640 kW; the closest walk is 1 min at <b>HondoGo - Halfmoon, NY</b>. Most are on Tesla Supercharger (31), Electrify America (23), ChargePoint (20).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>HondoGo - Halfmoon, NY</span><small>200 kW · 4 stalls</small></div>
-<div class="a">1707 US-9, Clifton Park, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>👑 Burger King ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🪵 Cracker Barrel ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.86469,-73.76849" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Parish Mirabito</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2877 E Main Street, Parish, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🏪 Dollar General ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.40452,-76.11936" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">995 US Route 9, Castleton-On-Hudson, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49791,-73.67476" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1128 Duanesburg Road, Rotterdam, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.78142,-74.02882" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Friendship</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2 Pennsylvania Ave, Friendship, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.20258,-78.14575" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Goldens Bridge</span><small>350 kW · 6 stalls</small></div>
-<div class="a">22 NY-138, Goldens Bridge, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.29401,-73.6748" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Aldi Baldwinsville</span><small>150 kW · 8 stalls</small></div>
-<div class="a">2254 Downer St, Baldwinsville, NY</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.15133,-76.35087" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Courtyard by Marriott Binghamton</span><small>180 kW · 8 stalls</small></div>
-<div class="a">3801 Vestal Pkwy E, Vestal, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.09693,-75.98038" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Inwood, NY - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">603 Burnside Ave, Inwood, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 CVS ≥3 min</span><span>🎯 Target ≥6 min</span><span>🥖 Panera Bread ≥7 min</span><span>☕ Starbucks ≥7 min</span><span>🌮 Taco Bell ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.62317,-73.74263" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Niagara Falls</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7200 Niagara Falls Blvd, Niagara Falls, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🎯 Target ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.08827,-78.98118" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Quicklees 23 Q Monroe Ave</span><small>125 kW · 1 stall</small></div>
-<div class="a">1950 Monroe Avenue, Rochester, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>💊 CVS ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.12605,-77.56399" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2586 (Cheektowaga, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2500 Walden Ave, Cheektowaga, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>🍗 Popeyes ≥9 min</span><span>🚗 Sonic ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.90943,-78.74468" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Tully Preble</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7073 Route 281, Tully, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.74797,-76.13435" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Islandia, NY - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">1750 Veterans Hwy, Islandia, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>💊 Walgreens ≥5 min</span><span>🛒 Walmart ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.80485,-73.18014" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hannaford Supermarket</span><small>50 kW · 1 stall</small></div>
-<div class="a">900 Central Ave, Albany, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🍗 Popeyes ≥1 min</span><span>💊 CVS ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.68066,-73.79098" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hannaford Plaza - East Greenbush</span><small>350 kW · 6 stalls</small></div>
-<div class="a">598 Columbia Tpke, East Greenbush, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.59834,-73.71103" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hannaford Markets - Wynantskill</span><small>50 kW · 1 stall</small></div>
-<div class="a">40 Main Ave, Wynantskill, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.6975,-73.64849" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Advcharger Fast Charger</span><small>62 kW · 1 stall</small></div>
-<div class="a">440 Plainview Rd, Hicksville, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 CVS ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77002,-73.50268" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Advcharger Fast</span><small>40 kW · 1 stall</small></div>
-<div class="a">440 Plainview Rd, Hicksville, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 CVS ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77001,-73.50262" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gravity Charging Center</span><small>500 kW · 24 stalls</small></div>
-<div class="a">401-471 W 42nd St, New York, NY</div><div class="host">Gravity Charging Center</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75878,-73.99293" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Basil Ford</span><small>240 kW · 4 stalls</small></div>
-<div class="a">1540 Walden Ave, Cheektowaga, NY</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🥞 IHOP ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🐔 Chick-fil-A ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.90759,-78.77793" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>33rd Street</span><small>200 kW · 12 stalls</small></div>
-<div class="a">32-16 36th Ave, Long Island, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>☕ Starbucks ≥5 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>🥖 Panera Bread ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75587,-73.92848" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Horseheads</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1020 Center Street, Horseheads, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>👑 Burger King ≥6 min</span><span>⛽ Speedway ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.15816,-76.8266" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Glen Cove Shopping Center</span><small>180 kW · 8 stalls</small></div>
-<div class="a">181 Forest Ave, Glen Cove, NY</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>💊 CVS ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.874,-73.62005" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Rensselaer</span><small>350 kW · 6 stalls</small></div>
-<div class="a">621 3rd Ave Ext, Rensselaer, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🎯 Target ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.64567,-73.70022" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>DePaula Ford</span><small>180 kW · 4 stalls</small></div>
-<div class="a">799 Central Ave, Albany, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍗 Wingstop ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.67977,-73.78939" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Quaker Crossing</span><small>150 kW · 4 stalls</small></div>
-<div class="a">3420 Amelia Dr, Orchard Park, NY</div><div class="host">Vialynk</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 CVS ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🎯 Target ≥3 min</span><span>🐦 Red Robin ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.79033,-78.78267" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>ChargeSmart EV - Potsdam</span><small>320 kW · 8 stalls</small></div>
-<div class="a">200 Market St, Potsdam, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🔧 Lowe&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.68477,-74.98531" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Aldi TUL 46 Saranac Lake</span><small>150 kW · 8 stalls</small></div>
-<div class="a">587 Lake Flower Ave, Saranac Lake, NY</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🛒 Aldi ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.31265,-74.11557" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>ChargeSmart EV - Saranac Lake</span><small>320 kW · 8 stalls</small></div>
-<div class="a">622 Lake Flower Avenue, Saranac Lake, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.31028,-74.11584" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Target Latham #T1915</span><small>350 kW · 6 stalls</small></div>
-<div class="a">675 Troy Schenectady Rd, Latham, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🎯 Target ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>🚗 Sonic ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.75569,-73.77167" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Glendale, NY - Cooper Avenue - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
-<div class="a">8000 Cooper Avenue, Glendale, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌶️ Chili&#x27;s ≥3 min</span><span>💊 CVS ≥8 min</span><span>🍔 Five Guys ≥9 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.70799,-73.86692" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>New York, NY - E 47th Street - Tesla Supercharger</span><small>150 kW · 4 stalls</small></div>
-<div class="a">212 East 47th Street, New York, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75323,-73.97158" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Della Honda of Plattsburgh</span><small>120 kW · 2 stalls</small></div>
-<div class="a">702 State Rte 3, Plattsburgh, NY</div><div class="host">Quickcharge</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.69591,-73.51573" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Courtyard Syracuse Downtown At Armory Square</span><small>100 kW · 2 stalls</small></div>
-<div class="a">300 W Fayette St, Syracuse, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍦 Ice cream shop ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.04889,-76.15699" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Nac Sub Transit Exteriorlevel</span><small>24 kW · 1 stall</small></div>
-<div class="a">6374 Transit Road, Depew, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>⛽ Speedway ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.93177,-78.69769" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>New York, NY - 59 Allen Street - Tesla Supercharger</span><small>75 kW · 4 stalls</small></div>
-<div class="a">59 Allen Street, New York, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍗 Popeyes ≥4 min</span><span>☕ Starbucks ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>💊 CVS ≥6 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.71712,-73.99199" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Shopcore Skyview Mall (Flushing, NY)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">40-24 College Point Blvd, Suite B215, Flushing, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🎯 Target ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🔨 Home Depot ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75619,-73.8363" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8484 Allegheny Road, Pembroke, NY</div><div class="host">EVgo</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>⛽ Flying J ≥1 min</span><span>⛽ TA Travel Center ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.0008,-78.40692" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>North New Hyde Park, NY - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">2056 Hillside Ave., North New Hyde Park, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💊 CVS ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.75082,-73.67457" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Healey Chevrolet Inc.</span><small>180 kW · 6 stalls</small></div>
-<div class="a">1960 South Rd, Crown Heights, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>💻 Best Buy ≥4 min</span><span>🌶️ Chili&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🥖 Panera Bread ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.62382,-73.91665" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Aaa Westcentral DC Fast Charger</span><small>62 kW · 1 stall</small></div>
-<div class="a">100 International Dr, Amherst, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🛒 Wegmans ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.97797,-78.7313" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Site Centers The Hub (Hempstead, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">132-178 Fulton Ave, Hempstead, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍩 Dunkin&#x27; ≥7 min</span><span>🍗 Wingstop ≥7 min</span><span>🛒 Aldi ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.70601,-73.63095" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Binghamton</span><small>350 kW · 4 stalls</small></div>
-<div class="a">33 South Washington, Binghamton, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>💊 Walgreens ≥4 min</span><span>💊 CVS ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.09037,-75.91355" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Plattsburgh</span><small>350 kW · 4 stalls</small></div>
-<div class="a">25 Consumer Square, Plattsburgh, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🏪 Sam&#x27;s Club ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.69408,-73.48529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>DES - Delancey and Essex Municipal Parking Garage</span><small>150 kW · 4 stalls</small></div>
-<div class="a">107 Essex Street, New York, NY</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Shake Shack ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.71932,-73.9882" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Syracuse North</span><small>350 kW · 3 stalls</small></div>
-<div class="a">414 7th N St, Syracuse, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍳 Denny&#x27;s ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.09225,-76.16967" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Sunnyside Municipal</span><small>350 kW · 6 stalls</small></div>
-<div class="a">43-10 Queens Blvd, Sunnyside, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>💊 CVS ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.74345,-73.921" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Denny&#x27;s Red Roof Inn (Herkimer, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">100 Marginal Rd., Herkimer, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🍗 KFC ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01885,-74.99188" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Days Inn - Syracuse</span><small>240 kW · 8 stalls</small></div>
-<div class="a">5552 Bartel Circle, Brewerton, NY</div><div class="host">Chargesmart Ev</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>⛽ Circle K ≥1 min</span><span>🏪 Dollar General ≥3 min</span><span>🍕 Little Caesars ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🍩 Dunkin&#x27; ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.23249,-76.13344" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Grandview Hotel Olympic</span><small>200 kW · 1 stall</small></div>
-<div class="a">101 Olympic Dr, Lake Placid, NY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>☕ Starbucks ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.2847,-73.98684" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Holiday Inn Express Ithaca</span><small>180 kW · 8 stalls</small></div>
-<div class="a">371 Elmira Rd, Ithaca, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>⛽ Speedway ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍗 KFC ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.42125,-76.51761" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>HondoGO - Highland, NY</span><small>200 kW · 4 stalls</small></div>
-<div class="a">3579 Rte 9W, Highland, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>👑 Burger King ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>⛽ Speedway ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.71358,-73.96419" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>340 Rutgers St</span><small>240 kW · 4 stalls</small></div>
-<div class="a">340 Rutgers St, Rochester, NY</div><div class="host">Vialynk</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>⛽ Speedway ≥1 min</span><span>🏪 Dollar General ≥6 min</span><span>🍕 Little Caesars ≥7 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.14277,-77.5884" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Roslyn Heights, NY - Willis Avenue - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">373 Willis Avenue, Roslyn Heights, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.77954,-73.65105" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Hancock</span><small>350 kW · 8 stalls</small></div>
-<div class="a">661 W. Main Street, Hancock, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🏪 Dollar General ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.95615,-75.29439" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Clifton Park, NY - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
-<div class="a">22 Clifton Country Rd, Clifton Park, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.86045,-73.7786" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>BHU - Bensonhurst#1 Municipal Parking Field</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1763 86th St, Brooklyn, NY</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>💊 CVS ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍦 Ice cream shop ≥4 min</span><span>☕ Starbucks ≥6 min</span><span>🌮 Taco Bell ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.60806,-74.00293" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>QBO - Queens Borough Hall Municipal Parking Garage</span><small>75 kW · 3 stalls</small></div>
-<div class="a">80-25 126th St, Kew Gardens, NY</div><div class="host">EV Connect</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>☕ Starbucks ≥6 min</span><span>💊 CVS ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.71454,-73.82616" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hancock, NY - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">661 West Main Street, Hancock, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>🏪 Dollar General ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Subway&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.95581,-75.29446" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">HondoGo - Halfmoon, NY</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">1707 US-9, Clifton Park, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>👑 Burger King <i>3 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🪵 Cracker Barrel <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.86469,-73.76849" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Parish Mirabito</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2877 E Main Street, Parish, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🏪 Dollar General <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.40452,-76.11936" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">995 US Route 9, Castleton-On-Hudson, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49791,-73.67476" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1128 Duanesburg Road, Rotterdam, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.78142,-74.02882" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Friendship</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2 Pennsylvania Ave, Friendship, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.20258,-78.14575" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Goldens Bridge</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">22 NY-138, Goldens Bridge, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.29401,-73.6748" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Aldi Baldwinsville</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">2254 Downer St, Baldwinsville, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.15133,-76.35087" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Courtyard by Marriott Binghamton</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>EV Gateway</span></div>
+<div class="a">3801 Vestal Pkwy E, Vestal, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.09693,-75.98038" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Inwood, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">603 Burnside Ave, Inwood, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 CVS <i>3 min</i></span><span>🎯 Target <i>6 min</i></span><span>🥖 Panera Bread <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.62317,-73.74263" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Niagara Falls</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">7200 Niagara Falls Blvd, Niagara Falls, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.08827,-78.98118" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Quicklees 23 Q Monroe Ave</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1950 Monroe Avenue, Rochester, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>💊 CVS <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.12605,-77.56399" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2586 (Cheektowaga, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2500 Walden Ave, Cheektowaga, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>🍗 Popeyes <i>9 min</i></span><span>🚗 Sonic <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.90943,-78.74468" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Tully Preble</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">7073 Route 281, Tully, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.74797,-76.13435" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Islandia, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1750 Veterans Hwy, Islandia, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🛒 Walmart <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.80485,-73.18014" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Hannaford Supermarket</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">900 Central Ave, Albany, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.68066,-73.79098" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Hannaford Plaza - East Greenbush</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">598 Columbia Tpke, East Greenbush, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.59834,-73.71103" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Hannaford Markets - Wynantskill</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">40 Main Ave, Wynantskill, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.6975,-73.64849" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Advcharger Fast Charger</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">440 Plainview Rd, Hicksville, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>💊 CVS <i>9 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.77002,-73.50268" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Advcharger Fast</div>
+<div class="sp"><s class="spd slow">40 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">440 Plainview Rd, Hicksville, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>💊 CVS <i>9 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.77001,-73.50262" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Gravity Charging Center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Gravity Charging Center</div>
+<div class="sp"><s class="spd ultra">500 kW</s><b>24 stalls</b><span>Gravity Charging Center</span></div>
+<div class="a">401-471 W 42nd St, New York, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75878,-73.99293" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Basil Ford</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">1540 Walden Ave, Cheektowaga, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🐔 Chick-fil-A <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.90759,-78.77793" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">33rd Street</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>12 stalls</b><span>EVgo</span></div>
+<div class="a">32-16 36th Ave, Long Island, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>6 min</i></span><span>🥖 Panera Bread <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75587,-73.92848" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Horseheads</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1020 Center Street, Horseheads, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>👑 Burger King <i>6 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.15816,-76.8266" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Glen Cove Shopping Center</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">181 Forest Ave, Glen Cove, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>💊 CVS <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.874,-73.62005" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Rensselaer</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">621 3rd Ave Ext, Rensselaer, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🎯 Target <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.64567,-73.70022" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">DePaula Ford</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">799 Central Ave, Albany, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.67977,-73.78939" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Quaker Crossing</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">3420 Amelia Dr, Orchard Park, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>🐦 Red Robin <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.79033,-78.78267" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">ChargeSmart EV - Potsdam</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>8 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">200 Market St, Potsdam, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.68477,-74.98531" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Aldi TUL 46 Saranac Lake</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">587 Lake Flower Ave, Saranac Lake, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.31265,-74.11557" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">ChargeSmart EV - Saranac Lake</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>8 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">622 Lake Flower Avenue, Saranac Lake, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.31028,-74.11584" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Target Latham #T1915</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">675 Troy Schenectady Rd, Latham, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>🚗 Sonic <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.75569,-73.77167" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Glendale, NY - Cooper Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8000 Cooper Avenue, Glendale, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>3 min</i></span><span>💊 CVS <i>8 min</i></span><span>🍔 Five Guys <i>9 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.70799,-73.86692" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">New York, NY - E 47th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">212 East 47th Street, New York, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75323,-73.97158" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Quickcharge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Della Honda of Plattsburgh</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Quickcharge</span></div>
+<div class="a">702 State Rte 3, Plattsburgh, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.69591,-73.51573" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Courtyard Syracuse Downtown At Armory Square</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">300 W Fayette St, Syracuse, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.04889,-76.15699" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Nac Sub Transit Exteriorlevel</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6374 Transit Road, Depew, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>⛽ Speedway <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.93177,-78.69769" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">New York, NY - 59 Allen Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">59 Allen Street, New York, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>💊 CVS <i>6 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.71712,-73.99199" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Shopcore Skyview Mall (Flushing, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">40-24 College Point Blvd, Suite B215, Flushing, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75619,-73.8363" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">8484 Allegheny Road, Pembroke, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>⛽ TA Travel Center <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.0008,-78.40692" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North New Hyde Park, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2056 Hillside Ave., North New Hyde Park, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💊 CVS <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.75082,-73.67457" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Healey Chevrolet Inc.</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>6 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">1960 South Rd, Crown Heights, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🌶️ Chili&#x27;s <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🥖 Panera Bread <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.62382,-73.91665" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Aaa Westcentral DC Fast Charger</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">100 International Dr, Amherst, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🛒 Wegmans <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.97797,-78.7313" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Site Centers The Hub (Hempstead, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">132-178 Fulton Ave, Hempstead, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🔨 Home Depot <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span><span>🍗 Wingstop <i>7 min</i></span><span>🛒 Aldi <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.70601,-73.63095" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Binghamton</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">33 South Washington, Binghamton, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>💊 CVS <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.09037,-75.91355" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Plattsburgh</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">25 Consumer Square, Plattsburgh, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.69408,-73.48529" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">DES - Delancey and Essex Municipal Parking Garage</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">107 Essex Street, New York, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍔 Shake Shack <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.71932,-73.9882" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Syracuse North</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">414 7th N St, Syracuse, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍳 Denny&#x27;s <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.09225,-76.16967" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Sunnyside Municipal</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">43-10 Queens Blvd, Sunnyside, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.74345,-73.921" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Denny&#x27;s Red Roof Inn (Herkimer, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">100 Marginal Rd., Herkimer, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🍗 KFC <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.01885,-74.99188" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Chargesmart Ev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Days Inn - Syracuse</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>8 stalls</b><span>Chargesmart Ev</span></div>
+<div class="a">5552 Bartel Circle, Brewerton, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍕 Little Caesars <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.23249,-76.13344" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Grandview Hotel Olympic</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">101 Olympic Dr, Lake Placid, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>☕ Starbucks <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.2847,-73.98684" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Holiday Inn Express Ithaca</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>EV Gateway</span></div>
+<div class="a">371 Elmira Rd, Ithaca, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍗 KFC <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.42125,-76.51761" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">HondoGO - Highland, NY</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EV Gateway</span></div>
+<div class="a">3579 Rte 9W, Highland, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.71358,-73.96419" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">340 Rutgers St</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">340 Rutgers St, Rochester, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🏪 Dollar General <i>6 min</i></span><span>🍕 Little Caesars <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.14277,-77.5884" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Roslyn Heights, NY - Willis Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">373 Willis Avenue, Roslyn Heights, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.77954,-73.65105" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Hancock</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">661 W. Main Street, Hancock, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.95615,-75.29439" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Clifton Park, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">22 Clifton Country Rd, Clifton Park, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.86045,-73.7786" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">BHU - Bensonhurst#1 Municipal Parking Field</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">1763 86th St, Brooklyn, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.60806,-74.00293" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">QBO - Queens Borough Hall Municipal Parking Garage</div>
+<div class="sp"><s class="spd std">75 kW</s><b>3 stalls</b><span>EV Connect</span></div>
+<div class="a">80-25 126th St, Kew Gardens, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>💊 CVS <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.71454,-73.82616" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hancock, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">661 West Main Street, Hancock, NY</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.95581,-75.29446" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Subway&amp;state=NY">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 151. <a href="../../../?chain=Subway&amp;state=NY">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in New York</h2><div class="chips"><a href="../../dunkin/ny/">🍩 Dunkin&#x27; <small>246</small></a><a href="../../mcdonald-s/ny/">🍟 McDonald&#x27;s <small>196</small></a><a href="../../starbucks/ny/">☕ Starbucks <small>173</small></a><a href="../../ice-cream-shop/ny/">🍦 Ice cream shop <small>155</small></a><a href="../../cvs/ny/">💊 CVS <small>107</small></a><a href="../../burger-king/ny/">👑 Burger King <small>105</small></a><a href="../../taco-bell/ny/">🌮 Taco Bell <small>100</small></a><a href="../../aldi/ny/">🛒 Aldi <small>93</small></a><a href="../../chipotle/ny/">🌯 Chipotle <small>90</small></a><a href="../../walgreens/ny/">💊 Walgreens <small>89</small></a><a href="../../panera-bread/ny/">🥖 Panera Bread <small>86</small></a><a href="../../wendy-s/ny/">🍔 Wendy&#x27;s <small>86</small></a><a href="../../speedway/ny/">⛽ Speedway <small>81</small></a><a href="../../popeyes/ny/">🍗 Popeyes <small>78</small></a><a href="../../home-depot/ny/">🔨 Home Depot <small>76</small></a><a href="../../walmart/ny/">🛒 Walmart <small>74</small></a><a href="../../target/ny/">🎯 Target <small>71</small></a><a href="../../applebee-s/ny/">🍎 Applebee&#x27;s <small>66</small></a><a href="../../five-guys/ny/">🍔 Five Guys <small>63</small></a><a href="../../kfc/ny/">🍗 KFC <small>48</small></a><a href="../../lowe-s/ny/">🔧 Lowe&#x27;s <small>43</small></a><a href="../../chick-fil-a/ny/">🐔 Chick-fil-A <small>40</small></a><a href="../../dollar-general/ny/">🏪 Dollar General <small>39</small></a><a href="../../arby-s/ny/">🥩 Arby&#x27;s <small>36</small></a><a href="../../tractor-supply/ny/">🚜 Tractor Supply <small>35</small></a><a href="../../best-buy/ny/">💻 Best Buy <small>33</small></a><a href="../../buffalo-wild-wings/ny/">🦬 Buffalo Wild Wings <small>32</small></a><a href="../../domino-s/ny/">🍕 Domino&#x27;s <small>32</small></a><a href="../../denny-s/ny/">🍳 Denny&#x27;s <small>31</small></a><a href="../../shake-shack/ny/">🍔 Shake Shack <small>31</small></a><a href="../../chili-s/ny/">🌶️ Chili&#x27;s <small>31</small></a><a href="../../olive-garden/ny/">🍝 Olive Garden <small>29</small></a><a href="../../sonic/ny/">🚗 Sonic <small>27</small></a><a href="../../jersey-mike-s/ny/">🥪 Jersey Mike&#x27;s <small>23</small></a><a href="../../ihop/ny/">🥞 IHOP <small>22</small></a><a href="../../little-caesars/ny/">🍕 Little Caesars <small>22</small></a><a href="../../texas-roadhouse/ny/">🤠 Texas Roadhouse <small>21</small></a><a href="../../pizza-hut/ny/">🍕 Pizza Hut <small>20</small></a><a href="../../costco/ny/">📦 Costco <small>19</small></a><a href="../../whole-foods/ny/">🥬 Whole Foods <small>19</small></a><a href="../../trader-joe-s/ny/">🛍️ Trader Joe&#x27;s <small>19</small></a><a href="../../wingstop/ny/">🍗 Wingstop <small>16</small></a><a href="../../wegmans/ny/">🛒 Wegmans <small>15</small></a><a href="../../red-robin/ny/">🐦 Red Robin <small>14</small></a><a href="../../sam-s-club/ny/">🏪 Sam&#x27;s Club <small>13</small></a><a href="../../cracker-barrel/ny/">🪵 Cracker Barrel <small>9</small></a><a href="../../panda-express/ny/">🐼 Panda Express <small>9</small></a><a href="../../raising-cane-s/ny/">🐕 Raising Cane&#x27;s <small>7</small></a><a href="../../dairy-queen/ny/">🍦 Dairy Queen <small>6</small></a><a href="../../firehouse-subs/ny/">🚒 Firehouse Subs <small>5</small></a><a href="../../love-s/ny/">⛽ Love&#x27;s <small>5</small></a><a href="../../ta-travel-center/ny/">⛽ TA Travel Center <small>5</small></a><a href="../../pilot/ny/">⛽ Pilot <small>4</small></a><a href="../../circle-k/ny/">⛽ Circle K <small>3</small></a><a href="../../flying-j/ny/">⛽ Flying J <small>2</small></a><a href="../../hardee-s/ny/">⭐ Hardee&#x27;s <small>1</small></a><a href="../../ikea/ny/">🪑 IKEA <small>1</small></a><a href="../../krispy-kreme/ny/">🍩 Krispy Kreme <small>1</small></a></div>
 <h2>Subway in other states</h2><div class="chips"><a href="../">All states</a></div>

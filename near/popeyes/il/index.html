@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>67 DC fast chargers</b> in Illinois have a Popeyes within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Popeyes&amp;state=IL">Open on the map →</a>
 <p class="stats">Of the 67 fast chargers with a Popeyes nearby in Illinois: The typical stop here delivers <b>180 kW</b>, and 43 of them do 150 kW or more; <b>11</b> are close enough that the Popeyes is a two-minute walk or less; <b>58</b> are listed as open 24 hours. The fastest is <b>Gigahub ORD Mannheim Road, Des Plaines, IL</b> in Des Plaines at 400 kW; the closest walk is 1 min at <b>Des Plaines, IL - Tesla Supercharger</b>. Most are on Tesla Supercharger (13), EVgo (10), Electrify America (8).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Des Plaines, IL - Tesla Supercharger</span><small>325 kW · 52 stalls</small></div>
-<div class="a">3041 Orchard Pl, Des Plaines, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🌭 Portillo&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.99905,-87.88393" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Elgin, IL - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">815 S Randall Rd, Elgin, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 Wingstop ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🌭 Portillo&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.0125,-88.33564" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gigahub ORD Mannheim Road, Des Plaines, IL</span><small>400 kW · 40 stalls</small></div>
-<div class="a">2991 Mannheim Road, Des Plaines, IL</div><div class="host">bp pulse</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌭 Portillo&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.00002,-87.88324" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Buddy Bear - 1045 W. 95th St.</span><small>240 kW · 2 stalls</small></div>
-<div class="a">1045 W 95th St, Chicago, IL</div><div class="host">Noodoe</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.72108,-87.64998" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mcgrath Honda</span><small>62 kW · 1 stall</small></div>
-<div class="a">6601 W Grand Ave, Chicago, IL</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🐼 Panda Express ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.92351,-87.79045" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Holiday Inn Chicago O&#x27;Hare</span><small>240 kW · 8 stalls</small></div>
-<div class="a">6600 Mannhem Rd Bld 2, Rosemont, IL</div><div class="host">Nayax Energy</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🌭 Portillo&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.99967,-87.88559" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Hyundai Country Gerald Hy</span><small>62 kW · 1 stall</small></div>
-<div class="a">5631 LaGrange Rd, Countryside, IL</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.78736,-87.86756" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Brookhaven Plaza</span><small>180 kW · 12 stalls</small></div>
-<div class="a">7532 South Cass Avenue, Darien, IL</div><div class="host">Blink</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🌮 Taco Bell ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.74936,-87.97481" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Americas Best Value Inn Champaign</span><small>90 kW · 4 stalls</small></div>
-<div class="a">1019 W Bloomington Rd, Champaign, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>⛽ Circle K ≥3 min</span><span>🔨 Home Depot ≥6 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>🏪 Dollar General ≥7 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.13304,-88.26196" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4610 Broadway, Mount Vernon, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>⛽ Pilot ≥1 min</span><span>⛽ TA Travel Center ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.31234,-88.96091" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Bradley, IL - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">990 N Kinzie Ave, Bradley, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🛒 Meijer ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🤠 Texas Roadhouse ≥3 min</span><span>🥪 Subway ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.15974,-87.84899" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Thorntons E Rollins Road, Round Lake Beach, IL</span><small>150 kW · 6 stalls</small></div>
-<div class="a">180 E Rollins Road, Round Lake Beach, IL</div><div class="host">bp pulse</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🐼 Panda Express ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.37926,-88.07879" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Commerce Bank - Shiloh</span><small>50 kW · 1 stall</small></div>
-<div class="a">4400 Green Mount Crossing Dr, Shiloh, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.57211,-89.92806" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer 301 (Bradley, IL)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">990 N Kinzie Ave, Bradley, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🛒 Meijer ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🐼 Panda Express ≥4 min</span><span>🤠 Texas Roadhouse ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.15903,-87.84901" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Community Plaza</span><small>160 kW · 4 stalls</small></div>
-<div class="a">210 S Main St, East Peoria, IL</div><div class="host">Red E</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🛒 Kroger ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>📦 Costco ≥5 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.66525,-89.58144" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Metropolitan Square</span><small>350 kW · 4 stalls</small></div>
-<div class="a">518 Metropolitan Way, Des Plaines, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍗 Wingstop ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.04325,-87.8849" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>McHenry, IL Rechargery Relay @ Casey&#x27;s - N Richmond Rd</span><small>400 kW · 6 stalls</small></div>
-<div class="a">1901 N Richmond Rd, McHenry, IL</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🛒 Meijer ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.35524,-88.26772" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Centennial Lanes 2.0 EV Charging</span><small>180 kW · 2 stalls</small></div>
-<div class="a">16050 Centennial Circle, Tinley Park, IL</div><div class="host">Noodoe</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🍕 Little Caesars ≥4 min</span><span>🍗 Wingstop ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>☕ Starbucks ≥5 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.59917,-87.79081" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Shiloh, IL - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">4000 Green Mt Crossing Dr, Shiloh, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🍕 Little Caesars ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.57251,-89.92752" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Hanover Park</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1470 Irving Park Rd, Hanover Park, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>💊 Walgreens ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>👑 Burger King ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🌮 Taco Bell ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.00535,-88.14339" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Chase Bank - 4223 N Harlem Ave</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4223 N Harlem Ave, Norridge, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🌯 Chipotle ≥1 min</span><span>🥖 Panera Bread ≥1 min</span><span>🐦 Red Robin ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.95698,-87.80683" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1256 (Joliet, IL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2424 W Jefferson St, Joliet, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>☕ Starbucks ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.52061,-88.14111" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Ole #1 Dcfast Hog</span><small>24 kW · 1 stall</small></div>
-<div class="a">2595 Ogden Ave, Lisle, IL</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍕 Domino&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.7968,-88.10194" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicago, IL - O&#x27;Hare - Tesla Supercharger</span><small>150 kW · 14 stalls</small></div>
-<div class="a">Building 840 O&#x27;Hare Int&#x27;l Airport, Chicago, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🌭 Portillo&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>🍔 Five Guys ≥6 min</span><span>🥖 Panera Bread ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.99867,-87.88839" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 224 (MT. Vernon, IL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">110 Davidson Ave, Mount Vernon, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>⛽ Flying J ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>⛽ Pilot ≥5 min</span><span>⛽ Circle K ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.31026,-88.95806" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Nameoki Commons</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3401 Nameoki Rd, Granite City, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>👑 Burger King ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.72675,-90.12454" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Jewel-Osco</span><small>50 kW · 1 stall</small></div>
-<div class="a">3400 N Western Ave, Chicago, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>💊 Walgreens ≥1 min</span><span>🌯 Chipotle ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>⛽ Circle K ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.94322,-87.68926" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Thorntons Harlem Avenue, Summit, IL</span><small>150 kW · 4 stalls</small></div>
-<div class="a">5900 S Harlem Avenue, Summit, IL</div><div class="host">bp pulse</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🍕 Pizza Hut ≥2 min</span><span>⛽ Speedway ≥3 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🍕 Little Caesars ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.78397,-87.80183" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Comfort Inn</span><small>90 kW · 4 stalls</small></div>
-<div class="a">308 S Lincolnway St, North Aurora, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🍳 Denny&#x27;s ≥5 min</span><span>🍩 Dunkin&#x27; ≥6 min</span><span>🍦 Ice cream shop ≥6 min</span><span>🍦 Culver&#x27;s ≥7 min</span><span>⛽ Speedway ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.79317,-88.32663" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Thorntons Collins Street, Joliet, IL</span><small>150 kW · 6 stalls</small></div>
-<div class="a">400 Collins Street, Joliet, IL</div><div class="host">bp pulse</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>💊 Walgreens ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.53236,-88.07194" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Mt. Vernon, IL - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">222 Potomac Blvd., Mt. Vernon, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🪵 Cracker Barrel ≥4 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.31631,-88.95591" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Culvers Bridgeview IL</span><small>360 kW · 6 stalls</small></div>
-<div class="a">9229 South Harlem Ave, Bridgeview, IL</div><div class="host">Red E</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>🍦 Culver&#x27;s ≥1 min</span><span>🍗 KFC ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.72367,-87.7982" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Super 8 by Wyndham</span><small>90 kW · 4 stalls</small></div>
-<div class="a">2 Gateway Dr, Collinsville, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>🥖 Panera Bread ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🍕 Pizza Hut ≥7 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.68282,-90.01567" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Champaign Ford City</span><small>120 kW · 4 stalls</small></div>
-<div class="a">701 W Marketview Dr, Champaign, IL</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>🥪 Subway ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🍔 Five Guys ≥3 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.13659,-88.25559" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Springfield, IL - South Dirksen Parkway - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">1501 S Dirksen Parkway, Springfield, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>👑 Burger King ≥1 min</span><span>🏪 Dollar General ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.78727,-89.60704" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Hanover Park, IL Rechargery Relay - Barrington Rd</span><small>400 kW · 6 stalls</small></div>
-<div class="a">7448 Barrington Rd, Hanover Park, IL</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥6 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍗 KFC ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.00659,-88.14531" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Bettenhausen CJDR Lockport IL</span><small>180 kW · 2 stalls</small></div>
-<div class="a">16471 W 159th St, Lockport, IL</div><div class="host">Red E</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🥖 Panera Bread ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.59575,-88.02007" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Skokie, IL - Tesla Supercharger</span><small>75 kW · 20 stalls</small></div>
-<div class="a">5507 Touhy Avenue, Skokie, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🐦 Red Robin ≥1 min</span><span>💻 Best Buy ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.00904,-87.7634" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Kohl&#x27;s 1396 - Mt. Vernon</span><small>350 kW · 6 stalls</small></div>
-<div class="a">141 Davidson Ave., Mount Vernon, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🛒 Aldi ≥1 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>⛽ Flying J ≥5 min</span><span>⛽ Pilot ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.30856,-88.96123" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Crossroads Centre</span><small>350 kW · 4 stalls</small></div>
-<div class="a">10850 Lincoln Trl, Fairview Heights, IL</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>☕ Starbucks ≥1 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🌯 Chipotle ≥4 min</span><span>💊 Walgreens ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.59196,-89.98895" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Zeigler Ford of North Riverside</span><small>120 kW · 6 stalls</small></div>
-<div class="a">2100 S Harlem Ave, North Riverside, IL</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🛒 Aldi ≥2 min</span><span>🍔 Five Guys ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.85229,-87.80426" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T2078 (Chicago, IL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1940 W 33rd Street, Chicago, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>💊 CVS ≥1 min</span><span>🎯 Target ≥1 min</span><span>💊 Walgreens ≥7 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>👑 Burger King ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.83555,-87.67318" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Costco Lincoln Park (Chicago, IL)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">2746 N Clybourn Ave, Chicago, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>📦 Costco ≥1 min</span><span>🛒 Aldi ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🥪 Subway ≥6 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.93003,-87.6761" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Dogwood Social House O&#x27;Fallon IL</span><small>90 kW · 4 stalls</small></div>
-<div class="a">1206 Central Park Dr, O&#x27;Fallon, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍔 Five Guys ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.57601,-89.93257" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicago, IL - North Columbus Drive - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
-<div class="a">225 North Columbus Drive, Chicago, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.88667,-87.61968" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>EV Phillips</span><small>62 kW · 1 stall</small></div>
-<div class="a">1400 Locke Dr, Bourbonnais, IL</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🥞 IHOP ≥4 min</span><span>🍳 Denny&#x27;s ≥6 min</span><span>🥪 Subway ≥6 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.16641,-87.84876" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Wrd Kia Joliet Abb</span><small>24 kW · 1 stall</small></div>
-<div class="a">2525 W Jefferson St, Joliet, IL</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>🛒 Aldi ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🐼 Panda Express ≥4 min</span><span>🍗 Wingstop ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.52263,-88.14581" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>NIU Visitor Parking Lot</span><small>60 kW · 3 stalls</small></div>
-<div class="a">121 Carroll Ave, DeKalb, IL</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>👑 Burger King ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>🥪 Subway ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.93309,-88.76744" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Village of Bensenville - Village Hall</span><small>240 kW · 4 stalls</small></div>
-<div class="a">12 S Center St # 22, Bensenville, IL</div><div class="host">Evxy</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>👑 Burger King ≥7 min</span><span>🥪 Subway ≥7 min</span><span>💊 Walgreens ≥7 min</span><span>🍕 Little Caesars ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.95642,-87.94238" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicago, IL - South Canal Street - Tesla Supercharger</span><small>75 kW · 14 stalls</small></div>
-<div class="a">1100 South Canal Street, Chicago, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🌭 Portillo&#x27;s ≥2 min</span><span>🥖 Panera Bread ≥2 min</span><span>🥬 Whole Foods ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.86912,-87.64001" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>433 W Van Buren St</span><small>120 kW · 4 stalls</small></div>
-<div class="a">433 W Van Buren St, Chicago, IL</div><div class="host">Evium</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥8 min</span><span>💊 Walgreens ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>☕ Peet&#x27;s Coffee ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.87665,-87.63869" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>HomeTowne Studios &amp; Conference Center Chicago – N Aurora/ Na</span><small>90 kW · 4 stalls</small></div>
-<div class="a">201 Smoke Tree Ln, North Aurora, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🍳 Denny&#x27;s ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>🍦 Ice cream shop ≥10 min</span><span>🍦 Culver&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.79477,-88.329" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>801 W Dundee Rd</span><small>120 kW · 4 stalls</small></div>
-<div class="a">801 W Dundee Rd, Arlington Heights, IL</div><div class="host">EV Connect</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🌭 Portillo&#x27;s ≥2 min</span><span>💊 Walgreens ≥5 min</span><span>🛒 Aldi ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.13834,-87.9916" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Fairview Liquor</span><small>90 kW · 4 stalls</small></div>
-<div class="a">5329 N Illinois St, Fairview Heights, IL</div><div class="host">Universal</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>🍩 Krispy Kreme ≥6 min</span><span>🥖 Panera Bread ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.58119,-89.98519" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>KNB Motors</span><small>240 kW · 4 stalls</small></div>
-<div class="a">401 w north ave, Northlake, IL</div><div class="host">Noodoe</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>🍦 Ice cream shop ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.90697,-87.88701" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Muller Honda of Gurnee - Series DCFC</span><small>40 kW · 3 stalls</small></div>
-<div class="a">7000 Grand Avenue, Gurnee, IL</div><div class="host">Blink</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>☕ Starbucks ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🐼 Panda Express ≥4 min</span><span>🔨 Home Depot ≥9 min</span><span>🏪 Sam&#x27;s Club ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.38701,-87.97567" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Thorntons N Farnsworth Avenue, Aurora, IL</span><small>150 kW · 4 stalls</small></div>
-<div class="a">2609 N Farnsworth Avenue, Aurora, IL</div><div class="host">bp pulse</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>⛽ Circle K ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🌯 Chipotle ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.80692,-88.28044" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Chicago, IL - Elston Avenue - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2656 North Elston Avenue, Chicago, IL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥10 min</span><span>🎯 Target ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>👑 Burger King ≥4 min</span><span>🥪 Subway ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.92777,-87.68581" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Target T0843 (Hodgkins, IL)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">9250 Joliet Rd, Hodgkins, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥10 min</span><span>🎯 Target ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.78152,-87.86108" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Raymond Chevrolet Kia</span><small>60 kW · 2 stalls</small></div>
-<div class="a">235 East Rt 173, Antioch, IL</div><div class="host">Blink</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥10 min</span><span>🍦 Culver&#x27;s ≥8 min</span><span>🛒 Walmart ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.467,-88.07366" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Des Plaines, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>52 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3041 Orchard Pl, Des Plaines, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🌭 Portillo&#x27;s <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.99905,-87.88393" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Elgin, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">815 S Randall Rd, Elgin, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍗 Wingstop <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🌭 Portillo&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.0125,-88.33564" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Gigahub ORD Mannheim Road, Des Plaines, IL</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>40 stalls</b><span>bp pulse</span></div>
+<div class="a">2991 Mannheim Road, Des Plaines, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌭 Portillo&#x27;s <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.00002,-87.88324" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Noodoe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Buddy Bear - 1045 W. 95th St.</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>2 stalls</b><span>Noodoe</span></div>
+<div class="a">1045 W 95th St, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.72108,-87.64998" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mcgrath Honda</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">6601 W Grand Ave, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.92351,-87.79045" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Nayax Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Holiday Inn Chicago O&#x27;Hare</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>8 stalls</b><span>Nayax Energy</span></div>
+<div class="a">6600 Mannhem Rd Bld 2, Rosemont, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🌭 Portillo&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.99967,-87.88559" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hyundai Country Gerald Hy</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5631 LaGrange Rd, Countryside, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.78736,-87.86756" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Brookhaven Plaza</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>12 stalls</b><span>Blink</span></div>
+<div class="a">7532 South Cass Avenue, Darien, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.74936,-87.97481" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Americas Best Value Inn Champaign</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">1019 W Bloomington Rd, Champaign, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>⛽ Circle K <i>3 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.13304,-88.26196" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4610 Broadway, Mount Vernon, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>⛽ TA Travel Center <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.31234,-88.96091" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bradley, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">990 N Kinzie Ave, Bradley, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🤠 Texas Roadhouse <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.15974,-87.84899" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Thorntons E Rollins Road, Round Lake Beach, IL</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>bp pulse</span></div>
+<div class="a">180 E Rollins Road, Round Lake Beach, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>🐼 Panda Express <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.37926,-88.07879" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Commerce Bank - Shiloh</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">4400 Green Mount Crossing Dr, Shiloh, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.57211,-89.92806" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Meijer 301 (Bradley, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">990 N Kinzie Ave, Bradley, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🤠 Texas Roadhouse <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.15903,-87.84901" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Community Plaza</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">210 S Main St, East Peoria, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🛒 Kroger <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>3 min</i></span><span>📦 Costco <i>5 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.66525,-89.58144" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Metropolitan Square</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">518 Metropolitan Way, Des Plaines, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍗 Wingstop <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.04325,-87.8849" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">McHenry, IL Rechargery Relay @ Casey&#x27;s - N Richmond Rd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">1901 N Richmond Rd, McHenry, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🛒 Meijer <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.35524,-88.26772" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Noodoe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Centennial Lanes 2.0 EV Charging</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Noodoe</span></div>
+<div class="a">16050 Centennial Circle, Tinley Park, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>🍗 Wingstop <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.59917,-87.79081" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Shiloh, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4000 Green Mt Crossing Dr, Shiloh, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.57251,-89.92752" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Hanover Park</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1470 Irving Park Rd, Hanover Park, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.00535,-88.14339" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Chase Bank - 4223 N Harlem Ave</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4223 N Harlem Ave, Norridge, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🐦 Red Robin <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.95698,-87.80683" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1256 (Joliet, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2424 W Jefferson St, Joliet, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.52061,-88.14111" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ole #1 Dcfast Hog</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2595 Ogden Ave, Lisle, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.7968,-88.10194" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chicago, IL - O&#x27;Hare - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>14 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">Building 840 O&#x27;Hare Int&#x27;l Airport, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🌭 Portillo&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>🍔 Five Guys <i>6 min</i></span><span>🥖 Panera Bread <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.99867,-87.88839" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 224 (MT. Vernon, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">110 Davidson Ave, Mount Vernon, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>4 min</i></span><span>⛽ Pilot <i>5 min</i></span><span>⛽ Circle K <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.31026,-88.95806" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Nameoki Commons</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3401 Nameoki Rd, Granite City, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.72675,-90.12454" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Jewel-Osco</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EVgo</span></div>
+<div class="a">3400 N Western Ave, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>⛽ Circle K <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.94322,-87.68926" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Thorntons Harlem Avenue, Summit, IL</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>bp pulse</span></div>
+<div class="a">5900 S Harlem Avenue, Summit, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🍕 Little Caesars <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.78397,-87.80183" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Comfort Inn</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">308 S Lincolnway St, North Aurora, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🍳 Denny&#x27;s <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>6 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>🍦 Culver&#x27;s <i>7 min</i></span><span>⛽ Speedway <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.79317,-88.32663" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Thorntons Collins Street, Joliet, IL</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>bp pulse</span></div>
+<div class="a">400 Collins Street, Joliet, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.53236,-88.07194" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mt. Vernon, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">222 Potomac Blvd., Mt. Vernon, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🪵 Cracker Barrel <i>4 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.31631,-88.95591" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Culvers Bridgeview IL</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">9229 South Harlem Ave, Bridgeview, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>🍦 Culver&#x27;s <i>1 min</i></span><span>🍗 KFC <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.72367,-87.7982" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Super 8 by Wyndham</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">2 Gateway Dr, Collinsville, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span><span>🥖 Panera Bread <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.68282,-90.01567" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Champaign Ford City</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">701 W Marketview Dr, Champaign, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>4 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.13659,-88.25559" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Springfield, IL - South Dirksen Parkway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1501 S Dirksen Parkway, Springfield, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🏪 Dollar General <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.78727,-89.60704" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Hanover Park, IL Rechargery Relay - Barrington Rd</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">7448 Barrington Rd, Hanover Park, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍗 KFC <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.00659,-88.14531" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bettenhausen CJDR Lockport IL</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">16471 W 159th St, Lockport, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.59575,-88.02007" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Skokie, IL - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5507 Touhy Avenue, Skokie, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>1 min</i></span><span>🐦 Red Robin <i>1 min</i></span><span>💻 Best Buy <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.00904,-87.7634" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Kohl&#x27;s 1396 - Mt. Vernon</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">141 Davidson Ave., Mount Vernon, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>⛽ Flying J <i>5 min</i></span><span>⛽ Pilot <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.30856,-88.96123" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Crossroads Centre</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">10850 Lincoln Trl, Fairview Heights, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.59196,-89.98895" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Zeigler Ford of North Riverside</div>
+<div class="sp"><s class="spd std">120 kW</s><b>6 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">2100 S Harlem Ave, North Riverside, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🍔 Five Guys <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.85229,-87.80426" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T2078 (Chicago, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1940 W 33rd Street, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>💊 CVS <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>👑 Burger King <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.83555,-87.67318" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Costco Lincoln Park (Chicago, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">2746 N Clybourn Ave, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>📦 Costco <i>1 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🥪 Subway <i>6 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.93003,-87.6761" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dogwood Social House O&#x27;Fallon IL</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">1206 Central Park Dr, O&#x27;Fallon, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🤠 Texas Roadhouse <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🍔 Five Guys <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.57601,-89.93257" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chicago, IL - North Columbus Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">225 North Columbus Drive, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.88667,-87.61968" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">EV Phillips</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1400 Locke Dr, Bourbonnais, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🍳 Denny&#x27;s <i>6 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.16641,-87.84876" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Wrd Kia Joliet Abb</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2525 W Jefferson St, Joliet, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🍗 Wingstop <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.52263,-88.14581" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">NIU Visitor Parking Lot</div>
+<div class="sp"><s class="spd std">60 kW</s><b>3 stalls</b><span>Swtch</span></div>
+<div class="a">121 Carroll Ave, DeKalb, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.93309,-88.76744" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evxy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Village of Bensenville - Village Hall</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Evxy</span></div>
+<div class="a">12 S Center St # 22, Bensenville, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🥪 Subway <i>7 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🍕 Little Caesars <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.95642,-87.94238" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chicago, IL - South Canal Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>14 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1100 South Canal Street, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🌭 Portillo&#x27;s <i>2 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🥬 Whole Foods <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.86912,-87.64001" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Evium"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">433 W Van Buren St</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Evium</span></div>
+<div class="a">433 W Van Buren St, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>8 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>☕ Peet&#x27;s Coffee <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.87665,-87.63869" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">HomeTowne Studios &amp; Conference Center Chicago – N Aurora/ Na</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">201 Smoke Tree Ln, North Aurora, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🍳 Denny&#x27;s <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>🍦 Ice cream shop <i>10 min</i></span><span>🍦 Culver&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.79477,-88.329" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">801 W Dundee Rd</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">801 W Dundee Rd, Arlington Heights, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🌭 Portillo&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🛒 Aldi <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.13834,-87.9916" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Universal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Fairview Liquor</div>
+<div class="sp"><s class="spd std">90 kW</s><b>4 stalls</b><span>Universal</span></div>
+<div class="a">5329 N Illinois St, Fairview Heights, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🍩 Krispy Kreme <i>6 min</i></span><span>🥖 Panera Bread <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.58119,-89.98519" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Noodoe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">KNB Motors</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Noodoe</span></div>
+<div class="a">401 w north ave, Northlake, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.90697,-87.88701" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Muller Honda of Gurnee - Series DCFC</div>
+<div class="sp"><s class="spd slow">40 kW</s><b>3 stalls</b><span>Blink</span></div>
+<div class="a">7000 Grand Avenue, Gurnee, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🔨 Home Depot <i>9 min</i></span><span>🏪 Sam&#x27;s Club <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.38701,-87.97567" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">Thorntons N Farnsworth Avenue, Aurora, IL</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>bp pulse</span></div>
+<div class="a">2609 N Farnsworth Avenue, Aurora, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>⛽ Circle K <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🌯 Chipotle <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.80692,-88.28044" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chicago, IL - Elston Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2656 North Elston Avenue, Chicago, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>10 min</i></span><span>🎯 Target <i>2 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.92777,-87.68581" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Target T0843 (Hodgkins, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">9250 Joliet Rd, Hodgkins, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>10 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.78152,-87.86108" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Raymond Chevrolet Kia</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">235 East Rt 173, Antioch, IL</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>10 min</i></span><span>🍦 Culver&#x27;s <i>8 min</i></span><span>🛒 Walmart <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.467,-88.07366" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IL">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 67. <a href="../../../?chain=Popeyes&amp;state=IL">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in Illinois</h2><div class="chips"><a href="../../mcdonald-s/il/">🍟 McDonald&#x27;s <small>213</small></a><a href="../../starbucks/il/">☕ Starbucks <small>197</small></a><a href="../../dunkin/il/">🍩 Dunkin&#x27; <small>182</small></a><a href="../../subway/il/">🥪 Subway <small>158</small></a><a href="../../ice-cream-shop/il/">🍦 Ice cream shop <small>139</small></a><a href="../../walgreens/il/">💊 Walgreens <small>127</small></a><a href="../../burger-king/il/">👑 Burger King <small>114</small></a><a href="../../panera-bread/il/">🥖 Panera Bread <small>99</small></a><a href="../../chipotle/il/">🌯 Chipotle <small>98</small></a><a href="../../aldi/il/">🛒 Aldi <small>97</small></a><a href="../../taco-bell/il/">🌮 Taco Bell <small>94</small></a><a href="../../wendy-s/il/">🍔 Wendy&#x27;s <small>89</small></a><a href="../../panda-express/il/">🐼 Panda Express <small>77</small></a><a href="../../circle-k/il/">⛽ Circle K <small>77</small></a><a href="../../cvs/il/">💊 CVS <small>73</small></a><a href="../../target/il/">🎯 Target <small>72</small></a><a href="../../walmart/il/">🛒 Walmart <small>71</small></a><a href="../../arby-s/il/">🥩 Arby&#x27;s <small>63</small></a><a href="../../culver-s/il/">🍦 Culver&#x27;s <small>60</small></a><a href="../../chick-fil-a/il/">🐔 Chick-fil-A <small>55</small></a><a href="../../buffalo-wild-wings/il/">🦬 Buffalo Wild Wings <small>51</small></a><a href="../../kfc/il/">🍗 KFC <small>44</small></a><a href="../../pizza-hut/il/">🍕 Pizza Hut <small>44</small></a><a href="../../denny-s/il/">🍳 Denny&#x27;s <small>42</small></a><a href="../../home-depot/il/">🔨 Home Depot <small>42</small></a><a href="../../domino-s/il/">🍕 Domino&#x27;s <small>41</small></a><a href="../../casey-s/il/">🍕 Casey&#x27;s <small>41</small></a><a href="../../meijer/il/">🛒 Meijer <small>37</small></a><a href="../../wingstop/il/">🍗 Wingstop <small>36</small></a><a href="../../best-buy/il/">💻 Best Buy <small>36</small></a><a href="../../portillo-s/il/">🌭 Portillo&#x27;s <small>36</small></a><a href="../../five-guys/il/">🍔 Five Guys <small>35</small></a><a href="../../jersey-mike-s/il/">🥪 Jersey Mike&#x27;s <small>35</small></a><a href="../../chili-s/il/">🌶️ Chili&#x27;s <small>35</small></a><a href="../../little-caesars/il/">🍕 Little Caesars <small>35</small></a><a href="../../pilot/il/">⛽ Pilot <small>35</small></a><a href="../../ihop/il/">🥞 IHOP <small>34</small></a><a href="../../lowe-s/il/">🔧 Lowe&#x27;s <small>34</small></a><a href="../../raising-cane-s/il/">🐕 Raising Cane&#x27;s <small>30</small></a><a href="../../applebee-s/il/">🍎 Applebee&#x27;s <small>30</small></a><a href="../../speedway/il/">⛽ Speedway <small>30</small></a><a href="../../dollar-general/il/">🏪 Dollar General <small>28</small></a><a href="../../dairy-queen/il/">🍦 Dairy Queen <small>25</small></a><a href="../../cracker-barrel/il/">🪵 Cracker Barrel <small>22</small></a><a href="../../texas-roadhouse/il/">🤠 Texas Roadhouse <small>22</small></a><a href="../../costco/il/">📦 Costco <small>19</small></a><a href="../../sonic/il/">🚗 Sonic <small>19</small></a><a href="../../sam-s-club/il/">🏪 Sam&#x27;s Club <small>18</small></a><a href="../../hardee-s/il/">⭐ Hardee&#x27;s <small>17</small></a><a href="../../olive-garden/il/">🍝 Olive Garden <small>14</small></a><a href="../../whole-foods/il/">🥬 Whole Foods <small>14</small></a><a href="../../red-robin/il/">🐦 Red Robin <small>14</small></a><a href="../../flying-j/il/">⛽ Flying J <small>14</small></a><a href="../../kroger/il/">🛒 Kroger <small>13</small></a><a href="../../trader-joe-s/il/">🛍️ Trader Joe&#x27;s <small>11</small></a><a href="../../ta-travel-center/il/">⛽ TA Travel Center <small>11</small></a><a href="../../shake-shack/il/">🍔 Shake Shack <small>10</small></a><a href="../../love-s/il/">⛽ Love&#x27;s <small>10</small></a><a href="../../tractor-supply/il/">🚜 Tractor Supply <small>10</small></a><a href="../../jack-in-the-box/il/">🤡 Jack in the Box <small>8</small></a><a href="../../peet-s-coffee/il/">☕ Peet&#x27;s Coffee <small>7</small></a><a href="../../krispy-kreme/il/">🍩 Krispy Kreme <small>6</small></a><a href="../../hy-vee/il/">🛒 Hy-Vee <small>5</small></a><a href="../../waffle-house/il/">🧇 Waffle House <small>4</small></a><a href="../../firehouse-subs/il/">🚒 Firehouse Subs <small>4</small></a><a href="../../ikea/il/">🪑 IKEA <small>4</small></a><a href="../../bojangles/il/">🍗 Bojangles <small>2</small></a><a href="../../quiktrip/il/">⛽ QuikTrip <small>2</small></a></div>
 <h2>Popeyes in other states</h2><div class="chips"><a href="../">All states</a></div>

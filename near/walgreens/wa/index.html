@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,306 +33,366 @@
 <p class="lead"><b>75 DC fast chargers</b> in Washington have a Walgreens within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Walgreens&amp;state=WA">Open on the map →</a>
 <p class="stats">Of the 75 fast chargers with a Walgreens nearby in Washington: The typical stop here delivers <b>180 kW</b>, and 53 of them do 150 kW or more; <b>9</b> are close enough that the Walgreens is a two-minute walk or less; <b>62</b> are listed as open 24 hours. The fastest is <b>Renton, WA Rechargery Relay - S 2nd Street</b> in Renton at 400 kW; the closest walk is 1 min at <b>Bothell, WA - Bothell Everett Highway - Tesla Supercharger</b>. Most are on Tesla Supercharger (20), Electrify America (12), ChargePoint (9).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bothell, WA - Bothell Everett Highway - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">21045 Bothell Everett Hwy, Bothell, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥1 min</span><span>🛒 Fred Meyer ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🛒 Safeway ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.80817,-122.20711" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Renton, WA Rechargery Relay - S 2nd Street</span><small>400 kW · 12 stalls</small></div>
-<div class="a">101 S 2nd Street, Renton, WA</div><div class="host">IONNA</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🛒 Safeway ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.48101,-122.21677" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Evroadway Wa-C-College01</span><small>50 kW · 1 stall</small></div>
-<div class="a">1601 Harvard Ave, Seattle, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🍗 Wingstop ≥4 min</span><span>🥞 IHOP ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61546,-122.32256" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Fred Meyer 457 (Bothell, WA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">21045 Bothell Everett Hwy., Bothell, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>🛒 Fred Meyer ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🛒 Safeway ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.80832,-122.20678" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Women of Wisdom - Terraces at Summitview</span><small>180 kW · 4 stalls</small></div>
-<div class="a">3801 Summitview Ave, Yakima, WA</div><div class="host">Opconnect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍗 KFC ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.60133,-120.56048" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Shoreline, WA - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1201 N 175th St, Shoreline, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>🤡 Jack in the Box ≥8 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🍕 Little Caesars ≥9 min</span><span>☕ Starbucks ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.7558,-122.34362" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mcc Chargers Cpe250-1</span><small>125 kW · 1 stall</small></div>
-<div class="a">1404 5th St, Marysville, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.05264,-122.17833" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Northgate QFC</span><small>350 kW · 2 stalls</small></div>
-<div class="a">11100 Roosevelt Way NE, Seattle, WA</div><div class="host">EVgo</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>💻 Best Buy ≥8 min</span><span>🎯 Target ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.70931,-122.31601" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>1301 2Nd Ave</span><small>180 kW · 2 stalls</small></div>
-<div class="a">1301 Second Ave, Suite 400, Seattle, WA</div><div class="host">Abm</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥1 min</span><span>💊 CVS ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.60794,-122.33825" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Auburn Chevrolet</span><small>180 kW · 2 stalls</small></div>
-<div class="a">1600 Auburn Way North, Auburn, WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.32262,-122.2204" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Mcc Chargers Cpe250-2</span><small>125 kW · 1 stall</small></div>
-<div class="a">1404 5th St, Marysville, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>👑 Burger King ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.05266,-122.17845" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway #1600 (Bellevue, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">300 Bellevue Wayne, Bellevue, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🛒 Safeway ≥1 min</span><span>🌯 Chipotle ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐼 Panda Express ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61332,-122.20062" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Haggen&#x27;s Bellingham #3449</span><small>350 kW · 4 stalls</small></div>
-<div class="a">210 36th St, Bellingham, WA</div><div class="host">EVgo</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.73315,-122.47153" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>In-N-Out 3Rd Way</span><small>160 kW · 1 stall</small></div>
-<div class="a">13511 Southeast 3rd Way, Vancouver, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🥪 Subway ≥1 min</span><span>🍔 In-N-Out ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.61964,-122.53396" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Vancouver, WA Rechargery Relay - SE 15th St</span><small>400 kW · 14 stalls</small></div>
-<div class="a">16415 SE 15th St, Vancouver, WA</div><div class="host">IONNA</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>🤡 Jack in the Box ≥5 min</span><span>🛒 Fred Meyer ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.60922,-122.50179" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>West Valley School</span><small>180 kW · 2 stalls</small></div>
-<div class="a">8900 E. Buckeye Ave., 8900 E. Buckeye Ave., WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🛒 Safeway ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🍕 Pizza Hut ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.68229,-117.28534" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>WA Trust Bank – Manito</span><small>180 kW · 2 stalls</small></div>
-<div class="a">3103 S. Grand Blvd., Spokane, WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>☕ Starbucks ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.62615,-117.4015" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Madison Pike WA3-141 ( Seattle, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1300 E Madison St, Seattle, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🥞 IHOP ≥5 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>🌯 Chipotle ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61388,-122.31477" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Vancouver, WA - Northeast Fourth Plain Boulevard - Tesla Sup</span><small>250 kW · 12 stalls</small></div>
-<div class="a">6916 NE Fourth Plain Blvd, Vancouver, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.64565,-122.60127" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Madison Broadway</span><small>100 kW · 2 stalls</small></div>
-<div class="a">1001 Broadway, Seattle, WA</div><div class="host">EVgo</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>🥞 IHOP ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🥪 Subway ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.6116,-122.32134" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Chehalis, WA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">700 Northwest Arkansas Way, Chehalis, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>🌮 Taco Bell ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>🚗 Sonic ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.67975,-122.97696" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Chehalis Commerce District</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1701 NW Louisiana Ave, Chehalis, WA</div><div class="host">EVgo</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>👑 Burger King ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🔨 Home Depot ≥3 min</span><span>🚗 Sonic ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.67973,-122.9771" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Seattle, WA - 1201 2nd Avenue - Tesla Supercharger</span><small>150 kW · 4 stalls</small></div>
-<div class="a">1201 Second Avenue, Seattle, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>☕ Starbucks ≥1 min</span><span>🎯 Target ≥3 min</span><span>☕ Peet&#x27;s Coffee ≥3 min</span><span>💊 CVS ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.60667,-122.3376" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 5073 (Covington, WA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">17432 SE 270th PL, Covington, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥4 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.36029,-122.10773" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 5 stalls</small></div>
-<div class="a">3497 Bethel Rd SE, Port Orchard, WA</div><div class="host">Walmart Charge</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>🛒 Walmart ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Safeway ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.5175,-122.62746" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Issaquah, WA - Tesla Supercharger</span><small>75 kW · 8 stalls</small></div>
-<div class="a">6100 East Lake Sammamish Parkway SE, Issaquah, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>🐼 Panda Express ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🛒 Fred Meyer ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💻 Best Buy ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.54807,-122.03999" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Sehome Village Shopping - Bellingham</span><small>175 kW · 2 stalls</small></div>
-<div class="a">222 36th St, Bellingham, WA</div><div class="host">EVCS</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.73118,-122.47123" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Bellevue, WA - Northeast 8th Street - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">10660 NE 8th St, Bellevue, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61785,-122.19749" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Target - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">11400 51st Ave NW, Gig Harbor, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🛒 Safeway ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.36075,-122.60873" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Mill Creek, WA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">13314 Bothell Everett Hwy, Mill Creek, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥5 min</span><span>🥬 Sprouts ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🛒 Fred Meyer ≥5 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.87762,-122.21289" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>LA Fitness - Tacoma Pacific</span><small>200 kW · 8 stalls</small></div>
-<div class="a">15707 Pacific Avenue South, Spanaway, WA</div><div class="host">EVCS</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>🚜 Tractor Supply ≥1 min</span><span>🛒 Safeway ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🌯 Chipotle ≥7 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.11438,-122.43241" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Chevrolet of Everett</span><small>180 kW · 2 stalls</small></div>
-<div class="a">7301 Everegreen Way, Everett, WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>🍗 KFC ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛒 Safeway ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.9316,-122.21955" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Starbucks Pasco</span><small>45 kW · 2 stalls</small></div>
-<div class="a">2411 W Court Street, Pasco, WA</div><div class="host">Opconnect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Circle K ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>☕ Dutch Bros ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.24182,-119.12418" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>City Light Waterfront</span><small>50 kW · 1 stall</small></div>
-<div class="a">56 Seneca St, Seattle, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🎯 Target ≥4 min</span><span>💊 CVS ≥4 min</span><span>☕ Peet&#x27;s Coffee ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.60572,-122.33901" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Seattle, WA - Union Street - Tesla Supercharger</span><small>75 kW · 10 stalls</small></div>
-<div class="a">601 Union Street, Seattle, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>☕ Starbucks ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🌯 Chipotle ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61012,-122.33191" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Bellevue, WA - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">10333 NE 1st Street, Bellevue, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>💊 CVS ≥2 min</span><span>🛒 Safeway ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61107,-122.20242" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Kroger Fred Meyer 13 (Shoreline, WA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">18325 Aurora Ave N, Shoreline, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🛒 Fred Meyer ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🍕 Little Caesars ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.76093,-122.34695" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Northgate Mall (Seattle, WA)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">401 NE Northgate Way, Seattle, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>💻 Best Buy ≥1 min</span><span>🎯 Target ≥1 min</span><span>💊 CVS ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.70846,-122.32489" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Central Library - Fast Chargers</span><small>100 kW · 2 stalls</small></div>
-<div class="a">1000 4th Avenue, Seattle, WA</div><div class="host">FLO</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🎯 Target ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.60695,-122.33281" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Gee Liberty Lake Service Facility</span><small>120 kW · 2 stalls</small></div>
-<div class="a">1750 North Pepper Lane, Liberty Lake, WA</div><div class="host">Blink</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span><span>🌮 Taco Bell ≥7 min</span><span>⭐ Carl&#x27;s Jr. ≥7 min</span><span>🔨 Home Depot ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.67273,-117.11174" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Moses Lake DCFC</span><small>100 kW · 1 stall</small></div>
-<div class="a">312 West 3rd Avenue, Moses Lake, WA</div><div class="host">FLO</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>☕ Dutch Bros ≥6 min</span><span>🍕 Domino&#x27;s ≥8 min</span><span>🍗 KFC ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.12881,-119.28197" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Evroadway Wa-Pacsci01</span><small>50 kW · 1 stall</small></div>
-<div class="a">164 2nd Ave, Seattle, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61905,-122.35249" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Titus-Will Hyundai</span><small>120 kW · 2 stalls</small></div>
-<div class="a">2255 Carriage Loop Southwest, Olympia, WA</div><div class="host">Blink</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>☕ Starbucks ≥6 min</span><span>🛍️ Trader Joe&#x27;s ≥6 min</span><span>🥞 IHOP ≥7 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.03123,-122.93259" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Whole Foods Seattle (Westlake)</span><small>100 kW · 6 stalls</small></div>
-<div class="a">2210 Westlake Ave, Seattle, WA</div><div class="host">EVgo</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>🥬 Whole Foods ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🍔 Shake Shack ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.61836,-122.33835" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Cap Sante Marina: 1207 Q Ave, Anacortes</span><small>180 kW · 4 stalls</small></div>
-<div class="a">1207 Q Ave, Anacortes, WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍕 Little Caesars ≥4 min</span><span>🥪 Subway ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.51291,-122.61075" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Vancouver, WA - Northeast Andresen Road - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">2101 NE Andresen Rd, Vancouver, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🥩 Arby&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.63821,-122.59861" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Bellingham City Cordata</span><small>62 kW · 1 stall</small></div>
-<div class="a">4194 Cordata Pkwy, Bellingham, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>💻 Best Buy ≥5 min</span><span>🛍️ Trader Joe&#x27;s ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🥪 Subway ≥5 min</span><span>🥞 IHOP ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.79294,-122.491" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Sedro Woolley ROW</span><small>200 kW · 8 stalls</small></div>
-<div class="a">900 Metcalf St, Sedro Woolley, WA</div><div class="host">Red E</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>👑 Burger King ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.50274,-122.23904" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Olympia Kia Olympiasubkia3</span><small>102 kW · 1 stall</small></div>
-<div class="a">2300 Carriage Loop SW, Olympia, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥7 min</span><span>☕ Starbucks ≥7 min</span><span>🛍️ Trader Joe&#x27;s ≥7 min</span><span>🥞 IHOP ≥8 min</span><span>🦬 Buffalo Wild Wings ≥9 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.0318,-122.93075" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Mullinax Ford of Olympia</span><small>180 kW · 6 stalls</small></div>
-<div class="a">1905 Cooper Point Road SW, Olympia, WA</div><div class="host">Synergev</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🛍️ Trader Joe&#x27;s ≥6 min</span><span>☕ Starbucks ≥6 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>🥞 IHOP ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.03013,-122.93313" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2947 (Vancouver, WA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">9000 NE HIGHWAY 99, Vancouver, WA</div><div class="host">Electrify America</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🌮 Del Taco ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.68739,-122.66091" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Town Nissan</span><small>44 kW · 1 stall</small></div>
-<div class="a">555 3rd St SE, East Wenatchee, WA</div><div class="host">Non-networked</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>📦 Costco ≥1 min</span><span>🛒 Safeway ≥6 min</span><span>👑 Burger King ≥7 min</span><span>🍕 Pizza Hut ≥7 min</span><span>☕ Dutch Bros ≥8 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.40072,-120.27884" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Community Food Co-Op: 315 Westerly Rd, Bellingham</span><small>150 kW · 2 stalls</small></div>
-<div class="a">315 Westerly Rd, Bellingham, WA</div><div class="host">EV Connect</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🥞 IHOP ≥4 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🎯 Target ≥7 min</span><span>🥪 Subway ≥7 min</span><span>💻 Best Buy ≥7 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=48.79168,-122.49289" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Overlake Fashion Plaza - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">2150 148th Ave NE, Redmond, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🐼 Panda Express ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🥞 IHOP ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.62864,-122.14086" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Auburn, WA - Auburn Way North - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">801 Auburn Wy N, Auburn, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🛒 Fred Meyer ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 KFC ≥3 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.31588,-122.2241" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>City Light Burien</span><small>62 kW · 1 stall</small></div>
-<div class="a">15135 4th Ave SW, Burien, WA</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🥪 Subway ≥2 min</span><span>💊 CVS ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.46737,-122.33941" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Pasco, WA - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4905 North Road 68, Pasco, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🍕 Little Caesars ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>⛽ Circle K ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>+15</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.27245,-119.18251" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>WinCo Foods - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1340 N Wenatchee Ave, Wenatchee, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>⛽ Circle K ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🐦 Red Robin ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.44217,-120.32696" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>ARCO NE Andresen Road, Vancouver, WA</span><small>150 kW · 4 stalls</small></div>
-<div class="a">1800 NE Andresen Road, Vancouver, WA</div><div class="host">bp pulse</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.63723,-122.60045" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Seattle, WA - NW Ballard Way - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">1416 NW Ballard Way, Seattle, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥8 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🥪 Subway ≥6 min</span><span>🛒 Fred Meyer ≥7 min</span><span>🍔 Wendy&#x27;s ≥8 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Walgreens&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.66257,-122.37448" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bothell, WA - Bothell Everett Highway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">21045 Bothell Everett Hwy, Bothell, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>1 min</i></span><span>🛒 Fred Meyer <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🛒 Safeway <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.80817,-122.20711" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Renton, WA Rechargery Relay - S 2nd Street</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>IONNA</span></div>
+<div class="a">101 S 2nd Street, Renton, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.48101,-122.21677" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Evroadway Wa-C-College01</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1601 Harvard Ave, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍗 Wingstop <i>4 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61546,-122.32256" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Fred Meyer 457 (Bothell, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">21045 Bothell Everett Hwy., Bothell, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>🛒 Fred Meyer <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🛒 Safeway <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.80832,-122.20678" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Opconnect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Women of Wisdom - Terraces at Summitview</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Opconnect</span></div>
+<div class="a">3801 Summitview Ave, Yakima, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍗 KFC <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.60133,-120.56048" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Shoreline, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1201 N 175th St, Shoreline, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>🤡 Jack in the Box <i>8 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🍕 Little Caesars <i>9 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.7558,-122.34362" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mcc Chargers Cpe250-1</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1404 5th St, Marysville, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.05264,-122.17833" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Northgate QFC</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">11100 Roosevelt Way NE, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>💻 Best Buy <i>8 min</i></span><span>🎯 Target <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.70931,-122.31601" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Abm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">1301 2Nd Ave</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Abm</span></div>
+<div class="a">1301 Second Ave, Suite 400, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.60794,-122.33825" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Auburn Chevrolet</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">1600 Auburn Way North, Auburn, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.32262,-122.2204" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mcc Chargers Cpe250-2</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1404 5th St, Marysville, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.05266,-122.17845" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Safeway #1600 (Bellevue, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">300 Bellevue Wayne, Bellevue, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>🌯 Chipotle <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61332,-122.20062" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Haggen&#x27;s Bellingham #3449</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">210 36th St, Bellingham, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.73315,-122.47153" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">In-N-Out 3Rd Way</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">13511 Southeast 3rd Way, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍔 In-N-Out <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.61964,-122.53396" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Vancouver, WA Rechargery Relay - SE 15th St</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>14 stalls</b><span>IONNA</span></div>
+<div class="a">16415 SE 15th St, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span><span>🤡 Jack in the Box <i>5 min</i></span><span>🛒 Fred Meyer <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.60922,-122.50179" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">West Valley School</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">8900 E. Buckeye Ave., 8900 E. Buckeye Ave., WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.68229,-117.28534" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">WA Trust Bank – Manito</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">3103 S. Grand Blvd., Spokane, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>☕ Starbucks <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.62615,-117.4015" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Madison Pike WA3-141 ( Seattle, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1300 E Madison St, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>🍕 Domino&#x27;s <i>6 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61388,-122.31477" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Vancouver, WA - Northeast Fourth Plain Boulevard - Tesla Sup</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6916 NE Fourth Plain Blvd, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.64565,-122.60127" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Madison Broadway</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1001 Broadway, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🥪 Subway <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.6116,-122.32134" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chehalis, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">700 Northwest Arkansas Way, Chehalis, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🔨 Home Depot <i>2 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.67975,-122.97696" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Chehalis Commerce District</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1701 NW Louisiana Ave, Chehalis, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.67973,-122.9771" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Seattle, WA - 1201 2nd Avenue - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1201 Second Avenue, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🎯 Target <i>3 min</i></span><span>☕ Peet&#x27;s Coffee <i>3 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.60667,-122.3376" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 5073 (Covington, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">17432 SE 270th PL, Covington, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>4 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.36029,-122.10773" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>5 stalls</b><span>Walmart Charge</span></div>
+<div class="a">3497 Bethel Rd SE, Port Orchard, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.5175,-122.62746" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Issaquah, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6100 East Lake Sammamish Parkway SE, Issaquah, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🛒 Fred Meyer <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💻 Best Buy <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.54807,-122.03999" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sehome Village Shopping - Bellingham</div>
+<div class="sp"><s class="spd fast">175 kW</s><b>2 stalls</b><span>EVCS</span></div>
+<div class="a">222 36th St, Bellingham, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.73118,-122.47123" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bellevue, WA - Northeast 8th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">10660 NE 8th St, Bellevue, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61785,-122.19749" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Target - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11400 51st Ave NW, Gig Harbor, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>🎯 Target <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🛒 Safeway <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.36075,-122.60873" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mill Creek, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">13314 Bothell Everett Hwy, Mill Creek, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>5 min</i></span><span>🥬 Sprouts <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🛒 Fred Meyer <i>5 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.87762,-122.21289" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">LA Fitness - Tacoma Pacific</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>8 stalls</b><span>EVCS</span></div>
+<div class="a">15707 Pacific Avenue South, Spanaway, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>🚜 Tractor Supply <i>1 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.11438,-122.43241" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Chevrolet of Everett</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">7301 Everegreen Way, Everett, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛒 Safeway <i>3 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.9316,-122.21955" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Opconnect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Starbucks Pasco</div>
+<div class="sp"><s class="spd slow">45 kW</s><b>2 stalls</b><span>Opconnect</span></div>
+<div class="a">2411 W Court Street, Pasco, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>☕ Dutch Bros <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.24182,-119.12418" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">City Light Waterfront</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">56 Seneca St, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🎯 Target <i>4 min</i></span><span>💊 CVS <i>4 min</i></span><span>☕ Peet&#x27;s Coffee <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.60572,-122.33901" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Seattle, WA - Union Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">601 Union Street, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61012,-122.33191" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bellevue, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">10333 NE 1st Street, Bellevue, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🛒 Safeway <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61107,-122.20242" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Kroger Fred Meyer 13 (Shoreline, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">18325 Aurora Ave N, Shoreline, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🛒 Fred Meyer <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🍕 Little Caesars <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.76093,-122.34695" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Northgate Mall (Seattle, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">401 NE Northgate Way, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>💻 Best Buy <i>1 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.70846,-122.32489" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FLO"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Central Library - Fast Chargers</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>FLO</span></div>
+<div class="a">1000 4th Avenue, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🎯 Target <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.60695,-122.33281" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Gee Liberty Lake Service Facility</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">1750 North Pepper Lane, Liberty Lake, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>6 min</i></span><span>🍕 Domino&#x27;s <i>6 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>⭐ Carl&#x27;s Jr. <i>7 min</i></span><span>🔨 Home Depot <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.67273,-117.11174" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FLO"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Moses Lake DCFC</div>
+<div class="sp"><s class="spd std">100 kW</s><b>1 stall</b><span>FLO</span></div>
+<div class="a">312 West 3rd Avenue, Moses Lake, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>☕ Dutch Bros <i>6 min</i></span><span>🍕 Domino&#x27;s <i>8 min</i></span><span>🍗 KFC <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.12881,-119.28197" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Evroadway Wa-Pacsci01</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">164 2nd Ave, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61905,-122.35249" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Titus-Will Hyundai</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">2255 Carriage Loop Southwest, Olympia, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🛍️ Trader Joe&#x27;s <i>6 min</i></span><span>🥞 IHOP <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.03123,-122.93259" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Whole Foods Seattle (Westlake)</div>
+<div class="sp"><s class="spd std">100 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">2210 Westlake Ave, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>🥬 Whole Foods <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🍔 Shake Shack <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.61836,-122.33835" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Cap Sante Marina: 1207 Q Ave, Anacortes</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">1207 Q Ave, Anacortes, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.51291,-122.61075" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Vancouver, WA - Northeast Andresen Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2101 NE Andresen Rd, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.63821,-122.59861" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Bellingham City Cordata</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">4194 Cordata Pkwy, Bellingham, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>🛍️ Trader Joe&#x27;s <i>5 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.79294,-122.491" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sedro Woolley ROW</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">900 Metcalf St, Sedro Woolley, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>👑 Burger King <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.50274,-122.23904" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Olympia Kia Olympiasubkia3</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2300 Carriage Loop SW, Olympia, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>7 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>🛍️ Trader Joe&#x27;s <i>7 min</i></span><span>🥞 IHOP <i>8 min</i></span><span>🦬 Buffalo Wild Wings <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.0318,-122.93075" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Synergev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Mullinax Ford of Olympia</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>6 stalls</b><span>Synergev</span></div>
+<div class="a">1905 Cooper Point Road SW, Olympia, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🛍️ Trader Joe&#x27;s <i>6 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>🥞 IHOP <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.03013,-122.93313" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2947 (Vancouver, WA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">9000 NE HIGHWAY 99, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🌮 Del Taco <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.68739,-122.66091" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Town Nissan</div>
+<div class="sp"><s class="spd slow">44 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">555 3rd St SE, East Wenatchee, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>📦 Costco <i>1 min</i></span><span>🛒 Safeway <i>6 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🍕 Pizza Hut <i>7 min</i></span><span>☕ Dutch Bros <i>8 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.40072,-120.27884" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Community Food Co-Op: 315 Westerly Rd, Bellingham</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">315 Westerly Rd, Bellingham, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>🎯 Target <i>7 min</i></span><span>🥪 Subway <i>7 min</i></span><span>💻 Best Buy <i>7 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=48.79168,-122.49289" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Overlake Fashion Plaza - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2150 148th Ave NE, Redmond, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.62864,-122.14086" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Auburn, WA - Auburn Way North - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">801 Auburn Wy N, Auburn, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🛒 Fred Meyer <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 KFC <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.31588,-122.2241" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">City Light Burien</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">15135 4th Ave SW, Burien, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🥪 Subway <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>⛽ Speedway <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.46737,-122.33941" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Pasco, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4905 North Road 68, Pasco, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🍕 Little Caesars <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>+15</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.27245,-119.18251" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">WinCo Foods - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1340 N Wenatchee Ave, Wenatchee, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>🐦 Red Robin <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.44217,-120.32696" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="bp pulse" style="background:#009b3a;color:#fff">bp</span></div><div class="body">
+<div class="n">ARCO NE Andresen Road, Vancouver, WA</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>bp pulse</span></div>
+<div class="a">1800 NE Andresen Road, Vancouver, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.63723,-122.60045" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Seattle, WA - NW Ballard Way - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1416 NW Ballard Way, Seattle, WA</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>8 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🛒 Fred Meyer <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>8 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.66257,-122.37448" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Walgreens&amp;state=WA">Show on map</a></div>
 </div></div><p class="more">Showing the 60 closest of 75. <a href="../../../?chain=Walgreens&amp;state=WA">Open the map to see them all →</a></p>
 <h2>Other chains near fast chargers in Washington</h2><div class="chips"><a href="../../starbucks/wa/">☕ Starbucks <small>243</small></a><a href="../../subway/wa/">🥪 Subway <small>230</small></a><a href="../../mcdonald-s/wa/">🍟 McDonald&#x27;s <small>174</small></a><a href="../../ice-cream-shop/wa/">🍦 Ice cream shop <small>121</small></a><a href="../../taco-bell/wa/">🌮 Taco Bell <small>102</small></a><a href="../../safeway/wa/">🛒 Safeway <small>96</small></a><a href="../../chipotle/wa/">🌯 Chipotle <small>94</small></a><a href="../../jack-in-the-box/wa/">🤡 Jack in the Box <small>90</small></a><a href="../../domino-s/wa/">🍕 Domino&#x27;s <small>82</small></a><a href="../../wendy-s/wa/">🍔 Wendy&#x27;s <small>80</small></a><a href="../../burger-king/wa/">👑 Burger King <small>77</small></a><a href="../../arby-s/wa/">🥩 Arby&#x27;s <small>62</small></a><a href="../../panda-express/wa/">🐼 Panda Express <small>60</small></a><a href="../../five-guys/wa/">🍔 Five Guys <small>53</small></a><a href="../../fred-meyer/wa/">🛒 Fred Meyer <small>53</small></a><a href="../../target/wa/">🎯 Target <small>52</small></a><a href="../../ihop/wa/">🥞 IHOP <small>49</small></a><a href="../../walmart/wa/">🛒 Walmart <small>49</small></a><a href="../../jersey-mike-s/wa/">🥪 Jersey Mike&#x27;s <small>49</small></a><a href="../../panera-bread/wa/">🥖 Panera Bread <small>48</small></a><a href="../../dutch-bros/wa/">☕ Dutch Bros <small>48</small></a><a href="../../kfc/wa/">🍗 KFC <small>47</small></a><a href="../../pizza-hut/wa/">🍕 Pizza Hut <small>42</small></a><a href="../../trader-joe-s/wa/">🛍️ Trader Joe&#x27;s <small>40</small></a><a href="../../cvs/wa/">💊 CVS <small>40</small></a><a href="../../red-robin/wa/">🐦 Red Robin <small>39</small></a><a href="../../little-caesars/wa/">🍕 Little Caesars <small>39</small></a><a href="../../home-depot/wa/">🔨 Home Depot <small>39</small></a><a href="../../costco/wa/">📦 Costco <small>35</small></a><a href="../../applebee-s/wa/">🍎 Applebee&#x27;s <small>34</small></a><a href="../../denny-s/wa/">🍳 Denny&#x27;s <small>32</small></a><a href="../../olive-garden/wa/">🍝 Olive Garden <small>32</small></a><a href="../../best-buy/wa/">💻 Best Buy <small>31</small></a><a href="../../carl-s-jr/wa/">⭐ Carl&#x27;s Jr. <small>30</small></a><a href="../../circle-k/wa/">⛽ Circle K <small>30</small></a><a href="../../chick-fil-a/wa/">🐔 Chick-fil-A <small>26</small></a><a href="../../lowe-s/wa/">🔧 Lowe&#x27;s <small>26</small></a><a href="../../buffalo-wild-wings/wa/">🦬 Buffalo Wild Wings <small>25</small></a><a href="../../wingstop/wa/">🍗 Wingstop <small>24</small></a><a href="../../tractor-supply/wa/">🚜 Tractor Supply <small>18</small></a><a href="../../popeyes/wa/">🍗 Popeyes <small>16</small></a><a href="../../sonic/wa/">🚗 Sonic <small>15</small></a><a href="../../firehouse-subs/wa/">🚒 Firehouse Subs <small>14</small></a><a href="../../whole-foods/wa/">🥬 Whole Foods <small>11</small></a><a href="../../speedway/wa/">⛽ Speedway <small>11</small></a><a href="../../shake-shack/wa/">🍔 Shake Shack <small>10</small></a><a href="../../peet-s-coffee/wa/">☕ Peet&#x27;s Coffee <small>10</small></a><a href="../../love-s/wa/">⛽ Love&#x27;s <small>9</small></a><a href="../../dairy-queen/wa/">🍦 Dairy Queen <small>8</small></a><a href="../../krispy-kreme/wa/">🍩 Krispy Kreme <small>7</small></a><a href="../../pilot/wa/">⛽ Pilot <small>6</small></a><a href="../../in-n-out/wa/">🍔 In-N-Out <small>5</small></a><a href="../../ikea/wa/">🪑 IKEA <small>4</small></a><a href="../../flying-j/wa/">⛽ Flying J <small>4</small></a><a href="../../dollar-general/wa/">🏪 Dollar General <small>4</small></a><a href="../../del-taco/wa/">🌮 Del Taco <small>3</small></a><a href="../../raising-cane-s/wa/">🐕 Raising Cane&#x27;s <small>2</small></a><a href="../../chili-s/wa/">🌶️ Chili&#x27;s <small>2</small></a><a href="../../texas-roadhouse/wa/">🤠 Texas Roadhouse <small>2</small></a><a href="../../sprouts/wa/">🥬 Sprouts <small>2</small></a><a href="../../ta-travel-center/wa/">⛽ TA Travel Center <small>2</small></a></div>
 <h2>Walgreens in other states</h2><div class="chips"><a href="../">All states</a></div>

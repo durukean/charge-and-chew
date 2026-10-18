@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,31 +33,36 @@
 <p class="lead"><b>5 DC fast chargers</b> in New Jersey have an Arby&#x27;s within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Open on the map →</a>
 <p class="stats">Of the 5 fast chargers with an Arby&#x27;s nearby in New Jersey: The typical stop here delivers <b>180 kW</b>, and 4 of them do 150 kW or more; <b>1</b> are close enough that the Arby&#x27;s is a two-minute walk or less; <b>3</b> are listed as open 24 hours. The fastest is <b>Tinton Falls, NJ</b> in Tinton Falls at 300 kW; the closest walk is 2 min at <b>QuickChek 21 Memorial Pkwy</b>. Most are on Red E (2), Rivian Adventure (1), EVgo (1).</p>
-<div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>QuickChek 21 Memorial Pkwy</span><small>160 kW · 2 stalls</small></div>
-<div class="a">671 Memorial Pkwy, Phillipsburg, NJ</div><div class="host">Red E</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.69759,-75.18023" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Tinton Falls, NJ</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1 Premium Outlet Boulevard, Tinton Falls, NJ</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥8 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>💊 Walgreens ≥8 min</span><span>🛒 Walmart ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.22292,-74.09342" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Jersey Shore Premium Outlet</span><small>50 kW · 2 stalls</small></div>
-<div class="a">1 Premium Outlet Blvd, Tinton Falls, NJ</div><div class="host">EVgo</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥9 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🛒 Walmart ≥9 min</span><span>💊 Walgreens ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.22625,-74.09314" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Tinton Falls, NJ - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">1 Premium Outlets Blvd, Tinton Falls, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥9 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🛒 Walmart ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.22641,-74.09381" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Liccardi Ford Lincoln</span><small>180 kW · 6 stalls</small></div>
-<div class="a">1615 US-22, Watchung, NJ</div><div class="host">Red E</div>
-<div class="c"><span>🥩 <b>Arby&#x27;s</b> ≥9 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🛒 Aldi ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🍗 Popeyes ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.64436,-74.41322" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">QuickChek 21 Memorial Pkwy</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">671 Memorial Pkwy, Phillipsburg, NJ</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.69759,-75.18023" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Tinton Falls, NJ</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1 Premium Outlet Boulevard, Tinton Falls, NJ</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>8 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🛒 Walmart <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.22292,-74.09342" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Jersey Shore Premium Outlet</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1 Premium Outlet Blvd, Tinton Falls, NJ</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>9 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🛒 Walmart <i>9 min</i></span><span>💊 Walgreens <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.22625,-74.09314" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tinton Falls, NJ - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1 Premium Outlets Blvd, Tinton Falls, NJ</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>9 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🛒 Walmart <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.22641,-74.09381" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Liccardi Ford Lincoln</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>6 stalls</b><span>Red E</span></div>
+<div class="a">1615 US-22, Watchung, NJ</div>
+<div class="c"><span>🥩 <b>Arby&#x27;s</b> <i>9 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.64436,-74.41322" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Arby&#x27;s&amp;state=NJ">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in New Jersey</h2><div class="chips"><a href="../../dunkin/nj/">🍩 Dunkin&#x27; <small>164</small></a><a href="../../mcdonald-s/nj/">🍟 McDonald&#x27;s <small>101</small></a><a href="../../starbucks/nj/">☕ Starbucks <small>97</small></a><a href="../../wawa/nj/">🦆 Wawa <small>97</small></a><a href="../../ice-cream-shop/nj/">🍦 Ice cream shop <small>86</small></a><a href="../../burger-king/nj/">👑 Burger King <small>70</small></a><a href="../../cvs/nj/">💊 CVS <small>51</small></a><a href="../../chipotle/nj/">🌯 Chipotle <small>49</small></a><a href="../../wendy-s/nj/">🍔 Wendy&#x27;s <small>49</small></a><a href="../../panera-bread/nj/">🥖 Panera Bread <small>48</small></a><a href="../../walgreens/nj/">💊 Walgreens <small>47</small></a><a href="../../taco-bell/nj/">🌮 Taco Bell <small>45</small></a><a href="../../chick-fil-a/nj/">🐔 Chick-fil-A <small>41</small></a><a href="../../target/nj/">🎯 Target <small>41</small></a><a href="../../popeyes/nj/">🍗 Popeyes <small>40</small></a><a href="../../domino-s/nj/">🍕 Domino&#x27;s <small>38</small></a><a href="../../applebee-s/nj/">🍎 Applebee&#x27;s <small>37</small></a><a href="../../home-depot/nj/">🔨 Home Depot <small>36</small></a><a href="../../walmart/nj/">🛒 Walmart <small>35</small></a><a href="../../five-guys/nj/">🍔 Five Guys <small>28</small></a><a href="../../lowe-s/nj/">🔧 Lowe&#x27;s <small>28</small></a><a href="../../kfc/nj/">🍗 KFC <small>27</small></a><a href="../../speedway/nj/">⛽ Speedway <small>27</small></a><a href="../../subway/nj/">🥪 Subway <small>25</small></a><a href="../../aldi/nj/">🛒 Aldi <small>25</small></a><a href="../../best-buy/nj/">💻 Best Buy <small>24</small></a><a href="../../shake-shack/nj/">🍔 Shake Shack <small>22</small></a><a href="../../jersey-mike-s/nj/">🥪 Jersey Mike&#x27;s <small>21</small></a><a href="../../pizza-hut/nj/">🍕 Pizza Hut <small>17</small></a><a href="../../dollar-general/nj/">🏪 Dollar General <small>15</small></a><a href="../../ihop/nj/">🥞 IHOP <small>14</small></a><a href="../../costco/nj/">📦 Costco <small>14</small></a><a href="../../dairy-queen/nj/">🍦 Dairy Queen <small>13</small></a><a href="../../chili-s/nj/">🌶️ Chili&#x27;s <small>13</small></a><a href="../../whole-foods/nj/">🥬 Whole Foods <small>12</small></a><a href="../../wingstop/nj/">🍗 Wingstop <small>12</small></a><a href="../../trader-joe-s/nj/">🛍️ Trader Joe&#x27;s <small>11</small></a><a href="../../panda-express/nj/">🐼 Panda Express <small>10</small></a><a href="../../olive-garden/nj/">🍝 Olive Garden <small>9</small></a><a href="../../red-robin/nj/">🐦 Red Robin <small>9</small></a><a href="../../royal-farms/nj/">🍗 Royal Farms <small>9</small></a><a href="../../sonic/nj/">🚗 Sonic <small>8</small></a><a href="../../firehouse-subs/nj/">🚒 Firehouse Subs <small>6</small></a><a href="../../wegmans/nj/">🛒 Wegmans <small>6</small></a><a href="../../raising-cane-s/nj/">🐕 Raising Cane&#x27;s <small>5</small></a><a href="../../buffalo-wild-wings/nj/">🦬 Buffalo Wild Wings <small>5</small></a><a href="../../pilot/nj/">⛽ Pilot <small>5</small></a><a href="../../krispy-kreme/nj/">🍩 Krispy Kreme <small>5</small></a><a href="../../denny-s/nj/">🍳 Denny&#x27;s <small>4</small></a><a href="../../texas-roadhouse/nj/">🤠 Texas Roadhouse <small>4</small></a><a href="../../little-caesars/nj/">🍕 Little Caesars <small>4</small></a><a href="../../sam-s-club/nj/">🏪 Sam&#x27;s Club <small>2</small></a><a href="../../circle-k/nj/">⛽ Circle K <small>2</small></a><a href="../../tractor-supply/nj/">🚜 Tractor Supply <small>2</small></a><a href="../../ta-travel-center/nj/">⛽ TA Travel Center <small>2</small></a><a href="../../cracker-barrel/nj/">🪵 Cracker Barrel <small>1</small></a><a href="../../ikea/nj/">🪑 IKEA <small>1</small></a><a href="../../flying-j/nj/">⛽ Flying J <small>1</small></a></div>
 <h2>Arby&#x27;s in other states</h2><div class="chips"><a href="../">All states</a></div>

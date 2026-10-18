@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Flying J">Open on the map →</a>
 <p class="stats">Of the 230 fast chargers with a Flying J nearby across the US: The typical stop here delivers <b>350 kW</b>, and 213 of them do 150 kW or more; <b>149</b> are close enough that the Flying J is a two-minute walk or less; <b>226</b> are listed as open 24 hours. The fastest is <b>TA Thompson Road, Baytown, TX</b> in Baytown at 400 kW; the closest walk is 1 min at <b>Flying J Travel Center</b>. Most are on EVgo (132), Tesla Supercharger (42), Electrify America (17).</p>
 <h2>By state</h2><div class="chips"><a href="tx/">Texas <small>30</small></a><a href="il/">Illinois <small>14</small></a><a href="ut/">Utah <small>13</small></a><a href="pa/">Pennsylvania <small>13</small></a><a href="ca/">California <small>13</small></a><a href="nv/">Nevada <small>11</small></a><a href="wy/">Wyoming <small>10</small></a><a href="mo/">Missouri <small>8</small></a><a href="ga/">Georgia <small>7</small></a><a href="ok/">Oklahoma <small>7</small></a><a href="fl/">Florida <small>7</small></a><a href="in/">Indiana <small>6</small></a><a href="wi/">Wisconsin <small>6</small></a><a href="oh/">Ohio <small>6</small></a><a href="sc/">South Carolina <small>6</small></a><a href="va/">Virginia <small>5</small></a><a href="nd/">North Dakota <small>5</small></a><a href="or/">Oregon <small>5</small></a><a href="id/">Idaho <small>5</small></a><a href="az/">Arizona <small>5</small></a><a href="nm/">New Mexico <small>5</small></a><a href="nc/">North Carolina <small>4</small></a><a href="wa/">Washington <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="ky/">Kentucky <small>4</small></a><a href="mt/">Montana <small>4</small></a><a href="ms/">Mississippi <small>3</small></a><a href="al/">Alabama <small>3</small></a><a href="mi/">Michigan <small>2</small></a><a href="sd/">South Dakota <small>2</small></a><a href="co/">Colorado <small>2</small></a><a href="ny/">New York <small>2</small></a><a href="ks/">Kansas <small>2</small></a><a href="la/">Louisiana <small>1</small></a><a href="mn/">Minnesota <small>1</small></a><a href="ne/">Nebraska <small>1</small></a><a href="ia/">Iowa <small>1</small></a><a href="md/">Maryland <small>1</small></a><a href="tn/">Tennessee <small>1</small></a><a href="nj/">New Jersey <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1720 W Thompson Rd, Indianapolis, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>🧇 Waffle House ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>⭐ Hardee&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.69298,-86.19054" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">9510 Greenwood Road, Greenwood, LA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥3 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🚗 Sonic ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.44418,-93.97969" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7001 Lake Park Bellville Road, Lake Park, GA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍗 Popeyes ≥4 min</span><span>⛽ TA Travel Center ≥4 min</span><span>🥩 Arby&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.64187,-83.1901" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">125 Plaza Lane, Mount Airy, NC</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Circle K ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.4866,-80.74622" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4740 Bethel Road, Olive Branch, MS</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.92851,-89.79377" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1605 East Saddleback Blvd., Lake Point, UT</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🌮 Del Taco ≥5 min</span><span>👑 Burger King ≥7 min</span><span>⛽ TA Travel Center ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.68584,-112.26693" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">35 East Flying J Drive, Richfield, UT</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🥪 Subway ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.78849,-112.08205" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Jackson Store</span><small>320 kW · 4 stalls</small></div>
-<div class="a">3709 S Geiger Blvd, Spokane, WA</div><div class="host">Onpoint Ev Solutions</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.6206,-117.50692" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1623 Oliver Road, New Milford, PA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>👑 Burger King ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.8248,-75.68286" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5609 Nittany Valley Drive, Mill Hall, PA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ TA Travel Center ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=PA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.02793,-77.52312" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6721 Emmaus Church Road, Tallysville, VA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.49997,-77.08942" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">921 N. Ih 35, Cotulla, TX</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🚗 Sonic ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.45309,-99.23837" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">602 4th Street, Lubbock, TX</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.59324,-101.84125" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8300 State Highway 108, Texarkana, AR</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.51376,-93.94809" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1011 Beltway Parkway, Laredo, TX</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ TA Travel Center ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ Pilot ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.68589,-99.4656" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">13712 Northwestern Avenue, Franksville, WI</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.77866,-87.95116" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1172 West 21St Street, Ogden, UT</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.2313,-112.00735" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">844 East 1250 South, Haubstadt, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🥪 Subway ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.17522,-87.55188" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1920 Harrison Drive, Evanston, WY</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.26487,-110.97787" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">121 North 129 E Ave, Tulsa, OK</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16264,-95.83236" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7800 West Grand River Ave., Grand Ledge, MI</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Love&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.7878,-84.67784" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2025 S 900 W, Salt Lake City, UT</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72686,-111.91531" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">780 State Hwy 54, Black River Falls, WI</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Kwik Trip ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.29578,-90.82975" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1810 South Douglas Hwy, Gillette, WY</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>👑 Burger King ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.27737,-105.4951" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">600 West 750 North, Willard, UT</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.42351,-112.05211" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 6 stalls</small></div>
-<div class="a">15100 North Thornton Rd, Lodi, CA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.11721,-121.39364" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1501 North Jack Tone Road, Ripon, CA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Love&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🚜 Tractor Supply ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.75567,-121.14444" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J 656 - eXtend</span><small>350 kW · 4 stalls</small></div>
-<div class="a">82 White Street, Whiteland, IN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Love&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.55007,-86.0362" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8051 Bagley Avenue, Northfield, MN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.47068,-93.29473" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3400 So. Newberry Rd., North Platte, NE</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>⛽ Love&#x27;s ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=NE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.10096,-100.7273" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3475 E Washington, Saginaw, MI</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.4515,-83.89437" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">16049 Willowbrook Road, South Beloit, IL</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥪 Subway ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.49401,-88.99796" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2725 93rd Ave SW, Tumwater, WA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>⛽ Pilot ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🥪 Subway ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.9524,-122.94053" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">15919 North Freeway, Houston, TX</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⛽ QuikTrip ≥2 min</span><span>💊 CVS ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.99865,-95.42663" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">15236 State Route 180, Catlettsburg, KY</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.36495,-82.69625" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5201 Granite Lane, Sioux Falls, SD</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>👑 Burger King ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=SD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.6026,-96.76705" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1530 Rest Church Rd, Winchester, VA</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.29018,-78.08693" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">I-20 Exit 277 101 N FM 707, Tye, TX</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.46116,-99.87201" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5625 W. Winnemucca Blvd., Winnemucca, NV</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>⛽ Pilot ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.93097,-117.80387" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4401 32nd Avenue South, Grand Forks, ND</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🥞 IHOP ≥6 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>💻 Best Buy ≥10 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.88791,-97.09207" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1720 W Thompson Rd, Indianapolis, IN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.69298,-86.19054" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">9510 Greenwood Road, Greenwood, LA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>3 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🚗 Sonic <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.44418,-93.97969" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">7001 Lake Park Bellville Road, Lake Park, GA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>⛽ TA Travel Center <i>4 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.64187,-83.1901" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">125 Plaza Lane, Mount Airy, NC</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.4866,-80.74622" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4740 Bethel Road, Olive Branch, MS</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.92851,-89.79377" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1605 East Saddleback Blvd., Lake Point, UT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🌮 Del Taco <i>5 min</i></span><span>👑 Burger King <i>7 min</i></span><span>⛽ TA Travel Center <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.68584,-112.26693" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">35 East Flying J Drive, Richfield, UT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🥪 Subway <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.78849,-112.08205" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Onpoint Ev Solutions"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Jackson Store</div>
+<div class="sp"><s class="spd ultra">320 kW</s><b>4 stalls</b><span>Onpoint Ev Solutions</span></div>
+<div class="a">3709 S Geiger Blvd, Spokane, WA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.6206,-117.50692" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1623 Oliver Road, New Milford, PA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>👑 Burger King <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.8248,-75.68286" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5609 Nittany Valley Drive, Mill Hall, PA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ TA Travel Center <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.02793,-77.52312" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=PA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">6721 Emmaus Church Road, Tallysville, VA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.49997,-77.08942" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Fying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">921 N. Ih 35, Cotulla, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🚗 Sonic <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.45309,-99.23837" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">602 4th Street, Lubbock, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.59324,-101.84125" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">8300 State Highway 108, Texarkana, AR</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.51376,-93.94809" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1011 Beltway Parkway, Laredo, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ TA Travel Center <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>⛽ Pilot <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.68589,-99.4656" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">13712 Northwestern Avenue, Franksville, WI</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.77866,-87.95116" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1172 West 21St Street, Ogden, UT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.2313,-112.00735" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">844 East 1250 South, Haubstadt, IN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.17522,-87.55188" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1920 Harrison Drive, Evanston, WY</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.26487,-110.97787" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">121 North 129 E Ave, Tulsa, OK</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16264,-95.83236" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">7800 West Grand River Ave., Grand Ledge, MI</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.7878,-84.67784" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">2025 S 900 W, Salt Lake City, UT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72686,-111.91531" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">780 State Hwy 54, Black River Falls, WI</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Kwik Trip <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.29578,-90.82975" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1810 South Douglas Hwy, Gillette, WY</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.27737,-105.4951" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">600 West 750 North, Willard, UT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.42351,-112.05211" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">15100 North Thornton Rd, Lodi, CA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>⭐ Carl&#x27;s Jr. <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.11721,-121.39364" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1501 North Jack Tone Road, Ripon, CA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🚜 Tractor Supply <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.75567,-121.14444" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J 656 - eXtend</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">82 White Street, Whiteland, IN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Love&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.55007,-86.0362" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">8051 Bagley Avenue, Northfield, MN</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.47068,-93.29473" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3400 So. Newberry Rd., North Platte, NE</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>⛽ Love&#x27;s <i>4 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.10096,-100.7273" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=NE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3475 E Washington, Saginaw, MI</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.4515,-83.89437" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">16049 Willowbrook Road, South Beloit, IL</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥪 Subway <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.49401,-88.99796" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2725 93rd Ave SW, Tumwater, WA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>⛽ Pilot <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🥪 Subway <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.9524,-122.94053" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">15919 North Freeway, Houston, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⛽ QuikTrip <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.99865,-95.42663" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">15236 State Route 180, Catlettsburg, KY</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.36495,-82.69625" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5201 Granite Lane, Sioux Falls, SD</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.6026,-96.76705" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=SD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">1530 Rest Church Rd, Winchester, VA</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.29018,-78.08693" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">I-20 Exit 277 101 N FM 707, Tye, TX</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.46116,-99.87201" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5625 W. Winnemucca Blvd., Winnemucca, NV</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>⛽ Pilot <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.93097,-117.80387" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4401 32nd Avenue South, Grand Forks, ND</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>🥩 Arby&#x27;s <i>8 min</i></span><span>💻 Best Buy <i>10 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.88791,-97.09207" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=ND">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Flying J within walking distance in the US?</summary><p>230 public DC fast chargers in the US have a Flying J within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Flying J charging stop is fastest in the US?</summary><p>TA Thompson Road, Baytown, TX in Baytown at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

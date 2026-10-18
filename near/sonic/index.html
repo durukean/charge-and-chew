@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Sonic">Open on the map →</a>
 <p class="stats">Of the 724 fast chargers with a Sonic nearby across the US: The typical stop here delivers <b>240 kW</b>, and 489 of them do 150 kW or more; <b>151</b> are close enough that the Sonic is a two-minute walk or less; <b>643</b> are listed as open 24 hours. The fastest is <b>Target - Tesla Supercharger</b> in Longview at 500 kW; the closest walk is 1 min at <b>Sonic Vista</b>. Most are on Tesla Supercharger (195), ChargePoint (128), Electrify America (79).</p>
 <h2>By state</h2><div class="chips"><a href="tx/">Texas <small>155</small></a><a href="ca/">California <small>57</small></a><a href="ok/">Oklahoma <small>41</small></a><a href="tn/">Tennessee <small>29</small></a><a href="mo/">Missouri <small>28</small></a><a href="ny/">New York <small>27</small></a><a href="nm/">New Mexico <small>25</small></a><a href="co/">Colorado <small>24</small></a><a href="ga/">Georgia <small>24</small></a><a href="va/">Virginia <small>21</small></a><a href="nc/">North Carolina <small>19</small></a><a href="fl/">Florida <small>19</small></a><a href="il/">Illinois <small>19</small></a><a href="al/">Alabama <small>18</small></a><a href="md/">Maryland <small>16</small></a><a href="ar/">Arkansas <small>16</small></a><a href="wa/">Washington <small>15</small></a><a href="la/">Louisiana <small>13</small></a><a href="ms/">Mississippi <small>13</small></a><a href="oh/">Ohio <small>12</small></a><a href="ut/">Utah <small>12</small></a><a href="ks/">Kansas <small>10</small></a><a href="sc/">South Carolina <small>10</small></a><a href="mi/">Michigan <small>10</small></a><a href="ne/">Nebraska <small>10</small></a><a href="az/">Arizona <small>10</small></a><a href="in/">Indiana <small>9</small></a><a href="or/">Oregon <small>9</small></a><a href="nj/">New Jersey <small>8</small></a><a href="id/">Idaho <small>7</small></a><a href="pa/">Pennsylvania <small>7</small></a><a href="ct/">Connecticut <small>6</small></a><a href="nv/">Nevada <small>6</small></a><a href="ky/">Kentucky <small>5</small></a><a href="ma/">Massachusetts <small>3</small></a><a href="ri/">Rhode Island <small>2</small></a><a href="wy/">Wyoming <small>2</small></a><a href="ia/">Iowa <small>2</small></a><a href="mn/">Minnesota <small>2</small></a><a href="mt/">Montana <small>1</small></a><a href="wv/">West Virginia <small>1</small></a><a href="nd/">North Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sonic Vista</span><small>90 kW · 16 stalls</small></div>
-<div class="a">101 Main St, Vista, CA</div><div class="host">Chaevi</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.20115,-117.24274" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Boise, ID - North Orchard Street - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">851 N Orchard St, Boise, ID</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=ID">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.61216,-116.24407" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Greenville, TX - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">3004 I-30 Frontage Rd, Greenville, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.13435,-96.0551" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Rifle, CO - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">675 Wapiti Ct, Rifle, CO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🛒 Walmart ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.52278,-107.77445" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lake Charles, LA - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
-<div class="a">1772 W Prien Lake Road, Lake Charles, LA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🏪 Sam&#x27;s Club ≥2 min</span><span>💊 CVS ≥3 min</span><span>🎯 Target ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.19907,-93.24881" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sonic Pecos (Pecos, TX)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5101 South Cedar St., Pecos, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍗 KFC ≥2 min</span><span>⛽ Flying J ≥3 min</span><span>👑 Burger King ≥5 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>☕ Starbucks ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.40316,-103.48451" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Exxon - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">4295 S Beltline Rd, Balch Springs, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.70612,-96.58566" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>777 Cranston St</span><small>180 kW · 4 stalls</small></div>
-<div class="a">777 Cranston Street, Cranston, RI</div><div class="host">Shell Recharge</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>🤠 Texas Roadhouse ≥6 min</span><span>🔧 Lowe&#x27;s ≥10 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=RI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.80344,-71.44123" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gateway of Euless</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3050 Highway 360, Euless, TX</div><div class="host">EVgo</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.88052,-97.07411" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Alvarado, TX - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">3313 I-35W, Alvarado, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>⛽ Pilot ≥2 min</span><span>🏪 Dollar General ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.46435,-97.26458" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ozona, TX - 14th Street - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">704 14th St, Ozona, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🏪 Dollar General ≥8 min</span><span>⛽ Pilot ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.70646,-101.20256" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hannibal, MO - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4215 McMasters Ave, Hannibal, MO</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍕 Casey&#x27;s ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>💊 CVS ≥6 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.7182,-91.3924" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Quanah, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1201 W 11th St, Quanah, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🏪 Dollar General ≥3 min</span><span>⛽ Love&#x27;s ≥3 min</span><span>🥪 Subway ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.29173,-99.75522" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bardin</span><small>180 kW · 2 stalls</small></div>
-<div class="a">4055 South Great Southwest Parkway, Grand Prairie, TX</div><div class="host">Racetrac</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>⛽ RaceTrac ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>👑 Burger King ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67298,-97.04454" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wawa Capitol Heights #0597</span><small>100 kW · 2 stalls</small></div>
-<div class="a">1401 Hampton Park Blvd, Capitol Heights, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥪 Subway ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.87044,-76.85116" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Oakley, KS - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">3689 US-40, Oakley, KS</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=KS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.11878,-100.81231" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>New Milford, CT - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">291 Danbury Road, New Milford, CT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.53864,-73.42194" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dallas, TX - Mountain Creek Parkway - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4880 Mountain Creek Pkwy, Dallas, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.67228,-96.96882" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Euless, TX - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">3050 TX-360, Euless, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.88079,-97.07451" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Lake Charles, LA</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1758 w Prien Lake Rd, Lake Charles, LA</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>💊 CVS ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>🎯 Target ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.19864,-93.24812" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4105 S. Loop 1604, San Antonio, TX</div><div class="host">EVgo</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍔 Whataburger ≥2 min</span><span>⛽ QuikTrip ≥3 min</span><span>👑 Burger King ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.21937,-98.41575" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Elizabeth, NJ - Spring Street - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">595 Spring St, Elizabeth, NJ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🦆 Wawa ≥1 min</span><span>⛽ Speedway ≥3 min</span><span>🍟 McDonald&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.67254,-74.19951" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Holiday Inn Express Oroville</span><small>50 kW · 8 stalls</small></div>
-<div class="a">550 Oro Dam Blvd, Oroville, CA</div><div class="host">EVCS</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🚜 Tractor Supply ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.49933,-121.56865" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1949 (Fredonia, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">10401 Bennett Road, Fredonia, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍗 Popeyes ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.45379,-79.31118" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Peabody MA Mercedes Benz HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">57 Newbury St, Peabody, MA</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=MA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.52605,-70.99476" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Shell Longview</span><small>160 kW · 4 stalls</small></div>
-<div class="a">3302 S Eastman Rd, Longview, TX</div><div class="host">Red E</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍔 Whataburger ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.45204,-94.70766" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Shell Italy</span><small>300 kW · 4 stalls</small></div>
-<div class="a">1020 Dale Evans Dr, Italy, TX</div><div class="host">Red E</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🏪 Dollar General ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.19484,-96.89724" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Quality INN Woodland</span><small>120 kW · 8 stalls</small></div>
-<div class="a">1562 E Main St, Woodland, CA</div><div class="host">EV Gateway</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.67615,-121.74847" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Baton Rouge, LA - Highland Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">18149 Highland Rd, Baton Rouge, LA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 Popeyes ≥2 min</span><span>🔨 Home Depot ≥2 min</span><span>⛽ RaceTrac ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=LA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.3489,-91.02841" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Annapolis Hynda</span><small>62 kW · 1 stall</small></div>
-<div class="a">3101 Solomons Island Rd, Edgewater, MD</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍕 Domino&#x27;s ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.93934,-76.56456" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Wake Forest, NC - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">12536 Capital Blvd, Wake Forest, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍝 Olive Garden ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>🍗 KFC ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.98654,-78.53259" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bill Knight Ford Stillwater</span><small>150 kW · 2 stalls</small></div>
-<div class="a">4405 W 6th Ave, Stillwater, OK</div><div class="host">Francis Energy</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Dutch Bros ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11461,-97.11686" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Shoppes at Boyette MB.HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">11270 Boyette Rd., Riverview, FL</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>⛽ Circle K ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.85422,-82.31586" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Dcf - Jv Dcf Pomona2</span><small>62 kW · 1 stall</small></div>
-<div class="a">44 Rio Rancho Road, Pomona, CA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Wingstop ≥5 min</span><span>⭐ Carl&#x27;s Jr. ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.02958,-117.75896" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cookeville, TN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">377 West Jackson Street, Cookeville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>💊 Walgreens ≥3 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.15584,-85.5152" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kokomo, IN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">2301 East Markland Avenue, Kokomo, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>⛽ Speedway ≥2 min</span><span>🏪 Sam&#x27;s Club ≥5 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.47582,-86.09978" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mlec Station 2 (R) W</span><small>102 kW · 1 stall</small></div>
-<div class="a">210 West Main St, Waverly, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 CVS ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.0827,-87.79769" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Gunnison</span><small>200 kW · 1 stall</small></div>
-<div class="a">202 E Tomichi Ave, Gunnison, CO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Safeway ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>⛽ Love&#x27;s ≥8 min</span><span>☕ Starbucks ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.54489,-106.9251" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Socorro, NM - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1100 N California St, Socorro, NM</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍕 Domino&#x27;s ≥5 min</span><span>🏪 Dollar General ≥5 min</span><span>🥪 Subway ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=NM">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07172,-106.89296" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Albany, GA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2831 Ledo Road, Albany, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚗 <b>Sonic</b> ≥1 min</span><span>🥞 IHOP ≥1 min</span><span>🛒 Walmart ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>🚜 Tractor Supply ≥6 min</span><span>🛒 Publix ≥10 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sonic&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.62398,-84.21581" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm other" title="Chaevi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sonic Vista</div>
+<div class="sp"><s class="spd std">90 kW</s><b>16 stalls</b><span>Chaevi</span></div>
+<div class="a">101 Main St, Vista, CA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.20115,-117.24274" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Boise, ID - North Orchard Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">851 N Orchard St, Boise, ID</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.61216,-116.24407" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=ID">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Greenville, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3004 I-30 Frontage Rd, Greenville, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.13435,-96.0551" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Rifle, CO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">675 Wapiti Ct, Rifle, CO</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🛒 Walmart <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.52278,-107.77445" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lake Charles, LA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1772 W Prien Lake Road, Lake Charles, LA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.19907,-93.24881" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sonic Pecos (Pecos, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">5101 South Cedar St., Pecos, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>⛽ Flying J <i>3 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.40316,-103.48451" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Exxon - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4295 S Beltline Rd, Balch Springs, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.70612,-96.58566" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Shell Recharge" style="background:#fbce07;color:#1b1b1b">S</span></div><div class="body">
+<div class="n">777 Cranston St</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Shell Recharge</span></div>
+<div class="a">777 Cranston Street, Cranston, RI</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>🤠 Texas Roadhouse <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>10 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.80344,-71.44123" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=RI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Gateway of Euless</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3050 Highway 360, Euless, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.88052,-97.07411" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Alvarado, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3313 I-35W, Alvarado, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.46435,-97.26458" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ozona, TX - 14th Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">704 14th St, Ozona, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🏪 Dollar General <i>8 min</i></span><span>⛽ Pilot <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.70646,-101.20256" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hannibal, MO - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4215 McMasters Ave, Hannibal, MO</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍕 Casey&#x27;s <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>💊 CVS <i>6 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.7182,-91.3924" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Quanah, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1201 W 11th St, Quanah, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>⛽ Love&#x27;s <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.29173,-99.75522" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Racetrac"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bardin</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Racetrac</span></div>
+<div class="a">4055 South Great Southwest Parkway, Grand Prairie, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>⛽ RaceTrac <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.67298,-97.04454" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Wawa Capitol Heights #0597</div>
+<div class="sp"><s class="spd std">100 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">1401 Hampton Park Blvd, Capitol Heights, MD</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.87044,-76.85116" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Oakley, KS - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3689 US-40, Oakley, KS</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>⛽ TA Travel Center <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.11878,-100.81231" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=KS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">New Milford, CT - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">291 Danbury Road, New Milford, CT</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.53864,-73.42194" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dallas, TX - Mountain Creek Parkway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4880 Mountain Creek Pkwy, Dallas, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.67228,-96.96882" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Euless, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3050 TX-360, Euless, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.88079,-97.07451" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Lake Charles, LA</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1758 w Prien Lake Rd, Lake Charles, LA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.19864,-93.24812" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">4105 S. Loop 1604, San Antonio, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍔 Whataburger <i>2 min</i></span><span>⛽ QuikTrip <i>3 min</i></span><span>👑 Burger King <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.21937,-98.41575" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Elizabeth, NJ - Spring Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">595 Spring St, Elizabeth, NJ</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.67254,-74.19951" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Holiday Inn Express Oroville</div>
+<div class="sp"><s class="spd std">50 kW</s><b>8 stalls</b><span>EVCS</span></div>
+<div class="a">550 Oro Dam Blvd, Oroville, CA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🚜 Tractor Supply <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.49933,-121.56865" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1949 (Fredonia, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">10401 Bennett Road, Fredonia, NY</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.45379,-79.31118" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Peabody MA Mercedes Benz HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">57 Newbury St, Peabody, MA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.52605,-70.99476" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=MA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Shell Longview</div>
+<div class="sp"><s class="spd fast">160 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">3302 S Eastman Rd, Longview, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍔 Whataburger <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.45204,-94.70766" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Shell Italy</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">1020 Dale Evans Dr, Italy, TX</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.19484,-96.89724" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Quality INN Woodland</div>
+<div class="sp"><s class="spd std">120 kW</s><b>8 stalls</b><span>EV Gateway</span></div>
+<div class="a">1562 E Main St, Woodland, CA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.67615,-121.74847" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Baton Rouge, LA - Highland Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">18149 Highland Rd, Baton Rouge, LA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍗 Popeyes <i>2 min</i></span><span>🔨 Home Depot <i>2 min</i></span><span>⛽ RaceTrac <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.3489,-91.02841" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=LA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Annapolis Hynda</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3101 Solomons Island Rd, Edgewater, MD</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍕 Domino&#x27;s <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.93934,-76.56456" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Wake Forest, NC - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">12536 Capital Blvd, Wake Forest, NC</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🥪 Jersey Mike&#x27;s <i>5 min</i></span><span>🍗 KFC <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.98654,-78.53259" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Francis Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Bill Knight Ford Stillwater</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>Francis Energy</span></div>
+<div class="a">4405 W 6th Ave, Stillwater, OK</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Dutch Bros <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11461,-97.11686" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Shoppes at Boyette MB.HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">11270 Boyette Rd., Riverview, FL</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>⛽ Circle K <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.85422,-82.31586" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Dcf - Jv Dcf Pomona2</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">44 Rio Rancho Road, Pomona, CA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 Wingstop <i>5 min</i></span><span>⭐ Carl&#x27;s Jr. <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.02958,-117.75896" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cookeville, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">377 West Jackson Street, Cookeville, TN</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🍗 Zaxby&#x27;s <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.15584,-85.5152" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kokomo, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2301 East Markland Avenue, Kokomo, IN</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>⛽ Speedway <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>5 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.47582,-86.09978" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mlec Station 2 (R) W</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">210 West Main St, Waverly, TN</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>💊 CVS <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.0827,-87.79769" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Gunnison</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">202 E Tomichi Ave, Gunnison, CO</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 Safeway <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>⛽ Love&#x27;s <i>8 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.54489,-106.9251" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Socorro, NM - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1100 N California St, Socorro, NM</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍕 Domino&#x27;s <i>5 min</i></span><span>🏪 Dollar General <i>5 min</i></span><span>🥪 Subway <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.07172,-106.89296" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=NM">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Albany, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2831 Ledo Road, Albany, GA</div>
+<div class="c"><span>🚗 <b>Sonic</b> <i>1 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>🚜 Tractor Supply <i>6 min</i></span><span>🛒 Publix <i>10 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.62398,-84.21581" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sonic&amp;state=GA">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Sonic within walking distance in the US?</summary><p>724 public DC fast chargers in the US have a Sonic within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Sonic charging stop is fastest in the US?</summary><p>Target - Tesla Supercharger in Longview at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

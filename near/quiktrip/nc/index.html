@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,61 +33,72 @@
 <p class="lead"><b>11 DC fast chargers</b> in North Carolina have a QuikTrip within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=QuikTrip&amp;state=NC">Open on the map →</a>
 <p class="stats">Of the 11 fast chargers with a QuikTrip nearby in North Carolina: The typical stop here delivers <b>325 kW</b>, and 6 of them do 150 kW or more; <b>1</b> are close enough that the QuikTrip is a two-minute walk or less; <b>9</b> are listed as open 24 hours. The fastest is <b>Gastonia, NC Rechargery Relay @ Circle K - N. Chester St.</b> in Gastonia at 400 kW; the closest walk is 1 min at <b>N. Graham</b>. Most are on EV Connect (4), IONNA (1), ChargePoint (1).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>N. Graham</span><small>360 kW · 8 stalls</small></div>
-<div class="a">1100 N. Graham St., Charlotte, NC</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥1 min</span><span>⛽ Circle K ≥7 min</span><span>🍦 Ice cream shop ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.23884,-80.83604" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Randy Marion Cadillac</span><small>50 kW · 1 stall</small></div>
-<div class="a">220 West Plaza Drive, Mooresville, NC</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥4 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍗 Zaxby&#x27;s ≥6 min</span><span>🍕 Little Caesars ≥7 min</span><span>🥪 Jersey Mike&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.59108,-80.84534" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Gastonia, NC Rechargery Relay @ Circle K - N. Chester St.</span><small>400 kW · 4 stalls</small></div>
-<div class="a">2106 N. Chester St., Gastonia, NC</div><div class="host">IONNA</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥5 min</span><span>🌮 Taco Bell ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🍔 Wendy&#x27;s ≥7 min</span><span>🍗 Zaxby&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.28737,-81.1875" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Ben Mynatt Chevrolet Cadillac</span><small>50 kW · 1 stall</small></div>
-<div class="a">281 Concord Pkwy South, Concord, NC</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥5 min</span><span>🍔 Cook Out ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span><span>🥪 Subway ≥5 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39483,-80.61202" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Modern Hyundai</span><small>62 kW · 1 stall</small></div>
-<div class="a">965 Concord Pkwy S, Concord, NC</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥6 min</span><span>🛒 Aldi ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>🛒 Walmart ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39231,-80.62172" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 5 stalls</small></div>
-<div class="a">2825 Lane Street, Kannapolis, NC</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥7 min</span><span>⛽ Pilot ≥1 min</span><span>🍗 Bojangles ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.49795,-80.56099" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Modern Nissan - Concord</span><small>50 kW · 1 stall</small></div>
-<div class="a">967 Concord Pkwy S, Concord, NC</div><div class="host">Non-networked</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥8 min</span><span>🛒 Aldi ≥2 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🤡 Jack in the Box ≥4 min</span><span>🛒 Walmart ≥4 min</span><span>🍗 Popeyes ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.39209,-80.62277" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart EV Charging</span><small>400 kW · 8 stalls</small></div>
-<div class="a">5825 Thunder Rd, Concord, NC</div><div class="host">Walmart Charge</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥8 min</span><span>🛒 Walmart ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🔧 Lowe&#x27;s ≥5 min</span><span>🍕 Domino&#x27;s ≥7 min</span><span>👑 Burger King ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.37871,-80.72483" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Charlotte, NC - Panara Drive - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">8111 Panara Dr, Charlotte, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥9 min</span><span>☕ Starbucks ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🍗 Wingstop ≥4 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>🍦 Ice cream shop ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.36966,-80.73328" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Mark Ficken Ford</span><small>120 kW · 4 stalls</small></div>
-<div class="a">7601 South Blvd, Charlotte, NC</div><div class="host">Red E</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.13027,-80.87457" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Ayrsley</span><small>360 kW · 12 stalls</small></div>
-<div class="a">8419 S. Tryon St., Charlotte, NC</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>QuikTrip</b> ≥10 min</span><span>⛽ Circle K ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🥞 IHOP ≥6 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.13994,-80.93274" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">N. Graham</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>8 stalls</b><span>EV Connect</span></div>
+<div class="a">1100 N. Graham St., Charlotte, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>1 min</i></span><span>⛽ Circle K <i>7 min</i></span><span>🍦 Ice cream shop <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.23884,-80.83604" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Randy Marion Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">220 West Plaza Drive, Mooresville, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>4 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>6 min</i></span><span>🍕 Little Caesars <i>7 min</i></span><span>🥪 Jersey Mike&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.59108,-80.84534" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Gastonia, NC Rechargery Relay @ Circle K - N. Chester St.</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>4 stalls</b><span>IONNA</span></div>
+<div class="a">2106 N. Chester St., Gastonia, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>5 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span><span>🍗 Zaxby&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.28737,-81.1875" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ben Mynatt Chevrolet Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">281 Concord Pkwy South, Concord, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>5 min</i></span><span>🍔 Cook Out <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.39483,-80.61202" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Modern Hyundai</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">965 Concord Pkwy S, Concord, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>6 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.39231,-80.62172" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>5 stalls</b><span>EVgo</span></div>
+<div class="a">2825 Lane Street, Kannapolis, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>7 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍗 Bojangles <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.49795,-80.56099" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Modern Nissan - Concord</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">967 Concord Pkwy S, Concord, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>8 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🤡 Jack in the Box <i>4 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>🍗 Popeyes <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.39209,-80.62277" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Walmart Charge" style="background:#0071ce;color:#ffc220">W</span></div><div class="body">
+<div class="n">Walmart EV Charging</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>Walmart Charge</span></div>
+<div class="a">5825 Thunder Rd, Concord, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>8 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>5 min</i></span><span>🍕 Domino&#x27;s <i>7 min</i></span><span>👑 Burger King <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.37871,-80.72483" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Charlotte, NC - Panara Drive - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8111 Panara Dr, Charlotte, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>9 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🍗 Wingstop <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>🍦 Ice cream shop <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.36966,-80.73328" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Mark Ficken Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">7601 South Blvd, Charlotte, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.13027,-80.87457" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ayrsley</div>
+<div class="sp"><s class="spd ultra">360 kW</s><b>12 stalls</b><span>EV Connect</span></div>
+<div class="a">8419 S. Tryon St., Charlotte, NC</div>
+<div class="c"><span>⛽ <b>QuikTrip</b> <i>10 min</i></span><span>⛽ Circle K <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🥞 IHOP <i>6 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.13994,-80.93274" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=QuikTrip&amp;state=NC">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in North Carolina</h2><div class="chips"><a href="../../mcdonald-s/nc/">🍟 McDonald&#x27;s <small>104</small></a><a href="../../starbucks/nc/">☕ Starbucks <small>82</small></a><a href="../../ice-cream-shop/nc/">🍦 Ice cream shop <small>76</small></a><a href="../../bojangles/nc/">🍗 Bojangles <small>74</small></a><a href="../../taco-bell/nc/">🌮 Taco Bell <small>71</small></a><a href="../../subway/nc/">🥪 Subway <small>70</small></a><a href="../../chick-fil-a/nc/">🐔 Chick-fil-A <small>68</small></a><a href="../../wendy-s/nc/">🍔 Wendy&#x27;s <small>67</small></a><a href="../../walmart/nc/">🛒 Walmart <small>62</small></a><a href="../../burger-king/nc/">👑 Burger King <small>57</small></a><a href="../../walgreens/nc/">💊 Walgreens <small>55</small></a><a href="../../waffle-house/nc/">🧇 Waffle House <small>53</small></a><a href="../../lowe-s/nc/">🔧 Lowe&#x27;s <small>50</small></a><a href="../../dunkin/nc/">🍩 Dunkin&#x27; <small>48</small></a><a href="../../arby-s/nc/">🥩 Arby&#x27;s <small>47</small></a><a href="../../cvs/nc/">💊 CVS <small>47</small></a><a href="../../circle-k/nc/">⛽ Circle K <small>47</small></a><a href="../../speedway/nc/">⛽ Speedway <small>42</small></a><a href="../../chipotle/nc/">🌯 Chipotle <small>40</small></a><a href="../../kfc/nc/">🍗 KFC <small>37</small></a><a href="../../zaxby-s/nc/">🍗 Zaxby&#x27;s <small>37</small></a><a href="../../cook-out/nc/">🍔 Cook Out <small>37</small></a><a href="../../jersey-mike-s/nc/">🥪 Jersey Mike&#x27;s <small>35</small></a><a href="../../cracker-barrel/nc/">🪵 Cracker Barrel <small>32</small></a><a href="../../panera-bread/nc/">🥖 Panera Bread <small>32</small></a><a href="../../firehouse-subs/nc/">🚒 Firehouse Subs <small>32</small></a><a href="../../sheetz/nc/">⛽ Sheetz <small>31</small></a><a href="../../hardee-s/nc/">⭐ Hardee&#x27;s <small>31</small></a><a href="../../aldi/nc/">🛒 Aldi <small>31</small></a><a href="../../home-depot/nc/">🔨 Home Depot <small>31</small></a><a href="../../harris-teeter/nc/">🛒 Harris Teeter <small>27</small></a><a href="../../applebee-s/nc/">🍎 Applebee&#x27;s <small>26</small></a><a href="../../pizza-hut/nc/">🍕 Pizza Hut <small>26</small></a><a href="../../dollar-general/nc/">🏪 Dollar General <small>26</small></a><a href="../../ihop/nc/">🥞 IHOP <small>25</small></a><a href="../../best-buy/nc/">💻 Best Buy <small>25</small></a><a href="../../tractor-supply/nc/">🚜 Tractor Supply <small>25</small></a><a href="../../domino-s/nc/">🍕 Domino&#x27;s <small>24</small></a><a href="../../little-caesars/nc/">🍕 Little Caesars <small>21</small></a><a href="../../target/nc/">🎯 Target <small>20</small></a><a href="../../popeyes/nc/">🍗 Popeyes <small>20</small></a><a href="../../sonic/nc/">🚗 Sonic <small>19</small></a><a href="../../five-guys/nc/">🍔 Five Guys <small>18</small></a><a href="../../chili-s/nc/">🌶️ Chili&#x27;s <small>18</small></a><a href="../../olive-garden/nc/">🍝 Olive Garden <small>16</small></a><a href="../../denny-s/nc/">🍳 Denny&#x27;s <small>15</small></a><a href="../../buffalo-wild-wings/nc/">🦬 Buffalo Wild Wings <small>15</small></a><a href="../../publix/nc/">🛒 Publix <small>15</small></a><a href="../../wingstop/nc/">🍗 Wingstop <small>14</small></a><a href="../../texas-roadhouse/nc/">🤠 Texas Roadhouse <small>13</small></a><a href="../../sam-s-club/nc/">🏪 Sam&#x27;s Club <small>13</small></a><a href="../../red-robin/nc/">🐦 Red Robin <small>12</small></a><a href="../../dairy-queen/nc/">🍦 Dairy Queen <small>9</small></a><a href="../../pilot/nc/">⛽ Pilot <small>9</small></a><a href="../../panda-express/nc/">🐼 Panda Express <small>8</small></a><a href="../../krispy-kreme/nc/">🍩 Krispy Kreme <small>8</small></a><a href="../../culver-s/nc/">🍦 Culver&#x27;s <small>7</small></a><a href="../../whole-foods/nc/">🥬 Whole Foods <small>7</small></a><a href="../../costco/nc/">📦 Costco <small>6</small></a><a href="../../whataburger/nc/">🍔 Whataburger <small>5</small></a><a href="../../trader-joe-s/nc/">🛍️ Trader Joe&#x27;s <small>5</small></a><a href="../../jack-in-the-box/nc/">🤡 Jack in the Box <small>5</small></a><a href="../../flying-j/nc/">⛽ Flying J <small>4</small></a><a href="../../caribou-coffee/nc/">☕ Caribou Coffee <small>3</small></a><a href="../../sprouts/nc/">🥬 Sprouts <small>3</small></a><a href="../../love-s/nc/">⛽ Love&#x27;s <small>2</small></a><a href="../../raising-cane-s/nc/">🐕 Raising Cane&#x27;s <small>1</small></a><a href="../../shake-shack/nc/">🍔 Shake Shack <small>1</small></a><a href="../../ikea/nc/">🪑 IKEA <small>1</small></a><a href="../../wegmans/nc/">🛒 Wegmans <small>1</small></a></div>
 <h2>QuikTrip in other states</h2><div class="chips"><a href="../">All states</a></div>

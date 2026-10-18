@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,186 +38,222 @@ order along the route, IL → KY → TN.</p>
 150 kW or more and <b>39</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Acees BP Vienna</span><small>120 kW · 4 stalls</small></div>
-<div class="a">612 E Vine St, Vienna, IL</div><div class="host">Red E</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.41639,-88.87579" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center 358 - eXtend</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5353 Cairo Road, Paducah, KY</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.0975,-88.69117" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 491 (Paducah, KY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5130 Hinkleville Rd, Paducah, KY</div><div class="host">Electrify America</div>
-<div class="c"><span>🍝 <b>Olive Garden</b> ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍕 Domino&#x27;s ≥3 min</span><span>🛒 Aldi ≥3 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=Olive Garden&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.07368,-88.68949" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Steak &#x27;n Shake - Tesla Supercharger</span><small>500 kW · 8 stalls</small></div>
-<div class="a">5131 Hinkleville Rd, Paducah, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥1 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>💻 Best Buy ≥3 min</span><span>🍝 Olive Garden ≥3 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.07682,-88.6878" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Larry Stovesand</span><small>62 kW · 1 stall</small></div>
-<div class="a">3300 Park Avenue, Paducah, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Kroger</b> ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.0832,-88.65246" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Kuttawa, KY - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">62 Days Inn Dr., Kuttawa, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥3 min</span><span>⛽ Pilot ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.07351,-88.12478" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kuttawa, KY - US62 - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">2299 US-62, Kuttawa, KY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.07172,-88.12441" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 673 (Clarksville, TN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3050 Wilma Rudolph Blvd, Clarksville, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>🧇 Waffle House ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.59519,-87.2897" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Jenkins &amp; Wynne Ford, Lincoln, Honda</span><small>300 kW · 4 stalls</small></div>
-<div class="a">2655 Trenton Road, Clarksville, TN</div><div class="host">Blink</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥8 min</span><span>🛒 Publix ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.58122,-87.3128" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Wyatt Johnson Subaru</span><small>60 kW · 2 stalls</small></div>
-<div class="a">2277 Trenton Road, Clarksville, TN</div><div class="host">Blink</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥4 min</span><span>🛒 Kroger ≥6 min</span><span>🛒 Publix ≥6 min</span><span>🍗 Zaxby&#x27;s ≥7 min</span><span>🔧 Lowe&#x27;s ≥8 min</span><span>🌶️ Chili&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.57525,-87.31233" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Clarksville, TN - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">2819 Wilma Rudolph Blvd, Clarksville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥞 <b>IHOP</b> ≥1 min</span><span>🍔 Cook Out ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>🥪 Subway ≥5 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../?chain=IHOP&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.58975,-87.29083" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Burger King (HiON EV) - Tesla Supercharger</span><small>250 kW · 4 stalls</small></div>
-<div class="a">1655 International Blvd, Clarksville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥1 min</span><span>🍗 Popeyes ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.55832,-87.23953" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>I24 Exit11 Station 4 (Rr)</span><small>125 kW · 1 stall</small></div>
-<div class="a">701 Sango Road, Clarksville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.5239,-87.22337" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>I24 Exit11 Station 3 (Rm)</span><small>125 kW · 1 stall</small></div>
-<div class="a">701 Sango Road, Clarksville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.52389,-87.22334" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Nashville, TN - Dickerson Pike - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">3451 Dickerson Pike, Nashville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥8 min</span><span>🛒 Walmart ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.24457,-86.75532" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Nashville, TN - 11th Avenue North - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">500 11th Ave N, Nashville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Publix</b> ≥3 min</span><span>☕ Starbucks ≥7 min</span><span>👑 Burger King ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Publix&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.16485,-86.79087" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Action Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">307 Thompson Ln, Nashville, TN</div><div class="host">Non-networked</div>
-<div class="c"><span>💊 <b>Walgreens</b> ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍩 Krispy Kreme ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walgreens&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11033,-86.74373" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Nashville, TN - Thompson Lane - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
-<div class="a">719 Thompson Lane, Nashville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🔨 Home Depot ≥4 min</span><span>🌯 Chipotle ≥9 min</span><span>🚒 Firehouse Subs ≥9 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panera Bread&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.10583,-86.76313" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Wyatt Johnson Ford</span><small>240 kW · 4 stalls</small></div>
-<div class="a">646 Thompson Ln, Nashville, TN</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🚒 <b>Firehouse Subs</b> ≥9 min</span><span>🥪 Subway ≥10 min</span><span>🍕 Pizza Hut ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Firehouse Subs&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11201,-86.75629" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Nashville, TN - Tesla Supercharger</span><small>250 kW · 24 stalls</small></div>
-<div class="a">61 East Thompson Lane, Nashville, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🛒 <b>Kroger</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.11052,-86.72383" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Willowbrook Commons (Nashville, TN)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">61 East Thompson Lane, Nashville, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Kroger</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.1098,-86.72716" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Guest Charger Cpe250 Dcfc</span><small>62 kW · 1 stall</small></div>
-<div class="a">343 Harding Pl, Nashville, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🧇 Waffle House ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.08573,-86.69804" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Guest Charger Cpe250 DC</span><small>62 kW · 1 stall</small></div>
-<div class="a">5300 Mt. View Road, Antioch, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Kroger</b> ≥3 min</span><span>🍗 Zaxby&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>👑 Burger King ≥7 min</span><span>🍔 Wendy&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Kroger&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.0491,-86.6493" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Murfreesboro, TN - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1851 Old Fort Pkwy, Murfreesboro, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>🎯 Target ≥2 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🍔 Whataburger ≥2 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🥖 Panera Bread ≥4 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.84481,-86.42597" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Mboro Hyu Hyd L3 A Front</span><small>62 kW · 1 stall</small></div>
-<div class="a">1625 South Church Street, Murfreesboro, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🧇 <b>Waffle House</b> ≥7 min</span><span>🍔 Wendy&#x27;s ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Waffle House&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.82367,-86.39428" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Farrar Place (Manchester, TN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">920 Hillsboro Blvd, Manchester, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>⭐ <b>Hardee&#x27;s</b> ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>💊 Walgreens ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Hardee&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.47422,-86.07977" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Manchester, TN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">2224 Hillsboro Blvd., Manchester, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍩 <b>Dunkin&#x27;</b> ≥1 min</span><span>🍗 Bojangles ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Dunkin&#x27;&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.45859,-86.05735" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Monteagle, TN - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">754 W Main St, Monteagle, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⭐ <b>Hardee&#x27;s</b> ≥2 min</span><span>🧇 Waffle House ≥4 min</span><span>🏪 Dollar General ≥5 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🚗 Sonic ≥7 min</span><span>🍟 McDonald&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Hardee&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.23761,-85.85088" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">640 Dixie Lee Avenue, Monteagle, TN</div><div class="host">EVgo</div>
-<div class="c"><span>🍔 <b>Wendy&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🌮 Taco Bell ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Wendy&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.23259,-85.82606" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kimball, TN - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">300 Kimball Crossing Drive, Kimball, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🪵 Cracker Barrel ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.03979,-85.68506" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Svec Kimball 1 (L)</span><small>125 kW · 1 stall</small></div>
-<div class="a">570 Main St, Kimball, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🛒 Walmart ≥6 min</span><span>🥪 Subway ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🧇 Waffle House ≥8 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.04387,-85.67888" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Svec Kimball 2 (R)</span><small>125 kW · 1 stall</small></div>
-<div class="a">570 Main St, Kimball, TN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🔧 <b>Lowe&#x27;s</b> ≥4 min</span><span>🚜 Tractor Supply ≥4 min</span><span>🛒 Walmart ≥6 min</span><span>🥪 Subway ≥8 min</span><span>🧇 Waffle House ≥8 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.04389,-85.67883" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cracker Barrel - Tesla Supercharger</span><small>500 kW · 8 stalls</small></div>
-<div class="a">50 Birmingham Hwy, Chattanooga, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥1 min</span><span>🧇 Waffle House ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>🛒 Walmart ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.01629,-85.38314" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chattanooga, TN - Manufacturers Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">301 Manufacturers Rd, Chattanooga, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Whole Foods</b> ≥1 min</span><span>☕ Starbucks ≥6 min</span><span>💊 Walgreens ≥8 min</span><span>🛒 Publix ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Whole Foods&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.06325,-85.31496" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>River City Company Riverfront Parkway Lot (Chattanooga, TN)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">190 Riverfront Pkwy, Chattanooga, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥3 min</span><span>🍔 Five Guys ≥7 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>🥖 Panera Bread ≥8 min</span><span>🌶️ Chili&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.05548,-85.31517" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chattanooga, TN - North Mack Smith Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1460 N Mack Smith Rd, Chattanooga, TN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🪵 <b>Cracker Barrel</b> ≥1 min</span><span>🧇 Waffle House ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🍔 Whataburger ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Cracker Barrel&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.99108,-85.20814" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Acees BP Vienna</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Red E</span></div>
+<div class="a">612 E Vine St, Vienna, IL</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.41639,-88.87579" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center 358 - eXtend</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5353 Cairo Road, Paducah, KY</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.0975,-88.69117" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 491 (Paducah, KY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">5130 Hinkleville Rd, Paducah, KY</div>
+<div class="c"><span>🍝 <b>Olive Garden</b> <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍕 Domino&#x27;s <i>3 min</i></span><span>🛒 Aldi <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.07368,-88.68949" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Olive Garden&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Steak &#x27;n Shake - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">500 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5131 Hinkleville Rd, Paducah, KY</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>1 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>🍝 Olive Garden <i>3 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.07682,-88.6878" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Larry Stovesand</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3300 Park Avenue, Paducah, KY</div>
+<div class="c"><span>🛒 <b>Kroger</b> <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.0832,-88.65246" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Kroger&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kuttawa, KY - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">62 Days Inn Dr., Kuttawa, KY</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>3 min</i></span><span>⛽ Pilot <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.07351,-88.12478" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kuttawa, KY - US62 - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2299 US-62, Kuttawa, KY</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.07172,-88.12441" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 673 (Clarksville, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">3050 Wilma Rudolph Blvd, Clarksville, TN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.59519,-87.2897" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Jenkins &amp; Wynne Ford, Lincoln, Honda</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">2655 Trenton Road, Clarksville, TN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>8 min</i></span><span>🛒 Publix <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.58122,-87.3128" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Wyatt Johnson Subaru</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">2277 Trenton Road, Clarksville, TN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>4 min</i></span><span>🛒 Kroger <i>6 min</i></span><span>🛒 Publix <i>6 min</i></span><span>🍗 Zaxby&#x27;s <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>8 min</i></span><span>🌶️ Chili&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.57525,-87.31233" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Clarksville, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2819 Wilma Rudolph Blvd, Clarksville, TN</div>
+<div class="c"><span>🥞 <b>IHOP</b> <i>1 min</i></span><span>🍔 Cook Out <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>🥪 Subway <i>5 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.58975,-87.29083" target="_blank" rel="noopener">Directions</a><a href="../../?chain=IHOP&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Burger King (HiON EV) - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>4 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1655 International Blvd, Clarksville, TN</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>1 min</i></span><span>🍗 Popeyes <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.55832,-87.23953" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">I24 Exit11 Station 4 (Rr)</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">701 Sango Road, Clarksville, TN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.5239,-87.22337" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">I24 Exit11 Station 3 (Rm)</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">701 Sango Road, Clarksville, TN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.52389,-87.22334" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Nashville, TN - Dickerson Pike - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3451 Dickerson Pike, Nashville, TN</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>8 min</i></span><span>🛒 Walmart <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.24457,-86.75532" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Nashville, TN - 11th Avenue North - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">500 11th Ave N, Nashville, TN</div>
+<div class="c"><span>🛒 <b>Publix</b> <i>3 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>👑 Burger King <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.16485,-86.79087" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Publix&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Action Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">307 Thompson Ln, Nashville, TN</div>
+<div class="c"><span>💊 <b>Walgreens</b> <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍩 Krispy Kreme <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11033,-86.74373" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walgreens&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Nashville, TN - Thompson Lane - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">719 Thompson Lane, Nashville, TN</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🌯 Chipotle <i>9 min</i></span><span>🚒 Firehouse Subs <i>9 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.10583,-86.76313" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panera Bread&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Wyatt Johnson Ford</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">646 Thompson Ln, Nashville, TN</div>
+<div class="c"><span>🚒 <b>Firehouse Subs</b> <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span><span>🍕 Pizza Hut <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11201,-86.75629" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Firehouse Subs&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Nashville, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">61 East Thompson Lane, Nashville, TN</div>
+<div class="c"><span>🛒 <b>Kroger</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.11052,-86.72383" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Kroger&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Willowbrook Commons (Nashville, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">61 East Thompson Lane, Nashville, TN</div>
+<div class="c"><span>🛒 <b>Kroger</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.1098,-86.72716" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Kroger&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Guest Charger Cpe250 Dcfc</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">343 Harding Pl, Nashville, TN</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.08573,-86.69804" target="_blank" rel="noopener">Directions</a><a href="../../?chain=KFC&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Guest Charger Cpe250 DC</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5300 Mt. View Road, Antioch, TN</div>
+<div class="c"><span>🛒 <b>Kroger</b> <i>3 min</i></span><span>🍗 Zaxby&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>👑 Burger King <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.0491,-86.6493" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Kroger&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Murfreesboro, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1851 Old Fort Pkwy, Murfreesboro, TN</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>🎯 Target <i>2 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🍔 Whataburger <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.84481,-86.42597" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mboro Hyu Hyd L3 A Front</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1625 South Church Street, Murfreesboro, TN</div>
+<div class="c"><span>🧇 <b>Waffle House</b> <i>7 min</i></span><span>🍔 Wendy&#x27;s <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.82367,-86.39428" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Waffle House&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Farrar Place (Manchester, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">920 Hillsboro Blvd, Manchester, TN</div>
+<div class="c"><span>⭐ <b>Hardee&#x27;s</b> <i>2 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>💊 Walgreens <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.47422,-86.07977" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Hardee&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Manchester, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2224 Hillsboro Blvd., Manchester, TN</div>
+<div class="c"><span>🍩 <b>Dunkin&#x27;</b> <i>1 min</i></span><span>🍗 Bojangles <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.45859,-86.05735" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Dunkin&#x27;&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Monteagle, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">754 W Main St, Monteagle, TN</div>
+<div class="c"><span>⭐ <b>Hardee&#x27;s</b> <i>2 min</i></span><span>🧇 Waffle House <i>4 min</i></span><span>🏪 Dollar General <i>5 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>🚗 Sonic <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.23761,-85.85088" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Hardee&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">640 Dixie Lee Avenue, Monteagle, TN</div>
+<div class="c"><span>🍔 <b>Wendy&#x27;s</b> <i>1 min</i></span><span>⛽ Pilot <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.23259,-85.82606" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Wendy&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Kimball, TN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">300 Kimball Crossing Drive, Kimball, TN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🪵 Cracker Barrel <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.03979,-85.68506" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Svec Kimball 1 (L)</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">570 Main St, Kimball, TN</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🧇 Waffle House <i>8 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.04387,-85.67888" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Svec Kimball 2 (R)</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">570 Main St, Kimball, TN</div>
+<div class="c"><span>🔧 <b>Lowe&#x27;s</b> <i>4 min</i></span><span>🚜 Tractor Supply <i>4 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>🧇 Waffle House <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.04389,-85.67883" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Lowe&#x27;s&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cracker Barrel - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">500 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">50 Birmingham Hwy, Chattanooga, TN</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>1 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>🛒 Walmart <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.01629,-85.38314" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chattanooga, TN - Manufacturers Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">301 Manufacturers Rd, Chattanooga, TN</div>
+<div class="c"><span>🥬 <b>Whole Foods</b> <i>1 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>💊 Walgreens <i>8 min</i></span><span>🛒 Publix <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.06325,-85.31496" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Whole Foods&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">River City Company Riverfront Parkway Lot (Chattanooga, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">190 Riverfront Pkwy, Chattanooga, TN</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>3 min</i></span><span>🍔 Five Guys <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>🥖 Panera Bread <i>8 min</i></span><span>🌶️ Chili&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.05548,-85.31517" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chattanooga, TN - North Mack Smith Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1460 N Mack Smith Rd, Chattanooga, TN</div>
+<div class="c"><span>🪵 <b>Cracker Barrel</b> <i>1 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🍔 Whataburger <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.99108,-85.20814" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Cracker Barrel&amp;state=TN">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

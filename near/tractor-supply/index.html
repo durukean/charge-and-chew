@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Tractor Supply">Open on the map →</a>
 <p class="stats">Of the 461 fast chargers with a Tractor Supply nearby across the US: The typical stop here delivers <b>180 kW</b>, and 297 of them do 150 kW or more; <b>64</b> are close enough that the Tractor Supply is a two-minute walk or less; <b>410</b> are listed as open 24 hours. The fastest is <b>Target - Tesla Supercharger</b> in Longview at 500 kW; the closest walk is 1 min at <b>Sisk Nissan</b>. Most are on Tesla Supercharger (104), ChargePoint (89), Electrify America (52).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>42</small></a><a href="ny/">New York <small>35</small></a><a href="mi/">Michigan <small>29</small></a><a href="tx/">Texas <small>29</small></a><a href="nc/">North Carolina <small>25</small></a><a href="fl/">Florida <small>23</small></a><a href="ga/">Georgia <small>20</small></a><a href="wa/">Washington <small>18</small></a><a href="va/">Virginia <small>16</small></a><a href="oh/">Ohio <small>16</small></a><a href="mo/">Missouri <small>13</small></a><a href="sc/">South Carolina <small>11</small></a><a href="in/">Indiana <small>10</small></a><a href="md/">Maryland <small>10</small></a><a href="ms/">Mississippi <small>10</small></a><a href="il/">Illinois <small>10</small></a><a href="pa/">Pennsylvania <small>10</small></a><a href="or/">Oregon <small>9</small></a><a href="ok/">Oklahoma <small>9</small></a><a href="ky/">Kentucky <small>8</small></a><a href="co/">Colorado <small>8</small></a><a href="mt/">Montana <small>7</small></a><a href="az/">Arizona <small>7</small></a><a href="tn/">Tennessee <small>7</small></a><a href="wi/">Wisconsin <small>6</small></a><a href="ut/">Utah <small>6</small></a><a href="ne/">Nebraska <small>6</small></a><a href="nh/">New Hampshire <small>5</small></a><a href="wv/">West Virginia <small>5</small></a><a href="ks/">Kansas <small>5</small></a><a href="nm/">New Mexico <small>5</small></a><a href="ia/">Iowa <small>5</small></a><a href="al/">Alabama <small>4</small></a><a href="me/">Maine <small>4</small></a><a href="ma/">Massachusetts <small>4</small></a><a href="ar/">Arkansas <small>4</small></a><a href="nd/">North Dakota <small>3</small></a><a href="nv/">Nevada <small>3</small></a><a href="vt/">Vermont <small>2</small></a><a href="nj/">New Jersey <small>2</small></a><a href="sd/">South Dakota <small>2</small></a><a href="wy/">Wyoming <small>2</small></a><a href="la/">Louisiana <small>2</small></a><a href="mn/">Minnesota <small>1</small></a><a href="ct/">Connecticut <small>1</small></a><a href="id/">Idaho <small>1</small></a><a href="de/">Delaware <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sisk Nissan</span><small>44 kW · 1 stall</small></div>
-<div class="a">10800 Eagle Way, Hopkinsville, KY</div><div class="host">Non-networked</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥6 min</span><span>🥖 Panera Bread ≥8 min</span><span>🐔 Chick-fil-A ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.81896,-87.47486" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolveNY Liberty</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1933 NY-52, Liberty, NY</div><div class="host">Pisoev Charging</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🏪 Dollar General ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.78329,-74.71857" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Moore Hyundai Don Moore</span><small>102 kW · 1 stall</small></div>
-<div class="a">3200 Villa Point, Owensboro, KY</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🍗 KFC ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🍕 Pizza Hut ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>💊 Walgreens ≥4 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=KY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.7523,-87.06218" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fort Wayne, IN - Maysville Road - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">10301 Maysville Road, Fort Wayne, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🛒 Meijer ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🥪 Subway ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.13411,-85.01439" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Myrtle Creek, OR - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">200 Pruner Road, Myrtle Creek, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.97262,-123.33903" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chipley, FL</span><small>300 kW · 6 stalls</small></div>
-<div class="a">1610 Main Street, Chipley, FL</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🧇 Waffle House ≥2 min</span><span>🍗 KFC ≥2 min</span><span>👑 Burger King ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.75384,-85.55095" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pauli Ford</span><small>120 kW · 4 stalls</small></div>
-<div class="a">2380 Old U.S. 27, Saint Johns, MI</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🥪 Subway ≥5 min</span><span>🛒 Walmart ≥6 min</span><span>🍗 KFC ≥6 min</span><span>🍦 Ice cream shop ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.98131,-84.5436" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam Boswell GMC</span><small>50 kW · 1 stall</small></div>
-<div class="a">1309 Boll Weevil Cir,, Enterprise, AL</div><div class="host">EV Connect</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🔧 Lowe&#x27;s ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.33233,-85.8639" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Tractor Supply Plaza</span><small>150 kW · 2 stalls</small></div>
-<div class="a">800 Central St, Millinocket, ME</div><div class="host">Jule</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🏪 Dollar General ≥3 min</span><span>⛽ Circle K ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=ME">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.65712,-68.68905" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>LA Fitness - Tacoma Pacific</span><small>200 kW · 8 stalls</small></div>
-<div class="a">15707 Pacific Avenue South, Spanaway, WA</div><div class="host">EVCS</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥1 min</span><span>🛒 Safeway ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>💊 Walgreens ≥6 min</span><span>🌯 Chipotle ≥7 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.11438,-122.43241" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Giddings, TX - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">3025 East Austin Street, Giddings, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🦫 Buc-ee&#x27;s ≥8 min</span><span>🥪 Subway ≥8 min</span><span>☕ Starbucks ≥9 min</span><span>🏪 Dollar General ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.17893,-96.90698" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Acura at Wappingers Falls</span><small>50 kW · 4 stalls</small></div>
-<div class="a">1271 US-9 S, Wappingers Falls, NY</div><div class="host">Vialynk</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.5747,-73.90991" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Denny&#x27;s Red Roof Inn (Herkimer, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">100 Marginal Rd., Herkimer, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍳 Denny&#x27;s ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🍗 KFC ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍩 Dunkin&#x27; ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.01885,-74.99188" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Uvalde, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">515 E Main St, Uvalde, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.21177,-99.77725" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2605 West Commerce Street, Buffalo, TX</div><div class="host">EVgo</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>⛽ Pilot ≥2 min</span><span>🚗 Sonic ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=31.447,-96.07941" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Schnucks War-Dc1</span><small>62 kW · 1 stall</small></div>
-<div class="a">499 E. Veterans memorial parkway, Warrenton, MO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>💊 Walgreens ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🤡 Jack in the Box ≥6 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81983,-91.14349" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>B&amp;B Ford</span><small>180 kW · 2 stalls</small></div>
-<div class="a">10476 Dunbarton Blvd, Barnwell, SC</div><div class="host">EV Connect</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🍗 KFC ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.24394,-81.37654" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Georgia Power E Ellijay</span><small>125 kW · 1 stall</small></div>
-<div class="a">696 1st Ave, East Ellijay, GA</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🧇 Waffle House ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🏪 Dollar General ≥9 min</span><span>🥩 Arby&#x27;s ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.67769,-84.47708" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Century Ford of Mt Airy</span><small>240 kW · 4 stalls</small></div>
-<div class="a">302 Century Dr, Mount Airy, MD</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>💊 CVS ≥2 min</span><span>🥞 IHOP ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.36844,-77.14255" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Schnucks War-Dc2</span><small>62 kW · 1 stall</small></div>
-<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div><div class="host">ChargePoint</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>💊 Walgreens ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🤡 Jack in the Box ≥6 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81983,-91.14344" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Kent Plaza - Walgreens</span><small>50 kW · 2 stalls</small></div>
-<div class="a">701 Washington Ave, Chestertown, MD</div><div class="host">Non-networked</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>💊 Walgreens ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🍗 KFC ≥1 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.22409,-76.0695" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tully, NY - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">5755 NY-80, Tully, NY</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>⛽ Circle K ≥1 min</span><span>👑 Burger King ≥3 min</span><span>🏪 Dollar General ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.80006,-76.12184" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Horseheads</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1020 Center Street, Horseheads, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>👑 Burger King ≥6 min</span><span>⛽ Speedway ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.15816,-76.8266" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Warrenton, MO Rechargery @ Schnucks - E Veterans Memorial Pk</span><small>400 kW · 6 stalls</small></div>
-<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div><div class="host">IONNA</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>💊 Walgreens ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🤡 Jack in the Box ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81987,-91.14325" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Aldi Geneseo TUL</span><small>150 kW · 8 stalls</small></div>
-<div class="a">4566 Morganview Rd, Geneseo, NY</div><div class="host">Red E</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🛒 Aldi ≥1 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🛒 Wegmans ≥5 min</span><span>🍕 Pizza Hut ≥6 min</span><span>🛒 Walmart ≥10 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.79943,-77.78013" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Winter Haven, FL - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1490 3rd St SW, Winter Haven, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>🥩 Arby&#x27;s ≥4 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>+14</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.00798,-81.7297" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sutherlin, OR - Tesla Supercharger</span><small>250 kW · 51 stalls</small></div>
-<div class="a">116 Clover Leaf Loop, Sutherlin, OR</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🌮 Taco Bell ≥1 min</span><span>🥪 Subway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥5 min</span><span>☕ Dutch Bros ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=OR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=43.3869,-123.34154" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>ALDI - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1371 S Walnut St, Starke, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🏪 Dollar General ≥7 min</span><span>🌮 Taco Bell ≥8 min</span><span>👑 Burger King ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.93258,-82.11725" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Della Honda of Plattsburgh</span><small>120 kW · 2 stalls</small></div>
-<div class="a">702 State Rte 3, Plattsburgh, NY</div><div class="host">Quickcharge</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🥪 Subway ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.69591,-73.51573" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lexington, VA - Tesla Supercharger</span><small>150 kW · 6 stalls</small></div>
-<div class="a">880 N Lee Hwy, Lexington, VA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥪 Subway ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.79702,-79.41908" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Entergy Mississippi, LLC - Cleveland</span><small>180 kW · 4 stalls</small></div>
-<div class="a">144 Kamien Way, Cleveland, MS</div><div class="host">EV Connect</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🚗 Sonic ≥5 min</span><span>👑 Burger King ≥5 min</span><span>💊 Walgreens ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.74611,-90.72076" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lexington, NC - Plaza Parkway - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">19 Plaza Parkway, Lexington, NC</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🥞 IHOP ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🪵 Cracker Barrel ≥2 min</span><span>🍕 Little Caesars ≥2 min</span><span>+15</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.78325,-80.2574" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Holiday Inn Express Ithaca</span><small>180 kW · 8 stalls</small></div>
-<div class="a">371 Elmira Rd, Ithaca, NY</div><div class="host">EV Gateway</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>⛽ Speedway ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🍩 Dunkin&#x27; ≥4 min</span><span>🍗 KFC ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.42125,-76.51761" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Electric Era Charging Station</span><small>200 kW · 8 stalls</small></div>
-<div class="a">115 Harrison Ave, Buena Vista, CO</div><div class="host">Electric Era</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>⛽ Love&#x27;s ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.85083,-106.13924" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 3459 (Bloomington, IL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2225 W Market St, Bloomington, IL</div><div class="host">Electrify America</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>⛽ Circle K ≥5 min</span><span>⛽ QuikTrip ≥5 min</span><span>🛒 Aldi ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=IL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.48811,-89.04125" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Crosstown Motors</span><small>180 kW · 2 stalls</small></div>
-<div class="a">650 Meadow Street, Littleton, NH</div><div class="host">Blink</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍎 Applebee&#x27;s ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>☕ Starbucks ≥3 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.30516,-71.80433" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6518 (Bristol, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">13249 Lee Highway, Bristol, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🏪 Sam&#x27;s Club ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>New Philadelphia, OH - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">1281 W High Ave, New Philadelphia, OH</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>👑 Burger King ≥1 min</span><span>⛽ Sheetz ≥1 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=OH">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.49393,-81.47344" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>White Plains, MD - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4210 Crain Highway, White Plains, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🦆 Wawa ≥1 min</span><span>💊 CVS ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.59569,-76.93737" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Romeo Chevrolet</span><small>50 kW · 3 stalls</small></div>
-<div class="a">1665 Ulster Ave, Lake Katrine, NY</div><div class="host">Non-networked</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.98033,-73.99026" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sisk Nissan</div>
+<div class="sp"><s class="spd slow">44 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">10800 Eagle Way, Hopkinsville, KY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>6 min</i></span><span>🥖 Panera Bread <i>8 min</i></span><span>🐔 Chick-fil-A <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.81896,-87.47486" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Pisoev Charging"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVolveNY Liberty</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Pisoev Charging</span></div>
+<div class="a">1933 NY-52, Liberty, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🏪 Dollar General <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.78329,-74.71857" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Moore Hyundai Don Moore</div>
+<div class="sp"><s class="spd std">102 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3200 Villa Point, Owensboro, KY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍕 Pizza Hut <i>3 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>💊 Walgreens <i>4 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.7523,-87.06218" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=KY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fort Wayne, IN - Maysville Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">10301 Maysville Road, Fort Wayne, IN</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>🥪 Subway <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.13411,-85.01439" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Myrtle Creek, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">200 Pruner Road, Myrtle Creek, OR</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.97262,-123.33903" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Chipley, FL</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">1610 Main Street, Chipley, FL</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🧇 Waffle House <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.75384,-85.55095" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Pauli Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">2380 Old U.S. 27, Saint Johns, MI</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🛒 Walmart <i>6 min</i></span><span>🍗 KFC <i>6 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.98131,-84.5436" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Sam Boswell GMC</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">1309 Boll Weevil Cir,, Enterprise, AL</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.33233,-85.8639" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Jule"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Tractor Supply Plaza</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>2 stalls</b><span>Jule</span></div>
+<div class="a">800 Central St, Millinocket, ME</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>⛽ Circle K <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.65712,-68.68905" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=ME">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EVCS"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">LA Fitness - Tacoma Pacific</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>8 stalls</b><span>EVCS</span></div>
+<div class="a">15707 Pacific Avenue South, Spanaway, WA</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>1 min</i></span><span>🛒 Safeway <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.11438,-122.43241" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Giddings, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3025 East Austin Street, Giddings, TX</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🦫 Buc-ee&#x27;s <i>8 min</i></span><span>🥪 Subway <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>🏪 Dollar General <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.17893,-96.90698" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Vialynk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Acura at Wappingers Falls</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Vialynk</span></div>
+<div class="a">1271 US-9 S, Wappingers Falls, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.5747,-73.90991" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Denny&#x27;s Red Roof Inn (Herkimer, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">100 Marginal Rd., Herkimer, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍳 Denny&#x27;s <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍗 KFC <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.01885,-74.99188" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Uvalde, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">515 E Main St, Uvalde, TX</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.21177,-99.77725" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">2605 West Commerce Street, Buffalo, TX</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>🚗 Sonic <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=31.447,-96.07941" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Schnucks War-Dc1</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">499 E. Veterans memorial parkway, Warrenton, MO</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81983,-91.14349" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">B&amp;B Ford</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>EV Connect</span></div>
+<div class="a">10476 Dunbarton Blvd, Barnwell, SC</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.24394,-81.37654" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Georgia Power E Ellijay</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">696 1st Ave, East Ellijay, GA</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🧇 Waffle House <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🏪 Dollar General <i>9 min</i></span><span>🥩 Arby&#x27;s <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.67769,-84.47708" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Century Ford of Mt Airy</div>
+<div class="sp"><s class="spd fast">240 kW</s><b>4 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">302 Century Dr, Mount Airy, MD</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.36844,-77.14255" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Schnucks War-Dc2</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81983,-91.14344" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kent Plaza - Walgreens</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">701 Washington Ave, Chestertown, MD</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.22409,-76.0695" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tully, NY - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5755 NY-80, Tully, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>⛽ Circle K <i>1 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🏪 Dollar General <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.80006,-76.12184" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Horseheads</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1020 Center Street, Horseheads, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>👑 Burger King <i>6 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.15816,-76.8266" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Warrenton, MO Rechargery @ Schnucks - E Veterans Memorial Pk</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>6 stalls</b><span>IONNA</span></div>
+<div class="a">499 E Veterans Memorial Pkwy, Warrenton, MO</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🤡 Jack in the Box <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81987,-91.14325" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Aldi Geneseo TUL</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Red E</span></div>
+<div class="a">4566 Morganview Rd, Geneseo, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🛒 Wegmans <i>5 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>🛒 Walmart <i>10 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.79943,-77.78013" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Winter Haven, FL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1490 3rd St SW, Winter Haven, FL</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>🥩 Arby&#x27;s <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>+14</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.00798,-81.7297" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Sutherlin, OR - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>51 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">116 Clover Leaf Loop, Sutherlin, OR</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>5 min</i></span><span>☕ Dutch Bros <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=43.3869,-123.34154" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=OR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">ALDI - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1371 S Walnut St, Starke, FL</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🏪 Dollar General <i>7 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>👑 Burger King <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.93258,-82.11725" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Quickcharge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Della Honda of Plattsburgh</div>
+<div class="sp"><s class="spd std">120 kW</s><b>2 stalls</b><span>Quickcharge</span></div>
+<div class="a">702 State Rte 3, Plattsburgh, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.69591,-73.51573" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lexington, VA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">880 N Lee Hwy, Lexington, VA</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.79702,-79.41908" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Entergy Mississippi, LLC - Cleveland</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">144 Kamien Way, Cleveland, MS</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🚗 Sonic <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span><span>💊 Walgreens <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.74611,-90.72076" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lexington, NC - Plaza Parkway - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">19 Plaza Parkway, Lexington, NC</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🥞 IHOP <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🪵 Cracker Barrel <i>2 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>+15</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.78325,-80.2574" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Gateway"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Holiday Inn Express Ithaca</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>8 stalls</b><span>EV Gateway</span></div>
+<div class="a">371 Elmira Rd, Ithaca, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🍩 Dunkin&#x27; <i>4 min</i></span><span>🍗 KFC <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.42125,-76.51761" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Electric Era"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Electric Era Charging Station</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>8 stalls</b><span>Electric Era</span></div>
+<div class="a">115 Harrison Ave, Buena Vista, CO</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>⛽ Love&#x27;s <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.85083,-106.13924" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 3459 (Bloomington, IL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2225 W Market St, Bloomington, IL</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>⛽ Circle K <i>5 min</i></span><span>⛽ QuikTrip <i>5 min</i></span><span>🛒 Aldi <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.48811,-89.04125" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=IL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Crosstown Motors</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">650 Meadow Street, Littleton, NH</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.30516,-71.80433" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6518 (Bristol, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">13249 Lee Highway, Bristol, VA</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">New Philadelphia, OH - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1281 W High Ave, New Philadelphia, OH</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>👑 Burger King <i>1 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🤠 Texas Roadhouse <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.49393,-81.47344" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=OH">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">White Plains, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4210 Crain Highway, White Plains, MD</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>💊 CVS <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.59569,-76.93737" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Romeo Chevrolet</div>
+<div class="sp"><s class="spd std">50 kW</s><b>3 stalls</b><span>Non-networked</span></div>
+<div class="a">1665 Ulster Ave, Lake Katrine, NY</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.98033,-73.99026" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=NY">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Tractor Supply within walking distance in the US?</summary><p>461 public DC fast chargers in the US have a Tractor Supply within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Tractor Supply charging stop is fastest in the US?</summary><p>Target - Tesla Supercharger in Longview at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

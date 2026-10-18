@@ -333,6 +333,10 @@ check(re.search(r"(?m)^\s*center\.restored = true;", _html) is not None and re.s
       "a search with no place uses an area restored from a previous visit again (the 'other state' bug)")
 check("locate('center', hp ? { thenPoi: hp } : {});" in _html,
       "'<category> near me' forgets the category again")
+# The static pages mirror the app's rows: network marks read from index.html (one source).
+_ih = open(os.path.join(HERE, "near", "in-n-out", "ca", "index.html"), encoding="utf-8").read() if os.path.exists(os.path.join(HERE, "near", "in-n-out", "ca", "index.html")) else ""
+check(not _ih or ('class="nm"' in _ih and 'class="ring"' not in _ih),
+      "static chain pages lost the network marks (or brought back the old walk-time ring)")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

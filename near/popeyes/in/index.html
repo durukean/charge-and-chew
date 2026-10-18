@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,51 +33,60 @@
 <p class="lead"><b>9 DC fast chargers</b> in Indiana have a Popeyes within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=Popeyes&amp;state=IN">Open on the map →</a>
 <p class="stats">Of the 9 fast chargers with a Popeyes nearby in Indiana: The typical stop here delivers <b>250 kW</b>, and 7 of them do 150 kW or more; <b>1</b> are close enough that the Popeyes is a two-minute walk or less; <b>8</b> are listed as open 24 hours. The fastest is <b>Lafayette, IN Rechargery Relay @ Wawa - North Creasy Lane</b> in Lafayette at 400 kW; the closest walk is 2 min at <b>Goshen, IN - Tesla Supercharger</b>. Most are on Tesla Supercharger (5), IONNA (1), Nayax Energy (1).</p>
-<div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Goshen, IN - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">1001 W Pike St, Goshen, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥2 min</span><span>🍗 KFC ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.58974,-85.84908" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Jeffersonville, IN - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1586 Veterans Pkwy, Jeffersonville, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🍔 Five Guys ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Krispy Kreme ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.32773,-85.74516" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Lafayette, IN Rechargery Relay @ Wawa - North Creasy Lane</span><small>400 kW · 12 stalls</small></div>
-<div class="a">1 North Creasy Lane, Lafayette, IN</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥3 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 KFC ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.41848,-86.83836" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Evansville, IN - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2622 Menards Dr, Evansville, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥4 min</span><span>🛒 Meijer ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🐼 Panda Express ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00153,-87.49442" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Fort Wayne, IN - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">6309 Lima Road, Fort Wayne, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥5 min</span><span>☕ Starbucks ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🛒 Meijer ≥1 min</span><span>🌮 Taco Bell ≥3 min</span><span>👑 Burger King ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.13841,-85.16335" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Ed Martin Nissan - Fishers</span><small>54 kW · 2 stalls</small></div>
-<div class="a">13397 Britton Park Rd, Fishers, IN</div><div class="host">Nayax Energy</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥7 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>🍟 McDonald&#x27;s ≥6 min</span><span>💊 CVS ≥8 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.98385,-86.00484" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Meijer 149 (Michigan City, IN)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">5120 S Franklin Street, Michigan City, IN</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🛒 Meijer ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.67383,-86.89188" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Michigan City, IN - Tesla Supercharger</span><small>250 kW · 20 stalls</small></div>
-<div class="a">5150 Franklin Street, Michigan City, IN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥9 min</span><span>🛒 Meijer ≥2 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.67382,-86.89126" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Napleton Nissan - Schererville</span><small>24 kW · 1 stall</small></div>
-<div class="a">1301 Indianapolis Blvd, Schererville, IN</div><div class="host">In Charge</div>
-<div class="c"><span>🍗 <b>Popeyes</b> ≥10 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>🌭 Portillo&#x27;s ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🐦 Red Robin ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=Popeyes&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=41.49821,-87.46971" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Goshen, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1001 W Pike St, Goshen, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>2 min</i></span><span>🍗 KFC <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.58974,-85.84908" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Jeffersonville, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1586 Veterans Pkwy, Jeffersonville, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Krispy Kreme <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.32773,-85.74516" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Lafayette, IN Rechargery Relay @ Wawa - North Creasy Lane</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>12 stalls</b><span>IONNA</span></div>
+<div class="a">1 North Creasy Lane, Lafayette, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>3 min</i></span><span>🐕 Raising Cane&#x27;s <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍗 KFC <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.41848,-86.83836" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Evansville, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2622 Menards Dr, Evansville, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>4 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.00153,-87.49442" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fort Wayne, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6309 Lima Road, Fort Wayne, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>5 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.13841,-85.16335" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Nayax Energy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Ed Martin Nissan - Fishers</div>
+<div class="sp"><s class="spd std">54 kW</s><b>2 stalls</b><span>Nayax Energy</span></div>
+<div class="a">13397 Britton Park Rd, Fishers, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>7 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span><span>💊 CVS <i>8 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.98385,-86.00484" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Meijer 149 (Michigan City, IN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">5120 S Franklin Street, Michigan City, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🛒 Meijer <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.67383,-86.89188" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Michigan City, IN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5150 Franklin Street, Michigan City, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>9 min</i></span><span>🛒 Meijer <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.67382,-86.89126" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="In Charge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Napleton Nissan - Schererville</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>In Charge</span></div>
+<div class="a">1301 Indianapolis Blvd, Schererville, IN</div>
+<div class="c"><span>🍗 <b>Popeyes</b> <i>10 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>🌭 Portillo&#x27;s <i>4 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🐦 Red Robin <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=41.49821,-87.46971" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=Popeyes&amp;state=IN">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in Indiana</h2><div class="chips"><a href="../../mcdonald-s/in/">🍟 McDonald&#x27;s <small>80</small></a><a href="../../starbucks/in/">☕ Starbucks <small>54</small></a><a href="../../speedway/in/">⛽ Speedway <small>54</small></a><a href="../../taco-bell/in/">🌮 Taco Bell <small>42</small></a><a href="../../arby-s/in/">🥩 Arby&#x27;s <small>41</small></a><a href="../../wendy-s/in/">🍔 Wendy&#x27;s <small>38</small></a><a href="../../aldi/in/">🛒 Aldi <small>34</small></a><a href="../../meijer/in/">🛒 Meijer <small>34</small></a><a href="../../walmart/in/">🛒 Walmart <small>33</small></a><a href="../../burger-king/in/">👑 Burger King <small>32</small></a><a href="../../subway/in/">🥪 Subway <small>32</small></a><a href="../../walgreens/in/">💊 Walgreens <small>29</small></a><a href="../../chipotle/in/">🌯 Chipotle <small>28</small></a><a href="../../culver-s/in/">🍦 Culver&#x27;s <small>27</small></a><a href="../../cvs/in/">💊 CVS <small>27</small></a><a href="../../panda-express/in/">🐼 Panda Express <small>24</small></a><a href="../../ice-cream-shop/in/">🍦 Ice cream shop <small>24</small></a><a href="../../kfc/in/">🍗 KFC <small>22</small></a><a href="../../kroger/in/">🛒 Kroger <small>20</small></a><a href="../../chick-fil-a/in/">🐔 Chick-fil-A <small>19</small></a><a href="../../panera-bread/in/">🥖 Panera Bread <small>19</small></a><a href="../../lowe-s/in/">🔧 Lowe&#x27;s <small>19</small></a><a href="../../dunkin/in/">🍩 Dunkin&#x27; <small>18</small></a><a href="../../buffalo-wild-wings/in/">🦬 Buffalo Wild Wings <small>18</small></a><a href="../../pizza-hut/in/">🍕 Pizza Hut <small>18</small></a><a href="../../five-guys/in/">🍔 Five Guys <small>17</small></a><a href="../../pilot/in/">⛽ Pilot <small>17</small></a><a href="../../applebee-s/in/">🍎 Applebee&#x27;s <small>16</small></a><a href="../../circle-k/in/">⛽ Circle K <small>15</small></a><a href="../../ihop/in/">🥞 IHOP <small>14</small></a><a href="../../hardee-s/in/">⭐ Hardee&#x27;s <small>14</small></a><a href="../../chili-s/in/">🌶️ Chili&#x27;s <small>13</small></a><a href="../../dollar-general/in/">🏪 Dollar General <small>13</small></a><a href="../../cracker-barrel/in/">🪵 Cracker Barrel <small>11</small></a><a href="../../target/in/">🎯 Target <small>11</small></a><a href="../../domino-s/in/">🍕 Domino&#x27;s <small>11</small></a><a href="../../best-buy/in/">💻 Best Buy <small>11</small></a><a href="../../denny-s/in/">🍳 Denny&#x27;s <small>10</small></a><a href="../../olive-garden/in/">🍝 Olive Garden <small>10</small></a><a href="../../wingstop/in/">🍗 Wingstop <small>10</small></a><a href="../../home-depot/in/">🔨 Home Depot <small>10</small></a><a href="../../tractor-supply/in/">🚜 Tractor Supply <small>10</small></a><a href="../../sonic/in/">🚗 Sonic <small>9</small></a><a href="../../texas-roadhouse/in/">🤠 Texas Roadhouse <small>9</small></a><a href="../../sam-s-club/in/">🏪 Sam&#x27;s Club <small>8</small></a><a href="../../portillo-s/in/">🌭 Portillo&#x27;s <small>8</small></a><a href="../../jersey-mike-s/in/">🥪 Jersey Mike&#x27;s <small>7</small></a><a href="../../red-robin/in/">🐦 Red Robin <small>7</small></a><a href="../../casey-s/in/">🍕 Casey&#x27;s <small>7</small></a><a href="../../flying-j/in/">⛽ Flying J <small>6</small></a><a href="../../waffle-house/in/">🧇 Waffle House <small>5</small></a><a href="../../whole-foods/in/">🥬 Whole Foods <small>5</small></a><a href="../../raising-cane-s/in/">🐕 Raising Cane&#x27;s <small>5</small></a><a href="../../wawa/in/">🦆 Wawa <small>4</small></a><a href="../../little-caesars/in/">🍕 Little Caesars <small>4</small></a><a href="../../love-s/in/">⛽ Love&#x27;s <small>4</small></a><a href="../../shake-shack/in/">🍔 Shake Shack <small>3</small></a><a href="../../krispy-kreme/in/">🍩 Krispy Kreme <small>3</small></a><a href="../../dairy-queen/in/">🍦 Dairy Queen <small>2</small></a><a href="../../zaxby-s/in/">🍗 Zaxby&#x27;s <small>2</small></a><a href="../../firehouse-subs/in/">🚒 Firehouse Subs <small>2</small></a><a href="../../ikea/in/">🪑 IKEA <small>2</small></a><a href="../../costco/in/">📦 Costco <small>1</small></a><a href="../../trader-joe-s/in/">🛍️ Trader Joe&#x27;s <small>1</small></a><a href="../../ta-travel-center/in/">⛽ TA Travel Center <small>1</small></a></div>
 <h2>Popeyes in other states</h2><div class="chips"><a href="../">All states</a></div>

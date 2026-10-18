@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -38,306 +38,366 @@ order along the route, MT → ND → MN → WI → IL → IN → MI.</p>
 150 kW or more and <b>243</b> listed as open 24 hours. Chargers under 50 kW are
 left out — on an interstate run they cost more time than they save.</p>
 <h2>Stops with food or shopping within a walk</h2>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Billings, MT - North Frontage Road - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">2711 N Frontage Rd, Billings, MT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ Pilot ≥2 min</span><span>👑 Burger King ≥6 min</span><span>🥪 Subway ≥8 min</span><span>🍕 Domino&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.81685,-108.41653" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Miles City, MT - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1815 South Haynes Avenue, Miles City, MT</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.39085,-105.82372" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Town Pump Miles City (Miles City, MT)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1210 S Haynes Ave, Miles City, MT</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🍕 Little Caesars ≥6 min</span><span>🍕 Pizza Hut ≥8 min</span><span>🛒 Walmart ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.39769,-105.82135" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Town Pump of Glendive (Glendive, MT)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">73 MT-16, Glendive, MT</div><div class="host">Electrify America</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=MT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.11597,-104.73741" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Dickinson, ND - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1681 3rd Avenue West, Dickinson, ND</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🍕 Pizza Hut ≥4 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🍔 Five Guys ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.9012,-102.79083" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Red Rock Ford of Dickinson Inc</span><small>80 kW · 2 stalls</small></div>
-<div class="a">272 34th St W, Dickinson, ND</div><div class="host">Ford BlueOval</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.91502,-102.78906" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hymandan Hom Parking</span><small>62 kW · 1 stall</small></div>
-<div class="a">805 E Main St, Mandan, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥3 min</span><span>🥪 Subway ≥3 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥6 min</span><span>👑 Burger King ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.82759,-100.87889" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Hymandan Hom Service</span><small>62 kW · 1 stall</small></div>
-<div class="a">805 E Main St, Mandan, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍕 <b>Domino&#x27;s</b> ≥3 min</span><span>🥪 Subway ≥3 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>🍕 Pizza Hut ≥5 min</span><span>👑 Burger King ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Domino&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.8275,-100.87871" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥10</b><span>min</span></div><div class="body">
-<div class="n"><span>Eide Kia</span><small>50 kW · 1 stall</small></div>
-<div class="a">3334 Memorial Highway, Mandan, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.8175,-100.84801" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Bismarck, ND - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">999 West Century Avenue, Bismarck, ND</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍔 <b>Five Guys</b> ≥1 min</span><span>💻 Best Buy ≥4 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>🍦 Ice cream shop ≥9 min</span><span>🤠 Texas Roadhouse ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Five Guys&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.83298,-100.8072" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Menards Bismarck 3313 (Bismarck, ND)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3300 State St, Bismarck, ND</div><div class="host">Electrify America</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>💊 CVS ≥3 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.84352,-100.77384" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>S &amp; R Truck Plaza</span><small>150 kW · 1 stall</small></div>
-<div class="a">1300 17th St SW, Jamestown, ND</div><div class="host">Non-networked</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.89247,-98.72807" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Jamestown, ND - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">2400 8th Avenue Southwest, Jamestown, ND</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>👑 <b>Burger King</b> ≥2 min</span><span>🚜 Tractor Supply ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>🥪 Subway ≥6 min</span><span>🛒 Walmart ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Burger King&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.8847,-98.71961" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>The Shoppes at Jamestown (Jamestown, ND)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2617 8th Ave SW, Jamestown, ND</div><div class="host">Electrify America</div>
-<div class="c"><span>🍎 <b>Applebee&#x27;s</b> ≥2 min</span><span>🛒 Walmart ≥5 min</span><span>👑 Burger King ≥5 min</span><span>🚜 Tractor Supply ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Applebee&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.88041,-98.71766" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Wilhelm Chevrolet Buick</span><small>60 kW · 2 stalls</small></div>
-<div class="a">305 Business Loop West, Jamestown, ND</div><div class="host">Blink</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥3 min</span><span>⭐ Hardee&#x27;s ≥6 min</span><span>🍕 Domino&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.89704,-98.71223" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>RM Stoudt Inc</span><small>180 kW · 2 stalls</small></div>
-<div class="a">800 23 ST SW, Jamestown, ND</div><div class="host">Red E</div>
-<div class="c"><span>🚜 <b>Tractor Supply</b> ≥2 min</span><span>👑 Burger King ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🥪 Subway ≥5 min</span><span>🍎 Applebee&#x27;s ≥6 min</span><span>🛒 Walmart ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Tractor Supply&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.88542,-98.72103" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Puklich Chevrolet Buick GMC</span><small>60 kW · 2 stalls</small></div>
-<div class="a">721 W Main St., Valley City, ND</div><div class="host">Blink</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥6 min</span><span>☕ Caribou Coffee ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.92273,-98.01266" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Stoudt Miller Ford</span><small>180 kW · 2 stalls</small></div>
-<div class="a">325 Wintershow Rd W, Valley City, ND</div><div class="host">Red E</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.91337,-98.00726" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ccec Chargers Hornbachers</span><small>62 kW · 1 stall</small></div>
-<div class="a">2050 Sheyenne St, West Fargo, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Circle K ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.85251,-96.90782" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fargo, ND - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">5680 23rd Avenue South, Fargo, ND</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍕 <b>Casey&#x27;s</b> ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>📦 Costco ≥2 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>👑 Burger King ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Casey&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.84359,-96.88238" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Menards West Fargo 3036 (West Fargo, ND)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1300 13th Ave E, West Fargo, ND</div><div class="host">Electrify America</div>
-<div class="c"><span>🤠 <b>Texas Roadhouse</b> ≥9 min</span><span>🔧 Lowe&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Texas Roadhouse&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.8631,-96.87987" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ccec Chargers Fm Cvb Level</span><small>62 kW · 1 stall</small></div>
-<div class="a">2001 44th St S, Fargo, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>⛽ <b>Circle K</b> ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍔 Wendy&#x27;s ≥4 min</span><span>🍕 Little Caesars ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Circle K&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.84942,-96.85967" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Fargo, ND - 45th Street South - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1551 45th St S, Fargo, ND</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌯 <b>Chipotle</b> ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🥞 IHOP ≥4 min</span><span>🍕 Little Caesars ≥4 min</span><span>🍔 Wendy&#x27;s ≥6 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.85663,-96.86251" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Ccec Chargers West Acres</span><small>62 kW · 1 stall</small></div>
-<div class="a">3902 13th Ave S, Fargo, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥖 <b>Panera Bread</b> ≥1 min</span><span>🌶️ Chili&#x27;s ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>💻 Best Buy ≥4 min</span><span>💊 Walgreens ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Panera Bread&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.86103,-96.84722" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3150 39th St SW Suite A, Fargo, ND</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Flying J</b> ≥1 min</span><span>⛽ Love&#x27;s ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Flying J&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.83319,-96.84528" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥8</b><span>min</span></div><div class="body">
-<div class="n"><span>Luther Family Buick Gmc</span><small>50 kW · 1 stall</small></div>
-<div class="a">3202 36TH STREET SW, FARGO, ND</div><div class="host">EV Connect</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥8 min</span><span>🍟 McDonald&#x27;s ≥9 min</span><span>⛽ Flying J ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.83116,-96.83541" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Luther Family Ford (DCFC)</span><small>120 kW · 4 stalls</small></div>
-<div class="a">3302 36th St S, Fargo, ND</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Love&#x27;s</b> ≥6 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>⛽ Flying J ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.82939,-96.83772" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>City Of Fargo</span><small>62 kW · 1 stall</small></div>
-<div class="a">225 4th St N, Fargo, ND</div><div class="host">ChargePoint</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>🍕 Casey&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=ND">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.87876,-96.78355" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Noodles &amp; Company</span><small>50 kW · 2 stalls</small></div>
-<div class="a">922 Holiday Drive, Moorhead, MN</div><div class="host">Zefnet</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>👑 Burger King ≥2 min</span><span>💊 Walgreens ≥7 min</span><span>⛽ Kwik Trip ≥8 min</span><span>⛽ Circle K ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.84933,-96.7667" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Mstate Public Cpe250-1</span><small>125 kW · 1 stall</small></div>
-<div class="a">2413 20th St, Moorhead, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍕 <b>Casey&#x27;s</b> ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Casey&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.84921,-96.74895" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fergus Falls</span><small>180 kW · 4 stalls</small></div>
-<div class="a">623 Frontier Dr, Fergus Falls, MN</div><div class="host">ChargeLab</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>☕ Caribou Coffee ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.29012,-96.11827" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fergus Falls, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">623 Frontier Dr, Fergus Falls, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🌮 <b>Taco Bell</b> ≥1 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>⭐ Hardee&#x27;s ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍎 Applebee&#x27;s ≥4 min</span><span>☕ Caribou Coffee ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Taco Bell&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.28999,-96.11831" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Service Foods</span><small>50 kW · 2 stalls</small></div>
-<div class="a">321 West Lincoln Avenue, Fergus Falls, MN</div><div class="host">Zefnet</div>
-<div class="c"><span>🍦 <b>Ice cream shop</b> ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Ice cream shop&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=46.28281,-96.07916" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Pilot Travel Center</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3181 Evergreen Lane, Alexandria, MN</div><div class="host">EVgo</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥1 min</span><span>🥪 Subway ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.86121,-95.42229" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Alexandria, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">4404 MN-29, Alexandria, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🎯 <b>Target</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.85039,-95.38895" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Simonson Station Store Alexandria</span><small>50 kW · 2 stalls</small></div>
-<div class="a">4924 Minnesota 29, Alexandria, MN</div><div class="host">Zefnet</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>☕ Caribou Coffee ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>⭐ Hardee&#x27;s ≥3 min</span><span>🛒 Aldi ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.84549,-95.38926" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>CircleK - Alexandria, MN</span><small>180 kW · 4 stalls</small></div>
-<div class="a">5310 Highway 29 S, Alexandria, MN</div><div class="host">Circle K</div>
-<div class="c"><span>🍦 <b>Culver&#x27;s</b> ≥6 min</span><span>🛒 Aldi ≥6 min</span><span>⭐ Hardee&#x27;s ≥7 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>🥪 Subway ≥7 min</span><span>☕ Caribou Coffee ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Culver&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.84171,-95.38932" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Menards Alexandria 3183 (Alexandria, MN)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">215 50th Ave W, Alexandria, MN</div><div class="host">Electrify America</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥2 min</span><span>🥪 Subway ≥4 min</span><span>⭐ Hardee&#x27;s ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>🍦 Culver&#x27;s ≥5 min</span><span>🌮 Taco Bell ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.84646,-95.38148" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Albany Chrysler - DCFC</span><small>180 kW · 4 stalls</small></div>
-<div class="a">34650 225th Avenue, Albany, MN</div><div class="host">Blink</div>
-<div class="c"><span>💊 <b>CVS</b> ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.62492,-94.57231" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>CircleK - St Cloud</span><small>180 kW · 4 stalls</small></div>
-<div class="a">4255 Roosevelt Rd, St. Cloud, MN</div><div class="host">Circle K</div>
-<div class="c"><span>⛽ <b>Pilot</b> ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>👑 Burger King ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Pilot&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.49793,-94.15106" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Clearwater, MN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">950 MN-24, Clearwater, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥3 min</span><span>👑 Burger King ≥4 min</span><span>⛽ Kwik Trip ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.41187,-94.0549" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Monticello, MN - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">216 7th Street West, Monticello, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>☕ Caribou Coffee ≥2 min</span><span>🌮 Taco Bell ≥3 min</span><span>👑 Burger King ≥4 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ Speedway ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=KFC&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.30082,-93.79956" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>CircleK - Monticello, MN</span><small>180 kW · 4 stalls</small></div>
-<div class="a">110 Oakwood Dr, Monticello, MN</div><div class="host">Circle K</div>
-<div class="c"><span>🥪 <b>Subway</b> ≥1 min</span><span>⛽ Speedway ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🌮 Taco Bell ≥7 min</span><span>🍗 KFC ≥7 min</span><span>👑 Burger King ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Subway&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.29583,-93.80024" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Simon Albertville Premium Outlets (Albertville, MN)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">6415 Labeaux Ave Ne, Albertville, MN</div><div class="host">Electrify America</div>
-<div class="c"><span>🍔 <b>Five Guys</b> ≥1 min</span><span>👑 Burger King ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>⛽ Speedway ≥7 min</span><span>🌮 Taco Bell ≥8 min</span><span>🍦 Culver&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Five Guys&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.24449,-93.66512" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Albertville Outlet Mall</span><small>50 kW · 2 stalls</small></div>
-<div class="a">6500 Labeaux Avenue Northeast, Albertville, MN</div><div class="host">Zefnet</div>
-<div class="c"><span>🍔 <b>Five Guys</b> ≥3 min</span><span>👑 Burger King ≥5 min</span><span>☕ Starbucks ≥6 min</span><span>⛽ Speedway ≥7 min</span><span>🌮 Taco Bell ≥8 min</span><span>🍦 Culver&#x27;s ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Five Guys&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.24448,-93.66115" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>McDonalds #7056 Rogers</span><small>350 kW · 6 stalls</small></div>
-<div class="a">21300 Rogers Dr, Rogers, MN 55374, MN</div><div class="host">EVgo</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>⛽ TA Travel Center ≥1 min</span><span>🍳 Denny&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥5 min</span><span>🎯 Target ≥5 min</span><span>🥪 Jersey Mike&#x27;s ≥5 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.19563,-93.54936" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Maple Grove, MN - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">15300 Grove Circle North, Maple Grove, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🎯 <b>Target</b> ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥5 min</span><span>☕ Caribou Coffee ≥5 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.13494,-93.4746" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>McDonalds #12407, Maple Grove</span><small>350 kW · 4 stalls</small></div>
-<div class="a">13595 83rd Way, Maple Grove, MN</div><div class="host">EVgo</div>
-<div class="c"><span>🍟 <b>McDonald&#x27;s</b> ≥1 min</span><span>🍩 Dunkin&#x27; ≥1 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🥪 Subway ≥3 min</span><span>⛽ Speedway ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.10532,-93.45243" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Maple Grove, MN</span><small>300 kW · 12 stalls</small></div>
-<div class="a">12459 Elm Creek Boulevard North, Maple Grove, MN</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥬 Whole Foods ≥4 min</span><span>🌭 Portillo&#x27;s ≥4 min</span><span>🚒 Firehouse Subs ≥5 min</span><span>🍔 Shake Shack ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Trader Joe&#x27;s&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.09253,-93.43215" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Hybp Building</span><small>62 kW · 1 stall</small></div>
-<div class="a">8100 Lakeland Ave N, Brooklyn Park, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.10208,-93.38881" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Hybp Row</span><small>62 kW · 1 stall</small></div>
-<div class="a">8100 Lakeland Ave N, Brooklyn Park, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>🛒 <b>Walmart</b> ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Walmart&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.10198,-93.38895" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Superior Ford-Plymouth-DCFC</span><small>120 kW · 4 stalls</small></div>
-<div class="a">9700 56th Ave N, Plymouth, MN</div><div class="host">Blink</div>
-<div class="c"><span>⛽ <b>Speedway</b> ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Speedway&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.05689,-93.40351" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Morrie&#x27;s Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">7875 Brooklyn Blvd, Brooklyn Park, MN</div><div class="host">Non-networked</div>
-<div class="c"><span>💊 <b>CVS</b> ≥5 min</span><span>🍗 Popeyes ≥5 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>🎯 Target ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.09387,-93.37206" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Luther Westside Volkswagen - DCFC</span><small>120 kW · 4 stalls</small></div>
-<div class="a">2370 S Hwy 100, St. Louis Park, MN</div><div class="host">Blink</div>
-<div class="c"><span>☕ <b>Caribou Coffee</b> ≥4 min</span><span>🥖 Panera Bread ≥7 min</span><span>📦 Costco ≥8 min</span><span>🍦 Ice cream shop ≥8 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>🔨 Home Depot ≥9 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Caribou Coffee&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.96009,-93.3469" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Ar Mpls Sn 2954 Express</span><small>62 kW · 1 stall</small></div>
-<div class="a">1820 Quentin Avenue, St. Louis Park, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Caribou Coffee</b> ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span><span>🥩 Arby&#x27;s ≥8 min</span><span>📦 Costco ≥8 min</span><span>🥪 Jersey Mike&#x27;s ≥8 min</span><span>🥖 Panera Bread ≥8 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Caribou Coffee&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.96353,-93.34258" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Cedar Commons</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3040 Excelsior Blvd, Minneapolis, MN</div><div class="host">EVgo</div>
-<div class="c"><span>🌯 <b>Chipotle</b> ≥1 min</span><span>☕ Caribou Coffee ≥1 min</span><span>🥬 Whole Foods ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>💊 Walgreens ≥2 min</span><span>🥪 Subway ≥2 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Chipotle&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.94747,-93.32123" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Robbinsdalecity City Hall</span><small>50 kW · 1 stall</small></div>
-<div class="a">4100 Lakeview Avenue North, Robbinsdale, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>💊 <b>CVS</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>💊 Walgreens ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🏪 Dollar General ≥4 min</span><span>🍦 Dairy Queen ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=CVS&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.03211,-93.3357" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Robbinsdale, MN - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">3501 West Broadway Avenue, Robbinsdale, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥1 min</span><span>🛒 Hy-Vee ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.01921,-93.32628" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Robbinsdalecity Lvt Park</span><small>62 kW · 1 stall</small></div>
-<div class="a">3769 Crystal Lake Boulevard, Robbinsdale, MN</div><div class="host">ChargePoint</div>
-<div class="c"><span>☕ <b>Starbucks</b> ≥3 min</span><span>🛒 Hy-Vee ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Starbucks&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.02052,-93.32462" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Minneapolis, MN - Tesla Supercharger</span><small>250 kW · 10 stalls</small></div>
-<div class="a">1650 New Brighton Boulevard, Minneapolis, MN</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🎯 <b>Target</b> ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>☕ Caribou Coffee ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🔨 Home Depot ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Target&amp;state=MN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=45.0045,-93.2287" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Billings, MT - North Frontage Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2711 N Frontage Rd, Billings, MT</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>⛽ Pilot <i>2 min</i></span><span>👑 Burger King <i>6 min</i></span><span>🥪 Subway <i>8 min</i></span><span>🍕 Domino&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.81685,-108.41653" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Miles City, MT - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1815 South Haynes Avenue, Miles City, MT</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.39085,-105.82372" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=MT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Town Pump Miles City (Miles City, MT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1210 S Haynes Ave, Miles City, MT</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🍕 Little Caesars <i>6 min</i></span><span>🍕 Pizza Hut <i>8 min</i></span><span>🛒 Walmart <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.39769,-105.82135" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=MT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Town Pump of Glendive (Glendive, MT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">73 MT-16, Glendive, MT</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.11597,-104.73741" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=MT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Dickinson, ND - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1681 3rd Avenue West, Dickinson, ND</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍕 Pizza Hut <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🍔 Five Guys <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.9012,-102.79083" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Ford BlueOval" style="background:#1f3f8f;color:#fff">F</span></div><div class="body">
+<div class="n">Red Rock Ford of Dickinson Inc</div>
+<div class="sp"><s class="spd std">80 kW</s><b>2 stalls</b><span>Ford BlueOval</span></div>
+<div class="a">272 34th St W, Dickinson, ND</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.91502,-102.78906" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hymandan Hom Parking</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">805 E Main St, Mandan, ND</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>6 min</i></span><span>👑 Burger King <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.82759,-100.87889" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hymandan Hom Service</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">805 E Main St, Mandan, ND</div>
+<div class="c"><span>🍕 <b>Domino&#x27;s</b> <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>4 min</i></span><span>🍕 Pizza Hut <i>5 min</i></span><span>👑 Burger King <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.8275,-100.87871" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Domino&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Eide Kia</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3334 Memorial Highway, Mandan, ND</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.8175,-100.84801" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Bismarck, ND - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">999 West Century Avenue, Bismarck, ND</div>
+<div class="c"><span>🍔 <b>Five Guys</b> <i>1 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span><span>🤠 Texas Roadhouse <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.83298,-100.8072" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Five Guys&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Menards Bismarck 3313 (Bismarck, ND)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">3300 State St, Bismarck, ND</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>2 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.84352,-100.77384" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">S &amp; R Truck Plaza</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">1300 17th St SW, Jamestown, ND</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.89247,-98.72807" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Jamestown, ND - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2400 8th Avenue Southwest, Jamestown, ND</div>
+<div class="c"><span>👑 <b>Burger King</b> <i>2 min</i></span><span>🚜 Tractor Supply <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>🛒 Walmart <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.8847,-98.71961" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Burger King&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">The Shoppes at Jamestown (Jamestown, ND)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">2617 8th Ave SW, Jamestown, ND</div>
+<div class="c"><span>🍎 <b>Applebee&#x27;s</b> <i>2 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🚜 Tractor Supply <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.88041,-98.71766" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Applebee&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Wilhelm Chevrolet Buick</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">305 Business Loop West, Jamestown, ND</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>6 min</i></span><span>🍕 Domino&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.89704,-98.71223" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">RM Stoudt Inc</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">800 23 ST SW, Jamestown, ND</div>
+<div class="c"><span>🚜 <b>Tractor Supply</b> <i>2 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🥪 Subway <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>6 min</i></span><span>🛒 Walmart <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.88542,-98.72103" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Tractor Supply&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Puklich Chevrolet Buick GMC</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">721 W Main St., Valley City, ND</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>6 min</i></span><span>☕ Caribou Coffee <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.92273,-98.01266" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Red E"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Stoudt Miller Ford</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>2 stalls</b><span>Red E</span></div>
+<div class="a">325 Wintershow Rd W, Valley City, ND</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.91337,-98.00726" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ccec Chargers Hornbachers</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2050 Sheyenne St, West Fargo, ND</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Circle K <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.85251,-96.90782" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fargo, ND - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5680 23rd Avenue South, Fargo, ND</div>
+<div class="c"><span>🍕 <b>Casey&#x27;s</b> <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>📦 Costco <i>2 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.84359,-96.88238" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Casey&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Menards West Fargo 3036 (West Fargo, ND)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1300 13th Ave E, West Fargo, ND</div>
+<div class="c"><span>🤠 <b>Texas Roadhouse</b> <i>9 min</i></span><span>🔧 Lowe&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.8631,-96.87987" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Texas Roadhouse&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ccec Chargers Fm Cvb Level</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2001 44th St S, Fargo, ND</div>
+<div class="c"><span>⛽ <b>Circle K</b> <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>4 min</i></span><span>🍕 Little Caesars <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.84942,-96.85967" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Circle K&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fargo, ND - 45th Street South - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1551 45th St S, Fargo, ND</div>
+<div class="c"><span>🌯 <b>Chipotle</b> <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>🍕 Little Caesars <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>6 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.85663,-96.86251" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chipotle&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ccec Chargers West Acres</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3902 13th Ave S, Fargo, ND</div>
+<div class="c"><span>🥖 <b>Panera Bread</b> <i>1 min</i></span><span>🌶️ Chili&#x27;s <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.86103,-96.84722" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Panera Bread&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3150 39th St SW Suite A, Fargo, ND</div>
+<div class="c"><span>⛽ <b>Flying J</b> <i>1 min</i></span><span>⛽ Love&#x27;s <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.83319,-96.84528" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Flying J&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Luther Family Buick Gmc</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">3202 36TH STREET SW, FARGO, ND</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>8 min</i></span><span>🍟 McDonald&#x27;s <i>9 min</i></span><span>⛽ Flying J <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.83116,-96.83541" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Luther Family Ford (DCFC)</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">3302 36th St S, Fargo, ND</div>
+<div class="c"><span>⛽ <b>Love&#x27;s</b> <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>⛽ Flying J <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.82939,-96.83772" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Love&#x27;s&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">City Of Fargo</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">225 4th St N, Fargo, ND</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>🍕 Casey&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.87876,-96.78355" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=ND">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Zefnet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Noodles &amp; Company</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Zefnet</span></div>
+<div class="a">922 Holiday Drive, Moorhead, MN</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>⛽ Kwik Trip <i>8 min</i></span><span>⛽ Circle K <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.84933,-96.7667" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Mstate Public Cpe250-1</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">2413 20th St, Moorhead, MN</div>
+<div class="c"><span>🍕 <b>Casey&#x27;s</b> <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.84921,-96.74895" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Casey&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="ChargeLab"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Fergus Falls</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>ChargeLab</span></div>
+<div class="a">623 Frontier Dr, Fergus Falls, MN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>☕ Caribou Coffee <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.29012,-96.11827" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fergus Falls, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">623 Frontier Dr, Fergus Falls, MN</div>
+<div class="c"><span>🌮 <b>Taco Bell</b> <i>1 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>⭐ Hardee&#x27;s <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>4 min</i></span><span>☕ Caribou Coffee <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.28999,-96.11831" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Taco Bell&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Zefnet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Service Foods</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Zefnet</span></div>
+<div class="a">321 West Lincoln Avenue, Fergus Falls, MN</div>
+<div class="c"><span>🍦 <b>Ice cream shop</b> <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=46.28281,-96.07916" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Ice cream shop&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Pilot Travel Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">3181 Evergreen Lane, Alexandria, MN</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.86121,-95.42229" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Alexandria, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4404 MN-29, Alexandria, MN</div>
+<div class="c"><span>🎯 <b>Target</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.85039,-95.38895" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Zefnet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Simonson Station Store Alexandria</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Zefnet</span></div>
+<div class="a">4924 Minnesota 29, Alexandria, MN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>☕ Caribou Coffee <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>⭐ Hardee&#x27;s <i>3 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.84549,-95.38926" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Circle K"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">CircleK - Alexandria, MN</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Circle K</span></div>
+<div class="a">5310 Highway 29 S, Alexandria, MN</div>
+<div class="c"><span>🍦 <b>Culver&#x27;s</b> <i>6 min</i></span><span>🛒 Aldi <i>6 min</i></span><span>⭐ Hardee&#x27;s <i>7 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>🥪 Subway <i>7 min</i></span><span>☕ Caribou Coffee <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.84171,-95.38932" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Culver&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Menards Alexandria 3183 (Alexandria, MN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">215 50th Ave W, Alexandria, MN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>2 min</i></span><span>🥪 Subway <i>4 min</i></span><span>⭐ Hardee&#x27;s <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🍦 Culver&#x27;s <i>5 min</i></span><span>🌮 Taco Bell <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.84646,-95.38148" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Albany Chrysler - DCFC</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">34650 225th Avenue, Albany, MN</div>
+<div class="c"><span>💊 <b>CVS</b> <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.62492,-94.57231" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Circle K"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">CircleK - St Cloud</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Circle K</span></div>
+<div class="a">4255 Roosevelt Rd, St. Cloud, MN</div>
+<div class="c"><span>⛽ <b>Pilot</b> <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>👑 Burger King <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.49793,-94.15106" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Pilot&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Clearwater, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">950 MN-24, Clearwater, MN</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>⛽ Kwik Trip <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.41187,-94.0549" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Monticello, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">216 7th Street West, Monticello, MN</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>1 min</i></span><span>☕ Caribou Coffee <i>2 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>👑 Burger King <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>⛽ Speedway <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.30082,-93.79956" target="_blank" rel="noopener">Directions</a><a href="../../?chain=KFC&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Circle K"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">CircleK - Monticello, MN</div>
+<div class="sp"><s class="spd fast">180 kW</s><b>4 stalls</b><span>Circle K</span></div>
+<div class="a">110 Oakwood Dr, Monticello, MN</div>
+<div class="c"><span>🥪 <b>Subway</b> <i>1 min</i></span><span>⛽ Speedway <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🌮 Taco Bell <i>7 min</i></span><span>🍗 KFC <i>7 min</i></span><span>👑 Burger King <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.29583,-93.80024" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Subway&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Simon Albertville Premium Outlets (Albertville, MN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">6415 Labeaux Ave Ne, Albertville, MN</div>
+<div class="c"><span>🍔 <b>Five Guys</b> <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🍦 Culver&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.24449,-93.66512" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Five Guys&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Zefnet"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Albertville Outlet Mall</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Zefnet</span></div>
+<div class="a">6500 Labeaux Avenue Northeast, Albertville, MN</div>
+<div class="c"><span>🍔 <b>Five Guys</b> <i>3 min</i></span><span>👑 Burger King <i>5 min</i></span><span>☕ Starbucks <i>6 min</i></span><span>⛽ Speedway <i>7 min</i></span><span>🌮 Taco Bell <i>8 min</i></span><span>🍦 Culver&#x27;s <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.24448,-93.66115" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Five Guys&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">McDonalds #7056 Rogers</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">21300 Rogers Dr, Rogers, MN 55374, MN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>⛽ TA Travel Center <i>1 min</i></span><span>🍳 Denny&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>🎯 Target <i>5 min</i></span><span>🥪 Jersey Mike&#x27;s <i>5 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.19563,-93.54936" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Maple Grove, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">15300 Grove Circle North, Maple Grove, MN</div>
+<div class="c"><span>🎯 <b>Target</b> <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>☕ Caribou Coffee <i>5 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.13494,-93.4746" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">McDonalds #12407, Maple Grove</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">13595 83rd Way, Maple Grove, MN</div>
+<div class="c"><span>🍟 <b>McDonald&#x27;s</b> <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>1 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🥪 Subway <i>3 min</i></span><span>⛽ Speedway <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.10532,-93.45243" target="_blank" rel="noopener">Directions</a><a href="../../?chain=McDonald&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Maple Grove, MN</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>12 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">12459 Elm Creek Boulevard North, Maple Grove, MN</div>
+<div class="c"><span>🛍️ <b>Trader Joe&#x27;s</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥬 Whole Foods <i>4 min</i></span><span>🌭 Portillo&#x27;s <i>4 min</i></span><span>🚒 Firehouse Subs <i>5 min</i></span><span>🍔 Shake Shack <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.09253,-93.43215" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Trader Joe&#x27;s&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hybp Building</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">8100 Lakeland Ave N, Brooklyn Park, MN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.10208,-93.38881" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Hybp Row</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">8100 Lakeland Ave N, Brooklyn Park, MN</div>
+<div class="c"><span>🛒 <b>Walmart</b> <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.10198,-93.38895" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Walmart&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Superior Ford-Plymouth-DCFC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">9700 56th Ave N, Plymouth, MN</div>
+<div class="c"><span>⛽ <b>Speedway</b> <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.05689,-93.40351" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Speedway&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Morrie&#x27;s Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">7875 Brooklyn Blvd, Brooklyn Park, MN</div>
+<div class="c"><span>💊 <b>CVS</b> <i>5 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>🎯 Target <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.09387,-93.37206" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Luther Westside Volkswagen - DCFC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">2370 S Hwy 100, St. Louis Park, MN</div>
+<div class="c"><span>☕ <b>Caribou Coffee</b> <i>4 min</i></span><span>🥖 Panera Bread <i>7 min</i></span><span>📦 Costco <i>8 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>🥩 Arby&#x27;s <i>8 min</i></span><span>🔨 Home Depot <i>9 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.96009,-93.3469" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Caribou Coffee&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ar Mpls Sn 2954 Express</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">1820 Quentin Avenue, St. Louis Park, MN</div>
+<div class="c"><span>☕ <b>Caribou Coffee</b> <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>🥩 Arby&#x27;s <i>8 min</i></span><span>📦 Costco <i>8 min</i></span><span>🥪 Jersey Mike&#x27;s <i>8 min</i></span><span>🥖 Panera Bread <i>8 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.96353,-93.34258" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Caribou Coffee&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Cedar Commons</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3040 Excelsior Blvd, Minneapolis, MN</div>
+<div class="c"><span>🌯 <b>Chipotle</b> <i>1 min</i></span><span>☕ Caribou Coffee <i>1 min</i></span><span>🥬 Whole Foods <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.94747,-93.32123" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Chipotle&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Robbinsdalecity City Hall</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">4100 Lakeview Avenue North, Robbinsdale, MN</div>
+<div class="c"><span>💊 <b>CVS</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🏪 Dollar General <i>4 min</i></span><span>🍦 Dairy Queen <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.03211,-93.3357" target="_blank" rel="noopener">Directions</a><a href="../../?chain=CVS&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Robbinsdale, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3501 West Broadway Avenue, Robbinsdale, MN</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>1 min</i></span><span>🛒 Hy-Vee <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.01921,-93.32628" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Robbinsdalecity Lvt Park</div>
+<div class="sp"><s class="spd std">62 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">3769 Crystal Lake Boulevard, Robbinsdale, MN</div>
+<div class="c"><span>☕ <b>Starbucks</b> <i>3 min</i></span><span>🛒 Hy-Vee <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.02052,-93.32462" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Starbucks&amp;state=MN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Minneapolis, MN - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1650 New Brighton Boulevard, Minneapolis, MN</div>
+<div class="c"><span>🎯 <b>Target</b> <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>☕ Caribou Coffee <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=45.0045,-93.2287" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Target&amp;state=MN">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>78</small></a><a href="../i-5/">I-5 <small>748</small></a><a href="../i-10/">I-10 <small>495</small></a><a href="../i-15/">I-15 <small>305</small></a><a href="../i-20/">I-20 <small>203</small></a><a href="../i-24/">I-24 <small>45</small></a><a href="../i-25/">I-25 <small>160</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>62</small></a><a href="../i-35/">I-35 <small>241</small></a><a href="../i-40/">I-40 <small>282</small></a><a href="../i-44/">I-44 <small>83</small></a><a href="../i-45/">I-45 <small>70</small></a><a href="../i-55/">I-55 <small>148</small></a><a href="../i-64/">I-64 <small>155</small></a><a href="../i-65/">I-65 <small>127</small></a><a href="../i-70/">I-70 <small>333</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>78</small></a><a href="../i-75/">I-75 <small>418</small></a><a href="../i-77/">I-77 <small>102</small></a><a href="../i-80/">I-80 <small>525</small></a><a href="../i-81/">I-81 <small>146</small></a><a href="../i-84/">I-84 <small>167</small></a><a href="../i-85/">I-85 <small>177</small></a><a href="../i-90/">I-90 <small>581</small></a><a href="../i-91/">I-91 <small>104</small></a><a href="../i-94/">I-94 <small>338</small></a><a href="../i-95/">I-95 <small>817</small></a><a href="../i-96/">I-96 <small>77</small></a></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

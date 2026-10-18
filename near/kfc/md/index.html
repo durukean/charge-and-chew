@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -33,131 +33,156 @@
 <p class="lead"><b>25 DC fast chargers</b> in Maryland have a KFC within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain=KFC&amp;state=MD">Open on the map →</a>
 <p class="stats">Of the 25 fast chargers with a KFC nearby in Maryland: The typical stop here delivers <b>150 kW</b>, and 13 of them do 150 kW or more; <b>7</b> are close enough that the KFC is a two-minute walk or less; <b>24</b> are listed as open 24 hours. The fastest is <b>Frederick, MD Rechargery Relay - W Patrick St</b> in Frederick at 400 kW; the closest walk is 1 min at <b>Chesapeake House Travel Plaza</b>. Most are on Tesla Supercharger (7), Swtch (5), Non-networked (3).</p>
-<div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Chesapeake House Travel Plaza</span><small>50 kW · 6 stalls</small></div>
-<div class="a">10670 I-95, Port Deposit, MD</div><div class="host">Non-networked</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥1 min</span><span>☕ Peet&#x27;s Coffee ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.61212,-76.00952" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Kent Plaza - Walgreens</span><small>50 kW · 2 stalls</small></div>
-<div class="a">701 Washington Ave, Chestertown, MD</div><div class="host">Non-networked</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🥩 Arby&#x27;s ≥1 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.22409,-76.0695" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>North East, MD - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">John F Kennedy Memorial Hwy, North East, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍕 Pizza Hut ≥2 min</span><span>☕ Peet&#x27;s Coffee ≥2 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.61194,-76.01001" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Frederick, MD - Buckeystown Pike - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">5601  Buckeystown Pike, Frederick, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥2 min</span><span>⛽ Sheetz ≥1 min</span><span>🐦 Red Robin ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🔧 Lowe&#x27;s ≥2 min</span><span>🏪 Sam&#x27;s Club ≥3 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.38687,-77.40778" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Upper Marlboro Ford</span><small>120 kW · 4 stalls</small></div>
-<div class="a">5701 Crain Hwy, Upper Marlboro, MD</div><div class="host">EV Connect</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍔 Wendy&#x27;s ≥9 min</span><span>🔨 Home Depot ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81163,-76.74042" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Ampcap Rr</span><small>125 kW · 1 stall</small></div>
-<div class="a">203 Frederick Road, Thurmont, MD</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍩 Dunkin&#x27; ≥5 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.61316,-77.41954" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Frederick, MD - Tesla Supercharger</span><small>150 kW · 10 stalls</small></div>
-<div class="a">5500 Buckeystown Pike, Frederick, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Aldi ≥2 min</span><span>🍝 Olive Garden ≥2 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.38471,-77.40554" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥3</b><span>min</span></div><div class="body">
-<div class="n"><span>Marlboro Crossroads</span><small>350 kW · 4 stalls</small></div>
-<div class="a">5700 Crain Hwy, Upper Marlboro, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥3 min</span><span>☕ Starbucks ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.81038,-76.73779" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Flying J</span><small>350 kW · 8 stalls</small></div>
-<div class="a">221 Belle Hill Road, Elkton, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥4 min</span><span>⛽ Flying J ≥1 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🧇 Waffle House ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.63795,-75.8067" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2009 (Abingdon, MD)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">401 Constant Friendship Blvd., Abingdon, MD</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥4 min</span><span>🛒 Walmart ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🦆 Wawa ≥5 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.4634,-76.31509" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥4</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - DPL - Salisbury FSO Parking Lot</span><small>50 kW · 2 stalls</small></div>
-<div class="a">251 Tilghman Rd, Salisbury, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥4 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🏪 Dollar General ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥪 Subway ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.36805,-75.54667" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥5</b><span>min</span></div><div class="body">
-<div class="n"><span>Reisterstown Road Library</span><small>50 kW · 1 stall</small></div>
-<div class="a">6310 Reisterstown Rd, Baltimore, MD</div><div class="host">Non-networked</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥5 min</span><span>🍗 Wingstop ≥3 min</span><span>🐼 Panda Express ≥4 min</span><span>🍔 Wendy&#x27;s ≥5 min</span><span>👑 Burger King ≥5 min</span><span>🌮 Taco Bell ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.35442,-76.70063" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - BGE - Barclay Street Lot</span><small>150 kW · 4 stalls</small></div>
-<div class="a">3201 Barclay St, Baltimore, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥6 min</span><span>🥪 Subway ≥2 min</span><span>🏪 Dollar General ≥2 min</span><span>☕ Starbucks ≥5 min</span><span>🌯 Chipotle ≥5 min</span><span>💊 CVS ≥6 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.32751,-76.61087" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>Ocean City, MD - Tesla Supercharger</span><small>250 kW · 6 stalls</small></div>
-<div class="a">12826A Ocean Gateway, Ocean City, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥6 min</span><span>🍗 Royal Farms ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🥖 Panera Bread ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.33572,-75.10495" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥6</b><span>min</span></div><div class="body">
-<div class="n"><span>H-D Frederick Dcfast Hog</span><small>24 kW · 1 stall</small></div>
-<div class="a">5722 Urbana Pike, Frederick, MD</div><div class="host">ChargePoint</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥6 min</span><span>🔧 Lowe&#x27;s ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍗 Popeyes ≥4 min</span><span>🧇 Waffle House ≥5 min</span><span>⛽ Sheetz ≥6 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.3904,-77.40587" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Royal Farms - Ocean City, MD - RFS</span><small>60 kW · 2 stalls</small></div>
-<div class="a">12826 Ocean Gateway, Ocean City, MD</div><div class="host">Blink</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥7 min</span><span>🍗 Royal Farms ≥1 min</span><span>🐔 Chick-fil-A ≥2 min</span><span>🌯 Chipotle ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>🥖 Panera Bread ≥6 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.33552,-75.10424" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - BGE - Randallstown</span><small>50 kW · 2 stalls</small></div>
-<div class="a">3525 Resource Dr, Randallstown, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥7 min</span><span>🍕 Domino&#x27;s ≥1 min</span><span>🔨 Home Depot ≥3 min</span><span>🛒 Walmart ≥7 min</span><span>🛒 Aldi ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.36315,-76.78741" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Target - Tesla Supercharger</span><small>325 kW · 20 stalls</small></div>
-<div class="a">3101 Donnel Dr, District Heights, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥7 min</span><span>🎯 Target ≥1 min</span><span>💊 Walgreens ≥1 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🥞 IHOP ≥3 min</span><span>🥩 Arby&#x27;s ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.84947,-76.88611" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥7</b><span>min</span></div><div class="body">
-<div class="n"><span>Younger Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">7418 Grove Rd, Frederick, MD</div><div class="host">In Charge</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥7 min</span><span>🍗 Popeyes ≥1 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>🧇 Waffle House ≥3 min</span><span>👑 Burger King ≥3 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.39102,-77.40801" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - DPL - Stevensville Park and Ride</span><small>50 kW · 4 stalls</small></div>
-<div class="a">111 Thompson Creek Rd, Stevensville, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>🎯 Target ≥2 min</span><span>🍦 Ice cream shop ≥8 min</span><span>☕ Starbucks ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.97753,-76.32114" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>EVsmart - DPL - Queen Annes County Library</span><small>50 kW · 2 stalls</small></div>
-<div class="a">200 Library Cir, Stevensville, MD</div><div class="host">Swtch</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>🍟 McDonald&#x27;s ≥8 min</span><span>🍕 Domino&#x27;s ≥8 min</span><span>☕ Starbucks ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.97888,-76.30595" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Westfield Wheaton (Silver Spring, MD)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">11160 Veirs Mill Rd, Silver Spring, MD</div><div class="host">Electrify America</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>💊 CVS ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍟 McDonald&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.03811,-77.05433" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>La Vale, MD - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">11601 Winchester Road, La Vale, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>⛽ Sheetz ≥1 min</span><span>🏪 Dollar General ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🍩 Dunkin&#x27; ≥2 min</span><span>🌮 Taco Bell ≥4 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.63625,-78.84571" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Abingdon, MD - Woodsdale Road - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">3500 Woodsdale Road, Abingdon, MD</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>🦆 Wawa ≥1 min</span><span>🛒 Wegmans ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🥖 Panera Bread ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.46559,-76.31107" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥9</b><span>min</span></div><div class="body">
-<div class="n"><span>Frederick, MD Rechargery Relay - W Patrick St</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1390 W Patrick St, Frederick, MD</div><div class="host">IONNA</div>
-<div class="c"><span>🍗 <b>KFC</b> ≥9 min</span><span>🍗 Popeyes ≥3 min</span><span>🍗 Bojangles ≥4 min</span><span>🔨 Home Depot ≥5 min</span><span>🍳 Denny&#x27;s ≥7 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../../?chain=KFC&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.41857,-77.45956" target="_blank" rel="noopener">Directions</a></div>
+<div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Chesapeake House Travel Plaza</div>
+<div class="sp"><s class="spd std">50 kW</s><b>6 stalls</b><span>Non-networked</span></div>
+<div class="a">10670 I-95, Port Deposit, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>☕ Peet&#x27;s Coffee <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.61212,-76.00952" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Kent Plaza - Walgreens</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">701 Washington Ave, Chestertown, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🥩 Arby&#x27;s <i>1 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.22409,-76.0695" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">North East, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">John F Kennedy Memorial Hwy, North East, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>☕ Peet&#x27;s Coffee <i>2 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.61194,-76.01001" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Frederick, MD - Buckeystown Pike - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5601  Buckeystown Pike, Frederick, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>2 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🐦 Red Robin <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🔧 Lowe&#x27;s <i>2 min</i></span><span>🏪 Sam&#x27;s Club <i>3 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.38687,-77.40778" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Upper Marlboro Ford</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>EV Connect</span></div>
+<div class="a">5701 Crain Hwy, Upper Marlboro, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>9 min</i></span><span>🔨 Home Depot <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81163,-76.74042" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">Ampcap Rr</div>
+<div class="sp"><s class="spd std">125 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">203 Frederick Road, Thurmont, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>5 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.61316,-77.41954" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Frederick, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>10 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5500 Buckeystown Pike, Frederick, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Aldi <i>2 min</i></span><span>🍝 Olive Garden <i>2 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.38471,-77.40554" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Marlboro Crossroads</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">5700 Crain Hwy, Upper Marlboro, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>3 min</i></span><span>☕ Starbucks <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.81038,-76.73779" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Flying J</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">221 Belle Hill Road, Elkton, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>4 min</i></span><span>⛽ Flying J <i>1 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🧇 Waffle House <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.63795,-75.8067" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2009 (Abingdon, MD)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">401 Constant Friendship Blvd., Abingdon, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>4 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🦆 Wawa <i>5 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.4634,-76.31509" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - DPL - Salisbury FSO Parking Lot</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Swtch</span></div>
+<div class="a">251 Tilghman Rd, Salisbury, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🏪 Dollar General <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🥪 Subway <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.36805,-75.54667" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Reisterstown Road Library</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">6310 Reisterstown Rd, Baltimore, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>5 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🐼 Panda Express <i>4 min</i></span><span>🍔 Wendy&#x27;s <i>5 min</i></span><span>👑 Burger King <i>5 min</i></span><span>🌮 Taco Bell <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.35442,-76.70063" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - BGE - Barclay Street Lot</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Swtch</span></div>
+<div class="a">3201 Barclay St, Baltimore, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>6 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🏪 Dollar General <i>2 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>💊 CVS <i>6 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.32751,-76.61087" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Ocean City, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>6 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">12826A Ocean Gateway, Ocean City, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>6 min</i></span><span>🍗 Royal Farms <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🥖 Panera Bread <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.33572,-75.10495" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="ChargePoint" style="background:#f58220;color:#fff">C</span></div><div class="body">
+<div class="n">H-D Frederick Dcfast Hog</div>
+<div class="sp"><s class="spd slow">24 kW</s><b>1 stall</b><span>ChargePoint</span></div>
+<div class="a">5722 Urbana Pike, Frederick, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>6 min</i></span><span>🔧 Lowe&#x27;s <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍗 Popeyes <i>4 min</i></span><span>🧇 Waffle House <i>5 min</i></span><span>⛽ Sheetz <i>6 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.3904,-77.40587" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Royal Farms - Ocean City, MD - RFS</div>
+<div class="sp"><s class="spd std">60 kW</s><b>2 stalls</b><span>Blink</span></div>
+<div class="a">12826 Ocean Gateway, Ocean City, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>7 min</i></span><span>🍗 Royal Farms <i>1 min</i></span><span>🐔 Chick-fil-A <i>2 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🥖 Panera Bread <i>6 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.33552,-75.10424" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - BGE - Randallstown</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Swtch</span></div>
+<div class="a">3525 Resource Dr, Randallstown, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>7 min</i></span><span>🍕 Domino&#x27;s <i>1 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🛒 Walmart <i>7 min</i></span><span>🛒 Aldi <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.36315,-76.78741" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Target - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3101 Donnel Dr, District Heights, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>7 min</i></span><span>🎯 Target <i>1 min</i></span><span>💊 Walgreens <i>1 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🥩 Arby&#x27;s <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.84947,-76.88611" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="In Charge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Younger Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>In Charge</span></div>
+<div class="a">7418 Grove Rd, Frederick, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>7 min</i></span><span>🍗 Popeyes <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>🧇 Waffle House <i>3 min</i></span><span>👑 Burger King <i>3 min</i></span><span>🔧 Lowe&#x27;s <i>4 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.39102,-77.40801" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - DPL - Stevensville Park and Ride</div>
+<div class="sp"><s class="spd std">50 kW</s><b>4 stalls</b><span>Swtch</span></div>
+<div class="a">111 Thompson Creek Rd, Stevensville, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>🎯 Target <i>2 min</i></span><span>🍦 Ice cream shop <i>8 min</i></span><span>☕ Starbucks <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.97753,-76.32114" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Swtch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">EVsmart - DPL - Queen Annes County Library</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Swtch</span></div>
+<div class="a">200 Library Cir, Stevensville, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>🍟 McDonald&#x27;s <i>8 min</i></span><span>🍕 Domino&#x27;s <i>8 min</i></span><span>☕ Starbucks <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.97888,-76.30595" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Westfield Wheaton (Silver Spring, MD)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">11160 Veirs Mill Rd, Silver Spring, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>💊 CVS <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.03811,-77.05433" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">La Vale, MD - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">11601 Winchester Road, La Vale, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>⛽ Sheetz <i>1 min</i></span><span>🏪 Dollar General <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>2 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.63625,-78.84571" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Abingdon, MD - Woodsdale Road - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3500 Woodsdale Road, Abingdon, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>🦆 Wawa <i>1 min</i></span><span>🛒 Wegmans <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🥖 Panera Bread <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.46559,-76.31107" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">Frederick, MD Rechargery Relay - W Patrick St</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">1390 W Patrick St, Frederick, MD</div>
+<div class="c"><span>🍗 <b>KFC</b> <i>9 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>🍗 Bojangles <i>4 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>🍳 Denny&#x27;s <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.41857,-77.45956" target="_blank" rel="noopener">Directions</a><a href="../../../?chain=KFC&amp;state=MD">Show on map</a></div>
 </div></div>
 <h2>Other chains near fast chargers in Maryland</h2><div class="chips"><a href="../../starbucks/md/">☕ Starbucks <small>120</small></a><a href="../../mcdonald-s/md/">🍟 McDonald&#x27;s <small>112</small></a><a href="../../dunkin/md/">🍩 Dunkin&#x27; <small>102</small></a><a href="../../ice-cream-shop/md/">🍦 Ice cream shop <small>100</small></a><a href="../../chipotle/md/">🌯 Chipotle <small>82</small></a><a href="../../subway/md/">🥪 Subway <small>78</small></a><a href="../../royal-farms/md/">🍗 Royal Farms <small>78</small></a><a href="../../cvs/md/">💊 CVS <small>77</small></a><a href="../../wawa/md/">🦆 Wawa <small>58</small></a><a href="../../chick-fil-a/md/">🐔 Chick-fil-A <small>56</small></a><a href="../../panera-bread/md/">🥖 Panera Bread <small>53</small></a><a href="../../wendy-s/md/">🍔 Wendy&#x27;s <small>52</small></a><a href="../../five-guys/md/">🍔 Five Guys <small>52</small></a><a href="../../popeyes/md/">🍗 Popeyes <small>49</small></a><a href="../../burger-king/md/">👑 Burger King <small>48</small></a><a href="../../taco-bell/md/">🌮 Taco Bell <small>47</small></a><a href="../../domino-s/md/">🍕 Domino&#x27;s <small>43</small></a><a href="../../target/md/">🎯 Target <small>41</small></a><a href="../../aldi/md/">🛒 Aldi <small>36</small></a><a href="../../walgreens/md/">💊 Walgreens <small>36</small></a><a href="../../panda-express/md/">🐼 Panda Express <small>32</small></a><a href="../../dollar-general/md/">🏪 Dollar General <small>31</small></a><a href="../../safeway/md/">🛒 Safeway <small>29</small></a><a href="../../home-depot/md/">🔨 Home Depot <small>29</small></a><a href="../../walmart/md/">🛒 Walmart <small>28</small></a><a href="../../arby-s/md/">🥩 Arby&#x27;s <small>28</small></a><a href="../../jersey-mike-s/md/">🥪 Jersey Mike&#x27;s <small>24</small></a><a href="../../sheetz/md/">⛽ Sheetz <small>23</small></a><a href="../../olive-garden/md/">🍝 Olive Garden <small>21</small></a><a href="../../buffalo-wild-wings/md/">🦬 Buffalo Wild Wings <small>21</small></a><a href="../../lowe-s/md/">🔧 Lowe&#x27;s <small>20</small></a><a href="../../sam-s-club/md/">🏪 Sam&#x27;s Club <small>19</small></a><a href="../../ihop/md/">🥞 IHOP <small>18</small></a><a href="../../wingstop/md/">🍗 Wingstop <small>18</small></a><a href="../../red-robin/md/">🐦 Red Robin <small>17</small></a><a href="../../pizza-hut/md/">🍕 Pizza Hut <small>17</small></a><a href="../../best-buy/md/">💻 Best Buy <small>17</small></a><a href="../../harris-teeter/md/">🛒 Harris Teeter <small>17</small></a><a href="../../sonic/md/">🚗 Sonic <small>16</small></a><a href="../../denny-s/md/">🍳 Denny&#x27;s <small>12</small></a><a href="../../costco/md/">📦 Costco <small>11</small></a><a href="../../waffle-house/md/">🧇 Waffle House <small>10</small></a><a href="../../trader-joe-s/md/">🛍️ Trader Joe&#x27;s <small>10</small></a><a href="../../peet-s-coffee/md/">☕ Peet&#x27;s Coffee <small>10</small></a><a href="../../tractor-supply/md/">🚜 Tractor Supply <small>10</small></a><a href="../../hardee-s/md/">⭐ Hardee&#x27;s <small>9</small></a><a href="../../applebee-s/md/">🍎 Applebee&#x27;s <small>9</small></a><a href="../../little-caesars/md/">🍕 Little Caesars <small>9</small></a><a href="../../cracker-barrel/md/">🪵 Cracker Barrel <small>8</small></a><a href="../../firehouse-subs/md/">🚒 Firehouse Subs <small>8</small></a><a href="../../shake-shack/md/">🍔 Shake Shack <small>7</small></a><a href="../../wegmans/md/">🛒 Wegmans <small>7</small></a><a href="../../sprouts/md/">🥬 Sprouts <small>7</small></a><a href="../../whole-foods/md/">🥬 Whole Foods <small>5</small></a><a href="../../texas-roadhouse/md/">🤠 Texas Roadhouse <small>5</small></a><a href="../../dairy-queen/md/">🍦 Dairy Queen <small>4</small></a><a href="../../raising-cane-s/md/">🐕 Raising Cane&#x27;s <small>4</small></a><a href="../../chili-s/md/">🌶️ Chili&#x27;s <small>4</small></a><a href="../../ikea/md/">🪑 IKEA <small>4</small></a><a href="../../bojangles/md/">🍗 Bojangles <small>3</small></a><a href="../../pilot/md/">⛽ Pilot <small>3</small></a><a href="../../circle-k/md/">⛽ Circle K <small>2</small></a><a href="../../krispy-kreme/md/">🍩 Krispy Kreme <small>2</small></a><a href="../../ta-travel-center/md/">⛽ TA Travel Center <small>2</small></a><a href="../../flying-j/md/">⛽ Flying J <small>1</small></a><a href="../../giant-eagle/md/">🛒 Giant Eagle <small>1</small></a><a href="../../cook-out/md/">🍔 Cook Out <small>1</small></a></div>
 <h2>KFC in other states</h2><div class="chips"><a href="../">All states</a></div>

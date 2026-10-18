@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Sam&#x27;s Club">Open on the map →</a>
 <p class="stats">Of the 426 fast chargers with a Sam&#x27;s Club nearby across the US: The typical stop here delivers <b>250 kW</b>, and 284 of them do 150 kW or more; <b>54</b> are close enough that the Sam&#x27;s Club is a two-minute walk or less; <b>376</b> are listed as open 24 hours. The fastest is <b>Target - Tesla Supercharger</b> in Longview at 500 kW; the closest walk is 1 min at <b>Sam&#x27;s Club 6357 (Annapolis,MD)</b>. Most are on Tesla Supercharger (115), Electrify America (75), ChargePoint (61).</p>
 <h2>By state</h2><div class="chips"><a href="tx/">Texas <small>43</small></a><a href="fl/">Florida <small>35</small></a><a href="ca/">California <small>35</small></a><a href="md/">Maryland <small>19</small></a><a href="oh/">Ohio <small>19</small></a><a href="il/">Illinois <small>18</small></a><a href="pa/">Pennsylvania <small>17</small></a><a href="ga/">Georgia <small>16</small></a><a href="mi/">Michigan <small>15</small></a><a href="co/">Colorado <small>14</small></a><a href="ny/">New York <small>13</small></a><a href="mo/">Missouri <small>13</small></a><a href="sc/">South Carolina <small>13</small></a><a href="nc/">North Carolina <small>13</small></a><a href="tn/">Tennessee <small>10</small></a><a href="ut/">Utah <small>9</small></a><a href="wi/">Wisconsin <small>9</small></a><a href="va/">Virginia <small>9</small></a><a href="al/">Alabama <small>8</small></a><a href="nv/">Nevada <small>8</small></a><a href="in/">Indiana <small>8</small></a><a href="ia/">Iowa <small>8</small></a><a href="me/">Maine <small>8</small></a><a href="mn/">Minnesota <small>8</small></a><a href="az/">Arizona <small>7</small></a><a href="la/">Louisiana <small>7</small></a><a href="ms/">Mississippi <small>6</small></a><a href="ok/">Oklahoma <small>6</small></a><a href="ar/">Arkansas <small>5</small></a><a href="wv/">West Virginia <small>4</small></a><a href="hi/">Hawaii <small>3</small></a><a href="ne/">Nebraska <small>3</small></a><a href="wy/">Wyoming <small>3</small></a><a href="ks/">Kansas <small>3</small></a><a href="ky/">Kentucky <small>3</small></a><a href="nm/">New Mexico <small>3</small></a><a href="nj/">New Jersey <small>2</small></a><a href="de/">Delaware <small>1</small></a><a href="nd/">North Dakota <small>1</small></a><a href="sd/">South Dakota <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6357 (Annapolis,MD)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2100 Generals Hwy, Annapolis, MD</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌯 Chipotle ≥5 min</span><span>🍗 Popeyes ≥5 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🍔 Five Guys ≥6 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.98946,-76.55072" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>EVolve NY Plattsburgh</span><small>350 kW · 4 stalls</small></div>
-<div class="a">25 Consumer Square, Plattsburgh, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🦬 Buffalo Wild Wings ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🛒 Walmart ≥3 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.69408,-73.48529" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 8277 (Westworth Village, TX)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6760 Westworth Blvd, Westworth Village, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍩 Krispy Kreme ≥2 min</span><span>🚒 Firehouse Subs ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.7543,-97.43069" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 8106 (Montgomery, AL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1080 Eastern Blvd, Montgomery, AL</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>👑 Burger King ≥8 min</span><span>🌮 Taco Bell ≥9 min</span><span>🧇 Waffle House ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.36606,-86.21456" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 4974 (North Las Vegas, NV)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2650 E Craig Rd, North Las Vegas, NV</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>🪵 Cracker Barrel ≥3 min</span><span>🥪 Subway ≥4 min</span><span>🔧 Lowe&#x27;s ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.24109,-115.11261" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Independence, MO</span><small>300 kW · 10 stalls</small></div>
-<div class="a">4011 South Bolger Road, Independence, MO</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🛒 Walmart ≥3 min</span><span>🌮 Taco Bell ≥4 min</span><span>🥪 Subway ≥4 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>☕ Starbucks ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=MO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.04496,-94.36419" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Eastwood Towne Center MB.HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">3003 Preyde Blvd., Lansing, MI</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🍦 Culver&#x27;s ≥1 min</span><span>🥪 Subway ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🛒 Walmart ≥5 min</span><span>🐼 Panda Express ≥6 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.76442,-84.51727" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 4356 (SW Las Vegas, NV)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">7200 Arroyo Crossing Pkwy, Las Vegas, NV</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>💻 Best Buy ≥4 min</span><span>🔨 Home Depot ≥4 min</span><span>🐼 Panda Express ≥5 min</span><span>🌯 Chipotle ≥6 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NV">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.0646,-115.24718" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 630 (Florence, SC)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">230 N Beltline Drive, Florence, SC</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🍦 Dairy Queen ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🛒 Aldi ≥4 min</span><span>🥩 Arby&#x27;s ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.19281,-79.82282" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 8278 (Greenville, SC)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1211 Woodruff Road, Greenville, SC</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🍩 Krispy Kreme ≥3 min</span><span>🐔 Chick-fil-A ≥5 min</span><span>🍗 Zaxby&#x27;s ≥5 min</span><span>🥞 IHOP ≥5 min</span><span>🍦 Ice cream shop ≥6 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=SC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.82506,-82.28885" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 5137 (Aurora, CO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">6101 South Aurora Parkway, Aurora, CO</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍝 Olive Garden ≥6 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.60584,-104.70639" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6549 (Pueblo, CO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">412 Eagleridge Blvd., Pueblo, CO</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🥪 Subway ≥1 min</span><span>👑 Burger King ≥2 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🥞 IHOP ≥5 min</span><span>🔨 Home Depot ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.31937,-104.61318" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6452 (Asheville, NC)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">645 Patton Ave., Asheville, NC</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>💊 CVS ≥7 min</span><span>🥪 Subway ≥7 min</span><span>☕ Starbucks ≥9 min</span><span>🌯 Chipotle ≥9 min</span><span>🍟 McDonald&#x27;s ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NC">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.59119,-82.5816" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 8272 (Fountain, CO)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">4385 Venetucci Blvd., Fountain, CO</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🐼 Panda Express ≥3 min</span><span>☕ Starbucks ≥3 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.76909,-104.78309" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6360 (Grand Junction, CO)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1040 Independent Ave., Grand Junction, CO</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🚗 Sonic ≥3 min</span><span>🐔 Chick-fil-A ≥4 min</span><span>🐦 Red Robin ≥4 min</span><span>🥬 Sprouts ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.08244,-108.58333" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 4991 (Cocoa, FL)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">450 Townsend Rd, Cocoa, FL</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🥞 IHOP ≥3 min</span><span>🍟 McDonald&#x27;s ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=28.36139,-80.79314" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6686 (Salt Lake City, UT)</span><small>350 kW · 8 stalls</small></div>
-<div class="a">1905 South 300 West, Salt Lake City, UT</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🔨 Home Depot ≥3 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span><span>🥞 IHOP ≥5 min</span><span>💻 Best Buy ≥5 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=UT">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.72787,-111.89792" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6661 (Portage, MI)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">7021 S Westnedge Ave, Portage, MI</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🤠 Texas Roadhouse ≥1 min</span><span>🍟 McDonald&#x27;s ≥4 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>💻 Best Buy ≥4 min</span><span>🚗 Sonic ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=MI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=42.21405,-85.58807" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 4627 (Denton, TX)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">2750 W. University, Denton, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🐼 Panda Express ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>⛽ RaceTrac ≥2 min</span><span>+17</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.23157,-97.16808" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 5274 (Pearl City, HI)</span><small>150 kW · 4 stalls</small></div>
-<div class="a">1131 Kuala St, Pearl City, HI</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍕 Domino&#x27;s ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🥪 Subway ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=HI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=21.39799,-157.97384" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6428 (Medford, NY)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2950 Horseblock Rd, Medford, NY</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥1 min</span><span>🎯 Target ≥3 min</span><span>💊 Walgreens ≥7 min</span><span>🔧 Lowe&#x27;s ≥8 min</span><span>🍩 Dunkin&#x27; ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NY">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.82619,-72.99036" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 335 (Jackson, TN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2196 Emporium Drive, Jackson, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Wendy&#x27;s ≥2 min</span><span>+16</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.66884,-88.85304" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1476 (Clarksville, IN)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1351 Veterans Pkwy, Clarksville, IN</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.33054,-85.75879" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 2065 (Knoxville, TN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8445 Walbrook Drive, Knoxville, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🍟 McDonald&#x27;s ≥5 min</span><span>⛽ Pilot ≥5 min</span><span>🚗 Sonic ≥6 min</span><span>🥪 Subway ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.92626,-84.06107" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Gwatney Buick GMC</span><small>120 kW · 4 stalls</small></div>
-<div class="a">5700 Landers Rd., North Little Rock, AR</div><div class="host">Blink</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🦬 Buffalo Wild Wings ≥6 min</span><span>🚜 Tractor Supply ≥9 min</span><span>⛽ Circle K ≥9 min</span><span>🥪 Subway ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=AR">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.8076,-92.20703" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Florence, AL - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">372 Cox Creek Pkwy, Florence, AL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🎯 Target ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🍗 Zaxby&#x27;s ≥2 min</span><span>🥩 Arby&#x27;s ≥2 min</span><span>🌶️ Chili&#x27;s ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=AL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.84116,-87.63424" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 4930 (Cookeville, TN)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">1177 Sams Street, Cookeville, TN</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🧇 Waffle House ≥4 min</span><span>⛽ Pilot ≥4 min</span><span>🍗 KFC ≥4 min</span><span>🍝 Olive Garden ≥6 min</span><span>🪵 Cracker Barrel ≥6 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.13346,-85.50762" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 4822 (Murrieta, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">40500 Murrieta Hot Springs Rd., Murrieta, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🛍️ Trader Joe&#x27;s ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>💊 Walgreens ≥2 min</span><span>🦬 Buffalo Wild Wings ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.55405,-117.17677" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Landers Nissan</span><small>50 kW · 2 stalls</small></div>
-<div class="a">371 Goodman Rd, Southaven, MS</div><div class="host">Non-networked</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>☕ Starbucks ≥4 min</span><span>🥪 Subway ≥5 min</span><span>⛽ Circle K ≥7 min</span><span>🍩 Dunkin&#x27; ≥8 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=MS">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.96184,-89.98332" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 7676 (Amarillo, TX)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">8952 Westgate Pkwy., Amarillo, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🔨 Home Depot ≥1 min</span><span>🐦 Red Robin ≥4 min</span><span>🍦 Ice cream shop ≥5 min</span><span>🍎 Applebee&#x27;s ≥5 min</span><span>🍟 McDonald&#x27;s ≥7 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=35.18517,-101.94083" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 8185 (Eau Claire, WI)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">4001 Gateway Dr, Eau Claire, WI</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🥪 Subway ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>⛽ Kwik Trip ≥3 min</span><span>☕ Starbucks ≥4 min</span><span>💻 Best Buy ≥4 min</span><span>+8</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=WI">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=44.77477,-91.42838" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Dorsett Nissan</span><small>50 kW · 1 stall</small></div>
-<div class="a">105 W Mayfair Dr, Terre Haute, IN</div><div class="host">Non-networked</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍦 Culver&#x27;s ≥4 min</span><span>🍝 Olive Garden ≥9 min</span><span>🦬 Buffalo Wild Wings ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.41449,-87.41653" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Chandler, AZ - N 54th St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">800 N 54th Street, Chandler, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🔨 Home Depot ≥3 min</span><span>💻 Best Buy ≥6 min</span><span>🐔 Chick-fil-A ≥8 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.3157,-111.96958" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sam&#x27;s Club 6518 (Bristol, VA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">13249 Lee Highway, Bristol, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🚜 Tractor Supply ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🥪 Subway ≥3 min</span><span>🌮 Taco Bell ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 3520 (Secaucus, NJ)</span><small>350 kW · 3 stalls</small></div>
-<div class="a">400 Park Plaza Dr., Secaucus, NJ</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🛒 Walmart ≥1 min</span><span>🦬 Buffalo Wild Wings ≥4 min</span><span>🐦 Red Robin ≥5 min</span><span>🌯 Chipotle ≥8 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NJ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.79215,-74.04193" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1773 (Newport News, VA)</span><small>350 kW · 10 stalls</small></div>
-<div class="a">12401 Jefferson Ave., Newport News, VA</div><div class="host">Electrify America</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>🔨 Home Depot ≥6 min</span><span>🍔 Cook Out ≥7 min</span><span>🔧 Lowe&#x27;s ≥8 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.11959,-76.50742" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Shenandoah, TX - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">19073 I-45, Shenandoah, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍦 Ice cream shop ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.18875,-95.45217" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Gm - Fuson Cadillac</span><small>50 kW · 1 stall</small></div>
-<div class="a">4325 So. US Hwy 41, Terre Haute, IN</div><div class="host">EV Connect</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍗 KFC ≥2 min</span><span>🍦 Culver&#x27;s ≥3 min</span><span>🍝 Olive Garden ≥7 min</span><span>🦬 Buffalo Wild Wings ≥8 min</span><span>🐔 Chick-fil-A ≥9 min</span><span>+3</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.41566,-87.41653" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Lincoln, NE - Tesla Supercharger</span><small>150 kW · 8 stalls</small></div>
-<div class="a">5020 N 27th Street, Lincoln, NE</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🛒 Hy-Vee ≥2 min</span><span>🥪 Subway ≥3 min</span><span>🛒 Walmart ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=NE">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=40.86082,-96.67966" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Pooler, GA</span><small>300 kW · 6 stalls</small></div>
-<div class="a">200 Tanger Outlets Boulevard, Pooler, GA</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> ≥2 min</span><span>🍦 Culver&#x27;s ≥2 min</span><span>🚗 Sonic ≥4 min</span><span>🍗 Zaxby&#x27;s ≥4 min</span><span>🌮 Taco Bell ≥4 min</span><span>🌯 Chipotle ≥5 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sam&#x27;s Club&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.13736,-81.24581" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6357 (Annapolis,MD)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2100 Generals Hwy, Annapolis, MD</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>🍗 Popeyes <i>5 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>🍔 Five Guys <i>6 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.98946,-76.55072" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">EVolve NY Plattsburgh</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">25 Consumer Square, Plattsburgh, NY</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.69408,-73.48529" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 8277 (Westworth Village, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">6760 Westworth Blvd, Westworth Village, TX</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍩 Krispy Kreme <i>2 min</i></span><span>🚒 Firehouse Subs <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.7543,-97.43069" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 8106 (Montgomery, AL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1080 Eastern Blvd, Montgomery, AL</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>👑 Burger King <i>8 min</i></span><span>🌮 Taco Bell <i>9 min</i></span><span>🧇 Waffle House <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.36606,-86.21456" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 4974 (North Las Vegas, NV)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2650 E Craig Rd, North Las Vegas, NV</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>1 min</i></span><span>🍔 In-N-Out <i>2 min</i></span><span>🪵 Cracker Barrel <i>3 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🔧 Lowe&#x27;s <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.24109,-115.11261" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Independence, MO</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>10 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">4011 South Bolger Road, Independence, MO</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🛒 Walmart <i>3 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>☕ Starbucks <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.04496,-94.36419" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=MO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Eastwood Towne Center MB.HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">3003 Preyde Blvd., Lansing, MI</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🍦 Culver&#x27;s <i>1 min</i></span><span>🥪 Subway <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🛒 Walmart <i>5 min</i></span><span>🐼 Panda Express <i>6 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.76442,-84.51727" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 4356 (SW Las Vegas, NV)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">7200 Arroyo Crossing Pkwy, Las Vegas, NV</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🐼 Panda Express <i>5 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.0646,-115.24718" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NV">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 630 (Florence, SC)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">230 N Beltline Drive, Florence, SC</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🍦 Dairy Queen <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>🥩 Arby&#x27;s <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.19281,-79.82282" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 8278 (Greenville, SC)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1211 Woodruff Road, Greenville, SC</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🍩 Krispy Kreme <i>3 min</i></span><span>🐔 Chick-fil-A <i>5 min</i></span><span>🍗 Zaxby&#x27;s <i>5 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>🍦 Ice cream shop <i>6 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.82506,-82.28885" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=SC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 5137 (Aurora, CO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">6101 South Aurora Parkway, Aurora, CO</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍝 Olive Garden <i>6 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.60584,-104.70639" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6549 (Pueblo, CO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">412 Eagleridge Blvd., Pueblo, CO</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🥪 Subway <i>1 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🤠 Texas Roadhouse <i>2 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>🔨 Home Depot <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.31937,-104.61318" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6452 (Asheville, NC)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">645 Patton Ave., Asheville, NC</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>💊 CVS <i>7 min</i></span><span>🥪 Subway <i>7 min</i></span><span>☕ Starbucks <i>9 min</i></span><span>🌯 Chipotle <i>9 min</i></span><span>🍟 McDonald&#x27;s <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.59119,-82.5816" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NC">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 8272 (Fountain, CO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">4385 Venetucci Blvd., Fountain, CO</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>☕ Starbucks <i>3 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.76909,-104.78309" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6360 (Grand Junction, CO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1040 Independent Ave., Grand Junction, CO</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>🐔 Chick-fil-A <i>4 min</i></span><span>🐦 Red Robin <i>4 min</i></span><span>🥬 Sprouts <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.08244,-108.58333" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 4991 (Cocoa, FL)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">450 Townsend Rd, Cocoa, FL</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=28.36139,-80.79314" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6686 (Salt Lake City, UT)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>Electrify America</span></div>
+<div class="a">1905 South 300 West, Salt Lake City, UT</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span><span>🥞 IHOP <i>5 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.72787,-111.89792" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=UT">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6661 (Portage, MI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">7021 S Westnedge Ave, Portage, MI</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🤠 Texas Roadhouse <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>4 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🚗 Sonic <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=42.21405,-85.58807" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=MI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 4627 (Denton, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">2750 W. University, Denton, TX</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>⛽ RaceTrac <i>2 min</i></span><span>+17</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.23157,-97.16808" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 5274 (Pearl City, HI)</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1131 Kuala St, Pearl City, HI</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍕 Domino&#x27;s <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=21.39799,-157.97384" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=HI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6428 (Medford, NY)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2950 Horseblock Rd, Medford, NY</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>1 min</i></span><span>🎯 Target <i>3 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>8 min</i></span><span>🍩 Dunkin&#x27; <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.82619,-72.99036" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NY">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 335 (Jackson, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2196 Emporium Drive, Jackson, TN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>2 min</i></span><span>+16</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.66884,-88.85304" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1476 (Clarksville, IN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">1351 Veterans Pkwy, Clarksville, IN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.33054,-85.75879" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 2065 (Knoxville, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">8445 Walbrook Drive, Knoxville, TN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>5 min</i></span><span>⛽ Pilot <i>5 min</i></span><span>🚗 Sonic <i>6 min</i></span><span>🥪 Subway <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.92626,-84.06107" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Blink" style="background:#00a3e0;color:#fff">b</span></div><div class="body">
+<div class="n">Gwatney Buick GMC</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>Blink</span></div>
+<div class="a">5700 Landers Rd., North Little Rock, AR</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>6 min</i></span><span>🚜 Tractor Supply <i>9 min</i></span><span>⛽ Circle K <i>9 min</i></span><span>🥪 Subway <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.8076,-92.20703" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=AR">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Florence, AL - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">372 Cox Creek Pkwy, Florence, AL</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🎯 Target <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🍗 Zaxby&#x27;s <i>2 min</i></span><span>🥩 Arby&#x27;s <i>2 min</i></span><span>🌶️ Chili&#x27;s <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.84116,-87.63424" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=AL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 4930 (Cookeville, TN)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">1177 Sams Street, Cookeville, TN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🧇 Waffle House <i>4 min</i></span><span>⛽ Pilot <i>4 min</i></span><span>🍗 KFC <i>4 min</i></span><span>🍝 Olive Garden <i>6 min</i></span><span>🪵 Cracker Barrel <i>6 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.13346,-85.50762" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 4822 (Murrieta, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">40500 Murrieta Hot Springs Rd., Murrieta, CA</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🛍️ Trader Joe&#x27;s <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>💊 Walgreens <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.55405,-117.17677" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Landers Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>Non-networked</span></div>
+<div class="a">371 Goodman Rd, Southaven, MS</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>🥪 Subway <i>5 min</i></span><span>⛽ Circle K <i>7 min</i></span><span>🍩 Dunkin&#x27; <i>8 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.96184,-89.98332" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=MS">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 7676 (Amarillo, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">8952 Westgate Pkwy., Amarillo, TX</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🔨 Home Depot <i>1 min</i></span><span>🐦 Red Robin <i>4 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>🍎 Applebee&#x27;s <i>5 min</i></span><span>🍟 McDonald&#x27;s <i>7 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=35.18517,-101.94083" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 8185 (Eau Claire, WI)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">4001 Gateway Dr, Eau Claire, WI</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🥪 Subway <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>⛽ Kwik Trip <i>3 min</i></span><span>☕ Starbucks <i>4 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>+8</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=44.77477,-91.42838" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=WI">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Non-networked"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Dorsett Nissan</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>Non-networked</span></div>
+<div class="a">105 W Mayfair Dr, Terre Haute, IN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍦 Culver&#x27;s <i>4 min</i></span><span>🍝 Olive Garden <i>9 min</i></span><span>🦬 Buffalo Wild Wings <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.41449,-87.41653" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Chandler, AZ - N 54th St - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">800 N 54th Street, Chandler, AZ</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🔨 Home Depot <i>3 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🐔 Chick-fil-A <i>8 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.3157,-111.96958" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Sam&#x27;s Club 6518 (Bristol, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">13249 Lee Highway, Bristol, VA</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🚜 Tractor Supply <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🌮 Taco Bell <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.63576,-82.12762" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 3520 (Secaucus, NJ)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">400 Park Plaza Dr., Secaucus, NJ</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🦬 Buffalo Wild Wings <i>4 min</i></span><span>🐦 Red Robin <i>5 min</i></span><span>🌯 Chipotle <i>8 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.79215,-74.04193" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NJ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1773 (Newport News, VA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>10 stalls</b><span>Electrify America</span></div>
+<div class="a">12401 Jefferson Ave., Newport News, VA</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>🔨 Home Depot <i>6 min</i></span><span>🍔 Cook Out <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>8 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.11959,-76.50742" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Shenandoah, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">19073 I-45, Shenandoah, TX</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍦 Ice cream shop <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.18875,-95.45217" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="EV Connect"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Gm - Fuson Cadillac</div>
+<div class="sp"><s class="spd std">50 kW</s><b>1 stall</b><span>EV Connect</span></div>
+<div class="a">4325 So. US Hwy 41, Terre Haute, IN</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍗 KFC <i>2 min</i></span><span>🍦 Culver&#x27;s <i>3 min</i></span><span>🍝 Olive Garden <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>8 min</i></span><span>🐔 Chick-fil-A <i>9 min</i></span><span>+3</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.41566,-87.41653" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=IN">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Lincoln, NE - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">5020 N 27th Street, Lincoln, NE</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🛒 Hy-Vee <i>2 min</i></span><span>🥪 Subway <i>3 min</i></span><span>🛒 Walmart <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=40.86082,-96.67966" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=NE">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Pooler, GA</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">200 Tanger Outlets Boulevard, Pooler, GA</div>
+<div class="c"><span>🏪 <b>Sam&#x27;s Club</b> <i>2 min</i></span><span>🍦 Culver&#x27;s <i>2 min</i></span><span>🚗 Sonic <i>4 min</i></span><span>🍗 Zaxby&#x27;s <i>4 min</i></span><span>🌮 Taco Bell <i>4 min</i></span><span>🌯 Chipotle <i>5 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.13736,-81.24581" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sam&#x27;s Club&amp;state=GA">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Sam&#x27;s Club within walking distance in the US?</summary><p>426 public DC fast chargers in the US have a Sam&#x27;s Club within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Sam&#x27;s Club charging stop is fastest in the US?</summary><p>Target - Tesla Supercharger in Longview at 500 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.

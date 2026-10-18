@@ -7,7 +7,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">
@@ -34,206 +34,246 @@
 <a class="cta" href="../../?chain=Sprouts">Open on the map →</a>
 <p class="stats">Of the 259 fast chargers with a Sprouts nearby across the US: The typical stop here delivers <b>250 kW</b>, and 181 of them do 150 kW or more; <b>43</b> are close enough that the Sprouts is a two-minute walk or less; <b>239</b> are listed as open 24 hours. The fastest is <b>San Jose, CA Rechargery Relay - Branham Ln.</b> in San Jose at 400 kW; the closest walk is 1 min at <b>Houston, TX - Yale Street - Tesla Supercharger</b>. Most are on Tesla Supercharger (89), EVgo (49), ChargePoint (40).</p>
 <h2>By state</h2><div class="chips"><a href="ca/">California <small>143</small></a><a href="co/">Colorado <small>19</small></a><a href="tx/">Texas <small>18</small></a><a href="fl/">Florida <small>18</small></a><a href="ga/">Georgia <small>17</small></a><a href="ok/">Oklahoma <small>10</small></a><a href="az/">Arizona <small>9</small></a><a href="md/">Maryland <small>7</small></a><a href="va/">Virginia <small>4</small></a><a href="nv/">Nevada <small>4</small></a><a href="nc/">North Carolina <small>3</small></a><a href="wy/">Wyoming <small>3</small></a><a href="wa/">Washington <small>2</small></a><a href="pa/">Pennsylvania <small>1</small></a><a href="tn/">Tennessee <small>1</small></a></div>
-<h2>Closest 40 nationwide</h2><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Houston, TX - Yale Street - Tesla Supercharger</span><small>250 kW · 35 stalls</small></div>
-<div class="a">195 Yale St, Houston, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Wingstop ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>🥪 Jersey Mike&#x27;s ≥4 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.7746,-95.40043" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>San Jose, CA Rechargery Relay - Branham Ln.</span><small>400 kW · 8 stalls</small></div>
-<div class="a">1130 Branham Ln, San Jose, CA</div><div class="host">IONNA</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>💊 CVS ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🛒 Safeway ≥5 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.26185,-121.87841" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Evergreen 56th and Tower (Denver, CO)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">18552 E 57th Ave, Denver, CO</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CO">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.79994,-104.7709" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Los Angeles, CA - Venice Boulevard - Tesla Supercharger</span><small>250 kW · 44 stalls</small></div>
-<div class="a">8985 Venice Blvd, Los Angeles, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🍔 In-N-Out ≥2 min</span><span>💊 CVS ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.02797,-118.39414" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Sprouts</span><small>350 kW · 6 stalls</small></div>
-<div class="a">1300 Pinole Valley Rd, Pinole, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🤡 Jack in the Box ≥6 min</span><span>🌯 Chipotle ≥6 min</span><span>☕ Peet&#x27;s Coffee ≥6 min</span><span>🛍️ Trader Joe&#x27;s ≥7 min</span><span>💊 Walgreens ≥7 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.00011,-122.28698" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Inventrust Pavilion At LaQuinta (LaQuinta, CA)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">79220 Hwy 111, LaQuinta, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>🍦 Ice cream shop ≥4 min</span><span>💻 Best Buy ≥4 min</span><span>🥖 Panera Bread ≥4 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.70981,-116.28597" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Regency Westlake Plaza (Westlake Village, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">2725-2785 Agoura Rd, Westlake Village, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>⭐ Carl&#x27;s Jr. ≥4 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.15231,-118.82629" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Burbank, CA - N San Fernando Blvd - Tesla Supercharger</span><small>250 kW · 8 stalls</small></div>
-<div class="a">1009 N San Fernando Blvd, Burbank, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🌮 Taco Bell ≥2 min</span><span>🍗 Wingstop ≥2 min</span><span>🥞 IHOP ≥2 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18744,-118.31822" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Port St. Lucie, FL - Tesla Supercharger</span><small>150 kW · 16 stalls</small></div>
-<div class="a">1701 NW Peacock Blvd, Port St. Lucie, FL</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍔 Five Guys ≥2 min</span><span>🥖 Panera Bread ≥3 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🌶️ Chili&#x27;s ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=27.31296,-80.40659" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Deerfield Beach Shoppes</span><small>120 kW · 4 stalls</small></div>
-<div class="a">930 Federal Hwy, Deerfield Beach, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>💊 Walgreens ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>⛽ Speedway ≥4 min</span><span>🛒 Aldi ≥4 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.30516,-80.09185" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Upland Town Center (Upland, CA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">913 W Foothill Blvd, Upland, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍕 Little Caesars ≥2 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>☕ Dutch Bros ≥2 min</span><span>🤡 Jack in the Box ≥3 min</span><span>🍦 Ice cream shop ≥5 min</span><span>+2</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.10835,-117.66101" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Fullerton, CA - South Harbor Blvd - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1475 S Harbor Blvd, Fullerton, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍳 Denny&#x27;s ≥2 min</span><span>💊 CVS ≥3 min</span><span>💻 Best Buy ≥3 min</span><span>🎯 Target ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>+18</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.8566,-117.92503" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Hunter Court Shopping Center - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">24372 Rockfield Blvd, Lake Forest, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍦 Ice cream shop ≥1 min</span><span>🤡 Jack in the Box ≥1 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>🌮 Del Taco ≥3 min</span><span>+13</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.61575,-117.70403" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Augusta, GA</span><small>300 kW · 6 stalls</small></div>
-<div class="a">630 Crane Creek Drive, Augusta, GA</div><div class="host">Rivian Adventure</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🧇 Waffle House ≥6 min</span><span>💻 Best Buy ≥6 min</span><span>🏪 Sam&#x27;s Club ≥7 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.49745,-82.07914" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Grand Plaza - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
-<div class="a">101-197 S Las Posas Rd, San Marcos, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🚗 Sonic ≥3 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.14061,-117.19182" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Crane Creek Shopping Center MB.HPC</span><small>400 kW · 10 stalls</small></div>
-<div class="a">630 Crane Creek Drive, Augusta, GA</div><div class="host">Mercedes Benz</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍔 Five Guys ≥1 min</span><span>🧇 Waffle House ≥5 min</span><span>💻 Best Buy ≥6 min</span><span>🏪 Sam&#x27;s Club ≥7 min</span><span>🦬 Buffalo Wild Wings ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.49742,-82.0795" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Mill Creek, WA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">13314 Bothell Everett Hwy, Mill Creek, WA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🤡 Jack in the Box ≥2 min</span><span>🛒 Fred Meyer ≥5 min</span><span>💊 Walgreens ≥5 min</span><span>🐔 Chick-fil-A ≥7 min</span><span>🔧 Lowe&#x27;s ≥7 min</span><span>+1</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=WA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=47.87762,-122.21289" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Shops at Canton Crossing</span><small>350 kW · 6 stalls</small></div>
-<div class="a">3800 Boston St, Baltimore, MD</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🐔 Chick-fil-A ≥1 min</span><span>🍔 Shake Shack ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🍩 Dunkin&#x27; ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=MD">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=39.27733,-76.56324" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Alhambra, CA - East Bay State St - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">201 E Bay State St, Alhambra, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>🍎 Applebee&#x27;s ≥3 min</span><span>🐼 Panda Express ≥3 min</span><span>🍦 Ice cream shop ≥4 min</span><span>☕ Starbucks ≥5 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.09508,-118.12393" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥1</b><span>min</span></div><div class="body">
-<div class="n"><span>Clovis, CA - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">870 Herndon Avenue, Clovis, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥1 min</span><span>👑 Burger King ≥1 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🌮 Taco Bell ≥1 min</span><span>🍔 In-N-Out ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.83704,-119.69912" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Petaluma, CA - Tesla Supercharger</span><small>150 kW · 20 stalls</small></div>
-<div class="a">401 Kennilworth Drive, Petaluma, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>🍔 Five Guys ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🎯 Target ≥4 min</span><span>🤡 Jack in the Box ≥7 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.24276,-122.62516" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mesa, AZ - S Signal Butte Rd - Tesla Supercharger</span><small>325 kW · 12 stalls</small></div>
-<div class="a">1252 S Signal Butte Rd, Mesa, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥3 min</span><span>🍦 Ice cream shop ≥3 min</span><span>🍔 Whataburger ≥3 min</span><span>⛽ Circle K ≥3 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.3917,-111.59848" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Shops of Kendall</span><small>350 kW · 8 stalls</small></div>
-<div class="a">9001 SW 127th Ave, Miami, FL</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>💊 CVS ≥1 min</span><span>🥞 IHOP ≥3 min</span><span>🔨 Home Depot ≥4 min</span><span>🛒 Aldi ≥5 min</span><span>💻 Best Buy ≥5 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=25.68538,-80.39895" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>West Covina, CA - E Eastland Center Drive - Tesla Supercharg</span><small>250 kW · 24 stalls</small></div>
-<div class="a">2753 E Eastland Center Drive, West Covina, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>👑 Burger King ≥2 min</span><span>🦬 Buffalo Wild Wings ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥3 min</span><span>🥞 IHOP ≥4 min</span><span>+10</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07388,-117.88975" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Scottsdale, AZ - N Miller Rd - Tesla Supercharger</span><small>250 kW · 12 stalls</small></div>
-<div class="a">4420 N Miller Rd, Scottsdale, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🍕 Pizza Hut ≥1 min</span><span>🥬 Whole Foods ≥8 min</span><span>💊 CVS ≥8 min</span><span>🌯 Chipotle ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.50096,-111.91779" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>FPL EVolution - Sprouts Farmers Market</span><small>120 kW · 4 stalls</small></div>
-<div class="a">670 E Oakland Park Blvd, Oakland Park, FL</div><div class="host">FPL EVolution</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🌮 Taco Bell ≥2 min</span><span>🛒 Aldi ≥6 min</span><span>🛒 Publix ≥10 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=FL">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=26.16589,-80.13812" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Venice Crossroads</span><small>50 kW · 2 stalls</small></div>
-<div class="a">8985 Venice Blvd, Los Angeles, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>☕ Starbucks ≥1 min</span><span>💊 CVS ≥1 min</span><span>🍔 Wendy&#x27;s ≥1 min</span><span>🍗 Wingstop ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>+5</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.02736,-118.39233" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Broken Arrow, OK - Tesla Supercharger</span><small>325 kW · 8 stalls</small></div>
-<div class="a">900 E Hillside Dr, Broken Arrow, OK</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>⛽ QuikTrip ≥1 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>☕ Starbucks ≥2 min</span><span>🎯 Target ≥5 min</span><span>🐼 Panda Express ≥7 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=OK">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=36.06814,-95.78055" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Thousand Oaks, CA - W Hillcrest Dr - Tesla Supercharger</span><small>75 kW · 20 stalls</small></div>
-<div class="a">350 West Hillcrest Drive, Thousand Oaks, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🥪 Subway ≥2 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🐼 Panda Express ≥2 min</span><span>🌯 Chipotle ≥7 min</span><span>🍝 Olive Garden ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18458,-118.89078" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Tucson, AZ - W River Rd - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">3844 West River Road, Tucson, AZ</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🚒 Firehouse Subs ≥1 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🥪 Subway ≥5 min</span><span>📦 Costco ≥7 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=AZ">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.32191,-111.04492" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Sycamore Square - Simi Valley</span><small>50 kW · 2 stalls</small></div>
-<div class="a">2801 Cochran St, Simi Valley, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥1 min</span><span>💊 CVS ≥2 min</span><span>🎯 Target ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🥖 Panera Bread ≥3 min</span><span>+7</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.27934,-118.74118" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 1700 (Poway, CA)</span><small>150 kW · 3 stalls</small></div>
-<div class="a">13425 Community Rd, Poway, CA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🛒 Aldi ≥1 min</span><span>🍦 Ice cream shop ≥2 min</span><span>🛒 Walmart ≥2 min</span><span>☕ Starbucks ≥2 min</span><span>🌯 Chipotle ≥2 min</span><span>+12</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.9583,-117.03865" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Mira Mesa Mall</span><small>350 kW · 6 stalls</small></div>
-<div class="a">8110 Mira Mesa Blvd, San Diego, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🐼 Panda Express ≥1 min</span><span>🐕 Raising Cane&#x27;s ≥2 min</span><span>🍕 Pizza Hut ≥2 min</span><span>🚒 Firehouse Subs ≥2 min</span><span>🍦 Ice cream shop ≥3 min</span><span>+11</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=32.91322,-117.14864" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Site Centers Johns Creek (Suwanee, GA)</span><small>350 kW · 4 stalls</small></div>
-<div class="a">3630 Peachtree Pkwy, Suwanee, GA</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>🛒 Kroger ≥2 min</span><span>🍔 Wendy&#x27;s ≥3 min</span><span>🐔 Chick-fil-A ≥3 min</span><span>🌯 Chipotle ≥4 min</span><span>+9</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.07001,-84.16912" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Walmart 5959 (Houston, TX)</span><small>350 kW · 6 stalls</small></div>
-<div class="a">111 Yale Street, Houston, TX</div><div class="host">Electrify America</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🛒 Walmart ≥1 min</span><span>🍗 Wingstop ≥2 min</span><span>🥪 Jersey Mike&#x27;s ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🌯 Chipotle ≥3 min</span><span>+6</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=29.77322,-95.39982" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Safeway Herndon #1689</span><small>200 kW · 4 stalls</small></div>
-<div class="a">413 Elden St, Herndon, VA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🥖 Panera Bread ≥1 min</span><span>🛒 Safeway ≥1 min</span><span>☕ Starbucks ≥1 min</span><span>🥞 IHOP ≥2 min</span><span>🍗 Popeyes ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=VA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=38.96773,-77.37676" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Huntington Beach, CA - Tesla Supercharger</span><small>325 kW · 24 stalls</small></div>
-<div class="a">6913 Warner Ave, Huntington Beach, CA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>⭐ Carl&#x27;s Jr. ≥2 min</span><span>🔨 Home Depot ≥4 min</span><span>🚒 Firehouse Subs ≥6 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=33.716,-118.00746" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Capitol McKee Center</span><small>350 kW · 6 stalls</small></div>
-<div class="a">385 N Capitol Ave, San Jose, CA</div><div class="host">EVgo</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🐕 Raising Cane&#x27;s ≥1 min</span><span>🐼 Panda Express ≥1 min</span><span>🌯 Chipotle ≥2 min</span><span>☕ Starbucks ≥3 min</span><span>🎯 Target ≥3 min</span><span>+4</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=CA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=37.37208,-121.84537" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Cumming, GA - Tesla Supercharger</span><small>325 kW · 16 stalls</small></div>
-<div class="a">501 Lakeland Plaza, Cumming, GA</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🍔 Whataburger ≥1 min</span><span>🍎 Applebee&#x27;s ≥1 min</span><span>🥖 Panera Bread ≥2 min</span><span>🤠 Texas Roadhouse ≥2 min</span><span>🍟 McDonald&#x27;s ≥3 min</span><span>+15</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=GA">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=34.18502,-84.14234" target="_blank" rel="noopener">Directions</a></div>
-</div></div><div class="card"><div class="ring"><b>≥2</b><span>min</span></div><div class="body">
-<div class="n"><span>Round Rock, TX - Tesla Supercharger</span><small>250 kW · 16 stalls</small></div>
-<div class="a">110 North Interstate Highway 35, Round Rock, TX</div><div class="host">Tesla Supercharger</div>
-<div class="c"><span>🥬 <b>Sprouts</b> ≥2 min</span><span>🍟 McDonald&#x27;s ≥1 min</span><span>☕ Starbucks ≥3 min</span><span>🍗 Popeyes ≥9 min</span></div>
-<div class="l"><a class="pri" href="../../?chain=Sprouts&amp;state=TX">Show on map</a><a href="https://www.google.com/maps/dir/?api=1&destination=30.50968,-97.68775" target="_blank" rel="noopener">Directions</a></div>
+<h2>Closest 40 nationwide</h2><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Houston, TX - Yale Street - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>35 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">195 Yale St, Houston, TX</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 Wingstop <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>🥪 Jersey Mike&#x27;s <i>4 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.7746,-95.40043" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="IONNA" style="background:#5b2a86;color:#fff">I</span></div><div class="body">
+<div class="n">San Jose, CA Rechargery Relay - Branham Ln.</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>8 stalls</b><span>IONNA</span></div>
+<div class="a">1130 Branham Ln, San Jose, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>⭐ Carl&#x27;s Jr. <i>2 min</i></span><span>💊 CVS <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🛒 Safeway <i>5 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.26185,-121.87841" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Evergreen 56th and Tower (Denver, CO)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">18552 E 57th Ave, Denver, CO</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.79994,-104.7709" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CO">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Los Angeles, CA - Venice Boulevard - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>44 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">8985 Venice Blvd, Los Angeles, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍔 In-N-Out <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.02797,-118.39414" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Sprouts</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">1300 Pinole Valley Rd, Pinole, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🤡 Jack in the Box <i>6 min</i></span><span>🌯 Chipotle <i>6 min</i></span><span>☕ Peet&#x27;s Coffee <i>6 min</i></span><span>🛍️ Trader Joe&#x27;s <i>7 min</i></span><span>💊 Walgreens <i>7 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.00011,-122.28698" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Inventrust Pavilion At LaQuinta (LaQuinta, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">79220 Hwy 111, LaQuinta, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>💻 Best Buy <i>4 min</i></span><span>🥖 Panera Bread <i>4 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.70981,-116.28597" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Regency Westlake Plaza (Westlake Village, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">2725-2785 Agoura Rd, Westlake Village, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>⭐ Carl&#x27;s Jr. <i>4 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.15231,-118.82629" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Burbank, CA - N San Fernando Blvd - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1009 N San Fernando Blvd, Burbank, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.18744,-118.31822" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Port St. Lucie, FL - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1701 NW Peacock Blvd, Port St. Lucie, FL</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🌶️ Chili&#x27;s <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=27.31296,-80.40659" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Deerfield Beach Shoppes</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>FPL EVolution</span></div>
+<div class="a">930 Federal Hwy, Deerfield Beach, FL</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>💊 Walgreens <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>⛽ Speedway <i>4 min</i></span><span>🛒 Aldi <i>4 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.30516,-80.09185" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Upland Town Center (Upland, CA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">913 W Foothill Blvd, Upland, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍕 Little Caesars <i>2 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>☕ Dutch Bros <i>2 min</i></span><span>🤡 Jack in the Box <i>3 min</i></span><span>🍦 Ice cream shop <i>5 min</i></span><span>+2</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.10835,-117.66101" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Fullerton, CA - South Harbor Blvd - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1475 S Harbor Blvd, Fullerton, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍳 Denny&#x27;s <i>2 min</i></span><span>💊 CVS <i>3 min</i></span><span>💻 Best Buy <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>+18</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.8566,-117.92503" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Hunter Court Shopping Center - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">24372 Rockfield Blvd, Lake Forest, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍦 Ice cream shop <i>1 min</i></span><span>🤡 Jack in the Box <i>1 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>🌮 Del Taco <i>3 min</i></span><span>+13</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.61575,-117.70403" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Rivian Adventure" style="background:#f2a900;color:#1b1b1b">R</span></div><div class="body">
+<div class="n">Augusta, GA</div>
+<div class="sp"><s class="spd ultra">300 kW</s><b>6 stalls</b><span>Rivian Adventure</span></div>
+<div class="a">630 Crane Creek Drive, Augusta, GA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🧇 Waffle House <i>6 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🏪 Sam&#x27;s Club <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.49745,-82.07914" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Grand Plaza - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">101-197 S Las Posas Rd, San Marcos, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🚗 Sonic <i>3 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.14061,-117.19182" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="Mercedes Benz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">Crane Creek Shopping Center MB.HPC</div>
+<div class="sp"><s class="spd ultra">400 kW</s><b>10 stalls</b><span>Mercedes Benz</span></div>
+<div class="a">630 Crane Creek Drive, Augusta, GA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍔 Five Guys <i>1 min</i></span><span>🧇 Waffle House <i>5 min</i></span><span>💻 Best Buy <i>6 min</i></span><span>🏪 Sam&#x27;s Club <i>7 min</i></span><span>🦬 Buffalo Wild Wings <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.49742,-82.0795" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mill Creek, WA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">13314 Bothell Everett Hwy, Mill Creek, WA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🤡 Jack in the Box <i>2 min</i></span><span>🛒 Fred Meyer <i>5 min</i></span><span>💊 Walgreens <i>5 min</i></span><span>🐔 Chick-fil-A <i>7 min</i></span><span>🔧 Lowe&#x27;s <i>7 min</i></span><span>+1</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=47.87762,-122.21289" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=WA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Shops at Canton Crossing</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">3800 Boston St, Baltimore, MD</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🐔 Chick-fil-A <i>1 min</i></span><span>🍔 Shake Shack <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🍩 Dunkin&#x27; <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.27733,-76.56324" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=MD">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Alhambra, CA - East Bay State St - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">201 E Bay State St, Alhambra, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🍎 Applebee&#x27;s <i>3 min</i></span><span>🐼 Panda Express <i>3 min</i></span><span>🍦 Ice cream shop <i>4 min</i></span><span>☕ Starbucks <i>5 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.09508,-118.12393" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Clovis, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">870 Herndon Avenue, Clovis, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>1 min</i></span><span>👑 Burger King <i>1 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🌮 Taco Bell <i>1 min</i></span><span>🍔 In-N-Out <i>2 min</i></span><span>⭐ Carl&#x27;s Jr. <i>2 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.83704,-119.69912" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Petaluma, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">401 Kennilworth Drive, Petaluma, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>🍔 Five Guys <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🎯 Target <i>4 min</i></span><span>🤡 Jack in the Box <i>7 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.24276,-122.62516" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Mesa, AZ - S Signal Butte Rd - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">1252 S Signal Butte Rd, Mesa, AZ</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>3 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>🍔 Whataburger <i>3 min</i></span><span>⛽ Circle K <i>3 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.3917,-111.59848" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Shops of Kendall</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>8 stalls</b><span>EVgo</span></div>
+<div class="a">9001 SW 127th Ave, Miami, FL</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>💊 CVS <i>1 min</i></span><span>🥞 IHOP <i>3 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🛒 Aldi <i>5 min</i></span><span>💻 Best Buy <i>5 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=25.68538,-80.39895" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">West Covina, CA - E Eastland Center Drive - Tesla Supercharg</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">2753 E Eastland Center Drive, West Covina, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>👑 Burger King <i>2 min</i></span><span>🦬 Buffalo Wild Wings <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>3 min</i></span><span>🥞 IHOP <i>4 min</i></span><span>+10</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.07388,-117.88975" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Scottsdale, AZ - N Miller Rd - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>12 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">4420 N Miller Rd, Scottsdale, AZ</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🍕 Pizza Hut <i>1 min</i></span><span>🥬 Whole Foods <i>8 min</i></span><span>💊 CVS <i>8 min</i></span><span>🌯 Chipotle <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.50096,-111.91779" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm other" title="FPL EVolution"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></span></div><div class="body">
+<div class="n">FPL EVolution - Sprouts Farmers Market</div>
+<div class="sp"><s class="spd std">120 kW</s><b>4 stalls</b><span>FPL EVolution</span></div>
+<div class="a">670 E Oakland Park Blvd, Oakland Park, FL</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🌮 Taco Bell <i>2 min</i></span><span>🛒 Aldi <i>6 min</i></span><span>🛒 Publix <i>10 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=26.16589,-80.13812" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=FL">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Venice Crossroads</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">8985 Venice Blvd, Los Angeles, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>💊 CVS <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>1 min</i></span><span>🍗 Wingstop <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>+5</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.02736,-118.39233" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Broken Arrow, OK - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>8 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">900 E Hillside Dr, Broken Arrow, OK</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>⛽ QuikTrip <i>1 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🎯 Target <i>5 min</i></span><span>🐼 Panda Express <i>7 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=36.06814,-95.78055" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=OK">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Thousand Oaks, CA - W Hillcrest Dr - Tesla Supercharger</div>
+<div class="sp"><s class="spd std">75 kW</s><b>20 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">350 West Hillcrest Drive, Thousand Oaks, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🥪 Subway <i>2 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🐼 Panda Express <i>2 min</i></span><span>🌯 Chipotle <i>7 min</i></span><span>🍝 Olive Garden <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.18458,-118.89078" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Tucson, AZ - W River Rd - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">3844 West River Road, Tucson, AZ</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🚒 Firehouse Subs <i>1 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🥪 Subway <i>5 min</i></span><span>📦 Costco <i>7 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.32191,-111.04492" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=AZ">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Sycamore Square - Simi Valley</div>
+<div class="sp"><s class="spd std">50 kW</s><b>2 stalls</b><span>EVgo</span></div>
+<div class="a">2801 Cochran St, Simi Valley, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>1 min</i></span><span>💊 CVS <i>2 min</i></span><span>🎯 Target <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🥖 Panera Bread <i>3 min</i></span><span>+7</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.27934,-118.74118" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 1700 (Poway, CA)</div>
+<div class="sp"><s class="spd fast">150 kW</s><b>3 stalls</b><span>Electrify America</span></div>
+<div class="a">13425 Community Rd, Poway, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🛒 Aldi <i>1 min</i></span><span>🍦 Ice cream shop <i>2 min</i></span><span>🛒 Walmart <i>2 min</i></span><span>☕ Starbucks <i>2 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>+12</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.9583,-117.03865" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Mira Mesa Mall</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">8110 Mira Mesa Blvd, San Diego, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🐕 Raising Cane&#x27;s <i>2 min</i></span><span>🍕 Pizza Hut <i>2 min</i></span><span>🚒 Firehouse Subs <i>2 min</i></span><span>🍦 Ice cream shop <i>3 min</i></span><span>+11</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=32.91322,-117.14864" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Site Centers Johns Creek (Suwanee, GA)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>4 stalls</b><span>Electrify America</span></div>
+<div class="a">3630 Peachtree Pkwy, Suwanee, GA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>🛒 Kroger <i>2 min</i></span><span>🍔 Wendy&#x27;s <i>3 min</i></span><span>🐔 Chick-fil-A <i>3 min</i></span><span>🌯 Chipotle <i>4 min</i></span><span>+9</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.07001,-84.16912" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm two" title="Electrify America" style="background:#00a19a;color:#fff">EA</span></div><div class="body">
+<div class="n">Walmart 5959 (Houston, TX)</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>Electrify America</span></div>
+<div class="a">111 Yale Street, Houston, TX</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🛒 Walmart <i>1 min</i></span><span>🍗 Wingstop <i>2 min</i></span><span>🥪 Jersey Mike&#x27;s <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🌯 Chipotle <i>3 min</i></span><span>+6</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=29.77322,-95.39982" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=TX">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Safeway Herndon #1689</div>
+<div class="sp"><s class="spd fast">200 kW</s><b>4 stalls</b><span>EVgo</span></div>
+<div class="a">413 Elden St, Herndon, VA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🥖 Panera Bread <i>1 min</i></span><span>🛒 Safeway <i>1 min</i></span><span>☕ Starbucks <i>1 min</i></span><span>🥞 IHOP <i>2 min</i></span><span>🍗 Popeyes <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=38.96773,-77.37676" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=VA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Huntington Beach, CA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>24 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">6913 Warner Ave, Huntington Beach, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>⭐ Carl&#x27;s Jr. <i>2 min</i></span><span>🔨 Home Depot <i>4 min</i></span><span>🚒 Firehouse Subs <i>6 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=33.716,-118.00746" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="EVgo" style="background:#0a4da2;color:#fff">e</span></div><div class="body">
+<div class="n">Capitol McKee Center</div>
+<div class="sp"><s class="spd ultra">350 kW</s><b>6 stalls</b><span>EVgo</span></div>
+<div class="a">385 N Capitol Ave, San Jose, CA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🐕 Raising Cane&#x27;s <i>1 min</i></span><span>🐼 Panda Express <i>1 min</i></span><span>🌯 Chipotle <i>2 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🎯 Target <i>3 min</i></span><span>+4</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=37.37208,-121.84537" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=CA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Cumming, GA - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">325 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">501 Lakeland Plaza, Cumming, GA</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🍔 Whataburger <i>1 min</i></span><span>🍎 Applebee&#x27;s <i>1 min</i></span><span>🥖 Panera Bread <i>2 min</i></span><span>🤠 Texas Roadhouse <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>3 min</i></span><span>+15</span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=34.18502,-84.14234" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=GA">Show on map</a></div>
+</div></div><div class="card"><div class="lead"><span class="nm" title="Tesla Supercharger" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span></div><div class="body">
+<div class="n">Round Rock, TX - Tesla Supercharger</div>
+<div class="sp"><s class="spd ultra">250 kW</s><b>16 stalls</b><span>Tesla Supercharger</span></div>
+<div class="a">110 North Interstate Highway 35, Round Rock, TX</div>
+<div class="c"><span>🥬 <b>Sprouts</b> <i>2 min</i></span><span>🍟 McDonald&#x27;s <i>1 min</i></span><span>☕ Starbucks <i>3 min</i></span><span>🍗 Popeyes <i>9 min</i></span></div>
+<div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=30.50968,-97.68775" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Sprouts&amp;state=TX">Show on map</a></div>
 </div></div>
 <h2>Common questions</h2><div class="faq"><details><summary>How many EV chargers have a Sprouts within walking distance in the US?</summary><p>259 public DC fast chargers in the US have a Sprouts within a 10-minute walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap locations.</p></details><details><summary>Which Sprouts charging stop is fastest in the US?</summary><p>San Jose, CA Rechargery Relay - Branham Ln. in San Jose at 400 kW.</p></details><details><summary>Can I charge a non-Tesla EV at these stops?</summary><p>Most are CCS or have CCS alongside NACS. Set your car in the map view and it will show connector compatibility and an estimated charge time for each stop. Tesla Supercharger sites additionally have to be open to your brand.</p></details><details><summary>How accurate are the walk times?</summary><p>They are minimums: straight-line distance at about 3 mph. The real walk is usually longer because you have to follow paths and crossings.</p></details></div>
 <footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated October 2026 · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.
