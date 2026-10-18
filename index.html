@@ -166,7 +166,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .searchpill .pbtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--dim);
   flex-shrink:0;transition:.15s}
 .searchpill .pbtn:hover{color:var(--txt)}
-.searchpill .pbtn.on{background:var(--accent);color:var(--accent-ink)}
+.searchpill .pbtn.on{background:var(--ink);color:var(--ink-on)}
 
 /* car bar */
 #carBar{display:none}
@@ -188,7 +188,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 :focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
 /* The text fields set outline:none on the input itself, so the field wrapper shows focus:
    the search pill, the route fields and the picker search had no focus indicator at all. */
-.searchpill:focus-within,.rfield:focus-within,.pk .searchbox:focus-within{outline:2.5px solid var(--accent);outline-offset:1px}
+.searchpill:has(input:focus),.rfield:focus-within,.pk .searchbox:focus-within{outline:2.5px solid var(--accent);outline-offset:1px}
 /* Inside segmented controls and scrolling rows an outer ring overlaps neighbours or is
    clipped by the scroller; draw it inside. */
 .seg button:focus-visible,#centerCard .rad button:focus-visible,.chiprow .chip:focus-visible,
@@ -218,7 +218,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .chip .cnt{font-size:10.5px;color:var(--dim2);font-weight:500}
 .chip.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .chip.on .cnt{color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}
-.chip.more{border-style:dashed;color:var(--accent);background:transparent;box-shadow:none}
+.chip.more{border-style:dashed;color:var(--txt);background:transparent;box-shadow:none}
 /* Sticky at the row's right edge: it took four full flings across 20 chips to reach the
    picker on a phone. Opaque background so chips scrolling underneath do not show through. */
 .chip.more{position:sticky;right:0;background:var(--surface);z-index:1}
@@ -226,7 +226,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:linear-gradient(to right,transparent,var(--surface))}
 .chip.catchip{font-weight:600}
 .qchip{color:var(--dim)}
-.qchip.on{color:var(--accent-ink)}
+.chip .qm{width:17px;height:17px;font-size:9px}   /* the map's Tesla mark, in the Tesla chip */
+.cbadge .ui-i{vertical-align:-2px;margin-right:1px}
+.qchip.on{color:var(--ink-on)}   /* was accent-ink: white on car mode's light ink, invisible */
 
 /* route panel */
 #routePanel{display:none}
@@ -258,8 +260,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 .seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px;
   height:44px;align-items:center}
 .seg button{padding:0 12px;height:36px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--dim)}
-.seg button.on{background:var(--surface);color:var(--txt);box-shadow:var(--sh2)}
-:root[data-theme="dark"] .seg button.on{background:var(--surface3);box-shadow:inset 0 0 0 1px var(--line2)}
+.seg button.on{background:var(--ink);color:var(--ink-on);box-shadow:none}
+
 #routeInfo{font-size:12.5px;color:var(--dim);margin-top:8px;min-height:16px;padding:0 2px}
 #routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
 #routePanel.collapsed #routeInfo{margin:0;display:flex;align-items:center;gap:10px;padding:12px 13px;
@@ -355,12 +357,14 @@ html.native .splash-mark svg{width:96px;height:96px}
 /* FABs */
 .mapctl{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom) + 66px);z-index:600;
   display:flex;flex-direction:column;gap:9px}
-.mbtn#routeToggle{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+
 .mbtn#routeToggle.on{background:var(--surface);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent),var(--sh2)}
 .mbtn{width:46px;height:46px;border-radius:16px;background:var(--surface);border:1px solid var(--line);
   color:var(--txt);display:grid;place-items:center;box-shadow:var(--sh);transition:.15s}
 .mbtn:active{transform:scale(.92)}
-.mbtn.on{color:var(--accent);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--sh)}
+/* Planning a drive is a headline feature: its button keeps the green icon (go), same shape. */
+.mbtn#routeToggle{color:var(--accent)}
+.mbtn.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .mbtn.primary{color:var(--accent)}
 .mbtn.busy{animation:pulse 1s infinite}
 @keyframes pulse{50%{opacity:.5}}
@@ -371,7 +375,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
 /* On short viewports (a laptop in landscape, a phone with the keyboard up) the stop
    details ran off the top of the map with the name cut off and no way to scroll. */
-.leaflet-popup-content{margin:14px 16px;font-size:13px;
+.leaflet-popup-content{margin:14px 16px;font-size:13px;scrollbar-gutter:stable;
   max-height:var(--pop-max,min(62vh,420px));overflow-y:auto;overscroll-behavior:contain}
 
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
@@ -412,7 +416,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none;
   max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pp-nb b{color:var(--chew);font-weight:700;font-family:var(--mono);font-size:11px}
-.pp-nb.on{border-color:var(--accent)}
+.pp-nb.on{border-color:var(--chew)}
 .pp-nb .ohs{font-style:normal;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
 .pp-nb .ohs.y{color:var(--good);background:var(--good-bg)}
 .pp-nb .ohs.n{color:var(--dim);background:var(--surface3)}
@@ -438,11 +442,11 @@ html.native .splash-mark svg{width:96px;height:96px}
 /* ═══ sheet ═══ */
 .clus{background:none!important;border:0!important}
 .clus i{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
-  border-radius:50%;font:800 11px/1 var(--mono),ui-monospace,monospace;font-style:normal;
-  color:#fff;background:rgba(21,128,61,.94);border:2px solid rgba(255,255,255,.9);
+  border-radius:50%;font:800 12px/1 var(--display);font-style:normal;
+  color:#fff;background:rgba(15,122,67,.95);border:2px solid rgba(255,253,250,.92);
   box-shadow:0 2px 8px rgba(0,0,0,.28);cursor:pointer}
-:root[data-theme="dark"] .clus i{background:rgba(74,222,128,.9);color:#08160d;
-  border-color:rgba(14,17,22,.85)}
+:root[data-theme="dark"] .clus i{background:rgba(61,220,132,.92);color:#0b1a10;
+  border-color:rgba(18,17,16,.85)}
 .clus.big i{font-size:12.5px}
 .heropick .c small{font-weight:600;font-size:10.5px;color:var(--dim2);text-transform:none}
 /* Esri's dark canvas is a mid-grey that floats against our near-black chrome. Filter the
@@ -506,7 +510,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   #app.phone #sheet #centerCard .lbl{font-weight:600;color:var(--dim)}
   #app.phone #sheet #centerCard .lbl{font-size:13px}
   #app.phone #sheet #centerCard .sub{display:none}      /* the title above already says it */
-  #app.phone #sheet #centerCard .rad button{height:34px;padding:0 11px;font-size:12.5px}
+  #app.phone #sheet #centerCard .rad button{height:30px;padding:0 11px;font-size:12.5px}
   #app.phone #sheet .chiprow{padding:2px 12px 7px;flex-shrink:0;margin:0}
   #app.phone #sheet .chiprow .chip{height:40px;padding:0 12px;font-size:12.5px}
   /* Sticky offsets ignore the row's 12 px side padding, so chips scrolled past the pinned
@@ -587,10 +591,10 @@ html.native .splash-mark svg{width:96px;height:96px}
 .handle{padding:9px 0 5px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
 .handle i{width:38px;height:4px;border-radius:2px;background:var(--line2);display:block}
 .sheethead{display:flex;align-items:center;gap:9px;padding:0 15px 10px;flex-shrink:0}
-.sheethead .t{flex:1;font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.3px;min-width:0;overflow:hidden;text-overflow:ellipsis;
-  white-space:nowrap;letter-spacing:-.2px}
+.sheethead .t{flex:1;font-family:var(--display);font-size:17px;font-weight:700;min-width:0;overflow:hidden;line-height:1.25;
+  letter-spacing:-.2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}   /* two lines: the end is what you picked */
 .sheethead .t em{font-style:normal;color:var(--dim2);font-weight:500}
-.sortbtn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--accent);background:none;
+.sortbtn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt);background:none;
   border:none;padding:6px 4px;font-weight:700;flex-shrink:0}
 .sortbtn .ci{color:var(--accent);opacity:.7}
 .iconbtn.sm{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);
@@ -614,14 +618,14 @@ html.native .splash-mark svg{width:96px;height:96px}
 .gapnote{margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);
   font-size:12.5px;line-height:1.45}
 .gapnote b{font-weight:800}
-.breaks{margin:0 0 12px;padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2)}
-.breaks .bh{font-weight:800;font-size:14px;margin:0 2px 8px}
+.breaks{margin:0 0 6px;padding:10px 4px 6px;border-bottom:1px solid var(--line)}
+.breaks .bh{font-family:var(--display);font-weight:700;font-size:16px;margin:0 2px 6px}
 .breaks .bh small{font-weight:500;color:var(--dim);font-size:12px;margin-left:4px}
 .brk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 8px;border-radius:12px;
   background:none;border:0;cursor:pointer;color:inherit;font:inherit}
 .brk+.brk{border-top:1px solid var(--line);border-radius:0}
 .brk:hover{background:var(--surface2)}
-.brk .bm{flex:0 0 74px;font:800 13px/1.2 var(--mono);color:var(--accent);display:flex;flex-direction:column}
+.brk .bm{flex:0 0 74px;font:700 15px/1.2 var(--display);color:var(--txt);display:flex;flex-direction:column}
 .brk .bm i{font:500 10.5px var(--sans);color:var(--dim);font-style:normal}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
@@ -644,7 +648,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 :root[data-theme="dark"] .wring.none{background:var(--surface3);color:var(--dim2)}
 .row .body{flex:1;min-width:0}
 .row .n{display:flex;gap:6px;align-items:flex-start}
-.row.sel{background:var(--surface2);border-radius:14px;border-bottom-color:transparent;padding-left:10px;padding-right:10px}
+.row.sel{background:var(--surface2);border-radius:14px;border-bottom-color:transparent;margin:0 -6px;padding-left:10px;padding-right:10px}
 .row .n b,.row .n .rowname{font-family:var(--display);font-size:16.5px;font-weight:700;flex:1;min-width:0;line-height:1.25;letter-spacing:-.2px}
 /* The clamp sits on the text, not the button: a <button> ignores line-clamp, so long names
    were cut off mid-word with no ellipsis. */
@@ -665,7 +669,7 @@ html.native .splash-mark svg{width:96px;height:96px}
    near-black text on dark grey on every 250 kW+ stop. */
 :root .row s.spd.ultra,:root .pp-sum s.spd.ultra{color:var(--accent-ink);background:var(--good)}
 :root .row s.spd.fast,:root .pp-sum s.spd.fast{color:var(--good);background:var(--good-bg)}
-:root .row s.spd.slow,:root .pp-sum s.spd.slow{color:var(--warn);background:var(--warn-bg)}
+:root .row s.spd.slow,:root .pp-sum s.spd.slow{color:var(--dim);background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
 :root .row s.spd.l2,:root .pp-sum s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
 .pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
@@ -684,7 +688,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .ch span{background:var(--chew-bg);border-radius:8px;padding:3px 8px;color:var(--txt)}
 .row .ch span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
 .row .ch .more{background:none}
-:root[data-theme="dark"] .row .ch span{background:var(--surface3)}
+
 .row .ch b{color:var(--txt);font-weight:700}
 .row .ch .more{background:none;color:var(--dim2);padding-left:2px}
 .row .star{font-size:16px;color:var(--dim2);flex-shrink:0;width:44px;height:40px;display:flex;align-items:flex-start;justify-content:center;padding-top:1px;margin:-6px -12px -10px 0;background:none;border:0;cursor:pointer}
@@ -756,18 +760,18 @@ html.native .splash-mark svg{width:96px;height:96px}
 .ftoggles{display:flex;flex-direction:column;gap:7px}
 .ftog{display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border-radius:12px;
   background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left}
-.ftog.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ftog.on{color:var(--txt)}   /* the switch says it is on; the row stays calm */
 /* A switch at the end, so each row reads as on/off before it is tapped -- they looked like
    plain grey buttons. */
 .ftog::after{content:'';margin-left:auto;flex-shrink:0;width:32px;height:19px;border-radius:999px;
   background:radial-gradient(circle at 9.5px 50%,#fff 6.5px,transparent 7px),var(--dim2);transition:background .15s}
-.ftog.on::after{background:radial-gradient(circle at 22.5px 50%,var(--accent) 6.5px,transparent 7px),var(--accent-ink)}
+.ftog.on::after{background:radial-gradient(circle at 22.5px 50%,#fff 6.5px,transparent 7px),var(--accent)}   /* on: green track, white knob */
 .tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700;
   background:var(--surface3);color:var(--dim)}
 .tag.free{background:var(--good-bg);color:var(--good)}
-.tag.dlr{background:var(--warn-bg);color:var(--warn)}
+.tag.dlr{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px var(--line2)}
 .tag.iso{background:var(--surface3);color:var(--dim)}
-.tag.one{background:var(--warn-bg);color:var(--warn)}
+.tag.one{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px var(--line2)}
 .pp-note{color:var(--dim2);font-size:10.5px;margin-top:8px;line-height:1.4}
 .pp-warn{color:var(--warn);font-size:11.5px;margin:8px 0;padding:8px 10px;background:var(--warn-bg);
   border-radius:10px;line-height:1.45}
@@ -885,7 +889,11 @@ html.native .splash-mark svg{width:96px;height:96px}
   .searchpill,.chip,.mbtn,#carBar .cartag,#carBar .mine{box-shadow:none}
   .searchpill{background:var(--surface2)}
   .chip{background:var(--surface2)}
-  #centerCard{box-shadow:none;background:var(--surface2)}
+  /* Desktop too: the area is a line, and the count lives in the title, not twice. */
+  #centerCard.show{box-shadow:none;background:none;border:0;padding:2px 2px 0 4px}
+  #centerCard .ic{color:var(--dim)}
+  #centerCard .lbl{font-weight:600;color:var(--dim)}
+  #centerCard .sub{display:none}
 
   #sheet{grid-column:1;grid-row:2;height:auto!important;border-radius:0;border-top:none;
     border-right:1px solid var(--line);box-shadow:none;min-height:0}
@@ -1050,10 +1058,10 @@ if (document.documentElement.classList.contains('car')) {
           Filters<span class="cnt" id="filtN"></span></button>
         <div style="display:contents" id="catchips"></div>
         <div class="qf" id="netSeg">
-          <button class="chip qchip" data-net="tesla" aria-pressed="false">⚡ Tesla</button>
+          <button class="chip qchip" data-net="tesla" aria-pressed="false"><span class="qm bmark" aria-hidden="true" style="background:#e31937;color:#fff"><svg viewBox="0 0 24 24"><path d="M3.8 7.1C8.4 4.8 15.6 4.8 20.2 7.1L19.3 9.9C15.7 8.5 13.7 8.3 12 8.3S8.3 8.5 4.7 9.9ZM9.8 10.6C11.2 10.3 12.8 10.3 14.2 10.6L12.9 20.2H11.1Z" fill="currentColor"/></svg></span> Tesla</button>
           <button class="chip qchip" data-net="other" aria-pressed="false">Other networks</button>
         </div>
-        <button class="chip qchip" id="savedChip" aria-pressed="false" aria-label="Show only saved stops"><span aria-hidden="true">⭐</span><span class="n" id="favN"></span></button>
+        <button class="chip qchip" id="savedChip" aria-pressed="false" aria-label="Show only saved stops"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.5 2.9 1-6.1L3.1 9.5l6.1-.9z"/></svg><span class="n" id="favN"></span></button>
         <div style="display:contents" id="chips"></div>
       </div>
 
@@ -1115,11 +1123,11 @@ if (document.documentElement.classList.contains('car')) {
       <div class="herocard">
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <div class="hero-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg3" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask3"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask3)"><rect width="64" height="64" fill="url(#ccg3)"/></g></svg></div>
-        <span class="badge">⚡ Free · 14,000+ US fast chargers</span>
+        <span class="badge"><svg class="ui-i" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg> Free · 14,000+ US fast chargers</span>
         <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
         <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
         <div class="herogrid" id="heroGrid"></div>
-        <button id="heroTrip" class="trip">🚗 Planning a drive? Find stops along your route</button>
+        <button id="heroTrip" class="trip"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg> Planning a drive? Find stops along your route</button>
         <button id="heroAll">Browse all chains</button>
         <button id="heroSkip">Just explore the map</button>
       </div>
@@ -1166,7 +1174,7 @@ if (document.documentElement.classList.contains('car')) {
     </div>
     <div class="fgroup">
       <label>Charger type</label>
-      <div class="ftoggles"><button class="ftog" id="l2Tog" aria-pressed="false">🔌 Include Level 2 (slower, at the chains)</button></div>
+      <div class="ftoggles"><button class="ftog" id="l2Tog" aria-pressed="false"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2v5M15 2v5M7 7h10v4a5 5 0 0 1-10 0zM12 16v6"/></svg> Include Level 2 (slower, at the chains)</button></div>
       <p class="fhint">Level 2 adds about 20–25 miles per hour parked: worth it over a sit-down meal or a big shop, not a coffee. Shown as hollow rings.</p>
     </div>
     <div class="fgroup">
@@ -1186,10 +1194,10 @@ if (document.documentElement.classList.contains('car')) {
     <div class="fgroup">
       <label>Only show</label>
       <div class="ftoggles">
-        <button class="ftog" data-f="h24">🕒 Open 24 hours</button>
-        <button class="ftog" data-f="free">💸 Free to charge</button>
-        <button class="ftog" data-f="nodlr">🏢 Hide dealership lots</button>
-        <button class="ftog" data-f="noiso">🌙 Hide isolated stops (nothing walkable)</button>
+        <button class="ftog" data-f="h24"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Open 24 hours</button>
+        <button class="ftog" data-f="free"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16 7.5c0-1.9-1.8-3-4-3s-4 1.1-4 3 1.8 2.6 4 3 4 1.3 4 3.3-1.8 3.2-4 3.2-4-1.2-4-3"/></svg> Free to charge</button>
+        <button class="ftog" data-f="nodlr"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2"/></svg> Hide dealership lots</button>
+        <button class="ftog" data-f="noiso"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg> Hide isolated stops (nothing walkable)</button>
       </div>
       <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
     </div>
@@ -1946,7 +1954,7 @@ const MARKS = {
   'bp pulse':           { bg: '#009b3a', ink: '#fff', t: 'bp' },
   'Shell Recharge':     { bg: '#fbce07', ink: '#1b1b1b', t: 'S' },
 };
-const NETCOL_O = { light: '#64748b', dark: '#94a3b8' };     // every other network
+const NETCOL_O = { light: '#8a8178', dark: '#8c847a' };     // every other network: warm stone, like the rest
 const markOf = s => s.lvl === 2 ? null : (MARKS[s.net] || null);
 const netCol = s => (MARKS[s.net] || null) ? MARKS[s.net].bg : NETCOL_O[curDark ? 'dark' : 'light'];
 /* The mark next to a network name in rows, cards, Filters and the legend: the same shapes. */
@@ -1981,7 +1989,7 @@ const MarkMarker = L.CircleMarker.extend({
   }
 });
 function addMarker(s) {
-  const opts = { renderer: canvas, radius: 3.5, weight: 1, color: '#6b7482', fillColor: '#6b7482', fillOpacity: .6 };
+  const opts = { renderer: canvas, radius: 3.5, weight: 1, color: '#8a8178', fillColor: '#8a8178', fillOpacity: .6 };
   const m = (markOf(s) ? new MarkMarker([s.lat, s.lon], opts) : L.circleMarker([s.lat, s.lon], opts)).addTo(map);
   // registered BEFORE bindPopup so it runs before Leaflet's own click-to-open handler,
   // which is what makes the padding apply to map clicks as well as list taps
@@ -2220,8 +2228,8 @@ function syncBasePref() {
     b.classList.toggle('on', b.dataset.base === basePref));
 }
 const MTHEME = {
-  light: { base: '#9aa7b3', ghost: '#cdd5dc', hot: '#15803d', hotStroke: '#ffffff' },
-  dark:  { base: '#4a5563', ghost: '#252b34', hot: '#4ade80', hotStroke: '#0e1116' } };
+  light: { base: '#a39a90', ghost: '#d6cfc5', hot: '#0f7a43', hotStroke: '#fffdfa' },
+  dark:  { base: '#5a534b', ghost: '#2c2824', hot: '#3ddc84', hotStroke: '#121110' } };
 let themePref = ['auto', 'light', 'dark'].includes(localStorage.getItem('cc_theme'))
   ? localStorage.getItem('cc_theme') : 'auto';
 let curDark = false, tiles = null, labelTiles = null;
@@ -2740,7 +2748,7 @@ function renderList(vis) {
     const carBadge = cm != null
       ? (cp === null
           ? `<span class="cbadge null">✕ no plug</span>`
-          : `<span class="cbadge ${cp}">${cp === 'adapter' ? '⚠' : '⚡'} ~${cm}m</span>`) : '';
+          : `<span class="cbadge ${cp}" title="${cp === 'adapter' ? 'Needs an adapter. ' : ''}About ${cm} min to charge 10-80%"><svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~${cm}m</span>`) : '';
     // On a route the lead is where the stop is on the drive, not its place in the list.
     const mile = showIdx && route.mileAt && route.mileAt.has(s.id) ? route.mileAt.get(s.id) : '?';
     const lead = showIdx ? `<div class="idx mi" title="Mile ${mile} of ${Math.round(route.mi)}"><span>mile</span><b>${mile}</b></div>`
@@ -2932,9 +2940,9 @@ function renderCarBar() {
   const c = CARS[car];
   bar.className = 'show';
   bar.innerHTML =
-    `<button class="cartag" id="carEdit">🚗 <span class="m">${esc(car)}</span>
+    `<button class="cartag" id="carEdit" aria-label="Your car: ${esc(car)}"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16v-5l2-5h10l2 5v5M3 16h18M7 16v2M17 16v2"/><path d="M7.5 13h.01M16.5 13h.01"/></svg> <span class="m">${esc(car)}</span>
       <span class="spec">${c[1]} kW · ${CONN_LABEL[c[2]]}</span></button>
-     <button class="mine ${onlyMine ? 'on' : ''}" id="mineToggle">⚡ Fits my car</button>`;
+     <button class="mine ${onlyMine ? 'on' : ''}" id="mineToggle"><svg class="ui-i" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg> Fits my car</button>`;
   $('carBtn').classList.add('on');
   $('carEdit').onclick = openCarPicker;
   $('mineToggle').onclick = () => {
@@ -2986,7 +2994,7 @@ function openPicker() {
 }
 function pkItem(k) {
   return `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
-      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k]}</span>
+      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k].toLocaleString()}</span>
      </button>`;
 }
 function drawPicker() {
@@ -3024,7 +3032,7 @@ $('picker').onclick = e => { if (e.target.id === 'picker') closePicker(); };
 function centerStyle(kind) {
   if (kind === 'me') return { radius: 7, color: '#fff', weight: 2.5, fillColor: '#4c9dff', fillOpacity: 1 };
   return { radius: 7.5, weight: 2.5, fillOpacity: 1,
-           color: curDark ? '#0e1116' : '#ffffff', fillColor: curDark ? '#f8fafc' : '#1f2937' };
+           color: curDark ? '#121110' : '#fffdfa', fillColor: curDark ? '#f4f1ec' : '#1c1917' };
 }
 function setCenter(lat, lon, label, kind) {
   track('area-search', kind);            // 'me' | 'pin' | 'place' — not where
@@ -3038,7 +3046,7 @@ function setCenter(lat, lon, label, kind) {
   if (centerLayer) map.removeLayer(centerLayer);
   if (radiusLayer) map.removeLayer(radiusLayer);
   centerLayer = L.circleMarker([lat, lon], centerStyle(kind)).addTo(map);
-  radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: curDark ? '#8aa4c8' : '#5b7aa6', weight: 1.4,
+  radiusLayer = L.circle([lat, lon], { radius: radiusMi * MI, color: curDark ? '#9f968c' : '#8a8178', weight: 1.4,
     opacity: .55, dashArray: '2 6', fill: false, interactive: false }).addTo(map);
   $('centerCard').classList.add('show');
   $('ccIcon').innerHTML = AREA_ICON[kind === 'me' ? 'me' : kind === 'pin' ? 'pin' : 'place'];
@@ -4913,11 +4921,11 @@ const SUGGESTIONS = [
   /* Road trips lead: it is the one capability nobody discovers on their own, and the
      suggestion list scrolls, so anything below the fold teaches nothing. */
   { h: 'Road trips — stops along the way' },
-  { q: 'LA to Las Vegas',   i: '🚗', note: 'route' },
+  { q: 'LA to Las Vegas',   i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg>', note: 'route' },
   /* The pairing is the product: a drive AND what you want to eat when you stop. Nobody
      guesses it is possible, so one example has to say it outright. */
   { q: 'LA to Las Vegas near ice cream', i: '🍦', note: 'route' },
-  { q: 'Dallas to Austin',  i: '🚗', note: 'route' },
+  { q: 'Dallas to Austin',  i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg>', note: 'route' },
   { h: 'Shop types' },
   { q: 'ice cream',      i: '🍦', note: 'instant' },   // precomputed, like a chain
   { q: 'tire shop',      i: '🛞', note: 'live' },
@@ -4928,7 +4936,7 @@ const SUGGESTIONS = [
   { q: 'IHOP in Austin', i: '🥞', note: 'chain' },
   { q: 'Buc-ee\'s',      i: '🦫', note: 'chain' },
   { q: 'Chase',          i: '🏦', note: 'brand' },
-  { q: 'Denver',         i: '📍', note: 'place' } ];
+  { q: 'Denver',         i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>', note: 'place' } ];
 
 /* ───────── place index, built from our own data ─────────
    Typeahead comes from SITES, not a geocoder. It costs no request and no extra payload
@@ -5014,16 +5022,16 @@ function liveSugg(raw) {
     const hits = tail.trim().length >= 2 ? placeMatches(tail, 6)
       : PLACES.filter(p => !head.toLowerCase().includes(p.city)).slice(0, 6);
     for (const p of hits)
-      out.push({ q: head + p.label, i: '🚗', label: p.label, note: 'route', sub: nCharger(p.c) });
+      out.push({ q: head + p.label, i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg>', label: p.label, note: 'route', sub: nCharger(p.c) });
     return out;
   }
   for (const b of chainMatches(raw, 3))
     out.push({ q: b, i: BRANDS[b].e, label: b, note: 'chain', sub: nCharger(counts[b] || 0) });
   for (const p of placeMatches(raw, 6))
-    out.push({ q: p.label, i: '📍', label: p.label, note: 'place', sub: nCharger(p.c) });
+    out.push({ q: p.label, i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>', label: p.label, note: 'place', sub: nCharger(p.c) });
   // Offer the trip they are halfway to typing, rather than making them find the panel.
   if (!m && out.length && out[0].note === 'place')
-    out.push({ q: out[0].label + ' to ', i: '🚗', label: `${out[0].label} to …`,
+    out.push({ q: out[0].label + ' to ', i: '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg>', label: `${out[0].label} to …`,
                note: 'route', sub: 'plan a drive', hold: true });
   return out;
 }
@@ -5354,8 +5362,10 @@ function applyCorridor(verts, mi, hr, hwy) {
   livePoiGen++;
   clearRoute();
   const rOpt = { pane: 'routePane', renderer: routeRenderer, interactive: false };
-  routeCase = L.polyline(verts, { ...rOpt, color: '#0a0d12', weight: 8, opacity: .85 }).addTo(map);
-  routeLayer = L.polyline(verts, { ...rOpt, color: '#4c9dff', weight: 3.5, opacity: .95 }).addTo(map);
+  // Ink on a paper casing (light) or paper on ink (dark): the trip reads as the one drawn
+  // line, and the network marks along it keep their own colours.
+  routeCase = L.polyline(verts, { ...rOpt, color: curDark ? '#121110' : '#fffdfa', weight: 8, opacity: .9 }).addTo(map);
+  routeLayer = L.polyline(verts, { ...rOpt, color: curDark ? '#f4f1ec' : '#1c1917', weight: 3.5, opacity: .95 }).addTo(map);
   const maxM = corridorMi * MI;
   const cells = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
   for (const v of verts) {
