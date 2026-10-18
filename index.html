@@ -3096,8 +3096,9 @@ function locate(target, opts) {
     if (opts.silentDeny && active.size) {
       // Without a location the honest answer is the whole country -- say so, and how to
       // narrow it, so a list starting in another state is not mistaken for a wrong search.
-      const what = [...active].join(' or ');
-      toast(`No location — showing ${what} stops nearest your time zone; add a city, e.g. "${[...active][0].toLowerCase()} in Austin"`);
+      const say = k => k === 'Ice cream shop' ? 'ice cream' : k;   // a category reads as words
+      const what = [...active].map(say).join(' or ');
+      toast(`No location — showing ${what} stops nearest your time zone. Add a city, e.g. "${say([...active][0]).toLowerCase()} in Austin"`);
       softOrigin = tzOrigin(); sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
       render(); setSheet('mid');
       // Frame the nearest results, not the whole country.
