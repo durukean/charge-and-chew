@@ -323,6 +323,16 @@ check(re.search(r"(?m)^  if \(el\) fillHours\(el[,)]", _html) is not None and "a
 # The delayed national fit at boot must not override a location that arrived first.
 check("setTimeout(() => { if (!center && !route) fitUS(); }, 460)" in _html,
       "the boot-time US fit can override the visitor's location again (map on the whole US, list local)")
+# Ice cream is precomputed (instant, no live lookup) and a placeless search looks where you
+# are, not at an area restored from an earlier visit ("ice cream" landed in another state).
+check(D.get("brands", {}).get("Ice cream shop", {}).get("n", 0) > 5000 if isinstance(D, dict) else True,
+      "the precomputed ice cream category is missing or nearly empty in data.js")
+check("'ice cream': 'Ice cream shop'" in _html and "'icea cream': 'Ice cream shop'" in _html,
+      "searches for ice cream (and its misspellings) no longer resolve to the precomputed category")
+check("center.restored = true;" in _html and re.search(r"if \(center && center\.restored\) \{", _html) is not None,
+      "a search with no place uses an area restored from a previous visit again (the 'other state' bug)")
+check("locate('center', hp ? { thenPoi: hp } : {});" in _html,
+      "'<category> near me' forgets the category again")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

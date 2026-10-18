@@ -1339,7 +1339,7 @@ window.CC_BASEMAPS = {
   } catch (e) { window.__ccMap = null; }
 })();
 </script>
-<script src="data.js?v=a29af5b21c"></script>
+<script src="data.js?v=c875ec9173"></script>
 <script>
 (() => {
 'use strict';
@@ -1761,6 +1761,9 @@ function restoreArea() {
   const kind = a.kind === 'me' ? 'pin' : (a.kind || 'place');
   const label = a.kind === 'me' && (!a.label || a.label === 'My location') ? 'Where you were' : (a.label || 'Last area');
   setCenter(a.lat, a.lon, label, kind);
+  // Restored, not chosen: a search that names no place should look where you ARE, not
+  // where you were last week (see the search handler).
+  center.restored = true;
   if (!wideLayout()) setSheet('mid');
   fitToCenter();
   return true;
@@ -2392,11 +2395,26 @@ function sortByKey(arr, key) {
   for (let i = 0; i < n; i++) arr[i] = src[head[i]];
   return arr;
 }
+/* Without a location, the nearest guess is the visitor's own time zone: a list that opens in
+   Michigan for someone in California reads as "it took me to another state". */
+let softOrigin = null;
+const TZ_ORIGIN = {
+  'America/Los_Angeles': [34.05, -118.24], 'America/Phoenix': [33.45, -112.07], 'America/Denver': [39.74, -104.99],
+  'America/Boise': [43.62, -116.2], 'America/Chicago': [41.88, -87.63], 'America/New_York': [40.71, -74.01],
+  'America/Detroit': [42.33, -83.05], 'America/Anchorage': [61.22, -149.9], 'Pacific/Honolulu': [21.31, -157.86] };
+function tzOrigin() {
+  let z = ''; try { z = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+  const hit = TZ_ORIGIN[z] || (/^America\/Indiana/.test(z) && [39.77, -86.16]) || (/^America\/Kentucky/.test(z) && [38.25, -85.76]);
+  return hit ? { lat: hit[0], lon: hit[1] } : { lat: 39.5, lon: Math.max(-122, Math.min(-72, tzMeridian(new Date()))) };
+}
 function visibleSites() {
   const out = [];
   for (const s of SITES) if (inScope(s) && passesChain(s)) out.push(s);
   if (route) sortByKey(out, s => routeIdx(s.id));
-  else if (sortBy === 'dist' && center) sortByKey(out, s => hav(center.lat, center.lon, s.lat, s.lon));
+  else if (sortBy === 'dist' && (center || softOrigin)) {
+    const o = center || softOrigin;
+    sortByKey(out, s => hav(o.lat, o.lon, s.lat, s.lon));
+  }
   else if (sortBy === 'stalls') sortByKey(out, s => -s.stalls);
   else if (sortBy === 'power') sortByKey(out, s => -s.kw);
   else if (sortBy === 'charge' && carInfo()) sortByKey(out, s => chargeOr(s));
@@ -2883,7 +2901,7 @@ const sortLabelNow = () => {
 };
 $('sortBtn').onclick = () => {
   const opts = [];
-  if (center) opts.push('dist');
+  if (center || softOrigin) opts.push('dist');
   opts.push('walk');
   if (carInfo()) opts.push('charge');
   opts.push('stalls', 'power');
@@ -3075,8 +3093,19 @@ function locate(target, opts) {
     // "On the way to Tahoe" without a location: the destination is filled; ask for a start.
     if (opts.thenRoute) { toast('Type where you\u2019re starting from'); if (!TOUCH) setTimeout(() => $('fromIn').focus(), 300); return; }
     if (opts.onFail) return opts.onFail();   // the automatic one at start-up: no complaint
+    if (opts.silentDeny && active.size) {
+      // Without a location the honest answer is the whole country -- say so, and how to
+      // narrow it, so a list starting in another state is not mistaken for a wrong search.
+      const what = [...active].join(' or ');
+      toast(`No location — showing ${what} stops nearest your time zone; add a city, e.g. "${[...active][0].toLowerCase()} in Austin"`);
+      softOrigin = tzOrigin(); sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
+      render(); setSheet('mid');
+      // Frame the nearest results, not the whole country.
+      const near = visibleSites().slice(0, 25);
+      if (near.length) settleFit(() => L.latLngBounds(near.map(x => [x.lat, x.lon])), [26, 26], 11);
+      return;
+    }
     toast(msg);
-    if (opts.silentDeny && active.size) { setSheet('mid'); fitToResults(); }
   }
   if (!navigator.geolocation) return fallback('Location not supported — try a city name');
   $('locBtn').classList.add('busy'); if (!opts.quiet) toast('Finding you…');
@@ -3216,7 +3245,7 @@ async function reverseName(lat, lon) {
    how people actually decide: how long the stop is and what they want out of it. */
 const GROUPS = [
   ['Coffee & quick', ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee',
-    'Krispy Kreme', 'Panera Bread']],
+    'Krispy Kreme', 'Panera Bread', 'Ice cream shop']],
   ['Burgers & drive-thru', ["McDonald's", 'Burger King', "Wendy's", 'In-N-Out', 'Whataburger',
     'Five Guys', 'Shake Shack', 'Jack in the Box', "Carl's Jr.", "Hardee's", 'Sonic', 'Cook Out',
     'Culver’s', "Culver's", 'Dairy Queen', 'Portillo\u2019s', "Portillo's"]],
@@ -3352,7 +3381,20 @@ const CHAIN_ALIAS = (function () {
     'panera': 'Panera Bread', 'cane s': "Raising Cane's", 'canes': "Raising Cane's",
     'jack in box': 'Jack in the Box', 'dq': 'Dairy Queen', 'kfc chicken': 'KFC',
     'starbuck': 'Starbucks', 'walmart supercenter': 'Walmart', 'costco gas': 'Costco',
-    'costco gas station': 'Costco', 'costco wholesale': 'Costco'
+    'costco gas station': 'Costco', 'costco wholesale': 'Costco',
+    /* Ice cream is a precomputed category (every OSM ice cream shop), so it answers from
+       the app's own data like a chain: instantly, anywhere, no live lookup. Common ways
+       and common misspellings of asking for it. */
+    'ice cream': 'Ice cream shop', 'icecream': 'Ice cream shop', 'ice cream shops': 'Ice cream shop',
+    'ice cream place': 'Ice cream shop', 'ice cream parlor': 'Ice cream shop', 'ice cream parlour': 'Ice cream shop',
+    'ice cream store': 'Ice cream shop', 'gelato': 'Ice cream shop', 'gelato shop': 'Ice cream shop',
+    'gelateria': 'Ice cream shop', 'frozen custard': 'Ice cream shop', 'custard': 'Ice cream shop',
+    'frozen yogurt': 'Ice cream shop', 'froyo': 'Ice cream shop', 'soft serve': 'Ice cream shop',
+    'icea cream': 'Ice cream shop', 'ice creme': 'Ice cream shop', 'ice creem': 'Ice cream shop',
+    'ice crem': 'Ice cream shop', 'ice cram': 'Ice cream shop', 'ise cream': 'Ice cream shop',
+    'ice creams': 'Ice cream shop', 'icecreams': 'Ice cream shop', 'iceream': 'Ice cream shop',
+    'ice-cream': 'Ice cream shop', 'icecream shop': 'Ice cream shop', 'icecream shops': 'Ice cream shop',
+    'icecream place': 'Ice cream shop', 'gelato shops': 'Ice cream shop', 'frozen yogurt shop': 'Ice cream shop'
   };
   for (const a in extra) if (BRANDS[extra[a]]) map.push([a, extra[a]]);
   map.sort((x, y) => y[0].length - x[0].length);      // longest match wins
@@ -3882,16 +3924,31 @@ $('placeIn').addEventListener('keydown', async e => {
     // them to pick a location here would be asking about somewhere they just left.
     if (route) { runLivePoi(poi, 'route'); return; }
     if (!center) { locate('center', { thenPoi: poi }); return; }
+    if (center.restored) {               // last visit's area: look where you are now
+      const was = center;
+      locate('center', { thenPoi: poi, quiet: true, onFail: () => { toast(`Searching near ${was.label} — your location isn't available`); runLivePoi(poi); } });
+      return;
+    }
     runLivePoi(poi); return;
   }
 
   if (p.here) {                          // "near me", "in my area", "around here"
-    locate('center');
+    // ...keeping what they asked for: "ice cream near me" used to locate and forget it.
+    const hp = p.chains.length ? null : detectPoiIntent(raw.replace(/\b(near|around|close to)\s+(me|here)\b|\bnearby\b|\bin my area\b/gi, ' ').trim());
+    locate('center', hp ? { thenPoi: hp } : {});
     return;
   }
   if (!p.place) {
     // "tesla charger near costco" with no place: the intent is almost always "near me".
     // If an area is already set, stay in it — the user is refining, not relocating.
+    if (center && center.restored) {
+      // The area was restored from a previous visit, not chosen: use where they are now,
+      // and only fall back to the old area -- saying so -- if location is unavailable.
+      const was = center;
+      setSheet('mid');
+      locate('center', { quiet: true, onFail: () => toast(`Showing ${was.label} — your location isn't available; add a city to look elsewhere`) });
+      return;
+    }
     if (center) {
       setSheet('mid');
       toast(`Filtered within ${center.label}`);
@@ -4205,8 +4262,8 @@ const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places
    Keys are exact BRANDS keys -- a typo here would silently match nothing, so verify.py
    checks every one of them against data.js. */
 const CAT_CHAINS = {
-  'amenity=ice_cream': ['Dairy Queen'],
-  'shop=ice_cream': ['Dairy Queen'],
+  'amenity=ice_cream': ['Ice cream shop', 'Dairy Queen'],
+  'shop=ice_cream': ['Ice cream shop', 'Dairy Queen'],
   'amenity=cafe': ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee'],
   'shop=pastry': ["Dunkin'", 'Krispy Kreme'],
   'shop=bakery': ['Krispy Kreme', "Dunkin'"],

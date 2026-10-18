@@ -66,6 +66,12 @@ def place_name(s):
     net, name = s.get("net") or "DC fast charger", s["name"]
     return name if net.lower() in name.lower() else f"{net} — {name}"
 def mins(m): return max(1, round(m / WALK))
+# Precomputed categories read as a kind of place, not a brand: "near an ice cream shop".
+CATEGORY_KEYS = {"Ice cream shop"}
+def near(key):
+    """What follows "near" in a title: the brand, or "an ice cream shop" for a category."""
+    return f"{art(key)} {key.lower()}" if key in CATEGORY_KEYS else key
+
 def art(name):
     """'a IHOP' reads wrong; pick a/an by how the name is actually said."""
     n = (name or "").strip()
@@ -354,7 +360,7 @@ def jsonld_chain(key, sites_list, canonical, faq_schema=None):
             {"@type": "ListItem", "position": 1, "name": "Chains", "item": f"{BASE}/near/"},
             {"@type": "ListItem", "position": 2, "name": key, "item": f"{BASE}/{canonical}"}]},
         {"@context": "https://schema.org", "@type": "ItemList",
-         "name": f"EV fast chargers near {key}",
+         "name": f"EV fast chargers near {near(key)}",
          "numberOfItems": len(sites_list), "itemListElement": items}]
     if faq_schema:
         blocks.append(faq_schema)
@@ -402,7 +408,7 @@ def jsonld_state(key, st, sn, sites_list, canonical, faq_schema=None):
             {"@type": "ListItem", "position": 2, "name": key, "item": f"{BASE}/near/{slug(key)}/"},
             {"@type": "ListItem", "position": 3, "name": sn, "item": f"{BASE}/{canonical}"}]},
         {"@context": "https://schema.org", "@type": "ItemList",
-         "name": f"Fast chargers near {key} in {sn}",
+         "name": f"Fast chargers near {near(key)} in {sn}",
          "numberOfItems": len(sites_list), "itemListElement": items}]
     if faq_schema:
         blocks.append(faq_schema)
@@ -469,9 +475,9 @@ for key, b in brands.items():
     stats_html = stats_para(key, "", sx)
     faq_html, faq_schema = faq_block(key, "", sx)
     top = "".join(site_card(sites[sid], key, "../../") for d, sid in hits[:40])
-    title = f"EV fast chargers near {key} ({n} locations)"
+    title = f"EV fast chargers near {near(key)} ({n:,} locations)"
     desc = f"{n} EV DC fast chargers within a 10-minute walk of {art(key)} {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
-    body = f"""<h1>{b['e']} EV fast chargers near {esc(key)}</h1>
+    body = f"""<h1>{b['e']} EV fast chargers near {esc(near(key))}</h1>
 <p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
 {stats_html}
@@ -505,9 +511,9 @@ for key, b in brands.items():
                       f'<a href="../../../?chain={esc(key)}&amp;state={st}">Open the map to see them all →</a></p>')
         others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
-        title = f"EV fast chargers near {key} in {sn} ({len(v):,})"
+        title = f"EV fast chargers near {near(key)} in {sn} ({len(v):,})"
         desc = f"All {len(v):,} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
-        body = f"""<h1>{b['e']} EV fast chargers near {esc(key)} in {sn}</h1>
+        body = f"""<h1>{b['e']} EV fast chargers near {esc(near(key))} in {sn}</h1>
 <p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {stats_html}

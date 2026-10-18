@@ -106,8 +106,24 @@ BRANDS = {
     "TA Travel Center":("⛽", "store", r"^TA( Travel Center)?$"),
 }
 
+# Categories, precomputed like the chains: every OSM place with these tags, whatever its
+# name. "ice cream" was the app's most-searched thing it could not answer from its own
+# data -- the live Overpass lookup took 30 s or failed under load, and the fallback was
+# Dairy Queen alone (2 stops in all of Los Angeles). key -> (emoji, category, [tag filters])
+CATEGORIES = {
+    "Ice cream shop":  ("🍦", "food",  ['["amenity"="ice_cream"]', '["shop"="ice_cream"]']),
+}
+BRANDS.update({k: (e, c, None) for k, (e, c, _) in CATEGORIES.items()})
+
 def overpass(brand_key, regex, tries=4):
-    q = f"""[out:json][timeout:300];
+    if brand_key in CATEGORIES:
+        sel = "".join(f"nwr{t}(area.us);" for t in CATEGORIES[brand_key][2])
+        q = f"""[out:json][timeout:300];
+area["ISO3166-1"="US"][admin_level=2]->.us;
+({sel});
+out center qt;"""
+    else:
+        q = f"""[out:json][timeout:300];
 area["ISO3166-1"="US"][admin_level=2]->.us;
 nwr["brand"~"{regex}"](area.us);
 out center qt;"""

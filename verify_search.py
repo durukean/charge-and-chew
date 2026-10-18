@@ -242,6 +242,16 @@ CASES = [
     ("i want chargers near me",      dict(hwy=None, here=True)),
     ("la to sf on i-5",              dict(trip="Los Angeles, CA|San Francisco, CA")),
 
+    # ── Ice cream is a precomputed category (2026-10-18): every way of asking for it, and the
+    #    common misspellings, must resolve to it -- "icea cream" used to say "Couldn't find".
+    ("ice cream",            dict(chains=["Ice cream shop"])),
+    ("icea cream",           dict(chains=["Ice cream shop"])),
+    ("icecream",             dict(chains=["Ice cream shop"])),
+    ("icecream shop",        dict(chains=["Ice cream shop"])),
+    ("ice cream shops",      dict(chains=["Ice cream shop"])),
+    ("gelato",               dict(chains=["Ice cream shop"])),
+    ("ice cream near me",    dict(chains=["Ice cream shop"], here=True)),
+    ("ice cream in phoenix", dict(chains=["Ice cream shop"], place="phoenix")),
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
     ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),
