@@ -329,7 +329,7 @@ check(D.get("brands", {}).get("Ice cream shop", {}).get("n", 0) > 5000 if isinst
       "the precomputed ice cream category is missing or nearly empty in data.js")
 check("'ice cream': 'Ice cream shop'" in _html and "'icea cream': 'Ice cream shop'" in _html,
       "searches for ice cream (and its misspellings) no longer resolve to the precomputed category")
-check("center.restored = true;" in _html and re.search(r"if \(center && center\.restored\) \{", _html) is not None,
+check(re.search(r"(?m)^\s*center\.restored = true;", _html) is not None and re.search(r"if \(center && center\.restored\) \{", _html) is not None,
       "a search with no place uses an area restored from a previous visit again (the 'other state' bug)")
 check("locate('center', hp ? { thenPoi: hp } : {});" in _html,
       "'<category> near me' forgets the category again")
