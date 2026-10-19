@@ -258,6 +258,9 @@ CASES = [
     # Food words mean a set of chains (2026-10-19): "tacos" listed McDonald's and Wendy's.
     ("tacos",                dict(chains=["Taco Bell", "Del Taco", "Chipotle"])),
     ("pizza in denver",      dict(chains=["Domino's", "Pizza Hut", "Little Caesars"], place="denver")),
+    # The About panel suggests these two.
+    ("tacos in denver",      dict(chains=["Taco Bell", "Del Taco", "Chipotle"], place="denver")),
+    ("bakery",               dict(poi="shop=bakery")),
     ("fried chicken near me", dict(here=True)),
     ("donuts",               dict(chains=["Dunkin'", "Krispy Kreme"])),
     ("taco bell",            dict(chains=["Taco Bell"])),
