@@ -1203,6 +1203,11 @@ for _needle, _why in [
 ]:
     check(_needle in _html, _why)
 
+# An area search frames its stops, not the empty ring around them (2026-10-19).
+_sc = _html[_html.index("function setCenter("):_html.index("function updateCenterSub(")]
+check(re.search(r"^\s*settleFit\(areaBounds\b", _sc, re.M) is not None,
+      "setCenter() no longer frames the stops it found (areaBounds): pins pile up in a 25-mile ring")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

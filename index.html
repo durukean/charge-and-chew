@@ -3060,7 +3060,19 @@ function setCenter(lat, lon, label, kind) {
   rememberArea();
   if (window.__themeRecheck) window.__themeRecheck();   // new latitude can change sunset
   render(); setSheet('mid'); syncUrl();
-  settleFit(() => radiusLayer && radiusLayer.getBounds(), [18, 18]);
+  settleFit(areaBounds, [18, 18], 14);
+}
+/* Frame what was found, not the whole circle. "Starbucks in Austin" drew a 25-mile circle
+   with every stop inside the middle eight, so the pins sat on top of each other in a map
+   that was mostly empty ring. The search point stays in frame; with fewer than two stops
+   the circle is the useful picture: it says how far we looked. Read at fit time, so the
+   chains a search sets after setCenter() count too. */
+function areaBounds() {
+  if (!radiusLayer) return null;
+  if (!center || stateScope) return radiusLayer.getBounds();
+  const pts = [[center.lat, center.lon]];
+  for (const s of SITES) if (inScope(s) && passesChain(s)) pts.push([s.lat, s.lon]);
+  return pts.length < 3 ? radiusLayer.getBounds() : L.latLngBounds(pts);
 }
 function updateCenterSub(n) {
   $('ccSub').textContent = `${n} stop${n === 1 ? '' : 's'} within ${radiusMi} mi`;
@@ -5625,7 +5637,7 @@ function fitToResults() {
    should not yank the view out from under you — so deep links ask for the fit explicitly. */
 function fitToCenter() {
   if (!radiusLayer) return;
-  settleFit(() => radiusLayer.getBounds(), [24, 24], 13);
+  settleFit(areaBounds, [24, 24], 14);
 }
 
 /* ───────── network filter ───────── */
