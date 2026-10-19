@@ -5608,9 +5608,10 @@ function settleFit(getBounds, padding, maxZoom, tries = 0) {
       const ovH = wideLayout() ? 0 : Math.max(0, Math.round($('overlayTop').getBoundingClientRect().bottom - mapTop));
       /* The button column floats over the right edge of the map too. Framing only for the card
          on top left the far end of a route under the route button -- on LA -> Santa Barbara the
-         LA pins sat half-covered on it. Measured, not assumed, so it follows the CSS. */
+         LA pins sat half-covered on it. Measured, not assumed, so it follows the CSS. The
+         desktop map has the same column: IHOP in Phoenix put the Mesa stop under it. */
       const ctl = document.querySelector('.mapctl');
-      const cb = !wideLayout() && ctl ? ctl.getBoundingClientRect() : null;
+      const cb = ctl ? ctl.getBoundingClientRect() : null;
       const ctlW = cb && cb.width ? Math.max(0, Math.round(mapBox.right - cb.left)) : 0;
       const o = { paddingTopLeft: [padding[0], padding[1] + ovH],
                   paddingBottomRight: [Math.max(padding[0], ctlW + 6), padding[1]], animate: false };
