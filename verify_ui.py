@@ -141,6 +141,13 @@ def main():
         httpd.shutdown()
         return 1
 
+    # ?q= runs a search typed into a link. Without it the page opens on the plain national
+    # view, whose title says "fast chargers" rather than naming the chain.
+    dom_q = render_dom(binpath, f"http://127.0.0.1:{port}/?q=ihop&nosw=1")
+    if dom_q is None:
+        httpd.shutdown()
+        return 1
+
     # Second boot with corrupted saved settings. One malformed favourite used to stop the
     # whole app script, leaving the splash up forever -- and reloading never fixed it.
     seed = os.path.join(HERE, "__seed_storage.html")
@@ -172,6 +179,7 @@ location.replace('/?chain=IHOP&nosw=1');
         "no_boot_error": not re.search(r'id="splash"[^>]*>\s*<div[^>]*color:(?:#b91c1c|var\(--bad\))', dom),
         "data_actually_loaded": dom.count('class="row"') > 3,
         "boots_with_corrupted_saved_settings": dom_bad.count('class="row"') > 3,
+        "search_link_runs_its_search": bool(re.search(r'id="sheetTitle"[^>]*>.{0,80}?IHOP', dom_q)),
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():

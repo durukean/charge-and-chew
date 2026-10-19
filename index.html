@@ -5553,6 +5553,7 @@ function syncUrl() {
   if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
   else { p.delete('at'); p.delete('r'); }
   p.delete('stop');   // a one-time "open this stop" from the widget, not part of the view
+  p.delete('q');      // a one-time search from a link: what it found is the view now
   if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
   else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
   else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
@@ -5832,7 +5833,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
 /* A link that describes a view opens exactly that view. The recipient's own saved filters
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
-const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'net', 'netpick', 'plug', 'l2',
+const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'q', 'net', 'netpick', 'plug', 'l2',
                    'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
@@ -5899,6 +5900,19 @@ if (q.get('from') && q.get('to')) {
 }
 /* ?stop=<id> opens that stop's panel: the home-screen widget shows one stop, and tapping it
    used to land on a list of 147 with the one you tapped nowhere in particular. */
+/* ?q=<anything you could type> runs that search, so a link can say "ice cream" or "LA to
+   Vegas" in words. Only when nothing more exact is in the link. */
+if (!boot && q.get('q') && q.get('q').trim()) {
+  const typed = q.get('q').trim().slice(0, 120);
+  boot = () => {
+    const i = $('placeIn');
+    i.value = typed;
+    i.dispatchEvent(new Event('input', { bubbles: true }));
+    hideSugg();
+    i.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+    i.blur(); hideSugg();
+  };
+}
 if (q.get('stop') && byId[+q.get('stop')]) {
   const sid = +q.get('stop'), first = boot;
   boot = () => {
