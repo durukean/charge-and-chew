@@ -237,6 +237,9 @@ CASES = [
     # Interstates are corridors, never places.
     ("chargers on i-5 with in n out", dict(hwy="I-5", chains=["In-N-Out"], place="")),
     ("superchargers on i95",         dict(hwy="I-95", net="tesla", place="")),
+    # The App Store text uses these two exact phrasings.
+    ("i-5 with starbucks",           dict(hwy="I-5", chains=["Starbucks"], place="")),
+    ("I-95 with Chick-fil-A",        dict(hwy="I-95", chains=["Chick-fil-A"], place="")),
     ("interstate 10",                dict(hwy="I-10", place="")),
     ("I-75 ccs",                     dict(hwy="I-75", plug=1, place="")),
     ("i want chargers near me",      dict(hwy=None, here=True)),

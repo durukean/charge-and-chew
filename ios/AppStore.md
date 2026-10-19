@@ -1,44 +1,93 @@
-# App Store listing — draft
+# App Store listing
 
-Everything App Store Connect will ask for, so submission is a copy-paste job once the CarPlay
-entitlement lands (or earlier, if we decide to submit without it).
+Everything App Store Connect asks for, ready to paste. The 1.0.5 text is live (approved,
+waiting for release). The **1.0.6** text below goes in once 1.0.6 is created, which can only
+happen after 1.0.5 is released.
 
 **Name** (30): `Charge & Chew: EV Stops`
 **Subtitle** (30): `Fast chargers near good food`
 **Category:** Navigation · secondary Travel · **Age:** 4+ · **Price:** Free
 
-**Keywords** (100, comma-separated, no repeats of name/subtitle words):
-`ev,charger,charging,tesla,supercharger,road trip,electric car,ihop,restaurants,map,route,walk`
+---
 
-**Description:**
+## 1.0.6
+
+Numbers are from the 2026-10-19 data: 14,239 US DC fast chargers, 90 chains plus ice cream
+shops, and 83% of those chargers have at least one of the chains within a 10-minute walk.
+
+**Keywords** (92 of 100). Words already in the name or subtitle (ev, stops, fast, chargers, near,
+good, food) are indexed anyway, so they are left out:
+`charging,tesla,supercharger,road trip,electric car,ihop,restaurant,ice cream,nacs,evgo,route`
+
+**Promotional text** (170). This can be changed at any time without a new version:
+> New look, and a stop card that tells you what your charge is good for: "23 min here, time for
+> a coffee run at Starbucks." Long drives now suggest where to break.
+
+**What's New** (about 900 of 4,000):
+> A redesign, and a smarter road trip.
+>
+> • A new look: warm, calm and easier to read in the sun. Green means charging, amber means food.
+> • Every big network has its own mark, so you can tell a Tesla Supercharger (red T) from
+>   Electrify America, EVgo, ChargePoint and others at a glance.
+> • The app opens where you are, with bigger stops that are easier to tap.
+> • Set your car and each stop says what the charge is good for: a coffee run, or a sit-down meal.
+> • Places say whether they're open, and on a route, whether they'll be open when you get there.
+> • Long drives suggest where to take a break, show each stop's mile on the drive, and warn you
+>   about the longest stretch without a fast charger.
+> • Search an interstate ("I-5 with Starbucks"), a food ("tacos", "pizza"), or ice cream:
+>   ice cream shops are now built in, and work offline.
+> • Dark and tinted app icons. The widget opens the stop it shows.
+> • Lots of smaller fixes.
+
+**Description** (about 1,100 of 4,000):
 > Charging takes 30 minutes. Might as well spend it somewhere good.
 >
 > Charge & Chew finds DC fast chargers within a short walk of the restaurants and stores you'd
-> actually stop at — IHOP, In-N-Out, Buc-ee's, Starbucks, Target and 85 more chains. 13,000+ US
-> chargers, every network, free, no account.
+> actually stop at: IHOP, In-N-Out, Buc-ee's, Starbucks, Target, ice cream shops and 85 more.
+> 14,000+ US chargers, every network, free, no account.
 >
-> • Search a chain, a place, a kind of shop ("tire shop"), or a whole drive: type "LA to Las Vegas"
->   and see every stop along the route with food a few minutes' walk from the charger.
-> • Tap any stop for walk times to each place, hours where known, and one-tap directions.
-> • Set your car for connector compatibility and a rough charge time at each stop.
-> • Works offline: the charger database is on your phone. Only the map tiles need a signal.
+> • Search a chain, a food ("tacos"), a city, an interstate ("I-95 with Chick-fil-A"), or a whole
+>   drive: type "LA to Las Vegas" and see every stop on the way with food a few minutes' walk from
+>   the charger, where to take a break, and the longest gap between fast chargers.
+> • Tap a stop for walk times to each place, whether it's open, and one-tap directions.
+> • Set your car for plug compatibility and a rough charge time, matched to what's nearby: long
+>   enough for coffee, or for a meal.
+> • Tesla, Electrify America, EVgo, ChargePoint, IONNA, Rivian and more, each with its own mark.
+> • Works offline: the charger database is on your phone. Only the map needs a signal.
 > • Your location never leaves your device. No ads, no tracking.
 >
-> Charger data: US DOE / NREL. Places: OpenStreetMap. Not affiliated with Tesla or any chain.
+> Charger data: US DOE / NREL. Places: OpenStreetMap. Not affiliated with Tesla, any charging
+> network or any chain.
+
+**Screenshots** (6.9", 1320×2868): `ios/screenshots/1.0.6/`, captions in
+`ios/screenshots/README.md`. Upload in order: 1-route, 2-stop, 3-nearby.
+
+**Build:** the newest VALID 1.0.6 build in TestFlight (34 at the time of writing).
+
+---
+
+## Unchanged from 1.0.5
 
 **Privacy policy URL:** https://chargeandchew.com/privacy/
 **Support URL:** https://chargeandchew.com/support/
 
-**App Privacy (nutrition label)** — answer honestly:
+**App Privacy (nutrition label)**:
 - Location → *Precise Location* → used for App Functionality → **not linked** to identity, not used for tracking.
 - Usage Data → *Product Interaction* (anonymous page counts via GoatCounter) → Analytics → **not linked**, not tracking.
 - Nothing else collected. No third-party SDKs.
 
 **Review notes:**
 > The app bundles its charger database and works without a network; the map tiles are the only
-> remote asset. Location is native (CoreLocation) and optional — deny it and search a city instead.
-> Directions open Apple Maps or the Google Maps app. CarPlay (EV Charging category) is built and
-> ships once the entitlement is granted.
+> remote asset. Location is native (CoreLocation) and optional: deny it and search a city instead.
+> Directions open Apple Maps or the Google Maps app. The app asks for a rating at most once, through
+> the system prompt, after real use.
 
-**Screenshots** (6.9" 1320×2868 from an iPhone 17 Pro Max simulator): 1) LA→Las Vegas route with
-IHOP stops, 2) a stop popup with walk times, 3) Las Vegas "Any food" list, 4) car set + charge times.
+---
+
+## 1.0.5 (live text, for reference)
+
+**Keywords:** `ev,charger,charging,tesla,supercharger,road trip,electric car,ihop,restaurants,map,route,walk`
+
+The description said "13,000+ US chargers", "85 more chains" and used "tire shop" as the example
+search. The What's New covered plug-based route planning, per-plug speeds, Level 2, speed and
+readability, and the widget.
