@@ -2683,7 +2683,10 @@ function renderList(vis) {
   if (route) scope = route.hwy ? 'on ' + route.hwy : 'on route';
 
   $('sheetTitle').innerHTML = (filtering || route || center)
-    ? `${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'} <em>${[filtering ? (cat === 'fav' ? 'saved' : 'near ' + esc(what)) : '', esc(scope)].filter(Boolean).join(' ')}</em>`
+    ? `${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'} <em>${[filtering ? (cat === 'fav' ? 'saved'
+        // "near Any food" read like a typo; a category alone is a phrase of its own
+        : anyCat && !active.size && !isSeed ? (anyCat === 'food' ? 'with food a short walk away' : 'with a store a short walk away')
+        : 'near ' + esc(what)) : '', esc(scope)].filter(Boolean).join(' ')}</em>`
     : `${vis.length.toLocaleString()} fast chargers${narrowings().length ? '' : ' <em>· every network, no filters</em>'}`;
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
@@ -3747,6 +3750,10 @@ function placeLabel(j) {
   const a = j.address || {};
   const town = a.city || a.town || a.village || a.hamlet || a.suburb || a.county || a.neighbourhood;
   const st = ST[(a.state || '').toLowerCase()] || a.state;
+  // A ZIP search should say the ZIP: OSM files 90210 under "Los Angeles", which read as if
+  // the search had gone somewhere else.
+  if ((j.addresstype === 'postcode' || j.type === 'postcode') && a.postcode)
+    return `${a.postcode} · ${[town, st].filter(Boolean).join(', ')}`;
   if (town && st) return `${town}, ${st}`;
   return (town || st || j.display_name.split(',')[0]).trim();
 }
