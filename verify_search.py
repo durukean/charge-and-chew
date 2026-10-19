@@ -252,6 +252,12 @@ CASES = [
     ("gelato",               dict(chains=["Ice cream shop"])),
     ("ice cream near me",    dict(chains=["Ice cream shop"], here=True)),
     ("ice cream in phoenix", dict(chains=["Ice cream shop"], place="phoenix")),
+    # Food words mean a set of chains (2026-10-19): "tacos" listed McDonald's and Wendy's.
+    ("tacos",                dict(chains=["Taco Bell", "Del Taco", "Chipotle"])),
+    ("pizza in denver",      dict(chains=["Domino's", "Pizza Hut", "Little Caesars"], place="denver")),
+    ("fried chicken near me", dict(here=True)),
+    ("donuts",               dict(chains=["Dunkin'", "Krispy Kreme"])),
+    ("taco bell",            dict(chains=["Taco Bell"])),
     # ── "ice cream" as a plain search, with no trip.
     ("ice cream",            dict(poi="amenity=ice_cream+shop=ice_cream", trip=None)),
     ("ice cream shop",       dict(poi="amenity=ice_cream+shop=ice_cream", poiLabel="ice cream shop")),

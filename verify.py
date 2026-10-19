@@ -337,6 +337,10 @@ check("locate('center', hp ? { thenPoi: hp } : {});" in _html,
 _ih = open(os.path.join(HERE, "near", "in-n-out", "ca", "index.html"), encoding="utf-8").read() if os.path.exists(os.path.join(HERE, "near", "in-n-out", "ca", "index.html")) else ""
 check(not _ih or ('class="nm"' in _ih and 'class="ring"' not in _ih),
       "static chain pages lost the network marks (or brought back the old walk-time ring)")
+# Food words resolve to the chains that serve them, before any live lookup ("tacos" was
+# every fast-food chain).
+check(re.search(r"for \(const \[re, keys\] of FOOD_GROUPS\)", _html) is not None and "'Taco Bell', 'Del Taco', 'Chipotle'" in _html,
+      "food words (tacos, pizza, burgers...) no longer map to their chains")
 # ---- speed badges in dark mode ----
 # The plain dark-theme badge rule (0,4,1) outranked the tier colours (0,3,1): every 250 kW+
 # stop showed near-black text on dark grey. Each tier rule must be at least as specific.

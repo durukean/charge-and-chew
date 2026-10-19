@@ -3481,6 +3481,18 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
 const GENERIC_PLACE = new Set(['beach', 'mall', 'downtown', 'airport', 'park', 'lake', 'highway', 'freeway',
   'interstate', 'city', 'town', 'center', 'centre', 'coast', 'mountains', 'freeway exit', 'exit']);
 
+const FOOD_GROUPS = [
+  [/(^|\s)(tacos?|taqueria|mexican|mexican food|burritos?|tex mex)(?=\s|$)/, ['Taco Bell', 'Del Taco', 'Chipotle']],
+  [/(^|\s)(pizzas?|pizzeria)(?=\s|$)/, ["Domino's", 'Pizza Hut', 'Little Caesars']],
+  [/(^|\s)(burgers?|hamburgers?|cheeseburgers?)(?=\s|$)/, ["McDonald's", 'Burger King', "Wendy's", 'In-N-Out',
+    'Whataburger', 'Five Guys', 'Shake Shack', 'Jack in the Box', "Carl's Jr.", "Culver's", 'Sonic']],
+  [/(^|\s)(fried chicken|chicken|chicken tenders|wings|chicken wings)(?=\s|$)/, ['Chick-fil-A', 'KFC', 'Popeyes',
+    "Raising Cane's", "Zaxby's", 'Bojangles', 'Wingstop']],
+  [/(^|\s)(donuts?|doughnuts?)(?=\s|$)/, ["Dunkin'", 'Krispy Kreme']],
+  [/(^|\s)(subs?|sandwich|sandwiches|hoagies?)(?=\s|$)/, ['Subway', "Jersey Mike's", 'Firehouse Subs']],
+  [/(^|\s)(pancakes?|waffles?)(?=\s|$)/, ['IHOP', "Denny's", 'Waffle House']],
+  [/(^|\s)(chinese|chinese food)(?=\s|$)/, ['Panda Express']],
+];
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
   const here = HERE_RE.test(t);
@@ -3490,6 +3502,17 @@ function parseQuery(raw) {
     if (chains.indexOf(key) !== -1) continue;
     const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
+  }
+  /* Food words that mean a set of chains we already have: "tacos" is Taco Bell, Del Taco
+     and Chipotle -- instant, from our own data. They were live lookups whose fallback was
+     every fast-food chain, so "tacos" listed McDonald's and Wendy's. Only when the query
+     named no chain itself; the words are removed so "pizza in denver" still finds Denver. */
+  if (!chains.length) {
+    for (const [re, keys] of FOOD_GROUPS) {
+      if (!re.test(t)) continue;
+      for (const k of keys) if (BRANDS[k] && chains.indexOf(k) === -1) chains.push(k);
+      t = t.replace(new RegExp(re.source, 'g'), ' ');
+    }
   }
   // Second pass: 2-4 adjacent words, spaces removed ("chick fila" -> "chickfila").
   {
