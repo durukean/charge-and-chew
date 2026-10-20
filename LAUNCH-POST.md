@@ -1,6 +1,6 @@
 # Launch post drafts
 
-Numbers are from the 2026-10-19 data. Mention the iPhone app only after 1.0.5 is released.
+Numbers are from the 2026-10-19 data. The iPhone app is live (1.0.5, released 2026-10-19).
 
 Post these yourself from your own account — communities react badly to posts that
 read as marketing, and they react well to "I built this because it annoyed me."

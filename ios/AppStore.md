@@ -1,8 +1,9 @@
 # App Store listing
 
-Everything App Store Connect asks for, ready to paste. The 1.0.5 text is live (approved,
-waiting for release). The **1.0.6** text below goes in once 1.0.6 is created, which can only
-happen after 1.0.5 is released.
+Everything App Store Connect asks for. 1.0.5 was released on 2026-10-19. **1.0.6** (build 35)
+was submitted the same day with the text below, the three screenshots in
+`ios/screenshots/1.0.6/`, release set to manual. The old-design preview video was removed
+from 1.0.6; it needs re-recording in the new design before it goes back.
 
 **Name** (30): `Charge & Chew: EV Stops`
 **Subtitle** (30): `Fast chargers near good food`
@@ -15,9 +16,9 @@ happen after 1.0.5 is released.
 Numbers are from the 2026-10-19 data: 14,239 US DC fast chargers, 90 chains plus ice cream
 shops, and 83% of those chargers have at least one of the chains within a 10-minute walk.
 
-**Keywords** (92 of 100). Words already in the name or subtitle (ev, stops, fast, chargers, near,
+**Keywords** (94 of 100). Words already in the name or subtitle (ev, stops, fast, chargers, near,
 good, food) are indexed anyway, so they are left out:
-`charging,tesla,supercharger,road trip,electric car,ihop,restaurant,ice cream,nacs,evgo,route`
+`charging,tesla,supercharger,road trip,electric car,ihop,restaurant,ice cream,nacs,dining,route`
 
 **Promotional text** (170). This can be changed at any time without a new version:
 > New look, and a stop card that tells you what your charge is good for: "23 min here, time for
@@ -62,7 +63,7 @@ good, food) are indexed anyway, so they are left out:
 **Screenshots** (6.9", 1320×2868): `ios/screenshots/1.0.6/`, captions in
 `ios/screenshots/README.md`. Upload in order: 1-route, 2-stop, 3-nearby.
 
-**Build:** the newest VALID 1.0.6 build in TestFlight (34 at the time of writing).
+**Build:** 35.
 
 ---
 
@@ -80,7 +81,7 @@ good, food) are indexed anyway, so they are left out:
 > The app bundles its charger database and works without a network; the map tiles are the only
 > remote asset. Location is native (CoreLocation) and optional: deny it and search a city instead.
 > Directions open Apple Maps or the Google Maps app. The app asks for a rating at most once, through
-> the system prompt, after real use.
+> the system prompt, after real use. (1.0.6 sent a step-by-step "how to try what's new" list.)
 
 ---
 
