@@ -1670,10 +1670,13 @@ function carInfo() { return car && CARS[car] ? CARS[car] : null; }
 // compatibility: 'native' | 'adapter' | null (can't use)
 /* "~115m" read as 115 metres on a row that also says "0.4 mi away". Minutes say min, and
    anything past the hour leads with hours: "~23 min", "~1h 55m". */
-function chargeLabel(m) {
-  if (m < 60) return m + ' min';
-  const h = Math.floor(m / 60), r = m % 60;
-  return h + 'h' + (r ? ' ' + r + 'm' : '');
+function chargeLabel(m) { return hmLabel(m); }
+/* Hours and minutes from whole minutes, so nothing can round up to "2h 60m", and under an
+   hour it is just minutes, never "0h 24m". */
+function hmLabel(min) {
+  const t = Math.round(min), r = t % 60;
+  if (t < 60) return t + ' min';
+  return Math.floor(t / 60) + 'h' + (r ? ' ' + String(r).padStart(2, '0') + 'm' : '');
 }
 function compat(s) {
   const c = carInfo(); if (!c) return null;
@@ -5516,7 +5519,7 @@ function breaksCard(vis) {
       const k = Object.keys(m).filter(k => (chainQuery() ? active.has(k) : BRANDS[k].cat === 'food'))
         .sort((a, b) => walkTo(s, a, m[a]) - walkTo(s, b, m[b]))[0];
       return `<button type="button" class="brk" data-brk="${s.id}">
-        <span class="bm">mile ${mile}<i>~${Math.floor(h)}h ${String(Math.round((h % 1) * 60)).padStart(2, '0')}m in</i></span>
+        <span class="bm">mile ${mile}<i>~${hmLabel(h * 60)} in</i></span>
         <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
       </button>`;
     }).join('') + '</div>';
@@ -5550,9 +5553,11 @@ function showRouteSummary() {
   const endLabel = v => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
   const trip = hwy ? `Along ${hwy}` : `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
   const miles = Math.round(mi).toLocaleString('en-US');
-  const time = `${Math.floor(hr)}h ${Math.round((hr % 1) * 60)}m`;
-  $('routeInfo').innerHTML = `<span class="sum"><b>${esc(trip)}</b><i><span class="rcount">${routeCountText()}</span> within ${corridorMi}\u00a0mi` +
-    ` · ${miles} mi · ${time}</i></span>` +
+  const time = hmLabel(hr * 60);
+  // Distance and time first: on a phone the line ends in an ellipsis, and it was cutting
+  // the drive time ("173 mi · 3h 2…") rather than the charger count.
+  $('routeInfo').innerHTML = `<span class="sum"><b>${esc(trip)}</b><i>${miles} mi · ${time} · ` +
+    `<span class="rcount">${routeCountText()}</span> within ${corridorMi}\u00a0mi</i></span>` +
     `<span class="ed">Edit</span><button class="rclear" id="rClear" title="Clear route" aria-label="Clear route">×</button>`;
   $('routePanel').classList.add('show', 'collapsed');
   $('overlayTop').classList.add('routing', 'routed');

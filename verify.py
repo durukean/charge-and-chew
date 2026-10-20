@@ -1222,6 +1222,17 @@ check(re.search(r"^\s*if \(!shown\) \{[^}]*return; \}", _pc, re.M) is not None
 check("~${chargeLabel(cm)}" in _html and "~${cm}m<" not in _html,
       "the row's charge-time badge is back to a bare 'm' (reads as metres)")
 
+# Durations: whole minutes first ("2h 60m" was possible), minutes alone under the hour.
+if _node and "function hmLabel(min)" in _html:
+    _hm = _html[_html.index("function hmLabel(min)"):]
+    _hm = _hm[:_hm.index("\n}\n") + 3]
+    _r6 = subprocess.run([_node, "-e", _hm + r"""
+const want = [[179.7, '3h'], [61, '1h 01m'], [24, '24 min'], [59.6, '1h'], [115, '1h 55m']];
+const bad = want.filter(([m, w]) => hmLabel(m) !== w).map(([m, w]) => m + ' -> ' + hmLabel(m) + ' (want ' + w + ')');
+console.log(bad.length ? bad.join('; ') : 'OK');"""], capture_output=True, text=True)
+    check(_r6.stdout.strip() == "OK", "hmLabel() formats durations wrong: " + (_r6.stdout + _r6.stderr).strip()[:300])
+check("% 1) * 60" not in _html, "a duration is built from (h % 1) * 60 again, which can print '2h 60m'")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
