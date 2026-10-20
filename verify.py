@@ -1243,6 +1243,11 @@ _dw = _html[_html.index("function dwellAdvice("):][:1200]
 check(re.search(r"\.sort\(\(a, b\) => \(wanted\(b\.k\) - wanted\(a\.k\)\)", _dw) is not None,
       "dwellAdvice ignores the searched chain (Starbucks search suggested Walmart)")
 
+# Filters / chain picker buttons say how many stops you will get.
+_rn = _html[_html.index("function render() {"):][:1500]
+check(re.search(r"^\s*\$\('filtDone'\)\.textContent = showN;", _rn, re.M) is not None,
+      "the Filters button no longer says how many stops the filters leave")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

@@ -2447,6 +2447,10 @@ function render() {
      single largest cost of a chip tap, billed to the chips but really the list's layout. */
   const chipScroll = $('chiprow').scrollLeft;
   const vis = visibleSites(), visIds = new Set(vis.map(s => s.id));
+  /* Filters and the chain picker apply as you tap, behind the sheet you are tapping in. Their
+     button says what you will get, so a filter that empties the map is seen before closing. */
+  const showN = `Show ${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'}`;
+  $('filtDone').textContent = showN; $('pkDone').textContent = showN;
   const filtering = chainQuery() || cat === 'fav';
   const T = MTHEME[curDark ? 'dark' : 'light'];
   const clustered = drawClusters(vis);
