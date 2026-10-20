@@ -1233,6 +1233,16 @@ console.log(bad.length ? bad.join('; ') : 'OK');"""], capture_output=True, text=
     check(_r6.stdout.strip() == "OK", "hmLabel() formats durations wrong: " + (_r6.stdout + _r6.stderr).strip()[:300])
 check("% 1) * 60" not in _html, "a duration is built from (h % 1) * 60 again, which can print '2h 60m'")
 
+# The stop card's "Set your car" brings the card back with its answer (2026-10-20).
+_cg = _html[_html.index("function drawCarGrid()"):_html.index("$('carBtn').onclick")]
+check(re.search(r"^\s*backToStop\(\);", _cg, re.M) is not None
+      and re.search(r"openCarPicker\(\); carReturnTo = ", _html) is not None,
+      "setting a car from a stop card no longer reopens that card")
+# The charge advice suggests what you searched for first, when it fits.
+_dw = _html[_html.index("function dwellAdvice("):][:1200]
+check(re.search(r"\.sort\(\(a, b\) => \(wanted\(b\.k\) - wanted\(a\.k\)\)", _dw) is not None,
+      "dwellAdvice ignores the searched chain (Starbucks search suggested Walmart)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

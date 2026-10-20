@@ -2092,7 +2092,7 @@ map.on('popupopen', e => {
     b.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + ((byId[+b.dataset.fav] || {}).name || 'this stop'));
   };
   const sc = el && el.querySelector('[data-setcar]');
-  if (sc) sc.onclick = () => { track('setcar-from-stop'); map.closePopup(); openCarPicker(); };
+  if (sc) sc.onclick = () => { track('setcar-from-stop'); map.closePopup(); openCarPicker(); carReturnTo = b ? +b.dataset.fav : null; };
   const more = el && el.querySelector('[data-more]');
   if (more) more.onclick = () => {
     const box = el.querySelector('.pp-more'), open = box.hidden;
@@ -2968,7 +2968,16 @@ function renderCarBar() {
     renderCarBar(); render();
   };
 }
+/* "Set your car" on a stop card asks a question about THAT stop, so the card comes back
+   once the car is set (or the picker is closed): it used to leave you on a bare map,
+   zoomed in on the stop, without the answer the link offered. */
+let carReturnTo = null;
+function backToStop() {
+  const id = carReturnTo; carReturnTo = null;
+  if (id && mk[id]) setTimeout(() => { if (mk[id]) { popupPad(mk[id]); mk[id].openPopup(); } }, 250);
+}
 function openCarPicker() {
+  carReturnTo = null;     // set again by the stop card's link, which calls this first
   $('carPicker').classList.add('show');
   drawCarGrid();
   // Not on a touch screen: iOS ignores focus() outside a tap, so it drew a focus ring with no
@@ -2990,17 +2999,19 @@ function drawCarGrid() {
     $('carPicker').classList.remove('show');
     renderCarBar(); render();
     toast('Car set: ' + car);
+    backToStop();
   });
 }
 $('carBtn').onclick = openCarPicker;
-$('carClose').onclick = () => $('carPicker').classList.remove('show');
-$('carPicker').onclick = e => { if (e.target.id === 'carPicker') $('carPicker').classList.remove('show'); };
+$('carClose').onclick = () => { $('carPicker').classList.remove('show'); backToStop(); };
+$('carPicker').onclick = e => { if (e.target.id === 'carPicker') { $('carPicker').classList.remove('show'); backToStop(); } };
 $('carSearch').oninput = drawCarGrid;
 $('carNone').onclick = () => {
   car = ''; onlyMine = false;
   localStorage.removeItem('cc_car'); localStorage.setItem('cc_onlymine', '0');
   $('carPicker').classList.remove('show');
   renderCarBar(); render();
+  backToStop();
 };
 
 /* ───────── chain picker ───────── */
@@ -4146,6 +4157,7 @@ function dwellKind(name) {
   return b && b.cat === 'store' ? 'shop' : 'quick';
 }
 
+const wanted = k => active.has(k) || (anyCat && inCat(k, anyCat)) ? 1 : 0;
 /* Given the charge time and what is within a walk, say what the wait is actually good for. */
 function dwellAdvice(s, mins) {
   if (mins == null) return '';
@@ -4154,7 +4166,9 @@ function dwellAdvice(s, mins) {
     .map(k => ({ k, kind: dwellKind(k), walk: walkMin(mDist(s, m[k])) }))
     // there and back has to fit inside the charge, with a little slack
     .filter(o => DWELL_MIN[o.kind] + o.walk * 2 <= mins - 3)
-    .sort((a, b) => (DWELL_MIN[b.kind] - DWELL_MIN[a.kind]) || (a.walk - b.walk));
+    // What you searched for comes first when it fits: "Seattle to Portland with Starbucks"
+    // suggested a browse at Walmart. Then the longest thing the charge allows, then nearest.
+    .sort((a, b) => (wanted(b.k) - wanted(a.k)) || (DWELL_MIN[b.kind] - DWELL_MIN[a.kind]) || (a.walk - b.walk));
   if (!opts.length) {
     const nearest = Object.keys(m).sort((a, b) => mDist(s, m[a]) - mDist(s, m[b]))[0];
     return nearest
