@@ -1208,6 +1208,11 @@ _sc = _html[_html.index("function setCenter("):_html.index("function updateCente
 check(re.search(r"^\s*settleFit\(areaBounds\b", _sc, re.M) is not None,
       "setCenter() no longer frames the stops it found (areaBounds): pins pile up in a 25-mile ring")
 
+# A fit that gave up while the map had no size is finished on the next resize (2026-10-19).
+check(re.search(r"^\s*if \(lastFit && !lastFit\.done && !userMovedMap\) settleFit\(", _html, re.M) is not None
+      and "lastFit.done = true" in _html,
+      "a fit made while the map had no size is never finished: the page stays on the whole-US view")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

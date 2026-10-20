@@ -2882,6 +2882,10 @@ $('sheet').addEventListener('transitionend', e => {
 window.addEventListener('resize', () => {
   $('sheet').style.height = wideLayout() ? '' : sheetPx(sheetState) + 'px';
   setTimeout(() => map.invalidateSize({ pan: false }), 60);
+  /* A page that loads with no room for the map (a hidden tab, a pane still opening) retries
+     its fit for about two seconds and then gives up, leaving the starting view of the whole
+     country under a list of Denver stops. Once there is room, finish the fit it never made. */
+  if (lastFit && !lastFit.done && !userMovedMap) settleFit(lastFit.getBounds, lastFit.padding, lastFit.maxZoom);
 });
 $('handle').onclick = () =>
   setSheet(sheetState === 'peek' ? 'mid' : sheetState === 'mid' ? 'full' : 'peek');
@@ -5594,7 +5598,7 @@ $('shareBtn').onclick = async () => {
    33% of LA -> Santa Barbara on screen. Re-framing stops the moment the user pans or pinches:
    their view is theirs. */
 function settleFit(getBounds, padding, maxZoom, tries = 0) {
-  if (tries === 0) { lastFit = { getBounds, padding, maxZoom }; userMovedMap = false; }
+  if (tries === 0) { lastFit = { getBounds, padding, maxZoom, done: false }; userMovedMap = false; }
   setTimeout(() => {
     map.invalidateSize({ pan: false });
     const b = getBounds();
@@ -5616,7 +5620,8 @@ function settleFit(getBounds, padding, maxZoom, tries = 0) {
       const o = { paddingTopLeft: [padding[0], padding[1] + ovH],
                   paddingBottomRight: [Math.max(padding[0], ctlW + 6), padding[1]], animate: false };
       if (maxZoom) o.maxZoom = maxZoom;
-      try { map.fitBounds(b, o); return; } catch (e) { /* transient sizing race */ }
+      try { map.fitBounds(b, o); if (lastFit && lastFit.getBounds === getBounds) lastFit.done = true; return; }
+      catch (e) { /* transient sizing race */ }
     }
     if (tries < 14) settleFit(getBounds, padding, maxZoom, tries + 1);
   }, tries === 0 ? 340 : 120);
