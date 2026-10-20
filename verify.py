@@ -1213,6 +1213,15 @@ check(re.search(r"^\s*if \(lastFit && !lastFit\.done && !userMovedMap\) settleFi
       and "lastFit.done = true" in _html,
       "a fit made while the map had no size is never finished: the page stays on the whole-US view")
 
+# The search x only drops the area for the search being shown, not for half-typed text.
+_pc = _html[_html.index("$('placeClr').onclick"):][:600]
+check(re.search(r"^\s*if \(!shown\) \{[^}]*return; \}", _pc, re.M) is not None
+      and re.search(r"^\s*lastSearchText = raw;", _html, re.M) is not None,
+      "the search box's x drops the area for any typed text (one stray letter lost Los Angeles)")
+# Charge times say min / h: "~115m" read as metres next to "0.4 mi away".
+check("~${chargeLabel(cm)}" in _html and "~${cm}m<" not in _html,
+      "the row's charge-time badge is back to a bare 'm' (reads as metres)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

@@ -1668,6 +1668,13 @@ const TIER_NAME = { ultra: 'Ultra-fast', fast: 'Fast', std: 'Standard', slow: 'S
 // car = [battery kWh, max DC kW, connector bit]
 function carInfo() { return car && CARS[car] ? CARS[car] : null; }
 // compatibility: 'native' | 'adapter' | null (can't use)
+/* "~115m" read as 115 metres on a row that also says "0.4 mi away". Minutes say min, and
+   anything past the hour leads with hours: "~23 min", "~1h 55m". */
+function chargeLabel(m) {
+  if (m < 60) return m + ' min';
+  const h = Math.floor(m / 60), r = m % 60;
+  return h + 'h' + (r ? ' ' + r + 'm' : '');
+}
 function compat(s) {
   const c = carInfo(); if (!c) return null;
   const carBit = c[2];
@@ -2751,7 +2758,7 @@ function renderList(vis) {
     const carBadge = cm != null
       ? (cp === null
           ? `<span class="cbadge null">✕ no plug</span>`
-          : `<span class="cbadge ${cp}" title="${cp === 'adapter' ? 'Needs an adapter. ' : ''}About ${cm} min to charge 10-80%"><svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~${cm}m</span>`) : '';
+          : `<span class="cbadge ${cp}" title="${cp === 'adapter' ? 'Needs an adapter. ' : ''}About ${cm} min to charge 10-80%"><svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~${chargeLabel(cm)}</span>`) : '';
     // On a route the lead is where the stop is on the drive, not its place in the list.
     const mile = showIdx && route.mileAt && route.mileAt.has(s.id) ? route.mileAt.get(s.id) : '?';
     const lead = showIdx ? `<div class="idx mi" title="Mile ${mile} of ${Math.round(route.mi)}"><span>mile</span><b>${mile}</b></div>`
@@ -3876,10 +3883,24 @@ async function geocode(q) {
   return hit;
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
-$('placeClr').onclick = () => { $('placeIn').value = ''; $('placeBox').classList.remove('has'); clearCenter(); };
+/* The x clears what you typed. Only when that text is the search being shown does it also
+   drop the search's area -- and then the map follows, like the area card's own x. It used
+   to drop the area for any text: type one letter, think better of it, tap x, and the list
+   jumped from Los Angeles to a Wendy's in Washington state under a map still on LA. */
+let lastSearchText = null;
+$('placeClr').onclick = () => {
+  const shown = lastSearchText !== null && $('placeIn').value.trim() === lastSearchText;
+  $('placeIn').value = ''; $('placeBox').classList.remove('has');
+  if (!shown) { $('placeIn').focus(); return; }
+  lastSearchText = null;
+  if (!center && !stateScope) return;
+  clearCenter();
+  if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();
+};
 $('placeIn').addEventListener('keydown', async e => {
   if (e.key !== 'Enter') return;
   const raw = $('placeIn').value.trim(); if (!raw) return;
+  lastSearchText = raw;
   $('placeIn').blur();
   const trip = parseTrip(raw);
   /* A trailing filter belongs to the trip, not the query: parseQuery would read "las vegas
