@@ -1,13 +1,28 @@
 # App Store listing
 
-Everything App Store Connect asks for. 1.0.5 was released on 2026-10-19. **1.0.6** (build 35)
-was submitted the same day with the text below, the three screenshots in
-`ios/screenshots/1.0.6/`, release set to manual. The old-design preview video was removed
-from 1.0.6; it needs re-recording in the new design before it goes back.
+Everything App Store Connect asks for. 1.0.5 released 2026-10-19; **1.0.6** (build 35, the
+redesign) released 2026-10-20. **1.0.7** (build 36, usability fixes) submitted 2026-10-20 with the
+same listing, keywords and screenshots as 1.0.6; only What's New and the review notes changed
+(below). Release stays manual. The old-design preview video is gone and still needs
+re-recording in the new design.
 
 **Name** (30): `Charge & Chew: EV Stops`
 **Subtitle** (30): `Fast chargers near good food`
 **Category:** Navigation · secondary Travel · **Age:** 4+ · **Price:** Free
+
+---
+
+## 1.0.7 What's New
+
+> Smoother everyday use:
+>
+> • Charge times read clearly: "~23 min" or "~1h 55m".
+> • Set your car from a stop and that stop comes back, showing how long you'd charge and what the time is good for.
+> • The suggestion favors what you searched for: search Starbucks and it suggests a coffee run there.
+> • Filters show how many stops you'll get before you close them.
+> • The route card puts distance and drive time first.
+> • City searches zoom to the stops found, not the whole search circle.
+> • Clearing the search box no longer loses the area you were looking at.
 
 ---
 
