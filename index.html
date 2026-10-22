@@ -2734,13 +2734,13 @@ function renderList(vis) {
        outside the current area. Say so, and offer the way out. */
     $('list').innerHTML = cat === 'fav'
       ? (favs.size
-          ? `<div class="empty"><b>None of your ${favs.size} saved stop${favs.size === 1 ? ' is' : 's are'} in this area</b>
+          ? `<div class="empty"><b>${favs.size === 1 ? 'Your saved stop isn\'t' : `None of your ${favs.size} saved stops are`} in this area</b>
              <button class="fball" id="favAll">Show all saved stops</button></div>`
           : '<div class="empty"><b>No saved stops yet</b>Tap ☆ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
     const wr = $('widenR');
     if (wr) wr.onclick = () => { const b = $('ccRad').querySelector(`button[data-mi="${radiusMi < 25 ? 25 : 50}"]`); if (b) b.click(); };
-    const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); fitToResults(); };
+    const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); dropShownSearchText(); fitToResults(); };
     return;
   }
   const showIdx = !!route;
@@ -3121,7 +3121,7 @@ function clearCenter() {
    Illinois. Refit to whatever is now in scope. clearCenter() itself stays put because the
    route planner calls it right before it fits the route. */
 $('ccX').onclick = () => {
-  clearCenter();
+  clearCenter(); dropShownSearchText();
   if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();
 };
 $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
@@ -3906,6 +3906,13 @@ $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has
    to drop the area for any text: type one letter, think better of it, tap x, and the list
    jumped from Los Angeles to a Wendy's in Washington state under a map still on LA. */
 let lastSearchText = null;
+/* Widening out (the area card's x, "Show all saved stops") undoes the search, so the box
+   should stop saying "chargers in austin" over a list that is no longer Austin. Text the
+   user typed since is theirs and stays. */
+function dropShownSearchText() {
+  if (lastSearchText === null || $('placeIn').value.trim() !== lastSearchText) return;
+  lastSearchText = null; $('placeIn').value = ''; $('placeBox').classList.remove('has');
+}
 $('placeClr').onclick = () => {
   const shown = lastSearchText !== null && $('placeIn').value.trim() === lastSearchText;
   $('placeIn').value = ''; $('placeBox').classList.remove('has');

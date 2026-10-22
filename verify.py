@@ -1248,6 +1248,11 @@ _rn = _html[_html.index("function render() {"):][:1500]
 check(re.search(r"^\s*\$\('filtDone'\)\.textContent = showN;", _rn, re.M) is not None,
       "the Filters button no longer says how many stops the filters leave")
 
+# Widening out clears the search text it undid (area x, "Show all saved stops").
+check(re.search(r"\$\('ccX'\)\.onclick = \(\) => \{\s*clearCenter\(\); dropShownSearchText\(\);", _html) is not None
+      and "dropShownSearchText(); fitToResults();" in _html,
+      "widening out leaves the old search in the box ('chargers in austin' over a list that is not Austin)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
