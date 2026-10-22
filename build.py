@@ -830,7 +830,7 @@ if os.path.exists(TRIP_PATH):
             sx = sites[sid]
             m = matches.get(sid, {})
             fk = sorted(((d, k) for k, d in m.items() if is_food(k)))[:3]
-            eats = ", ".join(f"{brands[k]['e']} {esc(k)} ≥{mins(d)} min" for d, k in fk)
+            eats = ", ".join(f"{brands[k]['e']} {esc(k)} {mins(d)} min" for d, k in fk)
             rows.append(f"<tr><td><b>mile {int(round(cum[bi]))}</b></td>"
                         f"<td><b>{esc(sx['city'])}, {sx['st']}</b><br><small>{esc(sx['name'])}</small></td>"
                         f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stall{'s' if sx.get('stalls', 0) != 1 else ''}</small></td>"
