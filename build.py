@@ -548,7 +548,7 @@ for key, b in brands.items():
         title = f"EV fast chargers near {near(key)} in {sn} ({len(v):,})"
         desc = f"All {len(v):,} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
         body = f"""<h1>{b['e']} EV fast chargers near {esc(near(key))} in {sn}</h1>
-<p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk. Sorted closest first.</p>
+<p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk, shortest walk first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {stats_html}
 {cards}
