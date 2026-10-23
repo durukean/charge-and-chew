@@ -91,6 +91,14 @@ def pretty_name(name, host=""):
     """Machine names like 'PIE AE HEB E51ST DCFC1' are what the user reads. Tidy them."""
     n = (name or "").strip()
     n = _re.sub(r'\s+', ' ', n)
+    # Network-internal tags that mean nothing to a driver (2026-10-22): Mercedes-Benz's
+    # "MB.HPC" (78 sites), a trailing "DC" for "DC charger" (164), Electrify America's Bank
+    # of America site codes "BOA Kent WA5-119" (64). The network is shown beside the name.
+    n = _re.sub(r'\s+MB\.HPC\b', '', n)
+    n = _re.sub(r'(?<!Washington)\s+DC$', '', n)
+    n = _re.sub(r'\s+[A-Z]{2}\d{1,2}-\d{2,4}\b', '', n)
+    n = _re.sub(r'^BOA\b', 'Bank of America', n)
+    n = _re.sub(r'\bBucees\b', "Buc-ee's", n)
     prev = None
     while prev != n:                       # strip repeated trailing unit codes
         prev = n

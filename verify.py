@@ -1253,6 +1253,15 @@ check(re.search(r"\$\('ccX'\)\.onclick = \(\) => \{\s*clearCenter\(\); dropShown
       and "dropShownSearchText(); fitToResults();" in _html,
       "widening out leaves the old search in the box ('chargers in austin' over a list that is not Austin)")
 
+# Station names: network-internal tags stripped, real names left alone (2026-10-22).
+sys.path.insert(0, os.path.join(HERE, "data"))
+from build_data import pretty_name as _pn
+for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "Gvec"),
+                    ("BOA Kent WA5-119 (Kent, WA)", "Bank of America Kent (Kent, WA)"),
+                    ("Union Station Washington DC", "Union Station Washington DC"),
+                    ("Love's Travel #285 (Santa Rosa, NM)", "Love's Travel #285 (Santa Rosa, NM)")]:
+    check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
