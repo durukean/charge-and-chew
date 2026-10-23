@@ -49,7 +49,11 @@ def net_name(code):
         return "Non-networked", "#94a3b8"
     if code in NETWORKS:
         return NETWORKS[code]
-    return code.replace("_", " ").title(), "#94a3b8"
+    name = code.replace("_", " ").title()
+    # Title-casing the code gets some brands wrong: "MERCEDES_BENZ" -> "Mercedes Benz".
+    return SPELLING.get(name, name), "#94a3b8"
+
+SPELLING = {"Mercedes Benz": "Mercedes-Benz"}
 
 CONN_BIT = {"J1772COMBO": 1, "TESLA": 2, "J3271": 2, "CHADEMO": 4}  # J3271 = NACS
 
