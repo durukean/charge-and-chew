@@ -119,6 +119,24 @@ def pretty_name(name, host=""):
         n = _re.sub(r'\b(Ev|Dc|Ac|Hq|Us|Ii|Iii|Iv)\b', lambda m: m.group(0).upper(), n)
     return n[:60]
 
+_KEEP_UPPER = {"N", "S", "E", "W", "NE", "NW", "SE", "SW", "US", "SR", "FM", "CR", "PO", "II", "III", "IV"}
+
+def unshout(t):
+    """'LARAMIE' -> 'Laramie', '9000 NE HIGHWAY 99' -> '9000 NE Highway 99'. Only text that
+    is all capitals is touched; mixed case is someone's deliberate spelling."""
+    if not t or t != t.upper() or len(_re.sub(r'[^A-Z]', '', t)) < 3:
+        return t
+    out = []
+    for w in t.split(' '):
+        if w in _KEEP_UPPER or _re.fullmatch(r'[A-Z]-?\d+[A-Z]?', w):   # I-35, US, NE, 5A
+            out.append(w)
+        else:
+            w = w.title()
+            w = _re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), w)  # 1St -> 1st
+            w = _re.sub(r"'S\b", "'s", w)
+            out.append(w)
+    return ' '.join(out)
+
 PLUG_BITS = (1, 2, 4)            # CCS, NACS (Tesla), CHAdeMO -- the order of "pk"
 
 
@@ -158,6 +176,9 @@ def clean(sites):
         pn = pretty_name(s.get("name", ""))
         if pn != s.get("name"):
             s["name"] = pn; stats["renamed"] += 1
+        # 161 cities and 151 streets arrive in capitals ("LARAMIE, WY" headed a route's break).
+        for f in ("city", "street"):
+            if s.get(f): s[f] = unshout(s[f])
         # A few records carry a name like "DC", "76" or "M3", which tells a user nothing.
         # Fall back to the address rather than dropping an otherwise valid charger.
         if len(_re.sub(r'[^A-Za-z0-9]', '', pn)) < 3:

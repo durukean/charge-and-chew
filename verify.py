@@ -1255,13 +1255,22 @@ check(re.search(r"\$\('ccX'\)\.onclick = \(\) => \{\s*clearCenter\(\); dropShown
 
 # Station names: network-internal tags stripped, real names left alone (2026-10-22).
 sys.path.insert(0, os.path.join(HERE, "data"))
-from build_data import pretty_name as _pn
+from build_data import pretty_name as _pn, unshout as _us
+for _raw, _want in [("LARAMIE", "Laramie"), ("9000 NE HIGHWAY 99", "9000 NE Highway 99"),
+                    ("123 W 1ST ST", "123 W 1st St"), ("2800 S I-35", "2800 S I-35"),
+                    ("McKinney", "McKinney")]:
+    check(_us(_raw) == _want, f"unshout({_raw!r}) = {_us(_raw)!r}, want {_want!r}")
 for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "Gvec"),
                     ("BOA Kent WA5-119 (Kent, WA)", "Bank of America Kent (Kent, WA)"),
                     ("Union Station Washington DC", "Union Station Washington DC"),
                     ("PGE - Electric Avenue - DCFC", "PGE - Electric Avenue"), ("Motley DC Fast Charger", "Motley"),
                     ("Love's Travel #285 (Santa Rosa, NM)", "Love's Travel #285 (Santa Rosa, NM)")]:
     check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
+
+# The breaks card only claims a cadence when every break point has a stop.
+_bc = _html[_html.index("function breaksCard("):][:1600]
+check("if (picks.length >= breakLegs() - 1)" in _bc and "longest leg ~" in _bc,
+      "the breaks card claims 'about every N h' even when break points have no stop")
 
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:

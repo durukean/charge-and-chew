@@ -5506,9 +5506,10 @@ function applyCorridor(verts, mi, hr, hwy) {
    In-N-Out" suggests In-N-Out breaks. Driver breaks, not a charging plan -- the same rule
    as the /trip/ pages' "good places to break the drive". */
 const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
+const breakLegs = () => Math.max(2, Math.min(6, Math.floor(route.mi / 130) + 1));
 function breakPicks(vis) {
   if (!route || !route.mileAt || route.hwy || route.mi < 130) return [];
-  const legs = Math.max(2, Math.min(6, Math.floor(route.mi / 130) + 1));
+  const legs = breakLegs();
   const span = Math.max(18, route.mi * 0.12 / (legs / 2));
   const foodWalk = s => {
     const m = MATCH[s.id] || {};
@@ -5537,7 +5538,18 @@ function breaksCard(vis) {
   const picks = breakPicks(vis);
   if (picks.length < 1) return '';
   const perMi = route.hr / Math.max(1, route.mi);
-  return `<div class="breaks"><div class="bh">Suggested breaks <small>about every ${Math.round(route.mi / (picks.length + 1) * perMi * 10) / 10} h of driving</small></div>` +
+  /* "About every 4.5 h" was the drive divided by the picks found, true only when every break
+     point had a stop. Denver -> Salt Lake City with Starbucks found one of three (the others
+     fall in a 97-mile charger gap), and the card promised breaks it did not have. When some
+     are missing, say the longest leg instead. */
+  let sub;
+  if (picks.length >= breakLegs() - 1) sub = `about every ${Math.round(route.mi / (picks.length + 1) * perMi * 10) / 10} h of driving`;
+  else {
+    const at = [0, ...picks.map(p => route.mileAt.get(p.s.id)).sort((a, b) => a - b), route.mi];
+    let longest = 0; for (let i = 1; i < at.length; i++) longest = Math.max(longest, at[i] - at[i - 1]);
+    sub = `longest leg ~${hmLabel(longest * perMi * 60)}`;
+  }
+  return `<div class="breaks"><div class="bh">Suggested breaks <small>${sub}</small></div>` +
     picks.map(({ s, walk }) => {
       const mile = route.mileAt.get(s.id), h = mile * perMi;
       const m = MATCH[s.id] || {};
