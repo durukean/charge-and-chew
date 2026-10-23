@@ -92,20 +92,22 @@ def pretty_name(name, host=""):
     n = (name or "").strip()
     n = _re.sub(r'\s+', ' ', n)
     # Network-internal tags that mean nothing to a driver (2026-10-22): Mercedes-Benz's
-    # "MB.HPC" (78 sites), a trailing "DC" for "DC charger" (164), Electrify America's Bank
-    # of America site codes "BOA Kent WA5-119" (64). The network is shown beside the name.
+    # "MB.HPC" (78 sites) and Electrify America's Bank of America site codes "BOA Kent
+    # WA5-119" (64); a trailing "DC" (164) goes in the loop below. The network is shown
+    # beside the name.
     n = _re.sub(r'\s+MB\.HPC\b', '', n)
-    n = _re.sub(r'(?<!Washington)\s+DC$', '', n)
     n = _re.sub(r'\s+[A-Z]{2}\d{1,2}-\d{2,4}\b', '', n)
     n = _re.sub(r'^BOA\b', 'Bank of America', n)
     n = _re.sub(r'\bBucees\b', "Buc-ee's", n)
-    # "Pine City DCFC", "Motley DC Fast Charger", "PGE - Electric Avenue - DCFC" (309 sites):
-    # every station here is a DC fast charger, so the tail says nothing.
-    n = _re.sub(r'[\s\-–—]+(?:DCFC|DC Fast(?: Charg\w*)?|Fast Charg\w*)$', '', n, flags=_re.I)
     prev = None
     while prev != n:                       # strip repeated trailing unit codes
         prev = n
         n = _CODE_TAIL.sub('', n).strip(' -–—·,')
+        # "Pine City DCFC", "Motley DC Fast Charger", "Pendleton DCFC 2" (309 sites): every
+        # station here is a DC fast charger, so the tail says nothing. In the loop, because a
+        # unit number after it ("... DCFC 1") only comes off on the pass above.
+        n = _re.sub(r'[\s\-–—]+(?:DCFC|DC Fast(?: Charg\w*)?|Fast Charg\w*)$', '', n, flags=_re.I)
+        n = _re.sub(r'(?<!Washington)\s+DC$', '', n, flags=_re.I)
     if not n or n.upper() == "DC":         # the whole name was "DC Fast Charger"
         n = host or name or "Charging station"
     # Some networks put the site name in the station name too: "KEY CENTER KEY CENTER",

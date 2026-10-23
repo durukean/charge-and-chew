@@ -1262,8 +1262,8 @@ for _raw, _want in [("LARAMIE", "Laramie"), ("9000 NE HIGHWAY 99", "9000 NE High
     check(_us(_raw) == _want, f"unshout({_raw!r}) = {_us(_raw)!r}, want {_want!r}")
 for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "Gvec"),
                     ("BOA Kent WA5-119 (Kent, WA)", "Bank of America Kent (Kent, WA)"),
-                    ("Union Station Washington DC", "Union Station Washington DC"),
-                    ("PGE - Electric Avenue - DCFC", "PGE - Electric Avenue"), ("Motley DC Fast Charger", "Motley"),
+                    ("Union Station Washington DC", "Union Station Washington DC"), ("UNION STATION WASHINGTON DC", "Union Station Washington DC"),
+                    ("PGE - Electric Avenue - DCFC", "PGE - Electric Avenue"), ("Motley DC Fast Charger", "Motley"), ("PENDLETON DCFC 2", "Pendleton"), ("Castle Charging Fast Charge 1", "Castle Charging"),
                     ("Love's Travel #285 (Santa Rosa, NM)", "Love's Travel #285 (Santa Rosa, NM)")]:
     check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
 
