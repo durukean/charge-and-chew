@@ -1,10 +1,9 @@
 # App Store listing
 
-Everything App Store Connect asks for. 1.0.5 released 2026-10-19; **1.0.6** (build 35, the
-redesign) released 2026-10-20. **1.0.7** (build 36, usability fixes) submitted 2026-10-20 with the
-same listing, keywords and screenshots as 1.0.6; only What's New and the review notes changed
-(below). Release stays manual. The old-design preview video is gone and still needs
-re-recording in the new design.
+Everything App Store Connect asks for. 1.0.5 released 2026-10-19; 1.0.6 (build 35, the redesign)
+released 2026-10-20; **1.0.7** (build 36, usability fixes) released 2026-10-22. The next version is
+1.0.8. Listing, keywords and screenshots are the 1.0.6 ones; release stays manual. The old-design
+preview video is gone and still needs re-recording in the new design.
 
 **Name** (30): `Charge & Chew: EV Stops`
 **Subtitle** (30): `Fast chargers near good food`
