@@ -1852,7 +1852,7 @@ function popupHtml(s) {
       <span>${BRANDS[k].e} ${at
         ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</a>`
         : (active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label))}</span>
-      <span class="d">≥${walkMin(d)} min · ${fmtFt(d)}</span>
+      <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span>
       ${at ? `<a class="go" href="https://www.google.com/maps/dir/?api=1&destination=${coord}&travelmode=walking"
         target="_blank" rel="noopener" title="Walking directions to this ${esc(k)}" aria-label="Walking directions to this ${esc(k)}">↗</a>` : ''}
     </div>`; }).join('')
@@ -2030,7 +2030,7 @@ function showPOIs(s) {
       dashArray: '3 5', interactive: false }).addTo(poiLayer);
     L.marker(ll, { icon: L.divIcon({ className: 'poi-div',
       html: `<span>${BRANDS[k].e}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] }), keyboard: false })
-      .bindTooltip(`${esc(k)} · ≥${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
+      .bindTooltip(`${esc(k)} · ${walkMin(mDist(s, m[k]))} min walk`, { direction: 'top', offset: [0, -12] })
       .addTo(poiLayer);
   }
   /* Frame the charger and its POIs so the walk is visible. This runs on popupopen, i.e.

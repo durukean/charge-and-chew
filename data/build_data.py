@@ -99,11 +99,14 @@ def pretty_name(name, host=""):
     n = _re.sub(r'\s+[A-Z]{2}\d{1,2}-\d{2,4}\b', '', n)
     n = _re.sub(r'^BOA\b', 'Bank of America', n)
     n = _re.sub(r'\bBucees\b', "Buc-ee's", n)
+    # "Pine City DCFC", "Motley DC Fast Charger", "PGE - Electric Avenue - DCFC" (309 sites):
+    # every station here is a DC fast charger, so the tail says nothing.
+    n = _re.sub(r'[\s\-–—]+(?:DCFC|DC Fast(?: Charg\w*)?|Fast Charg\w*)$', '', n, flags=_re.I)
     prev = None
     while prev != n:                       # strip repeated trailing unit codes
         prev = n
         n = _CODE_TAIL.sub('', n).strip(' -–—·,')
-    if not n:
+    if not n or n.upper() == "DC":         # the whole name was "DC Fast Charger"
         n = host or name or "Charging station"
     # Some networks put the site name in the station name too: "KEY CENTER KEY CENTER",
     # "Kinsale EV Kinsale EV" (41 fast and 213 Level 2 sites). Keep one copy.

@@ -1259,6 +1259,7 @@ from build_data import pretty_name as _pn
 for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "Gvec"),
                     ("BOA Kent WA5-119 (Kent, WA)", "Bank of America Kent (Kent, WA)"),
                     ("Union Station Washington DC", "Union Station Washington DC"),
+                    ("PGE - Electric Avenue - DCFC", "PGE - Electric Avenue"), ("Motley DC Fast Charger", "Motley"),
                     ("Love's Travel #285 (Santa Rosa, NM)", "Love's Travel #285 (Santa Rosa, NM)")]:
     check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
 
