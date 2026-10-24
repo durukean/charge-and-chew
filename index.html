@@ -2415,6 +2415,7 @@ function sortByKey(arr, key) {
   for (let i = 0; i < n; i++) arr[i] = src[head[i]];
   return arr;
 }
+const vis0 = () => visibleSites().length;
 /* Is anything that passes the current filters within 50 miles of the area? */
 function anyNear() {
   if (!center) return true;
@@ -3219,6 +3220,9 @@ function locate(target, opts) {
         toast(`Rough location only (±${Math.round(acc / 1000)} km) — search a city if this is wrong`);
       }
       if (opts.thenPoi) runLivePoi(opts.thenPoi);   // "banks near me" with no area set yet
+      /* Located, with a chain chosen that has none around here ("in n out" in New York):
+         the nearest ones, not "0 stops". Every way into a located search comes through here. */
+      else if (chainQuery() && !route && !visibleSites().length) nearestFrom(center, [...active].join(' or '));
     }
   };
   /* We only need to know which town you are in, not which side of the street. Asking for
@@ -3460,7 +3464,7 @@ const CHAIN_ALIAS = (function () {
     'in and out': 'In-N-Out', 'in out': 'In-N-Out',   // "in & out" normalises to "in out"
     'bucees': "Buc-ee's", 'buccees': "Buc-ee's", 'dunkin donuts': "Dunkin'",
     'starbucks coffee': 'Starbucks', 'bk': 'Burger King', 'taco': 'Taco Bell',
-    'heb': 'H-E-B', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
+    'heb': 'H-E-B', 'h e b': 'H-E-B', 'best by': 'Best Buy', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
     'sams': "Sam's Club", 'sams club': "Sam's Club", 'wally world': 'Walmart',
     'cvs pharmacy': 'CVS', 'seven eleven': 'Circle K', 'loves': "Love's",
     'pilot flying j': 'Pilot', 'cracker barrel old country store': 'Cracker Barrel',
@@ -3513,8 +3517,13 @@ function oneEdit(a, b) {
   return la > lb ? a.slice(i + 1) === b.slice(i) : a.slice(i) === b.slice(i + 1);
 }
 let townWords = null;
-function chainTypo(word) {
-  if (word.length < 7) return null;
+// Real names one slip from a chain, with no charger of their own to put them in townWords.
+const TYPO_NOT = new Set(['dennis', 'denis', 'cases', 'casey', 'sonora']);
+function chainTypo(word, whole) {
+  /* 7+ letters inside a longer query; 5+ when the word IS the whole search ("walmat",
+     "costo", "subwy", "publx" -- 61 of 249 common typos used to be looked up as towns).
+     A one-word search that is one slip from a chain and is not a town we know is the chain. */
+  if (word.length < (whole ? 5 : 7) || TYPO_NOT.has(word)) return null;
   if (!townWords) {
     townWords = new Set();
     for (const s of SITES) {
@@ -3567,20 +3576,27 @@ const FOOD_GROUPS = [
   [/(^|\s)(burgers?|hamburgers?|cheeseburgers?)(?=\s|$)/, ["McDonald's", 'Burger King', "Wendy's", 'In-N-Out',
     'Whataburger', 'Five Guys', 'Shake Shack', 'Jack in the Box', "Carl's Jr.", "Culver's", 'Sonic']],
   [/(^|\s)(fried chicken|chicken|chicken tenders|wings|chicken wings)(?=\s|$)/, ['Chick-fil-A', 'KFC', 'Popeyes',
-    "Raising Cane's", "Zaxby's", 'Bojangles', 'Wingstop']],
+    "Raising Cane's", "Zaxby's", 'Bojangles', 'Wingstop', 'Buffalo Wild Wings']],
   [/(^|\s)(donuts?|doughnuts?)(?=\s|$)/, ["Dunkin'", 'Krispy Kreme']],
   [/(^|\s)(subs?|sandwich|sandwiches|hoagies?)(?=\s|$)/, ['Subway', "Jersey Mike's", 'Firehouse Subs']],
   [/(^|\s)(pancakes?|waffles?)(?=\s|$)/, ['IHOP', "Denny's", 'Waffle House']],
   [/(^|\s)(chinese|chinese food)(?=\s|$)/, ['Panda Express']],
 ];
+const PLURAL_NO = new Set(['taco', 'custard', 'gelato', 'frozen yogurt']);
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
+  // "dc" on its own is the city; elsewhere ("dc fast charger") it is charger talk and goes.
+  if (t.trim() === 'dc' || t.trim() === 'd c') t = ' washington dc ';
   const here = HERE_RE.test(t);
   if (here) t = t.replace(new RegExp(HERE_RE.source, 'g'), ' ');
   const chains = [];
   for (const [alias, key] of CHAIN_ALIAS) {
     if (chains.indexOf(key) !== -1) continue;
-    const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '(\\s|$)');
+    // A trailing s or es as well: "ihops", "taco bells", "wawas" were not chains, and the
+    // leftover word went off to be geocoded as a town.
+    // Not for a food word standing in for a chain: "tacos" means every taco place, not Taco Bell.
+    const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') +
+      (PLURAL_NO.has(alias) ? '' : '(?:e?s)?') + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
   }
   /* Food words that mean a set of chains we already have: "tacos" is Taco Bell, Del Taco
@@ -3609,7 +3625,7 @@ function parseQuery(raw) {
     if (!chains.length) {
       for (let n = Math.min(3, w.length); n >= 1 && !chains.length; n--) {
         for (let i = 0; i + n <= w.length; i++) {
-          const key = chainTypo(w.slice(i, i + n).join('').replace(/-/g, ''));
+          const key = chainTypo(w.slice(i, i + n).join('').replace(/-/g, ''), n === w.length);
           if (key) { chains.push(key); w.splice(i, n); break; }
         }
       }
@@ -3694,6 +3710,9 @@ const CITY_ALIAS = {
   nyc: 'New York, NY', 'new york city': 'New York, NY', sf: 'San Francisco, CA',
   'san fran': 'San Francisco, CA', frisco: 'San Francisco, CA', dc: 'Washington, DC',
   'washington dc': 'Washington, DC', philly: 'Philadelphia, PA', nola: 'New Orleans, LA',
+  // Search audit 2026-10-24: well-known stops the geocoder sends to the wrong state.
+  'harris ranch': 'Coalinga, CA', 'jackson hole': 'Jackson, WY', woodlands: 'The Woodlands, TX',
+  'the woodlands': 'The Woodlands, TX',
   atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
   stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV',
   // California coast shorthand. Neither collides with a state code, unlike "sd" or "sc".
@@ -3812,6 +3831,17 @@ function parseTrip(raw) {
   return (A && B && A !== B) ? { from: A, to: B, filter: sp.filter } : null;
 }
 window.__parseTrip = parseTrip;   // exposed for the search test suite
+window.__geocode = q => geocode(q);   // exposed for tools/search_audit.mjs
+/* Read-only snapshot of where a search left the app, for tools/search_audit.mjs. */
+window.__ccState = () => {
+  const v = visibleSites(), mc = map.getCenter();
+  return { center: center && { lat: center.lat, lon: center.lon, label: center.label, kind: center.kind },
+    route: !!route, hwy: route && route.hwy || null, chains: [...active], anyCat,
+    busy: !!document.querySelector('.busy'), ready: SITES.length > 1000,
+    title: $('sheetTitle').textContent.replace(/\s+/g, ' ').trim(), toast: $('toast').textContent,
+    n: v.length, first: v.slice(0, 5).map(s => ({ name: s.name, st: s.st, lat: s.lat, lon: s.lon })),
+    map: [mc.lat, mc.lng], zoom: map.getZoom() };
+};
 
 /* place search */
 const ST = {alabama:'AL',alaska:'AK',arizona:'AZ',arkansas:'AR',california:'CA',colorado:'CO',
@@ -3894,6 +3924,16 @@ async function geocode(q) {
   const snap = snapPlace(q);
   if (snap) q = snap;
 
+  /* "jackson ms" landed in Houston: the geocoder read MS as Middle School and returned a
+     school. A trailing two-letter state code is spelled out, and the answer must be in that
+     state ("springfield il", "portland me", "columbus oh" alike). */
+  let wantState = null;
+  const sm = q.match(/^(.*?\S)[,\s]+([A-Za-z]{2})\.?\s*$/);
+  if (sm && STATE_NAME[sm[2].toUpperCase()] && sm[2].toUpperCase() !== 'DC') {
+    wantState = STATE_NAME[sm[2].toUpperCase()];
+    q = `${sm[1].replace(/,\s*$/, '')}, ${wantState}`;
+  }
+
   /* A place does not move. Caching the resolution makes a shared link instant and keeps
      route planning working through a Nominatim outage for anywhere already looked up. */
   const gk = q.trim().toLowerCase();
@@ -3906,7 +3946,11 @@ async function geocode(q) {
   if (!r.ok) throw new Error(busyMsg('Place search', r.status));
   const j = await r.json();
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
-  const ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
+  let ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
+  if (wantState) {
+    ranked = ranked.filter(h => (h.address && h.address.state) === wantState);
+    if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
+  }
   const best = ranked[0];
   /* Nominatim returns a confident-looking hit for almost any string, so leftover words
      could teleport the map to a real town that has nothing to do with the query. Require
@@ -4075,6 +4119,13 @@ $('placeIn').addEventListener('keydown', async e => {
     return;
   }
   if (!p.place) {
+    /* A route on screen is the area they mean: "starbucks" with LA -> Las Vegas drawn used to
+       go and find the user, which dropped the route. Filter the drive instead. */
+    if (route && !p.here) {
+      render(); syncUrl(); setSheet('mid');
+      toast(vis0() ? `Filtered along your route` : `None of that along this route — try a wider corridor`);
+      return;
+    }
     // "tesla charger near costco" with no place: the intent is almost always "near me".
     // If an area is already set, stay in it — the user is refining, not relocating.
     if (center && center.restored) {
@@ -4094,8 +4145,10 @@ $('placeIn').addEventListener('keydown', async e => {
          New York, found nothing (In-N-Out is a western chain) and left an empty New York map:
          "it goes to New York". A chain search that comes up empty in an area you picked
          looks where you are instead, or, without a location, shows the nearest ones. */
-      if (p.chains.length && center.kind !== 'me' && !visibleSites().length) {
+      if (p.chains.length && !visibleSites().length) {
         const was = center, what = p.chains.join(' or ');
+        // Already where they are (In-N-Out from New York): the nearest ones are the answer.
+        if (center.kind === 'me') return nearestFrom(was, what);
         toast(`No ${what} near ${was.label} — looking near you`);
         locate('center', { quiet: true, onFail: () => nearestFrom(was, what) });
         return;

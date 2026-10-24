@@ -1279,11 +1279,25 @@ check("if (pub.length && dlr.length) return pub.concat(dlr);" in _vs and 'class=
 
 # A chain with none in the area on screen does not leave an empty map there (2026-10-24):
 # "in n out" with New York showing searched New York and stopped.
-check("if (p.chains.length && center.kind !== 'me' && !visibleSites().length)" in _html
-      and "onFail: () => nearestFrom(was, what)" in _html,
+check("if (p.chains.length && !visibleSites().length)" in _html
+      and "onFail: () => nearestFrom(was, what)" in _html
+      and "else if (chainQuery() && !route && !visibleSites().length) nearestFrom(center" in _html,
       "a chain search that finds nothing in the current area no longer looks near you / nearest")
 check('id="nearestX"' in _html and "function anyNear()" in _html,
       "the empty state lost 'Show the nearest' for a chain with nothing within 50 miles")
+
+# Search audit 2026-10-24 (tools/search_audit.mjs):
+# - a chain typed with a route on screen filters the route instead of locating and dropping it
+_sq = _html[_html.index("  if (!p.place) {"):][:900]
+check(re.search(r"^\s*if \(route && !p\.here\) \{", _sq, re.M) is not None,
+      "a chain search with a route on screen drops the route again")
+# - "<town> <ST>" is held to that state ("jackson ms" landed on a Houston middle school)
+_gc = _html[_html.index("async function geocode(q)"):][:3200]
+check("ranked = ranked.filter(h => (h.address && h.address.state) === wantState)" in _gc,
+      "geocode no longer holds '<town> <ST>' to that state")
+# - "dc" alone is Washington, not charger talk
+check("if (t.trim() === 'dc' || t.trim() === 'd c') t = ' washington dc ';" in _html,
+      "'dc' alone no longer means Washington, DC")
 
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
