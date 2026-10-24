@@ -1277,6 +1277,14 @@ _vs = _html[_html.index("function visibleSites()"):][:2000]
 check("if (pub.length && dlr.length) return pub.concat(dlr);" in _vs and 'class="lsep"' in _html,
       "dealership lots lead the list again ('tacos in phoenix' opened on two Nissan lots)")
 
+# A chain with none in the area on screen does not leave an empty map there (2026-10-24):
+# "in n out" with New York showing searched New York and stopped.
+check("if (p.chains.length && center.kind !== 'me' && !visibleSites().length)" in _html
+      and "onFail: () => nearestFrom(was, what)" in _html,
+      "a chain search that finds nothing in the current area no longer looks near you / nearest")
+check('id="nearestX"' in _html and "function anyNear()" in _html,
+      "the empty state lost 'Show the nearest' for a chain with nothing within 50 miles")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

@@ -2415,6 +2415,20 @@ function sortByKey(arr, key) {
   for (let i = 0; i < n; i++) arr[i] = src[head[i]];
   return arr;
 }
+/* Is anything that passes the current filters within 50 miles of the area? */
+function anyNear() {
+  if (!center) return true;
+  for (const s of SITES) if (passesChain(s) && hav(center.lat, center.lon, s.lat, s.lon) <= 50 * MI) return true;
+  return false;
+}
+/* Drop an area that had nothing and list the nearest matches to it, nationwide. */
+function nearestFrom(was, what) {
+  clearCenter();
+  softOrigin = { lat: was.lat, lon: was.lon };
+  sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
+  render(); syncUrl(); fitToResults();
+  toast(`No ${what} near ${was.label} — showing the nearest`);
+}
 /* Without a location, the nearest guess is the visitor's own time zone: a list that opens in
    Michigan for someone in California reads as "it took me to another state". */
 let softOrigin = null;
@@ -2737,6 +2751,10 @@ function renderList(vis) {
     const couldHelp = nar.length ? countWithoutNarrowing() : 0;
     const fix = couldHelp
       ? `<b>Nothing matches</b>${nar.length === 1 ? 'The <strong>' + esc(nar[0].label) + '</strong> filter is hiding ' : 'Your filters are hiding '}${couldHelp} stop${couldHelp === 1 ? '' : 's'} here.<button class="fball" data-clear="*">Show ${couldHelp === 1 ? 'it' : 'them'}</button>`
+      /* A chain with none anywhere near (In-N-Out around New York): another 25 miles will not
+         find one, so offer the nearest ones instead. */
+      : !route && center && chainQuery() && !anyNear()
+      ? `<b>Nothing matches</b>${what ? esc(what) + ' has' : 'There is'} nothing within 50 miles of here.<button class="fball" id="nearestX">Show the nearest</button>`
       : `<b>Nothing matches</b>${what ? esc(what) + ' has nothing within reach of here. ' : ''}` +
         (route ? 'Try another chain or a wider route corridor.'
           : center && radiusMi < 50 ? `Try another chain, or look further out.<button class="fball" id="widenR">Search ${radiusMi < 25 ? 25 : 50} miles around</button>`
@@ -2749,6 +2767,8 @@ function renderList(vis) {
              <button class="fball" id="favAll">Show all saved stops</button></div>`
           : '<div class="empty"><b>No saved stops yet</b>Tap ☆ on any stop to save it here.</div>')
       : `<div class="empty">${fix}</div>`;
+    const nx = $('nearestX');
+    if (nx) nx.onclick = () => { const was = center; nearestFrom(was, what || 'stops'); dropShownSearchText(); };
     const wr = $('widenR');
     if (wr) wr.onclick = () => { const b = $('ccRad').querySelector(`button[data-mi="${radiusMi < 25 ? 25 : 50}"]`); if (b) b.click(); };
     const fa = $('favAll'); if (fa) fa.onclick = () => { clearCenter(); dropRoute && route && dropRoute(); dropShownSearchText(); fitToResults(); };
@@ -3437,7 +3457,7 @@ const CHAIN_ALIAS = (function () {
   const extra = {
     'mcdonalds': "McDonald's", 'micky ds': "McDonald's", 'chickfila': 'Chick-fil-A',
     'chick fil a': 'Chick-fil-A', 'innout': 'In-N-Out', 'in n out': 'In-N-Out',
-    'in and out': 'In-N-Out',
+    'in and out': 'In-N-Out', 'in out': 'In-N-Out',   // "in & out" normalises to "in out"
     'bucees': "Buc-ee's", 'buccees': "Buc-ee's", 'dunkin donuts': "Dunkin'",
     'starbucks coffee': 'Starbucks', 'bk': 'Burger King', 'taco': 'Taco Bell',
     'heb': 'H-E-B', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
@@ -3531,6 +3551,8 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
   'need', 'want', 'looking', 'look', 'please', 'there', 'that', 'this', 'go', 'going',
   // What kind of stop, not where: "costco gas", "walmart supercenter", "free chargers in sf".
   'gas', 'fuel', 'free', 'supercenter', 'restaurant', 'restaurants', 'locations',
+  // A chain's own trailing noun: "in n out burger" left the place "burger" to be geocoded.
+  'burger', 'burgers', 'coffee shop', 'pizza place', 'drive thru', 'drive through',
   // Amenities, not places: "chargers with bathrooms" geocoded a place called "bathrooms".
   'bathroom', 'bathrooms', 'restroom', 'restrooms', 'toilet', 'toilets', 'wifi', 'wi-fi', 'shade', 'covered']);
 /* One generic word alone is a kind of place, not a place: "chargers near the beach" sent the
@@ -4060,11 +4082,24 @@ $('placeIn').addEventListener('keydown', async e => {
       // and only fall back to the old area -- saying so -- if location is unavailable.
       const was = center;
       setSheet('mid');
-      locate('center', { quiet: true, onFail: () => toast(`Showing ${was.label} — your location isn't available; add a city to look elsewhere`) });
+      locate('center', { quiet: true, onFail: () => {
+        if (p.chains.length && !visibleSites().length) return nearestFrom(was, p.chains.join(' or '));
+        toast(`Showing ${was.label} — your location isn't available; add a city to look elsewhere`);
+      } });
       return;
     }
     if (center) {
       setSheet('mid');
+      /* ...unless the area has none of it. "in n out" while New York was on screen filtered
+         New York, found nothing (In-N-Out is a western chain) and left an empty New York map:
+         "it goes to New York". A chain search that comes up empty in an area you picked
+         looks where you are instead, or, without a location, shows the nearest ones. */
+      if (p.chains.length && center.kind !== 'me' && !visibleSites().length) {
+        const was = center, what = p.chains.join(' or ');
+        toast(`No ${what} near ${was.label} — looking near you`);
+        locate('center', { quiet: true, onFail: () => nearestFrom(was, what) });
+        return;
+      }
       toast(`Filtered within ${center.label}`);
       return;
     }

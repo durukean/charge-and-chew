@@ -236,6 +236,12 @@ CASES = [
     ("driving to san diego",         dict(trip="|San Diego")),
     # Interstates are corridors, never places.
     ("chargers on i-5 with in n out", dict(hwy="I-5", chains=["In-N-Out"], place="")),
+    # "in n out burger" kept "burger" as a place to geocode; "in & out" matched nothing (2026-10-24).
+    ("in n out",                     dict(chains=["In-N-Out"], place="", trip=None)),
+    ("in n out burger",              dict(chains=["In-N-Out"], place="")),
+    ("in-n-out burgers",             dict(chains=["In-N-Out"], place="")),
+    ("in & out",                     dict(chains=["In-N-Out"], place="")),
+    ("in n out burger in fresno",    dict(chains=["In-N-Out"], place="fresno")),
     ("superchargers on i95",         dict(hwy="I-95", net="tesla", place="")),
     # The App Store text uses these two exact phrasings.
     ("i-5 with starbucks",           dict(hwy="I-5", chains=["Starbucks"], place="")),
