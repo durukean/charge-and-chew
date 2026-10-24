@@ -1,9 +1,10 @@
 # App Store listing
 
 Everything App Store Connect asks for. 1.0.5 released 2026-10-19; 1.0.6 (build 35, the redesign)
-released 2026-10-20; **1.0.7** (build 36, usability fixes) released 2026-10-22. The next version is
-1.0.8. Listing, keywords and screenshots are the 1.0.6 ones; release stays manual. The old-design
-preview video is gone and still needs re-recording in the new design.
+released 2026-10-20; 1.0.7 (build 36) released 2026-10-22; **1.0.8** (build 39, search audit
+fixes) submitted 2026-10-24. The next version is 1.0.9. Listing, keywords and screenshots are
+the 1.0.6 ones; release stays manual. The old-design preview video is gone and still needs
+re-recording in the new design.
 
 **Name** (30): `Charge & Chew: EV Stops`
 **Subtitle** (30): `Fast chargers near good food`
@@ -11,10 +12,10 @@ preview video is gone and still needs re-recording in the new design.
 
 ---
 
-## 1.0.8 (build 39 in TestFlight; not submitted yet)
+## 1.0.8 (build 39, submitted 2026-10-24)
 
 **What's New:**
-> Small fixes that make the lists clearer:
+> Better search, clearer lists:
 >
 > • Searching a chain that isn't near the area on screen (In-N-Out while looking at New York) now finds the ones near you, or the nearest ones, instead of an empty map.
 > • Search understands more: plurals ("ihops"), common typos ("walmat"), "jackson ms" and other town + state searches, and it keeps your route when you add a chain.
