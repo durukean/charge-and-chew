@@ -769,6 +769,8 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:var(--surface3);color:var(--dim)}
 .tag.free{background:var(--good-bg);color:var(--good)}
 .tag.dlr{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px var(--line2)}
+.lsep{padding:14px 16px 6px;font-size:13px;font-weight:600;line-height:1.3;color:var(--txt);border-top:1px solid var(--line)}
+.lsep span{font-weight:400;color:var(--dim)}
 .tag.iso{background:var(--surface3);color:var(--dim)}
 .tag.one{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1px var(--line2)}
 .pp-note{color:var(--dim2);font-size:10.5px;margin-top:8px;line-height:1.4}
@@ -2437,6 +2439,15 @@ function visibleSites() {
   else if (sortBy === 'power') sortByKey(out, s => -s.kw);
   else if (sortBy === 'charge' && carInfo()) sortByKey(out, s => chargeOr(s));
   else sortByKey(out, s => bestWalk(s));
+  /* Dealership lots go after the public stations, in the same order among themselves: on
+     "tacos in phoenix" two single-stall 50 kW Nissan lots, often for that brand's customers,
+     led the list. Still listed (under their own heading), still on the map; a route keeps
+     driving order. */
+  if (!route) {
+    const pub = [], dlr = [];
+    for (const s of out) (s.dlr ? dlr : pub).push(s);
+    if (pub.length && dlr.length) return pub.concat(dlr);
+  }
   return out;
 }
 
@@ -2781,7 +2792,9 @@ function renderList(vis) {
       : (kwFor(s, F.plug) ? `<s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))]}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug)} kW</s>` : '');
     const stallTxt = s.stalls && !(s.stalls === 1 && s.lvl !== 2)
       ? `${s.stalls} ${s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : 'stalls'}` : '';
-    return `<div class="row${s.id === openStopId ? ' sel' : ''}" data-id="${s.id}">
+    const sep = !showIdx && s.dlr && i > 0 && !vis[i - 1].dlr
+      ? '<div class="lsep" role="heading" aria-level="3">At car dealerships <span>· often for that brand\'s drivers, and limited hours</span></div>' : '';
+    return `${sep}<div class="row${s.id === openStopId ? ' sel' : ''}" data-id="${s.id}">
       ${lead}
       <div class="body">
         <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map"><span>${esc(s.name)}</span></button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
