@@ -11,6 +11,25 @@ preview video is gone and still needs re-recording in the new design.
 
 ---
 
+## 1.0.8 (build 37 in TestFlight; not submitted yet)
+
+**What's New:**
+> Small fixes that make the lists clearer:
+>
+> • Dealership chargers are listed after public stations, under their own heading, since they're often for that brand's drivers.
+> • Walk times read the same everywhere: "5 min".
+> • On long drives, the suggested breaks say the longest leg when a stretch has no good stop.
+> • Cleaner station names and addresses.
+> • Saved stops and the search box behave more predictably.
+
+**Review notes** (replace the 1.0.7 "what is new" steps):
+> WHAT IS NEW IN 1.0.8 (small list and wording fixes) — how to try it:
+> 1. Allow location when asked (or decline: search a city instead).
+> 2. Search:  tacos in phoenix   — public stations come first; dealership chargers follow under the heading "At car dealerships".
+> 3. Search:  denver to salt lake city with starbucks   — the "Suggested breaks" card gives the longest leg.
+
+---
+
 ## 1.0.7 What's New
 
 > Smoother everyday use:
