@@ -11,12 +11,13 @@ preview video is gone and still needs re-recording in the new design.
 
 ---
 
-## 1.0.8 (build 38 in TestFlight; not submitted yet)
+## 1.0.8 (build 39 in TestFlight; not submitted yet)
 
 **What's New:**
 > Small fixes that make the lists clearer:
 >
 > • Searching a chain that isn't near the area on screen (In-N-Out while looking at New York) now finds the ones near you, or the nearest ones, instead of an empty map.
+> • Search understands more: plurals ("ihops"), common typos ("walmat"), "jackson ms" and other town + state searches, and it keeps your route when you add a chain.
 > • Dealership chargers are listed after public stations, under their own heading, since they're often for that brand's drivers.
 > • Walk times read the same everywhere: "5 min".
 > • On long drives, the suggested breaks say the longest leg when a stretch has no good stop.
