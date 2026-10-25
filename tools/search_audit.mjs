@@ -101,6 +101,60 @@ const CASES = [
     ['portland or', 'OR'], ['springfield mo', 'MO'], ['paris tx', 'TX'], ['wawas in philly', 'PA'],
   ].map(([q, st]) => C('LA', 'fresh', q, { st })),
 
+  // ── one-word towns that exist in several states: the nearby one ──
+  C('LA', 'fresh', 'pasadena', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'glendale', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'burbank', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'ontario', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'hollywood', { st: 'CA' }, '@amb'),
+  C('DAL', 'fresh', 'arlington', { st: 'TX' }, '@amb'),
+  C('DAL', 'fresh', 'irving', { st: 'TX' }, '@amb'),
+  C('DAL', 'fresh', 'paris', { st: 'TX' }, '@amb'),
+  C('DAL', 'fresh', 'pasadena', { st: 'TX' }, '@amb'),
+  C('CHI', 'fresh', 'aurora', { st: 'IL' }, '@amb'),
+  C('CHI', 'fresh', 'naperville', { st: 'IL' }, '@amb'),
+  C('CHI', 'fresh', 'springfield', { st: 'IL' }, '@amb'),
+  C('CHI', 'fresh', 'columbus', { st: 'OH' }, '@amb'),
+  C('SEA', 'fresh', 'vancouver', { st: 'WA' }, '@amb'),
+  C('SEA', 'fresh', 'portland', { st: 'OR' }, '@amb'),
+  C('SEA', 'fresh', 'bellevue', { st: 'WA' }, '@amb'),
+  C('NYC', 'fresh', 'portland', { st: 'ME' }, '@amb'),
+  C('NYC', 'fresh', 'princeton', { st: 'NJ' }, '@amb'),
+  C('NYC', 'fresh', 'greenwich', { st: 'CT' }, '@amb'),
+  C('NYC', 'fresh', 'arlington', { st: 'VA' }, '@amb'),
+  C('MIA', 'fresh', 'naples', { st: 'FL' }, '@amb'),
+  C('MIA', 'fresh', 'jacksonville', { st: 'FL' }, '@amb'),
+  C('MIA', 'fresh', 'aventura', { st: 'FL' }, '@amb'),
+  // ── landmarks people steer by ──
+  C('LA', 'fresh', 'disneyland', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'lax', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'chargers near lax', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'santa monica pier', { st: 'CA' }, '@amb'),
+  C('NYC', 'fresh', 'times square', { st: 'NY' }, '@amb'),
+  C('NYC', 'fresh', 'jfk', { st: 'NY' }, '@amb'),
+  C('SEA', 'fresh', 'sea-tac', { st: 'WA' }, '@amb'),
+  C('LA', 'fresh', 'yosemite', { st: 'CA' }, '@amb'),
+  C('LA', 'fresh', 'grand canyon', { st: 'AZ' }, '@amb'),
+  C('LA', 'fresh', 'zion national park', { st: 'UT' }, '@amb'),
+  // ── a route with tricky ends ──
+  C('LA', 'fresh', 'jackson ms to new orleans', { route: true }, '@amb'),
+  C('LA', 'fresh', 'portland me to boston', { route: true }, '@amb'),
+  C('LA', 'fresh', 'from here to san diego', { route: true }, '@amb'),
+  C('LA', 'fresh', 'disneyland to vegas', { route: true }, '@amb'),
+
+  // ── a kind of place (looked up live) plus a town: the town, not where you are ──
+  C('LA', 'fresh', 'pharmacy in denver', { st: 'CO' }, '@poi'),
+  C('LA', 'fresh', 'coffee in austin', { st: 'TX' }, '@poi'),
+  C('LA', 'fresh', 'gas station in reno', { st: 'NV' }, '@poi'),
+  C('LA', 'fresh', 'tire shop in phoenix', { st: 'AZ' }, '@poi'),
+  C('LA', 'fresh', 'grocery store in boise', { st: 'ID' }, '@poi'),
+  C('LA', 'fresh', 'bank near seattle', { st: 'WA' }, '@poi'),
+  C('LA', 'fresh', 'gym in miami', { st: 'FL' }, '@poi'),
+  C('LA', 'fresh', 'bakery in portland', { st: 'OR' }, '@poi'),
+  C('LA', 'fresh', 'pharmacy', { near: ['LA', 40] }, '@poi'),
+  C('LA', 'fresh', 'bank near me', { near: ['LA', 40] }, '@poi'),
+  C('LA', 'chosenNY', 'pharmacy', { near: ['NYC', 40] }, '@poi'),
+
   // ── trips and roads ──
   C('LA', 'fresh', 'la to vegas', { route: true }),
   C('LA', 'fresh', 'sf to la with in n out', { route: true, chain: 'In-N-Out' }),
@@ -180,7 +234,8 @@ async function main() {
   const { p: chrome, ws } = await startChrome(profile);
   const B = await cdpConnect(ws);
   const ORIGIN = `http://127.0.0.1:${port}`;
-  const cases = CASES.filter(c => !ONLY || c.q.includes(ONLY));
+  // "@tag" selects by note, anything else by query text
+  const cases = CASES.filter(c => !ONLY || (ONLY.startsWith('@') ? (c.note || '').includes(ONLY) : c.q.includes(ONLY)));
   let pass = 0; const fails = [];
 
   for (const c of cases) {

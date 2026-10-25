@@ -378,14 +378,14 @@ check(len(re.findall(r"(?m)^\s*matchVer\+\+;", _html)) >= 2,
 check("function lsGet" in _html and "function lsPut" in _html,
       "the geocode/route cache is gone — a shared trip would re-ask two public services")
 check(re.search(r"lsGet\(GEO_NS, gk, GEO_TTL\)", _html) is not None
-      and re.search(r"lsPut\(GEO_NS, gk, hit, GEO_CAP\)", _html) is not None,
+      and re.search(r"lsPut\(GEO_NS, [^;]*\bgk\b[^;]*, hit, GEO_CAP\)", _html) is not None,
       "geocoding is no longer cached")
 check(re.search(r"lsGet\(RTE_NS, rk, RTE_TTL\)", _html) is not None
       and re.search(r"lsPut\(RTE_NS, rk, trip, RTE_CAP\)", _html) is not None,
       "route geometry is no longer cached — an OSRM outage would kill a route already planned")
 # Caching a failure would stick: the lsPut must sit after every validation, so only a
 # resolved place is ever stored.
-_gi, _gp = _html.find("const gk = q.trim()"), _html.find("lsPut(GEO_NS, gk, hit")
+_gi, _gp = _html.find("const gk = q.trim()"), _html.find("lsPut(GEO_NS, ")
 check(_gi > 0 and _gp > _html.find("if (looksLikeChainBrand(", _gi),
       "the geocode cache is written before validation — a bad hit would be cached")
 # Route entries are ~50 kB; the namespace has to be bounded.
@@ -1298,6 +1298,20 @@ check("ranked = ranked.filter(h => (h.address && h.address.state) === wantState)
 # - "dc" alone is Washington, not charger talk
 check("if (t.trim() === 'dc' || t.trim() === 'd c') t = ' washington dc ';" in _html,
       "'dc' alone no longer means Washington, DC")
+
+# Same-named towns: the one near you (or the area on screen), cached per region.
+check("if (bias && !wantState && twins.length > 1)" in _html and "lsGet(GEO_NS, gk + cell, GEO_TTL)" in _html,
+      "geocode no longer prefers the nearby one of several same-named towns")
+# "from here to X" is a trip from your location.
+check("/^(here|me|my location|current location|where i am|home|my house)$/.test(a.trim())" in _html,
+      "'from here to X' is no longer a trip from your location")
+
+# "<kind of place> in <town>" searches the town ("gym in miami" searched near the user).
+check("const poiWhere = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';" in _html,
+      "a category with a town ('pharmacy in denver') ignores the town again")
+check("if (/\\b(national|state) (park|forest|monument|recreation area)\\b/.test(normalise(raw))) return null;" in _html,
+      "'zion national park' is read as 'find parks' again")
+check("!isState(h)" in _html, "a state counts as a same-named town again ('washington' -> middle of WA)")
 
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:

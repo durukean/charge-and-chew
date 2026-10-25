@@ -3171,6 +3171,7 @@ $('ccRad').querySelectorAll('button').forEach(b => b.onclick = () => {
   if (term) runLivePoi(intentFromTerm(term));
 });
 
+let lastMe = null;   // the last real position: which of several same-named towns is meant
 function locate(target, opts) {
   opts = opts || {};
   // If location is unavailable or refused we must still show the filtered results rather
@@ -3201,6 +3202,7 @@ function locate(target, opts) {
     $('locBtn').classList.remove('busy');
     if (opts.stale && opts.stale()) return;   // they searched or picked something meanwhile
     const la = p.coords.latitude, lo = p.coords.longitude;
+    lastMe = { lat: la, lon: lo };
     if (target === 'route') {
       // ~110 m: plenty for a route start, and the field ends up in a shareable link (?from=),
       // where 4 decimals (~11 m) gave away the sender's address.
@@ -3712,6 +3714,13 @@ const CITY_ALIAS = {
   'washington dc': 'Washington, DC', philly: 'Philadelphia, PA', nola: 'New Orleans, LA',
   // Search audit 2026-10-24: well-known stops the geocoder sends to the wrong state.
   'harris ranch': 'Coalinga, CA', 'jackson hole': 'Jackson, WY', woodlands: 'The Woodlands, TX',
+  lax: 'Los Angeles International Airport, CA', sfo: 'San Francisco International Airport, CA',
+  yosemite: 'Yosemite Valley, CA', 'yosemite national park': 'Yosemite Valley, CA',
+  'zion national park': 'Springdale, UT', 'zion np': 'Springdale, UT',
+  yellowstone: 'West Yellowstone, MT', 'joshua tree': 'Joshua Tree, CA',
+  'death valley': 'Furnace Creek, CA', 'big sur': 'Big Sur, CA', mammoth: 'Mammoth Lakes, CA',
+  'disney world': 'Lake Buena Vista, FL', 'walt disney world': 'Lake Buena Vista, FL',
+  'mount rushmore': 'Keystone, SD', 'smoky mountains': 'Gatlinburg, TN',
   'the woodlands': 'The Woodlands, TX',
   atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
   stl: 'St. Louis, MO', pdx: 'Portland, OR', phx: 'Phoenix, AZ', vega: 'Las Vegas, NV',
@@ -3828,6 +3837,11 @@ function parseTrip(raw) {
   }
   const sp = splitDest(b);
   const A = tripSide(a), B = tripSide(sp.dest);
+  /* "from here to san diego", "my location to vegas": the start is wherever you are. It
+     used to be no trip at all -- "here" is not a place -- and the search just located you. */
+  // "home" too: geocoding it found towns called Home; whoever types it is usually there.
+  if (B && /^(here|me|my location|current location|where i am|home|my house)$/.test(a.trim()))
+    return { from: '', to: B, filter: sp.filter, fromHere: true };
   return (A && B && A !== B) ? { from: A, to: B, filter: sp.filter } : null;
 }
 window.__parseTrip = parseTrip;   // exposed for the search test suite
@@ -3937,7 +3951,12 @@ async function geocode(q) {
   /* A place does not move. Caching the resolution makes a shared link instant and keeps
      route planning working through a Nominatim outage for anywhere already looked up. */
   const gk = q.trim().toLowerCase();
-  const cached = lsGet(GEO_NS, gk, GEO_TTL);
+  /* Several towns share a name (Pasadena CA / TX, Portland OR / ME, Arlington TX / VA). The
+     one near you -- or near the area on screen -- is meant, so those answers are cached per
+     region; a name with only one town is cached once. */
+  const bias = lastMe || (center ? { lat: center.lat, lon: center.lon } : null);
+  const cell = bias ? '@' + Math.round(bias.lat / 3) + ',' + Math.round(bias.lon / 3) : '';
+  const cached = (cell && lsGet(GEO_NS, gk + cell, GEO_TTL)) || lsGet(GEO_NS, gk, GEO_TTL);
   if (cached) return cached;
 
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
@@ -3950,6 +3969,20 @@ async function geocode(q) {
   if (wantState) {
     ranked = ranked.filter(h => (h.address && h.address.state) === wantState);
     if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
+  }
+  const nm = h => (h.display_name || '').split(',')[0].trim().toLowerCase();
+  // Towns only: the state of Washington is not a twin of Washington, DC.
+  const isState = h => h.address && !h.address.city && !h.address.town && !h.address.village
+    && (h.address.state || '').toLowerCase() === nm(h);
+  const twins = ranked.filter(h => nm(h) === nm(ranked[0]) && /^(place|boundary)$/.test(h.class) && !isState(h));
+  if (bias && !wantState && twins.length > 1) {
+    /* Size and distance together. Nearest alone picked Portland CT over Portland ME from New
+       York; size alone sent "pasadena" from Dallas to California. Nominatim's importance is
+       the size, and every tenfold of distance costs a quarter of it. */
+    const mi = h => hav(bias.lat, bias.lon, +h.lat, +h.lon) / MI;
+    const sc = h => (+h.importance || 0) - 0.25 * Math.log10(1 + mi(h) / 50);
+    const pick = twins.reduce((a, h) => sc(h) > sc(a) ? h : a);
+    if (pick !== ranked[0]) { ranked.splice(ranked.indexOf(pick), 1); ranked.unshift(pick); }
   }
   const best = ranked[0];
   /* Nominatim returns a confident-looking hit for almost any string, so leftover words
@@ -3976,7 +4009,7 @@ async function geocode(q) {
     if (!echoes) throw new Error(`Couldn't find "${q}"`);
   }
   const hit = { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
-  lsPut(GEO_NS, gk, hit, GEO_CAP);        // only successes: a cached failure would stick
+  lsPut(GEO_NS, twins.length > 1 && cell ? gk + cell : gk, hit, GEO_CAP);   // only successes: a cached failure would stick
   return hit;
 }
 $('placeIn').addEventListener('input', () => $('placeBox').classList.toggle('has', !!$('placeIn').value));
@@ -4098,7 +4131,27 @@ $('placeIn').addEventListener('keydown', async e => {
 
   /* "banks near me", "tire shop" — a category word means they want that kind of place,
      not a town of that name. Ask OSM live, scoped to the area. */
-  const poi = p.chains.length ? null : detectPoiIntent(raw);
+  let poi = p.chains.length ? null : detectPoiIntent(raw);
+  /* "gym in miami", "pharmacy in denver": the words that are not the category are a place,
+     and the search belongs there. They were ignored -- "Searching gym miami near Los
+     Angeles" -- so a category with a town always searched wherever you were. Go to the town
+     first, then look, with the town's words out of the label. */
+  const poiWhere = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';
+  if (poiWhere) {
+    const myNav = ++navGen;
+    toast('Searching…'); $('placeBox').classList.add('busy');
+    try {
+      const g = await geocode(poiWhere);
+      if (myNav !== navGen) return;
+      setCenter(g.lat, g.lon, g.label, 'place');
+      const words = new Set(normalise(poi.name).split(' '));
+      const bare = normalise(raw).split(' ').filter(w => !words.has(w) && !/^(in|near|around|at|by)$/.test(w)).join(' ');
+      runLivePoi(detectPoiIntent(bare) || poi);
+    } catch (err) {
+      if (myNav === navGen) toast(err.message);
+    } finally { $('placeBox').classList.remove('busy'); }
+    return;
+  }
   if (poi && !p.here) {
     // A route on screen is the area they mean; applyCorridor clears `center`, so asking
     // them to pick a location here would be asking about somewhere they just left.
@@ -4543,6 +4596,8 @@ function seedBanner(html) {
 /* Turn what was typed into {tags, name} — a tag to ask Overpass for, plus any leftover
    words to match the POI name against here. */
 function detectPoiIntent(raw) {
+  // "zion national park", "joshua tree national park": a destination, not "find parks".
+  if (/\b(national|state) (park|forest|monument|recreation area)\b/.test(normalise(raw))) return null;
   const words = normalise(raw).split(' ').filter(Boolean);
   let tags = null;
   const used = new Set();
