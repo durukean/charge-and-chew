@@ -12,6 +12,9 @@ run "verify.py"          python3 verify.py
 run "verify_search.py"   python3 verify_search.py
 run "verify_hours.py"    python3 verify_hours.py
 run "verify_ui.py"       python3 verify_ui.py
+# Where searches END UP (a located user, a remembered area, no location), offline. The full
+# version needs the internet: node tools/search_audit.mjs
+run "search_audit --quick" node tools/search_audit.mjs --quick
 run "sw_test.mjs"        node sw_test.mjs
 run "publish.py"         python3 publish.py
 rm -rf _site

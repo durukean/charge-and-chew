@@ -21,7 +21,10 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium']
   .find(p => existsSync(p));
-const ONLY = process.argv[2] || '';
+/* --quick: a handful of cases that need nothing from the network (outside services are
+   blocked), for check.sh. The full run needs the internet and ~20 minutes. */
+const QUICK = process.argv.includes('--quick');
+const ONLY = process.argv.slice(2).find(a => !a.startsWith('--')) || '';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ── where people are ── */
@@ -192,6 +195,14 @@ const CASES = [
   C('LA', 'fresh', 'ccs', { near: ['LA', 40] }),
 ];
 
+const QUICK_SET = new Set([
+  'LA|fresh|in n out', 'LA|fresh|ihops', 'LA|fresh|walmat', 'LA|fresh|tacos',
+  'NYC|fresh|in n out', 'NYC|fresh|dunkin', 'LA|restoredNY|starbucks', 'LA|restoredNY|in n out',
+  'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
+]);
+const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
+  '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];
+
 /* ── tiny CDP client ── */
 async function cdpConnect(wsUrl) {
   const ws = new WebSocket(wsUrl);
@@ -241,7 +252,8 @@ async function main() {
   const B = await cdpConnect(ws);
   const ORIGIN = `http://127.0.0.1:${port}`;
   // "@tag" selects by note, anything else by query text
-  const cases = CASES.filter(c => !ONLY || (ONLY.startsWith('@') ? (c.note || '').includes(ONLY) : c.q.includes(ONLY)));
+  const cases = CASES.filter(c => QUICK ? QUICK_SET.has(`${c.who}|${c.prior}|${c.q}`)
+    : !ONLY || (ONLY.startsWith('@') ? (c.note || '').includes(ONLY) : c.q.includes(ONLY)));
   let pass = 0; const fails = [];
 
   for (const c of cases) {
@@ -256,6 +268,7 @@ async function main() {
     let res, err = null;
     try {
       await send('Page.enable'); await send('Runtime.enable');
+      if (QUICK) { await send('Network.enable'); await send('Network.setBlockedURLs', { urls: BLOCK }); }
       if (c.who === 'denied') {
         await B.send('Browser.setPermission', { origin: ORIGIN, permission: { name: 'geolocation' }, setting: 'denied' });
         await send('Emulation.setTimezoneOverride', { timezoneId: 'America/Los_Angeles' });
