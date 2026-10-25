@@ -2428,7 +2428,7 @@ function nearestFrom(was, what) {
   softOrigin = { lat: was.lat, lon: was.lon };
   sortBy = 'dist'; $('sortLbl').textContent = SORT_LABEL.dist;
   render(); syncUrl(); fitToResults();
-  toast(`No ${what} near ${was.label} — showing the nearest`);
+  toast(`No ${what} near ${was.kind === 'me' ? 'you' : was.label} — showing the nearest`);
 }
 /* Without a location, the nearest guess is the visitor's own time zone: a list that opens in
    Michigan for someone in California reads as "it took me to another state". */
