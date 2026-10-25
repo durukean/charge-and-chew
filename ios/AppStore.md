@@ -12,6 +12,25 @@ re-recording in the new design.
 
 ---
 
+## 1.0.9 (build 41 in TestFlight; submit after 1.0.8 is approved)
+
+**What's New:**
+> Search that knows where you are:
+>
+> • "Pharmacy in Denver", "coffee in Austin": a kind of place plus a town now searches that town.
+> • Towns that share a name pick the one near you: Pasadena from Dallas is Pasadena, Texas.
+> • Landmarks work: LAX, Yosemite, Disney World, Zion National Park.
+> • "From here to San Diego" starts the drive where you are.
+> • A new search no longer keeps the last one's filters.
+
+**Review notes** (replace the "what is new" steps):
+> WHAT IS NEW IN 1.0.9 (search) — how to try it:
+> 1. Allow location when asked (or decline: search a city instead).
+> 2. Search:  pharmacy in denver   — the map goes to Denver and lists stops near pharmacies there.
+> 3. Search:  from here to san diego   — a route from your location.
+
+---
+
 ## 1.0.8 (build 39, submitted 2026-10-24)
 
 **What's New:**
