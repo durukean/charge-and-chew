@@ -66,6 +66,12 @@ const CASES = [
   C('denied', 'restoredNY', 'starbucks', { near: ['NYC', 40] }, 'no location: the remembered area, said so'),
   C('denied', 'restoredNY', 'in n out', { near: ['NYC', 2500] }, 'no location + none there: nearest'),
 
+  // ── remembered area, location only available by the time they search (a slow phone) ──
+  C('LA-late', 'restoredNY', 'in n out', { near: ['LA', 40] }, '@late'),
+  C('LA-late', 'restoredNY', 'starbucks', { near: ['LA', 40] }, '@late'),
+  C('LA-late', 'restoredNY', 'tacos', { near: ['LA', 40] }, '@late'),
+  C('LA-late', 'fresh', 'ihop', { near: ['LA', 40] }, '@late'),
+
   // ── an area picked in this visit (New York), then a chain ──
   C('LA', 'chosenNY', 'starbucks', { near: ['NYC', 40] }, 'refining the area on screen'),
   C('LA', 'chosenNY', 'in n out', { near: ['LA', 40] }, 'none in NY: look near me'),
@@ -199,6 +205,7 @@ const QUICK_SET = new Set([
   'LA|fresh|in n out', 'LA|fresh|ihops', 'LA|fresh|walmat', 'LA|fresh|tacos',
   'NYC|fresh|in n out', 'NYC|fresh|dunkin', 'LA|restoredNY|starbucks', 'LA|restoredNY|in n out',
   'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
+  'LA-late|restoredNY|in n out', 'LA-late|restoredNY|starbucks',
 ]);
 const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
   '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];
@@ -269,14 +276,16 @@ async function main() {
     try {
       await send('Page.enable'); await send('Runtime.enable');
       if (QUICK) { await send('Network.enable'); await send('Network.setBlockedURLs', { urls: BLOCK }); }
-      if (c.who === 'denied') {
+      const late = c.who.endsWith('-late');          // location refused at start-up, given before the search
+      const who = late ? c.who.slice(0, -5) : c.who;
+      if (c.who === 'denied' || late) {
         await B.send('Browser.setPermission', { origin: ORIGIN, permission: { name: 'geolocation' }, setting: 'denied' });
         await send('Emulation.setTimezoneOverride', { timezoneId: 'America/Los_Angeles' });
       } else {
         await B.send('Browser.setPermission', { origin: ORIGIN, permission: { name: 'geolocation' }, setting: 'granted' });
-        const [la, lo] = LOC[c.who];
+        const [la, lo] = LOC[who];
         await send('Emulation.setGeolocationOverride', { latitude: la, longitude: lo, accuracy: 30 });
-        await send('Emulation.setTimezoneOverride', { timezoneId: TZ[c.who] });
+        await send('Emulation.setTimezoneOverride', { timezoneId: TZ[who] });
       }
       await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
       // A clean slate for this origin, except the place-lookup cache (be kind to Nominatim).
@@ -303,6 +312,11 @@ async function main() {
           same = sig === last && !sig.startsWith('true') ? same + 1 : 0; last = sig;
         }
       };
+      if (late) {
+        await B.send('Browser.setPermission', { origin: ORIGIN, permission: { name: 'geolocation' }, setting: 'granted' });
+        const [la, lo] = LOC[who];
+        await send('Emulation.setGeolocationOverride', { latitude: la, longitude: lo, accuracy: 30 });
+      }
       if (c.prior === 'chosenNY') await search('chargers in new york');
       if (c.prior === 'route') await search('la to las vegas');
       if (c.prior === 'poiDenver') await search('pharmacy in denver');
