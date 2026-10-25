@@ -1313,6 +1313,10 @@ check("if (/\\b(national|state) (park|forest|monument|recreation area)\\b/.test(
       "'zion national park' is read as 'find parks' again")
 check("!isState(h)" in _html, "a state counts as a same-named town again ('washington' -> middle of WA)")
 
+# A category search's chains (pharmacy -> Walgreens, CVS) do not leak into the next search.
+check("if (seedFor && !p.chains.length && !p.anyCat && !detectPoiIntent(raw)" in _html,
+      "a category search's chains leak into the next search again ('lax' after 'pharmacy')")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

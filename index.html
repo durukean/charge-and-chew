@@ -4070,6 +4070,13 @@ $('placeIn').addEventListener('keydown', async e => {
     if (!p.free && q0.free && F.free) { F.free = FDEF.free; fChanged = true; }
     if (fChanged) { localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
   }
+  /* A category search ("pharmacy") answers with chains (Walgreens, CVS) set after the search
+     finished, so the rule above never knew about them: "lax" after "pharmacy in denver"
+     showed only pharmacies at LAX. Drop them while they are still exactly what it set. */
+  if (seedFor && !p.chains.length && !p.anyCat && !detectPoiIntent(raw)
+      && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k))) {
+    active.clear(); anyCat = null; seedFor = null;
+  }
 
   // apply whatever the query named, before we go anywhere near the network
   if (p.chains.length) {

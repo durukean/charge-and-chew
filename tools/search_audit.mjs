@@ -155,6 +155,12 @@ const CASES = [
   C('LA', 'fresh', 'bank near me', { near: ['LA', 40] }, '@poi'),
   C('LA', 'chosenNY', 'pharmacy', { near: ['NYC', 40] }, '@poi'),
 
+  // ── what the previous search set must not leak into the next ──
+  C('LA', 'poiDenver', 'lax', { st: 'CA', nochain: true }, '@leak'),
+  C('LA', 'poiDenver', 'chargers in austin', { st: 'TX', nochain: true }, '@leak'),
+  C('LA', 'starbucks', 'chargers in dallas', { st: 'TX', nochain: true }, '@leak'),
+  C('LA', 'starbucks', 'ihop in dallas', { st: 'TX', chain: 'IHOP' }, '@leak'),
+
   // ── trips and roads ──
   C('LA', 'fresh', 'la to vegas', { route: true }),
   C('LA', 'fresh', 'sf to la with in n out', { route: true, chain: 'In-N-Out' }),
@@ -286,6 +292,8 @@ async function main() {
       };
       if (c.prior === 'chosenNY') await search('chargers in new york');
       if (c.prior === 'route') await search('la to las vegas');
+      if (c.prior === 'poiDenver') await search('pharmacy in denver');
+      if (c.prior === 'starbucks') await search('starbucks in austin');
       await search(c.q);
       res = await ev(`window.__ccState()`);
     } catch (e) { err = e.message; }
@@ -313,6 +321,7 @@ async function main() {
       if (x.route && !res.route) why.push('no route drawn');
       if (x.hwy && res.hwy !== x.hwy) why.push(`wanted ${x.hwy}, got ${res.hwy}`);
       if (x.chain && !res.chains.includes(x.chain)) why.push(`chain ${x.chain} not set (${res.chains})`);
+      if (x.nochain && res.chains.length) why.push(`a filter stayed on: ${res.chains}`);
     }
     const tag = `${c.who.padEnd(6)} ${c.prior.padEnd(10)} ${JSON.stringify(c.q)}`;
     if (why.length) { fails.push({ c, why, res }); console.log(`FAIL  ${tag}\n        ${why.join('; ')}\n        title: ${res && res.title} | toast: ${res && res.toast}`); }
