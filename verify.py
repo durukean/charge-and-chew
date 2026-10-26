@@ -1274,7 +1274,7 @@ check("if (picks.length >= breakLegs() - 1)" in _bc and "longest leg ~" in _bc,
 
 # Dealership lots list after the public stations, under their own heading (not on a route).
 _vs = _html[_html.index("function visibleSites()"):][:2000]
-check("if (pub.length && dlr.length) return pub.concat(dlr);" in _vs and 'class="lsep"' in _html,
+check("if (pub.length && dlr.length) return pub.concat(dlr);" in _vs and "if (!route && center) {" in _vs and 'class="lsep"' in _html,
       "dealership lots lead the list again ('tacos in phoenix' opened on two Nissan lots)")
 
 # A chain with none in the area on screen does not leave an empty map there (2026-10-24):

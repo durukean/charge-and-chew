@@ -2457,8 +2457,9 @@ function visibleSites() {
   /* Dealership lots go after the public stations, in the same order among themselves: on
      "tacos in phoenix" two single-stall 50 kW Nissan lots, often for that brand's customers,
      led the list. Still listed (under their own heading), still on the map; a route keeps
-     driving order. */
-  if (!route) {
+     driving order. Only within an area: in a nationwide "nearest" list (Fred Meyer from
+     Dallas) a dealer lot 370 miles closer than the first public stop must not sink below it. */
+  if (!route && center) {
     const pub = [], dlr = [];
     for (const s of out) (s.dlr ? dlr : pub).push(s);
     if (pub.length && dlr.length) return pub.concat(dlr);
