@@ -3962,8 +3962,9 @@ async function geocode(q) {
 
   const url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
               '&limit=8&countrycodes=us&q=' + encodeURIComponent(q);
-  const r = await fetchTimeout(url);
-  if (!r.ok) throw new Error(busyMsg('Place search', r.status));
+  let r;
+  try { r = await fetchTimeout(url); } catch (e) { const t = offlineTown(q); if (t) return t; throw e; }
+  if (!r.ok) { const t = offlineTown(q); if (t) return t; throw new Error(busyMsg('Place search', r.status)); }
   const j = await r.json();
   if (!j.length) throw new Error(`Couldn't find "${q}"`);
   let ranked = j.slice().sort((a, b2) => scoreHit(b2) - scoreHit(a));
@@ -5211,18 +5212,39 @@ const PLACES = (() => {
     // AFDC city fields occasionally hold a street address ("8900 E. Buckeye Ave.")
     if (city.length < 3 || /\d/.test(city)) continue;
     const k = city + ', ' + s.st;
-    n.set(k, (n.get(k) || 0) + 1);
+    const e = n.get(k) || n.set(k, { la: [], lo: [] }).get(k);
+    e.la.push(s.lat); e.lo.push(s.lon);
   }
+  // the middle charger, not the average: one mis-filed address would drag an average away
+  const mid = a => a.slice().sort((x, y) => x - y)[a.length >> 1];
   return [...n.entries()]
-    .map(([label, c]) => {
+    .map(([label, e]) => {
       const city = label.slice(0, label.lastIndexOf(',')).toLowerCase();
       // key spans city+state so "lasvegasnv" still prefixes; ckey is the city alone, so a
       // substring search cannot run across the comma ("clydetx" must not match "det").
-      return { label, c, city, key: label.toLowerCase().replace(/[^a-z]/g, ''),
-               ckey: city.replace(/[^a-z]/g, '') };
+      return { label, c: e.la.length, city, key: label.toLowerCase().replace(/[^a-z]/g, ''),
+               ckey: city.replace(/[^a-z]/g, ''), lat: mid(e.la), lon: mid(e.lo) };
     })
     .sort((a, b) => b.c - a.c);
 })();
+
+/* Nominatim is a free shared service: busy, rate-limited, or no signal on the road, and
+   "tacos in austin" failed outright. Every charger ships with its town, so any town we have
+   chargers in is still found without it -- at its middle charger, and of same-named towns
+   the one near you, as geocode() weighs them. Not cached: the real answer replaces it. */
+function offlineTown(q) {
+  let n = normalise(q), st = null;
+  for (const [code, name] of Object.entries(STATE_NAME)) {
+    const sn = ' ' + normalise(name);
+    if (code !== 'DC' && n.endsWith(sn) && n.length > sn.length) { st = code; n = n.slice(0, -sn.length); break; }
+  }
+  const hits = PLACES.filter(p => normalise(p.city) === n && (!st || p.label.endsWith(', ' + st)));
+  if (!hits.length) return null;
+  const bias = lastMe || (center ? { lat: center.lat, lon: center.lon } : null);
+  const sc = p => bias ? 0.5 * Math.log10(1 + p.c) - Math.log10(1 + hav(bias.lat, bias.lon, p.lat, p.lon) / MI / 50) : p.c;
+  const p = hits.reduce((a, h) => sc(h) > sc(a) ? h : a);
+  return { lat: p.lat, lon: p.lon, label: p.label, alts: [] };
+}
 
 /* "lasvegas" is not a place to any geocoder, but it is unambiguous to a person. Snap a
    run-together word onto a city we have BEFORE asking Nominatim -- and only when it really

@@ -199,6 +199,8 @@ const CASES = [
   C('LA', 'fresh', 'evgo near me', { near: ['LA', 40] }),
   C('LA', 'fresh', '350 kw', { near: ['LA', 40] }),
   C('LA', 'fresh', 'ccs', { near: ['LA', 40] }),
+  // towns with the place lookup down (--quick blocks it): found from the chargers' own towns
+  C('LA', 'fresh', 'ihop in austin', { st: 'TX', chain: 'IHOP' }, '@offline'),
 ];
 
 const QUICK_SET = new Set([
@@ -206,6 +208,8 @@ const QUICK_SET = new Set([
   'NYC|fresh|in n out', 'NYC|fresh|dunkin', 'LA|restoredNY|starbucks', 'LA|restoredNY|in n out',
   'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
   'LA-late|restoredNY|in n out', 'LA-late|restoredNY|starbucks',
+  'LA|fresh|ihop in austin', 'DAL|fresh|pasadena', 'LA|fresh|pasadena', 'NYC|fresh|portland', 'SEA|fresh|portland',
+  'LA|fresh|springfield il', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
 ]);
 const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
   '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];

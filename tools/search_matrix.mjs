@@ -11,6 +11,7 @@
 
        node tools/search_matrix.mjs near     every chain x 12 locations x (located / late / no location)
        node tools/search_matrix.mjs in       every chain "in <city>" x 6 cities
+       node tools/search_matrix.mjs in --offline   the same with the place lookup down
        node tools/search_matrix.mjs places   every nickname, landmark and town alias the app knows
        node tools/search_matrix.mjs kinds    every kind of place ("pharmacy", "gym") near you and in a town
 
@@ -202,7 +203,8 @@ async function main() {
   const ONLYK = (process.argv.find(a => a.startsWith('--chain=')) || '').split('=')[1];
   if (ONLYK) { const ks = ONLYK.toLowerCase().split(','); cases.splice(0, cases.length, ...cases.filter(c => c.k && ks.some(x => c.k.toLowerCase().includes(x)))); }
   if (LIMIT) cases.splice(LIMIT);
-  const block = MODE === 'near' ? BLOCK : BLOCK_TILES;
+  // --offline: the place lookup is down too -- towns must still be found from the data
+  const block = MODE === 'near' || process.argv.includes('--offline') ? BLOCK : BLOCK_TILES;
   // Overpass (kinds) and Nominatim (places) are shared public services: one at a time.
   const nW = MODE === 'kinds' || MODE === 'places' ? 1 : WORKERS;
   const workers = [];

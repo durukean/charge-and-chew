@@ -468,7 +468,7 @@ check("e.target.closest('.leaflet-popup, .leaflet-control')" in _html,
 _rv = _html[_html.find("async function reverseName("):][:900]
 check("center === asked" in _rv and "toFixed(2)" in _rv,
       "reverseName sends exact coordinates again, or names a newer pin with an older answer")
-check("if (!r.ok) throw new Error(busyMsg('Place search', r.status));" in _html
+check("throw new Error(busyMsg('Place search', r.status)); }" in _html
       and "if (!r.ok) throw new Error(busyMsg('Route planning', r.status));" in _html,
       "a rate-limited geocode or route shows a raw JSON parse error again")
 _te = _html[_html.find("function onTileError()"):][:400]
@@ -1119,6 +1119,8 @@ for _needle, _why in [
     ("data-hold", "the half-typed-trip row would run as a query instead of waiting"),
 ]:
     check(_needle in _html, _why)
+check("function offlineTown(q)" in _html and _html.count("const t = offlineTown(q); if (t) return t;") == 2,
+      "with the place lookup down (busy, no signal) a town search fails again instead of using the chargers' own towns")
 check("const snap = snapPlace(q);" in _html,
       "geocode() no longer re-spaces run-together names — every caller funnels through it")
 check("$('placeIn').addEventListener('input', showSugg);" in _html,
