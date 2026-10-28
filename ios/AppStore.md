@@ -12,11 +12,14 @@ re-recording in the new design.
 
 ---
 
-## 1.1.0 (build 45; takes over the approved 1.0.8's slot, which was never released)
+## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
 approved 1.0.8 was cancelled (Developer Rejected) and its version record renamed to 1.1.0.
 Screenshots: the five in `ios/screenshots/1.1.0/`. No preview video.
+**Promotional text:** Search that knows where you are: type a chain, a kind of place or a town and
+get the fast chargers near it, even on a weak signal.
+Apple's age rating gained a required "social media" question (2026): answered **No**.
 
 **What's New:**
 > Search, rebuilt to find what you mean, wherever you are.
