@@ -2,7 +2,7 @@
 
 Everything App Store Connect asks for. 1.0.5 released 2026-10-19; 1.0.6 (build 35, the redesign)
 released 2026-10-20; 1.0.7 (build 36) released 2026-10-22; **1.0.8** (build 39, search audit
-fixes) submitted 2026-10-24. The next version is 1.0.9. Listing, keywords and screenshots are
+fixes) approved 2026-10-26 and never released: it is folded into **1.1.0**. Listing, keywords and screenshots are
 the 1.0.6 ones; release stays manual. The old-design preview video is gone and still needs
 re-recording in the new design.
 
@@ -12,28 +12,35 @@ re-recording in the new design.
 
 ---
 
-## 1.0.9 (new build with the 2026-10-27 search fixes; submit after 1.0.8 is released)
+## 1.1.0 (build 43; takes over the approved 1.0.8's slot, which was never released)
+
+1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted).
 
 **What's New:**
-> Search that knows where you are:
+> Search, rebuilt to find what you mean, wherever you are.
 >
-> • "Pharmacy in Denver", "coffee in Austin": a kind of place plus a town now searches that town.
+> • Search a chain that isn't near the map (In-N-Out while looking at New York) and you get the ones near you, or the nearest ones, instead of an empty map.
+> • A kind of place plus a town searches that town: "pharmacy in Denver", "coffee in Austin".
 > • Towns that share a name pick the one near you: Pasadena from Dallas is Pasadena, Texas.
-> • Landmarks work: LAX, Yosemite, Disney World, Zion National Park.
-> • "From here to San Diego" starts the drive where you are.
-> • A new search no longer keeps the last one's filters.
+> • Landmarks and nicknames work: LAX, Yosemite, Disney World, Zion National Park, Philly, NOLA.
+> • Plurals ("ihops"), common typos ("walmat") and town + state ("jackson ms") all work.
+> • "From here to San Diego" starts the drive where you are, and adding a chain keeps your route.
 > • Town searches work on a weak signal: any town with chargers is found without a connection.
-> • A chain that isn't near you lists its nearest stops first, dealerships included.
+> • A new search no longer keeps the last one's filters.
+> • Dealership chargers come after public stations, under their own heading.
+> • On long drives, the suggested breaks name the longest leg when a stretch has no good stop.
+> • Walk times read the same everywhere ("5 min"), and station names and addresses are cleaner.
 
 **Review notes** (replace the "what is new" steps):
-> WHAT IS NEW IN 1.0.9 (search) — how to try it:
+> WHAT IS NEW IN 1.1.0 (search) — how to try it:
 > 1. Allow location when asked (or decline: search a city instead).
 > 2. Search:  pharmacy in denver   — the map goes to Denver and lists stops near pharmacies there.
-> 3. Search:  from here to san diego   — a route from your location.
+> 3. Search:  in n out   — the stops nearest you, or the nearest ones in the country.
+> 4. Search:  from here to san diego   — a route from your location.
 
 ---
 
-## 1.0.8 (build 39, submitted 2026-10-24)
+## 1.0.8 (build 39, approved 2026-10-26, not released: folded into 1.1.0)
 
 **What's New:**
 > Better search, clearer lists:
