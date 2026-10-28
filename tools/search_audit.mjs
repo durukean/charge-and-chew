@@ -40,7 +40,8 @@ const TZ = { LA: 'America/Los_Angeles', DAL: 'America/Chicago', NYC: 'America/Ne
                                          result) is within that distance
    st:   'TX'                            the area searched is in that state (by its label),
                                          or else most of the first five results are
-   chain / cat / route / hwy / empty     what the search should have set */
+   chain / cat / route / hwy / empty     what the search should have set
+   clear: true                           then tap the search box's x: the rest is judged after */
 function C(who, prior, q, expect, note) { return { who, prior, q, expect, note }; }
 const CASES = [
   // ── a chain, no place: means near me ──
@@ -201,6 +202,13 @@ const CASES = [
   C('LA', 'fresh', 'ccs', { near: ['LA', 40] }),
   // towns with the place lookup down (--quick blocks it): found from the chargers' own towns
   C('LA', 'fresh', 'ihop in austin', { st: 'TX', chain: 'IHOP' }, '@offline'),
+  // the search box's x undoes the search: back where you were, the chain it set gone
+  C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
+  C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
+  C('LA', 'fresh', 'starbucks in austin', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
+  C('LA', 'fresh', 'buc-ees in texas', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
+  C('LA', 'fresh', 'pharmacy in denver', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
+  C('denied', 'fresh', 'starbucks', { clear: true, nochain: true }, '@clear'),
 ];
 
 const QUICK_SET = new Set([
@@ -209,7 +217,7 @@ const QUICK_SET = new Set([
   'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
   'LA-late|restoredNY|in n out', 'LA-late|restoredNY|starbucks',
   'LA|fresh|ihop in austin', 'DAL|fresh|pasadena', 'LA|fresh|pasadena', 'NYC|fresh|portland', 'SEA|fresh|portland',
-  'LA|fresh|springfield il', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
+  'LA|fresh|springfield il', 'LA|fresh|buc-ees', 'LA|fresh|starbucks in austin', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
 ]);
 const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
   '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];
@@ -326,6 +334,7 @@ async function main() {
       if (c.prior === 'poiDenver') await search('pharmacy in denver');
       if (c.prior === 'starbucks') await search('starbucks in austin');
       await search(c.q);
+      if (c.expect.clear) { await ev(`document.getElementById('placeClr').click(), true`); await sleep(1500); }
       res = await ev(`window.__ccState()`);
     } catch (e) { err = e.message; }
     await B.send('Target.closeTarget', { targetId }).catch(() => {});

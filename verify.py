@@ -1220,6 +1220,9 @@ _pc = _html[_html.index("$('placeClr').onclick"):][:600]
 check(re.search(r"^\s*if \(!shown\) \{[^}]*return; \}", _pc, re.M) is not None
       and re.search(r"^\s*lastSearchText = raw;", _html, re.M) is not None,
       "the search box's x drops the area for any typed text (one stray letter lost Los Angeles)")
+_pc2 = _html[_html.index("$('placeClr').onclick"):][:1400]
+check("let searchFrom = null;" in _html and "setCenter(back.lat, back.lon, back.label, back.kind)" in _pc2,
+      "the search box's x no longer undoes the search: 'in n out' then x listed every In-N-Out in the country")
 # Charge times say min / h: "~115m" read as metres next to "0.4 mi away".
 check("~${chargeLabel(cm)}" in _html and "~${cm}m<" not in _html,
       "the row's charge-time badge is back to a bare 'm' (reads as metres)")

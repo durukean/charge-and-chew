@@ -4027,19 +4027,38 @@ function dropShownSearchText() {
   if (lastSearchText === null || $('placeIn').value.trim() !== lastSearchText) return;
   lastSearchText = null; $('placeIn').value = ''; $('placeBox').classList.remove('has');
 }
+/* The x on the search being shown undoes that search. It used to drop the area and nothing
+   else: "in n out" from Los Angeles, then x, and the list was every In-N-Out in the country
+   with Colorado second, the chain still on. The chain or kind of place it set goes (while it
+   is still what it set: a chip tapped since is the user's), and the area goes back to the one
+   before the search -- your own location, usually. With none before, the whole country. */
+let searchFrom = null;   // the area before the search being shown
+const chainSig = () => anyCat ? 'any:' + anyCat : [...active].sort().join('|');
 $('placeClr').onclick = () => {
   const shown = lastSearchText !== null && $('placeIn').value.trim() === lastSearchText;
   $('placeIn').value = ''; $('placeBox').classList.remove('has');
   if (!shown) { $('placeIn').focus(); return; }
   lastSearchText = null;
-  if (!center && !stateScope) return;
-  clearCenter();
+  if (route) return;                       // a drive has its own x, on the route card
+  const q0 = lastQuerySet, back = searchFrom;
+  searchFrom = null;
+  if (q0 && q0.chains && chainSig() === q0.chains) { active.clear(); anyCat = null; }
+  if (seedFor && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k))) {
+    active.clear(); anyCat = null; seedFor = null;
+  }
+  lastQuerySet = null;
+  if (back) {
+    if (stateScope) clearCenter();         // "buc-ees in texas" leaves the statewide card
+    setCenter(back.lat, back.lon, back.label, back.kind); return;
+  }
+  if (center || stateScope) clearCenter(); else { clearLivePoi(); render(); syncUrl(); }
   if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();
 };
 $('placeIn').addEventListener('keydown', async e => {
   if (e.key !== 'Enter') return;
   const raw = $('placeIn').value.trim(); if (!raw) return;
   lastSearchText = raw;
+  searchFrom = center && !stateScope && !route ? { lat: center.lat, lon: center.lon, label: center.label, kind: center.kind } : null;
   $('placeIn').blur();
   const trip = parseTrip(raw);
   /* A trailing filter belongs to the trip, not the query: parseQuery would read "las vegas
@@ -4060,7 +4079,6 @@ $('placeIn').addEventListener('keydown', async e => {
      CCS-only. Only if it is still exactly what that search left: anything chosen or changed
      by hand since (a chip, Filters) is the user's and stays. */
   const q0 = lastQuerySet;
-  const chainSig = () => anyCat ? 'any:' + anyCat : [...active].sort().join('|');
   if (q0) {
     let fChanged = false;
     if (!p.chains.length && !p.anyCat && q0.chains && chainSig() === q0.chains) { active.clear(); anyCat = null; }
