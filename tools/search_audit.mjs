@@ -202,6 +202,8 @@ const CASES = [
   C('LA', 'fresh', 'ccs', { near: ['LA', 40] }),
   // towns with the place lookup down (--quick blocks it): found from the chargers' own towns
   C('LA', 'fresh', 'ihop in austin', { st: 'TX', chain: 'IHOP' }, '@offline'),
+  // a junk hit is not a place: "n out" was a hiking path in Colorado
+  C('LA', 'fresh', 'n out', { near: ['LA', 30] }, '@junk'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),

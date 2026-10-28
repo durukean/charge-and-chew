@@ -1121,6 +1121,8 @@ for _needle, _why in [
     check(_needle in _html, _why)
 check("function offlineTown(q)" in _html and _html.count("const t = offlineTown(q); if (t) return t;") == 2,
       "with the place lookup down (busy, no signal) a town search fails again instead of using the chargers' own towns")
+check("ranked = ranked.filter(h => !NOT_A_PLACE.test(h.type || ''));" in _html,
+      "a geocoder hit on a footpath counts as a place again ('n out' flew to a trail in Colorado)")
 check("const snap = snapPlace(q);" in _html,
       "geocode() no longer re-spaces run-together names — every caller funnels through it")
 check("$('placeIn').addEventListener('input', showSugg);" in _html,

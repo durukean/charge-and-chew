@@ -12,7 +12,7 @@ re-recording in the new design.
 
 ---
 
-## 1.1.0 (build 43; takes over the approved 1.0.8's slot, which was never released)
+## 1.1.0 (build 45; takes over the approved 1.0.8's slot, which was never released)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted).
 
@@ -26,7 +26,7 @@ re-recording in the new design.
 > • Plurals ("ihops"), common typos ("walmat") and town + state ("jackson ms") all work.
 > • "From here to San Diego" starts the drive where you are, and adding a chain keeps your route.
 > • Town searches work on a weak signal: any town with chargers is found without a connection.
-> • A new search no longer keeps the last one's filters.
+> • A new search no longer keeps the last one's filters, and the x in the search box takes you back to where you were.
 > • Dealership chargers come after public stations, under their own heading.
 > • On long drives, the suggested breaks name the longest leg when a stretch has no good stop.
 > • Walk times read the same everywhere ("5 min"), and station names and addresses are cleaner.

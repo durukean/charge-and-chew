@@ -3930,6 +3930,7 @@ function looksLikeChainBrand(hits, q) {
    "Unexpected token '<'" on screen. Say what happened and what to do instead. */
 const busyMsg = (what, status) => status === 429 || status === 403 || status >= 500
   ? `${what} is busy right now — try again in a minute` : `${what} failed (error ${status})`;
+const NOT_A_PLACE = /^(path|footway|track|cycleway|bridleway|steps|viewpoint|trailhead|picnic_site|bench|information)$/;
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
   if (c) return { lat: +c[1], lon: +c[2], label: 'Pinned coordinates' };
@@ -3972,6 +3973,10 @@ async function geocode(q) {
     ranked = ranked.filter(h => (h.address && h.address.state) === wantState);
     if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
   }
+  /* "n out" (In-N-Out with a letter dropped) flew to a hiking path in Colorado called N-Out.
+     Nobody looks for chargers around a footpath or a viewpoint: those hits don't count. */
+  ranked = ranked.filter(h => !NOT_A_PLACE.test(h.type || ''));
+  if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
   const nm = h => (h.display_name || '').split(',')[0].trim().toLowerCase();
   // Towns only: the state of Washington is not a twin of Washington, DC.
   const isState = h => h.address && !h.address.city && !h.address.town && !h.address.village
