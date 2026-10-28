@@ -12,7 +12,7 @@ re-recording in the new design.
 
 ---
 
-## 1.0.9 (build 41 in TestFlight; submit after 1.0.8 is approved)
+## 1.0.9 (new build with the 2026-10-27 search fixes; submit after 1.0.8 is released)
 
 **What's New:**
 > Search that knows where you are:
@@ -22,6 +22,8 @@ re-recording in the new design.
 > • Landmarks work: LAX, Yosemite, Disney World, Zion National Park.
 > • "From here to San Diego" starts the drive where you are.
 > • A new search no longer keeps the last one's filters.
+> • Town searches work on a weak signal: any town with chargers is found without a connection.
+> • A chain that isn't near you lists its nearest stops first, dealerships included.
 
 **Review notes** (replace the "what is new" steps):
 > WHAT IS NEW IN 1.0.9 (search) — how to try it:
