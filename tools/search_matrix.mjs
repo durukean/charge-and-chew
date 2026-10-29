@@ -99,6 +99,10 @@ async function makeWorker(B, ORIGIN, block) {
     return r.result.value;
   };
   await send('Page.enable'); await send('Runtime.enable'); await send('Network.enable');
+  /* Only one of the parallel tabs has focus, and Chrome (156) never answers a location
+     request from an unfocused page: the app sat on "Finding you…" and a quarter of the
+     matrix failed for no fault of the app (2026-10-28). Each tab gets its own focus. */
+  await send('Emulation.setFocusEmulationEnabled', { enabled: true });
   await send('Network.setBlockedURLs', { urls: block });
   await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   const perm = setting => B.send('Browser.setPermission', { origin: ORIGIN, browserContextId, permission: { name: 'geolocation' }, setting });

@@ -1123,6 +1123,12 @@ check("function offlineTown(q)" in _html and _html.count("const t = offlineTown(
       "with the place lookup down (busy, no signal) a town search fails again instead of using the chargers' own towns")
 check("ranked = ranked.filter(h => !NOT_A_PLACE.test(h.type || ''));" in _html,
       "a geocoder hit on a footpath counts as a place again ('n out' flew to a trail in Colorado)")
+check("""k === 'cuisine' ? `["cuisine"~"(^|;) *(${v}) *($|;)",i]`""" in _html and "const CU = c =>" in _html,
+      "a cuisine search ('sushi', 'bbq') no longer asks OSM for that cuisine: it lists every restaurant again")
+check("if (p.road && !trip && !p.place) {" in _html and "We can't follow ${p.road} yet" in _html,
+      "'us 101' / 'pch' vanish without a word again (only interstates have lines)")
+check("if (!wantState && /^\\d+\\s/.test(q.trim())) {" in _html,
+      "an address's town is no longer pinned to its state: '123 main st boise' goes to Oklahoma")
 check("const snap = snapPlace(q);" in _html,
       "geocode() no longer re-spaces run-together names — every caller funnels through it")
 check("$('placeIn').addEventListener('input', showSugg);" in _html,

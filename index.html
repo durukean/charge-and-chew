@@ -3666,6 +3666,18 @@ function parseQuery(raw) {
   let hwy = null;
   const hm = t.match(/\s(?:i|ih|interstate)\s?-?\s?(\d{1,3})\s/);
   if (hm) { hwy = 'I-' + (+hm[1]); t = t.replace(hm[0], ' '); }
+  /* "us 101", "route 66", "pch": a road that is not an interstate. Only the interstates'
+     lines ship, so these vanished from the query without a word ("101" is too short to be a
+     place, "us" and "route" are filler) and the search quietly became "near me". Kept as
+     `road` so the search can say so; "pch" and "highway 1" went to Salt Lake City. */
+  let road = null;
+  const rm = !hwy && t.match(/\s(?:(us|u s|highway|hwy|route|rte|sr|state route|ca)\s?-?\s?(\d{1,3})|(pch|pacific coast highway))\s/);
+  if (rm) {
+    const kind = rm[1] === 'u s' ? 'us' : rm[1] === 'rte' ? 'route' : rm[1] === 'state route' ? 'sr' : rm[1];
+    road = rm[3] ? 'the Pacific Coast Highway'
+      : ({ us: 'US-', sr: 'SR-', ca: 'CA-' }[kind] || { highway: 'Highway ', hwy: 'Highway ', route: 'Route ' }[kind]) + (+rm[2]);
+    t = t.replace(rm[0], ' ');
+  }
   // "level 2 chargers near target", "j1772 near me": switch the Level 2 layer on.
   const l2re = /\s(level 2|level two|lvl 2|l2|j1772|destination charg\w*)\s/;
   const l2 = l2re.test(t);
@@ -3681,7 +3693,13 @@ function parseQuery(raw) {
   const keepSt = stm && !NOISE_WORD.has(stm[1]) && !NON_PLACE.has(stm[1]) ? stm : null;
   let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
   // Strip surviving non-place words; if nothing meaningful is left, there is no place.
-  place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
+  // A region keeps its own filler word: "bay area" is not "bay".
+  if (!CITY_ALIAS[place]) place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
+  /* "downtown la" went to Baton Rouge: the geocoder read "la" as Louisiana. A town's
+     centre is where the search lands anyway, so "downtown X" is X -- when X is a place we
+     know; "downtown disney" is somewhere of its own. */
+  const dt = place.match(/^downtown (.+)$/);
+  if (dt && knownPlace(dt[1])) place = dt[1];
   if (keepSt && place.split(' ').pop() === keepSt[1]) place += ', ' + keepSt[2].toUpperCase();
   if (GENERIC_PLACE.has(place)) place = '';
   place = expandAbbrev(place);
@@ -3691,9 +3709,14 @@ function parseQuery(raw) {
      or "washington". */
   if (/\s(?:(?:in|near|around)\s(?:washington\s)?|washington\s)dc\s*$/.test(t)) place = 'Washington, DC';
   else if (CITY_ALIAS[place]) place = CITY_ALIAS[place];
+  /* "chargers in ca", "buc-ees in tx": a state code alone fell under the 3-letter floor
+     below and the place vanished. Not the codes that are also words people type around a
+     search ("in", "me", "or", "hi", "ok"); "la" and "dc" are cities, above. */
+  else if (/^[a-z]{2}$/.test(place) && STATE_NAME[place.toUpperCase()] && !/^(in|me|or|hi|ok)$/.test(place))
+    place = place === 'wa' ? 'washington state' : STATE_NAME[place.toUpperCase()].toLowerCase();
   const isZip = /^\d{5}$/.test(place);
   if (!isZip && place.replace(/[^a-z]/g, '').length < 3) place = '';
-  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2, kw: kw, hwy: hwy };
+  return { chains: chains, net: net, place: place, here: here, anyCat: anyc, free: free, plug: plug, l2: l2, kw: kw, hwy: hwy, road: road };
 }
 
 window.__parseQuery = parseQuery;
@@ -3721,6 +3744,12 @@ const CITY_ALIAS = {
   yellowstone: 'West Yellowstone, MT', 'joshua tree': 'Joshua Tree, CA',
   'death valley': 'Furnace Creek, CA', 'big sur': 'Big Sur, CA', mammoth: 'Mammoth Lakes, CA',
   'disney world': 'Lake Buena Vista, FL', 'walt disney world': 'Lake Buena Vista, FL',
+  /* Regions people name like towns. "bay area" lost "area" (a filler word) and went to Bay
+     County, Florida; "socal" was looked up as a coffee shop. */
+  'bay area': 'San Francisco, CA', 'sf bay area': 'San Francisco, CA', 'east bay': 'Oakland, CA',
+  socal: 'Los Angeles, CA', 'so cal': 'Los Angeles, CA', 'southern california': 'Los Angeles, CA',
+  norcal: 'Sacramento, CA', 'nor cal': 'Sacramento, CA', 'northern california': 'Sacramento, CA',
+  'inland empire': 'Riverside, CA', 'twin cities': 'Minneapolis, MN', dfw: 'Dallas, TX',
   'mount rushmore': 'Keystone, SD', 'smoky mountains': 'Gatlinburg, TN',
   'the woodlands': 'The Woodlands, TX',
   atl: 'Atlanta, GA', slc: 'Salt Lake City, UT', okc: 'Oklahoma City, OK',
@@ -3820,7 +3849,7 @@ function parseTrip(raw) {
   let a, b;
   /* "where to charge on the way to tahoe", "on my way to vegas": a destination with no start
      means a drive from wherever you are. It used to geocode "way tahoe". */
-  const wm = !/(?:^|\s)from\s/.test(t) && t.match(/(?:^|\s)(?:on the way|on my way|heading|driving|drive|road trip)\s+to\s+(.+?)\s*$/);
+  const wm = !/(?:^|\s)from\s/.test(t) && t.match(/(?:^|\s)(?:on the way|on my way|heading|headed|driving|drive|road trip|trip|route|directions|navigate|take me|get me|get|travel(?:l?ing)?)\s+to\s+(.+?)\s*$/);
   if (wm) {
     const sp = splitDest(wm[1]);
     const B = tripSide(sp.dest);
@@ -3948,6 +3977,20 @@ async function geocode(q) {
   if (sm && STATE_NAME[sm[2].toUpperCase()] && sm[2].toUpperCase() !== 'DC') {
     wantState = STATE_NAME[sm[2].toUpperCase()];
     q = `${sm[1].replace(/,\s*$/, '')}, ${wantState}`;
+  }
+  /* "123 main st boise" went to Boise City, Oklahoma, which has a 123 Main St too. An
+     address names its town last; when that town is one we know in a single state, the
+     answer has to be in that state. A town in several states (Springfield) is left alone. */
+  if (!wantState && /^\d+\s/.test(q.trim())) {
+    const w = normalise(q).split(' ');
+    for (let n = Math.min(3, w.length - 2); n >= 1 && !wantState; n--) {
+      const town = w.slice(-n).join(' ');
+      const sts = new Set(PLACES.filter(p => normalise(p.city) === town).map(p => p.label.slice(-2)));
+      if (sts.size === 1 && !sts.has('DC')) {
+        wantState = STATE_NAME[[...sts][0]];
+        q = `${w.slice(0, -n).join(' ')}, ${town}, ${wantState}`;
+      }
+    }
   }
 
   /* A place does not move. Caching the resolution makes a shared link instant and keeps
@@ -4138,6 +4181,11 @@ $('placeIn').addEventListener('keydown', async e => {
   if (p.hwy && !trip) {
     render(); syncUrl();
     await openHighway(p.hwy);
+    return;
+  }
+  if (p.road && !trip && !p.place) {
+    render(); syncUrl();
+    toast(`We can't follow ${p.road} yet, only interstates — plan the drive instead, like “LA to SF”`);
     return;
   }
   if (trip && trip.fromHere) {
@@ -4454,6 +4502,10 @@ window.__hoursNow = hoursNow;   // exercised by verify_hours.py
 
    Overpass will not tolerate an unanchored name regex over a wide radius (it times out),
    so every query is constrained by an indexed tag first and names are filtered here. */
+/* A cuisine is a restaurant (or a counter) WITH that cuisine. "sushi" was any restaurant at
+   all, so it listed every charger near a Denny's; "bbq in austin" was not food at all and
+   searched a town called "Bbq Austin". OSM keeps cuisines as a ;-list ("sushi;japanese"). */
+const CU = c => ['amenity=restaurant;cuisine=' + c, 'amenity=fast_food;cuisine=' + c];
 const POI_TAGS = {
   bank: ['amenity=bank'], banks: ['amenity=bank'], atm: ['amenity=atm'],
   pharmacy: ['amenity=pharmacy'], drugstore: ['amenity=pharmacy'], chemist: ['amenity=pharmacy'],
@@ -4492,10 +4544,23 @@ const POI_TAGS = {
   fastfood: ['amenity=fast_food'], burger: ['amenity=fast_food'], burgers: ['amenity=fast_food'],
   pizza: ['amenity=fast_food', 'amenity=restaurant'], taco: ['amenity=fast_food'],
   tacos: ['amenity=fast_food'], sandwich: ['amenity=fast_food'], sandwiches: ['amenity=fast_food'],
-  sushi: ['amenity=restaurant'], diner: ['amenity=restaurant'], breakfast: ['amenity=restaurant'],
+  diner: ['amenity=restaurant'], breakfast: ['amenity=restaurant'],
   lunch: ['amenity=restaurant'], dinner: ['amenity=restaurant'],
   deli: ['shop=deli'], butcher: ['shop=butcher'], juice: ['shop=beverages', 'amenity=cafe'],
-  smoothie: ['amenity=cafe'], icecreamshop: ['amenity=ice_cream', 'shop=ice_cream'] };
+  smoothie: ['amenity=cafe'], icecreamshop: ['amenity=ice_cream', 'shop=ice_cream'],
+  sushi: CU('sushi'), japanese: CU('japanese|sushi|ramen'), ramen: CU('ramen'),
+  bbq: CU('barbecue|bbq'), barbecue: CU('barbecue|bbq'), barbeque: CU('barbecue|bbq'),
+  thai: CU('thai'), indian: CU('indian'), italian: CU('italian'), korean: CU('korean'),
+  vietnamese: CU('vietnamese'), pho: CU('vietnamese|pho'), seafood: CU('seafood|fish'),
+  steak: CU('steak_house|steak'), steakhouse: CU('steak_house|steak'),
+  mediterranean: CU('mediterranean|greek|lebanese|middle_eastern'), greek: CU('greek'),
+  kebab: CU('kebab'), noodles: CU('noodle|ramen|vietnamese'), poke: CU('poke'),
+  bagel: ['shop=bakery;cuisine=bagel', 'amenity=cafe;cuisine=bagel'],
+  bagels: ['shop=bakery;cuisine=bagel', 'amenity=cafe;cuisine=bagel'] };
+const CUISINE_ICON = { sushi: '🍣', 'japanese|sushi|ramen': '🍱', ramen: '🍜', 'barbecue|bbq': '🍖',
+  thai: '🍛', indian: '🍛', italian: '🍝', korean: '🥘', vietnamese: '🍜', 'vietnamese|pho': '🍜',
+  'seafood|fish': '🦞', 'steak_house|steak': '🥩', 'mediterranean|greek|lebanese|middle_eastern': '🥙',
+  greek: '🥙', kebab: '🥙', 'noodle|ramen|vietnamese': '🍜', poke: '🍣' };
 
 /* Two-word category names, checked BEFORE single words. Without this, "ice cream shop"
    matched on "ice" and then kept "cream" as a NAME filter -- so every result had to be
@@ -4513,7 +4578,8 @@ const POI_PHRASES = {
   'hardware store': ['shop=hardware', 'shop=doityourself'],
   'liquor store': ['shop=alcohol'], 'department store': ['shop=department_store'],
   'shopping mall': ['shop=mall'], 'movie theater': ['amenity=cinema'],
-  'picnic area': ['tourism=picnic_site'], 'dog friendly': ['leisure=dog_park'] };
+  'picnic area': ['tourism=picnic_site'], 'dog friendly': ['leisure=dog_park'],
+  'korean bbq': CU('korean'), 'korean barbecue': CU('korean') };
 // "331 bank" reads as a typo; pluralise the last word of whatever they typed.
 function plural(t) {
   const w = String(t).trim().split(' '); const last = w[w.length - 1];
@@ -4541,9 +4607,15 @@ const POI_ICON = {
   'shop=department_store': '🏬', 'shop=second_hand': '♻️',
   'leisure=fitness_centre': '🏋️', 'leisure=park': '🌳', 'leisure=playground': '🛝',
   'leisure=dog_park': '🐕', 'tourism=hotel': '🏨', 'tourism=motel': '🏩',
-  'tourism=picnic_site': '🧺', 'highway=rest_area': '🛣️' };
+  'tourism=picnic_site': '🧺', 'highway=rest_area': '🛣️',
+  'shop=bakery;cuisine=bagel': '🥯', 'amenity=cafe;cuisine=bagel': '🥯' };
+for (const [c, e] of Object.entries(CUISINE_ICON)) for (const t of CU(c)) POI_ICON[t] = e;
 const POI_FILLER = new Set(['shop', 'shops', 'store', 'stores', 'place', 'places', 'near',
-  'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and']);
+  'nearby', 'a', 'an', 'the', 'my', 'me', 'some', 'any', 'around', 'close', 'to', 'and',
+  /* What people say around the word: "i want coffee", "pharmacy open now", "need a good
+     bbq spot". Each was kept as a NAME to match, so nothing was ever called that. */
+  'i', 'im', 'want', 'wanna', 'need', 'looking', 'for', 'get', 'grab', 'good', 'best',
+  'nearest', 'closest', 'open', 'now', 'can', 'we', 'eat', 'food', 'spot', 'spots', 'joint']);
 
 /* Chains we ALREADY have, grouped by the OSM tag a category search asks for.
    The live lookup depends on a free community server that is genuinely unreliable; these
@@ -4921,10 +4993,10 @@ async function runLivePoi(intent, scope) {
   const queries = ats.map(at => {
     const parts = intent.brandOnly
       ? `nwr(${at})["brand"~"^${intent.name.replace(/[^a-z0-9 ]/gi, '')}",i];`
-      : intent.tags.map(t => {
-          const [k, v] = t.split('=');
-          return `nwr(${at})["${k}"="${v}"];`;
-        }).join('');
+      : intent.tags.map(t => `nwr(${at})` + t.split(';').map(kv => {
+          const [k, v] = kv.split('=');
+          return k === 'cuisine' ? `["cuisine"~"(^|;) *(${v}) *($|;)",i]` : `["${k}"="${v}"]`;
+        }).join('') + ';').join('');
     return `[out:json][timeout:25];(${parts});out center ${onRoute ? 2000 : 600};`;
   });
 

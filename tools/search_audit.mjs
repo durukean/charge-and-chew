@@ -41,7 +41,8 @@ const TZ = { LA: 'America/Los_Angeles', DAL: 'America/Chicago', NYC: 'America/Ne
    st:   'TX'                            the area searched is in that state (by its label),
                                          or else most of the first five results are
    chain / cat / route / hwy / empty     what the search should have set
-   clear: true                           then tap the search box's x: the rest is judged after */
+   clear: true                           then tap the search box's x: the rest is judged after
+   toast: 'text'                         the message shown contains this */
 function C(who, prior, q, expect, note) { return { who, prior, q, expect, note }; }
 const CASES = [
   // ── a chain, no place: means near me ──
@@ -204,6 +205,23 @@ const CASES = [
   C('LA', 'fresh', 'ihop in austin', { st: 'TX', chain: 'IHOP' }, '@offline'),
   // a junk hit is not a place: "n out" was a hiking path in Colorado
   C('LA', 'fresh', 'n out', { near: ['LA', 30] }, '@junk'),
+  // Probe 2026-10-28: a destination in other words, regions, "downtown", a cuisine in a town
+  C('LA', 'fresh', 'directions to san diego', { route: true }, '@probe'),
+  C('LA', 'fresh', 'take me to vegas', { route: true }, '@probe'),
+  C('LA', 'fresh', 'route to vegas', { route: true }, '@probe'),
+  C('LA', 'fresh', 'downtown la', { near: ['LA', 15], st: 'CA' }, '@probe'),
+  C('NYC', 'fresh', 'bay area', { near: [[37.7749, -122.4194], 20] }, '@probe'),
+  C('LA', 'fresh', 'socal', { near: ['LA', 20] }, '@probe'),
+  C('LA', 'fresh', 'bbq in austin', { st: 'TX' }, '@probe'),
+  C('LA', 'fresh', 'steakhouse in dallas', { st: 'TX' }, '@probe'),
+  C('NYC', 'fresh', 'chargers in ca', { st: 'CA' }, '@probe'),
+  C('LA', 'fresh', 'buc-ees in tx', { st: 'TX', chain: "Buc-ee's" }, '@probe'),
+  C('LA', 'fresh', 'starbucks in wa', { st: 'WA', chain: 'Starbucks' }, '@probe'),
+  C('LA', 'fresh', 'in n out in az', { st: 'AZ', chain: 'In-N-Out' }, '@probe'),
+  C('LA', 'fresh', 'us 101', { toast: "can't follow US-101" }, '@probe'),
+  C('LA', 'fresh', 'pch', { toast: "can't follow the Pacific Coast Highway" }, '@probe'),
+  C('LA', 'fresh', '123 main st boise', { st: 'ID' }, '@probe'),
+  C('LA', 'fresh', '500 broadway nashville', { st: 'TN' }, '@probe'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
@@ -219,7 +237,7 @@ const QUICK_SET = new Set([
   'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
   'LA-late|restoredNY|in n out', 'LA-late|restoredNY|starbucks',
   'LA|fresh|ihop in austin', 'DAL|fresh|pasadena', 'LA|fresh|pasadena', 'NYC|fresh|portland', 'SEA|fresh|portland',
-  'LA|fresh|springfield il', 'LA|fresh|buc-ees', 'LA|fresh|starbucks in austin', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
+  'LA|fresh|springfield il', 'LA|fresh|us 101', 'LA|fresh|pch', 'NYC|fresh|bay area', 'LA|fresh|downtown la', 'LA|fresh|buc-ees', 'LA|fresh|starbucks in austin', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
 ]);
 const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
   '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];
@@ -364,6 +382,7 @@ async function main() {
       if (x.hwy && res.hwy !== x.hwy) why.push(`wanted ${x.hwy}, got ${res.hwy}`);
       if (x.chain && !res.chains.includes(x.chain)) why.push(`chain ${x.chain} not set (${res.chains})`);
       if (x.nochain && res.chains.length) why.push(`a filter stayed on: ${res.chains}`);
+      if (x.toast && !(res.toast || '').includes(x.toast)) why.push(`wanted a toast with "${x.toast}", got "${res.toast}"`);
     }
     const tag = `${c.who.padEnd(6)} ${c.prior.padEnd(10)} ${JSON.stringify(c.q)}`;
     if (why.length) { fails.push({ c, why, res }); console.log(`FAIL  ${tag}\n        ${why.join('; ')}\n        title: ${res && res.title} | toast: ${res && res.toast}`); }
