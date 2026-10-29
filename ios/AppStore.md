@@ -14,12 +14,19 @@ re-recording in the new design.
 
 ## Next (after 1.1.0): live on the web 2026-10-28, not yet in an iOS build
 
-From a probe of 93 queries the audit did not cover. Draft What's New lines:
+From two probes (93, then ~150 queries) the audit did not cover. Draft What's New lines:
 > • Cuisines: "sushi", "bbq in Austin", "thai food", "korean bbq near me" find that kind of restaurant.
 > • "Directions to San Diego", "take me to Vegas" and "route to Tahoe" plan the drive from where you are.
 > • Regions and downtowns: "bay area", "socal", "downtown LA".
 > • State codes and street addresses: "chargers in CA", "123 Main St Boise".
 > • Roads we can't follow yet (US-101, PCH) say so instead of doing nothing.
+> • Landmarks: "Central Park", "Griffith Park", "Mall of America", "Bellagio hotel" go there.
+> • Chains by their full or short names: "Chipotle Mexican Grill", "Pilot Travel Center", "mcd", "bdubs".
+> • Chains we don't list yet, in a town: "P.F. Chang's in Phoenix", "7-Eleven in Reno".
+> • Neighborhoods keep their names: Brooklyn, Harlem, East Los Angeles.
+> • Misspelled cities find the city: "pheonix", "sacremento", "cincinatti", "san fransisco".
+> • Nicknames and airport codes: "chi town", "atx", "mile high city", JFK, O'Hare (ORD).
+> • More ways to plan a drive: "LA-SF", "SF from LA", "Vegas and back".
 
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 

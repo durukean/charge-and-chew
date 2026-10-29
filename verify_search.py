@@ -299,6 +299,46 @@ CASES = [
     ("I-75 ccs",                     dict(hwy="I-75", plug=1, place="")),
     ("i want chargers near me",      dict(hwy=None, here=True)),
     ("la to sf on i-5",              dict(trip="Los Angeles, CA|San Francisco, CA")),
+    # ── Probe 2026-10-28 (2): chain names with their own descriptor, nicknames, compass towns.
+    #    "starbucks reserve" flew to Reserve, NM; "tractor supply co" to Colorado; "mcd" to
+    #    Mackinac Island. The descriptor goes with the chain; "starbucks in co" is still Colorado.
+    ("starbucks reserve",            dict(chains=["Starbucks"], place="")),
+    ("tractor supply co",            dict(chains=["Tractor Supply"], place="")),
+    ("loves travel stop",            dict(chains=["Love's"], place="")),
+    ("pilot travel center on i-40",  dict(chains=["Pilot"], place="", hwy="I-40")),
+    ("chipotle mexican grill in phoenix", dict(chains=["Chipotle"], place="phoenix")),
+    ("popeyes louisiana kitchen",    dict(chains=["Popeyes"], place="")),
+    ("five guys burgers and fries",  dict(chains=["Five Guys"], place="")),
+    ("starbucks in co",              dict(chains=["Starbucks"], place="colorado")),
+    ("mcd",                          dict(chains=["McDonald's"], place="")),
+    ("qt",                           dict(chains=["QuikTrip"], place="")),
+    ("bdubs",                        dict(chains=["Buffalo Wild Wings"], place="")),
+    ("jitb",                         dict(chains=["Jack in the Box"], place="")),
+    ("seven eleven",                 dict(chains=[], place="seven eleven")),   # not Circle K
+    ("e los angeles",                dict(place="east los angeles")),
+    ("n las vegas",                  dict(place="north las vegas")),
+    ("n out",                        dict(place="n out")),                     # not "north out"
+    # A name in front of a kind of place is its name, not a town (kind carries the position).
+    ("memorial hospital",            dict(poi="amenity=hospital", poiLabel="memorial hospital")),
+    # Nicknames and airport codes; "frisco" is Frisco, Texas, left to the geocoder.
+    ("chi town",                     dict(place="Chicago, IL")),
+    ("atx",                          dict(place="Austin, TX")),
+    ("h town",                       dict(place="Houston, TX")),
+    ("mile high city",               dict(place="Denver, CO")),
+    ("jfk",                          dict(place="John F. Kennedy International Airport, NY")),
+    ("ord",                          dict(place="O'Hare International Airport, IL")),
+    ("frisco",                       dict(place="frisco")),
+    ("sea",                          dict(place="sea")),            # a word, not SeaTac
+    # "low battery" means here; "while" is no place.
+    ("low battery",                  dict(here=True, place="")),
+    ("somewhere to eat while charging", dict(place="", anyCat="food")),
+    # Trips without "to": "la-sf", "sf from la", "vegas and back". A hyphenated town stays one.
+    ("la-sf",                        dict(trip="Los Angeles, CA|San Francisco, CA")),
+    ("sf from la",                   dict(trip="Los Angeles, CA|San Francisco, CA")),
+    ("vegas and back",               dict(trip="|Las Vegas, NV")),
+    ("round trip to tahoe and back", dict(trip="|South Lake Tahoe, CA")),
+    ("winston-salem",                dict(trip=None, place="winston-salem")),
+    ("chargers from la",             dict(trip=None)),
 
     # ── Ice cream is a precomputed category (2026-10-18): every way of asking for it, and the
     #    common misspellings, must resolve to it -- "icea cream" used to say "Couldn't find".

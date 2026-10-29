@@ -3469,12 +3469,20 @@ const CHAIN_ALIAS = (function () {
     'starbucks coffee': 'Starbucks', 'bk': 'Burger King', 'taco': 'Taco Bell',
     'heb': 'H-E-B', 'h e b': 'H-E-B', 'best by': 'Best Buy', 'trader joes': "Trader Joe's", 'whole foods market': 'Whole Foods',
     'sams': "Sam's Club", 'sams club': "Sam's Club", 'wally world': 'Walmart',
-    'cvs pharmacy': 'CVS', 'seven eleven': 'Circle K', 'loves': "Love's",
+    'cvs pharmacy': 'CVS', 'loves': "Love's",
     'pilot flying j': 'Pilot', 'cracker barrel old country store': 'Cracker Barrel',
     'panera': 'Panera Bread', 'cane s': "Raising Cane's", 'canes': "Raising Cane's",
     'jack in box': 'Jack in the Box', 'dq': 'Dairy Queen', 'kfc chicken': 'KFC',
     'starbuck': 'Starbucks', 'walmart supercenter': 'Walmart', 'costco gas': 'Costco',
     'costco gas station': 'Costco', 'costco wholesale': 'Costco',
+    /* Nicknames. "mcd" went to Mackinac Island, "bdubs" and "jitb" to whatever the geocoder
+       liked, "qt" and "dd" did nothing at all. */
+    'mcd': "McDonald's", 'mcds': "McDonald's", 'mickey ds': "McDonald's", 'qt': 'QuikTrip',
+    'dd': "Dunkin'", 'bww': 'Buffalo Wild Wings', 'bdubs': 'Buffalo Wild Wings',
+    'b dubs': 'Buffalo Wild Wings', 'jitb': 'Jack in the Box', 'peets': "Peet's Coffee",
+    'panda': 'Panda Express', 'firehouse': 'Firehouse Subs', 'super target': 'Target',
+    'supertarget': 'Target', 'petro': 'TA Travel Center', 'ta': 'TA Travel Center',
+    'travelcenters of america': 'TA Travel Center', 'travel centers of america': 'TA Travel Center',
     /* Ice cream is a precomputed category (every OSM ice cream shop), so it answers from
        the app's own data like a chain: instantly, anywhere, no live lookup. Common ways
        and common misspellings of asking for it. */
@@ -3493,6 +3501,16 @@ const CHAIN_ALIAS = (function () {
   map.sort((x, y) => y[0].length - x[0].length);      // longest match wins
   return map;
 })();
+/* What a chain calls itself after its name: "chipotle mexican grill", "pilot travel center",
+   "starbucks reserve". The extra words were left to be looked up as a town -- "starbucks
+   reserve" flew to Reserve, New Mexico and "tractor supply co" to Colorado -- or searched as
+   a name ("loves travel stop" found no Love's at all). Only straight after the chain's name,
+   so "starbucks in co" still means Colorado. */
+const CHAIN_TAIL = '(?:\\s(?:mexican grill|louisiana kitchen|italian kitchen|home improvement|' +
+  '(?:old )?country store|general store|super ?market|farmers market|neighborhood market|' +
+  'travel cent(?:er|re)s?|travel stops?|travel plazas?|truck stops?|gas stations?|' +
+  'gourmet burgers|burgers (?:and )?fries|butterburgers|doughnuts|donuts|sandwich(?:es)?|subs|' +
+  'pizza|coffee|express|reserve|cantina|restaurants?|diner|pharmacy|grill|kitchen|co|company))?';
 /* People split and join brand names every way: "chick fila", "mc donalds", "star bucks",
    "in nout". Rather than list each spelling, a run of adjacent words is also compared with its
    spaces removed. Only against names of 5+ letters, so short aliases ("bk", "dq", "heb")
@@ -3546,7 +3564,7 @@ function chainTypo(word, whole) {
 // "near me", "in my area", "around here" — these mean the user's location, not a place name.
 // Left unhandled, the leftover word ("area", "location", "here") was geocoded and landed in
 // New York.
-const HERE_RE = /\b(near me|by me|around me|close to me|my area|my location|my spot|current location|around here|near here|round here|here|nearby|near by|local|locally)\b/;
+const HERE_RE = /\b(near me|by me|around me|close to me|my area|my location|my spot|current location|around here|near here|round here|here|nearby|near by|local|locally|(?:low|dead|dying|empty) battery|battery (?:is )?(?:low|dead|dying|almost dead))\b/;
 // Words that survive stripping but are not places. Anything left made only of these is noise.
 const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot', 'zone', 'region',
   'somewhere', 'anywhere', 'place', 'places', 'best', 'good', 'great', 'cheap', 'cheapest',
@@ -3566,7 +3584,9 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
   // A chain's own trailing noun: "in n out burger" left the place "burger" to be geocoded.
   'burger', 'burgers', 'coffee shop', 'pizza place', 'drive thru', 'drive through',
   // Amenities, not places: "chargers with bathrooms" geocoded a place called "bathrooms".
-  'bathroom', 'bathrooms', 'restroom', 'restrooms', 'toilet', 'toilets', 'wifi', 'wi-fi', 'shade', 'covered']);
+  'bathroom', 'bathrooms', 'restroom', 'restrooms', 'toilet', 'toilets', 'wifi', 'wi-fi', 'shade', 'covered',
+  // "somewhere to eat while charging" looked up a place called "While".
+  'while', 'during', 'somewhere', 'anywhere']);
 /* One generic word alone is a kind of place, not a place: "chargers near the beach" sent the
    map to whichever "Beach" the geocoder liked. Only when it is the WHOLE place text, so Long
    Beach, Lake Tahoe and Downtown Disney are untouched. */
@@ -3599,7 +3619,7 @@ function parseQuery(raw) {
     // leftover word went off to be geocoded as a town.
     // Not for a food word standing in for a chain: "tacos" means every taco place, not Taco Bell.
     const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') +
-      (PLURAL_NO.has(alias) ? '' : '(?:e?s)?') + '(\\s|$)');
+      (PLURAL_NO.has(alias) ? '' : '(?:e?s)?') + CHAIN_TAIL + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
   }
   /* Food words that mean a set of chains we already have: "tacos" is Taco Bell, Del Taco
@@ -3700,6 +3720,9 @@ function parseQuery(raw) {
      know; "downtown disney" is somewhere of its own. */
   const dt = place.match(/^downtown (.+)$/);
   if (dt && knownPlace(dt[1])) place = dt[1];
+  // "e los angeles" went to Compton, "n las vegas" relied on the geocoder guessing.
+  const cd = place.match(/^([nsew]) (.+)$/);
+  if (cd && knownPlace(cd[2])) place = { n: 'north', s: 'south', e: 'east', w: 'west' }[cd[1]] + ' ' + cd[2];
   if (keepSt && place.split(' ').pop() === keepSt[1]) place += ', ' + keepSt[2].toUpperCase();
   if (GENERIC_PLACE.has(place)) place = '';
   place = expandAbbrev(place);
@@ -3734,11 +3757,29 @@ window.__parseQuery = parseQuery;
 const CITY_ALIAS = {
   la: 'Los Angeles, CA', 'l a': 'Los Angeles, CA', vegas: 'Las Vegas, NV',
   nyc: 'New York, NY', 'new york city': 'New York, NY', sf: 'San Francisco, CA',
-  'san fran': 'San Francisco, CA', frisco: 'San Francisco, CA', dc: 'Washington, DC',
+  'san fran': 'San Francisco, CA', dc: 'Washington, DC',
   'washington dc': 'Washington, DC', philly: 'Philadelphia, PA', nola: 'New Orleans, LA',
   // Search audit 2026-10-24: well-known stops the geocoder sends to the wrong state.
   'harris ranch': 'Coalinga, CA', 'jackson hole': 'Jackson, WY', woodlands: 'The Woodlands, TX',
   lax: 'Los Angeles International Airport, CA', sfo: 'San Francisco International Airport, CA',
+  /* More airport codes, and the nicknames people type ("chi town", "atx", "motor city"):
+     each was looked up as a town and either failed or found a namesake. Only codes that are
+     not also words ("sea", "mia", "oak", "san" and "las" stay out). */
+  jfk: 'John F. Kennedy International Airport, NY', lga: 'LaGuardia Airport, NY',
+  ewr: 'Newark Liberty International Airport, NJ', ord: "O'Hare International Airport, IL",
+  mdw: 'Chicago Midway International Airport, IL', iah: 'George Bush Intercontinental Airport, TX',
+  msp: 'Minneapolis-Saint Paul International Airport, MN', dtw: 'Detroit Metropolitan Wayne County Airport, MI',
+  seatac: 'Seattle-Tacoma International Airport, WA', 'sea tac': 'Seattle-Tacoma International Airport, WA',
+  sna: 'John Wayne Airport, CA', bur: 'Hollywood Burbank Airport, CA', mco: 'Orlando International Airport, FL',
+  iad: 'Washington Dulles International Airport, VA', dca: 'Ronald Reagan Washington National Airport, VA',
+  bwi: 'Baltimore/Washington International Airport, MD', bos: 'Boston Logan International Airport, MA',
+  bna: 'Nashville International Airport, TN', clt: 'Charlotte Douglas International Airport, NC',
+  sjc: 'San Jose Mineta International Airport, CA', dia: 'Denver International Airport, CO',
+  'chi town': 'Chicago, IL', chitown: 'Chicago, IL', 'windy city': 'Chicago, IL',
+  'big apple': 'New York, NY', 'motor city': 'Detroit, MI', motown: 'Detroit, MI',
+  'mile high city': 'Denver, CO', 'mile high': 'Denver, CO', 'h town': 'Houston, TX', htown: 'Houston, TX',
+  atx: 'Austin, TX', 'sin city': 'Las Vegas, NV', beantown: 'Boston, MA', nawlins: 'New Orleans, LA',
+  'city of angels': 'Los Angeles, CA', 'emerald city': 'Seattle, WA', 'music city': 'Nashville, TN',
   yosemite: 'Yosemite Valley, CA', 'yosemite national park': 'Yosemite Valley, CA',
   'zion national park': 'Springdale, UT', 'zion np': 'Springdale, UT',
   yellowstone: 'West Yellowstone, MT', 'joshua tree': 'Joshua Tree, CA',
@@ -3849,11 +3890,27 @@ function parseTrip(raw) {
   let a, b;
   /* "where to charge on the way to tahoe", "on my way to vegas": a destination with no start
      means a drive from wherever you are. It used to geocode "way tahoe". */
-  const wm = !/(?:^|\s)from\s/.test(t) && t.match(/(?:^|\s)(?:on the way|on my way|heading|headed|driving|drive|road trip|trip|route|directions|navigate|take me|get me|get|travel(?:l?ing)?)\s+to\s+(.+?)\s*$/);
+  const wm = !/(?:^|\s)from\s/.test(t) && t.replace(/\s+and back$/, '').match(/(?:^|\s)(?:on the way|on my way|heading|headed|driving|drive|road trip|trip|route|directions|navigate|take me|get me|get|travel(?:l?ing)?)\s+to\s+(.+?)\s*$/);
   if (wm) {
     const sp = splitDest(wm[1]);
     const B = tripSide(sp.dest);
     return B ? { from: '', to: B, filter: sp.filter, fromHere: true } : null;
+  }
+  /* "vegas and back", "tahoe and back": a drive there from where you are. */
+  const ab = t.match(/^(?:(?:a )?(?:round ?trip|drive|trip) (?:to )?)?(.+?)\s+and back$/);
+  if (ab) { const B = tripSide(ab[1]); return B ? { from: '', to: B, filter: '', fromHere: true } : null; }
+  /* "la-sf" and "sf from la": two places we know, joined without a "to". Not for a town with
+     a hyphen of its own ("winston-salem"), which is a place we know as a whole. */
+  const noTo = !/\sto\s/.test(' ' + t + ' ') && !knownPlace(t);
+  const hy = noTo && t.match(/^([a-z .']+?)-([a-z .']+)$/);
+  const fr = noTo && t.match(/^(.+?)\s+from\s+(.+)$/);
+  if (hy && knownPlace(hy[1].trim()) && knownPlace(hy[2].trim())) {
+    const A = tripSide(hy[1].trim()), B = tripSide(hy[2].trim());
+    if (A && B && A !== B) return { from: A, to: B, filter: '' };
+  }
+  if (fr && knownPlace(fr[1].trim()) && knownPlace(fr[2].trim())) {
+    const A = tripSide(fr[2].trim()), B = tripSide(fr[1].trim());
+    if (A && B && A !== B) return { from: A, to: B, filter: '' };
   }
   const fm = t.match(/(?:^|\s)from\s+(.+?)\s+to\s+(.+?)\s*$/);
   // "halfway between la and sf", "chargers between dallas and houston": also a drive.
@@ -3905,6 +3962,12 @@ function placeLabel(j) {
   // the search had gone somewhere else.
   if ((j.addresstype === 'postcode' || j.type === 'postcode') && a.postcode)
     return `${a.postcode} · ${[town, st].filter(Boolean).join(', ')}`;
+  /* A neighbourhood is called by its own name: "brooklyn" said "New York, NY", "harlem" said
+     the same, and "east los angeles" said "Compton, CA" (OSM files it under Compton), which
+     read as if the search had gone somewhere else. */
+  const own = String(j.display_name || '').split(',')[0].trim();
+  if (st && own && /^(suburb|neighbourhood|quarter|borough|city_district)$/.test(j.addresstype || ''))
+    return `${own}, ${st}`;
   if (town && st) return `${town}, ${st}`;
   return (town || st || j.display_name.split(',')[0]).trim();
 }
@@ -3933,7 +3996,10 @@ const isBusinessHit = h => h.class === 'shop' || h.class === 'office' || h.class
   || (h.class === 'leisure' && h.type === 'fitness_centre');
 
 function looksLikeChainBrand(hits, q) {
-  const norm = t => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  /* Letters only, and no leading "the": "pf changs" is "P.F. Chang's" and "cheesecake
+     factory" is "The Cheesecake Factory". With the dots and spaces kept, P.F. Chang's in
+     Boston read as a town and the map flew there. */
+  const norm = t => String(t || '').toLowerCase().replace(/^\s*the\s+/, '').replace(/[^a-z0-9]+/g, '');
   const target = norm(q);
   const same = hits.filter(h => norm(String(h.display_name || '').split(',')[0]).startsWith(target));
   if (!same.length) return false;
@@ -3941,6 +4007,10 @@ function looksLikeChainBrand(hits, q) {
      resolved to one store in Columbus and flew the map there. Landmarks are tourism,
      natural or historic classes, so they are unaffected. */
   if (same.every(isBusinessHit)) return true;
+  /* Many shops of that name, and the only place called it is a hamlet: "marshalls" flew to
+     Marshalls, New York (population: a crossroads) past every Marshalls store. */
+  if (same.filter(isBusinessHit).length >= 3
+      && !same.some(h => /^(place|boundary)$/.test(h.class) && (+h.importance || 0) >= 0.3)) return true;
   if (same.length < 2) return false;
   for (const h of same) {
     if (h.class === 'boundary') return false;
@@ -3959,6 +4029,40 @@ function looksLikeChainBrand(hits, q) {
    "Unexpected token '<'" on screen. Say what happened and what to do instead. */
 const busyMsg = (what, status) => status === 429 || status === 403 || status >= 500
   ? `${what} is busy right now — try again in a minute` : `${what} failed (error ${status})`;
+/* A landmark by its whole name. Its own name must start with what was typed -- or with the
+   name alone when it IS that kind of place: OSM calls them "Bellagio Las Vegas" and
+   "Cedars-Sinai Medical Center". And it must be well known (Nominatim importance) or fairly
+   known and near: there is a "Griffith Park" in Las Vegas and Falls Church too, and a "City
+   Park" in every other town. */
+const LANDMARK_IS = { park: x => x.class === 'leisure', mall: x => x.type === 'mall',
+  hospital: x => x.type === 'hospital', library: x => x.type === 'library', hotel: x => x.type === 'hotel' };
+async function findLandmark(phrase) {
+  const sq = t => normalise(t).replace(/^the /, '').replace(/[^a-z0-9]/g, '');
+  const want = sq(phrase);
+  const kind = (phrase.match(/(?:^|\s)(park|mall|hospital|library|hotel)(?:\s|$)/) || [])[1];
+  const base = kind ? sq(phrase.replace(new RegExp('(^|\\s)' + kind + '(\\s|$)'), ' ')) : '';
+  let j;
+  try {
+    const r = await fetchTimeout('https://nominatim.openstreetmap.org/search?format=json&addressdetails=1' +
+      '&limit=8&countrycodes=us&q=' + encodeURIComponent(phrase));
+    if (!r.ok) return null;
+    j = await r.json();
+  } catch (e) { return null; }
+  const from = lastMe || (center ? { lat: center.lat, lon: center.lon } : null);
+  let best = null, bs = -Infinity;
+  for (const x of j) {
+    const own = sq(String(x.display_name || '').split(',')[0]);
+    if (!own.startsWith(want) && !(base && own.startsWith(base) && LANDMARK_IS[kind](x))) continue;
+    const imp = +x.importance || 0, mi = from ? hav(from.lat, from.lon, +x.lat, +x.lon) / MI : Infinity;
+    if (!(imp >= 0.4 || (imp >= 0.3 && mi < 150))) continue;
+    const s = imp - 0.25 * Math.log10(1 + mi / 50);
+    if (s > bs) { bs = s; best = x; }
+  }
+  if (!best) return null;
+  const st = ST[((best.address || {}).state || '').toLowerCase()];
+  const own = String(best.display_name).split(',')[0].trim();
+  return { lat: +best.lat, lon: +best.lon, label: st ? `${own}, ${st}` : own };
+}
 const NOT_A_PLACE = /^(path|footway|track|cycleway|bridleway|steps|viewpoint|trailhead|picnic_site|bench|information)$/;
 async function geocode(q) {
   const c = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
@@ -4020,10 +4124,34 @@ async function geocode(q) {
      Nobody looks for chargers around a footpath or a viewpoint: those hits don't count. */
   ranked = ranked.filter(h => !NOT_A_PLACE.test(h.type || ''));
   if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
+  /* Nominatim returns a confident-looking hit for almost any string, so leftover words
+     could teleport the map to a real town that has nothing to do with the query. Require
+     the result to actually echo something the user typed. ZIPs and short names are exempt
+     because their match lands in structured address fields, not the display name.
+     Hits that don't are dropped BEFORE choosing, not just checked after: "frisco" leads
+     with San Francisco (an old nickname in OSM), which echoes nothing, and Frisco, Texas,
+     a city of 200,000 two lines down, was thrown away with it: "Couldn't find". */
+  const words = q.toLowerCase().match(/[a-z]{4,}/g) || [];
+  if (words.length) {
+    const echoes = h => {
+      const toks = ((h.display_name || '') + ' ' + JSON.stringify(h.address || {})).toLowerCase().match(/[a-z]{3,}/g) || [];
+      // Prefix match, not equality, so nicknames still land: philly -> Philadelphia.
+      return words.some(w => toks.some(t => t.startsWith(w.slice(0, 4)) || w.startsWith(t.slice(0, 4))));
+    };
+    ranked = ranked.filter(echoes);
+    if (!ranked.length) throw new Error(`Couldn't find "${q}"`);
+  }
   const nm = h => (h.display_name || '').split(',')[0].trim().toLowerCase();
   // Towns only: the state of Washington is not a twin of Washington, DC.
   const isState = h => h.address && !h.address.city && !h.address.town && !h.address.village
     && (h.address.state || '').toLowerCase() === nm(h);
+  /* "pittsburg" led with Pittsburg County, Oklahoma, ahead of four towns called Pittsburg.
+     Nobody types a bare name meaning the county: a town of that name goes first. */
+  const isCounty = h => h.addresstype === 'county' && / (county|parish)$/.test(nm(h));
+  if (isCounty(ranked[0]) && !/\b(county|parish)\b/.test(q.toLowerCase())) {
+    const town = ranked.find(h => nm(h) === nm(ranked[0]).replace(/ (county|parish)$/, '') && /^(place|boundary)$/.test(h.class));
+    if (town) { ranked.splice(ranked.indexOf(town), 1); ranked.unshift(town); }
+  }
   const twins = ranked.filter(h => nm(h) === nm(ranked[0]) && /^(place|boundary)$/.test(h.class) && !isState(h));
   if (bias && !wantState && twins.length > 1) {
     /* Size and distance together. Nearest alone picked Portland CT over Portland ME from New
@@ -4035,10 +4163,6 @@ async function geocode(q) {
     if (pick !== ranked[0]) { ranked.splice(ranked.indexOf(pick), 1); ranked.unshift(pick); }
   }
   const best = ranked[0];
-  /* Nominatim returns a confident-looking hit for almost any string, so leftover words
-     could teleport the map to a real town that has nothing to do with the query. Require
-     the result to actually echo something the user typed. ZIPs and short names are exempt
-     because their match lands in structured address fields, not the display name. */
   /* "supercharger near chase bank" used to fly to Dallas. Every hit was a different Chase
      branch with identical importance, and the Dallas one won only because OSM tagged that
      one building class=place, which scoreHit rewards. The real problem is that a brand we
@@ -4050,15 +4174,9 @@ async function geocode(q) {
     e.unsupportedChain = true;
     throw e;
   }
-  const words = q.toLowerCase().match(/[a-z]{4,}/g) || [];
-  if (words.length) {
-    const hay = ((best.display_name || '') + ' ' + JSON.stringify(best.address || {})).toLowerCase();
-    const toks = hay.match(/[a-z]{3,}/g) || [];
-    // Prefix match, not equality, so nicknames still land: philly -> Philadelphia.
-    const echoes = words.some(w => toks.some(t => t.startsWith(w.slice(0, 4)) || w.startsWith(t.slice(0, 4))));
-    if (!echoes) throw new Error(`Couldn't find "${q}"`);
-  }
-  const hit = { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4) };
+  const hit = { lat: +best.lat, lon: +best.lon, label: placeLabel(best), alts: ranked.slice(1, 4),
+                name: String(best.display_name || '').split(',')[0].trim(), biz: isBusinessHit(best),
+                imp: +best.importance || 0 };
   lsPut(GEO_NS, twins.length > 1 && cell ? gk + cell : gk, hit, GEO_CAP);   // only successes: a cached failure would stick
   return hit;
 }
@@ -4212,11 +4330,37 @@ $('placeIn').addEventListener('keydown', async e => {
   /* "banks near me", "tire shop" — a category word means they want that kind of place,
      not a town of that name. Ask OSM live, scoped to the area. */
   let poi = p.chains.length ? null : detectPoiIntent(raw);
+  /* "central park", "griffith park", "mall of america", "dolphin mall": a named place that
+     has a kind-of-place word in it. Read as "parks near Central" they went to Central, Ohio,
+     Mohave County, Arizona and Dolphin, Virginia. When the words around the kind run together
+     as one name (no "in" between), ask for the whole name, and go there if a well-known one
+     answers -- or a fairly known one nearby. "skate park", "city park" stay kinds. */
+  if (poi && poi.name && !p.here && !route) {
+    const phrase = normalise(raw).replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
+    if (/(^|\s)(park|mall|hospital|library|hotel)(\s|$)/.test(phrase) && normalise(raw).includes(phrase)) {
+      const myNav = ++navGen;
+      toast('Searching…'); $('placeBox').classList.add('busy');
+      const lm = await findLandmark(phrase);
+      $('placeBox').classList.remove('busy');
+      if (myNav !== navGen) return;
+      if (lm) { setCenter(lm.lat, lm.lon, lm.label, 'place'); return; }
+    }
+  }
   /* "gym in miami", "pharmacy in denver": the words that are not the category are a place,
      and the search belongs there. They were ignored -- "Searching gym miami near Los
      Angeles" -- so a category with a town always searched wherever you were. Go to the town
      first, then look, with the town's words out of the label. */
-  const poiWhere = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';
+  const pw = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';
+  /* ...but a word in FRONT of the kind is the place's own name, not a town: "memorial
+     hospital" went to New Braunfels, Texas, "outlet mall" to Port Sulphur, Louisiana and
+     "skate park" said "We don't track Skate yet". People write "kind town" or "kind in
+     town"; in front, only a town we know counts ("denver pharmacy", "la hotel"). */
+  const rw = normalise(raw).split(' '), ki = poi ? rw.indexOf((poi.kind || '').split(' ')[0]) : -1;
+  const ni = pw ? rw.indexOf(poi.name.split(' ')[0]) : -1;
+  // ("supercharger near chase bank": the "near" is before the name, so Chase is still a name.)
+  const nameFirst = pw && ki > 0 && ni > -1 && poi.name.split(' ').every(w => rw.indexOf(w) > -1 && rw.indexOf(w) < ki)
+    && !rw.slice(ni, ki).some(w => /^(in|near|around|at)$/.test(w));
+  const poiWhere = pw && (!nameFirst || knownPlace(poi.name) || knownPlace(pw)) ? pw : '';
   if (poiWhere) {
     const myNav = ++navGen;
     toast('Searching…'); $('placeBox').classList.add('busy');
@@ -4297,12 +4441,48 @@ $('placeIn').addEventListener('keydown', async e => {
   toast('Searching…');
   $('placeBox').classList.add('busy');
   const myNav = ++navGen;
+  /* A chain we don't bundle, in a town: "pf changs in phoenix", "7 eleven in reno". The
+     whole text is no place ("Couldn't find pf changs phoenix"), or it is just the town
+     ("7 eleven reno" is Reno, and the 7-Eleven was dropped), or a business looked for
+     wherever the map was. The words after the last "in" or "near" are the town and the words
+     before are the name: go there, then look for it. Only when the hit IS that town or one
+     shop in it: a landmark keeps its own ("golden gate park in sf", "ucla in la").
+     The geocoder is asked for "name, town" with the town as we know it: "venice beach la"
+     read "la" as Louisiana and found nothing. */
+  const sp = normalise(raw).match(/^(.+)\s(?:in|near|around)\s(.+)$/);
+  const spName = sp ? parseQuery(sp[1]).place : '', spTown = sp ? parseQuery(sp[2]).place : '';
+  const echoes = (typed, name) => (normalise(typed).match(/[a-z0-9]{3,}/g) || [])
+    .some(w => normalise(name || '').split(' ').some(t => t.startsWith(w.slice(0, 4))));
   try {
-    const g = await geocode(p.place);
+    const g = await geocode(spName && spTown ? `${spName}, ${spTown}` : p.place);
     if (myNav !== navGen) return;            // they searched or moved on meanwhile
+    if (spName && spTown && g.name && !knownPlace(spName)
+        && (g.biz || (!echoes(spName, g.name) && echoes(spTown, g.name)))) {
+      setCenter(g.lat, g.lon, g.label, 'place');
+      runLivePoi({ tags: ['amenity=bank'], name: spName, label: spName, brandOnly: true });
+      return;
+    }
+    /* The geocoder takes a misspelling literally when anything at all has that name:
+       "sacremento" was a farm road in Nebraska and "cincinatti" a spot in Oklahoma. An obscure
+       hit, and a big town of ours one slip away: that town is what was meant. */
+    const tf = !p.chains.length && !spName && g.imp !== undefined && g.imp < 0.25 && placeTypo(p.place, 15);
+    if (tf) { setCenter(tf.lat, tf.lon, tf.label, 'place'); toast(`Showing ${tf.label}`); return; }
     setCenter(g.lat, g.lon, g.label, 'place');
   } catch (err) {
     if (myNav !== navGen) return;
+    if (spName && spTown && (err.unsupportedChain || /^Couldn't find/.test(err.message))) {
+      try {
+        const g = await geocode(spTown);
+        if (myNav !== navGen) return;
+        setCenter(g.lat, g.lon, g.label, 'place');
+        runLivePoi({ tags: ['amenity=bank'], name: spName, label: spName, brandOnly: true });
+        return;
+      } catch (e2) { if (myNav !== navGen) return; }
+    }
+    // A shop that happens to share the misspelling ("pheonix") counts only for a big town.
+    const fix = !p.chains.length && (/^Couldn't find/.test(err.message) ? placeTypo(p.place)
+      : err.unsupportedChain ? placeTypo(p.place, 15) : null);
+    if (fix) { setCenter(fix.lat, fix.lon, fix.label, 'place'); toast(`Showing ${fix.label}`); return; }
     render(); syncUrl();
     if (err.unsupportedChain) {
       /* A brand we don't precompute. If we know where to look, ask OSM live for it;
@@ -4719,7 +4899,8 @@ function detectPoiIntent(raw) {
   const last = Math.max(...used);
   const kept = words.filter((w, i) => used.has(i) || (i === last + 1 && (w === 'shop' || w === 'store'))
                                    || (!POI_FILLER.has(w) && !NOISE_WORD.has(w)));
-  return { tags, name: rest.join(' '), label: kept.join(' ') || raw.trim() };
+  return { tags, name: rest.join(' '), label: kept.join(' ') || raw.trim(),
+           kind: words.filter((w, i) => used.has(i)).join(' ') };
 }
 
 window.__detectPoiIntent = detectPoiIntent;   // exposed for the search test suite
@@ -4989,10 +5170,14 @@ async function runLivePoi(intent, scope) {
     scopeLabel = center.label;
   }
   /* Anchored brand regex for a bare brand name, exact tag match for a category. Both are
-     constrained enough for Overpass; an unanchored name regex times out at this radius. */
+     constrained enough for Overpass; an unanchored name regex times out at this radius.
+     The brand's own punctuation is optional between its letters: OSM writes "P.F. Chang's",
+     "7-Eleven" and "The Cheesecake Factory", and "^pf changs" matched none of them. */
+  const brandRe = n => '^(the )?' + String(n).toLowerCase().replace(/^the /, '')
+    .replace(/[^a-z0-9]/g, '').split('').join('[^a-z0-9]*');
   const queries = ats.map(at => {
     const parts = intent.brandOnly
-      ? `nwr(${at})["brand"~"^${intent.name.replace(/[^a-z0-9 ]/gi, '')}",i];`
+      ? `nwr(${at})["brand"~"${brandRe(intent.name)}",i];`
       : intent.tags.map(t => `nwr(${at})` + t.split(';').map(kv => {
           const [k, v] = kv.split('=');
           return k === 'cuisine' ? `["cuisine"~"(^|;) *(${v}) *($|;)",i]` : `["${k}"="${v}"]`;
@@ -5068,7 +5253,9 @@ async function runLivePoi(intent, scope) {
   $('placeBox').classList.remove('busy');
   if (gen !== livePoiGen) return;          // a newer search started while this one waited
 
-  const want = intent.name;
+  // Letters and digits only: "childrens" is "Children's Hospital".
+  const sqz = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+  const want = intent.name ? sqz(intent.name) : '';
   const pois = [];
   /* Chunked route queries overlap at the seams, so the same shop can arrive twice. Harmless
      for the per-charger match (it takes the nearest either way) but it would inflate the
@@ -5084,7 +5271,7 @@ async function runLivePoi(intent, scope) {
     const t = el.tags || {};
     const nm = t.name || t.brand || '';
     // name filtering happens here, not in the query: Overpass times out on loose regexes
-    if (want && !intent.brandOnly && !(nm + ' ' + (t.brand || '')).toLowerCase().includes(want)) continue;
+    if (want && !intent.brandOnly && !sqz(nm + ' ' + (t.brand || '')).includes(want)) continue;
     /* Keep what OSM knows about the place. Showing "Tire Shop ≥3 min" without saying WHICH
        shop, whether it is open, or where it is, is barely an answer. */
     const addr = [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ');
@@ -5339,6 +5526,37 @@ function offlineTown(q) {
   const sc = p => bias ? 0.5 * Math.log10(1 + p.c) - Math.log10(1 + hav(bias.lat, bias.lon, p.lat, p.lon) / MI / 50) : p.c;
   const p = hits.reduce((a, h) => sc(h) > sc(a) ? h : a);
   return { lat: p.lat, lon: p.lon, label: p.label, alts: [] };
+}
+
+/* "pheonix", "sacremento", "cincinatti", "los angelas": the geocoder does not guess, so
+   each said "Couldn't find". A town we have chargers in, a slip or two away, is what was
+   meant -- the biggest such town. Only once the geocoder has found nothing, so a real place
+   always wins. */
+function editDist(a, b, max) {       // with swaps ("pheonix"); gives up past max
+  let prev2 = null, prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let low = i;
+    for (let j = 1; j <= b.length; j++) {
+      let v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (prev2 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+      cur.push(v);
+      if (v < low) low = v;
+    }
+    if (low > max) return max + 1;
+    prev2 = prev; prev = cur;
+  }
+  return prev[b.length];
+}
+function placeTypo(q, minC = 5) {
+  const k = normalise(q).replace(/[^a-z]/g, '');
+  if (k.length < 5 || PLACES.some(p => p.ckey === k)) return null;   // a town we have is no typo
+  const max = k.length >= 9 ? 2 : 1;
+  for (const p of PLACES) {            // most chargers first
+    if (p.c < minC || Math.abs(p.ckey.length - k.length) > max) continue;
+    if (editDist(k, p.ckey, max) <= max) return p;
+  }
+  return null;
 }
 
 /* "lasvegas" is not a place to any geocoder, but it is unambiguous to a person. Snap a

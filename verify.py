@@ -450,7 +450,7 @@ check(not _toasts, "toast() text is esc()'d again — users would see literal &a
 _toastfn = _html[_html.find("function toast(msg) {"):][:900]
 check("t.style.pointerEvents = ''; t.onclick = null;" in _toastfn,
       "toast() no longer resets the update prompt's tap handler — an invisible reload button over the list")
-check(re.search(r"const g = await geocode\(p\.place\);\n\s*if \(myNav !== navGen\) return;", _html) is not None,
+check(re.search(r"const g = await geocode\(spName && spTown \? `\$\{spName\}, \$\{spTown\}` : p\.place\);\n\s*if \(myNav !== navGen\) return;", _html) is not None,
       "a slow place search can overwrite a newer one again (Austin answering after Denver)")
 _rr = _html[_html.find("async function runRoute(opts)"):_html.find("function applyCorridor(")]
 check(_rr.count("if (stale()) return;") >= 2 and "finally { $('goBtn').disabled = false; }" in _rr,
@@ -1320,8 +1320,33 @@ check("/^(here|me|my location|current location|where i am|home|my house)$/.test(
       "'from here to X' is no longer a trip from your location")
 
 # "<kind of place> in <town>" searches the town ("gym in miami" searched near the user).
-check("const poiWhere = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';" in _html,
+check("const pw = poi && !p.here && !route && poi.name ? parseQuery(poi.name).place : '';" in _html
+      and "const poiWhere = pw && (!nameFirst || knownPlace(poi.name) || knownPlace(pw)) ? pw : '';" in _html,
       "a category with a town ('pharmacy in denver') ignores the town again")
+# ...and a name in front of the kind is not a town ("memorial hospital" went to Texas).
+check("&& !rw.slice(ni, ki).some(w => /^(in|near|around|at)$/.test(w));" in _html,
+      "'memorial hospital' / 'outlet mall' read the name as a town again")
+# Named landmarks with a kind word in them ("central park" went to Central, Ohio).
+check("async function findLandmark(phrase) {" in _html and "const lm = await findLandmark(phrase);" in _html,
+      "'central park' / 'mall of america' are kinds of place again, not the landmark")
+# A chain's own descriptor after its name ("starbucks reserve" went to Reserve, NM).
+check("CHAIN_TAIL + '(\\\\s|$)'" in _html, "chain descriptors ('pilot travel center') are towns again")
+# Brand names with punctuation: "pf changs" is P.F. Chang's (it flew to Boston).
+check("const brandRe = n => '^(the )?'" in _html and ".replace(/^\\s*the\\s+/, '').replace(/[^a-z0-9]+/g, '')" in _html,
+      "brand names with punctuation (P.F. Chang's, 7-Eleven) no longer match")
+# A neighbourhood is labelled by its own name ("brooklyn" said "New York, NY", "east los
+# angeles" said "Compton, CA").
+check("/^(suburb|neighbourhood|quarter|borough|city_district)$/.test(j.addresstype || '')" in _html,
+      "neighbourhoods are labelled with their city again (Brooklyn -> New York, NY)")
+# Misspelled towns snap to a town we have ("pheonix" was a brand search, "sacremento" a farm road).
+check("function placeTypo(q, minC = 5) {" in _html and "placeTypo(p.place, 15)" in _html,
+      "misspelled towns ('pheonix', 'sacremento') are no longer corrected")
+# Hits that echo nothing are dropped before choosing ("frisco" said Couldn't find).
+check("ranked = ranked.filter(echoes);" in _html, "'frisco' (led by San Francisco in OSM) can't be found again")
+# A bare name is the town, not the county ("pittsburg" went to Pittsburg County, OK).
+check("if (isCounty(ranked[0]) && " in _html, "a bare town name goes to the county of that name again")
+# Many shops of a name beat a hamlet of it ("marshalls" went to Marshalls, NY).
+check("if (same.filter(isBusinessHit).length >= 3" in _html, "'marshalls' flies to a hamlet in New York again")
 check("if (/\\b(national|state) (park|forest|monument|recreation area)\\b/.test(normalise(raw))) return null;" in _html,
       "'zion national park' is read as 'find parks' again")
 check("!isState(h)" in _html, "a state counts as a same-named town again ('washington' -> middle of WA)")
