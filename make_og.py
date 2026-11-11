@@ -105,7 +105,7 @@ def trip_cards(tmp, only):
             m = re.search(r"<b>(\d[\d,]*)</b> of those have somewhere to eat",
                           open(page, encoding="utf-8").read())
             if m: withfood = m.group(1)
-        hrs = int(t["hr"]); mins = int(round((t["hr"] - hrs) * 60))
+        m = int(round(t["hr"] * 60)); hrs, mins = m // 60, m % 60   # never "4h 60m"
         longest = max(len(a), len(b))
         size = 78 if longest <= 11 else 68 if longest <= 15 else 58
         render(TRIP_CARD.format(a=a, b=b, size=size, miles=f"{t['mi']:,.0f}",

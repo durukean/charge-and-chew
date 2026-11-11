@@ -506,6 +506,9 @@ urls = []
 def add(path): urls.append(f"{BASE}/{path.replace('index.html','')}")
 
 # ---- per chain, per chain+state ----
+# Each chain page gets the road trips that pass it ("<!--trips-->"), filled in once the trip
+# pages below are built: (page, chain, state or None for the national page).
+NEAR_TRIP_SLOTS = []
 chain_index_links = []
 state_chain = {}  # st -> {chain: count}
 for key, b in brands.items():
@@ -533,11 +536,13 @@ for key, b in brands.items():
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
 {stats_html}
 <h2>By state</h2><div class="chips">{state_links}</div>
+<!--trips-->
 <h2>Closest {min(40, n)} nationwide</h2>{top}
 {faq_html}"""
     can = f"near/{cs}/"
     path = f"near/{cs}/index.html"
     page(path, title, desc, body, can, jsonld_chain(key, hits, can, faq_schema), og=slug(key)); add(path)
+    NEAR_TRIP_SLOTS.append((path, key, None))
 
 
 # ---- per chain+state (needs complete state_chain from the loop above) ----
@@ -569,6 +574,7 @@ for key, b in brands.items():
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {stats_html}
 {cards}
+<!--trips-->
 <h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
 <h2>{bn(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>
 {faq_html}"""
@@ -577,6 +583,7 @@ for key, b in brands.items():
         thin = len(v) < STATE_INDEX_MIN   # keep crawlable, but out of the index for now
         page(path, title, desc, body, can, jsonld_state(key, st, sn, v, can, faq_schema), thin=thin, og=slug(key))
         if not thin: add(path)
+        NEAR_TRIP_SLOTS.append((path, key, st))
 
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)
@@ -764,7 +771,8 @@ along the route, with the restaurants and stores within a 10-minute walk of each
 # ---- trip pages: "EV charging stops from Los Angeles to Las Vegas" ----
 # The interstate pages answer "what is on I-15". These answer the question people actually
 # type, which names two cities and not a road number. Route geometry is pre-fetched and
-# committed by make_trips.py, so this build never depends on a routing server being up.
+# committed by tools/add_trips.py (the list of drives lives there), so this build never
+# depends on a routing server being up.
 TRIP_PATH = os.path.join(HERE, "data", "trips.json")
 TRIP_MI = 5.0
 TRIP_MIN_KW = 50
@@ -799,6 +807,12 @@ def kw_for(s, bit):
 
 def place(s):
     return f"{s['city']}, {s['st']}"
+
+
+def drive_label(hr):
+    """"4h 59m" from hours, never "4h 60m"."""
+    m = int(round(hr * 60))
+    return f"{m // 60}h {m % 60:02d}m"
 
 
 def plan_clock(clock, day):
@@ -946,12 +960,11 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
                    "battery or a busy site takes longer."))
 
     # 6. Drive time with the stops
-    hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
     nb, nm = len(brk), len(meals)
     parts = ([f"{nb} break{'s' if nb != 1 else ''} of about {planner.DWELL_BREAK} minutes"] if nb else []) + \
             ([f"{nm} meal{'s' if nm != 1 else ''} of about {planner.DWELL_MEAL}"] if nm else [])
     qa.append((f"How long is the drive from {A} to {B} with stops?",
-               f"About {hrs}h {mns:02d}m of driving for {t['mi']:,.0f} miles. " +
+               f"About {drive_label(t['hr'])} of driving for {t['mi']:,.0f} miles. " +
                (f"Leaving at {leave} with the plan's {' and '.join(parts)}, you arrive around {plan_clock(arr, arr_day)}."
                 if parts else f"Leaving at {leave} without a stop, you arrive around {plan_clock(arr, arr_day)}.")))
 
@@ -963,9 +976,17 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
     return html_, schema
 
 
+TRIP_REGIONS = [
+    ("The West", "CA NV AZ UT CO NM OR WA ID MT WY"),
+    ("Texas and the South Central states", "TX OK AR LA"),
+    ("The Southeast", "GA FL TN AL MS NC SC KY"),
+    ("The Northeast and Mid-Atlantic", "NY MA PA DC MD VA NJ CT RI VT NH ME DE WV"),
+    ("The Midwest", "IL MI OH IN MO MN WI IA NE KS ND SD"),
+]
+
+trip_links, trip_meta, chain_trips = [], {}, {}
 if os.path.exists(TRIP_PATH):
     trips = json.load(open(TRIP_PATH))
-    trip_links = []
     for tk in sorted(trips, key=lambda k: trips[k]["a"]):
         t = trips[tk]
         pts = t["pts"]
@@ -1056,8 +1077,7 @@ if os.path.exists(TRIP_PATH):
         med = sorted(kws)[len(kws) // 2] if kws else 0
         big = sum(1 for k in kws if k >= 150)
         tesla = sum(1 for f in found if "Tesla" in (sites[f[1]].get("net") or ""))
-        hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
-        drive = f"{hrs}h {mns:02d}m"
+        drive = drive_label(t["hr"])
         # The longest stretch with no fast charger near the route, by the app's rule (any DC
         # fast charger within the corridor), so the page, its Q&A and the app's gap row agree.
         g = plan.longest()
@@ -1085,7 +1105,7 @@ if os.path.exists(TRIP_PATH):
                   "the whole route rather than filling up with the city you left"
                   if len(withfood) > NBINS else "")
         body = (f"<h1>EV charging stops from {esc(a)} to {esc(b)}</h1>\n"
-                f'<p class="lead">The drive is <b>{t["mi"]:g} miles</b>, about <b>{drive}</b>. Along it '
+                f'<p class="lead">The drive is <b>{t["mi"]:,.1f} miles</b>, about <b>{drive}</b>. Along it '
                 f"sit <b>{len(found):,} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
                 f"&mdash; and <b>{len(withfood):,}</b> of those have somewhere to eat within a "
                 "10-minute walk, so the charging stop and the meal are the same stop.</p>\n"
@@ -1108,23 +1128,49 @@ if os.path.exists(TRIP_PATH):
              og=f"trip-{sl}")
         add(path)
         trip_links.append((a.split(",")[0], b.split(",")[0], sl, len(withfood)))
+        trip_meta[sl] = (a, b, ((t["alat"] + t["blat"]) / 2, (t["alon"] + t["blon"]) / 2))
+        # Which chains this drive passes, and in which states: for the chain pages' trip links.
+        for f in found:
+            for k in matches.get(f[1], {}):
+                chain_trips.setdefault((k, sites[f[1]]["st"]), Counter())[sl] += 1
+                chain_trips.setdefault((k, None), Counter())[sl] += 1
 
     if trip_links:
-        chips = "".join(f'<a href="../{sl}/">{esc(x)} &rarr; {esc(y)} <small>{n}</small></a>'
-                        for x, y, sl, n in trip_links)
-        for x, y, sl, n in trip_links:
+        names = {sl: (x, y, n) for x, y, sl, n in trip_links}
+        chip = lambda sl, pre, unit="": (f'<a href="{pre}{sl}/">{esc(names[sl][0])} &rarr; {esc(names[sl][1])} '
+                                         f'<small>{names[sl][2]}{unit}</small></a>')
+        # Related drives, not all 150: the way back, the other drives from the same start or to
+        # the same end (nearest first, so Atlanta -> Miami also gets Orlando -> Miami), the drives
+        # on from the destination, then the nearest others.
+        for sl, (a, b, mid) in trip_meta.items():
+            def rel(o):
+                oa, ob, om = trip_meta[o]
+                tier = (0 if (oa, ob) == (b, a) else 1 if oa == a or ob == b else
+                        2 if oa == b or ob == a else 3)
+                return (tier, _hav_km(mid[0], mid[1], om[0], om[1]), o)
+            near_ = sorted((o for o in trip_meta if o != sl), key=rel)[:10]
             f = os.path.join(HERE, f"trip/{sl}/index.html")
-            doc = open(f).read().replace('<div class="chips" id="tripchips"></div>',
-                                         f'<div class="chips">{chips}</div>')
+            doc = open(f).read().replace('<h2>Other road trips</h2><div class="chips" id="tripchips"></div>',
+                '<h2>More road trips</h2><div class="chips">' + "".join(chip(o, "../") for o in near_) +
+                '<a href="../"><b>All road trips &rarr;</b></a></div>')
             open(f, "w").write(doc)
-        idx_chips = "".join(f'<a href="{sl}/">{esc(x)} &rarr; {esc(y)} <small>{n} stops</small></a>'
-                            for x, y, sl, n in trip_links)
+        # The index: by region of the start, then by start and destination.
+        groups = []
+        for title_, sts in TRIP_REGIONS:
+            mine = sorted((sl for sl, (a, b, _) in trip_meta.items() if a.split(", ")[1] in sts.split()),
+                          key=lambda sl: (names[sl][0], names[sl][1]))
+            if mine:
+                groups.append(f"<h2>{title_}</h2>\n" + '<div class="chips">' +
+                              "".join(chip(sl, "", " stops") for sl in mine) + "</div>")
+        missing = set(trip_meta) - {sl for g in groups for sl in re.findall(r'href="([^"/]+)/"', g)}
+        if missing:
+            sys.exit(f"build.py: trips in no TRIP_REGIONS group: {sorted(missing)}")
         idx_body = (
             "<h1>EV road trip charging, planned around food</h1>\n"
-            f'<p class="lead">Pick a drive to see every fast charger within {TRIP_MI:g} miles of the '
-            "route, in order, with the restaurants within a 10-minute walk of each one. Charging "
-            "takes 20&ndash;40 minutes; this is about spending them somewhere worth stopping.</p>\n"
-            f'<div class="chips">{idx_chips}</div>\n'
+            f'<p class="lead">{len(trip_links)} popular drives, each with the plan for leaving at 8 am '
+            f"(where the meal stops fall, and when you arrive), every fast charger within {TRIP_MI:g} "
+            "miles of the route, and the restaurants within a 10-minute walk of each one.</p>\n"
+            + "\n".join(groups) + "\n"
             "<h2>Not your route?</h2>\n"
             '<p class="lead">The map plans any drive: type a start and a destination and it finds '
             'the chargers along it. <a class="cta" href="../">Open the map &rarr;</a></p>\n'
@@ -1146,6 +1192,23 @@ if os.path.exists(TRIP_PATH):
             sys.exit(f"build.py: expected exactly one TRIP_PAGES constant in index.html, found {_n}")
         if _h2 != _h:
             open(_ix, "w", encoding="utf-8").write(_h2)
+
+trip_names = {sl: (x, y) for x, y, sl, n in trip_links}
+# The chain pages: the drives that pass that chain (in that state), most stops first.
+for path, key, st in NEAR_TRIP_SLOTS:
+    f = os.path.join(HERE, path)
+    cnt = chain_trips.get((key, st), Counter())
+    top = sorted(cnt.items(), key=lambda x: (-x[1], x[0]))[:6 if st else 8]
+    pre = "../../../trip/" if st else "../../trip/"
+    sec = ""
+    if top:
+        sec = (f"<h2>Road trips with {bn(near(key))} on the way</h2>"
+               f"<p>How many of each drive&rsquo;s fast chargers{' in ' + esc(STATES.get(st, st)) if st else ''} "
+               f"have {art(key)} {bn(key)} within a walk:</p><div class=\"chips\">" +
+               "".join(f'<a href="{pre}{sl}/">{esc(trip_names[sl][0])} &rarr; {esc(trip_names[sl][1])} '
+                       f'<small>{c} stop{"s" if c != 1 else ""}</small></a>' for sl, c in top) + "</div>")
+    doc = open(f).read()
+    open(f, "w").write(doc.replace("<!--trips-->\n", sec + ("\n" if sec else ""), 1))
 
 
 # ---- privacy + support (App Store requires both URLs; they are useful pages regardless) ----

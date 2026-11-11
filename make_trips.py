@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Fetch and cache driving geometry for the trip landing pages.
 
+SUPERSEDED (2026-11): tools/add_trips.py holds the list of drives and looks up their end points
+the way the app does; use it. This older script knows 28 of the drives and city centres typed
+by hand, and --force here would put those back.
+
 Deliberately separate from build.py, for the same reason make_og.py is: build.py runs in CI
 on every data refresh and must not depend on a third-party demo server being up. This writes
 data/trips.json, that file is committed, and build.py only ever reads it. Re-run this by hand

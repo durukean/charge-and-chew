@@ -963,8 +963,8 @@ if os.path.exists(_trips):
     _tj = json.load(open(_trips))
     _dirs = [d for d in os.listdir(os.path.join(HERE, "trip"))
              if os.path.isdir(os.path.join(HERE, "trip", d))] if os.path.isdir(os.path.join(HERE, "trip")) else []
-    check(len(_dirs) >= len(_tj) - 2,
-          f"only {len(_dirs)} trip pages for {len(_tj)} cached routes")
+    check(len(_dirs) == len(_tj),
+          f"{len(_dirs)} trip pages for {len(_tj)} cached routes: drop thin drives from tools/add_trips.py PAIRS")
     _sm = open(os.path.join(HERE, "sitemap.xml"), encoding="utf-8").read()
     check(_sm.count("/trip/") >= len(_dirs), "trip pages are missing from the sitemap")
     _lv = os.path.join(HERE, "trip", "los-angeles-to-las-vegas", "index.html")
@@ -1019,8 +1019,8 @@ if os.path.exists(_trips):
         _stops = [g for g in _got if g[0] == "stop"]
         if _stops and _stops[0][3] * _tt["hr"] * 60 / _tt["mi"] < 55:
             _bad_plan.append(f"{_sl}: first stop at mile {_stops[0][3]}, under an hour out")
-        if _tt["mi"] < 130 and _stops:
-            _bad_plan.append(f"{_sl}: a stop on a drive under 130 miles leaving at 8 am")
+        if _tt["hr"] * 60 <= 150 and _stops:
+            _bad_plan.append(f"{_sl}: a stop on a drive of 2.5 hours or less leaving at 8 am")
         # The FAQPage markup is the visible questions and answers, word for word.
         _vis = [(_txt(q), _txt(a)) for q, a in re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>",
                                                            (re.search(r'<h2>Questions about this drive</h2><div class="faq">(.*?)</div>', _h, re.S) or re.match("()", "")).group(1), re.S)]
@@ -1034,6 +1034,32 @@ if os.path.exists(_trips):
         _ldq = [(e["name"], e["acceptedAnswer"]["text"]) for e in _fq[0]["mainEntity"]] if len(_fq) == 1 else None
         if not _vis or len(_vis) < 5 or _ldq != _vis:
             _bad_faq.append(_sl)
+    # ~150 drives (2026-11-11): each page links its related drives (not all of them) and the
+    # index; the index lists every drive once, by region; the chain pages link the drives that
+    # pass them, and no placeholder is left behind.
+    _onpages = sorted(d for d in _dirs if os.path.isfile(os.path.join(HERE, "trip", d, "index.html")))
+    check(len(_onpages) >= 140, f"only {len(_onpages)} trip pages (expected ~150)")
+    _ix = open(os.path.join(HERE, "trip", "index.html"), encoding="utf-8").read()
+    _ixl = re.findall(r'<a href="([a-z0-9-]+)/">', _ix)
+    check(sorted(_ixl) == _onpages, "the trips index does not list every trip page exactly once")
+    check(_ix.count("<h2>The ") >= 4, "the trips index lost its regions")
+    _rel_bad = []
+    for _d in _onpages:
+        _h = open(os.path.join(HERE, "trip", _d, "index.html"), encoding="utf-8").read()
+        _m = re.search(r'<h2>More road trips</h2><div class="chips">(.*?)</div>', _h, re.S)
+        _l = re.findall(r'href="\.\./([a-z0-9-]+)/"', _m.group(1)) if _m else []
+        if not (_m and 5 <= len(_l) <= 10 and _d not in _l and set(_l) <= set(_onpages) and 'href="../"><b>All road trips' in _m.group(1)):
+            _rel_bad.append(_d)
+    check(not _rel_bad, f"trip pages without a related-drives list: {_rel_bad[:3]}")
+    _near_all = glob.glob(os.path.join(HERE, "near", "*", "index.html")) + glob.glob(os.path.join(HERE, "near", "*", "*", "index.html"))
+    _left = [p_ for p_ in _near_all if "<!--trips-->" in open(p_, encoding="utf-8").read()]
+    check(not _left, f"{len(_left)} chain pages kept the road-trip placeholder, e.g. {_left[:2]}")
+    _inn = os.path.join(HERE, "near", "in-n-out", "ca", "index.html")
+    check(os.path.exists(_inn) and re.search(r'<h2>Road trips with <span class="nw">In-N-Out</span> on the way</h2>.*?'
+                                              r'href="\.\./\.\./\.\./trip/[a-z-]+/"', open(_inn, encoding="utf-8").read(), re.S),
+          "near/in-n-out/ca no longer links the road trips that pass In-N-Out in California")
+    _wt = sum(1 for p_ in _near_all if "/trip/" in open(p_, encoding="utf-8").read())
+    check(_wt > 1000, f"only {_wt} chain pages link a road trip")
     check(not _bad_plan, f"trip-page 8 am plans are wrong: {_bad_plan[:3]}")
     check(not _stale, f"{len(_stale)} trip pages' plans differ from planner.py (run build.py): {_stale[:3]}")
     check(not _bad_faq, f"{len(_bad_faq)} trip pages' FAQPage markup is missing or differs from the visible Q&A: {_bad_faq[:3]}")
