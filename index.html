@@ -6020,19 +6020,43 @@ function applyCorridor(verts, mi, hr, hwy) {
   routeCase = L.polyline(verts, { ...rOpt, color: curDark ? '#121110' : '#fffdfa', weight: 8, opacity: .9 }).addTo(map);
   routeLayer = L.polyline(verts, { ...rOpt, color: curDark ? '#f4f1ec' : '#1c1917', weight: 3.5, opacity: .95 }).addTo(map);
   const maxM = corridorMi * MI;
-  const cells = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
+  /* Every stop in the swept cells used to be measured against EVERY point of the line: LA ->
+     New York is 34k points, and a corridor tap froze a phone for 2.4-3.7 s (4x CPU), three
+     quarters of it in hav(). The points now go into the same 0.05° cells, and a stop is
+     measured only against the cells that can hold a point within maxM of it: the same
+     nearest point (ties to the earliest, as before), the same stops. Numeric cell keys --
+     building ~2.5M string keys was half a second on its own. */
+  const cell = (ci, cj) => ci * 100000 + cj;
+  const cells = new Set(), seen = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
   for (const v of verts) {
-    const ci = Math.round(v[0] / .05), cj = Math.round(v[1] / .05);
-    for (let di = -reach; di <= reach; di++) for (let dj = -reach; dj <= reach; dj++) cells.add((ci + di) + ',' + (cj + dj));
+    const ci = Math.round(v[0] / .05), cj = Math.round(v[1] / .05), c = cell(ci, cj);
+    if (seen.has(c)) continue;
+    seen.add(c);
+    for (let di = -reach; di <= reach; di++) for (let dj = -reach; dj <= reach; dj++) cells.add(cell(ci + di, cj + dj));
   }
   const ids = new Set(), order = new Map();
-  const step = verts.length > 3000 ? 3 : 1;
+  const step = verts.length > 3000 ? 3 : 1, bucket = new Map();
+  for (let i = 0; i < verts.length; i += step) {
+    const c = cell(Math.round(verts[i][0] / .05), Math.round(verts[i][1] / .05)), b = bucket.get(c);
+    if (b) b.push(i); else bucket.set(c, [i]);
+  }
+  /* How many cells away a point within maxM can lie, from hav() itself: a fixed number in
+     latitude; in longitude more toward the pole, where a degree is shorter. +1 each for the
+     rounding to a cell on both sides. */
+  const rad = Math.PI / 180, s0 = Math.sin(maxM / 2 / 6371000), dLat = maxM / 6371000 / rad;
+  const ri = Math.ceil(dLat / .05) + 1;
   for (const s of SITES) {
-    if (!cells.has(Math.round(s.lat / .05) + ',' + Math.round(s.lon / .05))) continue;
+    const ci = Math.round(s.lat / .05), cj = Math.round(s.lon / .05);
+    if (!cells.has(cell(ci, cj))) continue;
+    const sj = s0 / Math.sqrt(Math.cos(s.lat * rad) * Math.cos(Math.min(89.9, Math.abs(s.lat) + dLat) * rad));
+    const rj = sj >= 1 ? 3600 : Math.ceil(2 * Math.asin(sj) / rad / .05) + 1;
     let best = 9e9, bi = 0;
-    for (let i = 0; i < verts.length; i += step) {
-      const d = hav(s.lat, s.lon, verts[i][0], verts[i][1]);
-      if (d < best) { best = d; bi = i; }
+    for (let di = -ri; di <= ri; di++) for (let dj = -rj; dj <= rj; dj++) {
+      const b = bucket.get(cell(ci + di, cj + dj));
+      if (b) for (const i of b) {
+        const d = hav(s.lat, s.lon, verts[i][0], verts[i][1]);
+        if (d < best || (d === best && i < bi)) { best = d; bi = i; }
+      }
     }
     if (best <= maxM) { ids.add(s.id); order.set(s.id, bi); }
   }

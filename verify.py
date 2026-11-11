@@ -1301,6 +1301,12 @@ _bc2 = _html[_html.index("function breaksCard("):][:4000]
 check("const home = localAt(t0, tzOf(first)).dn;" in _bc2
       and "n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : ''" in _bc2,
       "the breaks card says 'next day' for day 3 again (day labels must count from the day you leave)")
+# The corridor is measured cell by cell (2026-11-10): every stop against every point of the line
+# froze a phone for 2.4-3.7 s on LA -> New York at each corridor tap.
+_ac = _html[_html.index("function applyCorridor("):_html.index("function applyCorridor(") + 4500]
+check("const b = bucket.get(cell(ci + di, cj + dj));" in _ac and "cells.add(cell(ci + di, cj + dj))" in _ac
+      and "+ ',' +" not in _ac and "for (let i = 0; i < verts.length; i += step) {\n      const d = hav(" not in _ac,
+      "applyCorridor measures each stop against every route point again (seconds-long freeze on long routes)")
 # A break opens its stop even when the stop has no list row (only LIST_MAX render): LA -> New
 # York had 17 of 23 break buttons doing nothing. tools/breaks_check.mjs taps every one.
 _bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:260]
