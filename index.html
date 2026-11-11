@@ -1335,12 +1335,18 @@ window.addEventListener('error', function () {
    the data. The app script adopts this map (window.__ccMap) instead of creating one, and
    re-requests the same tile URLs from cache when it builds its own layers.
    The theme guess (by hour) and the first view (link, else last area, else the US) only
-   decide which tiles are fetched first; the app script then applies the real ones. */
+   decide which tiles are fetched first; the app script then applies the real ones.
+   crossOrigin: without it every tile is an opaque response, which the service worker must not
+   cache (it cannot see an opaque body's size, and the watermark check needs it), so the
+   "offline map of where you've been" had never stored a single tile (BUG-21). Both hosts
+   send Access-Control-Allow-Origin: *. Web only: the iOS app has no service worker, and its
+   tiles stay exactly as they were. */
+window.CC_TILE_CORS = /^https?:$/.test(location.protocol);
 window.CC_BASEMAPS = {
   carto: {
     light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
     dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    opts:  { maxZoom: 19, subdomains: 'abcd' },
+    opts:  { maxZoom: 19, subdomains: 'abcd', crossOrigin: window.CC_TILE_CORS },
     attrib: '© <a href="https://carto.com">CARTO</a>, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors' },
   esri: {
     light: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
@@ -1349,7 +1355,7 @@ window.CC_BASEMAPS = {
     refLight: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
     refDark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
     // Esri's canvas has no tiles past z16; upscale rather than going blank at deep zoom.
-    opts:  { maxZoom: 19, maxNativeZoom: 16 },
+    opts:  { maxZoom: 19, maxNativeZoom: 16, crossOrigin: window.CC_TILE_CORS },
     // verbatim from the service's own copyrightText — Esri requires basemap AND data credit
     attrib: '<a href="https://www.esri.com">Esri</a>, HERE, Garmin, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, and the GIS user community' } };
 (function () {

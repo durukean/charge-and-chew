@@ -1542,6 +1542,14 @@ check(_live("noteRouteFrom(); clearCenter();", 2)
       and "$('rClear').onclick = e => { e.stopPropagation(); dropRoute(true);" in _html,
       "clearing a route drops you on the national view again instead of the area before it")
 
+# Map tiles are requested with CORS on the web (BUG-21): without it every tile is opaque and the
+# service worker, which must not cache what it cannot measure, never stored one. Both providers'
+# options carry it, and every tile layer (early map and app) is built from those options.
+check(_html.count("crossOrigin: window.CC_TILE_CORS },") == 2
+      and _live("window.CC_TILE_CORS = /^https?:$/.test(location.protocol);")
+      and _html.count("{ ...bm.opts, alt: '' }") == 2 and _html.count("Object.assign({}, bm.opts, { alt: '' })") == 2,
+      "map tiles are requested without CORS again, so the service worker can never cache one")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

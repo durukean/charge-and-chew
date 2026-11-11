@@ -9,8 +9,11 @@ const mkCache = name => ({
   async keys(){ const m=store.get(name); return m?[...m.keys()].map(u=>({url:u})):[]; },
   async delete(k){ const m=store.get(name); return m?m.delete(typeof k==='string'?k:k.url):false; },
 });
-function mkRes({size}){ return { ok:true, status:200, type:'basic', __size:size,
-  clone(){return mkRes({size})}, async arrayBuffer(){return new ArrayBuffer(size)} }; }
+/* type: 'basic' same-origin, 'cors' a cross-origin answer the page asked for with CORS (the
+   map tiles, since crossOrigin is set), 'opaque' one asked for without -- its body is unreadable
+   to the worker, which therefore must never cache it. */
+function mkRes({size, type='basic'}){ return { ok:true, status:200, type, __size:size,
+  clone(){return mkRes({size, type})}, async arrayBuffer(){return new ArrayBuffer(type === 'opaque' ? 0 : size)} }; }
 
 globalThis.self = {
   addEventListener:(t,f)=>{(listeners[t]=listeners[t]||[]).push(f)},
@@ -18,8 +21,8 @@ globalThis.self = {
 };
 globalThis.caches = { open:async n=>mkCache(n), keys:async()=>[...store.keys()], delete:async n=>store.delete(n),
   async match(req){ const k=typeof req==='string'?req:req.url; for (const m of store.values()) if (m.get(k)) return mkRes(m.get(k)); return undefined; } };
-let nextSize = 0;
-globalThis.fetch = async () => mkRes({size:nextSize});
+let nextSize = 0, nextType = 'cors';
+globalThis.fetch = async req => mkRes({size:nextSize, type: /basemaps|arcgisonline/.test(req && req.url || req) ? nextType : 'basic'});
 globalThis.Response = class { static error(){return{error:true}} };
 globalThis.Request = class { constructor(u,o){this.url=u;Object.assign(this,o)} };
 
@@ -46,6 +49,14 @@ const afterGood = (store.get(tilesCache())||new Map()).size;
 
 const probe = await tileReq(TILE+'?probe=1');
 
+/* An opaque tile (requested without crossOrigin) must still reach the map, but never the cache:
+   its size reads as 0, so the watermark check cannot vouch for it. */
+nextSize = 87968; nextType = 'opaque';
+const opaqueOut = await tileReq(TILE+'?x=3');
+const opaqueRes = opaqueOut && await opaqueOut;
+const afterOpaque = (store.get(tilesCache())||new Map()).size;
+nextType = 'cors';
+
 /* Every check counts toward the exit code. This file used to print "<-- BUG" and exit 0, so a
    service-worker regression would have sailed through CI with the word BUG in the log. */
 let failed = 0;
@@ -56,6 +67,8 @@ const report = (label, ok, okText, badText) => {
 report('watermark tile (126b) cached?', !(afterBad > 0), 'no   OK', 'YES');
 report('healthy tile (88KB) cached?', afterGood > afterBad, 'yes  OK', 'NO');
 report('probe request intercepted?', probe === undefined, 'no   OK (goes to network)', 'YES');
+report('opaque tile returned?', !!(opaqueRes && opaqueRes.type === 'opaque'), 'yes  OK', 'NO (map loses the tile)');
+report('opaque tile cached?', afterOpaque === afterGood, 'no   OK', 'YES (unvetted tile cached)');
 
 /* ---- data.js: a returning visitor must get NEW data when it is published ----
    The worker serves data.js cache-first by URL. For months the URL was a hand-edited "?v=9"
@@ -116,13 +129,15 @@ report('update keeps cached dataset?', !!(store.get('cc-data') && store.get('cc-
 report('old caches removed?', !store.has('cc-v1-data') && !store.has('cc-v1-shell'), 'yes  OK', 'NO');
 
 /* ---- a slow network must not hold the page hostage ---- */
-async function navReq(fetchImpl) {
+async function navReq(fetchImpl, path = '/') {
   globalThis.fetch = fetchImpl;
   let out, waits = [];
-  const ev = { request: { url: 'https://chargeandchew.com/', method: 'GET', mode: 'navigate', headers: { get: () => 'text/html' } },
+  const ev = { request: { url: 'https://chargeandchew.com' + path, method: 'GET', mode: 'navigate', headers: { get: () => 'text/html' } },
                respondWith: p => { out = p; }, waitUntil: p => waits.push(p) };
   for (const f of listeners['fetch']) f(ev);
-  const t0 = Date.now(); const res = await out; return { res, ms: Date.now() - t0 };
+  const t0 = Date.now(); const res = await out; const ms = Date.now() - t0;
+  await Promise.all(waits.map(w => w.catch(() => {})));   // let the background refresh land
+  return { res, ms };
 }
 store.set('cc-v49-shell', new Map([['https://chargeandchew.com/', { size: 111 }]]));   // cached page
 const slow = await navReq(() => new Promise(r => setTimeout(() => r(mkRes({ size: 222 })), 8000)));
@@ -130,6 +145,23 @@ report('slow network -> cached page?', slow.res && slow.res.__size === 111 && sl
        `yes  OK (${slow.ms} ms)`, `NO (${slow.ms} ms, size ${slow.res && slow.res.__size})`);
 const fast = await navReq(async () => mkRes({ size: 333 }));
 report('fast network -> fresh page?', fast.res && fast.res.__size === 333, 'yes  OK', 'NO');
+
+/* ---- one cached page per path, whatever the query (BUG-20) ----
+   Every shared link (?q=, ?from=&to=, ?stop=) used to store its own ~420 KB copy of index.html,
+   without limit, and a link never opened before missed the cache on a slow network. */
+store.delete('cc-v49-shell');    // only this worker's own shell from here on
+const shellName = () => [...store.keys()].find(k => k.startsWith('cc-v') && k.endsWith('-shell') && !k.startsWith('cc-v49'));
+for (const q of ['/?q=starbucks', '/?from=LA&to=Vegas', '/?stop=123', '/?chain=IHOP']) await navReq(async () => mkRes({ size: 444 }), q);
+const shellKeys = [...(store.get(shellName()) || new Map()).keys()];
+report('one shell copy for all links?', shellKeys.length === 1 && shellKeys[0] === 'https://chargeandchew.com/',
+       'yes  OK', 'NO (' + shellKeys.join(' ') + ')');
+const unseen = await navReq(() => new Promise(r => setTimeout(() => r(mkRes({ size: 555 })), 8000)), '/?from=Never&to=Seen');
+report('slow, never-seen link -> cache?', unseen.res && unseen.res.__size === 444 && unseen.ms < 5000,
+       `yes  OK (${unseen.ms} ms)`, `NO (${unseen.ms} ms, size ${unseen.res && unseen.res.__size})`);
+const offlineNav = await navReq(async () => { throw new TypeError('offline'); }, '/?q=never+seen');
+// 555: the slow load above still refreshed the ONE shared copy in the background
+report('offline, never-seen link -> page?', offlineNav.res && offlineNav.res.__size === 555, 'yes  OK',
+       'NO (' + (offlineNav.res && (offlineNav.res.__size || 'fallback page')) + ')');
 
 console.log('  cache name in use:            ', [...store.keys()].join(',') || '(none)');
 if (failed) { console.log(`\nservice worker: ${failed} check(s) FAILED`); process.exit(1); }

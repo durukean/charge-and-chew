@@ -4,7 +4,7 @@
    2. Stop re-downloading the ~1 MB dataset. GitHub Pages sends cache-control: max-age=600,
       so without this a returning visitor refetches everything every 10 minutes.
    Cache names are versioned; bump VERSION to roll out a new shell.                       */
-const VERSION = 'cc-v50';
+const VERSION = 'cc-v51';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 /* NOT versioned. data.js is addressed by a hash of its content (?v=), so a new dataset is a new
    URL whatever this worker's version is. Versioning this cache threw the ~1 MB dataset away on
@@ -77,6 +77,8 @@ self.addEventListener('fetch', event => {
         // "API key required" image as a valid 200 PNG; caching it cache-first pinned that
         // message on the map permanently, surviving deploys and CARTO itself recovering.
         // Real tiles are tens of KB, watermarks and blanks are under 2 KB.
+        // Opaque (a tile requested without CORS) has no readable size: never cached. The page
+        // asks with crossOrigin, so a normal tile is a readable 'cors' response.
         if (res && res.ok && res.type !== 'opaque') {
           const buf = await res.clone().arrayBuffer();
           if (buf.byteLength > 2000) { c.put(request, res.clone()); trimCache(TILES, TILE_LIMIT); }
@@ -114,9 +116,14 @@ self.addEventListener('fetch', event => {
   /* With no timeout, opening the app on one bar of signal waited for the network to give up
      entirely before the cached copy was used. After NAV_TIMEOUT the cached page is served and
      the network answer still refreshes the cache for next time. */
+  /* One cached copy per PAGE, not per address. Keyed on the full URL, every shared link
+     (/?q=starbucks, /?from=LA&to=Vegas, /?stop=123...) stored its own ~420 KB copy of the same
+     index.html, without limit, and a link never opened before missed the cache and waited for
+     the network on one bar of signal (BUG-20). The query never changes what the server sends. */
   if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
+    const page = url.origin + url.pathname;
     const net = fetch(request).then(async res => {
-      if (res && res.ok) await (await caches.open(SHELL)).put(request, res.clone());
+      if (res && res.ok) await (await caches.open(SHELL)).put(page, res.clone());
       return res;
     });
     if (event.waitUntil) event.waitUntil(net.catch(() => {}));
@@ -124,10 +131,10 @@ self.addEventListener('fetch', event => {
       try {
         const first = await Promise.race([net, new Promise(r => setTimeout(r, NAV_TIMEOUT, 'slow'))]);
         if (first !== 'slow') return first;
-        const hit = await caches.match(request);
+        const hit = await caches.match(page);
         return hit || await net;
       } catch {
-        return (await caches.match(request)) || (await caches.match('/index.html')) ||
+        return (await caches.match(page)) || (await caches.match('/index.html')) ||
                new Response('<h1>Offline</h1><p>Open the app once while online to use it offline.</p>',
                             { headers: { 'Content-Type': 'text/html' } });
       }
