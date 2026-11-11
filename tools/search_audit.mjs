@@ -293,6 +293,10 @@ const CASES = [
      ("union station" went to Union, NJ). Run by --quick too. */
   C('LA', 'fresh', 'union station', { offline: true, toast: 'offline', near: ['LA', 30] }, '@nosignal'),
   C('LA', 'fresh', 'central park', { offline: true, toast: 'offline', near: ['LA', 30] }, '@nosignal'),
+  /* A failed lookup leaves nothing of the search before it: "bakery in denver" (offline: the
+     bundled Dunkin') then "gym" said "Couldn't look up gym" with chain=Dunkin' still in the
+     state and the URL. */
+  C('LA', 'bakeryDenver', 'gym', { offline: true, nochain: true, cleanurl: true, title: "Couldn't look up gym" }, '@nosignal'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
@@ -428,6 +432,11 @@ async function main() {
         await send('Network.enable');
         await send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
       }
+      if (c.prior === 'bakeryDenver') {       // offline already: the bundled chains answer
+        await search('bakery in denver');
+        const st = await ev(`window.__ccState()`);
+        if (!st.chains.length || !/[?&]chain=/.test(st.url)) throw new Error(`"bakery in denver" set no chain (${st.chains}, ${st.url})`);
+      }
       await search(c.q);
       if (c.expect.clear) { await ev(`document.getElementById('placeClr').click(), true`); await sleep(1500); }
       res = await ev(`window.__ccState()`);
@@ -458,6 +467,8 @@ async function main() {
       if (x.chain && !res.chains.includes(x.chain)) why.push(`chain ${x.chain} not set (${res.chains})`);
       if (x.nochain && res.chains.length) why.push(`a filter stayed on: ${res.chains}`);
       if (x.toast && !(res.toast || '').includes(x.toast)) why.push(`wanted a toast with "${x.toast}", got "${res.toast}"`);
+      if (x.title && !(res.title || '').includes(x.title)) why.push(`wanted the title "${x.title}", got "${res.title}"`);
+      if (x.cleanurl && /[?&](chain|poi|any)=/.test(res.url)) why.push(`the URL keeps the last search: ${res.url}`);
     }
     const tag = `${c.who.padEnd(6)} ${c.prior.padEnd(10)} ${JSON.stringify(c.q)}`;
     if (why.length) { fails.push({ c, why, res }); console.log(`FAIL  ${tag}\n        ${why.join('; ')}\n        title: ${res && res.title} | toast: ${res && res.toast}`); }

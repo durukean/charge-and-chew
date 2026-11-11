@@ -4213,7 +4213,7 @@ window.__ccState = () => {
   return { center: center && { lat: center.lat, lon: center.lon, label: center.label, kind: center.kind },
     route: !!route, hwy: route && route.hwy || null, chains: [...active], anyCat,
     busy: !!document.querySelector('.busy'), ready: SITES.length > 1000,
-    title: $('sheetTitle').textContent.replace(/\s+/g, ' ').trim(), toast: $('toast').textContent,
+    title: $('sheetTitle').textContent.replace(/\s+/g, ' ').trim(), toast: $('toast').textContent, url: location.search,
     n: v.length, first: v.slice(0, 5).map(s => ({ name: s.name, st: s.st, lat: s.lat, lon: s.lon })),
     map: [mc.lat, mc.lng], zoom: map.getZoom() };
 };
@@ -5548,6 +5548,14 @@ async function runLivePoi(intent, scope) {
     render(); setSheet('mid'); syncUrl();
     seedBanner(`<b>Chains we bundle — showing now</b>Checking OpenStreetMap for independent
       ${esc(plural(intent.label))} too…`);
+  } else {
+    /* Nothing we bundle answers it, so what the LAST search left ("bakery in denver" ->
+       Dunkin') is no answer to this one. An answer replaces the chains anyway; a failed
+       lookup ("gym" with no signal) left them in the state and in the URL (chain=Dunkin')
+       under "Couldn't look up gym". Clear them now: the list, the map and the link agree
+       while it runs and if it fails. */
+    active.clear(); anyCat = null;
+    render(); syncUrl();
   }
   toast(`Searching ${intent.label} ${onRoute ? 'along your route' : 'near ' + scopeLabel}…`);
   $('placeBox').classList.add('busy');
