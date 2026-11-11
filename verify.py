@@ -1769,8 +1769,15 @@ check("bridge.onReview = { [weak self] in self?.reviewAfterDirections() }" in _w
 check('if host == "apps.apple.com" { UIApplication.shared.open(url); return }' in _wvc2,
       "'Rate the app' opens a web page in a Safari sheet instead of the App Store")
 check('onShare?(url, opts["title"] as? String ?? "Charge & Chew", opts["text"] as? String)' in _nb2
-      and "if let text, !text.isEmpty { items.append(text) }" in _wvc2,
+      and "if let plan { items.append(PlanText(text: plan, url: url)) }" in _wvc2,
       "the iOS share sheet drops the plan text again (link only)")
+# Copy put text and link on the pasteboard as two items, and a paste takes the first: the plan
+# arrived without its link (seen on the simulator: pbpaste had the text only). For Copy the
+# text carries the link and the link item steps aside.
+check('t == .copyToPasteboard ? text + "\\n" + url.absoluteString : text' in _wvc2
+      and "inText && t == .copyToPasteboard ? nil : url" in _wvc2
+      and "items.append(ShareItem(url: url, title: title, inText: plan != nil))" in _wvc2,
+      "iOS Copy on a shared plan puts the link on the pasteboard as a second item (a paste drops it)")
 # Dialogs take focus themselves on open (2026-11-11). Focusing the first control drew the
 # keyboard ring on the welcome card's x before any key was pressed: a square sticking out past
 # the card's round corner. The x's own ring is drawn inside it, rounded.

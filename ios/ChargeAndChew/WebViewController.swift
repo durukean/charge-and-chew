@@ -246,10 +246,14 @@ final class WebViewController: UIViewController {
     }
 
     /// A drive is shared as its plan: the itinerary text, then the link (with its preview).
+    /// Copy put the two on the pasteboard as separate items, and a paste takes the first: the
+    /// plan arrived without its link. For Copy the text carries the link and the link item
+    /// steps aside; Messages and Mail still get text plus a link with its preview.
     private func share(_ url: URL, title: String, text: String?) {
         var items: [Any] = []
-        if let text, !text.isEmpty { items.append(text) }
-        items.append(ShareItem(url: url, title: title))
+        let plan = text.flatMap { $0.isEmpty ? nil : $0 }
+        if let plan { items.append(PlanText(text: plan, url: url)) }
+        items.append(ShareItem(url: url, title: title, inText: plan != nil))
         let sheet = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(sheet, animated: true)
     }
@@ -434,11 +438,24 @@ extension WebViewController: WKUIDelegate {
 
 /// A shared link with the view's own title and the app icon, instead of the site's generic
 /// homepage card fetched over the network while the sheet jumps around.
+/// The plan's text; for Copy, the text and then the link, as one item.
+private final class PlanText: NSObject, UIActivityItemSource {
+    let text: String, url: URL
+    init(text: String, url: URL) { self.text = text; self.url = url }
+    func activityViewControllerPlaceholderItem(_ c: UIActivityViewController) -> Any { text }
+    func activityViewController(_ c: UIActivityViewController, itemForActivityType t: UIActivity.ActivityType?) -> Any? {
+        t == .copyToPasteboard ? text + "\n" + url.absoluteString : text
+    }
+}
+
 private final class ShareItem: NSObject, UIActivityItemSource {
-    let url: URL, title: String
-    init(url: URL, title: String) { self.url = url; self.title = title }
+    let url: URL, title: String, inText: Bool
+    init(url: URL, title: String, inText: Bool = false) { self.url = url; self.title = title; self.inText = inText }
     func activityViewControllerPlaceholderItem(_ c: UIActivityViewController) -> Any { url }
-    func activityViewController(_ c: UIActivityViewController, itemForActivityType t: UIActivity.ActivityType?) -> Any? { url }
+    func activityViewController(_ c: UIActivityViewController, itemForActivityType t: UIActivity.ActivityType?) -> Any? {
+        // Copy with a plan: the link is already in the text (PlanText), one item for the paste.
+        inText && t == .copyToPasteboard ? nil : url
+    }
     func activityViewController(_ c: UIActivityViewController, subjectForActivityType t: UIActivity.ActivityType?) -> String { title }
     func activityViewControllerLinkMetadata(_ c: UIActivityViewController) -> LPLinkMetadata? {
         let m = LPLinkMetadata()
