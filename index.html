@@ -753,13 +753,17 @@ html.native .splash-mark svg{width:96px;height:96px}
   letter-spacing:.05em;margin:0 2px 8px}
 .pkgroup h4 small{color:var(--dim2);font-weight:600}
 .pkgrid-in{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.pkitem{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:var(--surface2);
+/* The count sits under the name, as on the welcome card: beside it, it took the width and
+   "McDonald's" was clipped to "McDonald'" and "Whataburger" lost its "r" at 375 px, with no
+   ellipsis. The name now has the whole cell, and a longer one wraps rather than clips. */
+.pkitem{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:9px;row-gap:1px;
+  align-items:center;padding:11px 12px;border-radius:12px;background:var(--surface2);
   border:1px solid var(--line);font-size:13px;font-weight:600;text-align:left;transition:.12s}
 .pkitem:active{transform:scale(.97)}
 .pkitem.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
-.pkitem .e{font-size:17px;flex-shrink:0}
-.pkitem .nm{flex:1;min-width:0;overflow:hidden;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.pkitem .c{font-size:10.5px;color:var(--dim2);font-weight:600}
+.pkitem .e{font-size:17px;grid-row:1/3;align-self:center}
+.pkitem .nm{min-width:0;overflow:hidden;overflow-wrap:break-word;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pkitem .c{font-size:10.5px;color:var(--dim2);font-weight:600;line-height:1.2}
 .pkitem.on .c{color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}
 .caritem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:var(--surface2);
   border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left;transition:.12s}

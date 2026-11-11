@@ -1478,6 +1478,11 @@ _inno = os.path.join(HERE, "near/in-n-out/index.html")
 check(not os.path.exists(_inno) or 'with an <span class="nw">In-N-Out</span> within' in open(_inno).read(),
       "near/ pages break 'In-N-Out' at its hyphen again (build.py bn())")
 
+# The chain picker's count sits under the name (UI-06): beside it, it clipped "McDonald'".
+check(".pkitem{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;" in _html
+      and ".pkitem .e{font-size:17px;grid-row:1/3;align-self:center}" in _html,
+      "the chain picker clips names again (count beside the name instead of under it)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
