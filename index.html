@@ -2392,6 +2392,28 @@ function countWithoutNarrowing() {
    the first render and 62 ms of every chip tap after it, on a desktop.
    The decorated sort is stable exactly as Array.prototype.sort is, so ties keep the same
    order and the list is identical -- verified against the old ordering in four states. */
+/* Fly to a stop and open its panel: a list row, or a suggested break on the drive. */
+function flyToStop(s, byKeyboard) {
+  /* Opening on a fixed timer raced the 0.7 s fly: autoPan ran mid-animation and left the
+     panel off-screen. Wait for the movement to end — but a flyTo to where the map
+     already is never fires moveend, so keep a timer as a floor. */
+  let opened = false;
+  /* Opening a stop is the user directing the map. Without this, collapsing the sheet
+     below fired its transitionend re-fit ~340 ms later, which jumped the map back to
+     the whole area mid-flight -- and on a real iPhone the popup then opened with its
+     header under the search bar. */
+  userMovedMap = true;
+  const show = () => {
+    if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup();
+    // From the keyboard, carry focus into the panel that just opened.
+    if (byKeyboard) { const pe = mk[s.id].getPopup() && mk[s.id].getPopup().getElement();
+      const f = pe && pe.querySelector('a[href], button, [tabindex="0"]'); if (f) f.focus(); }
+  };
+  map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
+  map.once('moveend', show);
+  setTimeout(show, 900);
+  if (!wideLayout()) setSheet('peek');
+}
 /* Only the first LIST_MAX are ever shown in order (markers and clusters do not care), so with
    more than that in scope only those are fully sorted: the cut-off comes from a native numeric
    sort of the keys, then just the winners are ordered. Ties keep their original order, exactly
@@ -2831,9 +2853,13 @@ function renderList(vis) {
   }).join('') + (vis.length > LIST_MAX
     ? `<div class="empty">Showing the first ${LIST_MAX} of ${vis.length.toLocaleString()}. Narrow the filter to see more.</div>` : '');
 
-  $('list').querySelectorAll('[data-brk]').forEach(b => b.onclick = () => {
-    const r = document.querySelector(`#list .row[data-id="${b.dataset.brk}"]`);
-    if (r) { track('break-pick'); r.click(); }
+  /* A break opens its stop the way a list row does -- but only LIST_MAX rows render, and
+     looking the stop up by its row left 17 of 23 break buttons on LA -> New York doing
+     nothing at all. Go to the stop itself. */
+  $('list').querySelectorAll('[data-brk]').forEach(b => b.onclick = e => {
+    const s = byId[+b.dataset.brk];
+    if (!s || !mk[s.id]) return;
+    track('break-pick'); flyToStop(s, e.detail === 0);
   });
   const ls = $('leaveSel');
   /* render() rebuilds the list, select included: put focus back on the new one, or keyboard and
@@ -2845,27 +2871,7 @@ function renderList(vis) {
   $('list').querySelectorAll('.row').forEach(r => {
     r.onclick = e => {
       if (e.target.dataset.star !== undefined) return;
-      const s = byId[+r.dataset.id];
-      /* Opening on a fixed timer raced the 0.7 s fly: autoPan ran mid-animation and left the
-         panel off-screen. Wait for the movement to end — but a flyTo to where the map
-         already is never fires moveend, so keep a timer as a floor. */
-      let opened = false;
-      /* Opening a stop is the user directing the map. Without this, collapsing the sheet
-         below fired its transitionend re-fit ~340 ms later, which jumped the map back to
-         the whole area mid-flight -- and on a real iPhone the popup then opened with its
-         header under the search bar. */
-      userMovedMap = true;
-      const byKeyboard = e.detail === 0;   // Enter/Space on the name button
-      const show = () => {
-        if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup();
-        // From the keyboard, carry focus into the panel that just opened.
-        if (byKeyboard) { const pe = mk[s.id].getPopup() && mk[s.id].getPopup().getElement();
-          const f = pe && pe.querySelector('a[href], button, [tabindex="0"]'); if (f) f.focus(); }
-      };
-      map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
-      map.once('moveend', show);
-      setTimeout(show, 900);
-      if (!wideLayout()) setSheet('peek');
+      flyToStop(byId[+r.dataset.id], e.detail === 0);   // detail 0: Enter/Space on the name button
     };
   });
   $('list').querySelectorAll('[data-star]').forEach(b => b.onclick = e => {

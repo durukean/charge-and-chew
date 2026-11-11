@@ -1296,6 +1296,12 @@ check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _ht
 check(".bleave select{font-size:16px;min-height:44px" in _html,
       "the leaving-time picker is under 16px on touch again (iOS zooms the page into it)")
 
+# A break opens its stop even when the stop has no list row (only LIST_MAX render): LA -> New
+# York had 17 of 23 break buttons doing nothing. tools/breaks_check.mjs taps every one.
+_bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:260]
+check("track('break-pick'); flyToStop(s, e.detail === 0);" in _bk and ".row[data-id" not in _bk,
+      "a suggested break looks its stop up by list row again (dead buttons past the first 300 rows)")
+
 # Dealership lots list after the public stations, under their own heading (not on a route).
 _vs = _html[_html.index("function visibleSites()"):][:2000]
 check("if (pub.length && dlr.length) return pub.concat(dlr);" in _vs and "if (!route && center) {" in _vs and 'class="lsep"' in _html,

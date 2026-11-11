@@ -62,6 +62,12 @@ const CASES = [
     r => r.title ? '' : 'no breaks card']],
   ['Seattle, WA', 'Portland, OR', 600, 'America/Los_Angeles', [
     r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)}`]],
+  /* Coast to coast: more stops than the list renders (LIST_MAX), and every break must still
+     open its stop -- 17 of 23 did nothing when the tap looked the stop up by its list row. */
+  ['Los Angeles, CA', 'New York, NY', 420, 'America/Los_Angeles', [
+    r => r.taps && r.taps.length > 15 ? '' : `only ${r.taps && r.taps.length} breaks to tap`,
+    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return dead.length ? `${dead.length} break taps did not open their stop: ${JSON.stringify(dead.slice(0, 3))}` : ''; }],
+    { taps: true }],
 ];
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
 const ALWAYS = [
@@ -116,6 +122,23 @@ const READ = `(() => {
     }) };
 })()`;
 
+// Tap every break in turn; each must open the stop card at the break's own mile.
+const TAPS = `(async () => {
+  const out = [];
+  for (const b of [...document.querySelectorAll('.brk')]) {
+    const want = +(b.textContent.match(/mile (\\d+)/) || [])[1];
+    b.click();
+    let got = null;
+    for (let i = 0; i < 30 && got !== want; i++) {
+      await new Promise(r => setTimeout(r, 100));
+      const pm = document.querySelector('.leaflet-popup-content .pp-mile');
+      got = pm ? +(pm.textContent.match(/mile (\\d+)/) || [])[1] : null;
+    }
+    out.push([want, got]);
+  }
+  return out;
+})()`;
+
 async function main() {
   if (!CHROME) { console.log('SKIP: Chrome not found'); return 0; }
   const { p: srv, port } = await startServer();
@@ -123,7 +146,7 @@ async function main() {
   const { p: chrome, ws } = await startChrome(profile);
   const B = await cdpConnect(ws);
   let fails = 0;
-  for (const [from, to, leave, tz, checks] of CASES) {
+  for (const [from, to, leave, tz, checks, opt] of CASES) {
     if (ONLY && !(from + ' ' + to).toLowerCase().includes(ONLY)) continue;
     const tag = `${from} -> ${to}, leaving ${leave === '' ? 'now' : Math.floor(leave / 60) + ':' + String(leave % 60).padStart(2, '0')}`;
     const { targetId } = await B.send('Target.createTarget', { url: 'about:blank' });
@@ -144,6 +167,7 @@ async function main() {
       await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
       await sleep(400);
       res = await ev(READ);
+      if (res && opt && opt.taps) res.taps = await ev(TAPS);
       if (!res) why.push('no breaks card (route did not load?)');
       else for (const c of [...checks, ...ALWAYS]) { const w = c(res); if (w) why.push(w); }
     } catch (e) { why.push('error: ' + e.message); }
