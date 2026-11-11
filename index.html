@@ -2978,7 +2978,7 @@ function renderList(vis) {
   /* render() rebuilds the list, select included: put focus back on the new one, or keyboard and
      VoiceOver users are dropped at the top of the page after every change. */
   if (ls) ls.onchange = () => {
-    leaveAt = ls.value === '' ? null : +ls.value; track('break-leave', ls.value || 'now'); render(); syncUrl();
+    leavePick = ls.value === '' ? 'now' : ls.value === 'm' ? 'm' : +ls.value; track('break-leave', ls.value || 'now'); render(); syncUrl();
     const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });
   };
   $('list').querySelectorAll('.row').forEach(r => {
@@ -6364,7 +6364,28 @@ const NO_BREAKFAST = new Set(['Popeyes', 'In-N-Out', 'Chipotle', 'Five Guys', 'S
   'Olive Garden', 'Texas Roadhouse', "Chili's", "Applebee's", 'Buffalo Wild Wings', 'Red Robin', 'Panda Express',
   'KFC', "Arby's", "Culver's", 'Dairy Queen', "Zaxby's", "Portillo's", 'Cook Out', 'Little Caesars', "Domino's",
   'Pizza Hut', "Jersey Mike's", 'Firehouse Subs', 'Ice cream shop']);
-let leaveAt = null;                     // minutes after midnight where the drive starts; null = now
+/* When you leave, as picked on the breaks card (or given by a link): null = the default,
+   'now', 'm' = 8 am the coming morning, or minutes after midnight today, where the drive starts. */
+let leavePick = null;
+/* The default is now -- except at night. Planned at 10 pm, "now" made the first plan
+   "12:10 am Break, next day", which reads as broken: at that hour you are planning
+   tomorrow's drive. So from 8 pm to 5 am the default is 8 am the coming morning, with "now"
+   still first in the picker. 8 pm: after dinner a long drive is tomorrow's, but a short one
+   that is over by 11 pm is tonight's and stays "now". 5 am: from then on people do set off
+   (the early start that beats the traffic). */
+const NIGHT_FROM = 20 * 60, NIGHT_TO = 5 * 60, MORNING = 8 * 60;
+const nightPlan = (nowMin, driveMin) => nowMin < NIGHT_TO || (nowMin >= NIGHT_FROM && nowMin + driveMin > 23 * 60);
+/* [minutes after midnight, days ahead] where the drive starts, or null for now. "The coming
+   morning" is tomorrow before midnight and today after it. */
+const startMin = first => first ? localAt(Date.now(), tzOf(first)).min : (d => d.getHours() * 60 + d.getMinutes())(new Date());
+const morningOf = first => [MORNING, startMin(first) >= 12 * 60 ? 1 : 0];
+const nightNow = first => nightPlan(startMin(first), route ? route.hr * 60 : 0);
+function leaveOf(first) {
+  if (leavePick === 'now') return null;
+  if (leavePick === 'm') return morningOf(first);
+  if (leavePick !== null) return [leavePick, 0];
+  return nightNow(first) ? morningOf(first) : null;
+}
 // The first and last stops on the drive, for its start and end time zones.
 function routeEnds(vis) {
   let a = null, b = null;
@@ -6378,9 +6399,9 @@ function routeEnds(vis) {
 }
 // "Leaving 7 am" is 7 am where the drive starts, whatever zone the phone is in.
 function departMs(first) {
-  const now = Date.now();
-  if (leaveAt === null || !first) return now;
-  return now + (leaveAt - localAt(now, tzOf(first)).min) * 60000;
+  const now = Date.now(), L = first ? leaveOf(first) : null;
+  if (!L) return now;
+  return now + (L[0] + L[1] * 1440 - localAt(now, tzOf(first)).min) * 60000;
 }
 /* The time zone at a stop: its state's, with the states that are split cut by longitude. */
 const ST_TZ = { CA: 'Los_Angeles', NV: 'Los_Angeles', OR: 'Los_Angeles', WA: 'Los_Angeles', AZ: 'Phoenix',
@@ -6418,6 +6439,9 @@ function localAt(ms, tz) {
   return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5,
     wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday) };
 }
+const hhmm = min => String(Math.floor(min / 60)).padStart(2, '0') + String(min % 60).padStart(2, '0');
+// "tomorrow 8:00 am" in the evening; after midnight the same morning is "this morning".
+const morningLabel = first => (morningOf(first)[1] ? 'tomorrow ' : 'this morning ') + clockLabel(MORNING);
 function clockLabel(min) {
   const m = ((Math.round(min / 5) * 5) % 1440 + 1440) % 1440, h = Math.floor(m / 60);
   return `${(h % 12) || 12}:${String(m % 60).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`;
@@ -6565,9 +6589,13 @@ function breaksCard(vis) {
   /* Every hour: 5 am to 10 pm left out the 4 am start that beats the traffic and the 11 pm
      overnight drive. A shared link's 7:30 is kept as it is. */
   const hours = Array.from({ length: 24 }, (_, i) => i * 60);
-  if (leaveAt !== null && leaveAt % 60) { hours.push(leaveAt); hours.sort((a, b) => a - b); }
-  const opts = `<option value=""${leaveAt === null ? ' selected' : ''}>now</option>` +
-    hours.map(v => `<option value="${v}"${leaveAt === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
+  if (typeof leavePick === 'number' && leavePick % 60) { hours.push(leavePick); hours.sort((a, b) => a - b); }
+  /* At night the default is the coming morning: its own option, named for what it is, right
+     under "now" (one tap back to tonight). The plain hours are today's, as before. */
+  const night = nightNow(first), morning = leavePick === 'm' || (leavePick === null && night);
+  const opts = `<option value=""${!leaveOf(first) ? ' selected' : ''}>now</option>` +
+    (night || leavePick === 'm' ? `<option value="m"${morning ? ' selected' : ''}>${morningLabel(first)}</option>` : '') +
+    hours.map(v => `<option value="${v}"${leavePick === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
   /* Each time is local to its stop; arrival is in the time of the last stop on the drive. The
      day is counted from the day you leave: "next day" was all this knew, so LA -> New York
      (50 h) arrived "next day" and its lunch on day 3 said the same. */
@@ -6694,9 +6722,11 @@ function syncUrl() {
   else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
   else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
   /* The leaving time plans the meals: a shared "leaving 7 am" drive opened as "now", with
-     other meals at other stops. HHMM, on the clock where the drive starts. */
-  route && !route.hwy && leaveAt !== null
-    ? p.set('leave', String(Math.floor(leaveAt / 60)).padStart(2, '0') + String(leaveAt % 60).padStart(2, '0')) : p.delete('leave');
+     other meals at other stops. HHMM, on the clock where the drive starts. The night default
+     (and picking it) is left out: reopened, the link works it out again for its own hour.
+     "now" picked at night is kept, or a reload would bring the morning back. */
+  route && !route.hwy && typeof leavePick === 'number' ? p.set('leave', hhmm(leavePick))
+    : route && !route.hwy && leavePick === 'now' ? p.set('leave', 'now') : p.delete('leave');
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
 $('shareBtn').onclick = async () => {
@@ -7005,7 +7035,8 @@ if (q.get('c')) {
   $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === corridorMi));
 }
 const leaveQ = (q.get('leave') || '').match(/^([01]\d|2[0-3])([0-5]\d)$/);   // ?leave=0700, written by syncUrl
-if (leaveQ) leaveAt = +leaveQ[1] * 60 + +leaveQ[2];
+if (leaveQ) leavePick = +leaveQ[1] * 60 + +leaveQ[2];
+else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time beats the night default
 booting = false;
 render();
 

@@ -1330,7 +1330,7 @@ check("const planned = stop ? arriveMs(stop) : null;" in _fh and "hoursNow(p.hou
 check("const lz = tz ? localAt(+now, tz) : null;" in _html and "hoursNow(P.hours, null, tzOf(s))" in _html
       and "hoursNow(p.hours, null, near ? tzOf(near) : null)" in _html,
       "opening hours are judged on the phone's clock again, not the stop's time zone")
-check("if (ls) ls.onchange = () => {\n    leaveAt = " in _html and 'id="leaveSel"' in _html,
+check("if (ls) ls.onchange = () => {\n    leavePick = " in _html and 'id="leaveSel"' in _html,
       "the breaks card lost its leaving-time picker")
 check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _html,
       "changing the leaving time drops keyboard/VoiceOver focus again (the list re-render recreates the select)")
@@ -1367,8 +1367,8 @@ console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True
     check(_r6.stdout.strip() == "OK", "tzOf() puts a stop in the wrong time zone:\n  " + (_r6.stdout + _r6.stderr).strip()[:300])
 
 # The leaving time is part of a shared drive (2026-11-10): the recipient got "now" and other meals.
-check("? p.set('leave', String(Math.floor(leaveAt / 60)).padStart(2, '0') + String(leaveAt % 60).padStart(2, '0')) : p.delete('leave');" in _html
-      and "if (leaveQ) leaveAt = +leaveQ[1] * 60 + +leaveQ[2];" in _html
+check("route && !route.hwy && typeof leavePick === 'number' ? p.set('leave', hhmm(leavePick))" in _html
+      and re.search(r"(?m)^if \(leaveQ\) leavePick = \+leaveQ\[1\] \* 60 \+ \+leaveQ\[2\];", _html) is not None
       and "track('break-leave', ls.value || 'now'); render(); syncUrl();" in _html
       and "const hours = Array.from({ length: 24 }, (_, i) => i * 60);" in _html
       and "'leave'" in _html[_html.index("const VIEW_KEYS = ["):_html.index("const VIEW_KEYS = [") + 300],
@@ -1602,6 +1602,24 @@ check("rgba(0,0,0,.22) 7px,transparent 8px),var(--line2);transition:background .
 check(_live("#about .chainlinks a{color:var(--txt)}"),
       "About's chain chips are green again (green means charging, UI-16)")
 
+# Planned at night, the drive leaves at 8 am the coming morning (2026-11-11): "now" at 10 pm made
+# "12:10 am Break, next day" the first plan. tools/breaks_check.mjs plays it in the app with a
+# moved clock; this pins the rule and that the planner, the picker and the link all use it.
+_lv = _html[_html.index("const NIGHT_FROM = "):_html.index("function leaveOf(")]
+if _node:
+    _r7 = subprocess.run([_node, "-e", _lv.split("\nconst startMin")[0] + r"""
+const f = [], t = (h, m, drive, want) => { if (nightPlan(h * 60 + m, drive) !== want) f.push(`${h}:${m} drive ${drive} min: ${!want}`); };
+t(22, 30, 240, true); t(1, 30, 240, true); t(4, 59, 600, true); t(20, 0, 300, true);
+t(20, 30, 120, false);   // over by 11 pm: tonight's
+t(5, 0, 240, false); t(14, 0, 240, false); t(19, 59, 600, false);
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_r7.stdout.strip() == "OK", "the night departure rule is wrong:\n  " + (_r7.stdout + _r7.stderr).strip()[:300])
+check("return nightNow(first) ? morningOf(first) : null;" in _html
+      and "const now = Date.now(), L = first ? leaveOf(first) : null;" in _html
+      and "(night || leavePick === 'm' ? `<option value=\"m\"${morning ? ' selected' : ''}>${morningLabel(first)}</option>` : '') +" in _html
+      and _live("else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time beats the night default"),
+      "a drive planned at night leaves 'now' again (the default must be 8 am the coming morning, now one tap away)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
@@ -1611,3 +1629,4 @@ if fail:
         print(f"  ✗ {f}")
     sys.exit(1)
 print("all checks passed")
+

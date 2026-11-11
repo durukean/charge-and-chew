@@ -63,7 +63,7 @@ const CASES = [
     r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)} (want Lunch only: left after breakfast)`,
     // The leaving time goes into the link, so a shared drive plans the same meals.
     r => /[?&]leave=1000(&|$)/.test(r.url) ? '' : `leaving 10:00 is not in the link: ${r.url}`,
-    r => r.opts === 25 ? '' : `${r.opts} leaving times offered (want now + all 24 hours)`]],
+    r => r.opts === 25 + (r.mlabel ? 1 : 0) ? '' : `${r.opts} leaving times offered (want now + all 24 hours)`]],
   // ...and opening that link restores it: 7 am from ?leave=0700, no picking.
   ['Los Angeles, CA', 'Las Vegas, NV', 420, 'America/Los_Angeles', [
     r => r.sel === '420' ? '' : `picker shows "${r.sel}" for ?leave=0700`,
@@ -120,6 +120,39 @@ const CASES = [
     // The day change is marked once, above its first row, not ", next day" on every row.
     r => r.rows.filter(x => x === 'day').length === 2 && r.stops.every(s => !/day/.test(s.label)) ? '' : `day marks: ${r.rows.join(' ')}`],
     { taps: true }],
+  /* Planned at night, the default is 8 am the coming morning (not "12:10 am Break, next
+     day"), named as such, with "now" first in the picker; the clocks start at 8 and nothing
+     is "next day". A drive that is over by 11 pm stays "now"; daytime is unchanged; a link's
+     leaving time always wins. `null` leaves the picker alone; `at` is the phone's clock. */
+  ['Los Angeles, CA', 'Las Vegas, NV', null, 'America/Los_Angeles', [
+    r => r.sel === 'm' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" / "${r.mlabel}" at 10:30 pm (want tomorrow 8:00 am)`,
+    r => r.stops.length && r.stops.every(s => mins(s.clock) >= 480 && mins(s.clock) < 14 * 60) ? '' : `clocks ${r.stops.map(s => s.clock)} (want from 8 am)`,
+    r => !/day/.test(r.arrive) && mins(r.arrive) > 11 * 60 && mins(r.arrive) < 14 * 60 ? '' : `arrive "${r.arrive}" (want ~12:30 pm, same day)`,
+    r => r.rows.every(x => x !== 'day') ? '' : 'a day mark on a morning drive',
+    r => !/[?&]leave=/.test(r.url) ? '' : `the night default went into the link: ${r.url}`,
+    r => r.opts === 26 && r.first === '' ? '' : `${r.opts} options, first "${r.first}" (want now first, then the morning, then 24 hours)`],
+    { at: '2026-11-11T22:30:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', null, 'America/Los_Angeles', [
+    r => r.sel === 'm' && r.mlabel === 'this morning 8:00 am' ? '' : `picker "${r.sel}" / "${r.mlabel}" at 1:30 am (want this morning 8:00 am)`,
+    r => r.stops.every(s => mins(s.clock) >= 480) && !/day/.test(r.arrive) ? '' : `clocks ${r.stops.map(s => s.clock)} / arrive ${r.arrive}`],
+    { at: '2026-11-12T01:30:00-08:00' }],
+  // Chicago -> New York planned at 9 pm on a California phone is 11 pm in Chicago: night there.
+  ['Chicago, IL', 'New York, NY', null, 'America/Los_Angeles', [
+    r => r.sel === 'm' ? '' : `picker "${r.sel}" (want the morning: it is 11 pm where the drive starts)`,
+    r => meals(r).join() === 'Lunch,Dinner' ? '' : `meals ${meals(r)} (leaving 8 am: lunch and dinner)`],
+    { at: '2026-11-11T21:00:00-08:00' }],
+  ['Los Angeles, CA', 'San Diego, CA', null, 'America/Los_Angeles', [
+    r => r.sel === '' && !r.mlabel ? '' : `picker "${r.sel}" at 8:30 pm on a 2-hour drive (want now: over by 11 pm)`],
+    { at: '2026-11-11T20:30:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', null, 'America/Los_Angeles', [
+    r => r.sel === '' && !r.mlabel && r.opts === 25 ? '' : `picker "${r.sel}" / ${r.opts} options at 2 pm (want now, no morning option)`],
+    { at: '2026-11-11T14:00:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', 420, 'America/Los_Angeles', [
+    r => r.sel === '420' ? '' : `picker "${r.sel}" for ?leave=0700 at 10:30 pm (the link must win)`],
+    { at: '2026-11-11T22:30:00-08:00', link: true }],
+  ['Los Angeles, CA', 'Las Vegas, NV', 'now', 'America/Los_Angeles', [
+    r => r.sel === '' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" for ?leave=now at night (want now, the morning one tap away)`],
+    { at: '2026-11-11T22:30:00-08:00', link: true }],
 ];
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
 const ALWAYS = [
@@ -171,6 +204,8 @@ const READ = `(() => {
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
     arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
     url: location.search, sel: document.getElementById('leaveSel').value, opts: document.getElementById('leaveSel').options.length,
+    first: document.getElementById('leaveSel').options[0].value,
+    mlabel: (document.querySelector('#leaveSel option[value="m"]') || {}).textContent || '',
     // "1,018 mi · 15h 02m": the drive in minutes, and minutes per mile
     ...(() => { const t = (document.querySelector('#routeInfo .sum i') || {}).textContent || '';
       const mi = +((t.match(/([\\d,]+) mi/) || [])[1] || '0').replace(/,/g, '');
@@ -224,7 +259,7 @@ async function main() {
   let fails = 0;
   for (const [from, to, leave, tz, checks, opt] of CASES) {
     if (ONLY && !(from + ' ' + to).toLowerCase().includes(ONLY)) continue;
-    const tag = `${from} -> ${to}, leaving ${leave === '' ? 'now' : Math.floor(leave / 60) + ':' + String(leave % 60).padStart(2, '0')}`;
+    const tag = `${from} -> ${to}, leaving ${leave === '' || leave === 'now' ? 'now' : leave === null ? 'default' : Math.floor(leave / 60) + ':' + String(leave % 60).padStart(2, '0')}${opt && opt.at ? ' (planned ' + opt.at.slice(5, 16) + ')' : ''}`;
     const { targetId } = await B.send('Target.createTarget', { url: 'about:blank' });
     const { sessionId: S } = await B.send('Target.attachToTarget', { targetId, flatten: true });
     const send = (m, p) => B.send(m, p, S);
@@ -238,10 +273,15 @@ async function main() {
       await send('Page.enable'); await send('Runtime.enable');
       await send('Emulation.setTimezoneOverride', { timezoneId: tz });
       await send('Emulation.setFocusEmulationEnabled', { enabled: true });
-      const lv = opt && opt.link ? `&leave=${String(Math.floor(leave / 60)).padStart(2, '0')}${String(leave % 60).padStart(2, '0')}` : '';
+      // The phone's clock, moved to `at` (the app reads Date.now() and new Date()).
+      if (opt && opt.at) await send('Page.addScriptToEvaluateOnNewDocument', { source: `(() => {
+        const RD = Date, off = RD.parse(${JSON.stringify(opt.at)}) - RD.now();
+        class D extends RD { constructor(...a) { if (a.length) super(...a); else super(RD.now() + off); } static now() { return RD.now() + off; } }
+        window.Date = D; })();` });
+      const lv = opt && opt.link ? (leave === 'now' ? '&leave=now' : `&leave=${String(Math.floor(leave / 60)).padStart(2, '0')}${String(leave % 60).padStart(2, '0')}`) : '';
       await send('Page.navigate', { url: `http://127.0.0.1:${port}/?nosw=1&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}${lv}` });
       for (let i = 0; i < 120; i++) { await sleep(500); if (await ev(`!!document.getElementById('leaveSel')`)) break; }
-      if (!lv) await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
+      if (!lv && leave !== null) await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
       await sleep(400);
       res = await ev(READ);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
