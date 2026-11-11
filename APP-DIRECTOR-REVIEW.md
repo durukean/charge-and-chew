@@ -210,3 +210,20 @@ Code audited: `795bb53a5`, which is live on chargeandchew.com. Line numbers in t
 ## Note on the "freeze search work" advice
 
 The product review recommends pausing search long-tail work for distribution. That conflicts with your earlier goal of search working for any query. It's your call. My suggestion: fix the four confirmed search bugs (item 7), keep the audit suites as a regression net, and move new effort to items 1–6 and the Thanksgiving push.
+
+---
+
+## Changes made: batch 4 (2026-11-11, approved product items 14–18)
+
+Each change: gate `./check.sh` green before its commit, a guard in `verify.py` / `verify_ui.py` / `tools/breaks_check.mjs`, every guard mutation-tested (break the code, confirm the guard fails, restore). Screenshots at 375 px and 1280 px, light and dark, before and after.
+
+| Item | What changed | Why | Verified by |
+|---|---|---|---|
+| 0a | The fade beside "+ All chains": the chip sits in a sticky `.moreend` whose backing runs under the whole chip and past the row's top and bottom (clipped by the row), fading out over 40 px; none at the scroll end | The fade was a box with hard edges, and chips showed past the chip's round corners | Close-up crops at 375 light/dark and desktop; `verify.py` (markup and CSS) |
+| 0b | `r=` is one of 10/25/50 (from a link or a saved area), else 25 | `r=-5` searched within −5 mi and lit no button | Browser: −5, 7, abc → 25; `verify.py` |
+| 0c | Offline, a station or landmark search says it needs a signal | "union station" went to Union, NJ with no signal | `search_audit` `@nosignal` cases (run by `--quick`) |
+| 14 | Between 8 pm and 5 am at the drive's start, Leaving defaults to "tomorrow 8:00 am" ("this morning 8:00 am" after midnight), right under "now". A short evening drive done by 11 pm stays "now". `leave=` always wins; `leave=now` holds at night; the default is not written to the link | "12:10 am Break, next day" was the first plan anyone saw at night | `breaks_check`: 7 cases with a moved clock; node-run rule in `verify.py` |
+| 15 | The route list shows the best stop per ~30-min stretch, ranked like the breaks, with "Show all N stops" below and a way back. `build_data.py` merges port-split listings: 397 into 326 sites, stalls summed, plugs unioned. Rebuilt offline from the committed caches, pages regenerated; 21 chain×state pages fell under the index threshold | 250 raw rows, four "City_Of_Vernon …-N" rows first | `breaks_check` (short list, one per stretch, show all, back, break taps); `?stop=` for a stop that is not listed; `verify.py` re-runs the merge rule on data.js |
+| 16 | The welcome card leads with "Going somewhere?": From (your location when known), To, Leaving, Plan. Without a location, four example drives that have /trip/ guides. The chain grid stays below | The first run asked a chain question few people have | `verify_ui` rendered check; CDP walk of the example, typed and located paths |
+| 17 | Share on a drive sends the itinerary text plus the /trip/ guide (or the app link with its leaving time), with `ref=share`. Uses `navigator.share`, the native sheet (text + link), or the clipboard with a toast; a cancel is silent; `share-plan` event. `build.py` writes `TRIP_PAGES` | Trips are planned in group chats, and a bare link lost the plan | `breaks_check` (text lines match the card, trip link, app link); `verify.py` checks that TRIP_PAGES equals trip/ on disk |
+| 18 | The rating ask fires after a planned drive plus a Directions tap. The shell asks once per app version, after the return from Maps (`requestReview(in:)`). "Rate the app" in About, iOS only, opens the App Store write-review page. `ios/AppStore.md` "Next" draft updated | "5 opens on 2 days" never fired: 0 ratings | `breaks_check` with the shell stubbed; Swift guards in `verify.py`; Debug build on CC Shots 6.9, launched, About checked |
