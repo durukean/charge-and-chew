@@ -183,8 +183,11 @@ location.replace('/?chain=IHOP&nosw=1');
                       "try{for(;;)localStorage.setItem('j'+n++,'y'.repeat(1024));}catch(e){}"
                       "try{for(;;)localStorage.setItem('k'+n++,'z');}catch(e){}",
                       "/?q=ihop%20150%20kw&nosw=1")
+    # A first visit with no location (2026-11-11): the welcome card leads with the drive --
+    # From, To, leaving, plan -- and offers example trips instead of the national list.
+    dom_hero = seeded("localStorage.clear();", "/?nosw=1")
     httpd.shutdown()
-    if dom_filt is None or dom_full is None:
+    if dom_filt is None or dom_full is None or dom_hero is None:
         return 1
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
@@ -219,6 +222,11 @@ location.replace('/?chain=IHOP&nosw=1');
             r'id="sheetTitle"[^>]*>[\d,]+ stops <em>near <span aria-hidden="true">\U0001f95e</span> IHOP', dom_full))
             and bool(re.search(r'id="filtN"[^>]*>1</span>', dom_full)),
         "brand_emoji_hidden_from_screen_readers": '<span aria-hidden="true">\U0001f95e</span> IHOP' in dom,
+        "welcome_leads_with_the_drive": bool(re.search(r'<div id="hero"[^>]*class="show"', dom_hero))
+            and '<h1>Going somewhere?</h1>' in dom_hero and 'id="heroTo"' in dom_hero
+            and bool(re.search(r'<select id="heroLeave"[^>]*>\s*<option value=""', dom_hero))
+            and len(re.findall(r'<button type="button" data-ex="\d"', dom_hero)) == 4
+            and bool(re.search(r'<div class="heroex" id="heroEx">', dom_hero)),
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():

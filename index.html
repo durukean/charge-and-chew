@@ -877,9 +877,32 @@ html.native .splash-mark svg{width:96px;height:96px}
 .heropick .e{font-size:19px;grid-row:1/3;align-self:center}
 .heropick>span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600;white-space:nowrap}
-#heroTrip{width:100%;min-height:46px;border-radius:13px;background:var(--surface2);
-  border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));color:var(--txt);
-  font-weight:700;font-size:14px;margin:14px 0 9px;padding:11px 14px;line-height:1.35}
+/* Route first: From -> To, leaving, plan. The drive is what people come for; the chain grid
+   is the second question, below. */
+.herocard p .c{color:var(--accent);font-weight:700}.herocard p .h{color:var(--amber-text);font-weight:700}
+.heroform{display:grid;gap:8px;margin-bottom:12px}
+.hf{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 12px;border-radius:13px;
+  background:var(--surface2);border:1px solid var(--line)}
+.hf:focus-within{border-color:var(--accent)}
+.hf span{width:36px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--dim2)}
+.hf input{flex:1;min-width:0;height:46px;border:0;background:none;outline:none;font:inherit;font-size:16px;color:var(--txt)}
+.hf input::placeholder{color:var(--dim2)}
+.hf.me input::placeholder{color:var(--accent);font-weight:600}   /* "Your location": filled in, not a prompt */
+.hfrow{display:flex;align-items:center;gap:8px}
+.hleave{display:flex;align-items:center;gap:6px;flex-shrink:0;font-size:13px;font-weight:600;color:var(--dim)}
+.hleave select{max-width:150px;min-height:46px;padding:0 6px;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface2);color:var(--txt);font:inherit;font-size:16px}
+#heroGo{flex:1;min-width:0;height:48px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
+  font-weight:800;font-size:15px;white-space:nowrap}
+.heroex{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin:0 0 14px}
+@media (max-width:440px){.heroex{grid-template-columns:1fr 1fr}}
+.heroex[hidden]{display:none}
+.heroex small{grid-column:1/-1;font-size:12px;font-weight:600;color:var(--dim2)}
+.heroex button{min-height:38px;padding:0 12px;border-radius:100px;border:1px solid var(--line);background:var(--surface);
+  color:var(--txt);font-size:13px;font-weight:600;white-space:nowrap}
+@media(hover:hover){.heroex button:hover{border-color:var(--accent)}}
+.herosep{display:flex;align-items:center;gap:10px;margin:2px 0 10px;font-size:12px;font-weight:600;color:var(--dim2)}
+.herosep::before,.herosep::after{content:'';flex:1;height:1px;background:var(--line)}
 /* Short phones (iPhone SE, or any phone with Safari's toolbars showing): the card ran past
    the fold and its top, close button included, started off-screen. Tighter, not hidden. */
 @media (max-height:700px){
@@ -889,10 +912,10 @@ html.native .splash-mark svg{width:96px;height:96px}
   .herocard p{font-size:13px;margin-bottom:10px}
   .herogrid{gap:6px;margin-bottom:8px}
   .heropick{padding-top:8px;padding-bottom:8px}
-  #heroTrip{min-height:40px}
   #heroAll{height:42px}
+  .hf{min-height:44px}.hf input{height:42px}
 }
-#heroAll{width:100%;height:46px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
+#heroAll{width:100%;height:46px;border-radius:13px;background:var(--surface2);color:var(--txt);border:1px solid var(--line);
   font-weight:700;font-size:14.5px;margin-bottom:9px}
 #heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
 
@@ -1006,6 +1029,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   .pp-sec a{display:inline-block;padding:10px 0}
   .pp-poi-l a,.pp-det a{display:inline-block;padding:10px 0}
   #heroSkip{padding:14px 6px}
+  .heroex button{min-height:44px}
   #icGo,#icNo,#sugg button{min-height:44px}
   .rclose::after{content:'';position:absolute;inset:-5px}   /* 44 px to the finger, 34 px to the eye */
   #about .xclose{width:44px;height:44px}
@@ -1182,10 +1206,16 @@ if (document.documentElement.classList.contains('car')) {
         <button class="x" id="heroClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
         <div class="hero-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg3" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask3"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask3)"><rect width="64" height="64" fill="url(#ccg3)"/></g></svg></div>
         <span class="badge"><svg class="ui-i" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg> Free · 14,000+ US fast chargers</span>
-        <h1>Where do you want to<br><span class="c">Charge</span><i>&amp;</i><span class="h">Chew</span>?</h1>
-        <p>Pick a spot you love — we'll show the fast chargers within a short walk of it.</p>
+        <h1>Going somewhere?</h1>
+        <p>Where to <span class="c">charge</span> and <span class="h">eat</span> on the way: fast chargers with a meal a short walk away, timed to your drive.</p>
+        <form class="heroform" id="heroForm" autocomplete="off">
+          <label class="hf"><span>From</span><input id="heroFrom" type="text" placeholder="City or address" enterkeyhint="next" autocorrect="off" autocapitalize="words" spellcheck="false"></label>
+          <label class="hf"><span>To</span><input id="heroTo" type="text" placeholder="Where are you going?" enterkeyhint="go" autocorrect="off" autocapitalize="words" spellcheck="false"></label>
+          <div class="hfrow"><label class="hleave">Leaving <select id="heroLeave"></select></label><button type="submit" id="heroGo">Plan the drive</button></div>
+        </form>
+        <div class="heroex" id="heroEx" hidden></div>
+        <div class="herosep" aria-hidden="true"><span>or find chargers near a favourite</span></div>
         <div class="herogrid" id="heroGrid"></div>
-        <button id="heroTrip" class="trip"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg> Planning a drive? Find stops along your route</button>
         <button id="heroAll">Browse all chains</button>
         <button id="heroSkip">Just explore the map</button>
       </div>
@@ -3373,6 +3403,7 @@ function locate(target, opts) {
     if (opts.stale && opts.stale()) return;   // they searched or picked something meanwhile
     const la = p.coords.latitude, lo = p.coords.longitude;
     lastMe = { lat: la, lon: lo };
+    if ($('hero').classList.contains('show')) syncHeroFrom();   // found while the welcome card is up
     if (target === 'route') {
       // ~110 m: plenty for a route start, and the field ends up in a shareable link (?from=),
       // where 4 decimals (~11 m) gave away the sender's address.
@@ -6924,7 +6955,51 @@ function selectChain(k) {
   $('savedChip').classList.remove('on');
   render(); syncUrl(); setSheet('mid'); fitToResults();
 }
-function showHero() { buildHero(); $('hero').classList.add('show'); }
+/* Examples for a visitor we cannot locate, instead of a national list with no job: one tap
+   plans a real drive. Each has a /trip/ guide too. */
+const HERO_TRIPS = [['Los Angeles, CA', 'Las Vegas, NV', 'LA → Vegas'], ['Los Angeles, CA', 'San Francisco, CA', 'LA → SF'],
+  ['Denver, CO', 'Salt Lake City, UT', 'Denver → SLC'], ['Dallas, TX', 'Houston, TX', 'Dallas → Houston']];
+const shortCity = v => v.split(',')[0].replace(/^Los Angeles$/, 'LA');
+// "From" is where you are when we know it (placeholder "Your location"), else a field to fill.
+function syncHeroFrom() {
+  const me = !!lastMe, f = $('heroFrom');
+  f.placeholder = me ? 'Your location' : 'City or address';
+  f.closest('.hf').classList.toggle('me', me);
+  $('heroEx').hidden = me;
+}
+function showHero() {
+  buildHero();
+  // The same leaving times as the breaks card, and the same default (8 am at night).
+  const L = leaveOf(null), night = nightNow(null), sel = $('heroLeave');
+  sel.innerHTML = `<option value=""${L ? '' : ' selected'}>now</option>` +
+    (night ? `<option value="m" selected>${morningLabel(null)}</option>` : '') +
+    Array.from({ length: 24 }, (_, i) => `<option value="${i * 60}">${clockLabel(i * 60)}</option>`).join('');
+  sel.dataset.def = sel.value;
+  $('heroEx').innerHTML = '<small>Or try a drive</small>' + HERO_TRIPS.map(([a, b, name], i) =>
+    `<button type="button" data-ex="${i}" aria-label="Plan ${esc(a)} to ${esc(b)}">${esc(name)}</button>`).join('');
+  $('heroEx').querySelectorAll('[data-ex]').forEach(b => b.onclick = () => {
+    const [a, c] = HERO_TRIPS[+b.dataset.ex]; heroPlan(a, c, 'example'); });
+  syncHeroFrom();
+  $('hero').classList.add('show');
+}
+function heroPlan(f, t, how) {
+  if (!t) { $('heroTo').focus(); toast('Where are you going?'); return; }
+  if (!f && !lastMe) { $('heroFrom').focus(); toast('Where are you starting from?'); return; }
+  const ls = $('heroLeave');
+  // Picked on the card: that time. Left alone: the default, worked out at the drive's start.
+  if (ls.value !== ls.dataset.def) leavePick = ls.value === '' ? 'now' : ls.value === 'm' ? 'm' : +ls.value;
+  hideHero(); track('hero-plan', how);
+  $('fromIn').value = f || `${lastMe.lat.toFixed(3)}, ${lastMe.lon.toFixed(3)}`;
+  routeFromMe = !f;
+  $('toIn').value = t;
+  $('routePanel').classList.add('show');
+  $('routeToggle').classList.add('on');
+  $('overlayTop').classList.add('routing');
+  runRoute();
+}
+$('heroForm').onsubmit = e => { e.preventDefault(); heroPlan($('heroFrom').value.trim(), $('heroTo').value.trim(), 'typed'); };
+// Return in "From" moves to "To", as the keyboard's Next key says.
+$('heroFrom').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('heroTo').focus(); } });
 
 /* ───────── dialogs ─────────
    Five overlays behave as dialogs: Escape closes the top one, focus moves in when it opens,
@@ -7002,13 +7077,6 @@ const focusables = el => [...el.querySelectorAll('a[href], button:not([disabled]
   });
 })();
 function hideHero() { $('hero').classList.remove('show'); localStorage.setItem('cc_hero', '0'); }
-$('heroTrip').onclick = () => {
-  hideHero(); track('hero-trip');
-  $('routePanel').classList.add('show');
-  $('routeToggle').classList.add('on');
-  $('overlayTop').classList.add('routing');
-  if (!TOUCH) setTimeout(() => $('fromIn').focus(), 120);
-};
 $('heroAll').onclick = () => { hideHero(); openPicker(); };
 $('heroSkip').onclick = hideHero;
 $('heroClose').onclick = hideHero;

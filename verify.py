@@ -1099,7 +1099,7 @@ for _needle, _why in [
      "the route line is interactive again — it would swallow taps meant for the chargers"),
     ("window.__detectPoiIntent",
      "detectPoiIntent is not exported — the search suite cannot test it"),
-    ("heroTrip", "the hero card no longer offers to plan a drive"),
+    ("$('heroForm').onsubmit = e => { e.preventDefault(); heroPlan(", "the welcome card no longer plans a drive"),
     ("LA to Las Vegas", "the search suggestions have no road-trip example"),
 ]:
     check(_needle in _html, _why)
@@ -1149,7 +1149,7 @@ check("STATE_NAME[st.toUpperCase()] ? ', ' + st.toUpperCase() : all" in _html,
 # button off-screen with no way to scroll them back.
 check("function keepPopupOnScreen" in _html and re.search(r"animate: false \}\);\s*keepPopupOnScreen\(\);", _html) is not None,
       "the post-fit popup nudge is gone — on a phone the popup's right half falls off screen")
-check(_html.count('enterkeyhint=') == 5 and 'autocorrect="off"' in _html,
+check(_html.count('enterkeyhint=') == 7 and 'autocorrect="off"' in _html,
       "phone-keyboard attributes are missing — Return keys say the wrong thing and autocorrect mangles place names")
 check("$('toIn').blur(); $('goBtn').click();" in _html,
       "Return in the Destination field no longer runs the route")
