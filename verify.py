@@ -1550,6 +1550,45 @@ check(_html.count("crossOrigin: window.CC_TILE_CORS },") == 2
       and _html.count("{ ...bm.opts, alt: '' }") == 2 and _html.count("Object.assign({}, bm.opts, { alt: '' })") == 2,
       "map tiles are requested without CORS again, so the service worker can never cache one")
 
+# ---- Sheet rhythm (UI-08..12/14/15/16) ----
+# One 16 px gutter: title, area line, chips, breaks card and rows all start on it (they were at
+# 12/14/15/18/24 px). Rows carry no side padding of their own, on phone and desktop.
+check("--gutter:16px;" in _html
+      and ".sheethead{display:flex;align-items:center;gap:9px;padding:0 var(--gutter) 10px;flex-shrink:0}" in _html
+      and "#list{overflow-y:auto;overscroll-behavior:contain;padding:0 var(--gutter) calc(16px + env(safe-area-inset-bottom));flex:1}" in _html
+      and "#app.phone #sheet .chiprow{padding:2px var(--gutter) 7px;" in _html
+      and "#app.phone #sheet #centerCard.show{margin:-2px var(--gutter) 6px;padding:0;" in _html
+      and "display:flex;gap:12px;padding:15px 0;border-radius:0;" in _html
+      and "  .row{padding:15px 0}" in _html and "  .row{padding:14px 0}" in _html
+      and ".breaks{margin:0 0 6px;padding:10px 0 6px;" in _html
+      and ".brk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 0;" in _html,
+      "the sheet's left edges are off the 16 px gutter again (UI-08)")
+# The fade beside "+ All chains" is wide enough to hide a chip's icon (UI-09).
+check(".chip.more::before{content:'';position:absolute;right:100%;top:-4px;bottom:-4px;width:40px;" in _html
+      and "background:linear-gradient(to right,transparent,var(--surface) 55%)}" in _html,
+      "a sliced chip icon shows beside '+ All chains' again (UI-09)")
+# Phone chips are 44 px to tap (UI-11): the phone rule used to beat the coarse 44 px one with 40.
+check("#app.phone #sheet .chiprow .chip{height:44px;" in _html and "#app.phone #sheet .chiprow .chip{height:40px" not in _html,
+      "phone chips are under 44 px tall again (UI-11)")
+# Every :hover rule sits inside @media(hover:hover): on touch a tapped row stayed highlighted (UI-12).
+_hov = [l.strip()[:60] for l in _html.splitlines() if ":hover" in l and "@media(hover:hover)" not in l]
+check(not _hov, f"a :hover rule applies on touch screens again (sticky highlight, UI-12): {_hov[:2]}")
+# One badge vocabulary (UI-14): status tags are one outline style, "1 stall" is plain text.
+check(".tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font-size:10.5px;font-weight:700;line-height:1.6;\n  background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line2)}" in _html
+      and ".tag.free{color:var(--good)}" in _html and ".tag.iso{" not in _html and ".tag.dlr{" not in _html
+      and ".tag.one{box-shadow:none;padding:0;" in _html,
+      "row badges are back to several different treatments (UI-14)")
+# The radius says its unit on a phone (UI-10).
+check('<button data-mi="50" aria-label="50 miles">50</button><span class="u" aria-hidden="true">mi</span>' in _html,
+      "the area radius control has no unit again (UI-10)")
+# An off switch is a quiet track, not mid grey that reads as lit in dark (UI-15).
+check("rgba(0,0,0,.22) 7px,transparent 8px),var(--line2);transition:background .15s}" in _html
+      and "transparent 7px),var(--dim2);transition" not in _html,
+      "an off switch looks lit in dark mode again (UI-15)")
+# About's chain and trip chips are ink, not charging green (UI-16).
+check(_live("#about .chainlinks a{color:var(--txt)}"),
+      "About's chain chips are green again (green means charging, UI-16)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
