@@ -288,6 +288,11 @@ const CASES = [
   C('LA', 'fresh', 'denver station', { st: 'CO' }, '@probe'),
   C('LA', 'fresh', 'station', { near: ['LA', 30] }, '@probe'),
   C('LA', 'fresh', 'great', { near: ['LA', 30] }, '@probe'),
+  /* No signal at all (offline: the network goes down after start-up): a station or landmark
+     cannot be looked up, and the app says so instead of guessing a town named like it
+     ("union station" went to Union, NJ). Run by --quick too. */
+  C('LA', 'fresh', 'union station', { offline: true, toast: 'offline', near: ['LA', 30] }, '@nosignal'),
+  C('LA', 'fresh', 'central park', { offline: true, toast: 'offline', near: ['LA', 30] }, '@nosignal'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
@@ -357,7 +362,7 @@ async function main() {
   const B = await cdpConnect(ws);
   const ORIGIN = `http://127.0.0.1:${port}`;
   // "@tag" selects by note, anything else by query text
-  const cases = CASES.filter(c => QUICK ? QUICK_SET.has(`${c.who}|${c.prior}|${c.q}`)
+  const cases = CASES.filter(c => QUICK ? QUICK_SET.has(`${c.who}|${c.prior}|${c.q}`) || c.expect.offline
     : !ONLY || (ONLY.startsWith('@') ? (c.note || '').includes(ONLY) : c.q.includes(ONLY)));
   let pass = 0; const fails = [];
 
@@ -419,6 +424,10 @@ async function main() {
       if (c.prior === 'route') await search('la to las vegas');
       if (c.prior === 'poiDenver') await search('pharmacy in denver');
       if (c.prior === 'starbucks') await search('starbucks in austin');
+      if (c.expect.offline) {
+        await send('Network.enable');
+        await send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+      }
       await search(c.q);
       if (c.expect.clear) { await ev(`document.getElementById('placeClr').click(), true`); await sleep(1500); }
       res = await ev(`window.__ccState()`);

@@ -1179,7 +1179,7 @@ check('id="appearanceSeg"' in _html and "function syncAppearanceSeg" in _html, "
 check("'#filters .seg.wide[data-f] button'" in _html and "'#filters .seg.wide[data-f]'" in _html,
       "the filter wiring grabs every segment in the sheet again and overwrites the Appearance handlers")
 check("track('longpress-pin')" in _html, "press-and-hold to drop a pin is gone — phones have no pin button")
-check(".chip.more::before" in _html and "＋ All chains" in _html, "the sticky All-chains chip lost its fade")
+check(".moreend::before{" in _html and "＋ All chains" in _html, "the sticky All-chains chip lost its fade")
 check('id="poiRetry"' in _html
       and re.search(r"\$\('poiRetry'\)\.onclick = \(\) => runLivePoi\(intent,", _html) is not None,
       "a failed live lookup is only a 3-second toast again — on a phone that reads as nothing "
@@ -1188,7 +1188,7 @@ check('data-net="${esc(k)}"' in _html and "netPick = netPick === k ? null : k;" 
       "legend rows no longer filter by network — on a phone they look tappable and did nothing")
 check(".empty .fball{display:block" in _html and "'The <strong>' + esc(nar[0].label)" in _html,
       "the empty state renders its filter label as a block and its button as plain text again")
-check(".chip.more{position:sticky;right:0" in _html,
+check(".moreend{position:sticky;right:0" in _html,
       "the All-chains chip is no longer sticky — it takes four flings to reach on a phone")
 check("if (chainQuery() || cat === 'fav') fitToResults(); else fitUS();" in _html,
       "clearing the area no longer refits the map — an empty map under a list from another state")
@@ -1529,6 +1529,12 @@ check(_live("corridorMi = corridorFrom(q.get('c'));")
       and "const corridorFrom = v => [2, 5, 10].includes(+v) ? +v : 5;" in _html
       and not re.search(r"corridorMi = \+q\.get\('c'\)", _html),
       "c= in a link is used unchecked again ('0 chargers within -5 mi')")
+# r= is pinned the same way, from a link and from a saved area.
+check(_live("radiusMi = radiusFrom(q.get('r'));")
+      and _live("if (a.r) { radiusMi = radiusFrom(a.r); $('ccRad').querySelectorAll('button')")
+      and "const radiusFrom = v => [10, 25, 50].includes(+v) ? +v : 25;" in _html
+      and not re.search(r"radiusMi = \+q\.get\('r'\)", _html),
+      "r= in a link is used unchecked again (a search within -5 miles, no radius button lit)")
 # Offline is said as offline, not "OpenStreetMap is busy" with pointless retries (BUG-16).
 check(_live("if (isOffline()) { const e = new Error(OFFLINE_MSG); e.offline = true; throw e; }")
       and _live("if (isOffline()) { e.offline = true; throw e; }")
@@ -1563,10 +1569,17 @@ check("--gutter:16px;" in _html
       and ".breaks{margin:0 0 6px;padding:10px 0 6px;" in _html
       and ".brk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 0;" in _html,
       "the sheet's left edges are off the 16 px gutter again (UI-08)")
-# The fade beside "+ All chains" is wide enough to hide a chip's icon (UI-09).
-check(".chip.more::before{content:'';position:absolute;right:100%;top:-4px;bottom:-4px;width:40px;" in _html
-      and "background:linear-gradient(to right,transparent,var(--surface) 55%)}" in _html,
-      "a sliced chip icon shows beside '+ All chains' again (UI-09)")
+# The fade beside "+ All chains" is wide enough to hide a chip's icon (UI-09), and it is one
+# smooth gradient in the row's own colour with no edges: the chip sits in a sticky .moreend
+# whose backing runs under the whole chip and past the row's top and bottom (clipped by the
+# row). A fade 4 px taller than the chip, beside it only, drew a box, and chips showed past
+# the chip's round corners (light and dark, 375 px).
+check(re.search(r"\+ `<span class=\"moreend\"><button class=\"chip more\" id=\"moreChip\">＋ All chains</button></span>`;", _html) is not None
+      and ".moreend::before{content:'';position:absolute;z-index:-1;top:-40px;bottom:-40px;left:-48px;right:0;" in _html
+      and "background:linear-gradient(to right,transparent,var(--surface) 40px)}" in _html
+      and ".chip.more{border-style:dashed;color:var(--txt);background:var(--surface);" in _html
+      and "#app.phone #sheet .chiprow .moreend::before{right:calc(-1 * var(--gutter) - 1px)}" in _html,
+      "the fade beside '+ All chains' has hard edges again, or chips show past the chip's corners (UI-09)")
 # Phone chips are 44 px to tap (UI-11): the phone rule used to beat the coarse 44 px one with 40.
 check("#app.phone #sheet .chiprow .chip{height:44px;" in _html and "#app.phone #sheet .chiprow .chip{height:40px" not in _html,
       "phone chips are under 44 px tall again (UI-11)")

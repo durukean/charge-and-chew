@@ -227,14 +227,18 @@ html.native .splash-mark svg{width:96px;height:96px}
 .chip .cnt{font-size:10.5px;color:var(--dim2);font-weight:500}
 .chip.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .chip.on .cnt{color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}
-.chip.more{border-style:dashed;color:var(--txt);background:transparent;box-shadow:none}
+.chip.more{border-style:dashed;color:var(--txt);background:var(--surface);box-shadow:none}
 /* Sticky at the row's right edge: it took four full flings across 20 chips to reach the
-   picker on a phone. Opaque background so chips scrolling underneath do not show through. */
-.chip.more{position:sticky;right:0;background:var(--surface);z-index:1}
-/* Wider than a chip's padding plus its icon, and solid for its last half: at 22 px a hard
-   icon fragment ("Any store" bag) showed through beside it (UI-09). */
-.chip.more::before{content:'';position:absolute;right:100%;top:-4px;bottom:-4px;width:40px;pointer-events:none;
-  background:linear-gradient(to right,transparent,var(--surface) 55%)}
+   picker on a phone. The chip sits in .moreend, whose backing is the row's own colour, the
+   full height of the row and under the whole chip, fading out over 40 px to its left. A
+   fade only beside the chip and 4 px taller than it drew a box with hard edges, and chips
+   showed through past its round corners. The backing runs past the row's top and bottom,
+   where the scrolling row clips it, so it has no edge of its own. */
+.moreend{position:sticky;right:0;z-index:1;align-self:stretch;display:flex;align-items:center}
+.moreend::before{content:'';position:absolute;z-index:-1;top:-40px;bottom:-40px;left:-48px;right:0;pointer-events:none;
+  background:linear-gradient(to right,transparent,var(--surface) 40px)}
+/* Scrolled to the end, nothing is hidden: the last chip is not faded. */
+.chiprow.at-end .moreend::before{left:0}
 .chip.catchip{font-weight:600}
 .qchip{color:var(--dim)}
 .chip .qm{width:17px;height:17px;font-size:9px}   /* the map's Tesla mark, in the Tesla chip */
@@ -531,10 +535,10 @@ html.native .splash-mark svg{width:96px;height:96px}
   /* 44 px: the coarse-pointer rule asks for it, and this one used to win on specificity with
      40 (UI-11). */
   #app.phone #sheet .chiprow .chip{height:44px;padding:0 12px;font-size:12.5px}
-  /* Sticky offsets ignore the row's 12 px side padding, so chips scrolled past the pinned
-     chip showed in that strip. Pin to the real edge and cover the strip. */
-  #app.phone #sheet .chiprow .chip.more{right:calc(-1 * var(--gutter))}
-  #app.phone #sheet .chiprow .chip.more::after{content:'';position:absolute;left:100%;top:-4px;bottom:-4px;width:calc(var(--gutter) + 1px);background:var(--surface)}
+  /* Sticky offsets ignore the row's side padding, so chips scrolled past the pinned chip
+     showed in that strip. Pin to the real edge and let the backing cover the strip. */
+  #app.phone #sheet .chiprow .moreend{right:calc(-1 * var(--gutter))}
+  #app.phone #sheet .chiprow .moreend::before{right:calc(-1 * var(--gutter) - 1px)}
   #app.phone #carBar.show{display:contents}
   #app.phone #carBar .cartag,#app.phone #carBar .mine{height:44px;border-radius:100px;padding:0 12px;font-size:12.5px;
     font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px;border:1px solid var(--line);
@@ -1388,7 +1392,8 @@ window.CC_BASEMAPS = {
     var bm = window.CC_BASEMAPS[get('cc_basepref') === 'carto' ? 'carto' : 'esri'];
     var view = [[39.3, -96.5], 4];
     var at = (new URLSearchParams(location.search).get('at') || '').split(',').map(Number);
-    var r = +new URLSearchParams(location.search).get('r') || 25;
+    var r = +new URLSearchParams(location.search).get('r');
+    if (r !== 10 && r !== 50) r = 25;                 // the same three radii as radiusFrom()
     if (at.length === 2 && isFinite(at[0]) && isFinite(at[1])) view = [at, r <= 10 ? 11 : r <= 25 ? 10 : 9];
     else {
       var a = JSON.parse(get('cc_area') || 'null');
@@ -1542,6 +1547,9 @@ let corridorMi = 5;
 /* The corridor is one of the three widths the route card offers. "c=-5" in a link said
    "0 chargers within -5 mi" with no width selected (BUG-19). */
 const corridorFrom = v => [2, 5, 10].includes(+v) ? +v : 5;
+// Likewise the area radius: "r=-5" (or a hand-edited saved area) searched within -5 miles, and
+// "r=7" lit no button on the card. Anything else is the default 25.
+const radiusFrom = v => [10, 25, 50].includes(+v) ? +v : 25;
 let pinMode = false;
 let sortBy = 'walk';
 let netFilter = ['all', 'tesla', 'other'].includes(localStorage.getItem('cc_net'))
@@ -1873,8 +1881,8 @@ function restoreArea() {
   let a; try { a = JSON.parse(localStorage.getItem('cc_area') || 'null'); } catch (e) { return false; }
   if (!a || !isFinite(a.lat) || !isFinite(a.lon)) return false;
   if (Date.now() - (a.t || 0) > 14 * 864e5) { localStorage.removeItem('cc_area'); return false; }
-  if (a.r) { radiusMi = a.r; $('ccRad').querySelectorAll('button')
-    .forEach(x => x.classList.toggle('on', +x.dataset.mi === a.r)); }
+  if (a.r) { radiusMi = radiusFrom(a.r); $('ccRad').querySelectorAll('button')
+    .forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi)); }
   /* A remembered "my location" can be two weeks old. Restoring it as kind 'me' drew the
      blue you-are-here dot on a spot you may have left days ago; show it as a place instead. */
   const kind = a.kind === 'me' ? 'pin' : (a.kind || 'place');
@@ -2783,7 +2791,7 @@ function renderChips(keep) {
   el.innerHTML = top.map(k =>
     `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${bemo(k)} ${bname(k)}
       <span class="cnt" title="${chipCount(k).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}${scopeCounts ? ' here' : ''}">${chipCount(k)}</span></button>`).join('')
-    + `<button class="chip more" id="moreChip">＋ All chains</button>`;
+    + `<span class="moreend"><button class="chip more" id="moreChip">＋ All chains</button></span>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
     const k = c.dataset.cat;
     anyCat = anyCat === k ? null : k;
@@ -4568,8 +4576,10 @@ $('placeIn').addEventListener('keydown', async e => {
       if (myNav !== navGen) return;
     } finally { $('placeBox').classList.remove('busy'); }
     if (at) { setCenter(at.lat, at.lon, at.label, 'place'); return; }
+    /* Offline we could not ask, so say that -- not "couldn't find", and not a guess at a town
+       named like it: "union station" with no signal went to Union, New Jersey. */
+    if (isOffline()) { toast(OFFLINE_MSG); return; }
     if (!knownPlace(p.place)) {
-      if (isOffline()) { toast(OFFLINE_MSG); return; }   // not "couldn't find": we couldn't ask
       toast(`Couldn't find ${stn.name.replace(/\b[a-z]/g, c => c.toUpperCase())} — add its city, like “union station denver”`);
       return;
     }
@@ -4594,6 +4604,7 @@ $('placeIn').addEventListener('keydown', async e => {
       $('placeBox').classList.remove('busy');
       if (myNav !== navGen) return;
       if (lm) { setCenter(lm.lat, lm.lon, lm.label, 'place'); return; }
+      if (isOffline()) { toast(OFFLINE_MSG); return; }   // likewise "central park": not Central, a town
     }
   }
   /* "gym in miami", "pharmacy in denver": the words that are not the category are a place,
@@ -6986,7 +6997,7 @@ const wantL2 = VIEW_KEYS.some(k => q.has(k)) ? q.get('l2') === '1'
 if (PLUG_PARAM[(q.get('plug') || '').toLowerCase()]) F.plug = PLUG_PARAM[q.get('plug').toLowerCase()];
 syncFilterUI();
 if (q.get('r')) {
-  radiusMi = +q.get('r') || 25;
+  radiusMi = radiusFrom(q.get('r'));
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));
 }
 if (q.get('c')) {
