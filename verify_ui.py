@@ -227,6 +227,9 @@ location.replace('/?chain=IHOP&nosw=1');
             and bool(re.search(r'<select id="heroLeave"[^>]*>\s*<option value=""', dom_hero))
             and len(re.findall(r'<button type="button" data-ex="\d"', dom_hero)) == 4
             and bool(re.search(r'<div class="heroex" id="heroEx">', dom_hero)),
+        # Opened, the welcome card takes focus itself, not its x (whose keyboard ring then
+        # showed on open as a square past the card's round corner).
+        "welcome_card_focuses_itself_not_its_x": bool(re.search(r'<div id="hero"[^>]*tabindex="-1"[^>]*>', dom_hero)),
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():

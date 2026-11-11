@@ -841,7 +841,7 @@ check("lower48.length >= v.length * 0.95" in _html, "fitToResults frames Alaska/
 
 check("if (filtered && (!passesNet(s) || !passesSpec(s)" in _html,
       "chip counts ignore the active filters again ('Starbucks 17' beside an empty list)")
-check("f.focus({ preventScroll: true })" in _html,
+check("el.focus({ preventScroll: true })" in _html,
       "opening a dialog can scroll it again (the welcome card lost its top on short phones)")
 check("color-scheme:dark;" in _html and "color-scheme:light;" in _html,
       "native scrollbars and controls no longer follow the theme")
@@ -1684,6 +1684,15 @@ check('if host == "apps.apple.com" { UIApplication.shared.open(url); return }' i
 check('onShare?(url, opts["title"] as? String ?? "Charge & Chew", opts["text"] as? String)' in _nb2
       and "if let text, !text.isEmpty { items.append(text) }" in _wvc2,
       "the iOS share sheet drops the plan text again (link only)")
+# Dialogs take focus themselves on open (2026-11-11). Focusing the first control drew the
+# keyboard ring on the welcome card's x before any key was pressed: a square sticking out past
+# the card's round corner. The x's own ring is drawn inside it, rounded.
+check(_live("if (!el.contains(document.activeElement)) { el.tabIndex = -1; el.focus({ preventScroll: true }); }")
+      and "const f = focusables(el)[0]; if (f) f.focus(" not in _html
+      and "[role=dialog]:focus{outline:none}" in _html
+      and re.search(r"\.herocard \.x:focus-visible\{outline-offset:-[4-9]px;border-radius:\d+px\}", _html) is not None
+      and "(e.shiftKey && document.activeElement === $(d.id) ? last : first).focus();" in _html,
+      "a dialog focuses its first control on open again (the welcome card's x shows a square ring)")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

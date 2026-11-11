@@ -207,6 +207,11 @@ html.native .splash-mark svg{width:96px;height:96px}
 .qchip:focus-visible{outline-offset:1px}
 #map:focus-visible{outline-offset:-3px}
 .leaflet-container:focus-visible{outline:2.5px solid var(--accent);outline-offset:-3px}
+/* Dialogs take focus themselves when they open (a landmark for screen readers): no ring on
+   the whole overlay. The welcome card's x sits in its rounded corner, so its ring is drawn
+   inside the 44 px button with round corners, never as a square past the card's edge. */
+[role=dialog]:focus{outline:none}
+.herocard .x:focus-visible{outline-offset:-5px;border-radius:14px}
 
 /* The row scrolls, but a chip sliced mid-word at the screen edge reads as broken rather
    than scrollable. Fade the trailing edge so it clearly means 'there is more'. */
@@ -7090,7 +7095,11 @@ const focusables = el => [...el.querySelectorAll('a[href], button:not([disabled]
         const el = $(d.id);
         // preventScroll: focusing while a card still slides in scrolled the welcome screen
         // 86 px down, hiding its top (and close button) on a short phone.
-        if (!el.contains(document.activeElement)) { const f = focusables(el)[0]; if (f) f.focus({ preventScroll: true }); }
+        /* The dialog itself, not its first control: focused on open (no key pressed yet) the x
+           drew the keyboard ring, a square sticking out past the welcome card's round corner,
+           for everyone. A screen reader still lands in the dialog and reads its label; Tab
+           goes on to the x (below). */
+        if (!el.contains(document.activeElement)) { el.tabIndex = -1; el.focus({ preventScroll: true }); }
       }, 0);
     } else if (!isOpen && before[d.id]) {
       const back = before[d.id]; before[d.id] = null;
@@ -7107,7 +7116,8 @@ const focusables = el => [...el.querySelectorAll('a[href], button:not([disabled]
     if (e.key !== 'Tab') return;
     const f = focusables($(d.id)); if (!f.length) return;
     const first = f[0], last = f[f.length - 1];
-    if (!$(d.id).contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    // Focus on the dialog itself (as opened): Tab is its first control, Shift+Tab its last.
+    if (!$(d.id).contains(document.activeElement) || document.activeElement === $(d.id)) { e.preventDefault(); (e.shiftKey && document.activeElement === $(d.id) ? last : first).focus(); }
     else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
