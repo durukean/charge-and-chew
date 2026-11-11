@@ -1,0 +1,212 @@
+# Charge & Chew: app review, 2026-11-10
+
+Three read-only audits run in parallel, merged here:
+- **Bugs and performance** (`.director/bugs.md`): CDP-driven headless Chrome, phone emulation at 4x CPU, Fast 3G, offline.
+- **UI and accessibility** (`.director/ui.md`): 5 viewports, light and dark, 33 screenshots in `.director/screens/`.
+- **Product, market and growth** (`.director/design.md`): hands-on use, competitor research, user-pain evidence, all with sources.
+
+Code audited: `795bb53a5`, which is live on chargeandchew.com. Line numbers in the audit files refer to that commit.
+
+---
+
+## First impressions
+
+- **The idea is sound and differentiated.** Every competitor (PlugShare, ABRP, Tesla, Google Maps, Apple Maps, ChargePoint, Chargeway) stops at a "Dining nearby" checkbox. None answers "which stop has In-N-Out, how far a walk, and will it be lunchtime when I get there". The new meal-timed breaks are the one thing nobody else does.
+- **The product is ahead of its distribution.**
+  - Traffic is about 40 visits a day.
+  - There's no Search Console and almost no inbound links.
+  - The launch posts are unposted, and the app has 0 App Store ratings.
+  - Recent effort has gone into search long-tail fixes.
+- **The first run asks the wrong question.**
+  - The welcome dialog leads with "Browse all chains", though typed chain searches are rare and routes are the fastest-growing action.
+  - Without location, the user gets a random national list.
+- **The route view buries its best part.**
+  - Two or three smart breaks sit on top of 250 raw rows that start at "mile 0", including port-split duplicates (four "City_Of_Vernon 1850 E25Th-…" rows).
+  - "Leaving now" at night produces a plan of "12:10 am Break, next day", which looks broken.
+- **The craft is real.**
+  - The colour grammar: green means charging, amber means food.
+  - The network marks, the dark theme, and the stop card's line ("23 min here, time for a coffee run at Starbucks").
+  - No crashes or console errors in any normal flow, and no memory growth over a long session.
+
+## Research summary
+
+- **Demand evidence.** A Mach-E owner built a "dining while charging" custom GPT (July 2026) because nothing did this well.
+  - Road-trip complaints centre on restrooms, night closures, kids, and stops too short for a real meal.
+  - Vendor surveys: 63% prefer chargers near dining.
+  - Industry: stations near amenities see several times the use, and chains are launching charge-and-dine (Bojangles, Subway, Waffle House).
+- **The threat.** Google Maps plus Gemini could ship "chargers with lunch" one day. The defence is chain-level, walk-timed, meal-timed depth, and being the source AI answers cite first.
+- **Timing.** Thanksgiving is Nov 26, the heaviest road-trip week and exactly the "where do we eat on the drive" moment. Nov 17–25 is the window for a push.
+
+## Scorecard (1–10)
+
+| Lens | Score | Why |
+|---|---|---|
+| Value | 7 | A unique answer, now meal-timed, but needed mainly on infrequent long drives |
+| UX | 6 | Excellent natural-language search and routing. The first run is chain-first, the raw route list buries the plan, and night plans look broken |
+| Visual design | 7.5 | A coherent, warm system; small rough edges (broken brand names, tile seams, misaligned edges) |
+| Accessibility | 6.5 | Good focus system and dialogs. Toasts and segmented controls are silent to screen readers, no headings, map motion ignores reduced motion |
+| Performance | 7 | Boot is fine: ~530 ms main task at 4x, LCP 1.1 s, CLS 0. Taps take 50–60 ms. But a **2.4–3.7 s freeze** when changing the corridor on long routes, and the list takes 9.4 s on Fast 3G for a first visit (data.js is 1.08 MB gzipped) |
+| Trust / data quality | 6 | Honest sourcing. Duplicate rows, straight-line walks, and opening hours judged in the phone's time zone |
+| Growth readiness | 3 | No Search Console, no links, unposted drafts, 0 reviews, shares unfurl a generic card and lose the leaving time |
+
+---
+
+## Top 3 highest-leverage changes
+
+1. **Make "Meals on the way" the product, and finish it.**
+   - Fix its visible failures:
+     - break taps that do nothing past 300 rows;
+     - "next day" on day 3;
+     - clocks with no time at stops;
+     - hours checks that ignore the leaving time.
+   - Default the leaving time sensibly at night, put it in the URL, collapse the route list to the best stop per stretch, and make "Plan a drive" the first-run hero.
+   - It's the moat, and routes are already the growth action.
+2. **A Thanksgiving distribution push (Nov 17–25).**
+   - **You:** Search Console and Bing, the launch posts reframed as "where to eat on an EV road trip", and answering existing "where to stop between X and Y" threads.
+   - **Me:**
+     - trip pages v2, with meal-timed itineraries and Q&A, expanded from 44 to ~150 drives;
+     - a share that sends the plan as text and links the trip page;
+     - a review prompt that can actually fire.
+3. **Remove the long-route freeze, then a quality pass.**
+   - The corridor/route-planning loop is O(stops × route points): 2.4–3.7 s on a phone for LA→NY. Bucketing by grid cell should make it tens of ms.
+   - Then:
+     - one CSS rule for the map tile seams;
+     - non-breaking brand names ("In-N-" / "Out");
+     - a one-pass accessibility fix (live toasts, `aria-checked`, headings, reduced-motion map).
+
+---
+
+## Bug list
+
+**S1: broken, or a confidently wrong answer**
+
+| ID | Bug |
+|---|---|
+| BUG-01 | On routes with more than 300 stops, most break buttons do nothing when tapped. The handler looks for a list row, but only 300 rows render. LA→NY: 17 of 23 dead. |
+| BUG-02 | Multi-day drives say only "next day" for day 3 and for the arrival (a 49 h drive "arrives ~1:55 am · next day"). |
+
+**S2: wrong in specific cases, or a real barrier**
+
+| ID | Bug |
+|---|---|
+| BUG-03 | Break clocks count driving time only. "Dinner 6:00 pm" on LA→Denver is really about 8 pm; arrival is 3+ h late. |
+| BUG-04 | The stop card's open/closed check uses now + drive time, not the chosen leaving time, so it contradicts the breaks card. |
+| BUG-05 | Opening hours are judged on the phone's clock. An East Coast place shows "Open until 23:00" at 12:25 am local. |
+| BUG-06 | Your own location is written into the URL. Reload after moving and you're stuck on the old spot as a pin. |
+| BUG-07 | "great falls" does nothing ("great" and "falls" are both stripped). The same applies to Great Bend and Great Neck. |
+| BUG-08 / 09 | "college station tx" goes to the middle of Texas; "chargers in college station" searches universities near you. |
+| BUG-10 | "union station" goes to Union County, IL; "penn station la" goes to New Orleans. |
+| PERF-01 | Changing the corridor, or planning a long route, freezes the phone for 2.4–3.7 s (LA→NY) or 1.2–1.6 s (Seattle→San Diego). |
+| UI-03 | The breaks card's key information is its smallest text: 10.5 px meal labels, "Break, next day" wrapping, "mile N" cut off, no chevron. |
+| UI-04 | Two different "longest" figures (charger gap and break leg) are stacked and read as one. |
+| UI-05 | Brand names break at the hyphen ("In-N-" / "Out"), in the app and on /near/ pages. |
+| UI-06 | The chain picker clips "McDonald'" and "Whataburger" with no ellipsis. |
+| UI-07 | Faint tile seams form a grid over every light map (fractional zoom). |
+| A11Y-01 | Toasts are never announced (no live region). Segmented controls don't say which option is selected. |
+| ~~UI-01/02~~ | **Fixed in 795bb53a5:** the Leaving picker is now 16 px and 44 px tall on touch (no iOS zoom) and keeps focus after a change. |
+
+**S3: minor or cosmetic**
+
+- **Breaks:**
+  - BUG-11: filler breaks bunch up, 60 minutes apart.
+  - BUG-12: 2:35 am breaks at Starbucks; nothing considers night hours.
+  - BUG-13: the leaving time is not in share links, and the picker only offers 5 am–10 pm.
+  - BUG-14: three interstate spots get the wrong time zone (Ontario OR, West Wendover NV, western Kansas).
+  - UI-13: a break promises Wendy's, but the stop card hides it under "+14".
+  - UI-22: the breaks card fills a small phone's whole sheet.
+- **Routes:**
+  - BUG-15: clearing a route drops you on the national view.
+  - UI-17: on desktop in route mode, the chips sit above the route card.
+- **Offline, storage and links:**
+  - BUG-16: offline search says "OpenStreetMap is busy".
+  - BUG-17: a full localStorage throws on save or filter change.
+  - BUG-18: corrupted saved filters show "205 undefined chargers".
+  - BUG-19: `c=-5` in a link is accepted as the corridor.
+- **Service worker:**
+  - BUG-20: it caches one ~418 KB index.html per distinct URL.
+  - BUG-21: the tile cache has never stored a tile (opaque responses).
+- **Layout and polish:**
+  - UI-08: sheet left edges are off by 1–6 px.
+  - UI-09: a sliced chip shows under "+ All chains".
+  - UI-10: the radius control has no unit.
+  - UI-11: tap targets under 44 pt (chips 40 px; the handle is 18 px and the only drag target).
+  - UI-12: hover sticks on touch.
+  - UI-14: five badge styles in one row.
+  - UI-15: in dark mode, an off switch looks lit.
+  - UI-16: About links are green.
+  - UI-18: the tablet width stretches the phone layout.
+  - UI-19: terminology drifts ("stops" vs "chargers"; "instant", "live", "brand" tags).
+  - UI-20: static page lead text is quieter than the body.
+  - UI-21: the 404's 🔌 is invisible in dark.
+  - UI-23: two labels are just under AA contrast (gap note 4.47:1, mile label).
+- **Suspects:**
+  - UI-24: "Search this area" appears without the map moving.
+  - UI-25: cancelling the share sheet shows the wrong toast.
+
+---
+
+## Prioritized backlog (impact ÷ effort; S1 first; duplicates merged)
+
+`[needs-approval]` means it changes product behaviour, positioning, what Google indexes, or the release. The rest are fixes.
+
+| # | Item | Covers | Effort | Tag |
+|---|---|---|---|---|
+| 1 | A break tap opens the stop even beyond 300 rows (same path as `?stop=`) | BUG-01 | S | fix |
+| 2 | Day labels: "next day" / "day 3" / weekday, for stops and arrival | BUG-02 | S | fix |
+| 3 | Bucket route points by grid cell in `applyCorridor` (seconds → tens of ms) | PERF-01 | S–M | fix |
+| 4 | Time at stops in break clocks (~20 min per break, ~40 per meal); `fillHours` uses the leaving time; hours judged in the stop's own time zone | BUG-03/04/05 | M | fix |
+| 5 | Breaks card polish: 12 px amber meal pill, day change marked once, mile under the clock, chevron, gap shown as a row in the timeline, break → stop card leads with the promised chain | UI-03/04/13, BUG-11/14 | S–M | fix |
+| 6 | Leaving time in the URL (`leave=`) and share links; picker covers all hours | BUG-13 | S | fix |
+| 7 | Search: "great falls", "college station tx", "chargers in college station", "union station" (whole-town match before stripping; stations as landmarks), with regression cases | BUG-07–10 | S–M | fix |
+| 8 | Map tile seams (one CSS rule); non-breaking brand names (app + build.py); chain picker name layout | UI-05/06/07 | S | fix |
+| 9 | Accessibility pass: toast live region, `aria-checked` segments, handle as a button, headings, `aria-hidden` emoji, reduced-motion map | A11Y-01, UI-11 | S–M | fix |
+| 10 | Don't write your own location into the URL (only add it when sharing) | BUG-06 | S | fix |
+| 11 | Robustness: guarded storage writes, validated saved filters and `c=`, offline message, route × restores the previous area | BUG-15–19 | S | fix |
+| 12 | Service worker: one shell cache entry (`ignoreSearch`); make tiles cacheable (`crossOrigin`) or delete the dead branch | BUG-20/21 | S | fix |
+| 13 | Sheet rhythm: one 16 px gutter, chip fade, 44 px chips, one badge style, unit on radius, hover only on hover devices, dark switch | UI-08–12/14/15 | M | fix |
+| 14 | **Smart departure default**: at night, plan for tomorrow 8 am (with "now" one tap away) | design #1 | S | needs-approval |
+| 15 | **Route list collapsed** to the best stop per stretch, "Show all 250" below; merge port-split duplicate stations in `build_data.py` | design #1 | M | needs-approval |
+| 16 | **First run route-first**: "Going somewhere? From → To, leaving 8 am" as the hero; chain grid below; no random national list without location (example trips instead) | design #1 | M | needs-approval |
+| 17 | **Share the plan**: itinerary text ("leaving 8:00 · 12:10 lunch Primm, Carl's Jr. 3 min…"), link the /trip/ page when one exists, `ref=share` | growth #10 | S–M | needs-approval |
+| 18 | **Review prompt that can fire**: after a planned route + Directions, not "5 opens on 2 days"; "Rate the app" in About | growth #6 | S | needs-approval (iOS build) |
+| 19 | **Trip pages v2**: meal-timed itinerary ("leave at 8 am: breakfast in Hesperia…") + Q&A with FAQ markup; expand 44 → ~150 drives | growth #9 | M–L | needs-approval |
+| 20 | Captioned App Store screenshots, meal plan first | growth #8 | S–M | needs-approval |
+| 21 | "Road Food Index" data page for press (chain and interstate rankings, longest gaps) + `llms.txt` | growth #5/17 | M | needs-approval |
+| 22 | City pages `/in/<metro>/` for the top ~100 metros | growth #11 | M–L | needs-approval |
+| 23 | Noindex thin chain×state pages, **after** Search Console shows which earn impressions | growth #12 | S | needs-approval |
+| 24 | 1.1.1 iOS build carrying all of the above (1.1.0 is still in review) | release | M | needs-approval |
+
+**Only you can do these** (no code):
+- Set up Google Search Console and Bing Webmaster Tools, and submit the sitemap. This is a DNS TXT record at GoDaddy, which I can add in your Chrome once you sign in and approve.
+- Post the launch post, reframed for Thanksgiving, one community at a time: r/electricvehicles, TMC, macheforum (reply in the custom-GPT thread), Rivian and IONIQ/EV9 forums.
+- Do a Show HN, and pitch the data story to Electrek, InsideEVs and food trade press.
+- Create an App Store In-App Event ("Thanksgiving road trip: plan your meal stops") and submit a featuring nomination.
+- Reach out to EV clubs and YouTube road-trippers.
+
+## Next-level ideas (proposals only)
+
+1. **Stop signals:**
+   - "food open late", from hours plus a 24h chain list;
+   - "restroom likely", rule-based and labelled "likely";
+   - "good for kids", from playgrounds within 300 m.
+
+   These answer the top road-trip complaints.
+2. **Add to Calendar** for each meal stop (`.ics` on web, EventKit on iOS): an exportable plan with no backend.
+3. **iOS Live Activity / widget: "Next meal stop".** Driven by elapsed time, with no background location. Build it after trips prove out.
+4. **Honest walk times:** a detour factor, and flagging pairs that cross a freeway (the data build has motorway geometry).
+5. **Monetization, after ~1,000 visits/day:**
+   - Fits: a tip jar or one-time Supporter purchase, a hotel affiliate for overnight stops on multi-day drives, a B2B "Road Food Index" dataset.
+   - Avoid: display ads, paywalls, paid placement.
+
+## What not to change
+
+- Zero backend, no account, free; the privacy posture (location never leaves the device).
+- No charge-state routing and no live availability. "Where the good stops are", not "when you must charge".
+- The colour grammar (green = charging, amber = food, ink = selection), the network marks (style, not logos), the flat hairline rows, and Bricolage + Inter.
+- The dark theme, the stop card and its dwell line, the empty state with one action, and the Filters sheet footer.
+- The 16 px touch inputs, the focus-visible system, the dialog focus trap, safe areas, and the 40% sheet framing.
+- Offline bundled data. It works in dead zones where competitors don't.
+
+## Note on the "freeze search work" advice
+
+The product review recommends pausing search long-tail work for distribution. That conflicts with your earlier goal of search working for any query. It's your call. My suggestion: fix the four confirmed search bugs (item 7), keep the audit suites as a regression net, and move new effort to items 1–6 and the Thanksgiving push.
