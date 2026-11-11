@@ -31,6 +31,20 @@ Draft What's New lines:
 > • Nicknames and airport codes: "chi town", "atx", "mile high city", JFK, O'Hare (ORD).
 > • More ways to plan a drive: "LA-SF", "SF from LA", "Vegas and back".
 
+Also for the next build, from the 2026-11-10/11 app review (branch director/improve-2026-11-10).
+Draft What's New lines, most important first:
+> • Going somewhere? The app now opens on your drive: From, To, when you leave, and one tap to plan it. No location? Try LA → Vegas, Denver → SLC and more.
+> • Planning at night? Your drive leaves at 8 am tomorrow by default, so the plan reads like a real day on the road ("now" is one tap away).
+> • Meal stops that keep time: clocks count the time you spend at each stop, long drives say "next day" and "day 3", and late-night breaks go to places open late.
+> • Share the plan, not just a link: "LA → Las Vegas · leaving 8:00 am, 12:30 pm lunch in Primm: Carl's Jr. 3 min from a 350 kW charger…", with a link to the trip guide.
+> • Route lists show the best stop in each half hour of driving, with "Show all" one tap away. Stations split into one listing per plug now show as one stop.
+> • Opening hours are checked at the stop's own time zone, for when you will actually get there.
+> • Long cross-country routes no longer freeze for seconds while they plan.
+> • Search: "Great Falls", "College Station TX", "Union Station" and "Penn Station LA" go where you mean; offline, a station search says it needs a signal.
+> • Accessibility: VoiceOver announces messages and selected options, the results sheet handle is a real button, and the map respects Reduce Motion.
+> • Polish: brand names never break mid-word, no hairline seams on the map, 44-point chips, one badge style.
+> • After you plan a drive and tap Directions, the app may ask once (per version) for a rating; "Rate the app" is in About.
+
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The

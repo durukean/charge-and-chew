@@ -58,7 +58,7 @@ final class NativeBridge: NSObject {
     private weak var webView: WKWebView?
 
     /// Everything the page can ask the shell for beyond location. Set by the host.
-    var onShare: ((URL, String) -> Void)?
+    var onShare: ((URL, String, String?) -> Void)?
     var onTheme: ((Bool) -> Void)?
     /// Location is denied at the system level. The page cannot fix that; only Settings can.
     var onLocationDenied: (() -> Void)?
@@ -137,7 +137,7 @@ extension NativeBridge: WKScriptMessageHandler {
             if watching.isEmpty { manager.stopUpdatingLocation() }
         case "share":
             guard let raw = opts["url"] as? String, let url = URL(string: raw) else { return }
-            onShare?(url, opts["title"] as? String ?? "Charge & Chew")
+            onShare?(url, opts["title"] as? String ?? "Charge & Chew", opts["text"] as? String)
         case "theme":
             onTheme?(opts["dark"] as? Bool ?? false)
         case "haptic":

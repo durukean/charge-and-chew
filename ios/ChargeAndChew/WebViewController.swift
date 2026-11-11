@@ -87,16 +87,14 @@ final class WebViewController: UIViewController {
                                                name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         let bridge = NativeBridge(webView: webView)
-        bridge.onShare = { [weak self] url, title in self?.share(url, title: title) }
+        bridge.onShare = { [weak self] url, title, text in self?.share(url, title: title, text: text) }
         bridge.onTheme = { [weak self] isDark in self?.applyTheme(dark: isDark) }
         bridge.onLocationDenied = { [weak self] in self?.offerLocationSettings() }
-        // iOS shows the rating sheet at most three times a year and may skip it entirely;
-        // the page only asks once, after real use.
-        bridge.onReview = { [weak self] in
-            guard let scene = self?.view.window?.windowScene else { Diag.log("review: no scene"); return }
-            Diag.log("review: requested")
-            AppStore.requestReview(in: scene)
-        }
+        // The page asks after a planned drive and a Directions tap: the moment the app has done
+        // its job. Directions usually leaves for Maps, so the ask waits until the app is back.
+        bridge.onReview = { [weak self] in self?.reviewAfterDirections() }
+        NotificationCenter.default.addObserver(self, selector: #selector(appBecameActive),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
         // A downloaded data.js the page cannot read: drop it and reload from the bundled copy.
         // Reloads only if there WAS a download to drop, so a broken bundle cannot loop.
         bridge.onDataFailed = { [weak self] why in
@@ -247,10 +245,51 @@ final class WebViewController: UIViewController {
         present(alert, animated: true)
     }
 
-    private func share(_ url: URL, title: String) {
-        let sheet = UIActivityViewController(activityItems: [ShareItem(url: url, title: title)],
-                                             applicationActivities: nil)
+    /// A drive is shared as its plan: the itinerary text, then the link (with its preview).
+    private func share(_ url: URL, title: String, text: String?) {
+        var items: [Any] = []
+        if let text, !text.isEmpty { items.append(text) }
+        items.append(ShareItem(url: url, title: title))
+        let sheet = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(sheet, animated: true)
+    }
+
+    // MARK: rating
+
+    /// At most once per app version (iOS itself shows the sheet at most three times a year,
+    /// and may not show it at all). The old trigger -- five stop cards on two days -- never
+    /// fired for a road-tripper who opens the app a few times a year.
+    private static let reviewVersionKey = "cc.reviewVersion"
+    private var reviewPending = false
+    private var appVersion: String { Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?" }
+
+    private func reviewAfterDirections() {
+        guard UserDefaults.standard.string(forKey: Self.reviewVersionKey) != appVersion else {
+            Diag.log("review: already asked in \(appVersion)"); return
+        }
+        reviewPending = true
+        // Maps opens within a moment and the app goes inactive; the ask then waits for the
+        // return (appBecameActive). If nothing left the app, ask here.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self, UIApplication.shared.applicationState == .active else { return }
+            self.askForReview()
+        }
+    }
+
+    @objc private func appBecameActive() {
+        guard reviewPending else { return }
+        // Not the instant the app reappears: let the map settle under the user's eyes first.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in self?.askForReview() }
+    }
+
+    private func askForReview() {
+        guard reviewPending, UIApplication.shared.applicationState == .active,
+              presentedViewController == nil,               // not over a share sheet or Safari
+              let scene = view.window?.windowScene else { return }
+        reviewPending = false
+        UserDefaults.standard.set(appVersion, forKey: Self.reviewVersionKey)
+        Diag.log("review: requested (\(appVersion))")
+        AppStore.requestReview(in: scene)
     }
 
     /// Where an outside URL goes. Google Maps links are handed to the system so the Google
@@ -273,6 +312,8 @@ final class WebViewController: UIViewController {
         // Exact domain or a real subdomain: a bare hasSuffix("google.com") also matched
         // "evilgoogle.com", routing it past the in-app Safari sheet.
         let isGoogle = host == "google.com" || host.hasSuffix(".google.com")
+        // "Rate the app" in About: the App Store app, not a web page in a Safari sheet.
+        if host == "apps.apple.com" { UIApplication.shared.open(url); return }
         if isGoogle && url.path.hasPrefix("/maps") {
             // Directions: if the Google Maps app is installed the Universal Link takes it;
             // otherwise Google serves a mobile web page whose main feature is a nag to

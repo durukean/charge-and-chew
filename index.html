@@ -114,6 +114,7 @@ try {
 html.native{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 html.native input,html.native textarea,html.native .pp-addr{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 html.native .web-only{display:none}   /* e.g. the App Store link, inside the app itself */
+html:not(.native) .app-only{display:none}   /* "Rate the app": only where there is an app to rate */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}}
@@ -1346,7 +1347,8 @@ if (document.documentElement.classList.contains('car')) {
   <p class="about-small">Chargers: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> (under 24&nbsp;kW, private and truck-only sites left out; dealership lots flagged). Places: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Map: Esri. Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem</b></a> ·
   <a href="privacy/"><b>Privacy</b></a> · <a href="support/"><b>Support</b></a><span class="web-only"> ·
-  <a href="https://apps.apple.com/us/app/charge-chew-ev-stops/id6809134093" target="_blank" rel="noopener"><b>iPhone app</b></a></span></p>
+  <a href="https://apps.apple.com/us/app/charge-chew-ev-stops/id6809134093" target="_blank" rel="noopener"><b>iPhone app</b></a></span><span class="app-only"> ·
+  <a href="https://apps.apple.com/app/id6809134093?action=write-review" target="_blank" rel="noopener" id="rateApp"><b>Rate the app</b></a></span></p>
   <div class="web-only">
   <p><b>Popular chains:</b></p>
   <div class="chainlinks"><a href="near/ihop/">🥞 IHOP</a><a href="near/waffle-house/">🧇 Waffle House</a><a href="near/denny-s/">🍳 Denny's</a><a href="near/cracker-barrel/">🪵 Cracker Barrel</a><a href="near/in-n-out/">🍔 In-N-Out</a><a href="near/whataburger/">🍔 Whataburger</a><a href="near/chick-fil-a/">🐔 Chick-fil-A</a><a href="near/starbucks/">☕ Starbucks</a><a href="near/dunkin/">🍩 Dunkin'</a><a href="near/mcdonald-s/">🍟 McDonald's</a><a href="near/chipotle/">🌯 Chipotle</a><a href="near/panera-bread/">🥖 Panera Bread</a><a href="near/culver-s/">🍦 Culver's</a><a href="near/buc-ee-s/">🦫 Buc-ee's</a><a href="near/wawa/">🦆 Wawa</a><a href="near/sheetz/">⛽ Sheetz</a><a href="near/circle-k/">⛽ Circle K</a><a href="near/love-s/">⛽ Love's</a><a href="near/pilot/">⛽ Pilot</a><a href="near/walmart/">🛒 Walmart</a><a href="near/target/">🎯 Target</a><a href="near/costco/">📦 Costco</a><a href="near/sam-s-club/">🏪 Sam's Club</a><a href="near/kroger/">🛒 Kroger</a><a href="near/publix/">🛒 Publix</a><a href="near/h-e-b/">🛒 H-E-B</a><a href="near/whole-foods/">🥬 Whole Foods</a><a href="near/trader-joe-s/">🛍️ Trader Joe's</a><a href="near/meijer/">🛒 Meijer</a><a href="near/dollar-general/">🏪 Dollar General</a></div>
@@ -2268,7 +2270,9 @@ map.on('popupopen', e => {
     if (!box.hidden) track('car-navigate');
   };
   track('open-charger');
-  noteUse();
+  // Directions to a stop on a planned drive: the moment to ask for a rating (see askReview).
+  const dir = el && el.querySelector('.pp-links a[href*="/maps/dir/"]');
+  if (dir) dir.addEventListener('click', askReview);
   if (el) fillHours(el, e.popup._source && byId[e.popup._source._sid]);
   const src = e.popup._source;
   if (src && src._sid != null && byId[src._sid]) showPOIs(byId[src._sid]);
@@ -2281,26 +2285,13 @@ map.on('popupopen', () => document.getElementById('app').classList.add('popup-op
 map.on('popupclose', () => document.getElementById('app').classList.remove('popup-open'));
 /* The list row of the open stop is marked, so on a wide screen you can see which entry the
    panel on the map belongs to. */
-/* Ask for an App Store rating once, after the app has plainly been useful: stops opened on
-   at least two different days, five in all, and not mid-task -- the ask waits for the
-   panel to close. iOS decides whether to actually show it (at most three times a year). */
-let reviewQueued = false;
-function noteUse() {
-  if (!NATIVE) return;
-  try {
-    const n = +(localStorage.getItem('cc_opens') || 0) + 1;
-    localStorage.setItem('cc_opens', String(n));
-    const day = new Date().toISOString().slice(0, 10);
-    const days = (localStorage.getItem('cc_days') || '').split(',').filter(Boolean);
-    if (!days.includes(day)) { days.push(day); localStorage.setItem('cc_days', days.slice(-7).join(',')); }
-    if (n >= 5 && days.length >= 2 && !localStorage.getItem('cc_review_asked') && !reviewQueued) {
-      reviewQueued = true;
-      map.once('popupclose', () => setTimeout(() => {
-        try { localStorage.setItem('cc_review_asked', day); } catch (e) {}
-        native('review'); track('review-ask');
-      }, 900));
-    }
-  } catch (e) { /* storage blocked: never ask */ }
+/* Ask for an App Store rating at the moment the app has plainly done its job: a drive
+   planned, then Directions to one of its stops. "Five stops opened on two days" never came for
+   a road-tripper who opens the app a few times a year (0 ratings). The shell asks once per app
+   version, after Maps hands back (iOS shows the sheet at most three times a year, if at all). */
+function askReview() {
+  if (!NATIVE || !route || route.hwy) return;
+  native('review'); track('review-ask');
 }
 function markOpenRow() {
   document.querySelectorAll('#list .row.sel').forEach(r => r.classList.remove('sel'));

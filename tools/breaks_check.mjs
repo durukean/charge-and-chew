@@ -175,6 +175,14 @@ const CASES = [
     r => r.share && /^LA → Bakersfield · leaving tomorrow 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}" at 10:30 pm`,
     r => r.share && /[?&]leave=0800(&|$)/.test(r.share.url) && /[?&]ref=share(&|$)/.test(r.share.url) && /[?&]from=/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app, leaving 8:00, ref=share)`],
     { share: true, at: '2026-11-11T22:30:00-08:00' }],
+  /* In the iOS app (the shell's message handler stubbed): Directions from a stop on a planned
+     drive asks the shell for a rating; nothing else does (opening stops, a stop off a route).
+     About offers "Rate the app" there, and only there. */
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.review && r.review.before.length === 0 && r.review.after.join() === 'review' ? '' : `review asks ${JSON.stringify(r.review)} (want none before Directions, one after)`,
+    r => r.review && r.review.offRoute.length === 0 ? '' : `asked for a rating off a route: ${JSON.stringify(r.review && r.review.offRoute)}`,
+    r => r.review && r.review.rate === 'https://apps.apple.com/app/id6809134093?action=write-review' && r.review.rateShown ? '' : `Rate the app ${JSON.stringify(r.review)}`],
+    { native: true, review: true }],
   ['Los Angeles, CA', 'Las Vegas, NV', 'now', 'America/Los_Angeles', [
     r => r.sel === '' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" for ?leave=now at night (want now, the morning one tap away)`],
     { at: '2026-11-11T22:30:00-08:00', link: true }],
@@ -266,6 +274,30 @@ const SHARE = `(async () => {
   Object.defineProperty(window, 'innerWidth', { value: w, configurable: true });
   return got && { lines: (got.text || '').split('\\n'), url: got.url };
 })()`;
+// Open a stop, then tap its Directions; then the same off the route. Messages the shell got.
+const REVIEW = `(async () => {
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const asks = () => window.__ccMsgs.filter(m => m.cmd === 'review').map(m => m.cmd);
+  const openDir = async () => {
+    for (let i = 0; i < 40 && !document.querySelector('.leaflet-popup-content .pp-links a[href*="/maps/dir/"]'); i++) await wait(100);
+    const a = document.querySelector('.leaflet-popup-content .pp-links a[href*="/maps/dir/"]');
+    if (a) { a.addEventListener('click', e => e.preventDefault(), { once: true }); a.click(); }
+    await wait(200);
+  };
+  document.querySelector('#list .row .rowname').click();
+  await wait(1200);
+  const before = asks();
+  await openDir();
+  const after = asks();
+  window.__ccMsgs.length = 0;
+  document.getElementById('rClear').click();
+  await wait(600);
+  document.querySelector('#list .row .rowname').click();
+  await wait(1200);
+  await openDir();
+  const rate = document.getElementById('rateApp');
+  return { before, after, offRoute: asks(), rate: rate && rate.href, rateShown: !!(rate && rate.closest('.app-only') && getComputedStyle(rate.closest('.app-only')).display !== 'none') };
+})()`;
 // The route list: short (one per stretch), then all, then short again.
 const LIST = `(async () => {
   const rows = () => [...document.querySelectorAll('#list .row')];
@@ -326,6 +358,9 @@ async function main() {
       await send('Page.enable'); await send('Runtime.enable');
       await send('Emulation.setTimezoneOverride', { timezoneId: tz });
       await send('Emulation.setFocusEmulationEnabled', { enabled: true });
+      // The iOS shell: a message handler the page can post to, keeping what it is sent.
+      if (opt && opt.native) await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__ccMsgs = [];
+        window.webkit = { messageHandlers: { cc: { postMessage: m => window.__ccMsgs.push(m) } } };` });
       // The phone's clock, moved to `at` (the app reads Date.now() and new Date()).
       if (opt && opt.at) await send('Page.addScriptToEvaluateOnNewDocument', { source: `(() => {
         const RD = Date, off = RD.parse(${JSON.stringify(opt.at)}) - RD.now();
@@ -339,6 +374,7 @@ async function main() {
       res = await ev(READ);
       if (res && opt && opt.list) res.list = await ev(LIST);
       if (res && opt && opt.share) res.share = await ev(SHARE);
+      if (res && opt && opt.review) res.review = await ev(REVIEW);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
       if (!res) why.push('no breaks card (route did not load?)');
       else for (const c of [...checks, ...ALWAYS]) { const w = c(res); if (w) why.push(w); }

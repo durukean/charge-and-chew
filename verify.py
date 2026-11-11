@@ -1661,6 +1661,29 @@ check(_live("const plan = sharePlan();") and "url = `https://chargeandchew.com/t
       "sharing a drive sends a bare link again (it should send the plan as text, with the trip guide)")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
+# The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app
+# version, when the app is back from Maps -- not "5 stop cards on 2 days", which never fired.
+# tools/breaks_check.mjs plays the page half with the shell stubbed.
+_wvc2 = open(os.path.join(HERE, "ios", "ChargeAndChew", "WebViewController.swift")).read()
+_nb2 = open(os.path.join(HERE, "ios", "ChargeAndChew", "NativeBridge.swift")).read()
+check(_live("if (dir) dir.addEventListener('click', askReview);")
+      and _live("if (!NATIVE || !route || route.hwy) return;")
+      and "function noteUse" not in _html and "cc_opens" not in _html,
+      "the rating ask is not tied to Directions on a planned drive again")
+check(re.search(r'<span class="app-only"> ·\s*<a href="https://apps\.apple\.com/app/id6809134093\?action=write-review"', _html) is not None
+      and "html:not(.native) .app-only{display:none}" in _html,
+      "About lost 'Rate the app' in the iOS app (or shows it on the web)")
+check("bridge.onReview = { [weak self] in self?.reviewAfterDirections() }" in _wvc2
+      and re.search(r"guard UserDefaults\.standard\.string\(forKey: Self\.reviewVersionKey\) != appVersion else", _wvc2) is not None
+      and re.search(r"UserDefaults\.standard\.set\(appVersion, forKey: Self\.reviewVersionKey\)\s*\n\s*Diag\.log\(\"review: requested", _wvc2) is not None
+      and "AppStore.requestReview(in: scene)" in _wvc2
+      and "selector: #selector(appBecameActive)" in _wvc2,
+      "the iOS shell asks for a rating more than once per version, or not after the return from Maps")
+check('if host == "apps.apple.com" { UIApplication.shared.open(url); return }' in _wvc2,
+      "'Rate the app' opens a web page in a Safari sheet instead of the App Store")
+check('onShare?(url, opts["title"] as? String ?? "Charge & Chew", opts["text"] as? String)' in _nb2
+      and "if let text, !text.isEmpty { items.append(text) }" in _wvc2,
+      "the iOS share sheet drops the plan text again (link only)")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
