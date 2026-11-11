@@ -6116,7 +6116,8 @@ function tzOf(s) {
   return 'America/' + (ST_TZ[s.st] || 'New_York');
 }
 const TZ_FMT = new Map();
-// Minutes after local midnight, and the local date, of a moment at a stop.
+// Minutes after local midnight, the local date, and that date as a day number (days since
+// 1970, for counting the days of a drive), of a moment at a stop.
 function localAt(ms, tz) {
   let f = TZ_FMT.get(tz);
   if (!f) {
@@ -6124,9 +6125,10 @@ function localAt(ms, tz) {
     catch (e) { f = null; }
     TZ_FMT.set(tz, f);
   }
-  if (!f) { const d = new Date(ms); return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString() }; }
+  if (!f) { const d = new Date(ms);
+    return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString(), dn: Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) }; }
   const p = {}; for (const x of f.formatToParts(new Date(ms))) p[x.type] = x.value;
-  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day };
+  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5 };
 }
 function clockLabel(min) {
   const m = ((Math.round(min / 5) * 5) % 1440 + 1440) % 1440, h = Math.floor(m / 60);
@@ -6218,17 +6220,20 @@ function breaksCard(vis) {
   const hours = Array.from({ length: 18 }, (_, i) => (i + 5) * 60);   // 5 am .. 10 pm
   const opts = `<option value=""${leaveAt === null ? ' selected' : ''}>now</option>` +
     hours.map(v => `<option value="${v}"${leaveAt === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
-  // Each time is local to its stop; arrival is in the time of the last stop on the drive.
-  const home = localAt(t0, tzOf(first)).day;
-  const when = (ms, s) => { const l = localAt(ms, tzOf(s)); return [clockLabel(l.min), l.day !== home ? ' · next day' : '']; };
+  /* Each time is local to its stop; arrival is in the time of the last stop on the drive. The
+     day is counted from the day you leave: "next day" was all this knew, so LA -> New York
+     (50 h) arrived "next day" and its lunch on day 3 said the same. */
+  const home = localAt(t0, tzOf(first)).dn;
+  const when = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home;
+    return [clockLabel(l.min), n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : '']; };
   const arrive = t0 + route.hr * 3600000;
   return `<div class="breaks"><div class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</div>
     <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
-      <span>arrive ~${when(arrive, last).join('')}</span></div>` +
+      <span>arrive ~${when(arrive, last).filter(Boolean).join(' · ')}</span></div>` +
     picks.map(({ s, walk, k, meal }) => {
       const mile = route.mileAt.get(s.id), [clock, next] = when(t0 + mile * perMi * 3600000, s);
       return `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}">
-        <span class="bm">${clock}<i>${meal || 'Break'}${next ? ', next day' : ''}</i></span>
+        <span class="bm">${clock}<i>${meal || 'Break'}${next ? ', ' + next : ''}</i></span>
         <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min · ' : ''}mile ${mile}</span></span>
       </button>`;
     }).join('') + '</div>';

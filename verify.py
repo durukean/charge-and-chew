@@ -1296,6 +1296,11 @@ check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _ht
 check(".bleave select{font-size:16px;min-height:44px" in _html,
       "the leaving-time picker is under 16px on touch again (iOS zooms the page into it)")
 
+# Multi-day drives count days (2026-11-10): LA -> New York arrived "next day" after 50 hours.
+_bc2 = _html[_html.index("function breaksCard("):][:4000]
+check("const home = localAt(t0, tzOf(first)).dn;" in _bc2
+      and "n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : ''" in _bc2,
+      "the breaks card says 'next day' for day 3 again (day labels must count from the day you leave)")
 # A break opens its stop even when the stop has no list row (only LIST_MAX render): LA -> New
 # York had 17 of 23 break buttons doing nothing. tools/breaks_check.mjs taps every one.
 _bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:260]

@@ -29,7 +29,9 @@ const NOT_A_MEAL = ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Cari
 
 // "1:05 pm" -> minutes after midnight
 const mins = t => { const m = t.match(/(\d+):(\d+) (am|pm)/); return m ? (+m[1] % 12) * 60 + +m[2] + (m[3] === 'pm' ? 720 : 0) : NaN; };
-const meals = r => r.stops.filter(s => s.label !== 'Break').map(s => s.label.replace(', next day', ''));
+const meals = r => r.stops.filter(s => !/^Break/.test(s.label)).map(s => s.label.replace(/, (next day|day \d+)$/, ''));
+// The day a stop (or the arrival) is on: 1 the day you leave, 2 the next, then "day 3"...
+const dayOf = t => /next day/.test(t) ? 2 : +((t.match(/day (\d+)/) || [])[1] || 1);
 
 /* from, to, leave (minutes after midnight where the drive starts, '' = now), time zone, checks.
    Each check returns '' when fine, or what is wrong. */
@@ -66,7 +68,11 @@ const CASES = [
      open its stop -- 17 of 23 did nothing when the tap looked the stop up by its list row. */
   ['Los Angeles, CA', 'New York, NY', 420, 'America/Los_Angeles', [
     r => r.taps && r.taps.length > 15 ? '' : `only ${r.taps && r.taps.length} breaks to tap`,
-    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return dead.length ? `${dead.length} break taps did not open their stop: ${JSON.stringify(dead.slice(0, 3))}` : ''; }],
+    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return dead.length ? `${dead.length} break taps did not open their stop: ${JSON.stringify(dead.slice(0, 3))}` : ''; },
+    // ~41 h of driving from 7 am: the last stops and the arrival are on day 3, not "next day".
+    r => dayOf(r.arrive) === 3 ? '' : `arrival "${r.arrive}" (want day 3)`,
+    r => r.stops.some(s => dayOf(s.label) === 3) ? '' : 'no stop on day 3',
+    r => r.stops.every((s, i) => !i || dayOf(s.label) >= dayOf(r.stops[i - 1].label)) ? '' : 'day labels go backwards'],
     { taps: true }],
 ];
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
@@ -112,6 +118,7 @@ const READ = `(() => {
   const card = document.querySelector('.breaks');
   if (!card) return null;
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
+    arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
     stops: [...card.querySelectorAll('.brk')].map(b => {
       const line = b.querySelector('.bt span').textContent;
       // "350 kW · 🍔 Wendy's 4 min · mile 74": the part ending in "min", without its emoji
