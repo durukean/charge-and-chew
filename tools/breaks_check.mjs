@@ -186,6 +186,14 @@ const CASES = [
   ['Los Angeles, CA', 'Las Vegas, NV', 'now', 'America/Los_Angeles', [
     r => r.sel === '' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" for ?leave=now at night (want now, the morning one tap away)`],
     { at: '2026-11-11T22:30:00-08:00', link: true }],
+  /* A drive from "Your location" keeps the spot out of the address bar: from=me, which plans
+     from wherever you are when the page opens (here: located in LA). A link you send still
+     starts where you were. */
+  ['me', 'Bakersfield, CA', 480, 'America/Los_Angeles', [
+    r => /[?&]from=me(&|$)/.test(r.url) && !/[?&]from=-?\d/.test(r.url) ? '' : `address bar ${r.url} (want from=me, no coordinates)`,
+    r => r.sum === 'Your location → Bakersfield, CA' ? '' : `route card "${r.sum}" (want Your location → Bakersfield, CA)`,
+    r => r.share && /[?&]from=34\.05\d%2C\+?-118\.24\d(&|$)/.test(r.share.url) && !/[?&]from=me/.test(r.share.url) ? '' : `shared link ${r.share && r.share.url} (want the start's coordinates)`],
+    { share: true, me: [34.0522, -118.2437] }],
 ];
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
 const ALWAYS = [
@@ -236,7 +244,7 @@ const READ = `(() => {
   if (!card) return null;
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
     arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
-    url: location.search, sel: document.getElementById('leaveSel').value, opts: document.getElementById('leaveSel').options.length,
+    url: location.search, sum: (document.querySelector('#routeInfo .sum b') || {}).textContent || '', sel: document.getElementById('leaveSel').value, opts: document.getElementById('leaveSel').options.length,
     first: document.getElementById('leaveSel').options[0].value,
     mlabel: (document.querySelector('#leaveSel option[value="m"]') || {}).textContent || '',
     // "1,018 mi · 15h 02m": the drive in minutes, and minutes per mile
@@ -358,6 +366,10 @@ async function main() {
       await send('Page.enable'); await send('Runtime.enable');
       await send('Emulation.setTimezoneOverride', { timezoneId: tz });
       await send('Emulation.setFocusEmulationEnabled', { enabled: true });
+      if (opt && opt.me) {
+        await B.send('Browser.grantPermissions', { permissions: ['geolocation'] });
+        await send('Emulation.setGeolocationOverride', { latitude: opt.me[0], longitude: opt.me[1], accuracy: 30 });
+      }
       // The iOS shell: a message handler the page can post to, keeping what it is sent.
       if (opt && opt.native) await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__ccMsgs = [];
         window.webkit = { messageHandlers: { cc: { postMessage: m => window.__ccMsgs.push(m) } } };` });

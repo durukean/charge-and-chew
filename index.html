@@ -1553,6 +1553,8 @@ function shareUrl() {
     u.searchParams.delete('near');
     u.searchParams.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`);
   }
+  // Likewise a drive from "Your location" says from=me; the link you send starts where you were.
+  if (u.searchParams.get('from') === 'me' && routeFromMe) u.searchParams.set('from', $('fromIn').value.trim());
   return u.href;
 }
 
@@ -1575,6 +1577,7 @@ let navGen = 0;
 let openStopId = null;   // the stop whose panel is open (its list row is marked)
 let lastQuerySet = null; // what the last typed search set, so the next one can undo it
 let routeFromMe = false;   // the route's start was filled from the device location
+const LATLON = /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/;   // "34.050, -118.250": a start or end given as a spot
 // Live category lookup generation. Up here, not beside runLivePoi: setCenter() bumps it and
 // can run long before that line does.
 let livePoiGen = 0;
@@ -4521,6 +4524,7 @@ $('placeIn').addEventListener('keydown', async e => {
     $('routeToggle').classList.add('on');
     $('overlayTop').classList.add('routing');
     $('fromIn').value = trip.from; $('toIn').value = trip.to;
+    routeFromMe = false;   // a typed start, even one written as coordinates
   }
 
   /* A filter the LAST search set is dropped when this one doesn't name it: "chargers in sf"
@@ -6747,7 +6751,7 @@ function gapNote() {
 function showRouteSummary() {
   const { mi, hr, hwy } = route;
   // A start taken from the GPS is coordinates in the field; the card should say what it means.
-  const endLabel = v => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
+  const endLabel = v => LATLON.test(v.trim()) ? (routeFromMe ? 'Your location' : 'Dropped pin') : v.trim();
   const trip = hwy ? `Along ${hwy}` : `${endLabel($('fromIn').value)} → ${endLabel($('toIn').value)}`;
   const miles = Math.round(mi).toLocaleString('en-US');
   const time = hmLabel(hr * 60);
@@ -6800,7 +6804,10 @@ function syncUrl() {
   p.delete('stop');   // a one-time "open this stop" from the widget, not part of the view
   p.delete('q');      // a one-time search from a link: what it found is the view now
   if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
-  else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
+  /* A start taken from the device location is "from=me", not its coordinates: those put where
+     you were into the address bar, and a reload showed "Dropped pin" there after you had
+     moved. A reload locates you again; shareUrl() puts the spot back into a link you send. */
+  else if (route) { p.delete('hwy'); p.set('from', routeFromMe && LATLON.test($('fromIn').value.trim()) ? 'me' : $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
   else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
   /* The leaving time plans the meals: a shared "leaving 7 am" drive opened as "now", with
      other meals at other stops. HHMM, on the clock where the drive starts. The night default
@@ -7234,10 +7241,13 @@ if (q.get('hwy') && normHwy(q.get('hwy'))) {
 if (q.get('from') && q.get('to')) {
   $('routePanel').classList.add('show'); $('routeToggle').classList.add('on');
   $('overlayTop').classList.add('routing');
-  $('fromIn').value = q.get('from'); $('toIn').value = q.get('to');
+  // from=me (see syncUrl): a drive from where you are NOW, so a reload after moving starts there.
+  const fromMe = q.get('from') === 'me';
+  $('fromIn').value = fromMe ? '' : q.get('from'); $('toIn').value = q.get('to');
   // A shared "route + ice cream" link has to rebuild both halves, in that order.
   const bootPoi = q.get('poi') ? intentFromTerm(q.get('poi')) : null;
-  boot = () => runRoute(bootPoi ? { poi: bootPoi } : {});
+  boot = fromMe ? () => locate('route', { thenRoute: bootPoi ? { poi: bootPoi } : {} })
+    : () => runRoute(bootPoi ? { poi: bootPoi } : {});
 }
 /* ?stop=<id> opens that stop's panel: the home-screen widget shows one stop, and tapping it
    used to land on a list of 147 with the one you tapped nowhere in particular. */

@@ -1790,6 +1790,16 @@ check(".heroex{display:grid;grid-template-columns:1fr 1fr;" in _html
 _pcss, _bpy = open(os.path.join(HERE, "assets/pages.css")).read(), open(os.path.join(HERE, "build.py")).read()
 check(all(".card .c>span{background:var(--chew-bg)" in t and ".card .c span{" not in t for t in (_pcss, _bpy)),
       "a /near/ or /trip/ chip pads the brand name's .nw span as a chip of its own again")
+# A drive from "Your location" is from=me in the address bar, not its coordinates: a reload
+# after moving showed "Dropped pin" at the old spot. A reload locates again; a sent link carries
+# the spot. Behaviour is checked by tools/breaks_check.mjs (the "me -> Bakersfield" case).
+check(re.search(r"(?m)^\s*else if \(route\) \{ p\.delete\('hwy'\); p\.set\('from', routeFromMe && LATLON\.test\(\$\('fromIn'\)\.value\.trim\(\)\) \? 'me' :", _html) is not None,
+      "syncUrl writes the device location into from= again (a reload shows a Dropped pin there)")
+check(re.search(r"(?m)^\s*if \(u\.searchParams\.get\('from'\) === 'me' && routeFromMe\) u\.searchParams\.set\('from', \$\('fromIn'\)\.value\.trim\(\)\);", _html) is not None,
+      "a shared drive from 'Your location' sends from=me, which starts at the RECIPIENT's location")
+check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute:", _html) is not None,
+      "reopening a from=me drive no longer locates you (it would plan from a place called 'me')")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
