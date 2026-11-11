@@ -157,8 +157,12 @@ const CASES = [
     r => r.list && r.list.short > 5 && r.list.short < 20 && r.list.short < r.list.n / 4 ? '' : `short list ${JSON.stringify(r.list)}`,
     r => r.list && r.list.ordered && r.list.oneEach ? '' : `short list not one per stretch in driving order: ${JSON.stringify(r.list && r.list.miles)}`,
     r => r.list && r.list.all === Math.min(r.list.n, 300) && r.list.back === r.list.short ? '' : `show all gave ${r.list && r.list.all} rows of ${r.list && r.list.n}, back to ${r.list && r.list.back}`,
-    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return r.taps && r.taps.length && !dead.length ? '' : `break taps ${JSON.stringify(r.taps)}`; }],
-    { taps: true, list: true }],
+    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return r.taps && r.taps.length && !dead.length ? '' : `break taps ${JSON.stringify(r.taps)}`; },
+    /* With a car set, the card's tip ("23 min here — time for ...") names the chain the break
+       promised: Barstow's "Break · Taco Bell" card said "a coffee run at Starbucks". */
+    r => { const t = (r.taps || []).filter(([, , k]) => k); const off = t.filter(([, , k, , tip]) => !tip.includes(k));
+      return t.length && t.every(x => x[4]) && !off.length ? '' : `tips that do not name the promised chain: ${JSON.stringify(off.length ? off : t)}`; }],
+    { taps: true, list: true, car: 'Tesla Model Y' }],
   /* Share on a drive sends the plan as text: the drive and leaving time, a line per stop
      ("12:30 pm lunch in Primm: Carl's Jr. 3 min from a 350 kW charger"), the arrival, and a
      link -- the drive's /trip/ guide when there is one, else the app with its leaving time --
@@ -338,7 +342,8 @@ const TAPS = `(async () => {
       got = pm ? +(pm.textContent.match(/mile (\\d+)/) || [])[1] : null;
     }
     const lead = document.querySelector('.leaflet-popup-content .pp-nb');
-    out.push([want, got, b.dataset.k || '', lead ? lead.textContent : '']);
+    const tip = document.querySelector('.leaflet-popup-content .pp-dwell');
+    out.push([want, got, b.dataset.k || '', lead ? lead.textContent : '', tip ? tip.textContent.replace(/\\s+/g, ' ').trim() : '']);
   }
   return out;
 })()`;
@@ -373,6 +378,7 @@ async function main() {
       // The iOS shell: a message handler the page can post to, keeping what it is sent.
       if (opt && opt.native) await send('Page.addScriptToEvaluateOnNewDocument', { source: `window.__ccMsgs = [];
         window.webkit = { messageHandlers: { cc: { postMessage: m => window.__ccMsgs.push(m) } } };` });
+      if (opt && opt.car) await send('Page.addScriptToEvaluateOnNewDocument', { source: `try { localStorage.setItem('cc_car', ${JSON.stringify(opt.car)}); } catch (e) {}` });
       // The phone's clock, moved to `at` (the app reads Date.now() and new Date()).
       if (opt && opt.at) await send('Page.addScriptToEvaluateOnNewDocument', { source: `(() => {
         const RD = Date, off = RD.parse(${JSON.stringify(opt.at)}) - RD.now();

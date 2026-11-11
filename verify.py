@@ -1342,8 +1342,8 @@ check(re.search(r"^\s*backToStop\(\);", _cg, re.M) is not None
       and re.search(r"openCarPicker\(\); carReturnTo = ", _html) is not None,
       "setting a car from a stop card no longer reopens that card")
 # The charge advice suggests what you searched for first, when it fits.
-_dw = _html[_html.index("function dwellAdvice("):][:1200]
-check(re.search(r"\.sort\(\(a, b\) => \(wanted\(b\.k\) - wanted\(a\.k\)\)", _dw) is not None,
+_dw = _html[_html.index("function dwellAdvice("):][:2500]
+check(re.search(r"\.sort\(\(a, b\) => \(\(b\.k === lead\) - \(a\.k === lead\)\) \|\| \(wanted\(b\.k\) - wanted\(a\.k\)\)", _dw) is not None,
       "dwellAdvice ignores the searched chain (Starbucks search suggested Walmart)")
 
 # Filters / chain picker buttons say how many stops you will get.
@@ -1829,6 +1829,13 @@ check(_abh and "position:sticky" in _abh.group(1) and "background:var(--surface)
 check(not re.search(r"#about \.xclose\{[^}]*position:sticky", _html), "About's x is sticky on its own again")
 check(re.search(r"(?m)^\s*\$\('about'\)\.querySelector\('\.abhead'\)\.classList\.toggle\('scrolled', e\.target\.scrollTop > 2\)", _html) is not None,
       "About's header no longer draws its hairline when text scrolls under it")
+
+# A stop card opened from a break leads with the chain the plan promised; its tip ("23 min
+# here — time for ...") follows it, or says it is tight for it. Behaviour: breaks_check.
+_dw = _html[_html.index("function dwellAdvice("):_html.index("function dwellAdvice(") + 2500]
+check(re.search(r"(?m)^\s*const lead = leadAt\(s\);", _dw) and "((b.k === lead) - (a.k === lead)) ||" in _dw
+      and re.search(r"(?m)^\s*if \(lead && m\[lead\] !== undefined && \(!opts\.length \|\| opts\[0\]\.k !== lead\)\) \{", _dw),
+      "the stop card's tip no longer follows the chain the plan promised there")
 
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:

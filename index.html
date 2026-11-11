@@ -4911,13 +4911,21 @@ const wanted = k => active.has(k) || (anyCat && inCat(k, anyCat)) ? 1 : 0;
 function dwellAdvice(s, mins) {
   if (mins == null) return '';
   const m = MATCH[s.id]; if (!m) return '';
+  /* Opened from a break or a meal on the plan, the card leads with the chain the plan
+     promised there; the tip suggested something else ("Break · Taco Bell", then "time for a
+     coffee run at Starbucks"). It follows the plan: that chain first, or say it is tight. */
+  const lead = leadAt(s);
   const opts = Object.keys(m)
     .map(k => ({ k, kind: dwellKind(k), walk: walkMin(mDist(s, m[k])) }))
-    // there and back has to fit inside the charge, with a little slack
-    .filter(o => DWELL_MIN[o.kind] + o.walk * 2 <= mins - 3)
+    // there and back has to fit inside the charge, with a little slack (none for the plan's
+    // own pick: Taco Bell 1 min away fits a 23-minute charge)
+    .filter(o => DWELL_MIN[o.kind] + o.walk * 2 <= mins - (o.k === lead ? 0 : 3))
     // What you searched for comes first when it fits: "Seattle to Portland with Starbucks"
     // suggested a browse at Walmart. Then the longest thing the charge allows, then nearest.
-    .sort((a, b) => (wanted(b.k) - wanted(a.k)) || (DWELL_MIN[b.kind] - DWELL_MIN[a.kind]) || (a.walk - b.walk));
+    .sort((a, b) => ((b.k === lead) - (a.k === lead)) || (wanted(b.k) - wanted(a.k)) || (DWELL_MIN[b.kind] - DWELL_MIN[a.kind]) || (a.walk - b.walk));
+  if (lead && m[lead] !== undefined && (!opts.length || opts[0].k !== lead)) {
+    return `<div class="pp-dwell tight">${mins} min is tight for ${esc(lead)} — a ${walkMin(mDist(s, m[lead]))} min walk each way.</div>`;
+  }
   if (!opts.length) {
     const nearest = Object.keys(m).sort((a, b) => mDist(s, m[a]) - mDist(s, m[b]))[0];
     return nearest
