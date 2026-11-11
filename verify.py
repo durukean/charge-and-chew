@@ -1280,10 +1280,21 @@ for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "
                     ("Love's Travel #285 (Santa Rosa, NM)", "Love's Travel #285 (Santa Rosa, NM)")]:
     check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
 
-# The breaks card only claims a cadence when every break point has a stop.
-_bc = _html[_html.index("function breaksCard("):][:1600]
-check("if (picks.length >= breakLegs() - 1)" in _bc and "longest leg ~" in _bc,
-      "the breaks card claims 'about every N h' even when break points have no stop")
+# The breaks card only claims a cadence when no stretch runs long.
+_bc = _html[_html.index("function breaksCard("):][:1800]
+check("longest * perMi * 60 <= BREAK_MIN * 1.25" in _bc and "longest leg ~" in _bc,
+      "the breaks card claims 'about every N h' even when a stretch has no stop")
+# Meal-timed breaks (2026-11): meals by LOCAL time at each stop, a real meal (no coffee for
+# lunch, no Popeyes for breakfast), a leaving time that re-plans the card.
+_bp = _html[_html.index("function breakPicks("):][:2600]
+check("const at = localAt(t0 + into * 60000, tzOf(s));" in _bp and "nearestOf(s, mealKeys(m, meal.name), m)" in _bp,
+      "meal stops are no longer timed by local time at each stop")
+check("if (ls) ls.onchange = () => {\n    leaveAt = " in _html and 'id="leaveSel"' in _html,
+      "the breaks card lost its leaving-time picker")
+check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _html,
+      "changing the leaving time drops keyboard/VoiceOver focus again (the list re-render recreates the select)")
+check(".bleave select{font-size:16px;min-height:44px" in _html,
+      "the leaving-time picker is under 16px on touch again (iOS zooms the page into it)")
 
 # Dealership lots list after the public stations, under their own heading (not on a route).
 _vs = _html[_html.index("function visibleSites()"):][:2000]

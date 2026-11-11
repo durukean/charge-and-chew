@@ -259,6 +259,18 @@ const CASES = [
   C('LA', 'fresh', 'sf from la', { route: true }, '@probe'),
   C('LA', 'fresh', 'vegas and back', { route: true }, '@probe'),
   C('LA', 'fresh', 'low battery', { near: ['LA', 30] }, '@probe'),
+  // 2026-11, from a user: "outlet still goes to a different state". Everyday words alone stay
+  // where you are; towns named after them are still towns.
+  C('LA', 'fresh', 'outlet', { near: ['LA', 30] }, '@probe'),
+  C('DAL', 'fresh', 'outlet', { near: ['DAL', 30] }, '@probe'),
+  C('LA', 'fresh', 'outlet stores', { near: ['LA', 30] }, '@probe'),
+  C('LA', 'fresh', 'plaza', { near: ['LA', 30] }, '@probe'),
+  C('LA', 'fresh', 'casino', { near: ['LA', 30] }, '@probe'),
+  C('LA', 'fresh', 'springs', { near: ['LA', 30] }, '@probe'),
+  C('LA', 'fresh', 'college station', { st: 'TX' }, '@probe'),
+  C('LA', 'fresh', 'falls church', { st: 'VA' }, '@probe'),
+  C('LA', 'fresh', 'harbor springs', { st: 'MI' }, '@probe'),
+  C('LA', 'fresh', 'dodger stadium', { near: [[34.0739, -118.24], 1.5] }, '@probe'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
@@ -274,7 +286,7 @@ const QUICK_SET = new Set([
   'denied|restoredNY|in n out', 'denied|fresh|starbucks', 'LA|fresh|chargers near me',
   'LA-late|restoredNY|in n out', 'LA-late|restoredNY|starbucks',
   'LA|fresh|ihop in austin', 'DAL|fresh|pasadena', 'LA|fresh|pasadena', 'NYC|fresh|portland', 'SEA|fresh|portland',
-  'LA|fresh|springfield il', 'LA|fresh|us 101', 'LA|fresh|pch', 'LA|fresh|starbucks reserve', 'LA|fresh|mcd', 'LA|fresh|tractor supply co', 'LA|fresh|low battery', 'NYC|fresh|bay area', 'LA|fresh|downtown la', 'LA|fresh|buc-ees', 'LA|fresh|starbucks in austin', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
+  'LA|fresh|springfield il', 'LA|fresh|us 101', 'LA|fresh|pch', 'LA|fresh|starbucks reserve', 'LA|fresh|mcd', 'LA|fresh|tractor supply co', 'LA|fresh|low battery', 'LA|fresh|outlet', 'LA|fresh|plaza', 'NYC|fresh|bay area', 'LA|fresh|downtown la', 'LA|fresh|buc-ees', 'LA|fresh|starbucks in austin', 'LA|fresh|springfield missouri', 'LA|fresh|columbus ohio', 'LA|fresh|chargers in austin',
 ]);
 const BLOCK = ['*nominatim.openstreetmap.org*', '*overpass*', '*router.project-osrm.org*', '*arcgisonline.com*',
   '*basemaps.cartocdn.com*', '*goatcounter*', '*gc.zgo.at*', '*fonts.g*'];

@@ -339,6 +339,22 @@ CASES = [
     ("round trip to tahoe and back", dict(trip="|South Lake Tahoe, CA")),
     ("winston-salem",                dict(trip=None, place="winston-salem")),
     ("chargers from la",             dict(trip=None)),
+    # ── 2026-11 (a user: "outlet still goes to a different state"). Outlets are a kind of
+    #    place; everyday words alone are not towns elsewhere; towns named after them stay towns.
+    ("outlet",                       dict(poi="shop=mall;name=outlet+shop=outlet")),
+    ("outlets",                      dict(poi="shop=mall;name=outlet+shop=outlet")),
+    ("outlet mall",                  dict(poi="shop=mall;name=outlet+shop=outlet")),
+    ("outlet stores",                dict(poi="shop=mall;name=outlet+shop=outlet")),
+    ("casino",                       dict(poi="amenity=casino")),
+    ("school",                       dict(poi="amenity=school")),
+    ("brewery",                      dict(poi="craft=brewery")),
+    ("plaza",                        dict(place="")),
+    ("springs",                      dict(place="")),
+    ("village",                      dict(place="")),
+    ("palm springs",                 dict(place="palm springs")),
+    ("college station",              dict(place="college station")),
+    ("falls church",                 dict(place="falls church")),
+    ("harbor springs",               dict(place="harbor springs", poi=None)),   # a town, no chargers of its own
 
     # ── Ice cream is a precomputed category (2026-10-18): every way of asking for it, and the
     #    common misspellings, must resolve to it -- "icea cream" used to say "Couldn't find".

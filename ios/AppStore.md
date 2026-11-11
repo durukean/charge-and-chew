@@ -14,7 +14,10 @@ re-recording in the new design.
 
 ## Next (after 1.1.0): live on the web 2026-10-28, not yet in an iOS build
 
-From two probes (93, then ~150 queries) the audit did not cover. Draft What's New lines:
+From two probes (93, then ~150 queries) the audit did not cover, and meal-timed breaks.
+Draft What's New lines:
+> • Meals on the way: pick when you leave and long drives suggest where to stop for breakfast, lunch and dinner, at local time, with a real meal a short walk from the charger.
+> • "outlet", "casino", "brewery", "school" and other everyday words search near you instead of a town of that name in another state.
 > • Cuisines: "sushi", "bbq in Austin", "thai food", "korean bbq near me" find that kind of restaurant.
 > • "Directions to San Diego", "take me to Vegas" and "route to Tahoe" plan the drive from where you are.
 > • Regions and downtowns: "bay area", "socal", "downtown LA".

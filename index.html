@@ -626,6 +626,9 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk:hover{background:var(--surface2)}
 .brk .bm{flex:0 0 74px;font:700 15px/1.2 var(--display);color:var(--txt);display:flex;flex-direction:column}
 .brk .bm i{font:500 10.5px var(--sans);color:var(--dim);font-style:normal}
+.brk.meal .bm i{color:var(--chew);font-weight:600}
+.bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 6px;font-size:12.5px;color:var(--dim)}
+.bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
 .brk .bt span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -943,6 +946,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   /* iOS Safari zooms the page into any focused field under 16px, and the page cannot
      scroll back out (html is overflow:hidden). */
   .searchpill input,.rfield input,.pk .searchbox input{font-size:16px}
+  .bleave select{font-size:16px;min-height:44px;padding:6px 8px}
   #filtNetList div[data-net]{min-height:44px;padding:0 10px;font-size:13.5px}
   .pp-links a{padding:13px 8px}.pp-links a.rep{padding:13px 4px}.pp-links .pp-morebtn{padding:13px 18px}
   .pp-nb{padding:8px 10px;font-size:12.5px}
@@ -2831,6 +2835,13 @@ function renderList(vis) {
     const r = document.querySelector(`#list .row[data-id="${b.dataset.brk}"]`);
     if (r) { track('break-pick'); r.click(); }
   });
+  const ls = $('leaveSel');
+  /* render() rebuilds the list, select included: put focus back on the new one, or keyboard and
+     VoiceOver users are dropped at the top of the page after every change. */
+  if (ls) ls.onchange = () => {
+    leaveAt = ls.value === '' ? null : +ls.value; track('break-leave', ls.value || 'now'); render();
+    const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });
+  };
   $('list').querySelectorAll('.row').forEach(r => {
     r.onclick = e => {
       if (e.target.dataset.star !== undefined) return;
@@ -3591,6 +3602,9 @@ const NON_PLACE = new Set(['area', 'location', 'here', 'nearby', 'local', 'spot'
    map to whichever "Beach" the geocoder liked. Only when it is the WHOLE place text, so Long
    Beach, Lake Tahoe and Downtown Disney are untouched. */
 const GENERIC_PLACE = new Set(['beach', 'mall', 'downtown', 'airport', 'park', 'lake', 'highway', 'freeway',
+  // Each found a namesake far away: Plaza ND, Village AR, Springs NY, Falls County TX, Market WV.
+  'plaza', 'village', 'crossing', 'commons', 'springs', 'falls', 'ranch', 'depot', 'boardwalk', 'square',
+  'shops', 'waterfront', 'harbor', 'harbour', 'station', 'stadium', 'arena',
   'interstate', 'city', 'town', 'center', 'centre', 'coast', 'mountains', 'freeway exit', 'exit']);
 
 const FOOD_GROUPS = [
@@ -3712,6 +3726,11 @@ function parseQuery(raw) {
   const stm = t.match(/\s([a-z]+)\s(in|me|or)\s*$/);
   const keepSt = stm && !NOISE_WORD.has(stm[1]) && !NON_PLACE.has(stm[1]) ? stm : null;
   let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
+  /* ...unless the words that were stripped are part of a town's name: "college station" lost
+     "station" (charger talk) and went to College, Alaska. */
+  const whole = t.replace(/\s+/g, ' ').trim();
+  const wk = whole.replace(/[^a-z]/g, '');   // the town's own name, not "evansville in" (= Evansville, IN)
+  if (whole !== place && whole.includes(' ') && PLACES.some(x => x.ckey === wk)) place = whole;
   // Strip surviving non-place words; if nothing meaningful is left, there is no place.
   // A region keeps its own filler word: "bay area" is not "bay".
   if (!CITY_ALIAS[place]) place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
@@ -4035,11 +4054,16 @@ const busyMsg = (what, status) => status === 429 || status === 403 || status >= 
    known and near: there is a "Griffith Park" in Las Vegas and Falls Church too, and a "City
    Park" in every other town. */
 const LANDMARK_IS = { park: x => x.class === 'leisure', mall: x => x.type === 'mall',
+  outlets: x => x.type === 'mall' || x.type === 'outlet', outlet: x => x.type === 'mall' || x.type === 'outlet',
+  stadium: x => /^(stadium|arena)$/.test(x.type), arena: x => /^(stadium|arena)$/.test(x.type),
+  museum: x => x.type === 'museum', zoo: x => x.type === 'zoo', aquarium: x => x.type === 'aquarium',
+  casino: x => x.type === 'casino', university: x => /^(university|college)$/.test(x.type),
+  college: x => /^(university|college)$/.test(x.type),
   hospital: x => x.type === 'hospital', library: x => x.type === 'library', hotel: x => x.type === 'hotel' };
 async function findLandmark(phrase) {
   const sq = t => normalise(t).replace(/^the /, '').replace(/[^a-z0-9]/g, '');
   const want = sq(phrase);
-  const kind = (phrase.match(/(?:^|\s)(park|mall|hospital|library|hotel)(?:\s|$)/) || [])[1];
+  const kind = (phrase.match(/(?:^|\s)(park|mall|hospital|library|hotel|outlets?|stadium|arena|museum|zoo|aquarium|casino|university|college)(?:\s|$)/) || [])[1];
   const base = kind ? sq(phrase.replace(new RegExp('(^|\\s)' + kind + '(\\s|$)'), ' ')) : '';
   let j;
   try {
@@ -4330,6 +4354,8 @@ $('placeIn').addEventListener('keydown', async e => {
   /* "banks near me", "tire shop" — a category word means they want that kind of place,
      not a town of that name. Ask OSM live, scoped to the area. */
   let poi = p.chains.length ? null : detectPoiIntent(raw);
+  // A town whose name has a kind of place in it: "falls church", "college station", "park city".
+  if (poi && p.place && knownPlace(p.place) && normalise(p.place).split(' ').includes((poi.kind || '').split(' ')[0])) poi = null;
   /* "central park", "griffith park", "mall of america", "dolphin mall": a named place that
      has a kind-of-place word in it. Read as "parks near Central" they went to Central, Ohio,
      Mohave County, Arizona and Dolphin, Virginia. When the words around the kind run together
@@ -4337,7 +4363,7 @@ $('placeIn').addEventListener('keydown', async e => {
      answers -- or a fairly known one nearby. "skate park", "city park" stay kinds. */
   if (poi && poi.name && !p.here && !route) {
     const phrase = normalise(raw).replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
-    if (/(^|\s)(park|mall|hospital|library|hotel)(\s|$)/.test(phrase) && normalise(raw).includes(phrase)) {
+    if (/(^|\s)(park|mall|hospital|library|hotel|outlets?|stadium|arena|museum|zoo|aquarium|casino|university|college)(\s|$)/.test(phrase) && normalise(raw).includes(phrase)) {
       const myNav = ++navGen;
       toast('Searching…'); $('placeBox').classList.add('busy');
       const lm = await findLandmark(phrase);
@@ -4686,6 +4712,8 @@ window.__hoursNow = hoursNow;   // exercised by verify_hours.py
    all, so it listed every charger near a Denny's; "bbq in austin" was not food at all and
    searched a town called "Bbq Austin". OSM keeps cuisines as a ;-list ("sushi;japanese"). */
 const CU = c => ['amenity=restaurant;cuisine=' + c, 'amenity=fast_food;cuisine=' + c];
+const OUTLET = ['shop=mall;name=outlet', 'shop=outlet'];
+const UNI = ['amenity=university', 'amenity=college'];
 const POI_TAGS = {
   bank: ['amenity=bank'], banks: ['amenity=bank'], atm: ['amenity=atm'],
   pharmacy: ['amenity=pharmacy'], drugstore: ['amenity=pharmacy'], chemist: ['amenity=pharmacy'],
@@ -4708,6 +4736,23 @@ const POI_TAGS = {
   laundry: ['shop=laundry'], laundromat: ['shop=laundry'],
   liquor: ['shop=alcohol'], convenience: ['shop=convenience'],
   mall: ['shop=mall'], bookstore: ['shop=books'], books: ['shop=books'],
+  /* "outlet" was not a kind of place, so it was looked up as a town: a hamlet called Outlet,
+     Pennsylvania and a canal in Louisiana, from anywhere in the country. An outlet centre is
+     a mall with "Outlet" in its name (OSM has no separate tag), or the odd shop=outlet. */
+  outlet: OUTLET, outlets: OUTLET,
+  /* Everyday words that are kinds of place. Each one, typed alone, was looked up as a town
+     and found a namesake in another state: "casino" Casino, Minnesota, "school" School,
+     Missouri, "campus" Campus, Illinois, "brewery" the Brewery District of Columbus. */
+  brewery: ['craft=brewery'], breweries: ['craft=brewery'], winery: ['craft=winery'],
+  wineries: ['craft=winery'], vineyard: ['craft=winery'], vineyards: ['craft=winery'],
+  casino: ['amenity=casino'], casinos: ['amenity=casino'], stadium: ['leisure=stadium'],
+  arena: ['leisure=stadium'], school: ['amenity=school'], schools: ['amenity=school'],
+  church: ['amenity=place_of_worship'], churches: ['amenity=place_of_worship'],
+  spa: ['leisure=spa'], spas: ['leisure=spa'], dealership: ['shop=car'], dealerships: ['shop=car'],
+  campus: UNI, university: UNI, college: UNI,
+  resort: ['leisure=resort'], resorts: ['leisure=resort'], market: ['amenity=marketplace'],
+  museum: ['tourism=museum'], museums: ['tourism=museum'], zoo: ['tourism=zoo'],
+  aquarium: ['tourism=aquarium'],
   playground: ['leisure=playground'], park: ['leisure=park'],
   restroom: ['amenity=toilets'], bathroom: ['amenity=toilets'], toilets: ['amenity=toilets'],
   /* Treats and quick food. "ice cream" was the first thing a real user typed that this map
@@ -4758,6 +4803,8 @@ const POI_PHRASES = {
   'hardware store': ['shop=hardware', 'shop=doityourself'],
   'liquor store': ['shop=alcohol'], 'department store': ['shop=department_store'],
   'shopping mall': ['shop=mall'], 'movie theater': ['amenity=cinema'],
+  'outlet mall': OUTLET, 'outlet malls': OUTLET, 'outlet store': OUTLET, 'outlet stores': OUTLET,
+  'outlet center': OUTLET, 'outlet centers': OUTLET, 'factory outlet': OUTLET, 'factory outlets': OUTLET,
   'picnic area': ['tourism=picnic_site'], 'dog friendly': ['leisure=dog_park'],
   'korean bbq': CU('korean'), 'korean barbecue': CU('korean') };
 // "331 bank" reads as a typo; pluralise the last word of whatever they typed.
@@ -4784,6 +4831,11 @@ const POI_ICON = {
   'shop=supermarket': '🛒', 'shop=convenience': '🏪', 'shop=alcohol': '🍷',
   'shop=books': '📚', 'shop=pet': '🐶', 'shop=hardware': '🔨', 'shop=doityourself': '🔨',
   'shop=hairdresser': '💈', 'shop=laundry': '🧺', 'shop=mall': '🏬',
+  'shop=mall;name=outlet': '🛍️', 'shop=outlet': '🛍️',
+  'craft=brewery': '🍺', 'craft=winery': '🍷', 'amenity=casino': '🎰', 'leisure=stadium': '🏟️',
+  'amenity=school': '🏫', 'amenity=place_of_worship': '⛪', 'leisure=spa': '💆', 'shop=car': '🚗',
+  'amenity=university': '🎓', 'amenity=college': '🎓', 'leisure=resort': '🏝️',
+  'amenity=marketplace': '🧺', 'tourism=museum': '🏛️', 'tourism=zoo': '🦁', 'tourism=aquarium': '🐠',
   'shop=department_store': '🏬', 'shop=second_hand': '♻️',
   'leisure=fitness_centre': '🏋️', 'leisure=park': '🌳', 'leisure=playground': '🛝',
   'leisure=dog_park': '🐕', 'tourism=hotel': '🏨', 'tourism=motel': '🏩',
@@ -5180,7 +5232,8 @@ async function runLivePoi(intent, scope) {
       ? `nwr(${at})["brand"~"${brandRe(intent.name)}",i];`
       : intent.tags.map(t => `nwr(${at})` + t.split(';').map(kv => {
           const [k, v] = kv.split('=');
-          return k === 'cuisine' ? `["cuisine"~"(^|;) *(${v}) *($|;)",i]` : `["${k}"="${v}"]`;
+          return k === 'cuisine' ? `["cuisine"~"(^|;) *(${v}) *($|;)",i]`
+            : k === 'name' ? `["name"~"${v}",i]` : `["${k}"="${v}"]`;
         }).join('') + ';').join('');
     return `[out:json][timeout:25];(${parts});out center ${onRoute ? 2000 : 600};`;
   });
@@ -5999,64 +6052,178 @@ function applyCorridor(verts, mi, hr, hwy) {
   settleFit(() => routeLayer && routeLayer.getBounds(), [24, 24]);
 }
 
-/* "Where should I stop?" A long drive lists dozens of stops; this picks one near each
-   ~2-hour mark (130 mi), the strongest there: most power, then food closest, then stalls,
-   with 24-hour sites ahead on a tie. Picked from what is listed, so "LA to Vegas with
-   In-N-Out" suggests In-N-Out breaks. Driver breaks, not a charging plan -- the same rule
-   as the /trip/ pages' "good places to break the drive". */
+/* "Where should I stop?" A long drive lists dozens of stops; this picks the meal stops (below)
+   and then one in each stretch of more than ~2 hours between them, the strongest there: most
+   power, then food closest, then stalls, with 24-hour sites ahead on a tie. Picked from what
+   is listed, so "LA to Vegas with In-N-Out" suggests In-N-Out breaks. Driver breaks, not a
+   charging plan -- the same rule as the /trip/ pages' "good places to break the drive". */
+const BREAK_MIN = 150;                  // longest stretch without a suggested stop, minutes
 const lexLess = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i]; return false; };
-const breakLegs = () => Math.max(2, Math.min(6, Math.floor(route.mi / 130) + 1));
-function breakPicks(vis) {
-  if (!route || !route.mileAt || route.hwy || route.mi < 130) return [];
-  const legs = breakLegs();
-  const span = Math.max(18, route.mi * 0.12 / (legs / 2));
-  const foodWalk = s => {
-    const m = MATCH[s.id] || {};
-    const keys = chainQuery() ? chainKeysOn(m) : Object.keys(m).filter(k => BRANDS[k] && BRANDS[k].cat === 'food');
-    let best = 9e9;
-    for (const k of keys) { const d = walkTo(s, k, m[k]); if (d < best) best = d; }
-    return best;
-  };
-  const picks = [];
-  for (let n = 1; n < legs; n++) {
-    const target = route.mi * n / legs;
-    let best = null, bestScore = null;
-    for (const s of vis) {
-      if (s.lvl === 2 || !route.mileAt.has(s.id)) continue;
-      if (Math.abs(route.mileAt.get(s.id) - target) > span) continue;
-      const w = foodWalk(s);
-      if (w >= 9e9) continue;                      // a break means somewhere to eat
-      const sc = [-Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
-      if (!best || lexLess(sc, bestScore)) { best = s; bestScore = sc; }
-    }
-    if (best && !picks.some(p => p.s.id === best.id)) picks.push({ s: best, walk: bestScore[4] });
+/* Meals on the way (2026-11). A break near noon is lunch, and this app knows what is a short
+   walk from every charger -- the one thing a route planner cannot say. From the time you
+   leave (now, or a time picked on the card), each meal that falls during the drive gets the
+   stop nearest its hour with a real meal in walking distance; breaks fill any stretch over
+   ~2.5 hours between. Not in the first hour or the last 30 minutes: nobody stops for lunch just
+   out of the driveway or ten miles from home. Meal hours are LOCAL to each stop: LA to Denver
+   crosses into Mountain time, where 12:30 on a Pacific clock is already 1:30. */
+const MEALS = [{ name: 'Breakfast', at: 8 * 60 }, { name: 'Lunch', at: 12 * 60 + 30 }, { name: 'Dinner', at: 18 * 60 + 30 }];
+// Not a meal: coffee, doughnuts, ice cream. (Little Caesars is "grab" for dwell, but a pizza is dinner.)
+const NOT_A_MEAL = new Set(['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee', 'Krispy Kreme', 'Ice cream shop']);
+// No breakfast menu: "Breakfast at Popeyes" was the first thing this suggested.
+const NO_BREAKFAST = new Set(['Popeyes', 'In-N-Out', 'Chipotle', 'Five Guys', 'Shake Shack', "Raising Cane's", 'Wingstop',
+  'Olive Garden', 'Texas Roadhouse', "Chili's", "Applebee's", 'Buffalo Wild Wings', 'Red Robin', 'Panda Express',
+  'KFC', "Arby's", "Culver's", 'Dairy Queen', "Zaxby's", "Portillo's", 'Cook Out', 'Little Caesars', "Domino's",
+  'Pizza Hut', "Jersey Mike's", 'Firehouse Subs', 'Ice cream shop']);
+let leaveAt = null;                     // minutes after midnight where the drive starts; null = now
+// The first and last stops on the drive, for its start and end time zones.
+function routeEnds(vis) {
+  let a = null, b = null;
+  for (const s of vis) {
+    if (!route.mileAt.has(s.id)) continue;
+    const m = route.mileAt.get(s.id);
+    if (!a || m < route.mileAt.get(a.id)) a = s;
+    if (!b || m > route.mileAt.get(b.id)) b = s;
   }
-  return picks;
+  return [a, b];
+}
+// "Leaving 7 am" is 7 am where the drive starts, whatever zone the phone is in.
+function departMs(first) {
+  const now = Date.now();
+  if (leaveAt === null || !first) return now;
+  return now + (leaveAt - localAt(now, tzOf(first)).min) * 60000;
+}
+/* The time zone at a stop: its state's, with the states that are split cut by longitude. */
+const ST_TZ = { CA: 'Los_Angeles', NV: 'Los_Angeles', OR: 'Los_Angeles', WA: 'Los_Angeles', AZ: 'Phoenix',
+  CO: 'Denver', ID: 'Boise', MT: 'Denver', NM: 'Denver', UT: 'Denver', WY: 'Denver', AK: 'Anchorage',
+  AL: 'Chicago', AR: 'Chicago', IL: 'Chicago', IA: 'Chicago', KS: 'Chicago', LA: 'Chicago', MN: 'Chicago',
+  MS: 'Chicago', MO: 'Chicago', NE: 'Chicago', ND: 'Chicago', OK: 'Chicago', SD: 'Chicago', TN: 'Chicago',
+  TX: 'Chicago', WI: 'Chicago', KY: 'New_York', IN: 'Indiana/Indianapolis', MI: 'Detroit' };
+function tzOf(s) {
+  if (s.st === 'HI') return 'Pacific/Honolulu';
+  if (s.st === 'TN' && s.lon > -85.6) return 'America/New_York';
+  if (s.st === 'IN' && ((s.lat > 41 && s.lon < -86.5) || (s.lat < 38.6 && s.lon < -86.7))) return 'America/Chicago';
+  if (s.st === 'KY' && s.lon < -86.2) return 'America/Chicago';
+  if (s.st === 'FL' && s.lon < -85.1) return 'America/Chicago';
+  if (s.st === 'TX' && s.lon < -104.9) return 'America/Denver';
+  if (s.st === 'ID' && s.lat > 45.6) return 'America/Los_Angeles';
+  if ((s.st === 'ND' && s.lon < -101.2) || (s.st === 'SD' && s.lon < -100.6) || (s.st === 'NE' && s.lon < -101.4)) return 'America/Denver';
+  return 'America/' + (ST_TZ[s.st] || 'New_York');
+}
+const TZ_FMT = new Map();
+// Minutes after local midnight, and the local date, of a moment at a stop.
+function localAt(ms, tz) {
+  let f = TZ_FMT.get(tz);
+  if (!f) {
+    try { f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }); }
+    catch (e) { f = null; }
+    TZ_FMT.set(tz, f);
+  }
+  if (!f) { const d = new Date(ms); return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString() }; }
+  const p = {}; for (const x of f.formatToParts(new Date(ms))) p[x.type] = x.value;
+  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day };
+}
+function clockLabel(min) {
+  const m = ((Math.round(min / 5) * 5) % 1440 + 1440) % 1440, h = Math.floor(m / 60);
+  return `${(h % 12) || 12}:${String(m % 60).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`;
+}
+// The nearest of the given chains at a stop: [chain, metres], or [null, 9e9].
+function nearestOf(s, keys, m) {
+  let k0 = null, w0 = 9e9;
+  for (const k of keys) { const d = walkTo(s, k, m[k]); if (d < w0) { w0 = d; k0 = k; } }
+  return [k0, w0];
+}
+const foodKeys = m => (chainQuery() ? chainKeysOn(m) : Object.keys(m)).filter(k => BRANDS[k] && BRANDS[k].cat === 'food');
+// A chain the user asked for counts whatever it is: "LA to Vegas with Starbucks" eats at Starbucks.
+const mealKeys = (m, meal) => foodKeys(m).filter(k => chainQuery() ||
+  (!NOT_A_MEAL.has(k) && !(meal === 'Breakfast' && NO_BREAKFAST.has(k))));
+
+function breakPicks(vis) {
+  if (!route || !route.mileAt || route.hwy || route.mi < 60) return [];
+  const perMin = route.hr * 60 / Math.max(1, route.mi);     // minutes of driving per mile
+  const drive = route.hr * 60, t0 = departMs(routeEnds(vis)[0]);
+  const cands = vis.filter(s => s.lvl !== 2 && route.mileAt.has(s.id));
+  // A meal you leave within an hour of (or after) is one you had before setting off.
+  const start = localAt(t0, tzOf(routeEnds(vis)[0])), had = new Set();
+  for (const meal of MEALS) if (start.min > meal.at - 60) had.add(start.day + meal.name);
+  /* One stop per meal per day: the best within 45 minutes of its hour (local), failing that
+     within 75, failing that a LATE one within two hours -- Albuquerque to Dallas jumps an hour
+     at the Texas line right at lunchtime, and the first stop after it is Amarillo. Never more
+     than 45 minutes early: "lunch" at 11:10, forty minutes from Las Vegas, is no lunch. */
+  const best = new Map();
+  for (const s of cands) {
+    const mi = route.mileAt.get(s.id), into = mi * perMin;
+    if (into < 60 || into > drive - 30) continue;
+    const at = localAt(t0 + into * 60000, tzOf(s));
+    for (const meal of MEALS) {
+      const off = Math.abs(at.min - meal.at);
+      if (off > 120 || at.min < meal.at - 45 || had.has(at.day + meal.name)) continue;
+      const m = MATCH[s.id] || {};
+      const [k, w] = nearestOf(s, mealKeys(m, meal.name), m);
+      if (!k) continue;
+      // Near the hour, then a short walk, then power in 50 kW steps (150 vs 175 kW should not
+      // beat 20 minutes closer to noon), then closer still, then the shorter walk.
+      const sc = [off > 75 ? 2 : off > 45 ? 1 : 0, w > 400 ? 1 : 0, (s.kw || 0) < 100 ? 1 : 0,
+                  -Math.floor(Math.min(s.kw || 0, 350) / 50), Math.round(off / 15), w];
+      const key = at.day + meal.name, cur = best.get(key);
+      if (!cur || lexLess(sc, cur.sc)) best.set(key, { s, walk: w, k, meal: meal.name, sc });
+    }
+  }
+  const picks = [];
+  for (const p of best.values()) if (!picks.some(q => q.s.id === p.s.id)) picks.push(p);
+  /* Then a break in any stretch longer than ~2.5 hours between the start, the meal stops and
+     the end -- evenly inside that stretch. Fixed marks every 130 miles put a break an hour
+     after breakfast. */
+  const anchors = [0, ...picks.map(p => route.mileAt.get(p.s.id)).sort((a, b) => a - b), route.mi];
+  const targets = [];
+  for (let i = 1; i < anchors.length; i++) {
+    const gap = anchors[i] - anchors[i - 1], n = Math.ceil(gap * perMin / BREAK_MIN) - 1;
+    for (let j = 1; j <= n; j++) targets.push([anchors[i - 1] + gap * j / (n + 1), gap / (n + 1) * 0.35]);
+  }
+  for (const [target, span] of targets) {
+    let pick = null, pickScore = null;
+    for (const s of cands) {
+      if (Math.abs(route.mileAt.get(s.id) - target) > Math.max(12, span)) continue;
+      const m = MATCH[s.id] || {};
+      const [k, w] = nearestOf(s, chainQuery() ? chainKeysOn(m) : foodKeys(m), m);
+      if (!k) continue;                                       // a break means somewhere to eat
+      const sc = [-Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
+      if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null }; pickScore = sc; }
+    }
+    if (pick && !picks.some(p => p.s.id === pick.s.id)) picks.push(pick);
+  }
+  return picks.sort((a, b) => route.mileAt.get(a.s.id) - route.mileAt.get(b.s.id));
 }
 function breaksCard(vis) {
+  if (!route || !route.mileAt || route.hwy || route.mi < 60) return '';
   const picks = breakPicks(vis);
-  if (picks.length < 1) return '';
-  const perMi = route.hr / Math.max(1, route.mi);
-  /* "About every 4.5 h" was the drive divided by the picks found, true only when every break
-     point had a stop. Denver -> Salt Lake City with Starbucks found one of three (the others
-     fall in a 97-mile charger gap), and the card promised breaks it did not have. When some
-     are missing, say the longest leg instead. */
-  let sub;
-  if (picks.length >= breakLegs() - 1) sub = `about every ${Math.round(route.mi / (picks.length + 1) * perMi * 10) / 10} h of driving`;
-  else {
-    const at = [0, ...picks.map(p => route.mileAt.get(p.s.id)).sort((a, b) => a - b), route.mi];
-    let longest = 0; for (let i = 1; i < at.length; i++) longest = Math.max(longest, at[i] - at[i - 1]);
-    sub = `longest leg ~${hmLabel(longest * perMi * 60)}`;
-  }
-  return `<div class="breaks"><div class="bh">Suggested breaks <small>${sub}</small></div>` +
-    picks.map(({ s, walk }) => {
-      const mile = route.mileAt.get(s.id), h = mile * perMi;
-      const m = MATCH[s.id] || {};
-      const k = Object.keys(m).filter(k => (chainQuery() ? active.has(k) : BRANDS[k].cat === 'food'))
-        .sort((a, b) => walkTo(s, a, m[a]) - walkTo(s, b, m[b]))[0];
-      return `<button type="button" class="brk" data-brk="${s.id}">
-        <span class="bm">mile ${mile}<i>~${hmLabel(h * 60)} in</i></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
+  const [first, last] = routeEnds(vis);
+  if (!first) return '';
+  const perMi = route.hr / Math.max(1, route.mi), t0 = departMs(first);
+  /* Say "about every N h" only when it is true. Denver -> Salt Lake City with Starbucks found
+     one of three breaks (the others fall in a 97-mile charger gap) and the card still promised
+     a cadence. When a stretch runs long, say the longest leg instead. The leaving time and the
+     arrival always show, even with no stop to suggest: picking a time is how a short drive
+     gets its lunch stop. */
+  const at = [0, ...picks.map(p => route.mileAt.get(p.s.id)), route.mi];
+  let longest = 0; for (let i = 1; i < at.length; i++) longest = Math.max(longest, at[i] - at[i - 1]);
+  const sub = picks.length < 2 ? '' : longest * perMi * 60 <= BREAK_MIN * 1.25
+    ? `about every ${Math.round(route.hr / (picks.length + 1) * 10) / 10} h of driving`
+    : `longest leg ~${hmLabel(longest * perMi * 60)}`;
+  const hours = Array.from({ length: 18 }, (_, i) => (i + 5) * 60);   // 5 am .. 10 pm
+  const opts = `<option value=""${leaveAt === null ? ' selected' : ''}>now</option>` +
+    hours.map(v => `<option value="${v}"${leaveAt === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
+  // Each time is local to its stop; arrival is in the time of the last stop on the drive.
+  const home = localAt(t0, tzOf(first)).day;
+  const when = (ms, s) => { const l = localAt(ms, tzOf(s)); return [clockLabel(l.min), l.day !== home ? ' · next day' : '']; };
+  const arrive = t0 + route.hr * 3600000;
+  return `<div class="breaks"><div class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</div>
+    <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
+      <span>arrive ~${when(arrive, last).join('')}</span></div>` +
+    picks.map(({ s, walk, k, meal }) => {
+      const mile = route.mileAt.get(s.id), [clock, next] = when(t0 + mile * perMi * 3600000, s);
+      return `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}">
+        <span class="bm">${clock}<i>${meal || 'Break'}${next ? ', next day' : ''}</i></span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min · ' : ''}mile ${mile}</span></span>
       </button>`;
     }).join('') + '</div>';
 }
