@@ -854,8 +854,10 @@ def trip_plan_html(plan, a, b, app):
         s, k = r["s"], r["k"]
         m = matches.get(s["id"], {})
         others = sorted((d, x) for x, d in m.items() if x != k and brands.get(x, {}).get("cat") == "food")[:2]
-        food = ([f"{brands[k]['e']} <b>{bn(k)}</b> {r['walk']} min"] if k else []) + \
-               [f"{brands[x]['e']} {bn(x)} {mins(d)} min" for d, x in others]
+        # Each "🌮 Taco Bell 1 min" is one unbreakable unit: on a phone the cell broke between
+        # the number and "min" ("Denny's 3 / min,"), or left the emoji at the end of a line.
+        food = ([f"<span class=\"nw\">{brands[k]['e']} <b>{bn(k)}</b> {r['walk']} min</span>"] if k else []) + \
+               [f"<span class=\"nw\">{brands[x]['e']} {bn(x)} {mins(d)} min</span>" for d, x in others]
         kw = s.get("kw") or 0
         trs.append(f'<tr><td>{when}<br><small><i class="ml{" meal" if r["label"] != "Break" else ""}">{r["label"]}</i> &middot; mile {r["mi"]}</small></td>'
                    f'<td><a href="{app}&amp;stop={s["id"]}"><b>{esc(place(s))}</b></a><br><small>{esc(s["name"])}</small></td>'

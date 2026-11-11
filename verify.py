@@ -1003,7 +1003,11 @@ if os.path.exists(_trips):
                 continue
             _lab = re.search(r'<i class="ml[^"]*">([^<]*)</i> &middot; mile (\d+)', _r)
             _sid = re.search(r"leave=0800&amp;stop=(\d+)", _r)
-            _k = re.search(r"<td>[^<]*<b>(.*?)</b> (\d+) min", _r.split("</td>")[3] + "</td>") if _r.count("</td>") >= 4 else None
+            _k = re.search(r'<td>(?:<span class="nw">)?[^<]*<b>(.*?)</b> (\d+) min', _r.split("</td>")[3] + "</td>") if _r.count("</td>") >= 4 else None
+            # Each "🌮 Taco Bell 1 min" is one nowrap unit: phones broke it as "Denny's 3 / min,".
+            _fc = _r.split("</td>")[3] if _r.count("</td>") >= 4 else ""
+            if re.sub(r'<span class="nw">(?:(?!</?span)[^<]|<b>|</b>|<span class="nw">[^<]*</span>)*? \d+ min</span>', "", _fc).count(" min"):
+                _bad_plan.append(f"{_sl}: a 'name N min' in the plan's food cell can break across lines")
             if not (_lab and _sid and int(_sid.group(1)) in _sites):
                 _bad_plan.append(f"{_sl}: a stop row without a label, a mile or a real stop link"); continue
             _kk = _txt(_k.group(1)) if _k else ""
