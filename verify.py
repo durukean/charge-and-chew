@@ -1460,6 +1460,11 @@ check("!isState(h)" in _html, "a state counts as a same-named town again ('washi
 check("if (seedFor && !p.chains.length && !p.anyCat && !detectPoiIntent(raw)" in _html,
       "a category search's chains leak into the next search again ('lax' after 'pharmacy')")
 
+# Tile seams at a half zoom step (UI-07): half a pixel of overlap, with normal blending so the
+# overlap does not add up into a brighter line.
+check(".leaflet-container img.leaflet-tile{mix-blend-mode:normal;width:256.5px!important;height:256.5px!important}" in _html,
+      "map tiles show hairline seams at fractional zoom again")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

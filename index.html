@@ -141,6 +141,11 @@ html.native .splash-mark svg{width:96px;height:96px}
 #mapWrap{flex:1;position:relative;min-height:0}
 #map{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;background:var(--bg)}
 .leaflet-container{font:inherit;background:var(--bg)}
+/* zoomSnap 0.5 leaves the tiles at a fractional scale (0.707 at a half step), and their edges
+   fall between pixels: hairline seams drew a faint grid over every light map. Leaflet's own
+   fix (mix-blend-mode: plus-lighter) did not remove them; half a pixel of overlap does, and
+   "normal" blending keeps the overlap from adding up into a brighter line instead. */
+.leaflet-container img.leaflet-tile{mix-blend-mode:normal;width:256.5px!important;height:256.5px!important}
 .leaflet-control-attribution{background:var(--glass)!important;color:var(--dim2)!important;
   font-size:10px!important;padding:2px 6px!important;border-radius:6px 0 0 0}
 .leaflet-control-attribution a{color:var(--dim)!important}
