@@ -6343,12 +6343,25 @@ function applyCorridor(verts, mi, hr, hwy) {
      nearest point (ties to the earliest, as before), the same stops. Numeric cell keys --
      building ~2.5M string keys was half a second on its own. */
   const cell = (ci, cj) => ci * 100000 + cj;
-  const cells = new Set(), seen = new Set(), reach = Math.ceil(maxM / 111000 / .05) + 1;
+  /* How many cells away a point within maxM can lie, from hav() itself: a fixed number in
+     latitude; in longitude more toward the pole, where a degree is shorter. +1 each for the
+     rounding to a cell on both sides. The same bound both ways: which cells a stop can be in
+     around the line, and which cells of the line a stop measures. The first used the
+     latitude reach east-west too, and north of ~43.5° lost a stop or two at the edge of the
+     25-mile corridor (Seattle -> Spokane, Boston -> Bar Harbor). */
+  const rad = Math.PI / 180, s0 = Math.sin(maxM / 2 / 6371000), dLat = maxM / 6371000 / rad;
+  const ri = Math.ceil(dLat / .05) + 1;
+  const rjAt = lat => {   // for anything within maxM of a point at this latitude
+    const sj = s0 / Math.sqrt(Math.cos(Math.min(89.9, Math.abs(lat)) * rad) * Math.cos(Math.min(89.9, Math.abs(lat) + dLat) * rad));
+    return sj >= 1 ? 3600 : Math.ceil(2 * Math.asin(sj) / rad / .05) + 1;
+  };
+  const cells = new Set(), seen = new Set();
   for (const v of verts) {
     const ci = Math.round(v[0] / .05), cj = Math.round(v[1] / .05), c = cell(ci, cj);
     if (seen.has(c)) continue;
     seen.add(c);
-    for (let di = -reach; di <= reach; di++) for (let dj = -reach; dj <= reach; dj++) cells.add(cell(ci + di, cj + dj));
+    const rj = rjAt(Math.abs(ci * .05) + .025);   // the cell's poleward edge: any point in it
+    for (let di = -ri; di <= ri; di++) for (let dj = -rj; dj <= rj; dj++) cells.add(cell(ci + di, cj + dj));
   }
   const ids = new Set(), order = new Map();
   const step = verts.length > 3000 ? 3 : 1, bucket = new Map();
@@ -6356,16 +6369,10 @@ function applyCorridor(verts, mi, hr, hwy) {
     const c = cell(Math.round(verts[i][0] / .05), Math.round(verts[i][1] / .05)), b = bucket.get(c);
     if (b) b.push(i); else bucket.set(c, [i]);
   }
-  /* How many cells away a point within maxM can lie, from hav() itself: a fixed number in
-     latitude; in longitude more toward the pole, where a degree is shorter. +1 each for the
-     rounding to a cell on both sides. */
-  const rad = Math.PI / 180, s0 = Math.sin(maxM / 2 / 6371000), dLat = maxM / 6371000 / rad;
-  const ri = Math.ceil(dLat / .05) + 1;
   for (const s of SITES) {
     const ci = Math.round(s.lat / .05), cj = Math.round(s.lon / .05);
     if (!cells.has(cell(ci, cj))) continue;
-    const sj = s0 / Math.sqrt(Math.cos(s.lat * rad) * Math.cos(Math.min(89.9, Math.abs(s.lat) + dLat) * rad));
-    const rj = sj >= 1 ? 3600 : Math.ceil(2 * Math.asin(sj) / rad / .05) + 1;
+    const rj = rjAt(s.lat);
     let best = 9e9, bi = 0;
     for (let di = -ri; di <= ri; di++) for (let dj = -rj; dj <= rj; dj++) {
       const b = bucket.get(cell(ci + di, cj + dj));

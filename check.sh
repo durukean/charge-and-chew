@@ -18,6 +18,9 @@ run "search_audit --quick" node tools/search_audit.mjs --quick
 # The /trip/ pages' 8 am plan against the app's own breaks card on the same drive, offline
 # (the route answered from data/trips.json). Every trip: node tools/trip_plan_check.mjs
 run "trip_plan_check --quick" node tools/trip_plan_check.mjs --quick
+# The route corridor (app and planner.py) against brute force, northern and southern drives
+# at 5/10/25 mi, offline (~5 s).
+run "corridor_check.mjs"  node tools/corridor_check.mjs
 run "sw_test.mjs"        node sw_test.mjs
 run "publish.py"         python3 publish.py
 rm -rf _site

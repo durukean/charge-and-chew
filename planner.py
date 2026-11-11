@@ -125,29 +125,34 @@ def corridor(verts, mi, sites, corridor_mi=5):
     nearest point (ties to the earliest) and its mile from the start, scaled to the road
     distance. Same cells, same reach, same every-third-point on long lines."""
     max_m = corridor_mi * MI
-    reach = math.ceil(max_m / 111000 / .05) + 1
+    rad = math.pi / 180
+    s0 = math.sin(max_m / 2 / 6371000)
+    d_lat = max_m / 6371000 / rad
+    ri = math.ceil(d_lat / .05) + 1
+
+    def rj_at(lat):
+        # cells east-west within max_m of a point at this latitude: wider toward the pole
+        sj = s0 / math.sqrt(math.cos(min(89.9, abs(lat)) * rad) * math.cos(min(89.9, abs(lat) + d_lat) * rad))
+        return 3600 if sj >= 1 else math.ceil(2 * math.asin(sj) / rad / .05) + 1
+
     cells, seen = set(), set()
     for v in verts:
         c = (jsround(v[0] / .05), jsround(v[1] / .05))
         if c in seen: continue
         seen.add(c)
-        for di in range(-reach, reach + 1):
-            for dj in range(-reach, reach + 1):
+        rj = rj_at(abs(c[0] * .05) + .025)
+        for di in range(-ri, ri + 1):
+            for dj in range(-rj, rj + 1):
                 cells.add((c[0] + di, c[1] + dj))
     step = 3 if len(verts) > 3000 else 1
     bucket = {}
     for i in range(0, len(verts), step):
         bucket.setdefault((jsround(verts[i][0] / .05), jsround(verts[i][1] / .05)), []).append(i)
-    rad = math.pi / 180
-    s0 = math.sin(max_m / 2 / 6371000)
-    d_lat = max_m / 6371000 / rad
-    ri = math.ceil(d_lat / .05) + 1
     order = {}
     for s in sites:
         ci, cj = jsround(s["lat"] / .05), jsround(s["lon"] / .05)
         if (ci, cj) not in cells: continue
-        sj = s0 / math.sqrt(math.cos(s["lat"] * rad) * math.cos(min(89.9, abs(s["lat"]) + d_lat) * rad))
-        rj = 3600 if sj >= 1 else math.ceil(2 * math.asin(sj) / rad / .05) + 1
+        rj = rj_at(s["lat"])
         best, bi = 9e9, 0
         for di in range(-ri, ri + 1):
             for dj in range(-rj, rj + 1):
