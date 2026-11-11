@@ -1386,13 +1386,26 @@ const $ = id => document.getElementById(id);
 /* Storage that cannot throw. With site data blocked, merely touching window.localStorage
    throws, and dozens of reads below run at boot. Shadowing the name for this whole script
    turns that into a session-only memory store instead of a frozen splash. */
+/* Writes cannot throw either. A full quota (or Safari's old private mode, which allowed reads
+   and refused every write) threw QuotaExceededError out of 37 plain setItem calls: a star
+   that never filled, a filter that changed the state but never re-rendered the list. A
+   preference that cannot be saved is simply not remembered; the app carries on in memory.
+   The caches that make room when the quota is hit (poiStore, lsPut) need to SEE the
+   failure, so they write with setOrThrow. */
 const localStorage = (() => {
-  try { const s = window.localStorage; s.getItem('cc_probe'); return s; } catch (e) {
+  let s;
+  try { s = window.localStorage; s.getItem('cc_probe'); } catch (e) {
     const m = new Map();
-    return { getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => { m.set(k, String(v)); },
-             removeItem: k => { m.delete(k); }, key: i => { const k = [...m.keys()][i]; return k === undefined ? null : k; },
-             get length() { return m.size; } };
+    s = { getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => { m.set(k, String(v)); },
+          removeItem: k => { m.delete(k); }, key: i => { const k = [...m.keys()][i]; return k === undefined ? null : k; },
+          get length() { return m.size; } };
   }
+  return { getItem: k => { try { return s.getItem(k); } catch (e) { return null; } },
+           setItem: (k, v) => { try { s.setItem(k, v); return true; } catch (e) { return false; } },
+           setOrThrow: (k, v) => s.setItem(k, v),
+           removeItem: k => { try { s.removeItem(k); } catch (e) {} },
+           key: i => { try { return s.key(i); } catch (e) { return null; } },
+           get length() { try { return s.length; } catch (e) { return 0; } } };
 })();
 /* A saved value is whatever was last written, by any version of the app, or by hand. Parse
    it defensively and check its shape: `new Set({"x":1})` at boot froze the app for good. */
@@ -1499,13 +1512,25 @@ let lastFit = null, userMovedMap = false;
 let radiusMi = 25;
 let route = null;
 let corridorMi = 5;
+/* The corridor is one of the three widths the route card offers. "c=-5" in a link said
+   "0 chargers within -5 mi" with no width selected (BUG-19). */
+const corridorFrom = v => [2, 5, 10].includes(+v) ? +v : 5;
 let pinMode = false;
 let sortBy = 'walk';
 let netFilter = ['all', 'tesla', 'other'].includes(localStorage.getItem('cc_net'))
   ? localStorage.getItem('cc_net') : 'all';   // all | tesla | other
 let netPick = null;   // an exact network name when the search query asked for one
 const FDEF = { kw: 0, stalls: 0, plug: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
-let F = Object.assign({}, FDEF, readJSON('cc_filters', {}, isPlainObj));
+/* Each filter takes only the values its own control offers. A saved {"kw":"x","plug":7}
+   (BUG-18) hid two thousand stops behind an "x+ kW" chip and wrote "205 undefined chargers"
+   on the route card. Anything else falls back to the default, for saved values and links. */
+const FALLOW = { kw: [0, 50, 150, 250, 350], stalls: [0, 2, 4, 8], plug: [0, 1, 2, 4] };
+const cleanFilters = f => {
+  const o = {};
+  for (const k in FDEF) o[k] = FALLOW[k] ? (FALLOW[k].includes(f[k]) ? f[k] : FDEF[k]) : (f[k] === 1 || f[k] === true ? 1 : 0);
+  return o;
+};
+let F = cleanFilters(Object.assign({}, FDEF, readJSON('cc_filters', {}, isPlainObj)));
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
   plug: () => (PLUG_NAME[F.plug] || 'Plug') + ' only',
@@ -1553,7 +1578,7 @@ async function openHighway(ref) {
   $('routeToggle').classList.add('on');
   $('overlayTop').classList.add('routing');
   $('fromIn').value = ''; $('toIn').value = '';
-  clearCenter();
+  noteRouteFrom(); clearCenter();
   applyCorridor(verts, mi, mi / 62, ref);   // ~62 mph average on an interstate
 }
 const DC_COUNT = SITES.length;
@@ -1642,6 +1667,11 @@ const hav = (a1, o1, a2, o2) => {
 const walkMin = m => Math.max(1, Math.round(m / WALK_MPM));
 // Nominatim and OSRM are free shared services — under load they hang rather than fail,
 // which left the UI stuck on "Routing…" forever with no way to tell.
+/* No signal is not "busy". Offline, every free service we ask failed with "OpenStreetMap is
+   busy, trying again…" or "Network problem", which sends people to wait for something that
+   cannot come (BUG-16). Say what is true, and what still works: everything bundled. */
+const isOffline = () => navigator.onLine === false;
+const OFFLINE_MSG = 'You\u2019re offline \u2014 searching needs a signal. The chargers on the map still work.';
 function fetchTimeout(url, ms, init) {
   ms = ms || 12000;
   init = init || {};
@@ -1651,7 +1681,7 @@ function fetchTimeout(url, ms, init) {
   return fetch(url, Object.assign({}, init, { signal: c.signal })).then(function (r) { clearTimeout(t); return r; },
     function (e) {
       clearTimeout(t);
-      throw new Error(e && e.name === 'AbortError'
+      throw new Error(isOffline() ? OFFLINE_MSG : e && e.name === 'AbortError'
         ? 'That service is slow right now — try again in a moment.' : 'Network problem — check your connection.');
     });
 }
@@ -4512,6 +4542,7 @@ $('placeIn').addEventListener('keydown', async e => {
     } finally { $('placeBox').classList.remove('busy'); }
     if (at) { setCenter(at.lat, at.lon, at.label, 'place'); return; }
     if (!knownPlace(p.place)) {
+      if (isOffline()) { toast(OFFLINE_MSG); return; }   // not "couldn't find": we couldn't ask
       toast(`Couldn't find ${stn.name.replace(/\b[a-z]/g, c => c.toUpperCase())} — add its city, like “union station denver”`);
       return;
     }
@@ -5177,7 +5208,7 @@ function poiStore(body, els) {
   let s;
   try { s = JSON.stringify({ t: Date.now(), s: poiSig(body), e: els }); } catch (e) { return; }
   if (s.length > POI_MAX) return;             // one huge answer must not evict everything
-  try { localStorage.setItem(poiKey(body), s); }
+  try { localStorage.setOrThrow(poiKey(body), s); }
   catch (e) {
     /* Out of quota. Drop expired entries first, then the oldest, and try once more. Never
        let a caching failure break the search that produced the data. */
@@ -5192,7 +5223,7 @@ function poiStore(body, els) {
       }
       mine.sort((a, b) => a[1] - b[1]).slice(0, Math.ceil(mine.length / 2))
           .forEach(([k]) => localStorage.removeItem(k));
-      localStorage.setItem(poiKey(body), s);
+      localStorage.setOrThrow(poiKey(body), s);
     } catch (e2) { /* give up quietly; the answer is still returned */ }
   }
 }
@@ -5228,7 +5259,7 @@ function lsPut(ns, key, data, cap) {
     }
     return out.sort((a, b) => a[1] - b[1]);       // oldest first
   };
-  const put = () => localStorage.setItem(ns + fnv(key, 2166136261), body);
+  const put = () => localStorage.setOrThrow(ns + fnv(key, 2166136261), body);
   try { put(); }
   catch (e) {
     // out of quota: drop the oldest half of OUR namespace and try once more
@@ -5290,6 +5321,7 @@ async function overpassRun(body, tries, onRetry) {
   const until = Date.now() + OVERPASS_DEADLINE;
   let last;
   for (let i = 0; i <= n; i++) {
+    if (isOffline()) { const e = new Error(OFFLINE_MSG); e.offline = true; throw e; }
     try {
       const r = await fetchTimeout(OVERPASS, 28000, {
         method: 'POST', body: 'data=' + encodeURIComponent(body),
@@ -5309,6 +5341,7 @@ async function overpassRun(body, tries, onRetry) {
       return els;
     } catch (e) {
       last = e;
+      if (isOffline()) { e.offline = true; throw e; }   // a retry cannot help without a signal
       if (i === n) throw e;
       const wait = Math.min(e.retryAfter || 0, 8000) || [1200, 3000, 6000][i] || 6000;
       if (Date.now() + wait >= until) throw e;   // no time left for another round trip
@@ -5451,11 +5484,12 @@ async function runLivePoi(intent, scope) {
        nothing bundled answers this search IN SCOPE -- "ice cream" near downtown LA maps to
        Dairy Queen, of which there are none for miles -- and then "0 stops near Dairy Queen"
        would look like a result while being worse than admitting the lookup failed. */
+    const off = e.offline || isOffline();
     if (seed.length) {
       track('live-poi-seeded', intent.tags[0]);
       const names = seed.length <= 3 ? seed.join(', ') : seed.slice(0, 3).join(', ') + ' and more';
-      toast(`OpenStreetMap is busy — showing ${names} from our own data`);
-      seedBanner(`<b>Showing chains we bundle</b>OpenStreetMap was busy, so anything we
+      toast(`${off ? 'You\u2019re offline' : 'OpenStreetMap is busy'} — showing ${names} from our own data`);
+      seedBanner(`<b>Showing chains we bundle</b>${off ? 'You\u2019re offline' : 'OpenStreetMap was busy'}, so anything we
         don't track is missing.
         <button class="fball" id="poiRetry" style="margin-top:8px">Try again for all</button>`);
       $('poiRetry').onclick = () => runLivePoi(intent, onRoute ? 'route' : undefined);
@@ -5465,7 +5499,10 @@ async function runLivePoi(intent, scope) {
     /* A toast alone was not enough: on a phone it is gone in three seconds and what the
        user sees is "I searched and nothing happened". Put the failure, and the retry, where
        the results were going to be. */
-    $('list').innerHTML = `<div class="empty"><b>OpenStreetMap didn't answer</b>Live lookups for
+    $('list').innerHTML = off ? `<div class="empty"><b>You\u2019re offline</b>Looking up
+      "${esc(intent.label)}" needs a signal. The chargers on the map, and the chains we bundle, still work.
+      <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`
+      : `<div class="empty"><b>OpenStreetMap didn't answer</b>Live lookups for
       "${esc(intent.label)}" use a free community server that is sometimes busy.
       <button class="fball" id="poiRetry" style="margin-top:10px">Try again</button></div>`;
     $('sheetTitle').innerHTML = `Couldn't look up <em>${esc(intent.label)}</em>`;
@@ -6092,13 +6129,26 @@ $('routeToggle').onclick = () => {
   if (!on) $('overlayTop').classList.remove('routed');
   setTimeout(() => map.invalidateSize({ pan: false }), 220);
 };
-function dropRoute() {
+/* The x on a route goes back to the area you were looking at before it, as the x on a search
+   does. It dropped you on the national view: Denver, then "la to vegas", then x, and the list
+   was 14,000 chargers with no area (BUG-15). Taken when the FIRST route replaces an area; a
+   second route planned over the first keeps it. No area before: the whole country, as before.
+   Only that x goes back (goBack); "all saved stops" drops the route to show everywhere. */
+let routeFrom = null;
+function noteRouteFrom() {
+  if (route) return;
+  routeFrom = center && !stateScope ? { lat: center.lat, lon: center.lon, label: center.label, kind: center.kind } : null;
+}
+function dropRoute(goBack) {
+  const back = goBack ? routeFrom : null;
+  routeFrom = null;
   clearRoute(); route = null;
   $('routePanel').classList.remove('show');
   $('routeToggle').classList.remove('on');
   $('overlayTop').classList.remove('routing', 'routed');
   $('fromIn').value = ''; $('toIn').value = '';
-  render(); syncUrl();
+  if (back) setCenter(back.lat, back.lon, back.label, back.kind);
+  else { render(); syncUrl(); }
   setTimeout(() => map.invalidateSize({ pan: false }), 220);
 }
 function fitRouteWhenReady() {
@@ -6162,14 +6212,14 @@ async function runRoute(opts) {
       lsPut(RTE_NS, rk, trip, RTE_CAP);
     }
     if (stale()) return;
-    clearCenter();
+    noteRouteFrom(); clearCenter();
     applyCorridor(trip.v, trip.mi, trip.hr);
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
     if (opts.poi) await runLivePoi(opts.poi, 'route');
   } catch (e) {
-    if (!stale()) $('routeInfo').textContent = navigator.onLine ? e.message
-      : 'No connection — only routes planned before work offline';
+    if (!stale()) $('routeInfo').textContent = !isOffline() ? e.message
+      : 'You\u2019re offline \u2014 only routes planned before work without a signal';
   }
   finally { $('goBtn').disabled = false; }
 }
@@ -6562,7 +6612,7 @@ function showRouteSummary() {
   $('routePanel').classList.add('show', 'collapsed');
   $('overlayTop').classList.add('routing', 'routed');
   $('routeToggle').classList.add('on');
-  $('rClear').onclick = e => { e.stopPropagation(); dropRoute(); $('placeIn').value = ''; $('placeBox').classList.remove('has'); toast('Route cleared'); };
+  $('rClear').onclick = e => { e.stopPropagation(); dropRoute(true); $('placeIn').value = ''; $('placeBox').classList.remove('has'); toast('Route cleared'); };
   $('routeInfo').onclick = () => { $('routePanel').classList.remove('collapsed');
     $('routeInfo').onclick = null;
     // On a phone the full-height sheet covered everything below the two fields.
@@ -6897,6 +6947,7 @@ if (q.get('netpick') && SITES.some(s => s.net === q.get('netpick'))) {
 syncNetSeg(); renderLegend();
 if (q.get('minkw')) F.kw = +q.get('minkw') || 0;
 if (q.get('minstalls')) F.stalls = +q.get('minstalls') || 0;
+F = cleanFilters(F);   // a hand-edited minkw=9999 is no filter rather than an empty map
 if (q.get('h24')) F.h24 = 1;
 if (q.get('free')) F.free = 1;
 if (q.get('noiso')) F.noiso = 1;
@@ -6912,7 +6963,7 @@ if (q.get('r')) {
   $('ccRad').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === radiusMi));
 }
 if (q.get('c')) {
-  corridorMi = +q.get('c') || 5;
+  corridorMi = corridorFrom(q.get('c'));
   $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === corridorMi));
 }
 const leaveQ = (q.get('leave') || '').match(/^([01]\d|2[0-3])([0-5]\d)$/);   // ?leave=0700, written by syncUrl
@@ -6943,7 +6994,7 @@ if (q.get('at')) {
   }
 }
 if (q.get('hwy') && normHwy(q.get('hwy'))) {
-  if (q.get('c')) corridorMi = +q.get('c') || 5;
+  if (q.get('c')) corridorMi = corridorFrom(q.get('c'));
   boot = () => openHighway(normHwy(q.get('hwy')));
 }
 if (q.get('from') && q.get('to')) {

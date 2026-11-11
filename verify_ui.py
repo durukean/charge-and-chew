@@ -161,8 +161,30 @@ location.replace('/?chain=IHOP&nosw=1');
         dom_bad = render_dom(binpath, f"http://127.0.0.1:{port}/__seed_storage.html")
     finally:
         os.remove(seed)
-    httpd.shutdown()
     if dom_bad is None:
+        httpd.shutdown()
+        return 1
+
+    # Saved filters holding values no control offers (BUG-18): {"kw":"x"} hid most stops
+    # behind an "x+ kW" filter. A plain visit must open with no filters at all.
+    def seeded(js, url):
+        open(seed, "w").write("<!doctype html><script>" + js + "location.replace('" + url + "');</script>")
+        try:
+            return render_dom(binpath, f"http://127.0.0.1:{port}/__seed_storage.html")
+        finally:
+            os.remove(seed)
+    dom_filt = seeded("localStorage.setItem('cc_hero','0');"
+                      "localStorage.setItem('cc_filters','{\"kw\":\"x\",\"stalls\":3,\"plug\":7,\"h24\":\"yes\"}');",
+                      "/?nosw=1")
+    # A full quota (BUG-17): a search that saves a filter threw QuotaExceededError out of
+    # setItem and stopped half way. "ihop 150 kw" must still show IHOP with the kW filter on.
+    dom_full = seeded("localStorage.setItem('cc_hero','0');var n=0;"
+                      "try{var b='x'.repeat(262144);for(;;)localStorage.setItem('junk'+n++,b);}catch(e){}"
+                      "try{for(;;)localStorage.setItem('j'+n++,'y'.repeat(1024));}catch(e){}"
+                      "try{for(;;)localStorage.setItem('k'+n++,'z');}catch(e){}",
+                      "/?q=ihop%20150%20kw&nosw=1")
+    httpd.shutdown()
+    if dom_filt is None or dom_full is None:
         return 1
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
@@ -190,6 +212,12 @@ location.replace('/?chain=IHOP&nosw=1');
         "sheet_handle_is_a_button": bool(re.search(
             r'<button type="button" class="handle" id="handle"[^>]*aria-expanded="(?:true|false)"', dom)),
         "toast_is_announced": 'id="toast" role="status" aria-live="polite"' in dom,
+        "corrupt_saved_filters_are_dropped": bool(re.search(
+            r'id="sheetTitle"[^>]*>[\d,]+ fast chargers <em>· every network, no filters</em>', dom_filt))
+            and bool(re.search(r'id="filtN"[^>]*></span>', dom_filt)),
+        "full_storage_does_not_break_a_search": bool(re.search(
+            r'id="sheetTitle"[^>]*>[\d,]+ stops <em>near <span aria-hidden="true">\U0001f95e</span> IHOP', dom_full))
+            and bool(re.search(r'id="filtN"[^>]*>1</span>', dom_full)),
         "brand_emoji_hidden_from_screen_readers": '<span aria-hidden="true">\U0001f95e</span> IHOP' in dom,
     }
     bad = [k for k, v in checks.items() if not v]

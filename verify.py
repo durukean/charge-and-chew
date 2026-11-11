@@ -727,7 +727,7 @@ check("if (term) runLivePoi(intentFromTerm(term));" in _rad and "sortBy = keepSo
       "changing the radius throws away a category search or the chosen sort again")
 
 # ---- small behaviour fixes from the audit (each checked in a browser) ----
-check("Route planning needs a connection" not in _html and "only routes planned before work offline" in _html,
+check("Route planning needs a connection" not in _html and "only routes planned before work without a signal" in _html,
       "route planning refuses offline again, although a planned trip is fully cached")
 check("const kind = a.kind === 'me' ? 'pin' : (a.kind || 'place');" in _html,
       "a two-week-old 'my location' is restored with the live you-are-here dot again")
@@ -1504,6 +1504,43 @@ check("if (center && center.kind === 'me' && u.searchParams.get('near') === '1')
       "a shared 'near me' link no longer carries where you were looking")
 check("else if ((active.size || anyCat) && q.get('near') !== '1') { setSheet('mid'); fitToResults(); }" in _html,
       "reloading 'starbucks near me' shows the whole country instead of finding you again")
+
+# ---- Robustness (BUG-15..19): every guard below matches a LIVE statement at its call site ----
+def _live(stmt, n=1):
+    return len(re.findall(r"(?m)^[ \t]*" + re.escape(stmt), _html)) == n
+
+# A full quota (or a read-only private mode) must not throw out of a plain setItem (BUG-17):
+# the shim swallows write failures; the two caches that make room on a quota error must still
+# SEE it, so they write with setOrThrow (or their eviction is dead code).
+check(_live("setItem: (k, v) => { try { s.setItem(k, v); return true; } catch (e) { return false; } },")
+      and _live("return { getItem: k => { try { return s.getItem(k); } catch (e) { return null; } },"),
+      "localStorage writes can throw again (a full quota breaks the star and the filters)")
+check(_live("try { localStorage.setOrThrow(poiKey(body), s); }")
+      and _live("localStorage.setOrThrow(poiKey(body), s);")
+      and _live("const put = () => localStorage.setOrThrow(ns + fnv(key, 2166136261), body);"),
+      "the Overpass / place / route caches no longer see a quota error, so they never make room")
+# Saved filters and link values are pinned to what the controls offer (BUG-18/19).
+check(_live("let F = cleanFilters(Object.assign({}, FDEF, readJSON('cc_filters', {}, isPlainObj)));")
+      and _live("F = cleanFilters(F);")
+      and "const FALLOW = { kw: [0, 50, 150, 250, 350], stalls: [0, 2, 4, 8], plug: [0, 1, 2, 4] };" in _html,
+      "saved filters are used unchecked again ('x+ kW', '205 undefined chargers')")
+check(_live("corridorMi = corridorFrom(q.get('c'));")
+      and _live("if (q.get('c')) corridorMi = corridorFrom(q.get('c'));")
+      and "const corridorFrom = v => [2, 5, 10].includes(+v) ? +v : 5;" in _html
+      and not re.search(r"corridorMi = \+q\.get\('c'\)", _html),
+      "c= in a link is used unchecked again ('0 chargers within -5 mi')")
+# Offline is said as offline, not "OpenStreetMap is busy" with pointless retries (BUG-16).
+check(_live("if (isOffline()) { const e = new Error(OFFLINE_MSG); e.offline = true; throw e; }")
+      and _live("if (isOffline()) { e.offline = true; throw e; }")
+      and _live("const off = e.offline || isOffline();")
+      and _live("throw new Error(isOffline() ? OFFLINE_MSG : e && e.name === 'AbortError'"),
+      "offline lookups say 'busy' / 'network problem' again instead of 'You're offline'")
+# The x on a route goes back to the area before it (BUG-15).
+check(_live("noteRouteFrom(); clearCenter();", 2)
+      and _live("if (back) setCenter(back.lat, back.lon, back.label, back.kind);")
+      and _live("const back = goBack ? routeFrom : null;")
+      and "$('rClear').onclick = e => { e.stopPropagation(); dropRoute(true);" in _html,
+      "clearing a route drops you on the national view again instead of the area before it")
 
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
