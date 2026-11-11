@@ -1403,6 +1403,62 @@ add(f"{RFI_DIR}/index.html")
 print(f"Road Food Index: {len(RFI['chains'])} chains, {len(RFI['interstates'])} interstates, {len(RFI['drives'])} drives")
 
 
+# ---- llms.txt: what this site is, for AI answer engines (llmstxt.org) ----
+# Plain facts and the pages that hold the detail, with this week's numbers. Linked from nowhere:
+# the tools that read it look for it at the root.
+LLMS_PAGES = [
+    ("Road Food Index", f"{RFI_DIR}/", "which chains, interstates and states are best for food at US fast chargers, "
+     "and the longest charger gaps on popular drives; CSV downloads and a citation line"),
+    ("Road trip guides", "trip/", f"{len(trip_links)} US drives, each with a meal-timed plan for leaving at 8 am, "
+     "every fast charger within 5 miles of the route and the food a walk from each"),
+    ("Chains", "near/", f"fast chargers near each of the {len(RFI['chains'])} chains, nationally and by state"),
+    ("Interstates", "along/", "the fast chargers along major interstates, in route order"),
+    ("Support", "support/", "how to use the app, what the numbers mean, how to report a problem"),
+    ("Privacy", "privacy/", "what the app does with your data"),
+]
+llms = f"""# {BRAND}
+
+> A free map of every public DC fast charger in the US and the restaurants and stores within a
+> 10-minute walk of each one, so an EV driver can plan a charging stop around a meal. On the web
+> at {BASE}/ and as an iPhone app. No account, no ads.
+
+Data as of {RFI_DATE}, refreshed weekly: {RFI['n_sites']:,} DC fast-charger sites, {RFI['n_food']:,} of them
+with somewhere to eat within a 10-minute walk, matched against {len(RFI['chains'])} restaurant and store chains.
+
+## What the app does
+
+- Search a chain ("IHOP"), a town, a kind of shop ("ice cream") or a whole drive ("LA to Las Vegas with In-N-Out"); the map lists the fast chargers with that place within a walk, shortest walk first.
+- Plan a drive: the chargers along the route in driving order, the meal stops that fall at mealtimes in local time, and the longest stretch with no fast charger. It is a driver's plan, not a charging plan: it does not model battery charge.
+- Set your car to see which stops your plug fits and a rough 10-80% charge time.
+- iPhone app: the same map, plus a home-screen widget for the nearest stop with food and Siri shortcuts.
+
+## Key pages
+
+{chr(10).join(f"- [{n}]({BASE}/{p}): {d}" for n, p, d in LLMS_PAGES)}
+
+## Data and its limits
+
+- Chargers: US Department of Energy / NREL Alternative Fuels Data Center (https://afdc.energy.gov/fuels/electricity-locations), all networks; under 24 kW, private and truck-only sites left out.
+- Restaurants and stores: OpenStreetMap (https://www.openstreetmap.org), © OpenStreetMap contributors, ODbL.
+- "Within a walk" is within {D['walkM']} m in a straight line, about 10 minutes at 3 mph; walk times are minimums.
+- No live availability, prices or wait times: check the network's own app before relying on a stop.
+
+## Privacy
+
+No account and no sign-in. Location is used on the device to centre the map and is never sent to {BRAND}. Saved stops and settings stay in the browser or the app. Page views are counted anonymously (GoatCounter, no cookies).
+
+## Findings from the Road Food Index ({RFI_DATE})
+
+{chr(10).join(f"- {x}" for x in rfi.headlines(RFI))}
+
+Cite as: {BRAND}, "{RFI_TITLE}," data as of {RFI_DATE}, {BASE}/{RFI_DIR}/.
+
+## Contact
+
+chargeandchew@gmail.com
+"""
+open(os.path.join(HERE, "llms.txt"), "w", encoding="utf-8").write(llms)
+
 # ---- privacy + support (App Store requires both URLs; they are useful pages regardless) ----
 PRIVACY_BODY = """<h1>Privacy</h1>
 <p class="lead">Charge &amp; Chew has no accounts, no sign-in and no advertising. Here is exactly what

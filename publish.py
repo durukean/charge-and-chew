@@ -23,7 +23,7 @@ OUT = os.path.join(HERE, "_site")
 
 FILES = ["index.html", "404.html", "data.js", "level2.js", "highways.js", "sw.js", "manifest.json", "robots.txt",
          "sitemap.xml", "favicon.ico", "favicon.svg", "apple-touch-icon.png",
-         "icon-192.png", "icon-512.png", "icon-maskable-512.png", "og.png", "CNAME"]
+         "icon-192.png", "icon-512.png", "icon-maskable-512.png", "og.png", "CNAME", "llms.txt"]
 DIRS = ["near", "along", "trip", "road-food-index", "privacy", "support", "admin", "og", "vendor", "assets"]
 SITE_HOST = "chargeandchew.com"
 

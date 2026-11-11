@@ -1906,6 +1906,18 @@ if os.path.exists(_rfi_page):
             os.path.exists(os.path.join(HERE, x["contentUrl"].split("chargeandchew.com/", 1)[-1])) for x in _dl),
             "Dataset distribution does not list the CSVs that exist")
         check(all(x in _rtext for x in ("AFDC", "OpenStreetMap", "How to cite")), "the Road Food Index lost its sources or citation line")
+    # llms.txt (for AI answer engines): this week's numbers, the same findings, links that resolve
+    _lt = os.path.join(HERE, "llms.txt")
+    check(os.path.exists(_lt), "llms.txt is missing (run build.py)")
+    if os.path.exists(_lt):
+        _ll = open(_lt, encoding="utf-8").read()
+        check(f"{_R['n_sites']:,} DC fast-charger sites, {_R['n_food']:,} of them" in _ll,
+              "llms.txt's charger counts differ from the data")
+        check(all(x in _ll for x in _hl), "llms.txt's findings differ from the Road Food Index's")
+        _lbad = [u for u in re.findall(r"\(https://chargeandchew\.com/([^)]*)\)", _ll)
+                 if not os.path.exists(os.path.join(HERE, u, "index.html") if u.endswith("/") or not u else os.path.join(HERE, u))]
+        check(len(re.findall(r"\(https://chargeandchew\.com/", _ll)) >= 5 and not _lbad, f"llms.txt links pages that do not exist: {_lbad[:3]}")
+        check('"llms.txt"' in open(os.path.join(HERE, "publish.py"), encoding="utf-8").read(), "publish.py does not publish llms.txt")
     check("/road-food-index/" in open(os.path.join(HERE, "sitemap.xml"), encoding="utf-8").read(),
           "the Road Food Index is not in the sitemap")
     check('"road-food-index"' in open(os.path.join(HERE, "publish.py"), encoding="utf-8").read(),
