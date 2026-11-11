@@ -870,7 +870,7 @@ def trip_plan_html(plan, a, b, app):
     return sentence, table, short
 
 
-def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
+def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway, n_all, food_all):
     """Questions people ask about a drive, answered from this route's data. The same strings
     make the visible answers and the FAQPage markup, so the two cannot disagree."""
     A, B = esc(a.split(",")[0]), esc(b.split(",")[0])
@@ -879,7 +879,8 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
     brk = [r for r in stops if r["label"] == "Break"]
     arr, arr_day = plan.arrive()
     leave = plan.leave_label()
-    nfound, nfood = len(found), len(withfood)
+    # Every DC fast charger on the drive, counted as the app counts them (see the trip loop).
+    nfound, nfood = n_all, food_all
     qa = []
 
     def at_stop(r):
@@ -905,14 +906,14 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
             s, k, w = halfway
             ans += (f" About halfway, {esc(place(s))} (mile {plan.mile_at[s['id']]}) has {bn(k)} a {mins(w)}-minute walk "
                     f"from a {s.get('kw') or 0} kW charger.")
-    ans += f" In all, {nfood:,} of the {nfound:,} fast chargers along the way have a restaurant within a 10-minute walk."
+    ans += f" In all, {nfood:,} of the roughly {nfound:,} fast chargers along the way have a restaurant within a 10-minute walk."
     qa.append((f"Where should I stop to eat between {A} and {B}?", ans))
 
     # 2. How many chargers
     qa.append((f"How many fast chargers are there between {A} and {B}?",
-               f"{nfound:,} DC fast chargers of {TRIP_MIN_KW} kW or more are within {TRIP_MI:g} miles of the "
-               f"{t['mi']:,.0f}-mile route. {big:,} of them charge at 150 kW or more, {tesla:,} are on the Tesla "
-               f"network, and {nfood:,} have a restaurant within a 10-minute walk."))
+               f"About {nfound:,} DC fast chargers are within {TRIP_MI:g} miles of the {t['mi']:,.0f}-mile route, "
+               f"{len(found):,} of them {TRIP_MIN_KW} kW or more. {big:,} charge at 150 kW or more, {tesla:,} are on "
+               f"the Tesla network, and {nfood:,} have a restaurant within a 10-minute walk."))
 
     # 3. The longest gap
     g = plan.longest()
@@ -996,30 +997,23 @@ if os.path.exists(TRIP_PATH):
         for i in range(1, len(pts)):
             cum.append(cum[-1] + _hav_m(pts[i-1][0], pts[i-1][1], pts[i][0], pts[i][1]) / 1609.34)
         total_mi = cum[-1]
-        cell = 0.05
-        grid = {}
-        for i, (la, lo) in enumerate(pts):
-            grid.setdefault((round(la / cell), round(lo / cell)), []).append(i)
-        maxm = TRIP_MI * 1609.34
-        reach = int(maxm / 111000 / cell) + 1
-        found = []
-        for sid, s_ in sites.items():
-            if (s_.get("kw") or 0) < TRIP_MIN_KW:
-                continue
-            ci, cj = round(s_["lat"] / cell), round(s_["lon"] / cell)
-            cand = []
-            for di in range(-reach, reach + 1):
-                for dj in range(-reach, reach + 1):
-                    cand.extend(grid.get((ci + di, cj + dj), ()))
-            if not cand:
-                continue
-            best = None; bi = 0
-            for i in cand:
-                d = _hav_m(s_["lat"], s_["lon"], pts[i][0], pts[i][1])
-                if best is None or d < best:
-                    best = d; bi = i
-            if best is not None and best <= maxm:
-                found.append((bi, sid, best))
+        a, b = t["a"], t["b"]
+        # The app on this drive, leaving at 8:00 am: what the plan below shows. Distance and time
+        # go through the same arithmetic as an OSRM answer does in the app (metres / MI).
+        app_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;leave=0800"
+        plan = planner.Plan(D["sites"], RAW_MATCHES, brands, pts, t["mi"] * planner.MI / planner.MI,
+                            t["hr"] * 3600 / 3600, PLAN_DAY, PLAN_LEAVE, TRIP_MI)
+        # The chargers on the drive are the app's: the plan's corridor (applyCorridor's cells,
+        # nearest point and ties). This page had its own grid, narrower than the corridor, and
+        # counted only 50 kW and up, so it said "228 DC fast chargers" where the app on the same
+        # drive said "236 chargers". The count is every DC fast charger, as the app's; the lists
+        # below keep to 50 kW and up, and say so. The app's live route is denser than the line
+        # stored here, which moves the count by a charger or two at the corridor's edge: "about".
+        onroute = sorted((bi, sid) for sid, bi in plan.order.items())
+        n_all = len(onroute)
+        food_all = sum(1 for _, sid in onroute if any(brands.get(k, {}).get("cat") == "food" for k in matches.get(sid, {})))
+        found = [(bi, sid, _hav_m(sites[sid]["lat"], sites[sid]["lon"], pts[bi][0], pts[bi][1]))
+                 for bi, sid in onroute if (sites[sid].get("kw") or 0) >= TRIP_MIN_KW]
         if len(found) < 10:
             print(f"  skip trip {tk}: only {len(found):,} chargers")
             continue
@@ -1027,13 +1021,7 @@ if os.path.exists(TRIP_PATH):
         is_food = lambda k: brands.get(k, {}).get("cat") == "food"
         withfood = [f for f in found if any(is_food(k) for k in matches.get(f[1], {}))]
 
-        a, b = t["a"], t["b"]
         sl = trip_slug(a, b)
-        # The app on this drive, leaving at 8:00 am: what the plan below shows. Distance and time
-        # go through the same arithmetic as an OSRM answer does in the app (metres / MI).
-        app_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;leave=0800"
-        plan = planner.Plan(D["sites"], RAW_MATCHES, brands, pts, t["mi"] * planner.MI / planner.MI,
-                            t["hr"] * 3600 / 3600, PLAN_DAY, PLAN_LEAVE, TRIP_MI)
         sentence, plan_tbl, plan_short = trip_plan_html(plan, a, b, app_url)
 
         # Halfway: the strongest stop near the middle with a meal a short walk away. Only the Q&A
@@ -1090,13 +1078,13 @@ if os.path.exists(TRIP_PATH):
             gap_txt = f" Counting every DC fast charger, the longest stretch without one is <b>{g['len']} miles</b>, {where}."
         else:
             gap_txt = f" Counting every DC fast charger, there is one at least every <b>{max(g['len'], 1)} miles</b> of the way."
-        faq_html, faq_schema = trip_faq(plan, a, b, t, found, withfood, big, tesla, half)
+        faq_html, faq_schema = trip_faq(plan, a, b, t, found, withfood, big, tesla, half, n_all, food_all)
 
         # Google truncates near 60 characters and the suffix adds 16, so lead with the two
         # cities -- that is what people type -- and keep the whole thing inside the budget.
         title = f"{a.split(',')[0]} to {b.split(',')[0]} EV charging stops"
-        desc = (f"{plan_short} {len(found):,} fast chargers on the {t['mi']:,.0f}-mile drive from {a} to {b}, "
-                f"{len(withfood):,} with a restaurant a short walk away.")
+        desc = (f"{plan_short} About {n_all:,} fast chargers on the {t['mi']:,.0f}-mile drive from {a} to {b}, "
+                f"{food_all:,} with a restaurant a short walk away.")
         plan_sec = (f"<h2>Leaving {esc(a.split(',')[0])} at {plan.leave_label()}</h2>\n"
                     f'<p class="lead">{sentence}</p>\n{plan_tbl}\n'
                     f'<p class="plannote">Meals fall near their local hour (times are local at each stop), with about '
@@ -1108,8 +1096,8 @@ if os.path.exists(TRIP_PATH):
                   if len(withfood) > NBINS else "")
         body = (f"<h1>EV charging stops from {esc(a)} to {esc(b)}</h1>\n"
                 f'<p class="lead">The drive is <b>{t["mi"]:,.1f} miles</b>, about <b>{drive}</b>. Along it '
-                f"sit <b>{len(found):,} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
-                f"&mdash; and <b>{len(withfood):,}</b> of those have somewhere to eat within a "
+                f"sit <b>about {n_all:,} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
+                f"&mdash; and <b>{food_all:,}</b> of those have somewhere to eat within a "
                 "10-minute walk, so the charging stop and the meal are the same stop.</p>\n"
                 f'<a class="cta" href="{app_url}">Open this drive in the app &rarr;</a>\n'
                 f"{plan_sec}\n"

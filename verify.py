@@ -1020,6 +1020,11 @@ if os.path.exists(_trips):
                  ("stop", r["clock"], r["label"], r["mi"], r["s"]["id"], r["k"] or "") for r in _P.rows()]
         if _got != _want or f"<b>~{_P.arrive()[0]}</b>" not in _rows[-1]:
             _stale.append(_sl)
+        # The charger count is the app's (every DC fast charger in the plan's corridor): the page
+        # once said 228 (its own narrower grid, 50 kW and up) where the app said 236.
+        _lead = re.search(r"sit <b>about ([\d,]+) DC fast chargers</b> within 5 miles", _h)
+        if not _lead or int(_lead.group(1).replace(",", "")) != len(_P.order):
+            _bad_plan.append(f"{_sl}: the lead's charger count is not the app's ({len(_P.order)})")
         _stops = [g for g in _got if g[0] == "stop"]
         if _stops and _stops[0][3] * _tt["hr"] * 60 / _tt["mi"] < 55:
             _bad_plan.append(f"{_sl}: first stop at mile {_stops[0][3]}, under an hour out")

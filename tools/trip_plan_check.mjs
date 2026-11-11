@@ -69,7 +69,9 @@ function pagePlan(html) {
       mile: +(td[0].match(/mile (\d+)/) || [])[1], id: +(td[1].match(/stop=(\d+)/) || [])[1],
       k: food[1] ? text(food[1]) : '', walk: food[2] ? +food[2] : null });
   }
-  return { leave, arrive, rows };
+  // "Along it sit about 235 DC fast chargers within 5 miles of the route": the app's count
+  const n = +((html.match(/sit <b>about ([\d,]+) DC fast chargers<\/b>/) || [])[1] || '').replace(/,/g, '') || null;
+  return { leave, arrive, rows, n };
 }
 
 // The plan as the app's breaks card shows it.
@@ -90,7 +92,8 @@ const READ = `(() => {
         k: b.dataset.k || '', walk: seg ? +seg.match(/ (\\d+) min$/)[1] : null });
     }
   }
-  return { leave: sel.options[sel.selectedIndex].textContent, arrive: card.querySelector('.bleave > span').textContent.replace(/^arrive ~/, ''), rows };
+  return { leave: sel.options[sel.selectedIndex].textContent, arrive: card.querySelector('.bleave > span').textContent.replace(/^arrive ~/, ''), rows,
+    n: +((document.querySelector('#routeInfo .rcount') || {}).textContent || '').replace(/[^\\d]/g, '') || null };
 })()`;
 
 async function cdpConnect(wsUrl) {
@@ -206,6 +209,9 @@ function compare(page, app) {
   const why = [];
   if (page.leave !== app.leave) why.push(`leaving: page ${page.leave}, app ${app.leave}`);
   if (page.arrive !== app.arrive) why.push(`arrive: page ${page.arrive}, app ${app.arrive}`);
+  /* The page's "about N DC fast chargers" is the app's "N chargers within 5 mi" on the same
+     line. On the live route (denser than the stored one) it may move by a charger or two. */
+  if (!page.n || !app.n || Math.abs(page.n - app.n) > (LIVE ? 3 : 0)) why.push(`chargers on the route: page ${page.n}, app ${app.n}`);
   const n = Math.max(page.rows.length, app.rows.length);
   for (const a of app.rows) if (a.link && a.link !== 'ok') why.push(`the page's link to the ${a.label} stop at mile ${a.mile} ${a.link}`);
   for (let i = 0; i < n; i++) {
