@@ -900,8 +900,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:var(--surface2);color:var(--txt);font:inherit;font-size:16px}
 #heroGo{flex:1;min-width:0;height:48px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
   font-weight:800;font-size:15px;white-space:nowrap}
-.heroex{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin:0 0 14px}
-@media (max-width:440px){.heroex{grid-template-columns:1fr 1fr}}
+/* Two by two at every width: four in a row ran 29 px past the card's padding (8 px past its
+   edge) from 441 px up, and 84 px at 441 px. */
+.heroex{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 14px}
 .heroex[hidden]{display:none}
 .heroex small{grid-column:1/-1;font-size:12px;font-weight:600;color:var(--dim2)}
 .heroex button{min-height:38px;padding:0 12px;border-radius:100px;border:1px solid var(--line);background:var(--surface);

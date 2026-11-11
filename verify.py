@@ -1778,6 +1778,12 @@ check(_live("Promise.resolve(first ? first() : null).then(() => setTimeout(() =>
       and _live("if (pick && pick.k) popupLead = { id: sid, k: pick.k };")
       and _live("if (row) return row.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, detail: 1 }));"),
       "?stop= opens the stop before the drive is planned again, or as a key press (focus ring)")
+# The welcome card's example drives are two by two at every width (verify pass, 2026-11-11):
+# four in a row ("LA → Vegas ... Dallas → Houston") ran 29 px past the card's padding from
+# 441 px up, out past the card's edge, and 84 px at 441 px.
+check(".heroex{display:grid;grid-template-columns:1fr 1fr;" in _html
+      and not re.search(r"\.heroex\{[^}]*grid-template-columns:repeat\(4", _html),
+      "the welcome card's example drives sit four in a row again (they run past the card above 440 px)")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
