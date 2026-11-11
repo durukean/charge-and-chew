@@ -1454,10 +1454,13 @@ if (NATIVE) {
 /* The public URL for whatever is on screen. Inside the shell location.href is the loopback
    server, which means nothing to anyone else. */
 function shareUrl() {
-  if (!NATIVE) return location.href;
-  const u = new URL('https://chargeandchew.com/');
-  u.search = location.search;
-  u.searchParams.delete('src'); u.searchParams.delete('nosw');
+  const u = new URL(NATIVE ? 'https://chargeandchew.com/' : location.href);
+  if (NATIVE) { u.search = location.search; u.searchParams.delete('src'); u.searchParams.delete('nosw'); }
+  // The address bar says "near=1" (see syncUrl); the person you send it to is not near you.
+  if (center && center.kind === 'me' && u.searchParams.get('near') === '1') {
+    u.searchParams.delete('near');
+    u.searchParams.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`);
+  }
   return u.href;
 }
 
@@ -6590,8 +6593,13 @@ function syncUrl() {
   showL2 ? p.set('l2', '1') : p.delete('l2');
   netPick ? p.set('netpick', netPick) : p.delete('netpick');
   stateScope ? p.set('state', stateScope) : p.delete('state');
-  if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); }
-  else { p.delete('at'); p.delete('r'); }
+  /* Not where YOU are: written into the address bar, a reload after you had moved pinned the
+     map to the old spot as "Shared spot", and a search then filtered that (BUG-06).
+     "near=1" (the home-screen shortcut's "around me") says so instead: a reload finds you. A link you send still opens
+     where you were looking: shareUrl() adds the spot. */
+  if (center && center.kind === 'me') { p.delete('at'); p.set('near', '1'); p.set('r', radiusMi); }
+  else if (center) { p.set('at', `${center.lat.toFixed(4)},${center.lon.toFixed(4)}`); p.set('r', radiusMi); p.delete('near'); }
+  else { p.delete('at'); p.delete('r'); p.delete('near'); }
   p.delete('stop');   // a one-time "open this stop" from the widget, not part of the view
   p.delete('q');      // a one-time search from a link: what it found is the view now
   if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
@@ -6975,7 +6983,7 @@ if (q.get('stop') && byId[+q.get('stop')]) {
   };
 }
 if (boot) setTimeout(boot, 80);
-else if (active.size || anyCat) { setSheet('mid'); fitToResults(); }
+else if ((active.size || anyCat) && q.get('near') !== '1') { setSheet('mid'); fitToResults(); }
 else {
   /* A plain visit opens where you are. The last area (or the whole country) shows at once,
      and the map moves to you when the position arrives. The welcome card is for when we

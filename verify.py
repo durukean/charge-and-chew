@@ -1496,6 +1496,15 @@ check("if (REDUCED_MOTION) map.setView([s.lat, s.lon], Math.max(map.getZoom(), 1
 check("$('handle').setAttribute('aria-expanded', s === 'peek' ? 'false' : 'true');" in _html,
       "the sheet handle no longer says whether the list is open")
 
+# Your own location never goes into the address bar (BUG-06): a reload after moving pinned the
+# map to the old spot. "near=1" instead; a link you send still carries the spot.
+check("if (center && center.kind === 'me') { p.delete('at'); p.set('near', '1'); p.set('r', radiusMi); }" in _html,
+      "syncUrl writes your own location into the URL again (a reload pins you to the old spot)")
+check("if (center && center.kind === 'me' && u.searchParams.get('near') === '1') {" in _html,
+      "a shared 'near me' link no longer carries where you were looking")
+check("else if ((active.size || anyCat) && q.get('near') !== '1') { setSheet('mid'); fitToResults(); }" in _html,
+      "reloading 'starbucks near me' shows the whole country instead of finding you again")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
