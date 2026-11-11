@@ -16,7 +16,9 @@ CHROME = ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
           "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable",
           "/usr/bin/chromium", "/usr/bin/chromium-browser")
 
-# (spec, ISO datetime, expected open state or None when the parser should decline)
+# (spec, ISO datetime, expected open state or None when the parser should decline[, IANA zone]).
+# Without a zone the time is the device's own clock; with one, the moment is judged on the clock
+# where the place is (UTC instants below).
 CASES = [
     ("24/7",                              "2026-08-31T03:00", True),
     ("Mo-Fr 08:00-18:00",                 "2026-08-31T09:00", True),    # Monday 09:00
@@ -32,6 +34,15 @@ CASES = [
     ("Mo-Fr 08:00-18:00; Sa off",         "2026-09-05T10:00", False),
     ("sunrise-sunset",                    "2026-08-31T12:00", None),    # unparseable
     ("Mo-Fr 08:00-18:00 open \"by appt\"","2026-08-31T09:00", None),
+    # Planned from California at 9:25 pm Monday: a New York diner open till 23:00 is closed
+    # (12:25 am Tuesday there) -- it said "Open until 23:00" on the phone's clock.
+    ("Mo-Su 06:00-23:00",                 "2026-11-10T05:25:00Z", False, "America/New_York"),
+    ("Mo-Su 06:00-23:00",                 "2026-11-10T05:25:00Z", True,  "America/Los_Angeles"),
+    # The weekday is the place's too: 11 pm Sunday in LA is 2 am Monday in New York.
+    ("Mo-Fr 01:00-03:00",                 "2026-11-09T07:00:00Z", True,  "America/New_York"),
+    ("Mo-Fr 01:00-03:00",                 "2026-11-09T07:00:00Z", False, "America/Los_Angeles"),
+    ("Mo-Sa 07:00-21:00",                 "2026-11-10T03:30:00Z", True,  "America/Denver"),   # 8:30 pm Mon
+    ("Mo-Sa 07:00-21:00",                 "2026-11-10T03:30:00Z", False, "America/Chicago"),  # 9:30 pm Mon
 ]
 
 def main():
@@ -57,9 +68,9 @@ def main():
 const CASES = %s;
 function run(f){
   const fn = f.contentWindow.__hoursNow;
-  const out = CASES.map(([spec, when, exp]) => {
-    let got; try { got = fn(spec, new Date(when)); } catch(e){ got = 'ERR ' + e.message; }
-    return { spec, when, exp, got: got && typeof got === 'object' ? got.open : got, note: got && got.note };
+  const out = CASES.map(([spec, when, exp, tz]) => {
+    let got; try { got = fn(spec, new Date(when), tz); } catch(e){ got = 'ERR ' + e.message; }
+    return { spec, when, exp, tz, got: got && typeof got === 'object' ? got.open : got, note: got && got.note };
   });
   document.getElementById('o').textContent = JSON.stringify(out);
 }
@@ -84,7 +95,7 @@ function run(f){
     for r in got:
         ok = (r["got"] is None and r["exp"] is None) or (r["got"] == r["exp"])
         if not ok: bad += 1
-        print(f"  {'ok  ' if ok else 'FAIL'}  {r['spec'][:38]:40s} @ {r['when'][5:]}  -> {r['got']}"
+        print(f"  {'ok  ' if ok else 'FAIL'}  {r['spec'][:38]:40s} @ {r['when'][5:]}{' ' + r['tz'] if r.get('tz') else ''}  -> {r['got']}"
               f"{'  (' + str(r['note']) + ')' if r.get('note') else ''}")
     if bad: print(f"\n{bad} case(s) wrong"); return 1
     print(f"\nopening hours: {len(got)}/{len(got)} cases pass")

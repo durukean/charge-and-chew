@@ -1286,9 +1286,27 @@ check("longest * perMi * 60 <= BREAK_MIN * 1.25" in _bc and "longest leg ~" in _
       "the breaks card claims 'about every N h' even when a stretch has no stop")
 # Meal-timed breaks (2026-11): meals by LOCAL time at each stop, a real meal (no coffee for
 # lunch, no Popeyes for breakfast), a leaving time that re-plans the card.
-_bp = _html[_html.index("function breakPicks("):][:2600]
-check("const at = localAt(t0 + into * 60000, tzOf(s));" in _bp and "nearestOf(s, mealKeys(m, meal.name), m)" in _bp,
-      "meal stops are no longer timed by local time at each stop")
+_bp = _html[_html.index("function breakPicks("):_html.index("function breaksCard(")]
+check("const ms = t0 + (into + extra) * 60000, at = localAt(ms, tzOf(s));" in _bp and "nearestOf(s, mealKeys(m, meal.name), m)" in _bp,
+      "meal stops are no longer timed by local time at each stop (with the time at earlier stops)")
+# Time at stops (2026-11-10): "Dinner 6:00 pm" on LA -> Denver was pure driving time, ~2 h early.
+# Every pick adds its dwell to the clocks after it, the arrival counts them, and the stop card's
+# open/closed check uses the same plan, not "now + drive". tools/breaks_check.mjs checks the clocks.
+check("if (!next) break;\n      had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL;" in _bp
+      and "else if (next) { had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL; }" in _bp
+      and "if (pick) { picks.push(pick); last = pick.mi; extra += DWELL_BREAK; }" in _bp,
+      "suggested breaks no longer count the time spent at earlier stops")
+check("const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwellOf(p), 0) * 60000;" in _html,
+      "the breaks card's arrival ignores the time at stops again")
+_fh = _html[_html.index("async function fillHours("):_html.index("function poiDetailHtml(")]
+check("const planned = stop ? arriveMs(stop) : null;" in _fh and "hoursNow(p.hours, when || undefined, tz)" in _fh
+      and "lastPlan = { route, t0, perMin: perMi * 60, picks };" in _html,
+      "the stop card checks opening hours at now + drive time again, not the breaks card's leaving time")
+# Opening hours on the place's own clock (2026-11-10): a New York diner said "Open until 23:00" at
+# 12:25 am there, judged on a California phone. verify_hours.py runs the zone cases.
+check("const lz = tz ? localAt(+now, tz) : null;" in _html and "hoursNow(P.hours, null, tzOf(s))" in _html
+      and "hoursNow(p.hours, null, near ? tzOf(near) : null)" in _html,
+      "opening hours are judged on the phone's clock again, not the stop's time zone")
 check("if (ls) ls.onchange = () => {\n    leaveAt = " in _html and 'id="leaveSel"' in _html,
       "the breaks card lost its leaving-time picker")
 check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _html,

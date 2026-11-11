@@ -29,7 +29,23 @@ const NOT_A_MEAL = ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Cari
 
 // "1:05 pm" -> minutes after midnight
 const mins = t => { const m = t.match(/(\d+):(\d+) (am|pm)/); return m ? (+m[1] % 12) * 60 + +m[2] + (m[3] === 'pm' ? 720 : 0) : NaN; };
-const meals = r => r.stops.filter(s => !/^Break/.test(s.label)).map(s => s.label.replace(/, (next day|day \d+)$/, ''));
+const meals = r => r.stops.filter(s => !/^Break(,|$)/.test(s.label)).map(s => s.label.replace(/, (next day|day \d+)$/, ''));
+// Minutes stopped at each suggested stop, as in index.html (DWELL_MEAL / DWELL_BREAK).
+const dwell = s => /^Break(,|$)/.test(s.label) ? 20 : 40;
+const ZONE_SPLIT = /, (TX|ID|OR|NV|KS|NE|SD|ND|TN|KY|IN|FL|MI)$/;   // states with two time zones
+/* Every clock counts the time at the stops before it: between two stops in the same zone on
+   the same day, the gap is the driving plus the earlier stop's dwell (clocks are rounded to
+   5 minutes, miles to 1). "Dinner 6:00 pm" on LA -> Denver was pure driving time. */
+const dwellGaps = r => {
+  const bad = [];
+  for (let i = 1; i < r.stops.length; i++) {
+    const a = r.stops[i - 1], b = r.stops[i];
+    if (a.place.slice(-2) !== b.place.slice(-2) || ZONE_SPLIT.test(b.place) || mins(b.clock) < mins(a.clock)) continue;
+    const want = (b.mile - a.mile) * r.perMin + dwell(a), got = mins(b.clock) - mins(a.clock);
+    if (Math.abs(got - want) > 8) bad.push(`${a.place} -> ${b.place}: ${got} min, want ~${Math.round(want)}`);
+  }
+  return bad.length ? 'clocks ignore the time at stops: ' + bad.slice(0, 2).join('; ') : '';
+};
 // The day a stop (or the arrival) is on: 1 the day you leave, 2 the next, then "day 3"...
 const dayOf = t => /next day/.test(t) ? 2 : +((t.match(/day (\d+)/) || [])[1] || 1);
 
@@ -37,7 +53,10 @@ const dayOf = t => /next day/.test(t) ? 2 : +((t.match(/day (\d+)/) || [])[1] ||
    Each check returns '' when fine, or what is wrong. */
 const CASES = [
   ['Los Angeles, CA', 'Las Vegas, NV', 420, 'America/Los_Angeles', [
-    r => meals(r).join() === 'Breakfast' ? '' : `meals ${meals(r)} (want Breakfast only: arrive before lunch)`]],
+    r => meals(r).join() === 'Breakfast' ? '' : `meals ${meals(r)} (want Breakfast only: arrive before lunch)`,
+    // One time zone: arrival is 7:00 + the drive + the time at every stop.
+    r => { const want = 420 + r.drive + r.stops.reduce((a, s) => a + dwell(s), 0), got = mins(r.arrive);
+      return Math.abs(got - want) <= 6 ? '' : `arrive ${r.arrive}, want ~${Math.floor(want / 60)}:${String(Math.round(want % 60)).padStart(2, '0')} (drive + stops)`; }]],
   ['Los Angeles, CA', 'Las Vegas, NV', 600, 'America/Los_Angeles', [
     r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)} (want Lunch only: left after breakfast)`]],
   ['Los Angeles, CA', 'Denver, CO', 420, 'America/Los_Angeles', [
@@ -80,6 +99,7 @@ const ALWAYS = [
   r => r.stops.every(s => s.label !== 'Breakfast' || !NO_BREAKFAST.includes(s.chain)) ? '' : 'breakfast at a place with no breakfast',
   r => r.stops.every(s => !/^(Lunch|Dinner)/.test(s.label) || !NOT_A_MEAL.includes(s.chain)) ? '' : 'lunch or dinner at a coffee/ice cream place',
   r => r.stops.every((s, i) => !i || s.mile > r.stops[i - 1].mile) ? '' : 'stops out of order',
+  dwellGaps,
 ];
 
 async function cdpConnect(wsUrl) {
@@ -119,6 +139,12 @@ const READ = `(() => {
   if (!card) return null;
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
     arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
+    // "1,018 mi · 15h 02m": the drive in minutes, and minutes per mile
+    ...(() => { const t = (document.querySelector('#routeInfo .sum i') || {}).textContent || '';
+      const mi = +((t.match(/([\\d,]+) mi/) || [])[1] || '0').replace(/,/g, '');
+      const h = t.match(/(\\d+)h(?: (\\d+)m)?/), m = t.match(/· (\\d+) min/);
+      const drive = h ? +h[1] * 60 + +(h[2] || 0) : m ? +m[1] : 0;
+      return { drive, perMin: mi ? drive / mi : 0 }; })(),
     stops: [...card.querySelectorAll('.brk')].map(b => {
       const line = b.querySelector('.bt span').textContent;
       // "350 kW · 🍔 Wendy's 4 min · mile 74": the part ending in "min", without its emoji

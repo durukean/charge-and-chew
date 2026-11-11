@@ -1869,7 +1869,7 @@ function popupHtml(s) {
   const P = livePoiKey && livePoiFor[s.id];
   let poiBlock = '';
   if (P) {
-    const oh = hoursNow(P.hours);
+    const oh = hoursNow(P.hours, null, tzOf(s));
     const state = oh ? `<span class="oh ${oh.open ? 'y' : 'n'}">${oh.open ? 'Open now' : 'Closed'}</span>
         <span class="ohn">${esc(oh.note)}</span>`
       : P.hours ? `<span class="ohn">${esc(P.hours)}</span>` : '';
@@ -4679,12 +4679,16 @@ function parseHours(spec) {
   }
   return understood ? { week } : null;
 }
-/* Returns {open:bool, note:string} or null when the spec could not be read. */
-function hoursNow(spec, now) {
+/* Returns {open:bool, note:string} or null when the spec could not be read. Judged on the
+   clock where the place is (tz, an IANA zone) when one is given: at 9:25 pm in California a
+   New York diner open 06:00-23:00 said "Open until 23:00" -- it was 12:25 am there. Without
+   a zone, the device's own clock. */
+function hoursNow(spec, now, tz) {
   const p = parseHours(spec); if (!p) return null;
   if (p.always) return { open: true, note: 'Open 24/7' };
   now = now || new Date();
-  const mins = now.getHours() * 60 + now.getMinutes(), day = now.getDay();
+  const lz = tz ? localAt(+now, tz) : null;
+  const mins = lz ? lz.min : now.getHours() * 60 + now.getMinutes(), day = lz ? lz.wd : now.getDay();
   const fmt = m => String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
   for (const [a, b] of p.week[day]) {
     // a span ending past midnight is written 20:00-02:00
@@ -4702,7 +4706,7 @@ function hoursNow(spec, now) {
   }
   return { open: false, note: 'Closed' };
 }
-window.__hoursNow = hoursNow;   // exercised by verify_hours.py
+window.__hoursNow = hoursNow;   // exercised by verify_hours.py (with and without a zone)
 
 /* ───────── live POI search ─────────
    The 90 curated chains are precomputed and instant, but people ask for anything — a bank,
@@ -5846,13 +5850,20 @@ async function fillHours(el, stop) {
   }
   if (!el.isConnected) return;
   /* On a route the question is whether it is open when you get there, not now: a stop at
-     mile 180 is three hours away. Arrival is estimated from the route's average speed. */
+     mile 180 is three hours away. Arrival comes from the breaks card's plan -- its leaving
+     time and the time at stops before this one -- so the two agree: leaving at 10 am, the card
+     said lunch at Baker 1:15 pm while this checked the hours for "now + drive", 12:15 am at
+     9 pm. Without a plan (a highway), the route's average speed from now. Hours and the time
+     shown are the stop's own clock. */
+  const planned = stop ? arriveMs(stop) : null;
   const ahead = stop && route && route.mileAt && route.mileAt.has(stop.id) && route.mi > 0
     ? route.mileAt.get(stop.id) * route.hr / route.mi : 0;
-  const when = ahead >= 0.5 ? new Date(Date.now() + ahead * 3600e3) : null;
-  const at = when ? when.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '';
+  const when = planned != null ? (planned - Date.now() >= 30 * 60000 ? new Date(planned) : null)
+    : ahead >= 0.5 ? new Date(Date.now() + ahead * 3600e3) : null;
+  const tz = stop ? tzOf(stop) : null;
+  const at = when ? clockLabel(localAt(+when, tz).min) : '';
   for (const t of todo) {
-    const p = poiDetailCache.get(t.ck), oh = p && hoursNow(p.hours, when || undefined);
+    const p = poiDetailCache.get(t.ck), oh = p && hoursNow(p.hours, when || undefined, tz);
     if (!oh || t.c.querySelector('.ohs')) continue;
     const word = oh.open ? 'open' : 'closed';
     t.c.insertAdjacentHTML('beforeend', `<i class="ohs ${oh.open ? 'y' : 'n'}" title="${esc(when ? word + ' when you arrive, about ' + at : oh.note || '')}">${when ? word + ' ~' + at : word}</i>`);
@@ -5860,7 +5871,8 @@ async function fillHours(el, stop) {
 }
 function poiDetailHtml(p) {
   if (!p) return '<div class="pp-det">No extra details in OpenStreetMap for this one.</div>';
-  const oh = hoursNow(p.hours);
+  const near = openStopId != null && byId[openStopId];   // the place is a walk from the open stop: its zone
+  const oh = hoursNow(p.hours, null, near ? tzOf(near) : null);
   const state = oh ? `<span class="oh ${oh.open ? 'y' : 'n'}">${oh.open ? 'Open now' : 'Closed'}</span>${esc(oh.note)}`
     : p.hours ? esc(p.hours) : 'Hours not listed';
   const links = [
@@ -6140,19 +6152,20 @@ function tzOf(s) {
   return 'America/' + (ST_TZ[s.st] || 'New_York');
 }
 const TZ_FMT = new Map();
-// Minutes after local midnight, the local date, and that date as a day number (days since
-// 1970, for counting the days of a drive), of a moment at a stop.
+// Minutes after local midnight, the local date, that date as a day number (days since 1970,
+// for counting the days of a drive) and the weekday (0 = Sunday), of a moment at a stop.
 function localAt(ms, tz) {
   let f = TZ_FMT.get(tz);
   if (!f) {
-    try { f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }); }
+    try { f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }); }
     catch (e) { f = null; }
     TZ_FMT.set(tz, f);
   }
   if (!f) { const d = new Date(ms);
-    return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString(), dn: Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5) }; }
+    return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString(), dn: Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5), wd: d.getDay() }; }
   const p = {}; for (const x of f.formatToParts(new Date(ms))) p[x.type] = x.value;
-  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5 };
+  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5,
+    wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday) };
 }
 function clockLabel(min) {
   const m = ((Math.round(min / 5) * 5) % 1440 + 1440) % 1440, h = Math.floor(m / 60);
@@ -6169,68 +6182,113 @@ const foodKeys = m => (chainQuery() ? chainKeysOn(m) : Object.keys(m)).filter(k 
 const mealKeys = (m, meal) => foodKeys(m).filter(k => chainQuery() ||
   (!NOT_A_MEAL.has(k) && !(meal === 'Breakfast' && NO_BREAKFAST.has(k))));
 
+/* Time at each suggested stop, added to every clock after it. The clocks were pure driving
+   time: "Dinner 6:00 pm, Salina" on LA -> Denver came after breakfast, lunch and three
+   breaks, which is nearer 8 pm, and the arrival was 3 hours early. A break is a restroom and
+   a snack, a meal is ordering and eating: a driver's plan, not a charging plan. */
+const DWELL_BREAK = 20, DWELL_MEAL = 40;   // minutes
+const dwellOf = p => p.meal ? DWELL_MEAL : DWELL_BREAK;
 function breakPicks(vis) {
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return [];
+  const [first, lastStop] = routeEnds(vis);
+  if (!first) return [];
   const perMin = route.hr * 60 / Math.max(1, route.mi);     // minutes of driving per mile
-  const drive = route.hr * 60, t0 = departMs(routeEnds(vis)[0]);
+  const drive = route.hr * 60, t0 = departMs(first);
   const cands = vis.filter(s => s.lvl !== 2 && route.mileAt.has(s.id));
   // A meal you leave within an hour of (or after) is one you had before setting off.
-  const start = localAt(t0, tzOf(routeEnds(vis)[0])), had = new Set();
+  const start = localAt(t0, tzOf(first)), had = new Set();
   for (const meal of MEALS) if (start.min > meal.at - 60) had.add(start.day + meal.name);
-  /* One stop per meal per day: the best within 45 minutes of its hour (local), failing that
-     within 75, failing that a LATE one within two hours -- Albuquerque to Dallas jumps an hour
-     at the Texas line right at lunchtime, and the first stop after it is Amarillo. Never more
-     than 45 minutes early: "lunch" at 11:10, forty minutes from Las Vegas, is no lunch. */
-  const best = new Map();
-  for (const s of cands) {
-    const mi = route.mileAt.get(s.id), into = mi * perMin;
-    if (into < 60 || into > drive - 30) continue;
-    const at = localAt(t0 + into * 60000, tzOf(s));
-    for (const meal of MEALS) {
-      const off = Math.abs(at.min - meal.at);
-      if (off > 120 || at.min < meal.at - 45 || had.has(at.day + meal.name)) continue;
-      const m = MATCH[s.id] || {};
-      const [k, w] = nearestOf(s, mealKeys(m, meal.name), m);
-      if (!k) continue;
-      // Near the hour, then a short walk, then power in 50 kW steps (150 vs 175 kW should not
-      // beat 20 minutes closer to noon), then closer still, then the shorter walk.
-      const sc = [off > 75 ? 2 : off > 45 ? 1 : 0, w > 400 ? 1 : 0, (s.kw || 0) < 100 ? 1 : 0,
-                  -Math.floor(Math.min(s.kw || 0, 350) / 50), Math.round(off / 15), w];
-      const key = at.day + meal.name, cur = best.get(key);
-      if (!cur || lexLess(sc, cur.sc)) best.set(key, { s, walk: w, k, meal: meal.name, sc });
-    }
-  }
+  /* Planned in driving order, one stop at a time, every clock counting the time at the stops
+     before it: after a 40-minute lunch, dinner hour comes 40 minutes further down the road. */
   const picks = [];
-  for (const p of best.values()) if (!picks.some(q => q.s.id === p.s.id)) picks.push(p);
-  /* Then a break in any stretch longer than ~2.5 hours between the start, the meal stops and
-     the end -- evenly inside that stretch. Fixed marks every 130 miles put a break an hour
-     after breakfast. */
-  const anchors = [0, ...picks.map(p => route.mileAt.get(p.s.id)).sort((a, b) => a - b), route.mi];
-  const targets = [];
-  for (let i = 1; i < anchors.length; i++) {
-    const gap = anchors[i] - anchors[i - 1], n = Math.ceil(gap * perMin / BREAK_MIN) - 1;
-    for (let j = 1; j <= n; j++) targets.push([anchors[i - 1] + gap * j / (n + 1), gap / (n + 1) * 0.35]);
-  }
-  for (const [target, span] of targets) {
+  let last = 0, extra = 0;      // mile of the last stop (0, the start); minutes stopped so far
+  for (let guard = 0; guard < 400; guard++) {
+    /* The next meal. One stop per meal per day: the best within 45 minutes of its hour (local),
+       failing that within 75, failing that a LATE one within two hours -- Albuquerque to Dallas
+       jumps an hour at the Texas line right at lunchtime, and the first stop after it is
+       Amarillo. Never more than 45 minutes early: "lunch" at 11:10, forty minutes from Las
+       Vegas, is no lunch. */
+    const best = new Map();
+    /* A meal you reach the destination in time for (within a quarter hour of its hour) is
+       eaten there. Counting the time at stops, LA -> Vegas leaving at 7 arrives about 12:35,
+       and "Lunch 11:50, Primm" forty minutes out was a stop for nothing. */
+    const end = localAt(t0 + (drive + extra) * 60000, tzOf(lastStop));
+    for (const s of cands) {
+      const mi = route.mileAt.get(s.id), into = mi * perMin;
+      if (mi <= last || into < 60 || into > drive - 30) continue;
+      /* Not within an hour of the stop before: the break's 20 minutes made lunch hour come
+         sooner down the road, and "Break 11:20, Lunch 11:50" sat a few miles apart. */
+      if (picks.length && (mi - picks[picks.length - 1].mi) * perMin < 60) continue;
+      const ms = t0 + (into + extra) * 60000, at = localAt(ms, tzOf(s));
+      for (const meal of MEALS) {
+        const off = Math.abs(at.min - meal.at);
+        if (off > 120 || at.min < meal.at - 45 || had.has(at.day + meal.name) || (end.day === at.day && end.min <= meal.at + 15)) continue;
+        const m = MATCH[s.id] || {};
+        const [k, w] = nearestOf(s, mealKeys(m, meal.name), m);
+        if (!k) continue;
+        // Near the hour, then a short walk, then power in 50 kW steps (150 vs 175 kW should not
+        // beat 20 minutes closer to noon), then closer still, then the shorter walk.
+        const sc = [off > 75 ? 2 : off > 45 ? 1 : 0, w > 400 ? 1 : 0, (s.kw || 0) < 100 ? 1 : 0,
+                    -Math.floor(Math.min(s.kw || 0, 350) / 50), Math.round(off / 15), w];
+        const key = at.day + meal.name, cur = best.get(key);
+        if (!cur || lexLess(sc, cur.sc)) best.set(key, { s, walk: w, k, meal: meal.name, sc, key, mi, ms });
+      }
+    }
+    let next = null;
+    for (const p of best.values()) if (!next || p.mi < next.mi) next = p;
+    /* Then a break in any stretch longer than ~2.5 hours to that meal (or to the end), evenly
+       inside it: the first of them now, the rest planned from there. Fixed marks every 130
+       miles put a break an hour after breakfast. */
+    const to = next ? next.mi : route.mi, gap = to - last, n = Math.ceil(gap * perMin / BREAK_MIN) - 1;
+    if (n < 1) {
+      if (!next) break;
+      had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL;
+      continue;
+    }
+    const target = last + gap / (n + 1), span = Math.max(12, gap / (n + 1) * 0.35);
     let pick = null, pickScore = null;
     for (const s of cands) {
-      if (Math.abs(route.mileAt.get(s.id) - target) > Math.max(12, span)) continue;
+      const mi = route.mileAt.get(s.id);
+      /* Not within ~1.5 h of the stop before: each break took the strongest stop within 35% of
+         its mark, so neighbours drifted together (Childress, then Vernon an hour later). Nor
+         within an hour of the meal it comes before, or that meal is lost: a break at Childress
+         put Vernon, the one dinner stop, 59 minutes on, and the drive had no dinner. And, like
+         a meal, not in the last half hour. */
+      if ((mi - last) * perMin < BREAK_MIN * 0.6 || (to - mi) * perMin < (next ? 60 : 30)) continue;
       const m = MATCH[s.id] || {};
       const [k, w] = nearestOf(s, chainQuery() ? chainKeysOn(m) : foodKeys(m), m);
       if (!k) continue;                                       // a break means somewhere to eat
-      const sc = [-Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
-      if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null }; pickScore = sc; }
+      /* The strongest stop near the mark; failing any, the one nearest it. I-70 east of Salina
+         has no stop for 100 miles: skipping that mark left 5.5 h from dinner to the next break. */
+      const off = Math.abs(mi - target) > span ? Math.abs(mi - target) : 0;
+      const sc = [off, -Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
+      if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null, mi, ms: t0 + (mi * perMin + extra) * 60000 }; pickScore = sc; }
     }
-    if (pick && !picks.some(p => p.s.id === pick.s.id)) picks.push(pick);
+    if (pick) { picks.push(pick); last = pick.mi; extra += DWELL_BREAK; }
+    else if (next) { had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL; }
+    else break;                   // nowhere with food before the end
   }
-  return picks.sort((a, b) => route.mileAt.get(a.s.id) - route.mileAt.get(b.s.id));
+  return picks;
+}
+/* The breaks card's plan, kept for the stop card: when you reach a stop on it, with the
+   leaving time and the time at the stops before. */
+let lastPlan = null;
+function arriveMs(s) {
+  const P = lastPlan;
+  if (!P || P.route !== route || !route.mileAt || !route.mileAt.has(s.id)) return null;
+  const mi = route.mileAt.get(s.id);
+  let extra = 0;
+  for (const p of P.picks) if (p.mi < mi) extra += dwellOf(p);
+  return P.t0 + (mi * P.perMin + extra) * 60000;
 }
 function breaksCard(vis) {
+  lastPlan = null;
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return '';
   const picks = breakPicks(vis);
   const [first, last] = routeEnds(vis);
   if (!first) return '';
   const perMi = route.hr / Math.max(1, route.mi), t0 = departMs(first);
+  lastPlan = { route, t0, perMin: perMi * 60, picks };
   /* Say "about every N h" only when it is true. Denver -> Salt Lake City with Starbucks found
      one of three breaks (the others fall in a 97-mile charger gap) and the card still promised
      a cadence. When a stretch runs long, say the longest leg instead. The leaving time and the
@@ -6250,12 +6308,12 @@ function breaksCard(vis) {
   const home = localAt(t0, tzOf(first)).dn;
   const when = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home;
     return [clockLabel(l.min), n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : '']; };
-  const arrive = t0 + route.hr * 3600000;
+  const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwellOf(p), 0) * 60000;
   return `<div class="breaks"><div class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</div>
     <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
       <span>arrive ~${when(arrive, last).filter(Boolean).join(' · ')}</span></div>` +
-    picks.map(({ s, walk, k, meal }) => {
-      const mile = route.mileAt.get(s.id), [clock, next] = when(t0 + mile * perMi * 3600000, s);
+    picks.map(({ s, walk, k, meal, ms }) => {
+      const mile = route.mileAt.get(s.id), [clock, next] = when(ms, s);
       return `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}">
         <span class="bm">${clock}<i>${meal || 'Break'}${next ? ', ' + next : ''}</i></span>
         <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min · ' : ''}mile ${mile}</span></span>
