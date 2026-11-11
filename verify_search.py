@@ -355,6 +355,46 @@ CASES = [
     ("college station",              dict(place="college station")),
     ("falls church",                 dict(place="falls church")),
     ("harbor springs",               dict(place="harbor springs", poi=None)),   # a town, no chargers of its own
+    # ── 2026-11-11 (app review BUG-07..10): a town whose name holds a filler word or charger
+    #    talk, asked for with charger talk around it or a state after it. "great falls" did
+    #    nothing; "college station tx" searched colleges in Texas; "chargers in college
+    #    station" universities near you; "great bend" went to Bend, Oregon.
+    ("great falls",                  dict(place="great falls")),
+    ("chargers in great falls",      dict(place="great falls")),
+    ("great falls mt",               dict(place="great falls, MT")),
+    ("great falls montana",          dict(place="great falls, MT")),
+    ("great falls chargers",         dict(place="great falls")),
+    ("great bend",                   dict(place="great bend")),        # no fast charger: the geocoder's
+    ("great bend ks",                dict(place="great bend ks")),
+    ("great neck",                   dict(place="great neck")),
+    ("great barrington",             dict(place="great barrington")),
+    ("college station tx",           dict(place="college station, TX")),
+    ("chargers in college station",  dict(place="college station")),
+    ("chargers near college station texas", dict(place="college station, TX")),
+    ("college station chargers",     dict(place="college station")),
+    ("culver city la",               dict(place="culver city")),       # LA here is Los Angeles
+    ("new orleans la",               dict(place="new orleans, LA")),   # ...and here Louisiana
+    # ...and the words alone are still nothing, and still filler around other places.
+    ("great",                        dict(place="")),
+    ("falls",                        dict(place="")),
+    ("station",                      dict(place="")),
+    ("charging station",             dict(place="")),
+    ("great chargers in denver",     dict(place="denver")),
+    ("great food",                   dict(place="", anyCat="food")),
+    ("best chargers in great falls", dict(place="great falls")),
+    ("supercharger westwood",        dict(net="tesla", place="westwood")),
+    # A station is a landmark, asked for by its whole name, in the town named after it:
+    # "union station" went to Union County, Illinois and "penn station la" to New Orleans.
+    ("union station",                dict(place="union", station="union station|")),
+    ("chargers at union station",    dict(station="union station|")),
+    ("penn station la",              dict(station="penn station|Los Angeles, CA")),
+    ("union station denver",         dict(station="union station|denver")),
+    ("union station in kansas city", dict(station="union station|kansas city")),
+    ("grand central station",        dict(station="grand central station|")),
+    ("starbucks near union station", dict(chains=["Starbucks"], station="union station|")),
+    ("gas station",                  dict(station=None)),
+    ("charging station",             dict(station=None)),
+    ("police station",               dict(station=None)),
 
     # ── Ice cream is a precomputed category (2026-10-18): every way of asking for it, and the
     #    common misspellings, must resolve to it -- "icea cream" used to say "Couldn't find".
@@ -432,7 +472,8 @@ window.__ready = function () {{
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,
               poi: poi ? poi.tags.join('+') : null,
-              poiLabel: poi ? poi.label : null}});
+              poiLabel: poi ? poi.label : null,
+              station: (function (s) {{ return s ? s.name + '|' + s.town : null; }})(window.__stationAsked(qs[i], p.place))}});
   }}
   document.getElementById('out').textContent = JSON.stringify(r);
 }};
@@ -446,10 +487,11 @@ window.__ready = function () {{
   var n = 0, t = setInterval(function () {{
     var w = f.contentWindow; n++;
     if (w && typeof w.__parseQuery === 'function' && typeof w.__parseTrip === 'function'
-          && typeof w.__detectPoiIntent === 'function') {{
+          && typeof w.__detectPoiIntent === 'function' && typeof w.__stationAsked === 'function') {{
       clearInterval(t);
       try {{ window.__parseQuery = w.__parseQuery; window.__parseTrip = w.__parseTrip;
-             window.__detectPoiIntent = w.__detectPoiIntent; window.__ready(); }}
+             window.__detectPoiIntent = w.__detectPoiIntent; window.__stationAsked = w.__stationAsked;
+             window.__ready(); }}
       catch (e) {{ document.getElementById('out').textContent = 'ERR ' + e.message; }}
     }} else if (n > 240) {{
       clearInterval(t);

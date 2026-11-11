@@ -3644,6 +3644,43 @@ const FOOD_GROUPS = [
   [/(^|\s)(chinese|chinese food)(?=\s|$)/, ['Panda Express']],
 ];
 const PLURAL_NO = new Set(['taco', 'custard', 'gelato', 'frozen yogurt']);
+/* A town we have chargers in, named by two words or more somewhere in the text: the words
+   left once charger talk and filler in front ("chargers in", "best") are off, with or without
+   a state behind ("tx", "texas") and charger talk after it ("great falls chargers"). Returns
+   "college station, TX", or null. Two words or more only: one word alone is "beach" or
+   "union", which every state has. Tried before anything is stripped, so a town whose name
+   contains a filler word ("great falls") or charger talk ("college station") survives. */
+function knownTown(t) {
+  const w0 = t.trim().split(/\s+/).filter(Boolean);
+  const isTown = ws => ws.length > 1 && ws.length < 5 && PLACES.some(x => x.ckey === ws.join('').replace(/[^a-z]/g, ''));
+  const filler = x => NOISE_WORD.has(x) || NON_PLACE.has(x);
+  for (let a = 0; a < w0.length - 1; a++) {
+    if (a && !filler(w0[a - 1])) break;       // only filler may be dropped in front
+    let ws = w0.slice(a);
+    while (ws.length > 1) {
+      if (isTown(ws)) return ws.join(' ');
+      // a state behind it: "college station tx", "great falls montana"
+      let code = null, n = 0;
+      const last = ws[ws.length - 1];
+      if (/^[a-z]{2}$/.test(last) && STATE_NAME[last.toUpperCase()]) { code = last.toUpperCase(); n = 1; }
+      else for (const name in ST) {
+        const nw = name.split(' ');
+        if (ws.length > nw.length && ws.slice(-nw.length).join(' ') === name) { code = ST[name]; n = nw.length; break; }
+      }
+      if (code && isTown(ws.slice(0, -n))) {
+        const tw = ws.slice(0, -n), key = tw.join('').replace(/[^a-z]/g, '');
+        /* "culver city la" is Los Angeles more often than Louisiana: keep "LA" only for a
+           town we know there. */
+        if (code === 'LA' && !PLACES.some(x => x.ckey === key && /, LA$/.test(x.label))) return tw.join(' ');
+        return tw.join(' ') + ', ' + code;
+      }
+      // charger talk after it, a word at a time: "college station chargers" is not "college"
+      if (!NOISE_WORD.has(ws[ws.length - 1])) break;
+      ws = ws.slice(0, -1);
+    }
+  }
+  return null;
+}
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
   // "dc" on its own is the city; elsewhere ("dc fast charger") it is charger talk and goes.
@@ -3751,13 +3788,23 @@ function parseQuery(raw) {
   const keepSt = stm && !NOISE_WORD.has(stm[1]) && !NON_PLACE.has(stm[1]) ? stm : null;
   let place = t.replace(NOISE, ' ').replace(/\s+/g, ' ').trim();
   /* ...unless the words that were stripped are part of a town's name: "college station" lost
-     "station" (charger talk) and went to College, Alaska. */
-  const whole = t.replace(/\s+/g, ' ').trim();
-  const wk = whole.replace(/[^a-z]/g, '');   // the town's own name, not "evansville in" (= Evansville, IN)
-  if (whole !== place && whole.includes(' ') && PLACES.some(x => x.ckey === wk)) place = whole;
-  // Strip surviving non-place words; if nothing meaningful is left, there is no place.
-  // A region keeps its own filler word: "bay area" is not "bay".
-  if (!CITY_ALIAS[place]) place = place.split(' ').filter(w => w && !NON_PLACE.has(w)).join(' ').trim();
+     "station" (charger talk) and went to College, Alaska. Asked BEFORE any stripping, and of
+     the words left once charger talk in front and a state behind are off: only the whole text
+     used to count, so "college station tx" searched colleges in Texas, "chargers in college
+     station" universities near you, and "great falls" lost "great" (NON_PLACE) and then
+     "falls" (GENERIC_PLACE) and did nothing at all. */
+  const town = knownTown(t);
+  if (town) place = town;
+  /* Strip surviving non-place words; if nothing meaningful is left, there is no place.
+     A region keeps its own filler word: "bay area" is not "bay". "great" stays when a place
+     word follows it straight away in what was typed: Great Bend has no fast charger, so
+     knownTown cannot vouch for it, and "great bend" went to Bend, Oregon. ("great chargers in
+     denver" still loses it: "chargers" came next.) */
+  else if (!CITY_ALIAS[place]) {
+    const pw = place.split(' ');
+    place = pw.filter((w, i) => w && (!NON_PLACE.has(w) || (w === 'great' && pw[i + 1]
+      && !NON_PLACE.has(pw[i + 1]) && t.includes(' great ' + pw[i + 1] + ' ')))).join(' ').trim();
+  }
   /* "downtown la" went to Baton Rouge: the geocoder read "la" as Louisiana. A town's
      centre is where the search lands anyway, so "downtown X" is X -- when X is a place we
      know; "downtown disney" is somewhere of its own. */
@@ -3893,6 +3940,23 @@ function knownPlace(t) {
   for (const p of PLACES) if (p.ckey === bare || p.key === bare) return true;
   return false;
 }
+
+/* "union station denver" -> { name: 'union station', town: 'denver' }: the words in front of
+   "station" that the parser kept as the place are its name; what follows is the town. Not a
+   kind of station ("gas", "train", "police", or charger talk like "charging"). */
+const STATION_KIND = new Set(['gas', 'fuel', 'filling', 'service', 'police', 'fire', 'train', 'bus',
+  'subway', 'metro', 'rail', 'railway', 'transit', 'power', 'ranger', 'space', 'weather', 'radio',
+  'tv', 'polling', 'truck', 'amtrak', 'light', 'pump', 'gasoline', 'petrol', 'work', 'docking']);
+function stationAsked(raw, place) {
+  const w = normalise(raw).split(' ').filter(Boolean), pw = new Set(place.split(/[\s,]+/));
+  const i = w.lastIndexOf('station');
+  let a = i;
+  while (a > 0 && i - a < 3 && pw.has(w[a - 1]) && !STATION_KIND.has(w[a - 1])) a--;
+  if (i < 1 || a === i) return null;
+  const tail = w.slice(i + 1).filter(x => !/^(in|near|around|at|by)$/.test(x)).join(' ');
+  return { name: w.slice(a, i).join(' ') + ' station', town: tail ? parseQuery(tail).place : '' };
+}
+window.__stationAsked = stationAsked;   // exposed for the search test suite
 
 /* "LA to las vegas near ice cream shop" -- the destination is Las Vegas and "ice cream
    shop" is what to look for along the way. Splitting on " to " and keeping the whole tail
@@ -4083,11 +4147,14 @@ const LANDMARK_IS = { park: x => x.class === 'leisure', mall: x => x.type === 'm
   museum: x => x.type === 'museum', zoo: x => x.type === 'zoo', aquarium: x => x.type === 'aquarium',
   casino: x => x.type === 'casino', university: x => /^(university|college)$/.test(x.type),
   college: x => /^(university|college)$/.test(x.type),
-  hospital: x => x.type === 'hospital', library: x => x.type === 'library', hotel: x => x.type === 'hotel' };
-async function findLandmark(phrase) {
+  hospital: x => x.type === 'hospital', library: x => x.type === 'library', hotel: x => x.type === 'hotel',
+  station: x => x.class === 'railway' || x.class === 'public_transport' || /^(station|train_station|stop)$/.test(x.type) };
+/* `near` (a town the search named) replaces where you are, and the landmark must then be in
+   it: "penn station la" is somewhere in Los Angeles, not New York's Penn Station. */
+async function findLandmark(phrase, near) {
   const sq = t => normalise(t).replace(/^the /, '').replace(/[^a-z0-9]/g, '');
   const want = sq(phrase);
-  const kind = (phrase.match(/(?:^|\s)(park|mall|hospital|library|hotel|outlets?|stadium|arena|museum|zoo|aquarium|casino|university|college)(?:\s|$)/) || [])[1];
+  const kind = (phrase.match(/(?:^|\s)(park|mall|hospital|library|hotel|outlets?|stadium|arena|museum|zoo|aquarium|casino|university|college|station)(?:\s|$)/) || [])[1];
   const base = kind ? sq(phrase.replace(new RegExp('(^|\\s)' + kind + '(\\s|$)'), ' ')) : '';
   let j;
   try {
@@ -4096,12 +4163,16 @@ async function findLandmark(phrase) {
     if (!r.ok) return null;
     j = await r.json();
   } catch (e) { return null; }
-  const from = lastMe || (center ? { lat: center.lat, lon: center.lon } : null);
+  const from = near || lastMe || (center ? { lat: center.lat, lon: center.lon } : null);
   let best = null, bs = -Infinity;
   for (const x of j) {
     const own = sq(String(x.display_name || '').split(',')[0]);
-    if (!own.startsWith(want) && !(base && own.startsWith(base) && LANDMARK_IS[kind](x))) continue;
+    /* A station is often named for its street first: OSM's Penn Station is
+       "34th Street–Penn Station". The whole name inside it counts, for a station only. */
+    if (!own.startsWith(want) && !(base && own.startsWith(base) && LANDMARK_IS[kind](x))
+        && !(kind === 'station' && own.includes(want) && LANDMARK_IS.station(x))) continue;
     const imp = +x.importance || 0, mi = from ? hav(from.lat, from.lon, +x.lat, +x.lon) / MI : Infinity;
+    if (near && !(mi < 40)) continue;
     if (!(imp >= 0.4 || (imp >= 0.3 && mi < 150))) continue;
     const s = imp - 0.25 * Math.log10(1 + mi / 50);
     if (s > bs) { bs = s; best = x; }
@@ -4373,6 +4444,30 @@ $('placeIn').addEventListener('keydown', async e => {
     if (tripPoi) track('live-poi-route', tripPoi.tags[0]);
     runRoute(tripPoi ? { poi: tripPoi } : {});
     return;
+  }
+
+  /* "union station", "chargers at union station", "penn station la": a station is a
+     landmark. "station" is charger talk to the parser, so the place was just "union" (Union
+     County, Illinois) or "penn la" (New Orleans). Ask for it by its whole name -- in the town
+     named after it, if one was. A town called "... Station" kept the word, so it is a town
+     ("college station"); a town of ours with no such station is still that town ("denver
+     station"). */
+  const stn = !p.here && p.place && !/(^|\s)station(\s|,|$)/.test(p.place) ? stationAsked(raw, p.place) : null;
+  if (stn) {
+    const myNav = ++navGen;
+    toast('Searching…'); $('placeBox').classList.add('busy');
+    let at = null;
+    try {
+      const near = stn.town ? await geocode(stn.town).catch(() => null) : null;
+      if (myNav !== navGen) return;
+      at = await findLandmark(stn.name, near) || near;
+      if (myNav !== navGen) return;
+    } finally { $('placeBox').classList.remove('busy'); }
+    if (at) { setCenter(at.lat, at.lon, at.label, 'place'); return; }
+    if (!knownPlace(p.place)) {
+      toast(`Couldn't find ${stn.name.replace(/\b[a-z]/g, c => c.toUpperCase())} — add its city, like “union station denver”`);
+      return;
+    }
   }
 
   /* "banks near me", "tire shop" — a category word means they want that kind of place,

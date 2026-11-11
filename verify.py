@@ -1422,8 +1422,18 @@ check("const pw = poi && !p.here && !route && poi.name ? parseQuery(poi.name).pl
 check("&& !rw.slice(ni, ki).some(w => /^(in|near|around|at)$/.test(w));" in _html,
       "'memorial hospital' / 'outlet mall' read the name as a town again")
 # Named landmarks with a kind word in them ("central park" went to Central, Ohio).
-check("async function findLandmark(phrase) {" in _html and "const lm = await findLandmark(phrase);" in _html,
+check("async function findLandmark(phrase, near) {" in _html and "const lm = await findLandmark(phrase);" in _html,
       "'central park' / 'mall of america' are kinds of place again, not the landmark")
+# A town whose name holds filler or charger talk, asked for with words around it (BUG-07/08/09):
+# "great falls" did nothing, "college station tx" searched colleges in Texas.
+check("const town = knownTown(t);\n  if (town) place = town;" in _html,
+      "towns like 'great falls' / 'college station tx' lose their words to stripping again")
+check("(w === 'great' && pw[i + 1]" in _html, "'great bend' goes to Bend, Oregon again")
+# A station is a landmark (BUG-10): "union station" went to Union County, IL; "penn station la"
+# to New Orleans. In a named town only when the town is named.
+check("? stationAsked(raw, p.place) : null;" in _html and "at = await findLandmark(stn.name, near) || near;" in _html,
+      "'union station' is read as the town 'union' again")
+check("if (near && !(mi < 40)) continue;" in _html, "'penn station la' can land in New York again")
 # A chain's own descriptor after its name ("starbucks reserve" went to Reserve, NM).
 check("CHAIN_TAIL + '(\\\\s|$)'" in _html, "chain descriptors ('pilot travel center') are towns again")
 # Brand names with punctuation: "pf changs" is P.F. Chang's (it flew to Boston).
