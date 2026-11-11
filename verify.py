@@ -1819,6 +1819,17 @@ check(_swv and _pgv and _swv.group(1) == _pgv.group(1),
 check(re.search(r"(?m)^\s*ch\.port1\.onmessage = e => \{ if \(e\.data !== SW_VER\) offerUpdate\(w\); \};\n\s*w\.postMessage\('version', \[ch\.port2\]\);", _html) is not None,
       "the update toast no longer asks the new worker its version (the new page offers itself a reload)")
 
+# About: the x sits in a header that stays put on the sheet's own background. A lone sticky x
+# floated over the body text, which ran under and around it while scrolling (web and iOS).
+check(re.search(r'<div class="abhead"><h2>.*?</h2>\s*<a class="xclose"[^>]*>.*?</a></div>', _html, re.S) is not None,
+      "About's close button is not inside its header (it floated over the text again)")
+_abh = re.search(r"#about \.abhead\{([^}]*)\}", _html)
+check(_abh and "position:sticky" in _abh.group(1) and "background:var(--surface)" in _abh.group(1) and "top:-24px" in _abh.group(1),
+      "About's header is not a sticky, opaque bar at the top edge (text shows under the x)")
+check(not re.search(r"#about \.xclose\{[^}]*position:sticky", _html), "About's x is sticky on its own again")
+check(re.search(r"(?m)^\s*\$\('about'\)\.querySelector\('\.abhead'\)\.classList\.toggle\('scrolled', e\.target\.scrollTop > 2\)", _html) is not None,
+      "About's header no longer draws its hairline when text scrolls under it")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

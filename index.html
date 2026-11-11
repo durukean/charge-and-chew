@@ -944,10 +944,17 @@ html.native .splash-mark svg{width:96px;height:96px}
 .chainlinks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .chainlinks a{background:var(--surface2);border:1px solid var(--line);border-radius:100px;
   padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none}
-/* Close at the top as well: the only way out used to be a link several screens down. */
-#about .xclose{position:sticky;top:0;float:right;margin:-8px -8px 0 8px;width:38px;height:38px;border-radius:12px;
-  display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim);z-index:1;
-  box-shadow:0 0 0 7px var(--surface)}   /* a clean halo: text scrolling under it showed through at the edges */
+/* Close at the top as well: the only way out used to be a link several screens down. It sits
+   in a header that stays put with the title, on the sheet's own background: a lone sticky x
+   floated over the text, which ran under and around it while scrolling. top:-24px is the
+   box's padding, so the header holds at the box's very top edge. */
+#about .abhead{position:sticky;top:-24px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:-24px -24px 12px;padding:16px 16px 10px 24px;background:var(--surface);border-bottom:1px solid transparent;
+  transition:border-color .15s}
+#about .abhead.scrolled{border-bottom-color:var(--line)}   /* a hairline once text is under it */
+#about .abhead h2{margin:0}
+#about .xclose{flex:none;width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
 #about .about-ver{color:var(--dim2);font-size:12px;margin-top:4px}
 #about .about-small{color:var(--dim);font-size:12.5px;line-height:1.5}
 #about .about-list{margin:-4px 0 14px 18px;color:var(--dim);font-size:13.5px;line-height:1.5}
@@ -1333,8 +1340,8 @@ if (document.documentElement.classList.contains('car')) {
 </div>
 
 <div id="about" role="dialog" aria-modal="true" aria-label="About Charge and Chew"><div class="box">
-  <a class="xclose" href="#" aria-label="Close About"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
-  <h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
+  <div class="abhead"><h2><span class="c">Charge</span> &amp; <span class="h">Chew</span></h2>
+  <a class="xclose" href="#" aria-label="Close About"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></a></div>
   <p>Every public fast charger in the US — 14,000+ — and what's within a 10-minute walk of it, so you can plan a stop around what you'll do while the car charges.</p>
   <p><b>Try searching</b> <em>Starbucks</em> · <em>tacos in Denver</em> · <em>LA to Las Vegas with In-N-Out</em> · <em>I-5</em> · <em>ice cream</em> · <em>bakery</em> (kinds of place we don't track are looked up live for the area you're viewing). Tap ☆ on a stop to save it.</p>
   <p><b>On the map</b> each big network has its own mark — Tesla's red T, ChargePoint's C, Electrify America's EA, EVgo's e — and smaller networks share a plain dot. They're our own marks, not the networks' logos.</p>
@@ -7078,6 +7085,9 @@ const DIALOGS = [
   { id: 'hero', open: () => $('hero').classList.contains('show'), close: () => $('heroClose').click() },
 ];
 const topDialog = () => DIALOGS.find(d => d.open());
+// About's header draws its hairline only once the text has scrolled under it.
+$('about').querySelector('.box').addEventListener('scroll', e =>
+  $('about').querySelector('.abhead').classList.toggle('scrolled', e.target.scrollTop > 2), { passive: true });
 /* Swipe a bottom sheet down by its header to close it. Touch only: a mouse has the x. */
 document.querySelectorAll('.modal .pk').forEach(pk => {
   const head = pk.querySelector('h3'); if (!head) return;
