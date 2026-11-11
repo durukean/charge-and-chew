@@ -1784,6 +1784,12 @@ check(_live("Promise.resolve(first ? first() : null).then(() => setTimeout(() =>
 check(".heroex{display:grid;grid-template-columns:1fr 1fr;" in _html
       and not re.search(r"\.heroex\{[^}]*grid-template-columns:repeat\(4", _html),
       "the welcome card's example drives sit four in a row again (they run past the card above 440 px)")
+# ...and on the generated pages too (verify pass, 2026-11-11): ".card .c span" also styled the
+# name's own .nw span inside a chip, so "Chick-fil-A" and "In-N-Out" were a chip within a chip
+# (9 px of extra padding each side) on every /near/ and /trip/ card that names them.
+_pcss, _bpy = open(os.path.join(HERE, "assets/pages.css")).read(), open(os.path.join(HERE, "build.py")).read()
+check(all(".card .c>span{background:var(--chew-bg)" in t and ".card .c span{" not in t for t in (_pcss, _bpy)),
+      "a /near/ or /trip/ chip pads the brand name's .nw span as a chip of its own again")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
