@@ -188,6 +188,30 @@ h2{font-family:var(--display);font-size:20px;margin:30px 0 10px;letter-spacing:-
     radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.18),transparent) left/12px 100% no-repeat scroll,
     radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.18),transparent) right/12px 100% no-repeat scroll,
     var(--surface)}
+/* The Road Food Index: findings, ranked tables with a share bar, method, citation. */
+ol.find{margin:4px 0 24px;padding:0;list-style:none;counter-reset:f;display:flex;flex-direction:column;gap:10px}
+ol.find li{counter-increment:f;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:13px 16px 13px 50px;box-shadow:var(--sh);font-size:15px;line-height:1.55;color:var(--dim)}
+ol.find li::before{content:counter(f);position:absolute;left:14px;top:13px;width:24px;height:24px;border-radius:50%;
+  background:var(--chew-bg);color:var(--chew);font:800 13px/24px var(--display);text-align:center}
+ol.find b{color:var(--txt)}
+table.idx{border-collapse:collapse;width:100%;font-size:14px}
+table.idx th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim2);
+  font-weight:700;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:bottom}
+table.idx td{padding:10px 12px;border-bottom:1px solid var(--line);color:var(--dim);vertical-align:top;line-height:1.45}
+table.idx tr:last-child td{border-bottom:0}
+table.idx .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.idx a{color:var(--txt);font-weight:600;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+table.idx b{color:var(--txt)}
+table.idx small{color:var(--dim2);font-size:12.5px}
+table.idx .bar{display:block;height:4px;border-radius:2px;width:64px;margin:5px 0 0 auto;
+  background:linear-gradient(90deg,var(--accent) var(--v),var(--surface3) var(--v))}
+ul.method{margin:0 0 12px 18px;color:var(--dim);font-size:14.5px;line-height:1.6}
+ul.method li{margin-bottom:6px}
+ul.method b{color:var(--txt)}
+.cite{background:var(--surface2);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;
+  font-size:14px;line-height:1.6;color:var(--txt);margin-bottom:12px}
+@media(max-width:520px){table.idx .opt{display:none}table.idx th,table.idx td{padding:9px 8px}}
 h2+p,h2+.lead{margin-bottom:12px}
 
 }
@@ -988,6 +1012,7 @@ TRIP_REGIONS = [
 ]
 
 trip_links, trip_meta, chain_trips = [], {}, {}
+TRIP_PLANS = {}   # the same plans, for the Road Food Index's gap table
 if os.path.exists(TRIP_PATH):
     trips = json.load(open(TRIP_PATH))
     for tk in sorted(trips, key=lambda k: trips[k]["a"]):
@@ -1003,6 +1028,7 @@ if os.path.exists(TRIP_PATH):
         app_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;leave=0800"
         plan = planner.Plan(D["sites"], RAW_MATCHES, brands, pts, t["mi"] * planner.MI / planner.MI,
                             t["hr"] * 3600 / 3600, PLAN_DAY, PLAN_LEAVE, TRIP_MI)
+        TRIP_PLANS[tk] = plan
         # The chargers on the drive are the app's: the plan's corridor (applyCorridor's cells,
         # nearest point and ties). This page had its own grid, narrower than the corridor, and
         # counted only 50 kW and up, so it said "228 DC fast chargers" where the app on the same
@@ -1199,6 +1225,182 @@ for path, key, st in NEAR_TRIP_SLOTS:
                        f'<small>{c} stop{"s" if c != 1 else ""}</small></a>' for sl, c in top) + "</div>")
     doc = open(f).read()
     open(f, "w").write(doc.replace("<!--trips-->\n", sec + ("\n" if sec else ""), 1))
+
+
+# ---- the Road Food Index: a data page for press and answer engines ----
+# Every number comes from tools/road_food_index.py, which verify.py runs again and compares
+# with this page and its CSVs. Nothing here is typed in: the findings name whoever is first
+# or last in the data, so they stay true after a refresh.
+sys.path.insert(0, os.path.join(HERE, "tools"))
+import road_food_index as rfi
+RFI = rfi.compute(HERE, plans=TRIP_PLANS)
+RFI_DIR = "road-food-index"
+rfi.write_csvs(RFI, os.path.join(HERE, RFI_DIR))
+RFI_TITLE = "The Road Food Index"
+RFI_DATE = PLAN_DAY.strftime("%B %-d, %Y")
+
+
+def rfi_bold(sentence):
+    """The findings as the page shows them: the numbers in bold, the words unchanged."""
+    parts = re.split(r"(?<![\w-])(\d[\d,]*(?:\.\d+)?%?(?: miles)?)(?![\w-])", sentence)
+    return "".join(f"<b>{esc(x)}</b>" if i % 2 else esc(x) for i, x in enumerate(parts))
+
+
+def rfi_table(cols, rows, cap=""):
+    """cols: (label, class) where class has n (a number, right-aligned) and/or opt (hidden on a
+    phone, where the table keeps to the columns that carry the point)."""
+    th = "".join(f'<th class="{c}" scope="col">{l}</th>' for l, c in cols)
+    trs = "".join("<tr>" + "".join(f'<td class="{c}">{v}</td>' for (l, c), v in zip(cols, r)) + "</tr>" for r in rows)
+    cap = f"<caption>{cap}</caption>" if cap else ""
+    return f'<div class="tripwrap"><table class="idx">{cap}<thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>'
+
+
+def rfi_bar(v):
+    """A share as a number over a thin bar on a 0-100 scale."""
+    return f'{v}%<span class="bar" style="--v:{v}%"></span>'
+
+
+_food = [c for c in RFI["chains"] if c["type"] == "food"]
+_chain_rows = [[c["rank"], f'<a href="../near/{c["slug"]}/">{c["emoji"]}&nbsp;{bn(c["chain"])}</a>',
+                f'{c["sites"]:,}', rfi_bar(c["share"]), f'{c["close"]:,}', f'{c["median_walk"]} min']
+               for c in RFI["chains"][:25]]
+_ready = rfi.ready_ranked(RFI)
+_ready_rows = [[i, f'<a href="../near/{c["slug"]}/">{c["emoji"]}&nbsp;{bn(c["chain"])}</a>', f'{c["locations"]:,}',
+                f'{c["ready"]:,}', rfi_bar(c["ready_share"])] for i, c in enumerate(_ready[:15], 1)]
+_low = _ready[-3:][::-1]
+_road_rows = [[r["rank"], f'<a href="../along/{r["slug"]}/">{r["interstate"]}</a>', f'{r["miles"]:,}',
+               f'{r["chargers"]:,}', rfi_bar(r["food_share"]), f'{r["food_per_100"]}',
+               "&mdash;" if r["gap"] is None else f'{r["gap"]} mi'] for r in RFI["interstates"]]
+_nogap = [r["interstate"] for r in RFI["interstates"] if r["gap"] is None]
+_pairs = rfi.unique_pairs(RFI["drives"])[:10]
+_gap_rows = [[f'<a href="../trip/{d["slug"]}/">{esc(d["a"])} &rarr; {esc(d["b"])}</a>', f'<b>{d["gap"]} mi</b>',
+              f'{esc(d["gap_from_place"])} &rarr; {esc(d["gap_to_place"])}<br><small>mile {d["gap_from"]} to {d["gap_to"]} of {d["miles"]:,}</small>']
+             for d in _pairs]
+_ranked = [s for s in RFI["states"] if s.get("rank")]
+_state_rows = [[s["rank"], esc(s["state"]), f'{s["sites"]:,}', rfi_bar(s["food_share"]), f'{s["big"]:,}',
+                f'{bn(s["top_chain"])} <small>{s["top_chain_sites"]:,}</small>' if s["top_chain"] else "&mdash;"]
+               for s in _ranked]
+_unranked = [s for s in RFI["states"] if not s.get("rank")]
+
+# Long drives with the plan's lunch stop. Named for Thanksgiving only in the run-up to it.
+_tg = _dt.date.fromisoformat(RFI["thanksgiving"])
+_long = sorted(rfi.unique_pairs(sorted(RFI["drives"], key=lambda d: (-d["hours"], d["slug"]))),
+               key=lambda d: (-d["hours"], d["slug"]))[:12]
+_long_rows = [[f'<a href="../trip/{d["slug"]}/">{esc(d["a"])} &rarr; {esc(d["b"])}</a>',
+               f'{d["miles"]:,} mi<br><small>{drive_label(d["hours"])}</small>',
+               (f'{esc(d["lunch_place"])} <span class="nw">at {d["lunch_clock"]}</span>' +
+                (f'<br><small>{brands[d["lunch_chain"]]["e"]} {bn(d["lunch_chain"])} {d["lunch_walk"]} min walk</small>'
+                 if d["lunch_chain"] else "")) if d["lunch_place"] else "&mdash;",
+               f'{d["gap"]} mi'] for d in _long]
+if PLAN_DAY.month == 11 and PLAN_DAY <= _tg:
+    _long_h = "Driving for Thanksgiving"
+    _long_lead = (f"Thanksgiving is {_tg.strftime('%A, %B %-d')}. These are the {len(_long)} longest of the "
+                  f"{len(RFI['drives'])} drives we plan, with where lunch falls if you leave at 8 am. Each "
+                  "guide has the full plan, every charger on the way and the food a walk from each one.")
+else:
+    _long_h = "The longest drives we plan"
+    _long_lead = (f"The {len(_long)} longest of the {len(RFI['drives'])} drives we plan, with where lunch falls if "
+                  "you leave at 8 am. Each guide has the full plan, every charger on the way and the food a walk "
+                  "from each one.")
+
+_csvs = [("chains", "Chains", f"all {len(RFI['chains'])}"),
+         ("interstates", "Interstates", f"all {len(RFI['interstates'])}"),
+         ("states", "States", f"all {len(RFI['states'])}"),
+         ("drives", "Drives", f"all {len(RFI['drives'])}, with their longest gaps")]
+RFI_DESC = (f"Which restaurant chains, interstates and states are best for a meal while an EV charges: "
+            f"{len(RFI['chains'])} chains matched against all {RFI['n_sites']:,} US DC fast-charger sites, "
+            f"{len(RFI['interstates'])} interstates and the longest charger gaps on {len(RFI['drives'])} drives. "
+            f"Data as of {RFI_DATE}.")
+_find = rfi.headlines(RFI)
+rfi_body = f"""<h1>{RFI_TITLE}</h1>
+<p class="lead">How often is there somewhere to eat within a 10-minute walk of a US fast charger, and
+which chains, interstates and states do best? We matched all <b>{RFI['n_sites']:,}</b> public DC fast-charger
+sites in the US Department of Energy&rsquo;s database against <b>{len(RFI['chains'])}</b> restaurant and store
+chains mapped in OpenStreetMap. Data as of <b>{RFI_DATE}</b>.</p>
+<h2>Key findings</h2>
+<ol class="find">{''.join(f'<li>{rfi_bold(x)}</li>' for x in _find)}</ol>
+<a class="cta" href="../">Find a stop with food on the map &rarr;</a>
+
+<h2 id="chains">Chains next to the most fast chargers</h2>
+<p>Out of {RFI['n_sites']:,} DC fast-charger sites, how many have the chain within a 10-minute walk (800 m), how
+many within two minutes, and the typical walk. The top 25; the CSV has all {len(RFI['chains'])}.</p>
+{rfi_table([("#", "n"), ("Chain", ""), ("Sites", "n"), ("Share", "n"), ("2-min walk", "n opt"), ("Typical walk", "n opt")], _chain_rows)}
+
+<h2 id="locations">Chains with a charger at the most of their locations</h2>
+<p>The other way round: of each chain&rsquo;s US locations, the share with a DC fast charger within a
+10-minute walk. Chains with at least {rfi.CHAIN_MIN_LOCATIONS} locations; the top 15. At the other end:
+{', '.join(f"{bn(c['chain'])} ({c['ready_share']}% of {c['locations']:,})" for c in _low)}.</p>
+{rfi_table([("#", "n"), ("Chain", ""), ("Locations", "n opt"), ("With a charger", "n opt"), ("Share", "n")], _ready_rows)}
+
+<h2 id="interstates">Interstates, best to worst for food</h2>
+<p>Every fast charger of {rfi.INTERSTATE_MIN_KW} kW or more within {rfi.CORRIDOR_MI:g} miles of the interstate,
+the share with somewhere to eat within a 10-minute walk, how many such stops there are per 100 miles, and the
+longest stretch with none of those chargers.{(' ' + ', '.join(_nogap) + ' have no gap figure: their mapped line is not one continuous road.') if _nogap else ''}</p>
+{rfi_table([("#", "n"), ("Interstate", ""), ("Miles", "n opt"), ("Chargers", "n opt"), ("With food", "n"), ("Food stops / 100 mi", "n opt"), ("Longest gap", "n")], _road_rows)}
+
+<h2 id="gaps">The longest gaps on popular drives</h2>
+<p>On each of the {len(RFI['drives'])} drives we plan, the longest stretch with no DC fast charger within
+{rfi.TRIP_MI:g} miles of the road, counting the start and the end. A drive and its way back are listed once.</p>
+{rfi_table([("Drive", ""), ("Gap", "n"), ("Between", "")], _gap_rows)}
+
+<h2 id="states">States</h2>
+<p>The share of each state&rsquo;s fast-charger sites with somewhere to eat within a 10-minute walk, sites of
+150 kW or more, and the chain most often next to them. States with at least {rfi.STATE_MIN_SITES} sites;
+{', '.join(f"{esc(s['state'])} ({s['sites']})" for s in _unranked) or 'none'} {'has' if len(_unranked) == 1 else 'have'} fewer.</p>
+{rfi_table([("#", "n"), ("State", ""), ("Sites", "n opt"), ("With food", "n"), ("150 kW+", "n opt"), ("Most common chain", "opt")], _state_rows)}
+
+<h2 id="drives">{_long_h}</h2>
+<p>{_long_lead}</p>
+{rfi_table([("Drive", ""), ("Distance", "opt"), ("Lunch, leaving 8 am", ""), ("Longest gap", "n opt")], _long_rows)}
+<p><a href="../trip/"><b>All {len(RFI['drives'])} road trip guides &rarr;</b></a></p>
+
+<h2 id="method">How we counted</h2>
+<ul class="method">
+<li><b>Chargers</b>: every public DC fast-charger site in the US DOE / NREL
+<a href="https://afdc.energy.gov/fuels/electricity-locations">Alternative Fuels Data Center</a> station list, all
+networks, as the map shows them: under 24 kW, private and truck-only sites left out, and one site per location
+however many stalls it lists. {RFI['n_sites']:,} sites.</li>
+<li><b>Chains</b>: restaurant and store locations from <a href="https://www.openstreetmap.org">OpenStreetMap</a>,
+by brand. Map entries of one chain within {rfi.LOCATION_M} m of each other count as one location (a store and its
+fuel station are often mapped separately). OpenStreetMap is volunteer-made and misses some locations.</li>
+<li><b>Within a walk</b>: within {D['walkM']} m in a straight line, about 10 minutes at 3 mph. Walk times are
+minimums; the real walk is usually longer. &ldquo;Somewhere to eat&rdquo; is any of the {len(_food)} restaurant
+chains we track or an ice cream shop.</li>
+<li><b>Interstates</b>: the road as OpenStreetMap maps it; miles are measured along the line the map draws, which
+merges both directions and can differ a little from official lengths.</li>
+<li><b>Drives</b>: the {len(RFI['drives'])} routes of our road trip guides, as the app plans them.</li>
+</ul>
+<p class="lead">Data as of <b>{RFI_DATE}</b>. It is refreshed weekly, so the numbers on this page move with it.</p>
+
+<h2 id="download">Download the data</h2>
+<div class="chips">{''.join(f'<a href="{n}.csv" download>{l} <small>CSV, {d}</small></a>' for n, l, d in _csvs)}</div>
+
+<h2 id="cite">How to cite</h2>
+<p class="cite">Charge &amp; Chew, &ldquo;{RFI_TITLE},&rdquo; data as of {RFI_DATE}, {BASE}/{RFI_DIR}/. Charger data from
+the US Department of Energy (AFDC); chain locations &copy; OpenStreetMap contributors (ODbL).</p>
+<p>Questions about the data: <a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>.</p>"""
+
+RFI_LD = {
+    "@context": "https://schema.org", "@type": "Dataset", "name": RFI_TITLE, "description": RFI_DESC,
+    "url": f"{BASE}/{RFI_DIR}/", "dateModified": D["generated"],
+    "creator": {"@type": "Organization", "name": BRAND, "url": f"{BASE}/"},
+    "creditText": f"{BRAND}, {RFI_TITLE}",
+    "spatialCoverage": {"@type": "Place", "name": "United States"},
+    "isBasedOn": ["https://afdc.energy.gov/fuels/electricity-locations", "https://www.openstreetmap.org"],
+    "keywords": ["EV charging", "DC fast chargers", "restaurants", "road trips", "interstates"],
+    "variableMeasured": [
+        "Fast-charger sites with each chain within a 10-minute walk",
+        "Share of each chain's locations with a fast charger within a 10-minute walk",
+        "Share of each interstate's fast chargers with food within a 10-minute walk",
+        "Longest gap between fast chargers on each drive",
+        "Share of each state's fast-charger sites with food within a 10-minute walk"],
+    "distribution": [{"@type": "DataDownload", "name": f"{l} ({d})", "encodingFormat": "text/csv",
+                      "contentUrl": f"{BASE}/{RFI_DIR}/{n}.csv"} for n, l, d in _csvs],
+}
+page(f"{RFI_DIR}/index.html", f"{RFI_TITLE}: food at US EV fast chargers", RFI_DESC, rfi_body, f"{RFI_DIR}/",
+     ld_script(RFI_LD), og=RFI_DIR)
+add(f"{RFI_DIR}/index.html")
+print(f"Road Food Index: {len(RFI['chains'])} chains, {len(RFI['interstates'])} interstates, {len(RFI['drives'])} drives")
 
 
 # ---- privacy + support (App Store requires both URLs; they are useful pages regardless) ----

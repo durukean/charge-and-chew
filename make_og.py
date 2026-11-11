@@ -20,7 +20,7 @@ from data_reader import load_data
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-PORT = 8642
+PORT = int(os.environ.get("OG_PORT", "8642"))   # any server of this directory
 
 def slug(s):
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower())).strip("-")
@@ -116,6 +116,26 @@ def trip_cards(tmp, only):
     return made
 
 
+def index_card(tmp, only):
+    """The Road Food Index: its first finding, read off the page build.py wrote."""
+    if only and "road-food-index" not in only: return 0
+    page = os.path.join(HERE, "road-food-index", "index.html")
+    if not os.path.exists(page): return 0
+    h = open(page, encoding="utf-8").read()
+    m = re.search(r"<li><b>([\d.]+%)</b> of US DC fast-charger sites", h)
+    d = re.search(r"Data as of <b>([A-Za-z]+) \d+, (\d{4})</b>", h)
+    if not m or not d: return 0
+    render(TRIP_CARD.replace('<div class="kick">{miles} mi &middot; {drive}</div>', '<div class="kick">The Road Food Index</div>')
+           .replace("<h1>{a} <span class=\"n\">&rarr;</span> {b}</h1>", "<h1><span class=\"n\">{a}</span> {b}</h1>")
+           .replace("<p><b>{withfood}</b> charging stops along the way with somewhere to eat a short walk from the plug.</p>",
+                    "<p>Which chains, interstates and states are best for a meal while you charge. <b>{withfood}</b></p>")
+           .format(a=m.group(1), b="of US fast chargers have food within a 10&#8209;minute walk", size=66,
+                   withfood=f"Data as of {d.group(1)} {d.group(2)}."),
+           os.path.join(HERE, "og", "road-food-index.png"), tmp)
+    print("  road-food-index.png", flush=True)
+    return 1
+
+
 def main():
     D = load_data(os.path.join(HERE, "data.js"))
     counts = {}
@@ -145,6 +165,7 @@ def main():
         made += 1
         print(f"  {sl}.png  ({n:,} chargers)", flush=True)
     made += trip_cards(tmp, only)
+    made += index_card(tmp, only)
     if os.path.exists(tmp): os.remove(tmp)
     print(f"\n{made} cards written to og/ ({skipped} chains skipped: no chargers)")
 

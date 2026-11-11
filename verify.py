@@ -1844,6 +1844,73 @@ check(re.search(r"(?m)^\s*const lead = leadAt\(s\);", _dw) and "((b.k === lead) 
       and re.search(r"(?m)^\s*if \(lead && m\[lead\] !== undefined && \(!opts\.length \|\| opts\[0\]\.k !== lead\)\) \{", _dw),
       "the stop card's tip no longer follows the chain the plan promised there")
 
+# ---- the Road Food Index (2026-11-11): every number reproducible from the data ----
+# tools/road_food_index.py is run again here, independently of build.py, and the page and its
+# CSVs must say exactly what it says. A press page with a stale or hand-edited number is worse
+# than none: journalists quote it.
+_rfi_page = os.path.join(HERE, "road-food-index", "index.html")
+check(os.path.exists(_rfi_page), "the Road Food Index page is missing (run build.py)")
+if os.path.exists(_rfi_page):
+    sys.path.insert(0, os.path.join(HERE, "tools"))
+    import road_food_index as _rfi
+    from html import unescape as _unesc
+    _R = _rfi.compute(HERE)
+    _rh = open(_rfi_page, encoding="utf-8").read()
+    _rtext = _unesc(re.sub(r"<[^>]+>", "", _rh))
+    for _name in _rfi.TABLES:
+        _cf = os.path.join(HERE, "road-food-index", f"{_name}.csv")
+        check(os.path.exists(_cf) and open(_cf, encoding="utf-8").read() == _rfi.csv_text(_R, _name),
+              f"road-food-index/{_name}.csv differs from what tools/road_food_index.py computes (run build.py)")
+        check(f'href="{_name}.csv"' in _rh, f"the Road Food Index does not link its {_name}.csv")
+    _hl = _rfi.headlines(_R)
+    _miss = [x for x in _hl if x not in _rtext]
+    check(len(_hl) >= 3 and not _miss, f"Road Food Index findings differ from the data: {_miss[:1]}")
+    # every table row the page shows carries the computed numbers
+    for _c in _R["chains"][:25]:
+        check(f'{_c["sites"]:,}</td><td class="n">{_c["share"]}%' in _rh, f"chain row for {_c['chain']} differs from the data")
+    for _x in _R["interstates"]:
+        check(f'>{_x["interstate"]}</a></td><td class="n opt">{_x["miles"]:,}</td><td class="n opt">{_x["chargers"]:,}</td><td class="n">{_x["food_share"]}%' in _rh,
+              f"interstate row for {_x['interstate']} differs from the data")
+    for _s in [s for s in _R["states"] if s.get("rank")]:
+        check(f'<td class="">{_s["state"]}</td><td class="n opt">{_s["sites"]:,}</td><td class="n">{_s["food_share"]}%' in _rh,
+              f"state row for {_s['state']} differs from the data")
+    # One definition each: the interstate counts are the /along/ pages' own, and each drive's gap
+    # is the one its /trip/ page states.
+    for _x in _R["interstates"]:
+        _ap = os.path.join(HERE, "along", _x["slug"], "index.html")
+        _am = re.search(r"<b>([\d,]+) DC fast chargers</b> sit within", open(_ap, encoding="utf-8").read()) if os.path.exists(_ap) else None
+        check(_am is not None and int(_am.group(1).replace(",", "")) == _x["chargers"],
+              f"Road Food Index counts {_x['chargers']} chargers on {_x['interstate']}, its /along/ page {_am.group(1) if _am else 'nothing'}")
+    _tbad = []
+    for _d in _R["drives"]:
+        _tp = os.path.join(HERE, "trip", _d["slug"], "index.html")
+        _th = open(_tp, encoding="utf-8").read() if os.path.exists(_tp) else ""
+        _want = (f"the longest stretch without one is <b>{_d['gap']} miles</b>" if _d["gap"] >= 60
+                 else f"one at least every <b>{max(_d['gap'], 1)} miles</b>")
+        if _want not in _th:
+            _tbad.append(_d["slug"])
+    check(not _tbad, f"{len(_tbad)} drives' gaps on the Road Food Index differ from their /trip/ pages: {_tbad[:3]}")
+    # Dataset markup that matches the page
+    _ds = [json.loads(m) for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', _rh, re.S)]
+    _ds = [x for x in _ds if x.get("@type") == "Dataset"]
+    check(len(_ds) == 1, "the Road Food Index has no Dataset structured data")
+    if _ds:
+        _d0 = _ds[0]
+        _h1 = re.search(r"<h1>(.*?)</h1>", _rh, re.S)
+        _md = re.search(r'<meta name="description" content="([^"]*)"', _rh)
+        check(_h1 and _unesc(_h1.group(1)) == _d0.get("name"), "Dataset name is not the page's h1")
+        check(_md and _unesc(_md.group(1)) == _d0.get("description"), "Dataset description is not the page's description")
+        check(_d0.get("dateModified") == D.get("generated"), "Dataset dateModified is not the data's date")
+        _dl = _d0.get("distribution", [])
+        check(len(_dl) == len(_rfi.TABLES) and all(
+            os.path.exists(os.path.join(HERE, x["contentUrl"].split("chargeandchew.com/", 1)[-1])) for x in _dl),
+            "Dataset distribution does not list the CSVs that exist")
+        check(all(x in _rtext for x in ("AFDC", "OpenStreetMap", "How to cite")), "the Road Food Index lost its sources or citation line")
+    check("/road-food-index/" in open(os.path.join(HERE, "sitemap.xml"), encoding="utf-8").read(),
+          "the Road Food Index is not in the sitemap")
+    check('"road-food-index"' in open(os.path.join(HERE, "publish.py"), encoding="utf-8").read(),
+          "publish.py does not publish road-food-index/")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
