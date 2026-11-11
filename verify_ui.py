@@ -180,6 +180,17 @@ location.replace('/?chain=IHOP&nosw=1');
         "data_actually_loaded": dom.count('class="row"') > 3,
         "boots_with_corrupted_saved_settings": dom_bad.count('class="row"') > 3,
         "search_link_runs_its_search": bool(re.search(r'id="sheetTitle"[^>]*>.{0,80}?IHOP', dom_q)),
+        # Accessibility (A11Y-01): the chosen option of a segmented control is announced (the
+        # state is mirrored from .on by script, so this only passes if that script ran), the
+        # sheet handle is a real button that says whether the list is open, and the brand
+        # emoji is not read out before every name.
+        "segments_expose_selection": bool(re.search(
+            r'data-f="kw"[^>]*>\s*<button data-v="0" class="on" aria-pressed="true">', dom))
+            and 'aria-pressed="false">150+</button>' in dom,
+        "sheet_handle_is_a_button": bool(re.search(
+            r'<button type="button" class="handle" id="handle"[^>]*aria-expanded="(?:true|false)"', dom)),
+        "toast_is_announced": 'id="toast" role="status" aria-live="polite"' in dom,
+        "brand_emoji_hidden_from_screen_readers": '<span aria-hidden="true">\U0001f95e</span> IHOP' in dom,
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():

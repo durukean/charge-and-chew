@@ -592,7 +592,10 @@ html.native .splash-mark svg{width:96px;height:96px}
    growing it once the data arrived moved the whole map and its buttons: a 0.16 layout shift
    on every load, above the 0.1 "good" line. Start where it will end up. */
 @media (max-width:759px){#sheet{height:40vh;height:40dvh}}
-.handle{padding:9px 0 5px;display:grid;place-items:center;cursor:grab;flex-shrink:0}
+.handle{padding:9px 0 5px;display:grid;place-items:center;cursor:grab;flex-shrink:0;width:100%}
+.handle:focus-visible{outline-offset:-3px;border-radius:10px}
+/* For screen readers only: the results had no heading at all to jump to. */
+.vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .handle i{width:38px;height:4px;border-radius:2px;background:var(--line2);display:block}
 .sheethead{display:flex;align-items:center;gap:9px;padding:0 15px 10px;flex-shrink:0}
 .sheethead .t{flex:1;font-family:var(--display);font-size:17px;font-weight:700;min-width:0;overflow:hidden;line-height:1.25;
@@ -1099,7 +1102,7 @@ if (document.documentElement.classList.contains('car')) {
             <input id="toIn" placeholder="Destination" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="words" enterkeyhint="go"></div>
           <div class="rrow2">
             <button id="goBtn">Find stops along route</button>
-            <div class="seg" id="corridorSeg">
+            <div class="seg" id="corridorSeg" role="group" aria-label="Distance from the route">
               <button data-mi="2">2mi</button><button data-mi="5" class="on">5mi</button><button data-mi="10">10mi</button>
             </div>
           </div>
@@ -1115,7 +1118,7 @@ if (document.documentElement.classList.contains('car')) {
       <div id="centerCard">
         <span class="ic" id="ccIcon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></span>
         <div class="txt"><div class="lbl" id="ccLabel"></div><div class="sub" id="ccSub"></div></div>
-        <div class="rad" id="ccRad">
+        <div class="rad" id="ccRad" role="group" aria-label="Search radius in miles">
           <button data-mi="10">10</button><button data-mi="25" class="on">25</button><button data-mi="50">50</button>
         </div>
         <button class="x" id="ccX" aria-label="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -1158,7 +1161,8 @@ if (document.documentElement.classList.contains('car')) {
   </div>
 
   <section id="sheet" role="main" aria-label="Charger results">
-    <div class="handle" id="handle"><i></i></div>
+    <button type="button" class="handle" id="handle" aria-label="Show more results" aria-controls="list" aria-expanded="true"><i></i></button>
+    <h1 class="vh">Fast chargers near food and stores</h1>
     <div class="sheethead">
       <div class="t" id="sheetTitle" role="status" aria-live="polite" aria-atomic="true">…</div>
       <button class="sortbtn" id="sortBtn"><svg class="ci" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l-3 3M17 20l3-3"/></svg><span id="sortLbl">Sort</span></button>
@@ -1190,7 +1194,7 @@ if (document.documentElement.classList.contains('car')) {
     <div class="pkgrid">
     <div class="fgroup">
       <label>Minimum charging speed <span class="nocaps">(kW)</span></label>
-      <div class="seg wide" data-f="kw">
+      <div class="seg wide" data-f="kw" role="group" aria-label="Minimum charging speed">
         <button data-v="0" class="on">Any</button><button data-v="50">50+</button><button data-v="150">150+</button><button data-v="250">250+</button><button data-v="350">350+</button>
       </div>
       <p class="fhint">Higher kW means a shorter stop — 150 kW+ is a typical road-trip charger. With a plug chosen below, this is that plug's speed.</p>
@@ -1202,14 +1206,14 @@ if (document.documentElement.classList.contains('car')) {
     </div>
     <div class="fgroup">
       <label>Plug</label>
-      <div class="seg wide" data-f="plug">
+      <div class="seg wide" data-f="plug" role="group" aria-label="Plug">
         <button data-v="0" class="on">Any</button><button data-v="1">CCS</button><button data-v="2">Tesla</button><button data-v="4">CHAdeMO</button>
       </div>
       <p class="fhint">Only stops with this plug. Most non-Tesla EVs use CCS; Tesla's plug is also called NACS.</p>
     </div>
     <div class="fgroup">
       <label>Minimum stalls</label>
-      <div class="seg wide" data-f="stalls">
+      <div class="seg wide" data-f="stalls" role="group" aria-label="Minimum stalls">
         <button data-v="0" class="on">Any</button><button data-v="2">2+</button><button data-v="4">4+</button><button data-v="8">8+</button>
       </div>
       <p class="fhint">More stalls means less chance of waiting.</p>
@@ -1231,7 +1235,7 @@ if (document.documentElement.classList.contains('car')) {
     </div>
     <div class="fgroup">
       <label>Appearance</label>
-      <div class="seg wide" id="appearanceSeg">
+      <div class="seg wide" id="appearanceSeg" role="group" aria-label="Appearance">
         <button data-v="auto" class="on">Auto</button><button data-v="light">Light</button><button data-v="dark">Dark</button>
       </div>
       <p class="fhint">Auto follows the sun — light by day, dark after sunset.</p>
@@ -1274,7 +1278,7 @@ if (document.documentElement.classList.contains('car')) {
     <li>No live availability or prices — check the network's own app before you rely on a stop.</li>
   </ul>
   <p><b>Map style</b> — if the map ever comes up blank, choose Automatic.</p>
-  <div class="seg" id="baseSeg" style="margin:-4px 0 14px">
+  <div class="seg" id="baseSeg" role="group" aria-label="Map style" style="margin:-4px 0 14px">
     <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
   </div>
   <p class="about-small">Chargers: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> (under 24&nbsp;kW, private and truck-only sites left out; dealership lots flagged). Places: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Map: Esri. Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
@@ -1301,7 +1305,7 @@ if (document.documentElement.classList.contains('car')) {
   <div class="ic-txt"><b>Add to your home screen</b><span id="icSub">Opens instantly, works offline on the road.</span></div>
   <div class="ic-act"><button id="icGo">Add</button><button id="icNo" aria-label="Not now">Not now</button></div>
 </div>
-<div id="toast"></div>
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* Last resort. Anything that stops the app script during boot used to leave the splash up
@@ -1363,7 +1367,9 @@ window.CC_BASEMAPS = {
       var a = JSON.parse(get('cc_area') || 'null');
       if (a && isFinite(a.lat) && Date.now() - (a.t || 0) < 14 * 864e5) view = [[a.lat, a.lon], (a.r || 25) <= 10 ? 11 : 10];
     }
-    var m = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true, zoomSnap: 0.5 })
+    var calm = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var m = L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true, zoomSnap: 0.5,
+                           zoomAnimation: !calm, fadeAnimation: !calm, markerZoomAnimation: !calm })
       .setView(view[0], view[1]);
     var layers = [L.tileLayer(bm[dark ? 'dark' : 'light'], Object.assign({}, bm.opts, { alt: '' })).addTo(m)];
     if (bm.refLight) layers.push(L.tileLayer(bm[dark ? 'refDark' : 'refLight'], Object.assign({}, bm.opts, { alt: '' })).addTo(m));
@@ -1738,6 +1744,9 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
    broke at the hyphen at 375 px (Chick-fil-A, Buc-ee's and H-E-B too). A nowrap span rather
    than U+2011, so the text -- and what is copied or read aloud -- is unchanged. */
 const bname = s => /-/.test(s) ? `<span class="nw">${esc(s)}</span>` : esc(s);
+/* A brand's emoji, hidden from screen readers: VoiceOver read "hamburger In-N-Out", "chicken
+   Chick-fil-A" before every name in every row. The name is right after it. */
+const bemo = k => `<span aria-hidden="true">${BRANDS[k].e}</span>`;
 let toastT;
 /* An OSM website= tag is free text that anyone can edit, and esc() keeps it inside the
    attribute but does NOTHING to a javascript: URL -- that survives escaping intact and lands
@@ -1785,8 +1794,12 @@ const saveFavs = () => {
    Barbara drawn 266 px wide on a 440 px phone, exactly half of the 532 one step in would need.
    Half steps fit it properly. Tiles stay sharp: Leaflet rounds the tile level, so N.5 loads
    level N+1 tiles scaled DOWN (0.71x) rather than level N scaled up. */
+/* Reduce Motion: the map jumps instead of flying, and zooms without animating. The 0.7 s fly
+   to every stop, and every zoom's scale animation, ignored the setting (A11Y). */
+const REDUCED_MOTION = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 const map = window.__ccMap || L.map('map', { zoomControl: false, attributionControl: false, worldCopyJump: true,
-                           zoomSnap: 0.5 }).setView([39.3, -96.5], 4);
+                           zoomSnap: 0.5, zoomAnimation: !REDUCED_MOTION, fadeAnimation: !REDUCED_MOTION,
+                           markerZoomAnimation: !REDUCED_MOTION }).setView([39.3, -96.5], 4);
 /* Framing the country for the viewport we actually have. Deliberately a WIDE, SHORT band
    rather than true CONUS bounds: fitBounds always contains what you give it, so the real
    bounding box on a tall phone zooms out until Canada and South America fill the screen.
@@ -1882,7 +1895,7 @@ function popupHtml(s) {
        what makes Google resolve to that specific branch rather than the brand in general. */
     const gmaps = at ? gPlace(label, at[0].toFixed(5), at[1].toFixed(5)) : '';
     return `<div class="pp-chain${at ? ' tap' : ''}"${at ? ` data-poi="${esc(k)}" data-at="${coord}" role="button" tabindex="0" aria-label="${esc(k)} details"` : ''}>
-      <span>${BRANDS[k].e} ${at
+      <span>${bemo(k)} ${at
         ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)}</a>`
         : (active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label))}</span>
       <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span>
@@ -1935,7 +1948,7 @@ function popupHtml(s) {
   const near = ent.slice(0, 3).map(([k, v]) => {
     const at = mLatLng(s, v), d = mDist(s, v);
     const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
-    const inner = `${BRANDS[k].e} ${bname(label)} <b>${walkMin(d)} min</b>`;
+    const inner = `${bemo(k)} ${bname(label)} <b>${walkMin(d)} min</b>`;
     const hk = at && k !== livePoiKey ? ` data-hk="${esc(k)}" data-at="${at[0].toFixed(5)},${at[1].toFixed(5)}"` : '';
     return at ? `<a class="pp-nb${pri(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
@@ -2437,7 +2450,8 @@ function flyToStop(s, byKeyboard) {
     if (byKeyboard) { const pe = mk[s.id].getPopup() && mk[s.id].getPopup().getElement();
       const f = pe && pe.querySelector('a[href], button, [tabindex="0"]'); if (f) f.focus(); }
   };
-  map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
+  if (REDUCED_MOTION) map.setView([s.lat, s.lon], Math.max(map.getZoom(), 13), { animate: false });
+  else map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
   map.once('moveend', show);
   setTimeout(show, 900);
   if (!wideLayout()) setSheet('peek');
@@ -2707,7 +2721,7 @@ function renderChips(keep) {
       aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_ICON[c]} ${CAT_LABEL[c]}
       <span class="cnt">${chipCatCount(c).toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
-    `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${bname(k)}
+    `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${bemo(k)} ${bname(k)}
       <span class="cnt" title="${chipCount(k).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}${scopeCounts ? ' here' : ''}">${chipCount(k)}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All chains</button>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
@@ -2767,7 +2781,7 @@ function renderList(vis) {
      by set rather than tracked through every mutation, so tapping any chip afterwards
      simply falls back to the ordinary title. */
   const isSeed = seedFor && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k));
-  const parts = [...(anyCat ? [esc(CAT_LABEL[anyCat])] : []), ...[...active].map(k => BRANDS[k].e + ' ' + bname(k))];
+  const parts = [...(anyCat ? [esc(CAT_LABEL[anyCat])] : []), ...[...active].map(k => bemo(k) + ' ' + bname(k))];
   const what = cat === 'fav' ? 'saved'
     : isSeed ? esc(seedFor.icon + ' ' + seedFor.label)
     // A hand-picked set can grow just as long; past three it stops being a sentence.
@@ -2843,7 +2857,7 @@ function renderList(vis) {
     const chains = ent.slice(0, 3).map(([k, v]) => {
       const isLive = k === livePoiKey && lp && lp.name;
       const label = isLive ? lp.name : k;              // the real shop, not the category
-      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i></span>`;
+      return `<span>${bemo(k)} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i></span>`;
     }).join('');
     const extra = ent.length > 3 ? `<span class="more">+${ent.length - 3}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
@@ -2957,6 +2971,9 @@ function setSheet(s) {
   sheetState = s;
   sheetChangedAt = Date.now();
   const el = $('sheet');
+  // The handle is a button: say what it shows now and what a press does next.
+  $('handle').setAttribute('aria-expanded', s === 'peek' ? 'false' : 'true');
+  $('handle').setAttribute('aria-label', s === 'full' ? 'Show fewer results' : 'Show more results');
   el.classList.toggle('mid', s === 'mid');
   el.classList.toggle('full', s === 'full');
   // the map's floating controls have nowhere to go when the map is a sliver
@@ -2986,19 +3003,33 @@ window.addEventListener('resize', () => {
 });
 $('handle').onclick = () =>
   setSheet(sheetState === 'peek' ? 'mid' : sheetState === 'mid' ? 'full' : 'peek');
+/* The 18 px handle was the only thing that dragged the sheet -- under the 44 pt a thumb
+   needs. The whole header drags it now, as in Apple Maps; a tap on its buttons is still a
+   tap, because a drag only counts past 40 px. */
 let dragY = null, dragState = null;
-$('handle').addEventListener('touchstart', e => { dragY = e.touches[0].clientY; dragState = sheetState; }, { passive: true });
-$('handle').addEventListener('touchmove', e => {
-  if (dragY === null) return;
-  const dy = e.touches[0].clientY - dragY;
-  if (Math.abs(dy) < 40) return;
-  const order = ['peek', 'mid', 'full'];
-  let i = order.indexOf(dragState) + (dy < 0 ? 1 : -1);
-  i = Math.max(0, Math.min(2, i));
-  if (order[i] !== sheetState) setSheet(order[i]);
-  dragY = null;
-}, { passive: true });
-$('handle').addEventListener('touchend', () => { dragY = null; }, { passive: true });
+for (const el of [$('handle'), document.querySelector('.sheethead')]) {
+  el.addEventListener('touchstart', e => { dragY = e.touches[0].clientY; dragState = sheetState; }, { passive: true });
+  el.addEventListener('touchmove', e => {
+    if (dragY === null) return;
+    const dy = e.touches[0].clientY - dragY;
+    if (Math.abs(dy) < 40) return;
+    const order = ['peek', 'mid', 'full'];
+    let i = order.indexOf(dragState) + (dy < 0 ? 1 : -1);
+    i = Math.max(0, Math.min(2, i));
+    if (order[i] !== sheetState) setSheet(order[i]);
+    dragY = null;
+  }, { passive: true });
+  el.addEventListener('touchend', () => { dragY = null; }, { passive: true });
+}
+/* Segmented controls never said which option was on: "Any, button" and "150+, button" read
+   alike. Each marks its choice with .on, toggled from a dozen places, so the state is
+   mirrored from the class rather than set at every one of them (A11Y-01). */
+document.querySelectorAll('.seg, #ccRad').forEach(g => {
+  const sync = () => g.querySelectorAll('button').forEach(b =>
+    b.setAttribute('aria-pressed', b.classList.contains('on') ? 'true' : 'false'));
+  sync();
+  new MutationObserver(sync).observe(g, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
+});
 
 const SORT_LABEL = { dist: 'Nearest', walk: 'Shortest walk', stalls: 'Most stalls', power: 'Fastest charger', charge: 'Fastest for my car' };
 /* Route mode orders by position along the route regardless of sortBy, so the picker
@@ -3109,7 +3140,7 @@ function openPicker() {
 }
 function pkItem(k) {
   return `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
-      <span class="e">${BRANDS[k].e}</span><span class="nm">${bname(k)}</span><span class="c">${counts[k].toLocaleString()}</span>
+      <span class="e" aria-hidden="true">${BRANDS[k].e}</span><span class="nm">${bname(k)}</span><span class="c">${counts[k].toLocaleString()}</span>
      </button>`;
 }
 function drawPicker() {
@@ -6459,7 +6490,7 @@ function breaksCard(vis) {
   const rows = picks.map(({ s, walk, k, meal, ms, mi }) => ({ mi, ms, s, html: c =>
     `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}"${k ? ` data-k="${esc(k)}"` : ''}>
         <span class="bm">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? bemo(k) + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       </button>` }));
   if (gap) {
@@ -6481,7 +6512,7 @@ function breaksCard(vis) {
     if (n > day) day = n;
     return mark + r.html(clock);
   }).join('');
-  return `<div class="breaks"><div class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</div>
+  return `<div class="breaks"><h2 class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</h2>
     <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
       <span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + '</div>';
 }
@@ -6707,7 +6738,7 @@ function buildHero() {
   const g = $('heroGrid');
   const picks = HERO_PICKS.filter(k => BRANDS[k]);
   g.innerHTML = picks.map(k =>
-    `<button class="heropick" data-k="${esc(k)}" aria-label="${counts[k].toLocaleString()} chargers near ${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${bname(k)}</span><span class="c">${counts[k].toLocaleString()} <small>chargers</small></span></button>`).join('');
+    `<button class="heropick" data-k="${esc(k)}" aria-label="${counts[k].toLocaleString()} chargers near ${esc(k)}"><span class="e" aria-hidden="true">${BRANDS[k].e}</span><span>${bname(k)}</span><span class="c">${counts[k].toLocaleString()} <small>chargers</small></span></button>`).join('');
   g.querySelectorAll('[data-k]').forEach(b => b.onclick = () => selectChain(b.dataset.k));
 }
 function selectChain(k) {
