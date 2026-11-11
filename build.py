@@ -50,6 +50,12 @@ WALK = 80
 def slug(s): return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 from html import unescape   # 'html' itself is shadowed by locals named html below
 def esc(s): return html.escape(str(s))
+def bn(s):
+    """A brand name as printed: one unbreakable unit. "...have an In-" / "N-Out" broke at the
+    hyphen at 375 px. A nowrap span, not U+2011, so the text (and what search engines and
+    copy-paste see) is unchanged."""
+    e = esc(s)
+    return f'<span class="nw">{e}</span>' if "-" in str(s) else e
 
 
 def ld_script(x):
@@ -128,6 +134,7 @@ header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:
 h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
 .lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
 .lead b{color:var(--txt)}
+.nw{white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
 .cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
@@ -315,10 +322,10 @@ def stats_para(key, st_name, sx):
         bits.append(f"The typical stop here delivers <b>{sx['median_kw']} kW</b>"
                     + (f", and {sx['big']} of them do 150 kW or more" if sx["big"] else ""))
     if sx["walk1"]:
-        bits.append(f"<b>{sx['walk1']}</b> are close enough that the {esc(key)} is a two-minute walk or less")
+        bits.append(f"<b>{sx['walk1']}</b> are close enough that the {bn(key)} is a two-minute walk or less")
     if sx["h24"]:
         bits.append(f"<b>{sx['h24']}</b> are listed as open 24 hours")
-    lead = f"Of the {sx['n']} fast chargers with {art(key)} {esc(key)} nearby {where}: " + "; ".join(bits) + "."
+    lead = f"Of the {sx['n']} fast chargers with {art(key)} {bn(key)} nearby {where}: " + "; ".join(bits) + "."
     fast = sx["fastest"]
     extra = (f" The fastest is <b>{esc(fast['name'])}</b> in {esc(fast['city'])} at "
              f"{sx['fastest_kw']} kW; the closest walk is {sx['closest_min']} min at "
@@ -334,11 +341,11 @@ def faq_block(key, st_name, sx):
         return "", None
     where = f"in {st_name}" if st_name else "in the US"
     qa = [
-        (f"How many EV chargers have {art(key)} {esc(key)} within walking distance {where}?",
-         f"{sx['n']} public DC fast chargers {where} have {art(key)} {esc(key)} within a 10-minute "
+        (f"How many EV chargers have {art(key)} {bn(key)} within walking distance {where}?",
+         f"{sx['n']} public DC fast chargers {where} have {art(key)} {bn(key)} within a 10-minute "
          f"walk (800 m), based on US Department of Energy charger data matched against OpenStreetMap "
          f"locations."),
-        (f"Which {esc(key)} charging stop is fastest {where}?",
+        (f"Which {bn(key)} charging stop is fastest {where}?",
          f"{esc(sx['fastest']['name'])} in {esc(sx['fastest']['city'])} at {sx['fastest_kw']} kW."
          if sx.get("fastest_kw") else "Power ratings are not published for these stops."),
         (f"Can I charge a non-Tesla EV at these stops?",
@@ -455,7 +462,7 @@ def site_card(s, focus, root):
     m = matches.get(s["id"], {})
     chains = []
     for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[1]))[:6]:
-        name = '<b>' + esc(k) + '</b>' if k == focus else esc(k)
+        name = '<b>' + bn(k) + '</b>' if k == focus else bn(k)
         chains.append(f"<span>{brands[k]['e']} {name} <i>{mins(d)} min</i></span>")
     kw = s.get("kw") or 0
     spd = f'<s class="spd {speed_tier(kw)}">{kw} kW</s>' if kw else ""
@@ -511,8 +518,8 @@ for key, b in brands.items():
     top = "".join(site_card(sites[sid], key, "../../") for d, sid in hits[:40])
     title = f"EV fast chargers near {near(key)} ({n:,} locations)"
     desc = f"{n} EV DC fast chargers within a 10-minute walk of {art(key)} {key}, across all networks (Tesla, EA, EVgo, ChargePoint and more), ranked by walking distance."
-    body = f"""<h1>{b['e']} EV fast chargers near {esc(near(key))}</h1>
-<p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {esc(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
+    body = f"""<h1>{b['e']} EV fast chargers near {bn(near(key))}</h1>
+<p class="lead">We found <b>{n} DC fast chargers</b> in the US — across all networks — with {art(key)} {bn(key)} within a 10-minute walk (800 m). Closest first; the first few are practically in the same parking lot.</p>
 <a class="cta" href="../../?chain={esc(key)}">Open on the map →</a>
 {stats_html}
 <h2>By state</h2><div class="chips">{state_links}</div>
@@ -543,17 +550,17 @@ for key, b in brands.items():
         if len(v) > STATE_CARD_CAP:
             cards += (f'<p class="more">Showing the {STATE_CARD_CAP} closest of {len(v):,}. '
                       f'<a href="../../../?chain={esc(key)}&amp;state={st}">Open the map to see them all →</a></p>')
-        others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
+        others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
         title = f"EV fast chargers near {near(key)} in {sn} ({len(v):,})"
         desc = f"All {len(v):,} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
-        body = f"""<h1>{b['e']} EV fast chargers near {esc(near(key))} in {sn}</h1>
-<p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {esc(key)} within a 10-minute walk, shortest walk first.</p>
+        body = f"""<h1>{b['e']} EV fast chargers near {bn(near(key))} in {sn}</h1>
+<p class="lead"><b>{len(v):,} DC fast chargers</b> in {sn} have {art(key)} {bn(key)} within a 10-minute walk, shortest walk first.</p>
 <a class="cta" href="../../../?chain={esc(key)}&amp;state={st}">Open on the map →</a>
 {stats_html}
 {cards}
 <h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
-<h2>{esc(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>
+<h2>{bn(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>
 {faq_html}"""
         can = f"near/{cs}/{st.lower()}/"
         path = f"near/{cs}/{st.lower()}/index.html"
@@ -563,14 +570,14 @@ for key, b in brands.items():
 
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)
-chains_html = "".join(f'<a href="{cs}/">{brands[k]["e"]} {esc(k)} <small>{n}</small></a>' for n, k, cs in chain_index_links)
+chains_html = "".join(f'<a href="{cs}/">{brands[k]["e"]} {bn(k)} <small>{n}</small></a>' for n, k, cs in chain_index_links)
 # Only the strongest few chains per state. Listing all 2,952 combinations turned this into
 # a link farm: it dilutes link equity and reads as low quality. The rest stay reachable from
 # each chain's own page.
 HUB_PER_STATE = 8
 states_html = "".join(
     f'<h2>{STATES.get(st, st)}</h2><div class="chips">' +
-    "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {esc(k)} <small>{c}</small></a>'
+    "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c}</small></a>'
             for k, c in sorted(cm.items(), key=lambda x: -x[1])[:HUB_PER_STATE]) +
     (f'<a href="../?state={st}"><b>all {len(cm)} in {st} →</b></a>' if len(cm) > HUB_PER_STATE else "")
     + "</div>"
@@ -830,7 +837,7 @@ if os.path.exists(TRIP_PATH):
             sx = sites[sid]
             m = matches.get(sid, {})
             fk = sorted(((d, k) for k, d in m.items() if is_food(k)))[:3]
-            eats = ", ".join(f"{brands[k]['e']} {esc(k)} {mins(d)} min" for d, k in fk)
+            eats = ", ".join(f"{brands[k]['e']} {bn(k)} {mins(d)} min" for d, k in fk)
             rows.append(f"<tr><td><b>mile {int(round(cum[bi]))}</b></td>"
                         f"<td><b>{esc(sx['city'])}, {sx['st']}</b><br><small>{esc(sx['name'])}</small></td>"
                         f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stall{'s' if sx.get('stalls', 0) != 1 else ''}</small></td>"

@@ -645,7 +645,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
-.brk .bt span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brk .bt>span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(pointer:coarse){.brk{padding:12px 8px}}
 .row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
 /* The row's lead: the network's mark, as on the map. */
@@ -692,7 +692,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .sub{color:var(--dim2);font-size:11.5px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
 .row .sub .st{font-weight:600;color:var(--dim)}
 .row .sub .where{min-width:0}
-.row .sub .nw{white-space:nowrap}
+.row .sub .nw,.nw{white-space:nowrap}
 .nocaps{text-transform:none}   /* "0.3 mi" and "away" landed on separate lines */
 .row .sub .tag,.row .sub .cbadge{margin-left:0}
 .row .sub .netdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
@@ -701,8 +701,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .cbadge.adapter{background:var(--warn-bg);color:var(--warn)}
 .row .cbadge.null{background:var(--bad-bg);color:var(--bad)}
 .row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:wrap;gap:5px 7px}
-.row .ch span{background:var(--chew-bg);border-radius:8px;padding:3px 8px;color:var(--txt)}
-.row .ch span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
+.row .ch>span{background:var(--chew-bg);border-radius:8px;padding:3px 8px;color:var(--txt)}   /* not a name's own .nw span */
+.row .ch>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
 .row .ch .more{background:none}
 
 .row .ch b{color:var(--txt);font-weight:700}
@@ -1730,6 +1730,10 @@ function dwell(min) {
 const fmtFt = m => m < 25 ? 'at this stop'
   : m / MI < .1 ? Math.round(m * 3.281) + ' ft' : (m / MI).toFixed(1) + ' mi';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+/* A brand name as printed, escaped: one unbreakable unit. "432 stops near 🍔 In-N-" / "Out"
+   broke at the hyphen at 375 px (Chick-fil-A, Buc-ee's and H-E-B too). A nowrap span rather
+   than U+2011, so the text -- and what is copied or read aloud -- is unchanged. */
+const bname = s => /-/.test(s) ? `<span class="nw">${esc(s)}</span>` : esc(s);
 let toastT;
 /* An OSM website= tag is free text that anyone can edit, and esc() keeps it inside the
    attribute but does NOTHING to a javascript: URL -- that survives escaping intact and lands
@@ -1875,8 +1879,8 @@ function popupHtml(s) {
     const gmaps = at ? gPlace(label, at[0].toFixed(5), at[1].toFixed(5)) : '';
     return `<div class="pp-chain${at ? ' tap' : ''}"${at ? ` data-poi="${esc(k)}" data-at="${coord}" role="button" tabindex="0" aria-label="${esc(k)} details"` : ''}>
       <span>${BRANDS[k].e} ${at
-        ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)}</a>`
-        : (active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label))}</span>
+        ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)}</a>`
+        : (active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label))}</span>
       <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span>
       ${at ? `<a class="go" href="https://www.google.com/maps/dir/?api=1&destination=${coord}&travelmode=walking"
         target="_blank" rel="noopener" title="Walking directions to this ${esc(k)}" aria-label="Walking directions to this ${esc(k)}">↗</a>` : ''}
@@ -1927,7 +1931,7 @@ function popupHtml(s) {
   const near = ent.slice(0, 3).map(([k, v]) => {
     const at = mLatLng(s, v), d = mDist(s, v);
     const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
-    const inner = `${BRANDS[k].e} ${esc(label)} <b>${walkMin(d)} min</b>`;
+    const inner = `${BRANDS[k].e} ${bname(label)} <b>${walkMin(d)} min</b>`;
     const hk = at && k !== livePoiKey ? ` data-hk="${esc(k)}" data-at="${at[0].toFixed(5)},${at[1].toFixed(5)}"` : '';
     return at ? `<a class="pp-nb${pri(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
@@ -2699,7 +2703,7 @@ function renderChips(keep) {
       aria-pressed="${anyCat === c}" title="Every ${c === 'food' ? 'restaurant, cafe and fast-food' : 'store and pharmacy'} chain we track, in one tap">${CAT_ICON[c]} ${CAT_LABEL[c]}
       <span class="cnt">${chipCatCount(c).toLocaleString()}</span></button>`).join('');
   el.innerHTML = top.map(k =>
-    `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${esc(k)}
+    `<button class="chip ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">${BRANDS[k].e} ${bname(k)}
       <span class="cnt" title="${chipCount(k).toLocaleString()} chargers within a 10-minute walk of ${esc(k)}${scopeCounts ? ' here' : ''}">${chipCount(k)}</span></button>`).join('')
     + `<button class="chip more" id="moreChip">＋ All chains</button>`;
   $('catchips').querySelectorAll('.chip[data-cat]').forEach(c => c.onclick = () => {
@@ -2759,9 +2763,9 @@ function renderList(vis) {
      by set rather than tracked through every mutation, so tapping any chip afterwards
      simply falls back to the ordinary title. */
   const isSeed = seedFor && active.size === seedFor.keys.length && seedFor.keys.every(k => active.has(k));
-  const parts = [...(anyCat ? [CAT_LABEL[anyCat]] : []), ...[...active].map(k => BRANDS[k].e + ' ' + k)];
+  const parts = [...(anyCat ? [esc(CAT_LABEL[anyCat])] : []), ...[...active].map(k => BRANDS[k].e + ' ' + bname(k))];
   const what = cat === 'fav' ? 'saved'
-    : isSeed ? seedFor.icon + ' ' + seedFor.label
+    : isSeed ? esc(seedFor.icon + ' ' + seedFor.label)
     // A hand-picked set can grow just as long; past three it stops being a sentence.
     : parts.length > 3 ? parts.slice(0, 2).join(' or ') + ` and ${parts.length - 2} more`
     : parts.join(' or ');
@@ -2774,7 +2778,7 @@ function renderList(vis) {
     ? `${vis.length.toLocaleString()} stop${vis.length === 1 ? '' : 's'} <em>${[filtering ? (cat === 'fav' ? 'saved'
         // "near Any food" read like a typo; a category alone is a phrase of its own
         : anyCat && !active.size && !isSeed ? (anyCat === 'food' ? 'with food a short walk away' : 'with a store a short walk away')
-        : 'near ' + esc(what)) : '', esc(scope)].filter(Boolean).join(' ')}</em>`
+        : 'near ' + what) : '', esc(scope)].filter(Boolean).join(' ')}</em>`
     : `${vis.length.toLocaleString()} fast chargers${narrowings().length ? '' : ' <em>· every network, no filters</em>'}`;
 
   /* Show what is hiding stops. Without this a stale network filter reads as "there is
@@ -2835,7 +2839,7 @@ function renderList(vis) {
     const chains = ent.slice(0, 3).map(([k, v]) => {
       const isLive = k === livePoiKey && lp && lp.name;
       const label = isLive ? lp.name : k;              // the real shop, not the category
-      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + esc(label) + '</b>' : esc(label)} <i>${walkMin(walkTo(s, k, v))} min</i></span>`;
+      return `<span>${BRANDS[k].e} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i></span>`;
     }).join('');
     const extra = ent.length > 3 ? `<span class="more">+${ent.length - 3}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
@@ -3101,7 +3105,7 @@ function openPicker() {
 }
 function pkItem(k) {
   return `<button class="pkitem ${active.has(k) ? 'on' : ''}" data-k="${esc(k)}">
-      <span class="e">${BRANDS[k].e}</span><span class="nm">${esc(k)}</span><span class="c">${counts[k].toLocaleString()}</span>
+      <span class="e">${BRANDS[k].e}</span><span class="nm">${bname(k)}</span><span class="c">${counts[k].toLocaleString()}</span>
      </button>`;
 }
 function drawPicker() {
@@ -6451,7 +6455,7 @@ function breaksCard(vis) {
   const rows = picks.map(({ s, walk, k, meal, ms, mi }) => ({ mi, ms, s, html: c =>
     `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}"${k ? ` data-k="${esc(k)}"` : ''}>
         <span class="bm">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       </button>` }));
   if (gap) {
@@ -6699,7 +6703,7 @@ function buildHero() {
   const g = $('heroGrid');
   const picks = HERO_PICKS.filter(k => BRANDS[k]);
   g.innerHTML = picks.map(k =>
-    `<button class="heropick" data-k="${esc(k)}" aria-label="${counts[k].toLocaleString()} chargers near ${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${esc(k)}</span><span class="c">${counts[k].toLocaleString()} <small>chargers</small></span></button>`).join('');
+    `<button class="heropick" data-k="${esc(k)}" aria-label="${counts[k].toLocaleString()} chargers near ${esc(k)}"><span class="e">${BRANDS[k].e}</span><span>${bname(k)}</span><span class="c">${counts[k].toLocaleString()} <small>chargers</small></span></button>`).join('');
   g.querySelectorAll('[data-k]').forEach(b => b.onclick = () => selectChain(b.dataset.k));
 }
 function selectChain(k) {
