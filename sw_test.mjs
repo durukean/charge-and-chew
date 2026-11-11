@@ -163,5 +163,12 @@ const offlineNav = await navReq(async () => { throw new TypeError('offline'); },
 report('offline, never-seen link -> page?', offlineNav.res && offlineNav.res.__size === 555, 'yes  OK',
        'NO (' + (offlineNav.res && (offlineNav.res.__size || 'fallback page')) + ')');
 
+/* "New version — tap to reload" only for a page older than the worker: the page asks the
+   installing worker its version over a MessageChannel, and must get this file's VERSION. */
+let told = null;
+for (const f of listeners['message'] || []) f({ data: 'version', ports: [{ postMessage: v => { told = v; } }], waitUntil: () => {} });
+const swVer = (fs.readFileSync('sw.js', 'utf8').match(/const VERSION = '([^']+)'/) || [])[1];
+report('tells the page its version?', told && told === swVer, `yes  OK (${told})`, `NO (${told})`);
+
 console.log('  cache name in use:            ', [...store.keys()].join(',') || '(none)');
 if (failed) { console.log(`\nservice worker: ${failed} check(s) FAILED`); process.exit(1); }

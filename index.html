@@ -7354,27 +7354,41 @@ setOnline(navigator.onLine);
 if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') track('pwa-launch');
 if (!navigator.onLine) track('offline-use');
 
+/* The shell this page belongs to: sw.js's VERSION (verify.py keeps the two equal). */
+const SW_VER = 'cc-v51';
 if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
       reg.addEventListener('updatefound', () => {
         const w = reg.installing;
         if (!w) return;
+        let asked = false;
         w.addEventListener('statechange', () => {
           // only prompt when this is an update, not the very first install
-          if (w.state === 'installed' && navigator.serviceWorker.controller) {
-            const t = $('toast');
-            t.textContent = 'New version — tap to reload';
-            t.classList.add('show');
-            t.style.pointerEvents = 'auto';
-            t.onclick = () => { w.postMessage('skipWaiting'); location.reload(); };
-            clearTimeout(toastT);
-            toastT = setTimeout(() => { t.classList.remove('show'); t.style.pointerEvents = 'none'; t.onclick = null; }, 12000);
+          if (w.state === 'installed' && navigator.serviceWorker.controller && !asked) {
+            /* Pages load network-first, so the first visit after a deploy already IS the new
+               page while its worker installs, and "New version — tap to reload" reloaded into
+               the same thing. Ask the new worker which shell it is: only a page older than it
+               (served from the cache on a bad signal, or open since before the deploy) is
+               offered the reload. */
+            asked = true;
+            const ch = new MessageChannel();
+            ch.port1.onmessage = e => { if (e.data !== SW_VER) offerUpdate(w); };
+            w.postMessage('version', [ch.port2]);
           }
         });
       });
     }).catch(() => { /* offline support simply unavailable */ });
   });
+  const offerUpdate = w => {
+    const t = $('toast');
+    t.textContent = 'New version — tap to reload';
+    t.classList.add('show');
+    t.style.pointerEvents = 'auto';
+    t.onclick = () => { w.postMessage('skipWaiting'); location.reload(); };
+    clearTimeout(toastT);
+    toastT = setTimeout(() => { t.classList.remove('show'); t.style.pointerEvents = 'none'; t.onclick = null; }, 12000);
+  };
 }
 
 /* PWA shortcut deep links */

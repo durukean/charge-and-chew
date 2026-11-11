@@ -1809,6 +1809,16 @@ check(re.search(r"(?m)^\s*if \(u\.searchParams\.get\('from'\) === 'me' && routeF
 check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute:", _html) is not None,
       "reopening a from=me drive no longer locates you (it would plan from a place called 'me')")
 
+# The update toast is for a page older than its worker only (the first visit after a deploy
+# is already the new page: network-first). The page compares its SW_VER with the worker's
+# VERSION, so the two must move together.
+_swv = re.search(r"const VERSION = '([^']+)';", open(os.path.join(HERE, "sw.js")).read())
+_pgv = re.search(r"(?m)^const SW_VER = '([^']+)';", _html)
+check(_swv and _pgv and _swv.group(1) == _pgv.group(1),
+      f"index.html SW_VER ({_pgv and _pgv.group(1)}) is not sw.js VERSION ({_swv and _swv.group(1)}): bump both together")
+check(re.search(r"(?m)^\s*ch\.port1\.onmessage = e => \{ if \(e\.data !== SW_VER\) offerUpdate\(w\); \};\n\s*w\.postMessage\('version', \[ch\.port2\]\);", _html) is not None,
+      "the update toast no longer asks the new worker its version (the new page offers itself a reload)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

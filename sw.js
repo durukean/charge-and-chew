@@ -44,6 +44,8 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('message', e => {
   if (e.data === 'skipWaiting') self.skipWaiting();
+  // Which shell this is: a page that is already this version is not offered a reload into it.
+  if (e.data === 'version' && e.ports && e.ports[0]) e.ports[0].postMessage(VERSION);
   // Switching map style must drop cached tiles from the old provider — and is the escape
   // hatch if a watermark tile ever got cached by an older build of this worker.
   if (e.data === 'clearTiles') e.waitUntil(caches.delete(TILES));
