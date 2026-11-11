@@ -150,6 +150,15 @@ const CASES = [
   ['Los Angeles, CA', 'Las Vegas, NV', 420, 'America/Los_Angeles', [
     r => r.sel === '420' ? '' : `picker "${r.sel}" for ?leave=0700 at 10:30 pm (the link must win)`],
     { at: '2026-11-11T22:30:00-08:00', link: true }],
+  /* The route list is the best stop in each ~30-minute stretch (one row per stretch, in
+     driving order), with "Show all N stops" below opening every stop and a way back. Breaks
+     whose stop is not in the short list still open it. */
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.list && r.list.short > 5 && r.list.short < 20 && r.list.short < r.list.n / 4 ? '' : `short list ${JSON.stringify(r.list)}`,
+    r => r.list && r.list.ordered && r.list.oneEach ? '' : `short list not one per stretch in driving order: ${JSON.stringify(r.list && r.list.miles)}`,
+    r => r.list && r.list.all === Math.min(r.list.n, 300) && r.list.back === r.list.short ? '' : `show all gave ${r.list && r.list.all} rows of ${r.list && r.list.n}, back to ${r.list && r.list.back}`,
+    r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return r.taps && r.taps.length && !dead.length ? '' : `break taps ${JSON.stringify(r.taps)}`; }],
+    { taps: true, list: true }],
   ['Los Angeles, CA', 'Las Vegas, NV', 'now', 'America/Los_Angeles', [
     r => r.sel === '' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" for ?leave=now at night (want now, the morning one tap away)`],
     { at: '2026-11-11T22:30:00-08:00', link: true }],
@@ -231,6 +240,24 @@ const READ = `(() => {
       return out; })() };
 })()`;
 
+// The route list: short (one per stretch), then all, then short again.
+const LIST = `(async () => {
+  const rows = () => [...document.querySelectorAll('#list .row')];
+  const miles = rows().map(r => +(r.querySelector('.idx b') || {}).textContent);
+  const span = 30 * (+((document.querySelector('#routeInfo .sum i') || {}).textContent.match(/([\\d,]+) mi/) || [])[1].replace(/,/g, '')) /
+    ((t => { const h = t.match(/(\\d+)h(?: (\\d+)m)?/); return h ? +h[1] * 60 + +(h[2] || 0) : 60; })((document.querySelector('#routeInfo .sum i') || {}).textContent || ''));
+  const buckets = miles.map(m => Math.floor(m / Math.max(10, span)));
+  const out = { n: +document.getElementById('sheetTitle').textContent.replace(/,/g, '').match(/\\d+/)[0], short: miles.length, miles,
+    ordered: miles.every((m, i) => !i || m >= miles[i - 1]), oneEach: new Set(buckets).size === buckets.length };
+  const all = document.getElementById('routeAll');
+  if (!all) return out;
+  all.click(); await new Promise(r => setTimeout(r, 300));
+  out.all = rows().length;
+  const back = document.getElementById('routeBest'); if (back) back.click();
+  await new Promise(r => setTimeout(r, 300));
+  out.back = rows().length;
+  return out;
+})()`;
 // Tap every break in turn; each must open the stop card at the break's own mile, its first
 // place being the chain the break promised.
 const TAPS = `(async () => {
@@ -284,6 +311,7 @@ async function main() {
       if (!lv && leave !== null) await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
       await sleep(400);
       res = await ev(READ);
+      if (res && opt && opt.list) res.list = await ev(LIST);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
       if (!res) why.push('no breaks card (route did not load?)');
       else for (const c of [...checks, ...ALWAYS]) { const w = c(res); if (w) why.push(w); }

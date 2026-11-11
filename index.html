@@ -820,6 +820,13 @@ html.native .splash-mark svg{width:96px;height:96px}
 .tag.free{color:var(--good)}
 .lsep{padding:14px 16px 6px;font-size:13px;font-weight:600;line-height:1.3;color:var(--txt);border-top:1px solid var(--line)}
 .lsep span{font-weight:400;color:var(--dim)}
+/* The short route list: what it is on top, the way to everything below. */
+.lsep.rlist{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding-left:0;padding-right:0}
+.breaks + .lsep.rlist{border-top:0;padding-top:6px}     /* the card's own rule is the divider */
+.lsep .rlnk{margin-left:auto;border:0;background:none;padding:6px 0;min-height:32px;font:inherit;font-weight:700;color:var(--accent);cursor:pointer}
+.listmore{display:block;width:100%;min-height:48px;margin:6px 0 18px;border:1px solid var(--line2);border-radius:14px;
+  background:var(--surface);color:var(--txt);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+@media(hover:hover){.listmore:hover{background:var(--surface2)}}
 .tag.one{box-shadow:none;padding:0;border-radius:0;font-size:11.5px;font-weight:600;line-height:inherit;color:var(--warn)}
 .pp-note{color:var(--dim2);font-size:10.5px;margin-top:8px;line-height:1.4}
 .pp-warn{color:var(--warn);font-size:11.5px;margin:8px 0;padding:8px 10px;background:var(--warn-bg);
@@ -1409,7 +1416,7 @@ window.CC_BASEMAPS = {
   } catch (e) { window.__ccMap = null; }
 })();
 </script>
-<script src="data.js?v=29dd0411c1"></script>
+<script src="data.js?v=f7ef5f62ba"></script>
 <script>
 (() => {
 'use strict';
@@ -2914,7 +2921,13 @@ function renderList(vis) {
   }
   const showIdx = !!route;
   const bc = breaksCard(vis);
-  $('list').innerHTML = (bc || gapNote()) + vis.slice(0, LIST_MAX).map((s, i) => {
+  /* On a route: the best stop in each stretch, then "Show all" (see bestPerStretch). Opened in
+     full, a line on top goes back to the short list. */
+  const full = route && routeAllFor === route, col = full ? null : bestPerStretch(vis);
+  const rows = col ? col.rows : vis.slice(0, LIST_MAX);
+  const head = col ? `<div class="lsep rlist" role="heading" aria-level="3">${col.label} <span>· ${col.rows.length} of ${vis.length.toLocaleString()}</span></div>`
+    : full && bestPerStretch(vis) ? `<div class="lsep rlist" role="heading" aria-level="3">All ${vis.length.toLocaleString()} stops in driving order <button type="button" class="rlnk" id="routeBest">Best per stretch</button></div>` : '';
+  $('list').innerHTML = (bc || gapNote()) + head + rows.map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
@@ -2951,7 +2964,7 @@ function renderList(vis) {
       : (kwFor(s, F.plug) ? `<s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))]}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug)} kW</s>` : '');
     const stallTxt = s.stalls && !(s.stalls === 1 && s.lvl !== 2)
       ? `${s.stalls} ${s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : 'stalls'}` : '';
-    const sep = !showIdx && s.dlr && i > 0 && !vis[i - 1].dlr
+    const sep = !showIdx && s.dlr && i > 0 && !rows[i - 1].dlr
       ? '<div class="lsep" role="heading" aria-level="3">At car dealerships <span>· often for that brand\'s drivers, and limited hours</span></div>' : '';
     return `${sep}<div class="row${s.id === openStopId ? ' sel' : ''}" data-id="${s.id}">
       ${lead}
@@ -2961,8 +2974,17 @@ function renderList(vis) {
         <div class="ch">${chains}${extra}</div>
       </div>
     </div>`;
-  }).join('') + (vis.length > LIST_MAX
+  }).join('') + (col ? `<button type="button" class="listmore" id="routeAll">Show all ${vis.length.toLocaleString()} stops</button>`
+    : vis.length > LIST_MAX
     ? `<div class="empty">Showing the first ${LIST_MAX} of ${vis.length.toLocaleString()}. Narrow the filter to see more.</div>` : '');
+  const ra = $('routeAll');
+  if (ra) ra.onclick = () => {
+    routeAllFor = route; track('route-all'); render();
+    // Keyboard and VoiceOver users land on the list they asked for, not the top of the page.
+    const r = document.querySelector('#list .row .rowname'); if (r) r.focus({ preventScroll: true });
+  };
+  const rb = $('routeBest');
+  if (rb) rb.onclick = () => { routeAllFor = null; render(); const b = $('routeAll'); if (b) b.scrollIntoView({ block: 'nearest' }); };
 
   /* A break opens its stop the way a list row does -- but only LIST_MAX rows render, and
      looking the stop up by its row left 17 of 23 break buttons on LA -> New York doing
@@ -6552,6 +6574,34 @@ function breakPicks(vis) {
     else break;                   // nowhere with food before the end
   }
   return picks;
+}
+/* The route list, short. LA -> Las Vegas listed all 250 stops in driving order, opening on ten
+   "mile 0" rows in the city you are leaving, under a plan of two breaks. It shows the best stop
+   in each stretch of about half an hour of driving instead (10 miles at least), ranked like the
+   breaks: somewhere to eat (what you asked for, when you asked), then a charger of 100 kW or
+   more, a walk under 5 minutes, power in 50 kW steps, stalls, 24 hours, the shorter walk. Level 2
+   only when a stretch has nothing else. "Show all N stops" below opens the full list; stops
+   left out still open from the map, the breaks card and ?stop= (none of those need a row). */
+const STRETCH_MIN = 30;
+let routeAllFor = null;       // the route whose list is open in full
+function bestPerStretch(vis) {
+  if (!route || !route.mileAt || vis.length <= 20) return null;
+  const perMin = route.hr && route.mi ? route.hr * 60 / route.mi : 1;    // minutes per mile
+  const span = Math.max(10, STRETCH_MIN / perMin);                         // miles per stretch
+  const best = new Map();
+  for (const s of vis) {
+    if (!route.mileAt.has(s.id)) continue;
+    const b = Math.floor(route.mileAt.get(s.id) / span), m = MATCH[s.id] || {}, kw = kwFor(s, F.plug) || 0;
+    const [k, w] = nearestOf(s, chainQuery() ? chainKeysOn(m) : foodKeys(m), m);
+    const sc = [s.lvl === 2 ? 1 : 0, k ? 0 : 1, kw < 100 ? 1 : 0, w > 400 ? 1 : 0,
+                -Math.floor(Math.min(kw, 350) / 50), -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
+    const cur = best.get(b);
+    if (!cur || lexLess(sc, cur.sc)) best.set(b, { s, sc });
+  }
+  const out = [...best.values()].map(x => x.s).sort((a, b) => route.mileAt.get(a.id) - route.mileAt.get(b.id));
+  if (out.length >= vis.length * 0.8) return null;
+  const label = span > STRETCH_MIN / perMin + 0.5 ? `Best stop every ~${Math.round(span)} mi` : `Best stop every ~${STRETCH_MIN} min of driving`;
+  return { rows: out, label };
 }
 /* The breaks card's plan, kept for the stop card: when you reach a stop on it, with the
    leaving time and the time at the stops before. */

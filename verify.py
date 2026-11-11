@@ -313,7 +313,7 @@ check("const mileAt = new Map();" in _html and 'class="idx mi"' in _html,
       "route rows lost their mile markers")
 # A route says where its longest charger gap is (geography, never a charging plan).
 # On a drive with a breaks card the gap is a row in it, at its mile (2026-11-10); otherwise a note.
-check("$('list').innerHTML = (bc || gapNote()) + vis.slice(0, LIST_MAX)" in _html and "function gapNote()" in _html
+check("$('list').innerHTML = (bc || gapNote()) + head + rows.map(" in _html and "function gapNote()" in _html
       and "const gap = chargerGap();" in _html[_html.index("function breaksCard("):_html.index("function gapNote()")]
       and 'class="brk gap" role="note"' in _html,
       "route lists no longer flag the longest stretch without a fast charger")
@@ -1620,6 +1620,32 @@ check("return nightNow(first) ? morningOf(first) : null;" in _html
       and _live("else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time beats the night default"),
       "a drive planned at night leaves 'now' again (the default must be 8 am the coming morning, now one tap away)")
 
+# Port-split listings of one site are one stop (2026-11-11): a route through Los Angeles opened on
+# four "City_Of_Vernon 1850 E25Th-..." rows. build_data.merge_ports() merges them (stalls add up);
+# no two listings in data.js may still match its rule.
+check(re.search(r"(?m)^\s*deduped, stats\[\"ports\"\] = merge_ports\(deduped\)", _bd) is not None,
+      "build_data.py no longer merges port-split listings of one site")
+if D:
+    sys.path.insert(0, os.path.join(HERE, "data"))
+    from build_data import _same_site
+    _grid = {}
+    for _s in D["sites"]:
+        _grid.setdefault((int(_s["lat"] * 200), int(_s["lon"] * 200)), []).append(_s)
+    _split = []
+    for _s in D["sites"]:
+        _c = (int(_s["lat"] * 200), int(_s["lon"] * 200))
+        for _di in (-1, 0, 1):
+            for _dj in (-1, 0, 1):
+                _split += [(_s["name"], _t["name"]) for _t in _grid.get((_c[0] + _di, _c[1] + _dj), ())
+                           if _t["id"] > _s["id"] and _same_site(_s, _t)]
+    check(not _split, f"{len(_split)} port-split listings of one site are separate stops again, e.g. {_split[:2]}")
+# A route lists the best stop per ~30-minute stretch, with "Show all N stops" below (2026-11-11).
+# tools/breaks_check.mjs plays it (short list, one per stretch, show all, back, break taps).
+check(_live("const full = route && routeAllFor === route, col = full ? null : bestPerStretch(vis);")
+      and _live("const rows = col ? col.rows : vis.slice(0, LIST_MAX);")
+      and "<button type=\"button\" class=\"listmore\" id=\"routeAll\">Show all ${vis.length.toLocaleString()} stops</button>" in _html
+      and _live("routeAllFor = route; track('route-all'); render();"),
+      "the route list is every stop again (it should be the best per stretch, with Show all below)")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

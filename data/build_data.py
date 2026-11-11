@@ -230,11 +230,87 @@ def clean(sites):
         deduped.extend(picked)
     stats["dup"] = len(kept) - len(deduped)
 
+    deduped, stats["ports"] = merge_ports(deduped)
+
     for s in deduped:
         if DEALER_RE.search(s["name"]):
             s["dlr"] = 1; stats["dealer"] += 1
     stats["end"] = len(deduped)
     return deduped, stats
+
+
+PORT_M = 50     # port-split listings of one site sit within this many metres of each other
+_SEP = " -_#/."
+
+
+def _prefix(a, b):
+    n = 0
+    while n < min(len(a), len(b)) and a[n].lower() == b[n].lower():
+        n += 1
+    return n
+
+
+def _same_site(s, t):
+    """Two listings of one site split by port or cabinet: "Dash In Dash In-1" ... "-4",
+    "City_Of_Vernon 3805 Soto-1" ... "-10", "Ucsd Cp-Athena Dc1-1" ... "-5". Same network,
+    within PORT_M, and the names share most of their length (at least 60% of the shorter)."""
+    if s.get("net") != t.get("net") or hav(s["lat"], s["lon"], t["lat"], t["lon"]) > PORT_M:
+        return False
+    n = _prefix(s["name"], t["name"])
+    return n >= max(5, 0.6 * min(len(s["name"]), len(t["name"])))
+
+
+def merge_ports(sites):
+    """Merge listings of one site that AFDC splits by port: a route through Los Angeles opened on
+    four "City_Of_Vernon 1850 E25Th-…" rows and five "…3805 Soto-…" ones. Each listing is a
+    separate charger, so stalls ADD UP (unlike the duplicate listings merged above); plugs are
+    unioned and the best kW kept. The richest listing stays (its id and address); the name is the
+    shared part when it ends at a separator ("City_Of_Vernon 3805 Soto"), or one listing's name
+    is that part, else the richest listing's own name."""
+    grid = {}
+    for s in sites:
+        grid.setdefault((int(s["lat"] * 200), int(s["lon"] * 200)), []).append(s)
+    parent = {id(s): s for s in sites}
+
+    def root(s):
+        while parent[id(s)] is not s:
+            parent[id(s)] = parent[id(parent[id(s)])]
+            s = parent[id(s)]
+        return s
+    for s in sites:
+        ci, cj = int(s["lat"] * 200), int(s["lon"] * 200)
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                for t in grid.get((ci + di, cj + dj), ()):
+                    if t is not s and _same_site(s, t):
+                        a, b = root(s), root(t)
+                        if a is not b:
+                            parent[id(b)] = a
+    groups = {}
+    for s in sites:
+        groups.setdefault(id(root(s)), []).append(s)
+    out, merged = [], 0
+    for g in groups.values():
+        if len(g) == 1:
+            out.append(g[0]); continue
+        g.sort(key=lambda x: ((x.get("kw") or 0), (x.get("stalls") or 0), -x["id"] if isinstance(x.get("id"), int) else 0), reverse=True)
+        keep = g[0]
+        n = min(_prefix(keep["name"], x["name"]) for x in g[1:])
+        common = keep["name"][:n]
+        stalls = sum(x.get("stalls") or 0 for x in g)
+        for x in g[1:]:
+            merge_plugs(keep, x)
+            if x.get("h24"):
+                keep["h24"] = 1
+        if stalls:
+            keep["stalls"] = stalls
+        if (common and common[-1] in _SEP) or any(x["name"] == common for x in g):
+            base = common.rstrip(_SEP).strip()
+            if len(base) >= 5:
+                keep["name"] = base
+        out.append(keep)
+        merged += len(g) - 1
+    return out, merged
 
 
 def hav(a1, o1, a2, o2):
@@ -250,7 +326,7 @@ def main():
     chargers, cstats = clean(chargers)
     print(f"Cleaned: {cstats['start']} -> {cstats['end']}  "
           f"(dropped {cstats['low_kw']} sub-{MIN_KW}kW, {cstats['truck']} truck-only, "
-          f"{cstats['private']} private/test, {cstats['dup']} duplicates; "
+          f"{cstats['private']} private/test, {cstats['dup']} duplicates, {cstats['ports']} port-split listings; "
           f"renamed {cstats['renamed']}, flagged {cstats['dealer']} dealerships)")
     pois = json.load(open(os.path.join(HERE, "pois.json")))
 
