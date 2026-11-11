@@ -38,6 +38,9 @@ def _hav(a1, o1, a2, o2):
     dla = (a2 - a1) * p; dlo = (o2 - o1) * p
     x = math.sin(dla/2)**2 + math.cos(a1*p)*math.cos(a2*p)*math.sin(dlo/2)**2
     return 2 * R * math.asin(math.sqrt(x))
+# The trip plans (planner.py) measure walks exactly as the app does, from the raw deltas, so
+# they keep their own copy before the conversion below rounds them to whole metres.
+RAW_MATCHES = {k: dict(v) for k, v in matches.items()}
 for _sid, _m in matches.items():
     _s = sites.get(_sid)
     if not _s: continue
@@ -197,6 +200,11 @@ table.trip tr:last-child td{border-bottom:0}
 table.trip td b{color:var(--txt)}
 table.trip td:first-child{white-space:nowrap;color:var(--txt);font-variant-numeric:tabular-nums}
 table.trip small{color:var(--dim2);font-size:12.5px}
+table.trip td a{color:inherit;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
+table.trip i.ml{font-style:normal;font-weight:700;color:var(--dim)}
+table.trip i.ml.meal{color:var(--chew)}
+table.trip tr.gap td b{color:var(--warn)}
+.plannote{color:var(--dim);font-size:14px;line-height:1.6;margin:-8px 0 22px}
 .faq{display:flex;flex-direction:column;gap:8px}
 .faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 14px;
   box-shadow:var(--sh)}
@@ -387,7 +395,7 @@ def jsonld_chain(key, sites_list, canonical, faq_schema=None):
     return "".join(ld_script(x) for x in blocks)
 
 
-def jsonld_route(name, kind, stop_ids, canonical, total):
+def jsonld_route(name, kind, stop_ids, canonical, total, faq_schema=None):
     """Structured data for the corridor pages (/along/, /trip/).
 
     These were the only sections shipping none, and they are the ones the site most wants to
@@ -410,6 +418,8 @@ def jsonld_route(name, kind, stop_ids, canonical, total):
         {"@context": "https://schema.org", "@type": "ItemList",
          "name": f"EV fast chargers with food along {name}",
          "numberOfItems": total, "itemListElement": items}]
+    if faq_schema:
+        blocks.append(faq_schema)
     return "".join(ld_script(x) for x in blocks)
 
 
@@ -767,6 +777,192 @@ def trip_card(s, focus, root, href):
     return site_card(s, focus, root).replace(
         f'href="{root}?chain={esc(focus)}&amp;state={s["st"]}"', f'href="{href}"')
 
+# ---- the drive itself, as the app plans it (planner.py) ----
+# Each page carries the plan the app shows for that drive leaving at 8:00 am where it starts:
+# the meal stops at their local hours, the breaks, the longest charger gap and the arrival. It
+# is the app's own code ported, fed the same route, so "Open this drive in the app" opens on the
+# same stops at the same times (tools/trip_plan_check.mjs holds the two together). The date is
+# the data's: clocks only move with daylight saving, so the pages change with the data.
+import planner
+PLAN_DAY = _dt.date.fromisoformat(D["generated"])
+PLAN_LEAVE = 8 * 60
+FAQ_CARS = ("Tesla Model Y", "Ford Mustang Mach-E", "Hyundai Ioniq 5")
+CARS = D.get("cars", {})
+
+
+def kw_for(s, bit):
+    """kwFor(): the power of one plug type at a stop."""
+    if not bit or not (s.get("conn", 0) & bit) or not s.get("pk"):
+        return s.get("kw") or 0
+    return s["pk"][0 if bit == 1 else 1 if bit == 2 else 2] or s.get("kw") or 0
+
+
+def place(s):
+    return f"{s['city']}, {s['st']}"
+
+
+def plan_clock(clock, day):
+    return clock + ("" if not day else " the next day" if day == 1 else f" on day {day + 1}")
+
+
+def trip_plan_html(plan, a, b, app):
+    """The plan as a sentence (what a search snippet or a group chat wants) and as a table,
+    each stop linking to the app at that stop. Returns (sentence, html, short) where `short`
+    is the one-line form for the meta description."""
+    A, B = a.split(",")[0], b.split(",")[0]
+    rows = plan.rows()
+    stops = [r for r in rows if r["kind"] == "stop"]
+    arr, arr_day = plan.arrive()
+    leave = plan.leave_label()
+    bits = [f"Leave {esc(A)} at {leave}"]
+    for r in stops:
+        what = "take a break" if r["label"] == "Break" else f"stop for {r['label'].lower()}"
+        bits.append(f"{what} in {esc(r['s']['city'])} at {plan_clock(r['clock'], r['day'])}")
+    bits.append(f"arrive in {esc(B)} around {plan_clock(arr, arr_day)}")
+    sentence = ", ".join(bits[:-1]) + " and " + bits[-1] + "."
+    if not stops:
+        sentence = (f"Leave {esc(A)} at {leave} and arrive in {esc(B)} around {plan_clock(arr, arr_day)}: "
+                    "the drive is short enough that the plan has no stop. In the app, a later leaving "
+                    "time plans a meal on the way when one falls during the drive.")
+    short = "; ".join(f"{('break' if r['label'] == 'Break' else r['label'].lower())} in {r['s']['city']} {r['clock']}"
+                      for r in stops[:3])
+    short = f"Leaving at 8 am: {short + ', ' if short else ''}arrive ~{arr}."
+    trs = [f'<tr><td><b>{leave}</b></td><td><b>Leave {esc(a)}</b></td><td></td><td></td></tr>']
+    for r in rows:
+        when = f"<b>{r['clock']}</b>" + ("<br><small>next day</small>" if r["day"] == 1 else
+                                         f"<br><small>day {r['day'] + 1}</small>" if r["day"] > 1 else "")
+        if r["kind"] == "gap":
+            g = r["gap"]
+            trs.append(f'<tr class="gap"><td>{when}</td><td><b>No fast charger for {g["len"]} mi</b><br>'
+                       f'<small>from mile {g["from"]} {"to the end" if g["to"] == g["end"] else "to mile " + str(g["to"])}</small></td>'
+                       f'<td></td><td>None within {TRIP_MI:g}&nbsp;mi of the route</td></tr>')
+            continue
+        s, k = r["s"], r["k"]
+        m = matches.get(s["id"], {})
+        others = sorted((d, x) for x, d in m.items() if x != k and brands.get(x, {}).get("cat") == "food")[:2]
+        food = ([f"{brands[k]['e']} <b>{bn(k)}</b> {r['walk']} min"] if k else []) + \
+               [f"{brands[x]['e']} {bn(x)} {mins(d)} min" for d, x in others]
+        kw = s.get("kw") or 0
+        trs.append(f'<tr><td>{when}<br><small><i class="ml{" meal" if r["label"] != "Break" else ""}">{r["label"]}</i> &middot; mile {r["mi"]}</small></td>'
+                   f'<td><a href="{app}&amp;stop={s["id"]}"><b>{esc(place(s))}</b></a><br><small>{esc(s["name"])}</small></td>'
+                   f'<td>{str(kw) + " kW" if kw else "&mdash;"}<br><small>{s.get("stalls", 0)} stall{"s" if s.get("stalls", 0) != 1 else ""}</small></td>'
+                   f'<td>{", ".join(food) or "&mdash;"}</td></tr>')
+    trs.append(f'<tr><td><b>~{arr}</b>{"<br><small>next day</small>" if arr_day == 1 else ""}</td>'
+               f'<td><b>Arrive in {esc(b)}</b></td><td></td><td></td></tr>')
+    table = ('<div class="tripwrap"><table class="trip plan"><thead><tr><th>When</th><th>Where</th>'
+             f'<th>Charger</th><th>Food within a walk</th></tr></thead><tbody>{"".join(trs)}</tbody></table></div>')
+    return sentence, table, short
+
+
+def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway):
+    """Questions people ask about a drive, answered from this route's data. The same strings
+    make the visible answers and the FAQPage markup, so the two cannot disagree."""
+    A, B = esc(a.split(",")[0]), esc(b.split(",")[0])
+    stops = [r for r in plan.rows() if r["kind"] == "stop"]
+    meals = [r for r in stops if r["label"] != "Break"]
+    brk = [r for r in stops if r["label"] == "Break"]
+    arr, arr_day = plan.arrive()
+    leave = plan.leave_label()
+    nfound, nfood = len(found), len(withfood)
+    qa = []
+
+    def at_stop(r):
+        kw = r["s"].get("kw") or 0
+        return (f"{bn(r['k'])} is a {r['walk']}-minute walk from a {str(kw) + ' kW ' if kw else ''}charger"
+                if r["k"] else f"there is a {str(kw) + ' kW ' if kw else ''}charger")
+
+    # 1. Where to eat
+    if meals:
+        ans = f"Leaving {A} at {leave}, " + "; ".join(
+            f"{r['label'].lower()} falls in {esc(place(r['s']))} around {plan_clock(r['clock'], r['day'])}, where {at_stop(r)}"
+            for r in meals) + "."
+        if brk:
+            ans += (" The break in " if len(brk) == 1 else " The breaks: ") + "; ".join(
+                f"{esc(place(r['s']))} at {plan_clock(r['clock'], r['day'])}" + (" has " if len(brk) == 1 else ", ") +
+                f"{bn(r['k'])} {r['walk']} min from the charger" for r in brk) + "."
+    elif brk:
+        ans = (f"Leaving {A} at {leave}, no mealtime falls on the way. The plan's break" + ("s" if len(brk) > 1 else "") + " "
+               + "; ".join(f"in {esc(place(r['s']))} at {plan_clock(r['clock'], r['day'])}: {at_stop(r)}" for r in brk) + ".")
+    else:
+        ans = f"Leaving {A} at {leave} you arrive around {plan_clock(arr, arr_day)}, too soon for a meal stop."
+        if halfway:
+            s, k, w = halfway
+            ans += (f" About halfway, {esc(place(s))} (mile {plan.mile_at[s['id']]}) has {bn(k)} a {mins(w)}-minute walk "
+                    f"from a {s.get('kw') or 0} kW charger.")
+    ans += f" In all, {nfood:,} of the {nfound:,} fast chargers along the way have a restaurant within a 10-minute walk."
+    qa.append((f"Where should I stop to eat between {A} and {B}?", ans))
+
+    # 2. How many chargers
+    qa.append((f"How many fast chargers are there between {A} and {B}?",
+               f"{nfound:,} DC fast chargers of {TRIP_MIN_KW} kW or more are within {TRIP_MI:g} miles of the "
+               f"{t['mi']:,.0f}-mile route. {big:,} of them charge at 150 kW or more, {tesla:,} are on the Tesla "
+               f"network, and {nfood:,} have a restaurant within a 10-minute walk."))
+
+    # 3. The longest gap
+    g = plan.longest()
+    if g["len"] >= 30:
+        def at_mile(mi):
+            for s in plan.vis:
+                if plan.mile_at[s["id"]] == mi: return f" ({esc(place(s))})"
+            return ""
+        where = (f"from the start to mile {g['to']}{at_mile(g['to'])}" if g["from"] == 0 else
+                 f"from mile {g['from']}{at_mile(g['from'])} to the end" if g["to"] == g["end"] else
+                 f"between mile {g['from']}{at_mile(g['from'])} and mile {g['to']}{at_mile(g['to'])}")
+        gap_a = f"{g['len']} miles, {where}, with no DC fast charger within {TRIP_MI:g} miles of the route."
+    else:
+        gap_a = (f"No stretch is longer than {max(g['len'], 1)} miles: there is a DC fast charger within "
+                 f"{TRIP_MI:g} miles of the route at least that often.")
+    qa.append((f"What is the longest stretch without a fast charger between {A} and {B}?", gap_a))
+
+    # 4. Chains
+    cnt = Counter(k for f in found for k in matches.get(f[1], {})
+                  if brands.get(k, {}).get("cat") == "food" and k not in CATEGORY_KEYS)   # "Ice cream shop" is no chain
+    top = sorted(cnt.items(), key=lambda x: (-x[1], x[0]))[:6]
+    if top:
+        names = [f"{bn(k)} (near {n} charger{'s' if n != 1 else ''})" if i == 0 else f"{bn(k)} ({n})"
+                 for i, (k, n) in enumerate(top)]
+        lst = names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+        qa.append((f"Which restaurant chains are on the way from {A} to {B}?",
+                   f"Counting the fast chargers of {TRIP_MIN_KW} kW or more on the route, the chains most often "
+                   f"within a 10-minute walk are {lst}."))
+
+    # 5. Charging time: the app's own estimate, for three common cars, at the plan's stops
+    pool = [r["s"] for r in stops] or ([halfway[0]] if halfway else [])
+    est = []
+    for car in FAQ_CARS:
+        spec = CARS.get(car)
+        if not spec: continue
+        best = None
+        for s in pool:
+            if s.get("conn", 0) & spec[2] and (best is None or kw_for(s, spec[2]) > kw_for(best, spec[2])):
+                best = s
+        m_ = planner.charge_min(best, spec) if best else None
+        if m_:
+            est.append(f"about {planner.hm_label(m_)} for a {esc(car)} at the {kw_for(best, spec[2])} kW charger in {esc(place(best))}")
+    if est:
+        qa.append((f"How long does it take to charge on the way from {A} to {B}?",
+                   "It depends on the car. The app's estimate for a 10–80% charge is " + "; ".join(est) +
+                   ". These are rough figures from each car's battery size and peak charging speed; a cold "
+                   "battery or a busy site takes longer."))
+
+    # 6. Drive time with the stops
+    hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
+    nb, nm = len(brk), len(meals)
+    parts = ([f"{nb} break{'s' if nb != 1 else ''} of about {planner.DWELL_BREAK} minutes"] if nb else []) + \
+            ([f"{nm} meal{'s' if nm != 1 else ''} of about {planner.DWELL_MEAL}"] if nm else [])
+    qa.append((f"How long is the drive from {A} to {B} with stops?",
+               f"About {hrs}h {mns:02d}m of driving for {t['mi']:,.0f} miles. " +
+               (f"Leaving at {leave} with the plan's {' and '.join(parts)}, you arrive around {plan_clock(arr, arr_day)}."
+                if parts else f"Leaving at {leave} without a stop, you arrive around {plan_clock(arr, arr_day)}.")))
+
+    html_ = '<h2>Questions about this drive</h2><div class="faq">' + "".join(
+        f"<details><summary>{q}</summary><p>{x}</p></details>" for q, x in qa) + "</div>"
+    plain = lambda h: unescape(re.sub(r"<[^>]+>", "", h))
+    schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": plain(q), "acceptedAnswer": {"@type": "Answer", "text": plain(x)}} for q, x in qa]}
+    return html_, schema
+
+
 if os.path.exists(TRIP_PATH):
     trips = json.load(open(TRIP_PATH))
     trip_links = []
@@ -810,41 +1006,27 @@ if os.path.exists(TRIP_PATH):
 
         a, b = t["a"], t["b"]
         sl = trip_slug(a, b)
-        map_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;any=food"
+        # The app on this drive, leaving at 8:00 am: what the plan below shows. Distance and time
+        # go through the same arithmetic as an OSRM answer does in the app (metres / MI).
+        app_url = f"../../?from={quote(a)}&amp;to={quote(b)}&amp;c={TRIP_MI:g}&amp;leave=0800"
+        plan = planner.Plan(D["sites"], RAW_MATCHES, brands, pts, t["mi"] * planner.MI / planner.MI,
+                            t["hr"] * 3600 / 3600, PLAN_DAY, PLAN_LEAVE, TRIP_MI)
+        sentence, plan_tbl, plan_short = trip_plan_html(plan, a, b, app_url)
 
-        # Suggested stops: split the drive into even legs and take the strongest stop near each
-        # break -- power and stalls first, then the shortest walk to food. This is geography,
-        # not a range estimate: it says where the good stops ARE, never when you must charge.
-        legs = 0 if t["mi"] < 130 else max(2, min(4, int(t["mi"] // 130) + 1))
-        picks = []
-        for n in range(1, legs):
-            target = total_mi * n / legs
-            span = max(18.0, total_mi * 0.12)
-            near = [f for f in withfood if abs(cum[f[0]] - target) <= span]
-            if not near:
-                continue
-            def score(f):
-                sx = sites[f[1]]
-                m = matches.get(f[1], {})
-                walk = min((d for k, d in m.items() if is_food(k)), default=9e9)
-                return (-min(sx.get("kw") or 0, 350), -min(sx.get("stalls") or 0, 40), walk)
-            pick = min(near, key=score)
-            if pick[1] not in [p[1] for p in picks]:
-                picks.append(pick)
-
-        rows = []
-        for bi, sid, dist in picks:
-            sx = sites[sid]
+        # Halfway: the strongest stop near the middle with a meal a short walk away. Only the Q&A
+        # uses it, for a drive too short for the plan to stop.
+        half = None
+        for bi_, sid, _d in withfood:
+            if abs(cum[bi_] - total_mi / 2) > total_mi * 0.15: continue
             m = matches.get(sid, {})
-            fk = sorted(((d, k) for k, d in m.items() if is_food(k)))[:3]
-            eats = ", ".join(f"{brands[k]['e']} {bn(k)} {mins(d)} min" for d, k in fk)
-            rows.append(f"<tr><td><b>mile {int(round(cum[bi]))}</b></td>"
-                        f"<td><b>{esc(sx['city'])}, {sx['st']}</b><br><small>{esc(sx['name'])}</small></td>"
-                        f"<td>{sx.get('kw', 0)} kW<br><small>{sx.get('stalls', 0)} stall{'s' if sx.get('stalls', 0) != 1 else ''}</small></td>"
-                        f"<td>{eats or '&mdash;'}</td></tr>")
-        stops_tbl = (f'<div class="tripwrap"><table class="trip"><thead><tr><th>At</th>'
-                     f'<th>Where</th><th>Charger</th><th>Food within a walk</th></tr></thead>'
-                     f'<tbody>{"".join(rows)}</tbody></table></div>' if rows else "")
+            fk = [(d, k) for k, d in m.items() if is_food(k) and k not in planner.NOT_A_MEAL]
+            if not fk: continue
+            d, k = min(fk)
+            sx = sites[sid]
+            rank = (d > 400, -min(sx.get("kw") or 0, 350), -min(sx.get("stalls") or 0, 40), d)
+            if half is None or rank < half[0]:
+                half = (rank, (sx, k, d))
+        half = half[1] if half else None
 
         # Spread the cards across the whole drive. Taking the first 48 in route order would
         # fill the page with the origin city's suburbs and never reach the far end.
@@ -867,7 +1049,8 @@ if os.path.exists(TRIP_PATH):
             m = matches.get(sid, {})
             fk = [k for k in m if is_food(k)]
             focus = min(fk, key=lambda k: m[k]) if fk else (min(m, key=lambda k: m[k]) if m else "")
-            cards.append(trip_card(sites[sid], focus, "../../", map_url))
+            # "Show on map" opens this drive in the app, at this stop.
+            cards.append(trip_card(sites[sid], focus, "../../", f"{app_url}&amp;stop={sid}"))
 
         kws = [sites[f[1]]["kw"] for f in found if sites[f[1]].get("kw")]
         med = sorted(kws)[len(kws) // 2] if kws else 0
@@ -875,35 +1058,29 @@ if os.path.exists(TRIP_PATH):
         tesla = sum(1 for f in found if "Tesla" in (sites[f[1]].get("net") or ""))
         hrs = int(t["hr"]); mns = int(round((t["hr"] - hrs) * 60))
         drive = f"{hrs}h {mns:02d}m"
-        # The longest stretch with no fast charger near the route (the same rule as the map's
-        # route list): where the chargers run out is what a long drive needs to know.
-        scale = t["mi"] / max(total_mi, 1)
-        end_mi = round(t["mi"])
-        marks = sorted(round(cum[f[0]] * scale) for f in found) + [end_mi]
-        g_len, g_from, g_to, prev = 0, 0, 0, 0
-        for m_ in marks:
-            if m_ - prev > g_len:
-                g_len, g_from, g_to = m_ - prev, prev, m_
-            prev = m_
-        if g_len >= 60:
-            where = (f"from the start to mile {g_to}" if g_from == 0 else
-                     f"from mile {g_from} to the end" if g_to == end_mi else
-                     f"between mile {g_from} and mile {g_to}")
-            gap_txt = f" The longest stretch without one is <b>{g_len} miles</b>, {where}."
+        # The longest stretch with no fast charger near the route, by the app's rule (any DC
+        # fast charger within the corridor), so the page, its Q&A and the app's gap row agree.
+        g = plan.longest()
+        if g["len"] >= 60:
+            where = (f"from the start to mile {g['to']}" if g["from"] == 0 else
+                     f"from mile {g['from']} to the end" if g["to"] == g["end"] else
+                     f"between mile {g['from']} and mile {g['to']}")
+            gap_txt = f" Counting every DC fast charger, the longest stretch without one is <b>{g['len']} miles</b>, {where}."
         else:
-            gap_txt = f" There is one at least every <b>{max(g_len, 1)} miles</b> of the way."
+            gap_txt = f" Counting every DC fast charger, there is one at least every <b>{max(g['len'], 1)} miles</b> of the way."
+        faq_html, faq_schema = trip_faq(plan, a, b, t, found, withfood, big, tesla, half)
 
         # Google truncates near 60 characters and the suffix adds 16, so lead with the two
         # cities -- that is what people type -- and keep the whole thing inside the budget.
         title = f"{a.split(',')[0]} to {b.split(',')[0]} EV charging stops"
-        desc = (f"{len(found):,} DC fast chargers within {TRIP_MI:g} miles of the {t['mi']:,.0f}-mile drive "
-                f"from {a} to {b}, and the {len(withfood):,} of them with a restaurant within a "
-                f"10-minute walk. In route order.")
-        break_sec = ("<h2>Good places to break the drive</h2>"
-                     f"<p>Split into roughly {legs} legs, these are the strongest stops near each "
-                     "break &mdash; most power, most stalls, shortest walk to food. Where you "
-                     "actually need to charge depends on your car and how you drive; this is "
-                     f"where the good stops are.</p>{stops_tbl}") if rows else ""
+        desc = (f"{plan_short} {len(found):,} fast chargers on the {t['mi']:,.0f}-mile drive from {a} to {b}, "
+                f"{len(withfood):,} with a restaurant a short walk away.")
+        plan_sec = (f"<h2>Leaving {esc(a.split(',')[0])} at {plan.leave_label()}</h2>\n"
+                    f'<p class="lead">{sentence}</p>\n{plan_tbl}\n'
+                    f'<p class="plannote">Meals fall near their local hour (times are local at each stop), with about '
+                    f"{planner.DWELL_BREAK} minutes for a break and {planner.DWELL_MEAL} for a meal. "
+                    "It is a driver&rsquo;s plan, not a charging plan: where you need to charge depends on "
+                    f'your car. <a href="{app_url}">Open this drive in the app</a> to pick another leaving time.</p>')
         spread = (" &mdash; the strongest stop in each stretch of the drive, so the list covers "
                   "the whole route rather than filling up with the city you left"
                   if len(withfood) > NBINS else "")
@@ -912,21 +1089,22 @@ if os.path.exists(TRIP_PATH):
                 f"sit <b>{len(found):,} DC fast chargers</b> within {TRIP_MI:g} miles of the route "
                 f"&mdash; and <b>{len(withfood):,}</b> of those have somewhere to eat within a "
                 "10-minute walk, so the charging stop and the meal are the same stop.</p>\n"
-                f'<a class="cta" href="{map_url}">Plan this trip on the map &rarr;</a>\n'
-                f"{break_sec}\n"
+                f'<a class="cta" href="{app_url}">Open this drive in the app &rarr;</a>\n'
+                f"{plan_sec}\n"
                 f'<p class="stats">Typical power along this route is <b>{med} kW</b>, with <b>{big}</b> '
                 f"stops at 150 kW or more and <b>{tesla}</b> on the Tesla network. Chargers under "
-                f"{TRIP_MIN_KW} kW are left out &mdash; on a drive this length they cost more time "
-                f"than they save.{gap_txt}</p>\n"
+                f"{TRIP_MIN_KW} kW are left out of the list &mdash; on a drive this length they cost more "
+                f"time than they save.{gap_txt}</p>\n"
                 "<h2>Every stop with food within a walk</h2>\n"
                 f"<p>In order along the route{spread}.</p>\n"
                 f'{"".join(cards)}\n'
+                f"{faq_html}\n"
                 '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>')
         path = f"trip/{sl}/index.html"
         # Trip pages are the ones people share; make_og.py renders a card naming the drive.
         page(path, title, desc, body, f"trip/{sl}/",
              jsonld_route(f"{a.split(',')[0]} to {b.split(',')[0]}", "trip",
-                          [f[1] for f in shown], f"trip/{sl}/", len(withfood)),
+                          [f[1] for f in shown], f"trip/{sl}/", len(withfood), faq_schema),
              og=f"trip-{sl}")
         add(path)
         trip_links.append((a.split(",")[0], b.split(",")[0], sl, len(withfood)))

@@ -7256,14 +7256,20 @@ if (!boot && q.get('q') && q.get('q').trim()) {
 if (q.get('stop') && byId[+q.get('stop')]) {
   const sid = +q.get('stop'), first = boot;
   boot = () => {
-    if (first) first();
-    setTimeout(() => {
+    /* After the drive is planned, not 700 ms into it: a /trip/ page's stop link opened the
+       stop, then the route's fit swept the map out to the whole drive with the card half
+       under the top bar. A stop on the plan leads with the chain the plan promised there. */
+    Promise.resolve(first ? first() : null).then(() => setTimeout(() => {
+      const pick = lastPlan && lastPlan.route === route ? lastPlan.picks.find(p => p.s.id === sid) : null;
+      if (pick && pick.k) popupLead = { id: sid, k: pick.k };
       const row = document.querySelector(`#list .row[data-id="${sid}"]`);
-      if (row) return row.click();
+      // As a tap, not a key press: row.click() (detail 0) moved focus into the card as for the
+      // keyboard, and its star drew the keyboard ring on a link nobody had typed into.
+      if (row) return row.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, detail: 1 }));
       userMovedMap = true;
       map.setView([byId[sid].lat, byId[sid].lon], 14);
       setTimeout(() => { if (mk[sid]) { popupPad(mk[sid]); mk[sid].openPopup(); } }, 300);
-    }, 700);
+    }, 700));
   };
 }
 if (boot) setTimeout(boot, 80);

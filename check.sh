@@ -15,6 +15,9 @@ run "verify_ui.py"       python3 verify_ui.py
 # Where searches END UP (a located user, a remembered area, no location), offline. The full
 # version needs the internet: node tools/search_audit.mjs
 run "search_audit --quick" node tools/search_audit.mjs --quick
+# The /trip/ pages' 8 am plan against the app's own breaks card on the same drive, offline
+# (the route answered from data/trips.json). Every trip: node tools/trip_plan_check.mjs
+run "trip_plan_check --quick" node tools/trip_plan_check.mjs --quick
 run "sw_test.mjs"        node sw_test.mjs
 run "publish.py"         python3 publish.py
 rm -rf _site

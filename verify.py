@@ -971,21 +971,73 @@ if os.path.exists(_trips):
     check(os.path.exists(_lv), "the LA to Las Vegas trip page is gone")
     if os.path.exists(_lv):
         _t = open(_lv, encoding="utf-8").read()
-        # The CTA is the whole point of the page: it must land on the app already routed
-        # and already filtered to food, or the page is just a list.
-        check("any=food" in _t and "from=Los%20Angeles" in _t and "to=Las%20Vegas" in _t,
-              "the trip CTA no longer opens the map on that route with food selected")
-        check("mile " in _t, "the break-the-drive table lost its route mileage")
-        # Distance, not point index. OSRM emits geometry far denser in cities, and indexing
-        # by point put the first suggested stop 30 miles into a 270-mile drive.
-        _m = [int(x) for x in re.findall(r"<b>mile (\d+)</b>", _t)]
-        check(_m and _m[0] > 45,
-              f"first suggested stop is at mile {_m[0] if _m else '?'} — sampling is skewed to the origin city")
-    for _short in ("orlando-to-tampa", "denver-to-colorado-springs"):
-        _f = os.path.join(HERE, "trip", _short, "index.html")
-        if os.path.exists(_f):
-            check("Good places to break" not in open(_f, encoding="utf-8").read(),
-                  f"{_short} is under 130 miles and should not suggest a mid-drive charging stop")
+        # The CTA is the whole point of the page: it opens the app on this drive, leaving at
+        # 8:00 am, so the app's plan is the plan on the page.
+        check('<a class="cta" href="../../?from=Los%20Angeles%2C%20CA&amp;to=Las%20Vegas%2C%20NV&amp;c=5&amp;leave=0800">Open this drive in the app' in _t,
+              "the trip CTA no longer opens the app on that drive leaving at 8:00 am")
+    # The 8 am plan on every trip page (2026-11-11): planner.py's port of the app's breaks
+    # card. tools/trip_plan_check.mjs compares it with the app itself; this checks that every
+    # page carries one, that it is what planner.py says NOW (a page left stale after a change
+    # to the plan's code or to index.html's meal rules fails here), and that it is sane.
+    import planner as _pl
+    from html import unescape as _un
+    _txt = lambda h: _un(re.sub(r"<[^>]+>", "", h)).strip()
+    _sites = {x["id"]: x for x in D["sites"]} if D else {}
+    _bad_plan, _bad_faq, _bad_ld, _stale = [], [], [], []
+    for _tk, _tt in _tj.items():
+        _sl = "-to-".join(re.sub(r"[^a-z0-9]+", "-", x.split(",")[0].lower()).strip("-") for x in (_tt["a"], _tt["b"]))
+        _f = os.path.join(HERE, "trip", _sl, "index.html")
+        if not os.path.exists(_f):
+            continue
+        _h = open(_f, encoding="utf-8").read()
+        _tb = re.search(r'<table class="trip plan">.*?<tbody>(.*?)</tbody>', _h, re.S)
+        if not _tb:
+            _bad_plan.append(f"{_sl}: no plan"); continue
+        _rows = re.findall(r"<tr[^>]*>(.*?)</tr>", _tb.group(1), re.S)
+        if not (_rows and "<b>8:00 am</b>" in _rows[0] and "Leave " in _rows[0] and "Arrive in " in _rows[-1]):
+            _bad_plan.append(f"{_sl}: no leave/arrive rows")
+        _got = []
+        for _r in _rows[1:-1]:
+            if "No fast charger for" in _r:
+                _got.append(("gap", _txt(re.search(r"<td><b>([^<]*)</b>", _r).group(1)), int(re.search(r"for (\d+) mi", _r).group(1))))
+                continue
+            _lab = re.search(r'<i class="ml[^"]*">([^<]*)</i> &middot; mile (\d+)', _r)
+            _sid = re.search(r"leave=0800&amp;stop=(\d+)", _r)
+            _k = re.search(r"<td>[^<]*<b>(.*?)</b> (\d+) min", _r.split("</td>")[3] + "</td>") if _r.count("</td>") >= 4 else None
+            if not (_lab and _sid and int(_sid.group(1)) in _sites):
+                _bad_plan.append(f"{_sl}: a stop row without a label, a mile or a real stop link"); continue
+            _kk = _txt(_k.group(1)) if _k else ""
+            if _lab.group(1) in ("Lunch", "Dinner") and _kk in _pl.NOT_A_MEAL or _lab.group(1) == "Breakfast" and _kk in _pl.NO_BREAKFAST:
+                _bad_plan.append(f"{_sl}: {_lab.group(1)} at {_kk}")
+            _got.append(("stop", _txt(re.search(r"<td><b>([^<]*)</b>", _r).group(1)), _lab.group(1), int(_lab.group(2)), int(_sid.group(1)), _kk))
+        _P = _pl.Plan(D["sites"], {int(k): v for k, v in D["matches"].items()}, D["brands"], _tt["pts"],
+                      _tt["mi"] * _pl.MI / _pl.MI, _tt["hr"] * 3600 / 3600, __import__("datetime").date.fromisoformat(D["generated"]), 480, 5)
+        _want = [("gap", r["clock"], r["gap"]["len"]) if r["kind"] == "gap" else
+                 ("stop", r["clock"], r["label"], r["mi"], r["s"]["id"], r["k"] or "") for r in _P.rows()]
+        if _got != _want or f"<b>~{_P.arrive()[0]}</b>" not in _rows[-1]:
+            _stale.append(_sl)
+        _stops = [g for g in _got if g[0] == "stop"]
+        if _stops and _stops[0][3] * _tt["hr"] * 60 / _tt["mi"] < 55:
+            _bad_plan.append(f"{_sl}: first stop at mile {_stops[0][3]}, under an hour out")
+        if _tt["mi"] < 130 and _stops:
+            _bad_plan.append(f"{_sl}: a stop on a drive under 130 miles leaving at 8 am")
+        # The FAQPage markup is the visible questions and answers, word for word.
+        _vis = [(_txt(q), _txt(a)) for q, a in re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>",
+                                                           (re.search(r'<h2>Questions about this drive</h2><div class="faq">(.*?)</div>', _h, re.S) or re.match("()", "")).group(1), re.S)]
+        _lds = []
+        for _m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', _h, re.S):
+            try:
+                _lds.append(json.loads(_m.group(1).replace("<\\/", "</")))
+            except ValueError:
+                _bad_ld.append(_sl)
+        _fq = [x for x in _lds if x.get("@type") == "FAQPage"]
+        _ldq = [(e["name"], e["acceptedAnswer"]["text"]) for e in _fq[0]["mainEntity"]] if len(_fq) == 1 else None
+        if not _vis or len(_vis) < 5 or _ldq != _vis:
+            _bad_faq.append(_sl)
+    check(not _bad_plan, f"trip-page 8 am plans are wrong: {_bad_plan[:3]}")
+    check(not _stale, f"{len(_stale)} trip pages' plans differ from planner.py (run build.py): {_stale[:3]}")
+    check(not _bad_faq, f"{len(_bad_faq)} trip pages' FAQPage markup is missing or differs from the visible Q&A: {_bad_faq[:3]}")
+    check(not _bad_ld, f"JSON-LD does not parse on {_bad_ld[:3]}")
 check("trip/los-angeles-to-las-vegas/" in _html, "the app no longer links to any trip page")
 
 # ---- Siri / Shortcuts ----
@@ -1693,6 +1745,13 @@ check(_live("if (!el.contains(document.activeElement)) { el.tabIndex = -1; el.fo
       and re.search(r"\.herocard \.x:focus-visible\{outline-offset:-[4-9]px;border-radius:\d+px\}", _html) is not None
       and "(e.shiftKey && document.activeElement === $(d.id) ? last : first).focus();" in _html,
       "a dialog focuses its first control on open again (the welcome card's x shows a square ring)")
+# A /trip/ page's stop link (?from&to&leave&stop=) opens the stop once the drive is planned,
+# leading with the chain the plan promised, as a tap (2026-11-11). tools/trip_plan_check.mjs
+# opens every such link; this pins the wiring.
+check(_live("Promise.resolve(first ? first() : null).then(() => setTimeout(() => {")
+      and _live("if (pick && pick.k) popupLead = { id: sid, k: pick.k };")
+      and _live("if (row) return row.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, detail: 1 }));"),
+      "?stop= opens the stop before the drive is planned again, or as a key press (focus ring)")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
