@@ -25,6 +25,8 @@ const NO_BREAKFAST = ['Popeyes', 'In-N-Out', 'Chipotle', 'Five Guys', 'Shake Sha
   'Olive Garden', 'Texas Roadhouse', "Chili's", "Applebee's", 'Buffalo Wild Wings', 'Red Robin', 'Panda Express',
   'KFC', "Arby's", "Culver's", 'Dairy Queen', "Zaxby's", "Portillo's", 'Cook Out', 'Little Caesars', "Domino's",
   'Pizza Hut', "Jersey Mike's", 'Firehouse Subs', 'Ice cream shop'];
+// Open late or all night (index.html LATE): where a break between 10 pm and 6 am should be.
+const LATE = ["McDonald's", 'Taco Bell', 'Jack in the Box', "Denny's", 'Waffle House', 'Whataburger', 'IHOP'];
 const NOT_A_MEAL = ['Starbucks', "Dunkin'", 'Dutch Bros', "Peet's Coffee", 'Caribou Coffee', 'Krispy Kreme', 'Ice cream shop'];
 
 // "1:05 pm" -> minutes after midnight
@@ -63,7 +65,9 @@ const CASES = [
     r => meals(r).join() === 'Breakfast,Lunch,Dinner' ? '' : `meals ${meals(r)}`,
     // Lunch is in Nevada or Utah, at roughly 12:30 LOCAL time
     r => { const l = r.stops.find(s => s.label === 'Lunch'); return l && /, (NV|UT|AZ)$/.test(l.place) && Math.abs(mins(l.clock) - 750) <= 75 ? '' : `lunch ${l && l.place} ${l && l.clock}`; },
-    r => { const d = r.stops.find(s => s.label === 'Dinner'); return d && /, (UT|CO)$/.test(d.place) ? '' : `dinner ${d && d.place}`; }]],
+    r => { const d = r.stops.find(s => s.label === 'Dinner'); return d && /, (UT|CO)$/.test(d.place) ? '' : `dinner ${d && d.place}`; },
+    // I-70 in Utah has a charger gap: a row in the plan, and no "longest leg" next to it.
+    r => r.gap && !/longest leg/.test(r.sub) ? '' : `gap row "${r.gap}", subtitle "${r.sub}"`]],
   // The Texas line jumps an hour at lunchtime: a LATE lunch is fine, an early one is not.
   ['Albuquerque, NM', 'Dallas, TX', 480, 'America/Denver', [
     r => { const l = r.stops.find(s => s.label === 'Lunch'); return l && mins(l.clock) >= 12 * 60 + 30 - 45 ? '' : `lunch ${l && l.clock}`; }]],
@@ -83,15 +87,30 @@ const CASES = [
     r => r.title ? '' : 'no breaks card']],
   ['Seattle, WA', 'Portland, OR', 600, 'America/Los_Angeles', [
     r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)}`]],
+  /* The longest charger gap is a row in the plan at its mile (UI-04), and the card does not
+     also name a "longest leg", a second "longest" that read as the same thing. */
+  ['Denver, CO', 'Salt Lake City, UT', 480, 'America/Denver', [
+    r => /^No fast charger for \d+ mi$/.test(r.gap) ? '' : `no charger-gap row (got "${r.gap}")`,
+    r => !/longest leg/.test(r.sub) ? '' : `subtitle "${r.sub}" next to the gap row`]],
+  // Leaving at 9 pm: breaks between 10 pm and 6 am go to places likely open (BUG-12).
+  ['Los Angeles, CA', 'New York, NY', 1260, 'America/Los_Angeles', [
+    r => { const night = r.stops.filter(s => s.label === 'Break' && (mins(s.clock) >= 22 * 60 || mins(s.clock) < 6 * 60));
+      const bad = night.filter(s => !LATE.includes(s.chain));
+      // One may be a 24-hour site with no late chain in walking distance.
+      return night.length > 3 && bad.length <= 1 ? '' : `night breaks not at late chains: ${bad.map(s => s.clock + ' ' + s.place + ' (' + s.chain + ')').join(', ')}`; }]],
   /* Coast to coast: more stops than the list renders (LIST_MAX), and every break must still
      open its stop -- 17 of 23 did nothing when the tap looked the stop up by its list row. */
   ['Los Angeles, CA', 'New York, NY', 420, 'America/Los_Angeles', [
     r => r.taps && r.taps.length > 15 ? '' : `only ${r.taps && r.taps.length} breaks to tap`,
     r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return dead.length ? `${dead.length} break taps did not open their stop: ${JSON.stringify(dead.slice(0, 3))}` : ''; },
+    // "Breakfast · Wendy's 4 min" opened a card that led with Panda Express and hid Wendy's in "+14".
+    r => { const off = (r.taps || []).filter(([, , k, lead]) => k && !lead.includes(k)); return off.length ? `${off.length} stop cards do not lead with the promised chain: ${JSON.stringify(off.slice(0, 2))}` : ''; },
     // ~41 h of driving from 7 am: the last stops and the arrival are on day 3, not "next day".
     r => dayOf(r.arrive) === 3 ? '' : `arrival "${r.arrive}" (want day 3)`,
-    r => r.stops.some(s => dayOf(s.label) === 3) ? '' : 'no stop on day 3',
-    r => r.stops.every((s, i) => !i || dayOf(s.label) >= dayOf(r.stops[i - 1].label)) ? '' : 'day labels go backwards'],
+    r => r.stops.some(s => s.day === 3) ? '' : 'no stop on day 3',
+    r => r.stops.every((s, i) => !i || s.day >= r.stops[i - 1].day) ? '' : 'days go backwards',
+    // The day change is marked once, above its first row, not ", next day" on every row.
+    r => r.rows.filter(x => x === 'day').length === 2 && r.stops.every(s => !/day/.test(s.label)) ? '' : `day marks: ${r.rows.join(' ')}`],
     { taps: true }],
 ];
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
@@ -100,6 +119,10 @@ const ALWAYS = [
   r => r.stops.every(s => !/^(Lunch|Dinner)/.test(s.label) || !NOT_A_MEAL.includes(s.chain)) ? '' : 'lunch or dinner at a coffee/ice cream place',
   r => r.stops.every((s, i) => !i || s.mile > r.stops[i - 1].mile) ? '' : 'stops out of order',
   dwellGaps,
+  // A break is never within ~1.5 h of driving after the stop before (BUG-11: Childress, then
+  // Vernon an hour later).
+  r => { const bad = r.stops.filter((s, i) => s.label === 'Break' && (s.mile - (i ? r.stops[i - 1].mile : 0)) * r.perMin < 150 * 0.6 - 3);
+    return bad.length ? 'breaks bunched up: ' + bad.map(s => s.clock + ' ' + s.place).join(', ') : ''; },
 ];
 
 async function cdpConnect(wsUrl) {
@@ -145,20 +168,30 @@ const READ = `(() => {
       const h = t.match(/(\\d+)h(?: (\\d+)m)?/), m = t.match(/· (\\d+) min/);
       const drive = h ? +h[1] * 60 + +(h[2] || 0) : m ? +m[1] : 0;
       return { drive, perMin: mi ? drive / mi : 0 }; })(),
-    stops: [...card.querySelectorAll('.brk')].map(b => {
-      const line = b.querySelector('.bt span').textContent;
-      // "350 kW · 🍔 Wendy's 4 min · mile 74": the part ending in "min", without its emoji
-      const seg = line.split(' · ').find(x => / \\d+ min$/.test(x)) || '';
-      const chain = seg.replace(/^\\S+ /, '').replace(/ \\d+ min$/, '');
-      return { clock: b.querySelector('.bm').firstChild.textContent.trim(), label: b.querySelector('.bm i').textContent,
-        place: b.querySelector('.bt b').textContent, chain, mile: +(line.match(/mile (\\d+)/) || [])[1] };
-    }) };
+    sub: (card.querySelector('.bh small') || {}).textContent || '',
+    gap: (card.querySelector('.brk.gap .bt b') || {}).textContent || '',
+    rows: [...card.children].filter(e => e.matches('.brk, .bday')).map(e => e.matches('.bday') ? 'day' : e.matches('.gap') ? 'gap' : 'stop'),
+    stops: (() => {
+      // A row per stop; each day after the first starts under a "Next day · ..." / "Day 3 · ..." line.
+      let day = 1; const out = [];
+      for (const b of card.children) {
+        if (b.matches('.bday')) { day = /^Next day/.test(b.textContent) ? 2 : +(b.textContent.match(/^Day (\\d+)/) || [])[1]; continue; }
+        if (!b.matches('.brk[data-brk]')) continue;
+        const line = b.querySelector('.bt span').textContent;
+        // "350 kW · 🍔 Wendy's 4 min": the part ending in "min", without its emoji
+        const seg = line.split(' · ').find(x => / \\d+ min$/.test(x)) || '';
+        const chain = seg.replace(/^\\S+ /, '').replace(/ \\d+ min$/, '');
+        out.push({ clock: b.querySelector('.bm').firstChild.textContent.trim(), label: b.querySelector('.bm i').textContent, day,
+          place: b.querySelector('.bt b').textContent, chain, mile: +(b.querySelector('.bm small').textContent.match(/mile (\\d+)/) || [])[1] });
+      }
+      return out; })() };
 })()`;
 
-// Tap every break in turn; each must open the stop card at the break's own mile.
+// Tap every break in turn; each must open the stop card at the break's own mile, its first
+// place being the chain the break promised.
 const TAPS = `(async () => {
   const out = [];
-  for (const b of [...document.querySelectorAll('.brk')]) {
+  for (const b of [...document.querySelectorAll('.brk[data-brk]')]) {
     const want = +(b.textContent.match(/mile (\\d+)/) || [])[1];
     b.click();
     let got = null;
@@ -167,7 +200,8 @@ const TAPS = `(async () => {
       const pm = document.querySelector('.leaflet-popup-content .pp-mile');
       got = pm ? +(pm.textContent.match(/mile (\\d+)/) || [])[1] : null;
     }
-    out.push([want, got]);
+    const lead = document.querySelector('.leaflet-popup-content .pp-nb');
+    out.push([want, got, b.dataset.k || '', lead ? lead.textContent : '']);
   }
   return out;
 })()`;

@@ -312,10 +312,13 @@ check(re.search(r"if \(!p\.chains\.length && !p\.anyCat && q0\.chains && chainSi
 check("const mileAt = new Map();" in _html and 'class="idx mi"' in _html,
       "route rows lost their mile markers")
 # A route says where its longest charger gap is (geography, never a charging plan).
-check("$('list').innerHTML = gapNote() + " in _html and "function gapNote()" in _html,
+# On a drive with a breaks card the gap is a row in it, at its mile (2026-11-10); otherwise a note.
+check("$('list').innerHTML = (bc || gapNote()) + vis.slice(0, LIST_MAX)" in _html and "function gapNote()" in _html
+      and "const gap = chargerGap();" in _html[_html.index("function breaksCard("):_html.index("function gapNote()")]
+      and 'class="brk gap" role="note"' in _html,
       "route lists no longer flag the longest stretch without a fast charger")
 # Long routes open with suggested breaks (driver breaks near each ~2 h mark, not a charging plan).
-check("gapNote() + breaksCard(vis) + vis.slice(0, LIST_MAX)" in _html and "function breakPicks(vis)" in _html,
+check("const bc = breaksCard(vis);" in _html and "function breakPicks(vis)" in _html,
       "long routes no longer suggest where to break the drive")
 # The stop card says which of its places are open, in one cached lookup per stop.
 check(re.search(r"(?m)^  if \(el\) fillHours\(el[,)]", _html) is not None and "async function fillHours(el" in _html,
@@ -1281,9 +1284,25 @@ for _raw, _want in [("Bucees Calhoun MB.HPC", "Buc-ee's Calhoun"), ("Gvec DC", "
     check(_pn(_raw) == _want, f"pretty_name({_raw!r}) = {_pn(_raw)!r}, want {_want!r}")
 
 # The breaks card only claims a cadence when no stretch runs long.
-_bc = _html[_html.index("function breaksCard("):][:1800]
+_bc = _html[_html.index("function breaksCard("):_html.index("function chargerGap(")]
 check("longest * perMi * 60 <= BREAK_MIN * 1.25" in _bc and "longest leg ~" in _bc,
       "the breaks card claims 'about every N h' even when a stretch has no stop")
+# ...and does not name a "longest leg" beside the charger-gap row: two different "longest"s read
+# as one (Denver -> Salt Lake City).
+check(": gap ? '' : `longest leg ~${hmLabel(longest * perMi * 60)}`;" in _bc,
+      "the breaks card names a 'longest leg' next to the charger-gap row again")
+# Breaks card polish (2026-11-10): the meal as a 12px amber pill (it was 10.5px), the mile under
+# the clock (it was the truncated end of the food line), a chevron, and the day change marked once.
+check(".brk.meal .bm i{align-self:flex-start;color:var(--chew);background:var(--chew-bg)" in _html
+      and ".brk .bm i{font:500 12px/1.35 var(--sans)" in _html
+      and "<span class=\"bm\">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>" in _bc
+      and '<svg class="chev"' in _bc and "const mark = n > day ? `<div class=\"bday\">" in _bc,
+      "the breaks card rows lost their polish (meal pill, mile under the clock, chevron, one day mark)")
+# A break opens a card that leads with the chain it promised (Wendy's was hidden in "+14").
+check("popupLead = b.dataset.k ? { id: s.id, k: b.dataset.k } : null;" in _html
+      and ".sort((a, b) => (pri(b[0]) - pri(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));" in _html
+      and "<a class=\"pp-nb${pri(k) ? ' on' : ''}\"" in _html,
+      "a suggested break's stop card no longer leads with the promised chain")
 # Meal-timed breaks (2026-11): meals by LOCAL time at each stop, a real meal (no coffee for
 # lunch, no Popeyes for breakfast), a leaving time that re-plans the card.
 _bp = _html[_html.index("function breakPicks("):_html.index("function breaksCard(")]
@@ -1296,6 +1315,10 @@ check("if (!next) break;\n      had.add(next.key); picks.push(next); last = next
       and "else if (next) { had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL; }" in _bp
       and "if (pick) { picks.push(pick); last = pick.mi; extra += DWELL_BREAK; }" in _bp,
       "suggested breaks no longer count the time spent at earlier stops")
+# Night breaks go somewhere likely open: Starbucks at 2:35 am on LA -> New York leaving at 9 pm.
+check("const sc = [off, shut, -Math.min(s.kw || 0, 350)" in _bp and "keys.filter(x => LATE.has(x))" in _bp
+      and "if (lk) { k = lk; w = lw; } else shut = s.h24 ? 1 : 2;" in _bp,
+      "breaks between 10 pm and 6 am no longer prefer late-night chains or 24-hour sites")
 check("const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwellOf(p), 0) * 60000;" in _html,
       "the breaks card's arrival ignores the time at stops again")
 _fh = _html[_html.index("async function fillHours("):_html.index("function poiDetailHtml(")]
@@ -1325,9 +1348,27 @@ _ac = _html[_html.index("function applyCorridor("):_html.index("function applyCo
 check("const b = bucket.get(cell(ci + di, cj + dj));" in _ac and "cells.add(cell(ci + di, cj + dj))" in _ac
       and "+ ',' +" not in _ac and "for (let i = 0; i < verts.length; i += step) {\n      const d = hav(" not in _ac,
       "applyCorridor measures each stop against every route point again (seconds-long freeze on long routes)")
+# Time zones at stops (2026-11-10): Ontario OR, West Wendover NV and western Kansas keep Mountain time.
+if _node and "const ST_TZ = " in _html:
+    _tz = _html[_html.index("const ST_TZ = "):_html.index("const TZ_FMT")]
+    _r6 = subprocess.run([_node, "-e", _tz + r"""
+const f = [], t = (st, lat, lon, want) => { const got = tzOf({ st, lat, lon }); if (got !== 'America/' + want) f.push(`${st} ${lat},${lon}: ${got}`); };
+t('OR', 44.03, -116.96, 'Denver');      // Ontario, I-84
+t('OR', 45.52, -122.68, 'Los_Angeles'); // Portland
+t('OR', 44.77, -117.83, 'Los_Angeles'); // Baker City
+t('NV', 40.73, -114.07, 'Denver');      // West Wendover, I-80
+t('NV', 36.17, -115.14, 'Los_Angeles'); // Las Vegas
+t('NV', 40.83, -115.76, 'Los_Angeles'); // Elko
+t('KS', 39.35, -101.71, 'Denver');      // Goodland, I-70
+t('KS', 37.98, -101.75, 'Denver');      // Syracuse, US-50
+t('KS', 39.39, -101.05, 'Chicago');     // Colby
+t('KS', 37.69, -97.34, 'Chicago');      // Wichita
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_r6.stdout.strip() == "OK", "tzOf() puts a stop in the wrong time zone:\n  " + (_r6.stdout + _r6.stderr).strip()[:300])
+
 # A break opens its stop even when the stop has no list row (only LIST_MAX render): LA -> New
 # York had 17 of 23 break buttons doing nothing. tools/breaks_check.mjs taps every one.
-_bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:260]
+_bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:520]
 check("track('break-pick'); flyToStop(s, e.detail === 0);" in _bk and ".row[data-id" not in _bk,
       "a suggested break looks its stop up by list row again (dead buttons past the first 300 rows)")
 

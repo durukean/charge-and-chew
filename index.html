@@ -625,8 +625,17 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk+.brk{border-top:1px solid var(--line);border-radius:0}
 .brk:hover{background:var(--surface2)}
 .brk .bm{flex:0 0 74px;font:700 15px/1.2 var(--display);color:var(--txt);display:flex;flex-direction:column}
-.brk .bm i{font:500 10.5px var(--sans);color:var(--dim);font-style:normal}
-.brk.meal .bm i{color:var(--chew);font-weight:600}
+.brk .bm i{font:500 12px/1.35 var(--sans);color:var(--dim);font-style:normal}
+/* The meal is what the card is for: it was the smallest text on screen (10.5 px). */
+.brk.meal .bm i{align-self:flex-start;color:var(--chew);background:var(--chew-bg);font-weight:600;padding:0 7px;border-radius:999px;margin-top:2px}
+/* Where on the drive, under the time: on the food line it was the part cut off at 375 px. */
+.brk .bm small{font:500 11.5px/1.35 var(--sans);color:var(--dim);margin-top:1px}
+.brk .chev{flex:0 0 14px;color:var(--dim2)}
+.bday{font:600 12px var(--sans);color:var(--dim);margin:4px 0 0;padding:8px 8px 2px;border-top:1px solid var(--line)}
+.brk.gap{cursor:default}
+.brk.gap:hover{background:none}
+.brk.gap .bt b{color:var(--warn)}
+.brk.gap .bt span{white-space:normal}
 .bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 6px;font-size:12.5px;color:var(--dim)}
 .bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -1837,14 +1846,19 @@ function reportUrl(s) {
   return 'https://github.com/durukean/charge-and-chew/issues/new?title=' +
     encodeURIComponent(`Data issue: ${s.name}`) + '&body=' + encodeURIComponent(body);
 }
+/* The chain a suggested break promised, for that stop's card: listed first and marked, the way
+   a chain you searched for is. Dropped when that card closes. */
+let popupLead = null;
+const leadAt = s => popupLead && popupLead.id === s.id ? popupLead.k : null;
+map.on('popupclose', e => { if (popupLead && e.popup._source && e.popup._source._sid === popupLead.id) popupLead = null; });
 function popupHtml(s) {
-  const m = MATCH[s.id] || {};
+  const m = MATCH[s.id] || {}, lead = leadAt(s), pri = k => (k === lead ? 2 : 0) + (active.has(k) ? 1 : 0);
   /* The panel used to open with everything at once -- plugs, address, three warnings, a
      disclaimer, a scrolling list of every chain within 800 m, three buttons -- which buried
      the two things people open a stop for: is it fast, and what is next to it. Those stay
      on top; the rest is one tap away under More. */
   const ent = Object.entries(m)
-    .sort((a, b) => (active.has(b[0]) - active.has(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+    .sort((a, b) => (pri(b[0]) - pri(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
   const rows = ent.map(([k, v]) => { const d = mDist(s, v);
     const isLive = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name;
     const label = isLive ? livePoiFor[s.id].name : k;
@@ -1910,7 +1924,7 @@ function popupHtml(s) {
     const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
     const inner = `${BRANDS[k].e} ${esc(label)} <b>${walkMin(d)} min</b>`;
     const hk = at && k !== livePoiKey ? ` data-hk="${esc(k)}" data-at="${at[0].toFixed(5)},${at[1].toFixed(5)}"` : '';
-    return at ? `<a class="pp-nb${active.has(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
+    return at ? `<a class="pp-nb${pri(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
   }).join('');
   return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
@@ -2025,7 +2039,8 @@ function showPOIs(s) {
   const m = MATCH[s.id]; if (!m) return;
   // The same three places the card lists: sixteen emoji and dashed lines at once was a lot
   // to take in for one tap.
-  let keys = Object.keys(m).sort((a, b) => (active.has(b) - active.has(a)) || mDist(s, m[a]) - mDist(s, m[b]));
+  const lead = leadAt(s), pri = k => (k === lead ? 2 : 0) + (active.has(k) ? 1 : 0);
+  let keys = Object.keys(m).sort((a, b) => (pri(b) - pri(a)) || mDist(s, m[a]) - mDist(s, m[b]));
   keys = keys.slice(0, 3);
   const pts = [[s.lat, s.lon]];
   for (const k of keys) {
@@ -2803,7 +2818,8 @@ function renderList(vis) {
     return;
   }
   const showIdx = !!route;
-  $('list').innerHTML = gapNote() + breaksCard(vis) + vis.slice(0, LIST_MAX).map((s, i) => {
+  const bc = breaksCard(vis);
+  $('list').innerHTML = (bc || gapNote()) + vis.slice(0, LIST_MAX).map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
@@ -2859,6 +2875,8 @@ function renderList(vis) {
   $('list').querySelectorAll('[data-brk]').forEach(b => b.onclick = e => {
     const s = byId[+b.dataset.brk];
     if (!s || !mk[s.id]) return;
+    // "Breakfast · Wendy's 4 min" opened a card that led with Panda Express and hid Wendy's in "+14".
+    popupLead = b.dataset.k ? { id: s.id, k: b.dataset.k } : null;
     track('break-pick'); flyToStop(s, e.detail === 0);
   });
   const ls = $('leaveSel');
@@ -6149,6 +6167,9 @@ function tzOf(s) {
   if (s.st === 'TX' && s.lon < -104.9) return 'America/Denver';
   if (s.st === 'ID' && s.lat > 45.6) return 'America/Los_Angeles';
   if ((s.st === 'ND' && s.lon < -101.2) || (s.st === 'SD' && s.lon < -100.6) || (s.st === 'NE' && s.lon < -101.4)) return 'America/Denver';
+  // Interstate towns on Mountain time in Pacific and Central states: Ontario, OR (Malheur, I-84),
+  // West Wendover, NV (I-80), and Goodland and Syracuse, KS (I-70, US-50).
+  if ((s.st === 'OR' && s.lon > -117.2) || (s.st === 'NV' && s.lon > -114.1) || (s.st === 'KS' && s.lon < -101.4)) return 'America/Denver';
   return 'America/' + (ST_TZ[s.st] || 'New_York');
 }
 const TZ_FMT = new Map();
@@ -6188,6 +6209,9 @@ const mealKeys = (m, meal) => foodKeys(m).filter(k => chainQuery() ||
    a snack, a meal is ordering and eating: a driver's plan, not a charging plan. */
 const DWELL_BREAK = 20, DWELL_MEAL = 40;   // minutes
 const dwellOf = p => p.meal ? DWELL_MEAL : DWELL_BREAK;
+/* Between 10 pm and 6 am a break goes to a 24-hour site or one of these, most of them open
+   late or all night: LA -> New York leaving at 9 pm stopped at Starbucks at 2:35 am. */
+const LATE = new Set(["McDonald's", 'Taco Bell', 'Jack in the Box', "Denny's", 'Waffle House', 'Whataburger', 'IHOP']);
 function breakPicks(vis) {
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return [];
   const [first, lastStop] = routeEnds(vis);
@@ -6255,14 +6279,19 @@ function breakPicks(vis) {
          put Vernon, the one dinner stop, 59 minutes on, and the drive had no dinner. And, like
          a meal, not in the last half hour. */
       if ((mi - last) * perMin < BREAK_MIN * 0.6 || (to - mi) * perMin < (next ? 60 : 30)) continue;
-      const m = MATCH[s.id] || {};
-      const [k, w] = nearestOf(s, chainQuery() ? chainKeysOn(m) : foodKeys(m), m);
+      const m = MATCH[s.id] || {}, keys = chainQuery() ? chainKeysOn(m) : foodKeys(m);
+      let [k, w] = nearestOf(s, keys, m), shut = 0;
       if (!k) continue;                                       // a break means somewhere to eat
+      const ms = t0 + (mi * perMin + extra) * 60000, hm = localAt(ms, tzOf(s)).min;
+      if (hm >= 22 * 60 || hm < 6 * 60) {                     // a late chain, else a 24-hour site
+        const [lk, lw] = nearestOf(s, keys.filter(x => LATE.has(x)), m);
+        if (lk) { k = lk; w = lw; } else shut = s.h24 ? 1 : 2;
+      }
       /* The strongest stop near the mark; failing any, the one nearest it. I-70 east of Salina
          has no stop for 100 miles: skipping that mark left 5.5 h from dinner to the next break. */
       const off = Math.abs(mi - target) > span ? Math.abs(mi - target) : 0;
-      const sc = [off, -Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
-      if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null, mi, ms: t0 + (mi * perMin + extra) * 60000 }; pickScore = sc; }
+      const sc = [off, shut, -Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
+      if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null, mi, ms }; pickScore = sc; }
     }
     if (pick) { picks.push(pick); last = pick.mi; extra += DWELL_BREAK; }
     else if (next) { had.add(next.key); picks.push(next); last = next.mi; extra += DWELL_MEAL; }
@@ -6296,9 +6325,13 @@ function breaksCard(vis) {
      gets its lunch stop. */
   const at = [0, ...picks.map(p => route.mileAt.get(p.s.id)), route.mi];
   let longest = 0; for (let i = 1; i < at.length; i++) longest = Math.max(longest, at[i] - at[i - 1]);
+  /* The longest charger gap is a row of its own at its mile (below). A "longest leg ~4h 58m"
+     under it read as a second, different "longest" (Denver -> Salt Lake City), so the leg is
+     only named when there is no gap row to explain it. */
+  const gap = chargerGap();
   const sub = picks.length < 2 ? '' : longest * perMi * 60 <= BREAK_MIN * 1.25
     ? `about every ${Math.round(route.hr / (picks.length + 1) * 10) / 10} h of driving`
-    : `longest leg ~${hmLabel(longest * perMi * 60)}`;
+    : gap ? '' : `longest leg ~${hmLabel(longest * perMi * 60)}`;
   const hours = Array.from({ length: 18 }, (_, i) => (i + 5) * 60);   // 5 am .. 10 pm
   const opts = `<option value=""${leaveAt === null ? ' selected' : ''}>now</option>` +
     hours.map(v => `<option value="${v}"${leaveAt === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
@@ -6306,26 +6339,47 @@ function breaksCard(vis) {
      day is counted from the day you leave: "next day" was all this knew, so LA -> New York
      (50 h) arrived "next day" and its lunch on day 3 said the same. */
   const home = localAt(t0, tzOf(first)).dn;
-  const when = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home;
-    return [clockLabel(l.min), n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : '']; };
+  const dayName = n => n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : '';
+  const when = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home; return [clockLabel(l.min), dayName(n), n, l.wd]; };
   const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwellOf(p), 0) * 60000;
+  /* The plan in driving order: the breaks, and the charger gap where it starts (after a stop
+     at the same mile: you leave that stop into it). Each day after the first is marked once,
+     above its first row -- "Break, next day" on every row wrapped in the time column. */
+  const rows = picks.map(({ s, walk, k, meal, ms, mi }) => ({ mi, ms, s, html: c =>
+    `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}"${k ? ` data-k="${esc(k)}"` : ''}>
+        <span class="bm">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      </button>` }));
+  if (gap) {
+    let extra = 0;
+    for (const p of picks) if (p.mi <= gap.from) extra += dwellOf(p);
+    // Clock and zone where the gap starts: the stop there, else the start or the nearest stop before it.
+    let at = first;
+    for (const s of vis) if (route.mileAt.has(s.id) && route.mileAt.get(s.id) <= gap.from && route.mileAt.get(s.id) > route.mileAt.get(at.id)) at = s;
+    rows.push({ mi: gap.from + 0.5, ms: t0 + (gap.from * perMi * 60 + extra) * 60000, s: at, html: c =>
+      `<div class="brk gap" role="note"><span class="bm">${c}<small>mile ${gap.from}</small></span>
+        <span class="bt"><b>No ${F.plug ? PLUG_NAME[F.plug] + ' ' : ''}fast charger for ${gap.len} mi</b><span>${gap.to === gap.end ? 'to the end' : 'to mile ' + gap.to} · none within ${corridorMi}\u00a0mi</span></span>
+      </div>` });
+    rows.sort((x, y) => x.mi - y.mi);
+  }
+  let day = 0;
+  const body = rows.map(r => {
+    const [clock, , n, wd] = when(r.ms, r.s);
+    const mark = n > day ? `<div class="bday">${dayName(n).replace(/^./, c => c.toUpperCase())} · ${['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][wd]}</div>` : '';
+    if (n > day) day = n;
+    return mark + r.html(clock);
+  }).join('');
   return `<div class="breaks"><div class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</div>
     <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
-      <span>arrive ~${when(arrive, last).filter(Boolean).join(' · ')}</span></div>` +
-    picks.map(({ s, walk, k, meal, ms }) => {
-      const mile = route.mileAt.get(s.id), [clock, next] = when(ms, s);
-      return `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}">
-        <span class="bm">${clock}<i>${meal || 'Break'}${next ? ', ' + next : ''}</i></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? BRANDS[k].e + ' ' + esc(k) + ' ' + walkMin(walk) + ' min · ' : ''}mile ${mile}</span></span>
-      </button>`;
-    }).join('') + '</div>';
+      <span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + '</div>';
 }
 
 /* The longest stretch of the route with no fast charger you could use (any network, the
    plug filter respected; chain filters ignored, since a charger is a charger when you need
    one). Geography, not a charging plan: it says where the gap is, never when to charge. */
-function gapNote() {
-  if (!route || !route.mileAt) return '';
+function chargerGap() {
+  if (!route || !route.mileAt) return null;
   const ms = [];
   for (const [id, m] of route.mileAt) {
     const s = byId[id];
@@ -6334,9 +6388,14 @@ function gapNote() {
   ms.sort((a, b) => a - b);
   const end = Math.round(route.mi);
   let prev = 0, g = { len: 0, from: 0, to: 0 };
-  for (const m of ms.concat(end)) { if (m - prev > g.len) g = { len: m - prev, from: prev, to: m }; prev = m; }
-  if (g.len < 60) return '';
-  const where = g.from === 0 ? `from the start to mile ${g.to}`
+  for (const m of ms.concat(end)) { if (m - prev > g.len) g = { len: m - prev, from: prev, to: m, end }; prev = m; }
+  return g.len < 60 ? null : g;
+}
+// On a highway, or a drive too short for the breaks card, the gap is a note above the list.
+function gapNote() {
+  const g = chargerGap();
+  if (!g) return '';
+  const end = g.end, where = g.from === 0 ? `from the start to mile ${g.to}`
     : g.to === end ? `from mile ${g.from} to the end` : `between mile ${g.from} and mile ${g.to}`;
   return `<div class="gapnote">Longest stretch with no ${F.plug ? PLUG_NAME[F.plug] + ' ' : ''}fast charger within ${corridorMi}\u00a0mi: <b>${g.len} mi</b>, ${where}.</div>`;
 }
