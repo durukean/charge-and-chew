@@ -193,7 +193,7 @@ final class WebViewController: UIViewController {
         // Every view parameter the web app shares; a link from the site with ?plug=ccs or
         // ?l2=1 must open the same view in the app, not quietly drop the filter.
         let allowed = ["at", "r", "stop", "chain", "any", "net", "netpick", "plug", "l2", "hwy", "from", "to", "c", "poi", "state", "q",
-                       "minkw", "minstalls", "h24", "free", "noiso", "nodlr"]
+                       "minkw", "minstalls", "h24", "free", "noiso", "nodlr", "leave"]
         c.queryItems = [URLQueryItem(name: "src", value: "ios")] + q.filter { allowed.contains($0.name) }
         if let u = c.url { Diag.log("deep link -> \(u.absoluteString)"); webView.load(URLRequest(url: u)) }
     }

@@ -1366,6 +1366,14 @@ t('KS', 37.69, -97.34, 'Chicago');      // Wichita
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_r6.stdout.strip() == "OK", "tzOf() puts a stop in the wrong time zone:\n  " + (_r6.stdout + _r6.stderr).strip()[:300])
 
+# The leaving time is part of a shared drive (2026-11-10): the recipient got "now" and other meals.
+check("? p.set('leave', String(Math.floor(leaveAt / 60)).padStart(2, '0') + String(leaveAt % 60).padStart(2, '0')) : p.delete('leave');" in _html
+      and "if (leaveQ) leaveAt = +leaveQ[1] * 60 + +leaveQ[2];" in _html
+      and "track('break-leave', ls.value || 'now'); render(); syncUrl();" in _html
+      and "const hours = Array.from({ length: 24 }, (_, i) => i * 60);" in _html
+      and "'leave'" in _html[_html.index("const VIEW_KEYS = ["):_html.index("const VIEW_KEYS = [") + 300],
+      "the leaving time is not written to / read from the link again, or the picker lost hours")
+
 # A break opens its stop even when the stop has no list row (only LIST_MAX render): LA -> New
 # York had 17 of 23 break buttons doing nothing. tools/breaks_check.mjs taps every one.
 _bk = _html[_html.index("querySelectorAll('[data-brk]').forEach("):][:520]

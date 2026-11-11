@@ -2883,7 +2883,7 @@ function renderList(vis) {
   /* render() rebuilds the list, select included: put focus back on the new one, or keyboard and
      VoiceOver users are dropped at the top of the page after every change. */
   if (ls) ls.onchange = () => {
-    leaveAt = ls.value === '' ? null : +ls.value; track('break-leave', ls.value || 'now'); render();
+    leaveAt = ls.value === '' ? null : +ls.value; track('break-leave', ls.value || 'now'); render(); syncUrl();
     const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });
   };
   $('list').querySelectorAll('.row').forEach(r => {
@@ -6332,7 +6332,10 @@ function breaksCard(vis) {
   const sub = picks.length < 2 ? '' : longest * perMi * 60 <= BREAK_MIN * 1.25
     ? `about every ${Math.round(route.hr / (picks.length + 1) * 10) / 10} h of driving`
     : gap ? '' : `longest leg ~${hmLabel(longest * perMi * 60)}`;
-  const hours = Array.from({ length: 18 }, (_, i) => (i + 5) * 60);   // 5 am .. 10 pm
+  /* Every hour: 5 am to 10 pm left out the 4 am start that beats the traffic and the 11 pm
+     overnight drive. A shared link's 7:30 is kept as it is. */
+  const hours = Array.from({ length: 24 }, (_, i) => i * 60);
+  if (leaveAt !== null && leaveAt % 60) { hours.push(leaveAt); hours.sort((a, b) => a - b); }
   const opts = `<option value=""${leaveAt === null ? ' selected' : ''}>now</option>` +
     hours.map(v => `<option value="${v}"${leaveAt === v ? ' selected' : ''}>${clockLabel(v)}</option>`).join('');
   /* Each time is local to its stop; arrival is in the time of the last stop on the drive. The
@@ -6455,6 +6458,10 @@ function syncUrl() {
   if (route && route.hwy) { p.set('hwy', route.hwy); p.delete('from'); p.delete('to'); p.set('c', corridorMi); }
   else if (route) { p.delete('hwy'); p.set('from', $('fromIn').value); p.set('to', $('toIn').value); p.set('c', corridorMi); }
   else { p.delete('from'); p.delete('to'); p.delete('c'); p.delete('hwy'); }
+  /* The leaving time plans the meals: a shared "leaving 7 am" drive opened as "now", with
+     other meals at other stops. HHMM, on the clock where the drive starts. */
+  route && !route.hwy && leaveAt !== null
+    ? p.set('leave', String(Math.floor(leaveAt / 60)).padStart(2, '0') + String(leaveAt % 60).padStart(2, '0')) : p.delete('leave');
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
 $('shareBtn').onclick = async () => {
@@ -6734,7 +6741,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
 const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'q', 'net', 'netpick', 'plug', 'l2',
-                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr'];
+                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr', 'leave'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
 if (q.get('netpick') && SITES.some(s => s.net === q.get('netpick'))) {
@@ -6761,6 +6768,8 @@ if (q.get('c')) {
   corridorMi = +q.get('c') || 5;
   $('corridorSeg').querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.mi === corridorMi));
 }
+const leaveQ = (q.get('leave') || '').match(/^([01]\d|2[0-3])([0-5]\d)$/);   // ?leave=0700, written by syncUrl
+if (leaveQ) leaveAt = +leaveQ[1] * 60 + +leaveQ[2];
 booting = false;
 render();
 

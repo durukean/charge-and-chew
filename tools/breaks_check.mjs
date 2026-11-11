@@ -60,7 +60,15 @@ const CASES = [
     r => { const want = 420 + r.drive + r.stops.reduce((a, s) => a + dwell(s), 0), got = mins(r.arrive);
       return Math.abs(got - want) <= 6 ? '' : `arrive ${r.arrive}, want ~${Math.floor(want / 60)}:${String(Math.round(want % 60)).padStart(2, '0')} (drive + stops)`; }]],
   ['Los Angeles, CA', 'Las Vegas, NV', 600, 'America/Los_Angeles', [
-    r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)} (want Lunch only: left after breakfast)`]],
+    r => meals(r).join() === 'Lunch' ? '' : `meals ${meals(r)} (want Lunch only: left after breakfast)`,
+    // The leaving time goes into the link, so a shared drive plans the same meals.
+    r => /[?&]leave=1000(&|$)/.test(r.url) ? '' : `leaving 10:00 is not in the link: ${r.url}`,
+    r => r.opts === 25 ? '' : `${r.opts} leaving times offered (want now + all 24 hours)`]],
+  // ...and opening that link restores it: 7 am from ?leave=0700, no picking.
+  ['Los Angeles, CA', 'Las Vegas, NV', 420, 'America/Los_Angeles', [
+    r => r.sel === '420' ? '' : `picker shows "${r.sel}" for ?leave=0700`,
+    r => meals(r).join() === 'Breakfast' ? '' : `meals ${meals(r)} from ?leave=0700 (want Breakfast, as when picked)`],
+    { link: true }],
   ['Los Angeles, CA', 'Denver, CO', 420, 'America/Los_Angeles', [
     r => meals(r).join() === 'Breakfast,Lunch,Dinner' ? '' : `meals ${meals(r)}`,
     // Lunch is in Nevada or Utah, at roughly 12:30 LOCAL time
@@ -162,6 +170,7 @@ const READ = `(() => {
   if (!card) return null;
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
     arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
+    url: location.search, sel: document.getElementById('leaveSel').value, opts: document.getElementById('leaveSel').options.length,
     // "1,018 mi · 15h 02m": the drive in minutes, and minutes per mile
     ...(() => { const t = (document.querySelector('#routeInfo .sum i') || {}).textContent || '';
       const mi = +((t.match(/([\\d,]+) mi/) || [])[1] || '0').replace(/,/g, '');
@@ -229,9 +238,10 @@ async function main() {
       await send('Page.enable'); await send('Runtime.enable');
       await send('Emulation.setTimezoneOverride', { timezoneId: tz });
       await send('Emulation.setFocusEmulationEnabled', { enabled: true });
-      await send('Page.navigate', { url: `http://127.0.0.1:${port}/?nosw=1&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}` });
+      const lv = opt && opt.link ? `&leave=${String(Math.floor(leave / 60)).padStart(2, '0')}${String(leave % 60).padStart(2, '0')}` : '';
+      await send('Page.navigate', { url: `http://127.0.0.1:${port}/?nosw=1&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}${lv}` });
       for (let i = 0; i < 120; i++) { await sleep(500); if (await ev(`!!document.getElementById('leaveSel')`)) break; }
-      await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
+      if (!lv) await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
       await sleep(400);
       res = await ev(READ);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
