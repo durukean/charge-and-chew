@@ -159,6 +159,22 @@ const CASES = [
     r => r.list && r.list.all === Math.min(r.list.n, 300) && r.list.back === r.list.short ? '' : `show all gave ${r.list && r.list.all} rows of ${r.list && r.list.n}, back to ${r.list && r.list.back}`,
     r => { const dead = (r.taps || []).filter(([a, b]) => a !== b); return r.taps && r.taps.length && !dead.length ? '' : `break taps ${JSON.stringify(r.taps)}`; }],
     { taps: true, list: true }],
+  /* Share on a drive sends the plan as text: the drive and leaving time, a line per stop
+     ("12:30 pm lunch in Primm: Carl's Jr. 3 min from a 350 kW charger"), the arrival, and a
+     link -- the drive's /trip/ guide when there is one, else the app with its leaving time --
+     marked ref=share. */
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.share && /^LA → Las Vegas · leaving 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}"`,
+    r => r.share && r.share.lines.slice(1, -1).length === r.stops.length
+      && r.share.lines.slice(1, -1).every((l, i) => l.startsWith(r.stops[i].clock + ' ' + r.stops[i].label.toLowerCase() + ' in ' + r.stops[i].place.split(',')[0] + ': ')
+        && / min from a \d+ kW charger$/.test(l)) ? '' : `stop lines ${JSON.stringify(r.share && r.share.lines)} vs ${JSON.stringify(r.stops.map(s => s.clock + ' ' + s.label))}`,
+    r => r.share && r.share.lines[r.share.lines.length - 1] === 'arrive ~' + r.arrive.replace(/^arrive ~/, '') ? '' : `last line "${r.share && r.share.lines.slice(-1)}" (card: ${r.arrive})`,
+    r => r.share && r.share.url === 'https://chargeandchew.com/trip/los-angeles-to-las-vegas/?ref=share' ? '' : `link ${r.share && r.share.url}`],
+    { share: true }],
+  ['Los Angeles, CA', 'Bakersfield, CA', null, 'America/Los_Angeles', [
+    r => r.share && /^LA → Bakersfield · leaving tomorrow 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}" at 10:30 pm`,
+    r => r.share && /[?&]leave=0800(&|$)/.test(r.share.url) && /[?&]ref=share(&|$)/.test(r.share.url) && /[?&]from=/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app, leaving 8:00, ref=share)`],
+    { share: true, at: '2026-11-11T22:30:00-08:00' }],
   ['Los Angeles, CA', 'Las Vegas, NV', 'now', 'America/Los_Angeles', [
     r => r.sel === '' && r.mlabel === 'tomorrow 8:00 am' ? '' : `picker "${r.sel}" for ?leave=now at night (want now, the morning one tap away)`],
     { at: '2026-11-11T22:30:00-08:00', link: true }],
@@ -240,6 +256,16 @@ const READ = `(() => {
       return out; })() };
 })()`;
 
+// Tap Share with the system share sheet stubbed: what it would send.
+const SHARE = `(async () => {
+  let got = null;
+  navigator.share = async d => { got = d; };
+  const w = window.innerWidth; Object.defineProperty(window, 'innerWidth', { value: 400, configurable: true });
+  document.getElementById('shareBtn').click();
+  await new Promise(r => setTimeout(r, 300));
+  Object.defineProperty(window, 'innerWidth', { value: w, configurable: true });
+  return got && { lines: (got.text || '').split('\\n'), url: got.url };
+})()`;
 // The route list: short (one per stretch), then all, then short again.
 const LIST = `(async () => {
   const rows = () => [...document.querySelectorAll('#list .row')];
@@ -312,6 +338,7 @@ async function main() {
       await sleep(400);
       res = await ev(READ);
       if (res && opt && opt.list) res.list = await ev(LIST);
+      if (res && opt && opt.share) res.share = await ev(SHARE);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
       if (!res) why.push('no breaks card (route did not load?)');
       else for (const c of [...checks, ...ALWAYS]) { const w = c(res); if (w) why.push(w); }

@@ -1323,7 +1323,7 @@ check("const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwell
       "the breaks card's arrival ignores the time at stops again")
 _fh = _html[_html.index("async function fillHours("):_html.index("function poiDetailHtml(")]
 check("const planned = stop ? arriveMs(stop) : null;" in _fh and "hoursNow(p.hours, when || undefined, tz)" in _fh
-      and "lastPlan = { route, t0, perMin: perMi * 60, picks };" in _html,
+      and "lastPlan = { route, t0, perMin: perMi * 60, picks, first, last };" in _html,
       "the stop card checks opening hours at now + drive time again, not the breaks card's leaving time")
 # Opening hours on the place's own clock (2026-11-10): a New York diner said "Open until 23:00" at
 # 12:25 am there, judged on a California phone. verify_hours.py runs the zone cases.
@@ -1646,6 +1646,21 @@ check(_live("const full = route && routeAllFor === route, col = full ? null : be
       and "<button type=\"button\" class=\"listmore\" id=\"routeAll\">Show all ${vis.length.toLocaleString()} stops</button>" in _html
       and _live("routeAllFor = route; track('route-all'); render();"),
       "the route list is every stop again (it should be the best per stretch, with Show all below)")
+# Share on a drive sends the plan as text with the /trip/ guide (or the app) marked ref=share
+# (2026-11-11). tools/breaks_check.mjs checks the text and links; this pins the wiring, and that
+# the guide list build.py writes into index.html is exactly the trip pages that exist.
+_tp = re.search(r"const TRIP_PAGES = '([^']*)';", _html)
+_trips_on_disk = sorted(d for d in os.listdir(os.path.join(HERE, "trip")) if os.path.isfile(os.path.join(HERE, "trip", d, "index.html")))
+check(_tp is not None and _tp.group(1).split() == _trips_on_disk,
+      "index.html's TRIP_PAGES does not list the /trip/ guides that exist (run build.py)")
+check(_live("const plan = sharePlan();") and "url = `https://chargeandchew.com/trip/${sl}/?ref=share`;" in _html
+      and _live("u.searchParams.set('ref', 'share');")
+      and "native('share', plan ? { url, title: 'Charge & Chew', text: plan.text } : { url, title: 'Charge & Chew' });" in _html
+      and "navigator.share(plan ? { title: 'Charge & Chew', text: plan.text, url }" in _html
+      and _live("if (plan) track('share-plan');"),
+      "sharing a drive sends a bare link again (it should send the plan as text, with the trip guide)")
+check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
+      "build.py no longer writes the trip-guide list into index.html")
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

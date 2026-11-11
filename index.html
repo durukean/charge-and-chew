@@ -1535,6 +1535,8 @@ if (NATIVE) {
 }
 /* The public URL for whatever is on screen. Inside the shell location.href is the loopback
    server, which means nothing to anyone else. */
+/* Drives with a /trip/ guide, by its slug ("los-angeles-to-las-vegas"). Written by build.py. */
+const TRIP_PAGES = 'atlanta-to-nashville atlanta-to-orlando atlanta-to-savannah austin-to-houston boston-to-portland charlotte-to-atlanta chicago-to-detroit chicago-to-indianapolis dallas-to-austin dallas-to-houston dallas-to-oklahoma-city denver-to-colorado-springs denver-to-kansas-city denver-to-salt-lake-city detroit-to-cleveland houston-to-new-orleans houston-to-san-antonio kansas-city-to-st-louis las-vegas-to-flagstaff las-vegas-to-salt-lake-city los-angeles-to-las-vegas los-angeles-to-palm-springs los-angeles-to-phoenix los-angeles-to-san-diego los-angeles-to-san-francisco miami-to-key-west miami-to-orlando minneapolis-to-chicago nashville-to-memphis new-york-to-boston new-york-to-washington orlando-to-tampa philadelphia-to-pittsburgh phoenix-to-las-vegas phoenix-to-tucson sacramento-to-south-lake-tahoe salt-lake-city-to-boise san-antonio-to-el-paso san-francisco-to-portland san-francisco-to-south-lake-tahoe seattle-to-portland seattle-to-spokane washington-to-charlotte';
 function shareUrl() {
   const u = new URL(NATIVE ? 'https://chargeandchew.com/' : location.href);
   if (NATIVE) { u.search = location.search; u.searchParams.delete('src'); u.searchParams.delete('nosw'); }
@@ -6652,7 +6654,7 @@ function breaksCard(vis) {
   const [first, last] = routeEnds(vis);
   if (!first) return '';
   const perMi = route.hr / Math.max(1, route.mi), t0 = departMs(first);
-  lastPlan = { route, t0, perMin: perMi * 60, picks };
+  lastPlan = { route, t0, perMin: perMi * 60, picks, first, last };
   /* Say "about every N h" only when it is true. Denver -> Salt Lake City with Starbucks found
      one of three breaks (the others fall in a 97-mile charger gap) and the card still promised
      a cadence. When a stretch runs long, say the longest leg instead. The leaving time and the
@@ -6684,6 +6686,7 @@ function breaksCard(vis) {
   const dayName = n => n === 1 ? 'next day' : n > 1 ? 'day ' + (n + 1) : '';
   const when = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home; return [clockLabel(l.min), dayName(n), n, l.wd]; };
   const arrive = t0 + route.hr * 3600000 + picks.reduce((a, p) => a + dwellOf(p), 0) * 60000;
+  lastPlan.arrive = arrive;
   /* The plan in driving order: the breaks, and the charger gap where it starts (after a stop
      at the same mile: you leave that stop into it). Each day after the first is marked once,
      above its first row -- "Break, next day" on every row wrapped in the time column. */
@@ -6810,16 +6813,58 @@ function syncUrl() {
     : route && !route.hwy && leavePick === 'now' ? p.set('leave', 'now') : p.delete('leave');
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
+/* A drive is shared as its plan, the way road trips are planned: in a group chat.
+     LA → Las Vegas · leaving 8:00 am
+     10:05 am break in Barstow: Taco Bell 1 min from a 325 kW charger
+     12:30 pm lunch in Primm: Carl's Jr. 3 min from a 350 kW charger
+     arrive ~1:55 pm
+   then the drive's /trip/ guide when there is one, else this view (with its leaving time).
+   A bare link with a generic preview was all a recipient got. */
+const tripEnd = (v, s) => /^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(v.trim()) ? s.city : v.split(',')[0].trim();
+function sharePlan() {
+  const P = lastPlan;
+  if (!route || route.hwy || !P || P.route !== route || !P.first) return null;
+  const home = localAt(P.t0, tzOf(P.first)).dn;
+  const at = (ms, s) => { const l = localAt(ms, tzOf(s)), n = l.dn - home;
+    return clockLabel(l.min) + (n === 1 ? ' (next day)' : n > 1 ? ` (day ${n + 1})` : ''); };
+  const a = tripEnd($('fromIn').value, P.first), b = tripEnd($('toIn').value, P.last);
+  const L = leaveOf(P.first), start = localAt(P.t0, tzOf(P.first)).min;
+  const lines = [`${shortCity(a)} → ${shortCity(b)} · leaving ${L && L[1] ? 'tomorrow ' : ''}${clockLabel(start)}`];
+  for (const p of P.picks) lines.push(`${at(p.ms, p.s)} ${(p.meal || 'break').toLowerCase()} in ${p.s.city}: ` +
+    (p.k ? `${p.k} ${walkMin(p.walk)} min from a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger` : `a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger`));
+  lines.push(`arrive ~${at(P.arrive, P.last)}`);
+  const sl = `${slugOf(a)}-to-${slugOf(b)}`;
+  let url;
+  if ((' ' + TRIP_PAGES + ' ').includes(' ' + sl + ' ')) url = `https://chargeandchew.com/trip/${sl}/?ref=share`;
+  else {
+    const u = new URL(shareUrl());
+    // The default leaving time is not in the address bar (it is worked out on opening); a plan
+    // that says "leaving 8:00 am" must open leaving 8:00 am.
+    if (L && !u.searchParams.get('leave')) u.searchParams.set('leave', hhmm(start));
+    u.searchParams.set('ref', 'share');
+    url = u.href;
+  }
+  return { text: lines.join('\n'), url };
+}
+const slugOf = v => v.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 $('shareBtn').onclick = async () => {
   track('share');
   syncUrl();
-  const url = shareUrl();
-  if (NATIVE) { native('share', { url, title: 'Charge & Chew' }); return; }
+  const plan = sharePlan();
+  const url = plan ? plan.url : shareUrl();
+  if (plan) track('share-plan');
+  if (NATIVE) { native('share', plan ? { url, title: 'Charge & Chew', text: plan.text } : { url, title: 'Charge & Chew' }); return; }
   try {
-    if (navigator.share && window.innerWidth < 760) { await navigator.share({ title: 'Charge & Chew', url }); return; }
-    await navigator.clipboard.writeText(url);
-    toast('Link copied to clipboard');
-  } catch (e) { toast('Copy the URL from the address bar'); }
+    if (navigator.share && window.innerWidth < 760) {
+      await navigator.share(plan ? { title: 'Charge & Chew', text: plan.text, url } : { title: 'Charge & Chew', url }); return;
+    }
+    await navigator.clipboard.writeText(plan ? plan.text + '\n' + url : url);
+    toast(plan ? 'Plan copied: paste it in a message' : 'Link copied to clipboard');
+  } catch (e) {
+    // Closing the share sheet is not a failure (UI-25: it said "copy the URL" after a cancel).
+    if (e && e.name === 'AbortError') return;
+    toast('Copy the URL from the address bar');
+  }
 };
 
 /* Fitting during boot races the layout: the map can still report a near-zero size, and

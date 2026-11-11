@@ -958,6 +958,16 @@ if os.path.exists(TRIP_PATH):
              idx_body, "trip/")
         add("trip/index.html")
         print(f"Trip pages: {len(trip_links)}")
+        # The app shares a planned drive with a link to its guide when there is one, so it
+        # needs the list of guides: one constant in index.html, space-separated slugs.
+        _ix = os.path.join(HERE, "index.html")
+        _h = open(_ix, encoding="utf-8").read()
+        _h2, _n = re.subn(r"const TRIP_PAGES = '[^']*';",
+                          "const TRIP_PAGES = '" + " ".join(sorted(sl for _, _, sl, _ in trip_links)) + "';", _h)
+        if _n != 1:
+            sys.exit(f"build.py: expected exactly one TRIP_PAGES constant in index.html, found {_n}")
+        if _h2 != _h:
+            open(_ix, "w", encoding="utf-8").write(_h2)
 
 
 # ---- privacy + support (App Store requires both URLs; they are useful pages regardless) ----
