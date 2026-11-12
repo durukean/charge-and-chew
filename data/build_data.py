@@ -321,6 +321,119 @@ def hav(a1, o1, a2, o2):
     return 2 * R * math.asin(math.sqrt(a))
 
 
+# ── stop signals from data/amenities.json (fetch_amenities.py) ──
+# Folded in as a few small per-charger numbers, never the raw points:
+#   wc: public toilets mapped within WC_M, in tens of metres ("restroom likely")
+#   ra: 1 when the charger is at a highway rest area or service plaza ("restroom likely")
+#   ml: 1 when the charger is at a shopping mall ("restroom likely", in mall hours)
+#   pg: a playground within PG_M, in tens of metres ("good for kids")
+#   xh: the matched chains whose straight line from the charger crosses a motorway or a divided
+#       trunk road at street level ("across the highway"; the walk shown is straight-line)
+# A place on the far side of a highway is never counted as next to the charger.
+WC_M, PG_M = 150, 300
+AT_M = 60          # how far outside a rest area's or mall's outline a charger still counts as at it
+
+
+class _Local:
+    """Metres east/north of one charger, close enough at a kilometre's range."""
+    def __init__(self, lat, lon):
+        self.lat, self.lon = lat, lon
+        self.kx = math.cos(math.radians(lat)) * 111320.0
+    def xy(self, lat, lon):
+        return ((lon - self.lon) * self.kx, (lat - self.lat) * 110540.0)
+
+
+def _cross(ax, ay, bx, by, cx, cy, dx, dy):
+    """Do segments AB and CD properly intersect?"""
+    def o(px, py, qx, qy, rx, ry):
+        v = (qx - px) * (ry - py) - (qy - py) * (rx - px)
+        return (v > 1e-9) - (v < -1e-9)
+    return (o(ax, ay, bx, by, cx, cy) * o(ax, ay, bx, by, dx, dy) < 0 and
+            o(cx, cy, dx, dy, ax, ay) * o(cx, cy, dx, dy, bx, by) < 0)
+
+
+def amenity_signals(chargers, matches, path=None):
+    path = path or os.path.join(HERE, "amenities.json")
+    if not os.path.exists(path):
+        print("No data/amenities.json: no restroom / playground / highway signals this build")
+        return {}
+    from fetch_amenities import load as load_amenities
+    A = load_amenities(path)
+    G = 0.01
+    def cells(lat, lon, r=1):
+        i, j = int(math.floor(lat / G)), int(math.floor(lon / G))
+        return [(i + a, j + b) for a in range(-r, r + 1) for b in range(-r, r + 1)]
+    def index(points):
+        g = {}
+        for p in points:
+            g.setdefault((int(math.floor(p[0] / G)), int(math.floor(p[1] / G))), []).append(p)
+        return g
+    toil, play = index(A.get("toilets", [])), index(A.get("playground", []))
+    boxes = {}
+    for kind in ("rest", "mall"):
+        g = {}
+        for b in A.get(kind, []):
+            for i in range(int(math.floor(b[0] / G)), int(math.floor(b[2] / G)) + 1):
+                for j in range(int(math.floor(b[1] / G)), int(math.floor(b[3] / G)) + 1):
+                    g.setdefault((i, j), []).append(b)
+        boxes[kind] = g
+    segs = {}
+    for line in A.get("hwy", []):
+        for a, b in zip(line, line[1:]):
+            for i in range(int(math.floor(min(a[0], b[0]) / G)), int(math.floor(max(a[0], b[0]) / G)) + 1):
+                for j in range(int(math.floor(min(a[1], b[1]) / G)), int(math.floor(max(a[1], b[1]) / G)) + 1):
+                    segs.setdefault((i, j), []).append((a, b))
+
+    out = {}
+    for s in chargers:
+        L = _Local(s["lat"], s["lon"])
+        near = []
+        seen = set()
+        for c in cells(s["lat"], s["lon"]):
+            for sg in segs.get(c, ()):
+                if id(sg) not in seen:
+                    seen.add(id(sg))
+                    near.append(L.xy(*sg[0]) + L.xy(*sg[1]))
+        def across(lat, lon):
+            x, y = L.xy(lat, lon)
+            return any(_cross(0, 0, x, y, *q) for q in near)
+        def nearest(grid, limit):
+            best = None
+            for c in cells(s["lat"], s["lon"]):
+                for p in grid.get(c, ()):
+                    d = hav(s["lat"], s["lon"], p[0], p[1])
+                    if d <= limit and (best is None or d < best) and not across(p[0], p[1]):
+                        best = d
+            return best
+        def at(kind):
+            m = AT_M / 111000.0
+            for c in cells(s["lat"], s["lon"], 0):
+                for b in boxes[kind].get(c, ()):
+                    k = m / max(0.2, math.cos(math.radians(s["lat"])))
+                    if b[0] - m <= s["lat"] <= b[2] + m and b[1] - k <= s["lon"] <= b[3] + k:
+                        return True
+            return False
+        sig = {}
+        d = nearest(toil, WC_M)
+        if d is not None:
+            sig["wc"] = max(1, int(round(d / 10)))
+        if at("rest"):
+            sig["ra"] = 1
+        if at("mall"):
+            sig["ml"] = 1
+        d = nearest(play, PG_M)
+        if d is not None:
+            sig["pg"] = max(1, int(round(d / 10)))
+        if near:
+            xh = [k for k, v in (matches.get(s["id"]) or {}).items()
+                  if across(s["lat"] + v[0] / 1e4, s["lon"] + v[1] / 1e4)]
+            if xh:
+                sig["xh"] = xh
+        if sig:
+            out[s["id"]] = sig
+    return out
+
+
 def main():
     chargers = json.load(open(os.path.join(HERE, "chargers.json")))
     chargers, cstats = clean(chargers)
@@ -355,6 +468,18 @@ def main():
                 k: [round((plat - lat) * 1e4), round((plon - lon) * 1e4)]
                 for k, (d, plat, plon) in sorted(found.items(), key=lambda x: x[1][0])
             }
+
+    # Stop signals (restroom likely, playground, across the highway): a few small keys per site.
+    signals = amenity_signals(chargers, matches)
+    for c in chargers:
+        c.update(signals.get(c["id"], {}))
+        if "xh" in c:   # as positions in the site's own matches (half the bytes); data_reader and the app turn them back into names
+            order = list(matches[c["id"]])
+            c["xh"] = [order.index(k) for k in c["xh"]]
+    from collections import Counter as _C
+    _n = _C(k for v in signals.values() for k in v)
+    print("Signals: " + ", ".join("%s %d" % kv for kv in sorted(_n.items())) +
+          " (sites); across-the-highway pairs: %d" % sum(len(v.get("xh", [])) for v in signals.values()))
 
     brands_out = {k: {"e": v[0], "cat": v[1], "n": len(pois.get(k, []))}
                   for k, v in RAW_BRANDS.items() if k in pois}

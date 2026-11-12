@@ -1476,7 +1476,7 @@ window.CC_BASEMAPS = {
   } catch (e) { window.__ccMap = null; }
 })();
 </script>
-<script src="data.js?v=f7ef5f62ba"></script>
+<script src="data.js?v=507af58133"></script>
 <script>
 (() => {
 'use strict';
@@ -1546,6 +1546,9 @@ const STATE_NAME = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas",
 const WALK_MPM = 80, MI = 1609.34;
 const SITES = D.sites, BRANDS = D.brands;
 const MATCH = {}; for (const k in D.matches) MATCH[+k] = D.matches[k];
+/* s.xh (the places whose straight line from the charger crosses a highway) ships as positions in
+   the site's own matches, which is half the bytes of the names; names from here on. */
+for (const s of SITES) if (s.xh) { const ks = Object.keys(MATCH[s.id] || {}); s.xh = s.xh.map(i => ks[i]).filter(Boolean); }
 const byId = {}; SITES.forEach(s => byId[s.id] = s);
 
 /* ───────── state ───────── */
@@ -6608,7 +6611,8 @@ const LATE = new Set(["McDonald's", 'Taco Bell', 'Jack in the Box', "Denny's", '
    hours, where a place lists them, overrule the rule (fillHours). Night is the planner's
    window, 10 pm to 6 am at the stop, at the time you would be there: the plan's arrival on a
    planned drive, otherwise now. */
-const LATE_STOPS = new Set(["Buc-ee's", 'Pilot', 'Flying J', "Love's", 'TA Travel Center', 'Wawa', 'Sheetz',
+// 24-hour travel stops with hot food and public restrooms: late food, and a restroom.
+const TRAVEL_STOPS = new Set(["Buc-ee's", 'Pilot', 'Flying J', "Love's", 'TA Travel Center', 'Wawa', 'Sheetz',
   'QuikTrip', 'Kwik Trip', 'Royal Farms']);
 const isNight = min => min >= 22 * 60 || min < 6 * 60;
 const nowAt = new Map();          // zone -> [minute stamp, local minutes]: one Intl call per zone per minute
@@ -6624,11 +6628,12 @@ function stopWhen(s) {
 // Food usually open late at a stop, nearest first: [[chain, metres], ...].
 function lateFoods(s) {
   const m = MATCH[s.id] || {};
-  return Object.keys(m).filter(k => BUNDLED_KEYS.has(k) && (LATE.has(k) || LATE_STOPS.has(k)))
+  return Object.keys(m).filter(k => BUNDLED_KEYS.has(k) && (LATE.has(k) || TRAVEL_STOPS.has(k)))
     .map(k => [k, walkTo(s, k, m[k])]).sort((a, b) => a[1] - b[1]);
 }
 const hasFood = s => Object.keys(MATCH[s.id] || {}).some(k => BRANDS[k] && BRANDS[k].cat === 'food');
 const SIG_ICON = {
+  wc: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v7M8.5 10.5h7M12 15l-3 6M12 15l3 6"/></svg>',
   late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
 };
 /* The late-food signal at a stop: null when it says nothing (daytime in a row, no food). */
@@ -6648,25 +6653,63 @@ function lateSig(s, w, names, byHours) {
     label: 'Food may be closed' + at, why: 'None of the food here is a chain that usually stays open late. Check the hours before you go.' };
   return null;
 }
-/* Small outline tags for a list row (the batch-3 badge style), at most two. Late food only
-   at night: in daytime every row with a McDonald's would say it. */
+/* Restroom likely: a rule, never a fact, and only on a solid reason, shown with it. In order:
+   the charger is at a highway rest area or service plaza; a 24-hour travel stop is a short walk
+   away; public toilets are mapped within 150 m; a 24-hour restaurant is next door; a big store is
+   next door while it is likely open (6 am to 10 pm); the charger is at a mall in mall hours. A
+   place across a highway from the charger never counts (s.xh). From OpenStreetMap via the data
+   build (s.ra, s.wc, s.ml) and the bundled chains. */
+const RR_24 = new Set(['Waffle House', "Denny's"]);
+const RR_STORE = new Set(['Walmart', 'Target', 'Costco', "Sam's Club", 'Meijer']);
+// The straight line from the charger to this place crosses a freeway or a divided highway (s.xh).
+const acrossHwy = (s, k) => !!(s.xh && s.xh.indexOf(k) >= 0);
+const nextDoor = (k, d) => d <= 150 ? k + ' next door' : k + ', a ' + walkMin(d) + '-min walk';
+function restroomSig(s, w) {
+  if (s.lvl === 2) return null;
+  w = w || stopWhen(s);
+  const m = MATCH[s.id] || {}, near = (set, lim) => {
+    let best = null;
+    for (const k in m) if (set.has(k) && BUNDLED_KEYS.has(k) && !acrossHwy(s, k)) {
+      const d = walkTo(s, k, m[k]);
+      if (d <= lim && (!best || d < best[1])) best = [k, d];
+    }
+    return best;
+  };
+  const sig = (short, why) => ({ kind: 'wc', tag: 'restroom likely', label: 'Restroom likely', short,
+    why: short.replace(/^./, c => c.toUpperCase()) + '. ' + why + ' Likely, not certain.' });
+  if (s.ra) return sig('the charger is at a highway rest area or service plaza', 'Those have restrooms.');
+  let t = near(TRAVEL_STOPS, 250);
+  if (t) return sig(nextDoor(t[0], t[1]), 'Travel stops like it have public restrooms and are usually open 24 hours.');
+  if (s.wc) return sig('public toilets mapped ' + s.wc * 10 + ' m away', 'From OpenStreetMap.');
+  t = near(RR_24, 150);
+  if (t) return sig(nextDoor(t[0], t[1]), 'It is usually open 24 hours, with restrooms for customers.');
+  const day = w.min >= 6 * 60 && w.min < 22 * 60;
+  t = day && near(RR_STORE, 250);
+  if (t) return sig(nextDoor(t[0], t[1]), 'Restrooms in store hours (most are open about 6 am to 10 pm).');
+  if (s.ml && w.min >= 10 * 60 && w.min < 21 * 60) return sig('the charger is at a shopping mall', 'Restrooms in mall hours.');
+  return null;
+}
+/* Small outline tags for a list row (the batch-3 badge style), at most two: late food (only at
+   night: by day every row with a McDonald's would say it), then restroom. */
 function rowSigs(s) {
   if (s.lvl === 2) return '';
-  const out = [], w = stopWhen(s);
-  if (isNight(w.min)) { const L = lateSig(s, w); if (L && L.tag) out.push(`<span class="tag sig" title="${esc(L.why)}">${SIG_ICON.late}${L.tag}</span>`); }
-  return out.slice(0, 2).join('');
+  const out = [], w = stopWhen(s), tag = x => x && x.tag ? `<span class="tag sig" title="${esc(x.why)}">${SIG_ICON[x.kind]}${x.tag}</span>` : '';
+  if (isNight(w.min)) out.push(tag(lateSig(s, w)));
+  out.push(tag(restroomSig(s, w)));
+  return out.filter(Boolean).slice(0, 2).join('');
 }
 /* The stop card's line: each item a button whose reason opens under the line. */
 function cardSigs(s) {
   if (s.lvl === 2) return '';
-  const items = [lateSig(s)].filter(Boolean);
+  const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w)].filter(Boolean);
   if (!items.length) return '';
   return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
 }
 /* A planned break's line: what is true there at that clock. */
 function brkSigs(s, k, ms) {
   const min = localAt(ms, tzOf(s)).min, bits = [];
-  if (isNight(min) && k) bits.push(LATE.has(k) || LATE_STOPS.has(k) ? 'open late' : 'may be closed then');
+  if (isNight(min) && k) bits.push(LATE.has(k) || TRAVEL_STOPS.has(k) ? 'open late' : 'may be closed then');
+  if (restroomSig(s, { min, ms, planned: true })) bits.push('restroom likely');
   return bits.length ? `<span class="bs">${bits.join(' · ')}</span>` : '';
 }
 document.addEventListener('click', e => {

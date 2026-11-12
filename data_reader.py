@@ -20,5 +20,16 @@ def load_data(path, prefix="window.PITSTOP_DATA"):
     if marker in raw:
         start = raw.index(marker) + len(marker)
         end = raw.rindex(")")
-        return json.loads(ast.literal_eval(raw[start:end].strip()))
-    return json.loads(raw[raw.index("{"): raw.rindex("}") + 1])
+        return _names(json.loads(ast.literal_eval(raw[start:end].strip())))
+    return _names(json.loads(raw[raw.index("{"): raw.rindex("}") + 1]))
+
+
+def _names(D):
+    """A site's "xh" (places across a highway from the charger) is stored as positions in that
+    site's own matches; every reader gets the chain names, as the app does at boot."""
+    M = D.get("matches") or {}
+    for s in D.get("sites", []):
+        if s.get("xh") and all(isinstance(i, int) for i in s["xh"]):
+            order = list(M.get(str(s["id"]), {}))
+            s["xh"] = [order[i] for i in s["xh"] if i < len(order)]
+    return D

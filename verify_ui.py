@@ -190,6 +190,7 @@ location.replace('/?chain=IHOP&nosw=1');
     if dom_filt is None or dom_full is None or dom_hero is None:
         return 1
 
+
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
     checks = {
         "app_booted": 'id="app"' in dom,

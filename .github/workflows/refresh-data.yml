@@ -52,6 +52,11 @@ jobs:
           if [ -f data/highways.json ]; then
             python3 data/fetch_highways.py || echo "::warning::fetch_highways failed; using the cached data/highways.json"
           fi
+          # Toilets, playgrounds, rest areas, malls and highway lines near each charger (stop
+          # signals). A committed cache too: a run only fetches the cells new chargers need.
+          if [ -f data/amenities.json ]; then
+            python3 data/fetch_amenities.py || echo "::warning::fetch_amenities failed; using the cached data/amenities.json"
+          fi
           python3 data/build_data.py
           # The optional Level 2 layer. Its own guards (count floor, max drop) refuse a bad
           # build; a failure keeps last month's level2.js rather than blocking the fast data.

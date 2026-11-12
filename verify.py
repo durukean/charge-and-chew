@@ -603,6 +603,15 @@ if _ov_ad:
 _wf = open(os.path.join(HERE, ".github", "workflows", "refresh-data.yml")).read()
 check("fetch_pois.py || true" not in _wf and "fetch_highways.py || true" not in _wf,
       "the refresh workflow swallows fetch failures with || true again")
+# The stop signals' cache is kept by the weekly refresh (gap-fill), loudly when it fails.
+check('python3 data/fetch_amenities.py || echo "::warning::fetch_amenities failed' in _wf
+      and _wf.index("fetch_amenities.py") < _wf.index("python3 data/build_data.py")
+      and os.path.exists(os.path.join(HERE, "data", "amenities.json")),
+      "the refresh workflow no longer fills data/amenities.json before build_data.py (or the cache is gone)")
+_fa = open(os.path.join(HERE, "data", "fetch_amenities.py")).read()
+check('UA = "chargeandchew-data/' in _fa and '"User-Agent": UA' in _fa and "time.sleep(PAUSE)" in _fa
+      and "wait = min(wait * 2, 900)" in _fa and "ThreadPool" not in _fa and "concurrent" not in _fa,
+      "fetch_amenities.py is no longer polite to Overpass (named UA, one at a time, pause, backoff)")
 
 # ---- instant category results, merged with the live lookup ----
 # The bundled chains answer immediately; the live lookup then ADDS independents. Merge, not
@@ -2035,7 +2044,7 @@ check("const r = lateKeysByHours(b ? (b.dataset.keys || '').split('|').filter(Bo
       "lateByHours no longer asks lateKeysByHours (the rule verify_hours.py tests)")
 if _node and _SIG:
     _rsig = subprocess.run([_node, "-e", r"""
-let MIN = 0; const BRANDS = {}, MATCH = {};
+let MIN = 0; const BRANDS = {}, MATCH = {}, F = { kids: 0 };
 for (const [k, c] of [["Taco Bell", "food"], ["Chipotle", "food"], ["Wawa", "store"], ["Walmart", "store"], ["IHOP", "food"]]) BRANDS[k] = { cat: c, e: '' };
 const BUNDLED_KEYS = new Set(Object.keys(BRANDS));
 const walkTo = (s, k, v) => v[0] * 10; const arriveMs = s => s.plan == null ? null : s.plan;
@@ -2068,6 +2077,112 @@ t(/open late by the hours OpenStreetMap lists/.test(lateSig(S(1), null, ['Chipot
 t(rowSigs(Object.assign(S(1), { lvl: 2 })) === '', 'a Level 2 row carries signals');
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_rsig.stdout.strip() == "OK", "stop signals say the wrong thing:\n  " + (_rsig.stdout + _rsig.stderr).strip()[:600])
+
+# ---- Stop signals: the data (batch 8) [B8-D] ----
+# The data build: what lands in data.js. A synthetic amenities.json: a motorway running north-
+# south 100 m east of charger 7; charger 8 is 160 m east (across it). Toilets 80 m east (this side
+# for 7, across for 8) and 290 m east (8's side); a playground 250 m west; a rest area around 7;
+# Taco Bell 200 m east (across for 7), Subway 200 m west.
+import tempfile as _tf
+sys.path.insert(0, os.path.join(HERE, "data"))
+import build_data as _bd
+_k = 1 / (111320 * __import__("math").cos(__import__("math").radians(40)))
+_am = {"v": 1, "toilets": [[40.0, -100 + 80 * _k], [40.0, -100 + 290 * _k]], "playground": [[40.0, -100 - 250 * _k]],
+       "mall": [], "rest": [[39.999, -100.001, 40.001, -99.999]],
+       "hwy": [[[39.99, -100 + 100 * _k], [40.01, -100 + 100 * _k]]]}
+with _tf.NamedTemporaryFile("w", suffix=".json", delete=False) as _f:
+    json.dump(_am, _f)
+_sg = _bd.amenity_signals([{"id": 7, "lat": 40.0, "lon": -100.0}, {"id": 8, "lat": 40.0, "lon": -100 + 160 * _k}],
+                          {7: {"Taco Bell": [0, round(200 * _k * 1e4)], "Subway": [0, -round(200 * _k * 1e4)]}}, _f.name)
+os.remove(_f.name)
+check(_sg.get(7) == {"wc": 8, "ra": 1, "pg": 25, "xh": ["Taco Bell"]},
+      f"build_data.amenity_signals is wrong for the test charger: {_sg.get(7)} (want wc 8, ra, pg 25, xh Taco Bell only)")
+check(_sg.get(8) == {"wc": 13},
+      f"build_data.amenity_signals counts toilets across the motorway (or a far playground / rest area): {_sg.get(8)} (want wc 13)")
+# The cache: complete (no half-done fill), covering the cells of nearly every charger (a failed
+# weekly gap-fill may leave a few new ones out), and readable in its compact form.
+import fetch_amenities as _fam
+import amenities_from_pbf as _afp
+_AM = _fam.load()
+_ch_all = json.load(open(os.path.join(HERE, "data", "chargers.json")))
+_cells = _fam.cells_of(_AM)
+_unc = sum(1 for _c in _ch_all if _fam.cell_of(_c["lat"], _c["lon"]) not in _cells)
+check("partial" not in _AM and all(k in _AM for k in _fam.KINDS) and _unc <= len(_ch_all) * 0.01,
+      f"data/amenities.json is incomplete: partial={'partial' in _AM}, {_unc} chargers outside its cells")
+_g = [[40.12345, -100.54321], [40.12399, -100.5], [40.2, -100.49999]]
+check(_fam.decode_line(_fam.encode_line(_g)) == _g, "amenities.json highway encoding does not round-trip")
+# Clipping keeps a long straight motorway segment that crosses a covered cell with no node in
+# it, and merging continued lines keeps every segment.
+_cl = _fam.clip("hwy", [[[39.0, -100.01], [41.0, -100.01]]], {(2000, -5001)})
+check(_cl == [[[39.0, -100.01], [41.0, -100.01]]] and _fam.clip("hwy", [[[39.0, -100.01], [39.5, -100.01]]], {(2000, -5001)}) == [],
+      f"fetch_amenities.clip drops a segment that crosses a covered cell, or keeps one that does not: {_cl}")
+_ml = _fam.merge_lines([[[1.0, 1.0], [1.0, 1.001]], [[1.0, 1.001], [1.0, 1.002]], [[2.0, 2.0], [2.0, 2.001]]])
+check(sorted(_ml) == [[[1.0, 1.0], [1.0, 1.001], [1.0, 1.002]], [[2.0, 2.0], [2.0, 2.001]]],
+      f"fetch_amenities.merge_lines changes the segments: {_ml}")
+# The extract path keeps exactly what the Overpass selectors keep.
+check(_afp.kinds_of({"amenity": "toilets"}) == ["toilets"] and _afp.kinds_of({"amenity": "toilets", "access": "private"}) == []
+      and _afp.kinds_of({"leisure": "playground", "access": "no"}) == [] and _afp.kinds_of({"highway": "services"}) == ["rest"]
+      and _afp.is_hwy({"highway": "motorway"}, "w") and not _afp.is_hwy({"highway": "motorway", "bridge": "yes"}, "w")
+      and not _afp.is_hwy({"highway": "trunk"}, "w") and _afp.is_hwy({"highway": "trunk", "oneway": "yes"}, "w")
+      and not _afp.is_hwy({"highway": "motorway", "tunnel": "yes"}, "w") and not _afp.is_hwy({"highway": "motorway"}, "r"),
+      "amenities_from_pbf keeps different things from the Overpass selectors")
+for _sel, _want in (('"access"!~"^(private|no)$"', _afp.PRIVATE == {"private", "no"}),
+                    ('"bridge"!~"^(yes|viaduct|cantilever|covered)$"', _afp.BRIDGE == {"yes", "viaduct", "cantilever", "covered"}),
+                    ('"tunnel"!~"^(yes|building_passage|culvert)$"', _afp.TUNNEL == {"yes", "building_passage", "culvert"})):
+    check(_sel in open(os.path.join(HERE, "data", "fetch_amenities.py")).read() and _want,
+          f"fetch_amenities.py and amenities_from_pbf.py disagree on {_sel}")
+# data.js stores xh as positions in the site's matches; the app turns them into names at boot.
+check(re.search(r"(?m)^for \(const s of SITES\) if \(s\.xh\) \{ const ks = Object\.keys\(MATCH\[s\.id\] \|\| \{\}\); s\.xh = s\.xh\.map\(i => ks\[i\]\)\.filter\(Boolean\); \}$", _html) is not None,
+      "the app no longer turns data.js xh positions into chain names at boot")
+# Coverage floors (measured 2026-11-12 from the US extract: wc 643, ra 780, ml 460, pg 1485, xh 3556; ~70% of each): a broken fetch or fold shows up here.
+_cov = {k: sum(1 for s in D["sites"] if k in s) for k in ("wc", "ra", "ml", "pg", "xh")}
+_floor = {"wc": 450, "ra": 545, "ml": 320, "pg": 1040, "xh": 2490}
+check(all(_cov[k] >= _floor[k] for k in _floor), f"stop-signal coverage fell below its floor: {_cov} (floors {_floor})")
+check(all(isinstance(s.get("xh", []), list) and all(k in D["brands"] and k in D["matches"].get(str(s["id"]), {}) for k in s.get("xh", []))
+          for s in D["sites"]), "a site's xh names a chain that is not matched at it")
+
+# ---- Restroom likely (batch 8) [B8-R] ----
+_SIG_HEAD = r"""let MIN = 13 * 60; const BRANDS = {}, MATCH = {}; const F = { kids: 0 };
+for (const k of ["Buc-ee's", 'Waffle House', 'Walmart', 'Taco Bell', 'Chipotle', "Love's"]) BRANDS[k] = { cat: 'food', e: '' };
+const BUNDLED_KEYS = new Set(Object.keys(BRANDS));
+const walkTo = (s, k, v) => v[0] * 10; const arriveMs = () => null;
+const localAt = () => ({ min: MIN }); const tzOf = () => 'America/Chicago';
+const walkMin = m => Math.max(1, Math.round(m / 80));
+const clockLabel = m => String(m); const esc = t => String(t).replace(/"/g, '&quot;');
+const document = { addEventListener() {} };
+"""
+check("restroomSig(s, w)" in _SIG[_SIG.index("function cardSigs(s) {"):_SIG.index("function brkSigs(")]
+      and "out.push(tag(restroomSig(s, w)));" in _SIG
+      and "if (restroomSig(s, { min, ms, planned: true })) bits.push('restroom likely');" in _SIG,
+      "the restroom signal is gone from the stop card, the rows or the breaks")
+if _node and _SIG:
+    _rr = subprocess.run([_node, "-e", _SIG_HEAD + _SIG + r"""
+const f = [], t = (c, msg) => { if (!c) f.push(msg); };
+const S = (id, o) => Object.assign({ id, st: 'TX', lat: 30, lon: -97 }, o || {});
+const R = s => { nowAt.clear(); return restroomSig(s); };
+MATCH[1] = { "Buc-ee's": [12, 0] };                                         // 120 m
+t(R(S(1)) && /Buc-ee's next door/.test(R(S(1)).why), "a travel stop next door is no restroom");
+t(R(S(1, { xh: ["Buc-ee's"] })) === null, 'a travel stop across the highway still counts as a restroom');
+MATCH[2] = { "Buc-ee's": [30, 0] };                                         // 300 m: too far
+t(R(S(2)) === null, 'a travel stop 300 m away counts as a restroom');
+t(R(S(3, { ra: 1 })) && /rest area/.test(R(S(3, { ra: 1 })).why), 'a charger at a rest area is no restroom');
+t(R(S(4, { wc: 8 })) && /80 m away/.test(R(S(4, { wc: 8 })).why), 'mapped toilets are no restroom');
+MATCH[5] = { 'Waffle House': [10, 0] }; MATCH[6] = { 'Waffle House': [20, 0] };
+t(R(S(5)) && R(S(6)) === null, 'a 24-hour restaurant counts beyond next door, or not next door');
+MATCH[7] = { 'Walmart': [15, 0] };
+t(R(S(7)) && /store hours/.test(R(S(7)).why), 'a store next door by day is no restroom');
+MIN = 23 * 60; t(R(S(7)) === null, 'a store counts as a restroom at 11 pm');
+t(R(S(8, { ml: 1 })) === null, 'a mall counts as a restroom at 11 pm');
+MIN = 13 * 60; t(R(S(8, { ml: 1 })) !== null, 'a mall is no restroom by day');
+MATCH[9] = { 'Chipotle': [5, 0] }; t(R(S(9)) === null, 'any restaurant counts as a restroom');
+t(R(S(1)).label === 'Restroom likely' && / Likely, not certain\.$/.test(R(S(1)).why), 'the restroom signal is not labelled "likely"');
+t(R(S(1, { lvl: 2 })) === null, 'a Level 2 site carries a restroom signal');
+t(/restroom likely/.test(brkSigs(S(1), "Buc-ee's", 0)) && !/restroom/.test(brkSigs(S(9), 'Chipotle', 0)), 'a planned break does not say "restroom likely" where the rule does');
+nowAt.clear(); t(/restroom likely/.test(rowSigs(S(1))) && !/restroom/.test(rowSigs(S(9))), 'a row does not carry "restroom likely" where the rule does');
+MIN = 23 * 60; nowAt.clear(); MATCH[12] = { "Love's": [12, 0], 'Taco Bell': [5, 0] };
+t((rowSigs(S(12, { pg: 24 })).match(/class="tag sig"/g) || []).length === 2, 'a row carries more than two signals');
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_rr.stdout.strip() == "OK", "the restroom signal says the wrong thing:\n  " + (_rr.stdout + _rr.stderr).strip()[:700])
 
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.
