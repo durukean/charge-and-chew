@@ -296,7 +296,7 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 <header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a><a href="{root}trip/">Road trips</a></nav></header>
 {body}
-<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {UPDATED} · <a href="{root}privacy/">Privacy</a> · <a href="{root}support/">Support</a>.
+<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {UPDATED} · <a href="{root}road-food-index/">Road Food Index</a> · <a href="{root}in/">Cities</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}support/">Support</a>.
 Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -627,7 +627,7 @@ states_html = "".join(
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 <p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <a class="cta" href="../">Open the interactive map →</a>
-<p><a class="cta sec" href="../along/">Browse by interstate instead →</a></p>
+<p><a class="cta sec" href="../along/">Browse by interstate instead →</a> <a class="cta sec" href="../in/">Browse by city →</a></p>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
 {states_html}"""
 page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
@@ -744,7 +744,7 @@ order along the route, {" → ".join(states[:12])}{" …" if len(states) > 12 el
 <a class="cta" href="../../?hwy={disp}">Open {disp} in the map →</a>
 <p class="stats">Typical power along this corridor is <b>{med} kW</b>, with <b>{big}</b> stops at
 150 kW or more and <b>{h24}</b> listed as open 24 hours. Chargers under {INTERSTATE_MIN_KW} kW are
-left out — on an interstate run they cost more time than they save.</p>
+left out — on an interstate run they cost more time than they save.<!--rfi--></p>
 <h2>Stops with food or shopping within a walk</h2>
 {"".join(cards)}
 <h2>Other interstates</h2><div class="chips" id="hwchips"></div>'''
@@ -767,6 +767,8 @@ left out — on an interstate run they cost more time than they save.</p>
 <p class="lead">Pick an interstate to see every fast charger within {CORRIDOR_MI:g} miles of it, in order
 along the route, with the restaurants and stores within a 10-minute walk of each stop.</p>
 <div class="chips">{idx_chips}</div>
+<h2>Which is best for food?</h2>
+<p class="lead">The <a href="../road-food-index/#interstates">Road Food Index</a> ranks every interstate by how many of its fast chargers have somewhere to eat within a walk, with the longest gap on each.</p>
 <h2>Planning a specific drive?</h2>
 <p class="lead">City-to-city guides pick the stops for you: <a href="../trip/">EV road trip charging with food nearby →</a></p>
 <h2>Or browse by chain</h2>
@@ -1192,7 +1194,13 @@ if os.path.exists(TRIP_PATH):
             '<p class="lead">The map plans any drive: type a start and a destination and it finds '
             'the chargers along it. <a class="cta" href="../">Open the map &rarr;</a></p>\n'
             "<h2>Or browse by road</h2>\n"
-            '<p class="lead"><a href="../along/">Every charger along the interstates &rarr;</a></p>')
+            '<p class="lead"><a href="../along/">Every charger along the interstates &rarr;</a></p>\n'
+            "<h2>Where the gaps are</h2>\n"
+            '<p class="lead">The longest stretches without a fast charger on these drives, and the chains, '
+            'interstates and states best for a meal while you charge: <a href="../road-food-index/">the Road Food '
+            'Index &rarr;</a></p>\n'
+            "<h2>Or start from a city</h2>\n"
+            '<p class="lead"><a href="../in/">Fast chargers near food, city by city &rarr;</a></p>')
         page("trip/index.html", "EV road trip charging stops with food nearby",
              "Charging stops for popular US road trips - LA to Las Vegas, New York to Boston, "
              "Dallas to Austin and more - with the restaurants within a 10-minute walk of each stop.",
@@ -1401,6 +1409,15 @@ RFI_LD = {
 page(f"{RFI_DIR}/index.html", f"{RFI_TITLE}: food at US EV fast chargers", RFI_DESC, rfi_body, f"{RFI_DIR}/",
      ld_script(RFI_LD), og=RFI_DIR)
 add(f"{RFI_DIR}/index.html")
+_ord = lambda n: f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+for _x in RFI["interstates"]:
+    _f = os.path.join(HERE, "along", _x["slug"], "index.html")
+    if os.path.exists(_f):
+        _doc = open(_f).read()
+        open(_f, "w").write(_doc.replace("<!--rfi-->", (
+            f' On the <a href="../../{RFI_DIR}/#interstates">Road Food Index</a>, {_x["interstate"]} ranks '
+            f'<b>{_ord(_x["rank"])}</b> of {len(RFI["interstates"])} interstates for food: <b>{_x["food_share"]}%</b> of '
+            f"these chargers have somewhere to eat within a 10-minute walk."), 1))
 print(f"Road Food Index: {len(RFI['chains'])} chains, {len(RFI['interstates'])} interstates, {len(RFI['drives'])} drives")
 
 

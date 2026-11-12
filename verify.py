@@ -1987,6 +1987,34 @@ if os.path.exists(_mj) and os.path.exists(_cidx):
     check("<!--cities-->" not in open(_tda, encoding="utf-8").read() if os.path.exists(_tda) else True,
           "the cities placeholder was left in a trip page")
 
+# ---- discoverability (2026-11-11): the Road Food Index and the city pages are linked from
+# every generated page's footer, the app's About, the section indexes and each interstate page.
+_gen = (glob.glob(os.path.join(HERE, "near/**/index.html"), recursive=True) +
+        glob.glob(os.path.join(HERE, "along/**/index.html"), recursive=True) +
+        glob.glob(os.path.join(HERE, "trip/**/index.html"), recursive=True) +
+        glob.glob(os.path.join(HERE, "in/**/index.html"), recursive=True))
+_nofoot = [os.path.relpath(p_, HERE) for p_ in _gen
+           if not re.search(r'<footer>[^<]*(?:<a[^>]*>[^<]*</a>[^<]*)*<a href="(?:\.\./)*road-food-index/">Road Food Index</a> · <a href="(?:\.\./)*in/">Cities</a>',
+                            open(p_, encoding="utf-8").read())]
+check(len(_gen) > 2000 and not _nofoot, f"{len(_nofoot)} generated pages lack the Road Food Index / Cities footer links: {_nofoot[:2]}")
+_ab = _html[_html.find('<div id="about"'):_html.find('<div id="offlineBar"')]
+check('<a href="road-food-index/">' in _ab and '<a href="in/">' in _ab, "About no longer links the Road Food Index and the city pages")
+# (the footer links these too, so match the index's own links, not any href)
+for _ix, _want in (("trip/index.html", ('<a href="../road-food-index/">the Road Food Index', '<a href="../in/">Fast chargers near food')),
+                   ("along/index.html", ('<a href="../road-food-index/#interstates">Road Food Index</a> ranks every',)),
+                   ("near/index.html", ('<a class="cta sec" href="../in/">',))):
+    _t = open(os.path.join(HERE, _ix), encoding="utf-8").read()
+    check(all(w in _t for w in _want), f"{_ix} lost its link to {_want}")
+if os.path.exists(_rfi_page):
+    _ordn = lambda n: f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+    _abad = []
+    for _x in _R["interstates"]:
+        _t = open(os.path.join(HERE, "along", _x["slug"], "index.html"), encoding="utf-8").read()
+        if (f"{_x['interstate']} ranks <b>{_ordn(_x['rank'])}</b> of {len(_R['interstates'])} interstates for food: "
+                f"<b>{_x['food_share']}%</b>") not in _t or "<!--rfi-->" in _t:
+            _abad.append(_x["slug"])
+    check(not _abad, f"{len(_abad)} interstate pages state a Road Food Index rank that differs from the data: {_abad[:3]}")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
