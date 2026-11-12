@@ -79,7 +79,9 @@ function startServer() {
 }
 async function startChrome(profile) {
   const p = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`,
-    '--no-first-run', '--no-default-browser-check', 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+    '--no-first-run', '--no-default-browser-check',
+    // overpass-api.de has banned this machine: no run may reach it (NXDOMAIN).
+    '--host-resolver-rules=MAP *overpass* ~NOTFOUND, MAP overpass-api.de ~NOTFOUND', 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
   const ws = await new Promise((res, rej) => {
     p.stderr.on('data', d => { const m = String(d).match(/DevTools listening on (ws:\/\/\S+)/); if (m) res(m[1]); });
     setTimeout(() => rej(new Error('chrome did not start')), 15000);

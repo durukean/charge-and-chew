@@ -11,6 +11,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Probe a list, the way verify_ui.py and verify_search.py do. A single hard-coded macOS
 # path made the monthly refresh die on the Linux CI runner with FileNotFoundError, and the
 # whole data pipeline stopped silently for over a week.
+# overpass-api.de has banned this machine; no test run may reach it (NXDOMAIN).
+OVERPASS_BLOCK = "--host-resolver-rules=MAP *overpass* ~NOTFOUND, MAP overpass-api.de ~NOTFOUND"
 CHROME = ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
           "/Applications/Chromium.app/Contents/MacOS/Chromium",
           "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable",
@@ -97,7 +99,7 @@ function run(f){
     # Clean up in `finally`: a timeout used to skip cleanup and leave _hours_probe.html in the
     # repo root, where a `git add -A` committed it.
     try:
-        subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000",
+        subprocess.run([binpath, "--headless=new", "--virtual-time-budget=9000", OVERPASS_BLOCK,
                         f"--dump-dom", f"http://127.0.0.1:{port}/_hours_probe.html"],
                        stdout=open(out, "w"), stderr=subprocess.DEVNULL, timeout=90)
         dom = open(out).read()

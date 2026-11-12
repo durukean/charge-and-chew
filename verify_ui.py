@@ -13,6 +13,8 @@ import json, os, re, shutil, subprocess, sys, tempfile, threading, http.server, 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PORT = 0            # 0 = let the OS pick a free port (8791 collided with another project)
+# overpass-api.de has banned this machine; no test run may reach it (NXDOMAIN).
+OVERPASS_BLOCK = "--host-resolver-rules=MAP *overpass* ~NOTFOUND, MAP overpass-api.de ~NOTFOUND"
 CHROME = ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
           "/Applications/Chromium.app/Contents/MacOS/Chromium",
           "/usr/bin/google-chrome", "/usr/bin/chromium")
@@ -99,7 +101,7 @@ def render_dom(binpath, url):
         # No service worker during the test: it keeps the page alive and --dump-dom never returns.
         cmd = [binpath, "--headless=new", "--disable-gpu", "--no-sandbox",
                f"--user-data-dir={prof}", "--virtual-time-budget=12000",
-               "--disable-features=ServiceWorker", "--dump-dom", url]
+               "--disable-features=ServiceWorker", OVERPASS_BLOCK, "--dump-dom", url]
         # Chrome sometimes lingers after emitting the DOM, so write to a file and poll for
         # it rather than blocking on process exit.
         domfile = os.path.join(prof, "dom.html")
