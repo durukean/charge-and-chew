@@ -140,8 +140,10 @@ check(re.search(r"(?m)^\s*WRITTEN\.add\(os\.path\.normpath\(full\)\)", _bp)
       and re.search(r"(?m)^\s*os\.remove\(_full\)", _bp),
       "build.py no longer retires pages it stopped generating — they live on with stale data")
 _priv = open(os.path.join(HERE, "privacy", "index.html"), encoding="utf-8").read()
-check("Google Fonts" in _priv and "CARTO" in _priv and "It stays on your device" not in _priv,
-      "privacy policy no longer discloses Google Fonts / CARTO, or claims location stays on the device")
+check("Google Fonts" in _priv and "Esri" in _priv and "It stays on your device" not in _priv,
+      "privacy policy no longer discloses Google Fonts / Esri, or claims location stays on the device")
+# CARTO is retired (BUG-B01): the policy must not name a service the app no longer contacts.
+check("CARTO" not in _priv, "the privacy policy still lists CARTO, which the app no longer uses")
 
 # The basemap has a silent-failure mode: CARTO throttles by referrer and serves a
 # watermark tile reading "API key required" as a valid HTTP 200 PNG, so no request errors
@@ -475,8 +477,19 @@ check("throw new Error(busyMsg('Place search', r.status)); }" in _html
       and "if (!r.ok) throw new Error(busyMsg('Route planning', r.status));" in _html,
       "a rate-limited geocode or route shows a raw JSON parse error again")
 _te = _html[_html.find("function onTileError()"):][:400]
-check("!navigator.onLine" in _te and "setTimeout(" in _te,
-      "bad signal can switch the map to watermarked CARTO tiles for the rest of the session again")
+check(_te.startswith("function onTileError() {\n  if (!navigator.onLine) return;") and "setTimeout(" in _te and "tiles.redraw()" in _te and "tileRetryAt = now + 60000" in _te,
+      "a burst of tile errors no longer retries Esri (at most once a minute), or retries while offline")
+# BUG-B01: CARTO serves an "API KEY REQUIRED" watermark for every tile. No tile URL may point at
+# it, nothing may switch to it, and a saved 'carto' choice must be dropped at boot.
+check("cartocdn" not in _html and "data-base=" not in _html and "baseProvider = 'carto'" not in _html,
+      "index.html still offers or falls back to CARTO, whose tiles are all watermarks")
+check(re.search(r"if \(localStorage\.getItem\('cc_basepref'\) === 'carto' \|\| localStorage\.getItem\('cc_base'\) === 'carto'\) \{\n\s*localStorage\.setItem\('cc_basepref', 'auto'\);", _html) is not None,
+      "a saved CARTO map style is no longer migrated to automatic")
+_swsrc = open(os.path.join(HERE, "sw.js")).read()
+check("if (url.hostname === 'server.arcgisonline.com') {" in _swsrc and "cartocdn" not in _swsrc.split("self.addEventListener('fetch'")[1],
+      "the service worker intercepts (and can cache) CARTO tiles again")
+check(re.search(r"for \(const req of await c\.keys\(\)\) if \(/\(\^\|\\\.\)cartocdn\\\.com\$/\.test\(new URL\(req\.url\)\.hostname\)\) await c\.delete\(req\);", _swsrc) is not None,
+      "the service worker no longer purges cached CARTO watermark tiles on activate")
 # An OSM website= tag is free text anyone can edit; esc() leaves javascript: URLs intact.
 # safeUrl is an allow-list (output always starts with http or is empty), which is what makes
 # it immune to "java<TAB>script:" -- mutation-tested: removing the whitespace strip does NOT
@@ -1302,8 +1315,8 @@ check(re.search(r"^\s*probeBasemap\(\)\s*;", _html, re.M) is not None,
       "basemap selection is never called — the map would have no tile layer")
 # CARTO stamps "API KEY REQUIRED" into a normal, full-size tile, so it cannot be detected
 # by status code or byte length. Esri must stay the default for the unauthenticated site.
-check("basePref === 'auto' ? 'esri'" in _html,
-      "default basemap is no longer Esri — CARTO watermarks every tile without an API key")
+check("var bm = window.CC_BASEMAPS.esri;" in _html and "const bm = BASEMAPS.esri;" in _html,
+      "the basemap is no longer Esri — CARTO watermarks every tile without an API key")
 for _needle, _why in [
     ("function probeBasemap", "basemap selection gone"),
     ("BASEMAPS", "basemap table gone"),
@@ -1646,8 +1659,9 @@ check(_live("noteRouteFrom(); clearCenter();", 2)
 
 # Map tiles are requested with CORS on the web (BUG-21): without it every tile is opaque and the
 # service worker, which must not cache what it cannot measure, never stored one. Both providers'
-# options carry it, and every tile layer (early map and app) is built from those options.
-check(_html.count("crossOrigin: window.CC_TILE_CORS },") == 2
+# options carry it (Esri, the one provider since CARTO was retired), and every tile layer (early
+# map and app) is built from those options.
+check(_html.count("crossOrigin: window.CC_TILE_CORS },") == 1
       and _live("window.CC_TILE_CORS = /^https?:$/.test(location.protocol);")
       and _html.count("{ ...bm.opts, alt: '' }") == 2 and _html.count("Object.assign({}, bm.opts, { alt: '' })") == 2,
       "map tiles are requested without CORS again, so the service worker can never cache one")

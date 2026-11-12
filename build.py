@@ -1739,8 +1739,7 @@ app, removes all of it.</p>
 open-source and privacy-first: no cookies, no personal data, no cross-site tracking. It tells us
 roughly how many people used the site and which pages, and nothing about who you are.</p>
 <h2>Other services the app talks to</h2>
-<p>Map tiles from Esri (or CARTO, if you choose that map style, or as a stand-in while Esri is
-unreachable); fonts from Google Fonts, which like any web host sees your IP address when the page
+<p>Map tiles from Esri; fonts from Google Fonts, which like any web host sees your IP address when the page
 loads; charger data from the US DOE / NREL Alternative Fuel Stations database (bundled, refreshed
 monthly); chain and shop locations from OpenStreetMap, including live lookups through its Overpass
 service. Tapping a place or "Directions" opens Google Maps or Apple Maps, which are governed by
@@ -1748,7 +1747,7 @@ their own policies.</p>
 <h2>Contact</h2>
 <p>Questions or a deletion request (there is nothing on our side to delete, but ask anyway):
 <a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>.</p>
-<p class="stats">Last updated 2026-10-08.</p>"""
+<p class="stats">Last updated 2026-11-12.</p>"""
 page("privacy/index.html", "Privacy", "What Charge & Chew does with your data: no accounts, no ads, your location is never sent to us, anonymous page counts only.", PRIVACY_BODY, "privacy/")
 add("privacy/index.html")
 

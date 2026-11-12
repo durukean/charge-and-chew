@@ -1382,10 +1382,6 @@ if (document.documentElement.classList.contains('car')) {
     <li><i>Open</i> and <i>closed</i> come from posted hours where OpenStreetMap has them; on a route they're for when you'd arrive.</li>
     <li>No live availability or prices — check the network's own app before you rely on a stop.</li>
   </ul>
-  <p><b>Map style</b> — if the map ever comes up blank, choose Automatic.</p>
-  <div class="seg" id="baseSeg" role="group" aria-label="Map style" style="margin:-4px 0 14px">
-    <button data-base="auto">Automatic</button><button data-base="carto">CARTO</button><button data-base="esri">Esri</button>
-  </div>
   <p class="about-small">Chargers: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations" target="_blank" rel="noopener">Alternative Fuel Stations</a> (under 24&nbsp;kW, private and truck-only sites left out; dealership lots flagged). Places: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a>. Map: Esri. Not affiliated with Tesla, Inc. or any listed chain or network. "Supercharger" is a trademark of Tesla, Inc.</p>
   <p><a href="https://github.com/durukean/charge-and-chew/issues/new?title=Problem%20report" target="_blank" rel="noopener"><b>Report a problem</b></a> ·
   <a href="privacy/"><b>Privacy</b></a> · <a href="support/"><b>Support</b></a><span class="web-only"> ·
@@ -1450,12 +1446,10 @@ window.addEventListener('error', function () {
    send Access-Control-Allow-Origin: *. Web only: the iOS app has no service worker, and its
    tiles stay exactly as they were. */
 window.CC_TILE_CORS = /^https?:$/.test(location.protocol);
+/* Esri only. CARTO was retired on 2026-11-12: its key-less tiles now come back as a full-size
+   "API KEY REQUIRED" image for every visitor (a CDN hit, immutable for 30 days), so anyone on
+   it, by choice or by the old error fallback, saw a map with no streets (BUG-B01). */
 window.CC_BASEMAPS = {
-  carto: {
-    light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    dark:  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    opts:  { maxZoom: 19, subdomains: 'abcd', crossOrigin: window.CC_TILE_CORS },
-    attrib: '© <a href="https://carto.com">CARTO</a>, © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors' },
   esri: {
     light: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
     dark:  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
@@ -1472,7 +1466,7 @@ window.CC_BASEMAPS = {
     var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
     var pref = get('cc_theme'), hr = new Date().getHours();
     var dark = pref === 'dark' || (pref !== 'light' && (hr < 7 || hr >= 19));
-    var bm = window.CC_BASEMAPS[get('cc_basepref') === 'carto' ? 'carto' : 'esri'];
+    var bm = window.CC_BASEMAPS.esri;
     var view = [[39.3, -96.5], 4];
     var at = (new URLSearchParams(location.search).get('at') || '').split(',').map(Number);
     var r = +new URLSearchParams(location.search).get('r');
@@ -2378,61 +2372,35 @@ function track(name, detail) {
 }
 
 /* ───────── theme ───────── */
-/* Basemaps. CARTO's unauthenticated tiles are the design we want, but once a site gets
-   real traffic CARTO throttles by referrer and starts returning a watermark tile that
-   reads "API key required" — served as HTTP 200 with a valid PNG, so nothing errors and
-   the whole map silently turns into that message. (OSM's volunteer servers do the same
-   with an "Access blocked" tile.) We probe one dense land tile at startup and fall back
-   to Esri's key-free canvas if CARTO is blocked for this visitor. */
+/* Basemaps: Esri's key-free canvas, with its reference layer for place names. CARTO is gone
+   (see CC_BASEMAPS): a saved 'carto' choice from the old Map style picker is dropped here, and
+   the service worker purges any CARTO tile it ever cached. */
 const BASEMAPS = window.CC_BASEMAPS;   // defined in the early-map script above data.js
-let basePref = ['auto', 'carto', 'esri'].includes(localStorage.getItem('cc_basepref'))
-  ? localStorage.getItem('cc_basepref') : 'auto';   // auto | carto | esri
-let baseProvider = basePref !== 'auto' ? basePref : 'esri';
-// A healthy z12 tile over Austin is tens of KB; a watermark or blank tile is under 2 KB.
-/* CARTO now enforces on this domain and answers with its normal map tile with
-   "API KEY REQUIRED" rendered INTO the image — a full-size, valid PNG. There is no status
-   code, no failed request and no size difference to detect it by: an earlier fix here
-   probed tile byte length and was fooled completely, because a watermarked tile is
-   11-88 KB exactly like a good one. So we do not try to detect it. Esri's canvas needs no
-   key and is the default; CARTO stays selectable for whoever holds an API key. */
-function probeBasemap() {
-  baseProvider = basePref === 'auto' ? 'esri' : basePref;
-  applyTheme();
-}
-/* Real outages do surface as tile errors, which is worth surviving -- but so do a patch of
-   bad signal and being offline (the service worker answers an uncached tile with an error).
-   Six failures over the WHOLE session used to switch to CARTO, whose tiles carry the
-   watermark above, and nothing ever switched back. Now only a burst while online counts,
-   and Esri is retried after three minutes. */
-let tileFails = [];
+try {
+  if (localStorage.getItem('cc_basepref') === 'carto' || localStorage.getItem('cc_base') === 'carto') {
+    localStorage.setItem('cc_basepref', 'auto');
+    localStorage.removeItem('cc_base'); localStorage.removeItem('cc_base_at');
+  }
+} catch (e) {}
+function probeBasemap() { applyTheme(); }
+/* Real outages do surface as tile errors -- but so do a patch of bad signal and being offline
+   (the service worker answers an uncached tile with an error). A burst while online used to
+   switch to CARTO, whose tiles are now all watermarks. There is no other key-free basemap to
+   fall back to, so a burst asks Esri again a little later: Leaflet never retries a failed
+   tile by itself. At most one retry a minute. */
+let tileFails = [], tileRetryAt = 0;
 function onTileError() {
-  if (basePref !== 'auto' || baseProvider !== 'esri' || !navigator.onLine) return;
+  if (!navigator.onLine) return;
   const now = Date.now();
   tileFails = tileFails.filter(t => now - t < 20000);
   tileFails.push(now);
-  if (tileFails.length < 12) return;
-  tileFails = []; baseProvider = 'carto'; applyTheme();
+  if (tileFails.length < 12 || now < tileRetryAt) return;
+  tileFails = []; tileRetryAt = now + 60000;
   setTimeout(() => {
-    if (basePref === 'auto' && baseProvider === 'carto') { baseProvider = 'esri'; applyTheme(); }
-  }, 180000);
-}
-/* If the probe was wrong for this visitor — CARTO can serve a good tile for the probe and
-   watermarks for the rest — they need a way out that does not depend on our detection. */
-function setBasePref(p) {
-  basePref = p;
-  localStorage.setItem('cc_basepref', p);
-  localStorage.removeItem('cc_base_at');
-  if (p === 'auto') { probeBasemap(); toast('Map style: automatic'); }
-  else { baseProvider = p; localStorage.setItem('cc_base', p); applyTheme();
-         toast('Map style: ' + (p === 'carto' ? 'CARTO' : 'Esri')); }
-  syncBasePref();
-  if (navigator.serviceWorker && navigator.serviceWorker.controller)
-    navigator.serviceWorker.controller.postMessage('clearTiles');
-}
-function syncBasePref() {
-  const g = $('baseSeg'); if (!g) return;
-  g.querySelectorAll('button').forEach(b =>
-    b.classList.toggle('on', b.dataset.base === basePref));
+    if (!navigator.onLine) return;
+    if (tiles) tiles.redraw();
+    if (labelTiles) labelTiles.redraw();
+  }, 15000);
 }
 const MTHEME = {
   light: { base: '#a39a90', ghost: '#d6cfc5', hot: '#0f7a43', hotStroke: '#fffdfa' },
@@ -2487,14 +2455,12 @@ function applyTheme() {
   if (mc) mc.content = curDark ? '#121110' : '#f6f3ee';
   if (tiles) map.removeLayer(tiles);
   if (labelTiles) { map.removeLayer(labelTiles); labelTiles = null; }
-  const bm = BASEMAPS[baseProvider] || BASEMAPS.carto;
-  $('map').classList.toggle('bm-esri', baseProvider === 'esri');
+  const bm = BASEMAPS.esri;
+  $('map').classList.add('bm-esri');
   // alt:'' marks the tiles decorative — otherwise every tile is an unlabelled image
   tiles = L.tileLayer(bm[curDark ? 'dark' : 'light'], { ...bm.opts, alt: '' }).addTo(map);
   tiles.on('tileerror', onTileError);
-  if (baseProvider === 'esri') {
-    labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], { ...bm.opts, alt: '' }).addTo(map);
-  }
+  labelTiles = L.tileLayer(bm[curDark ? 'refDark' : 'refLight'], { ...bm.opts, alt: '' }).addTo(map);
   if (window.__ccEarlyTiles) { window.__ccEarlyTiles.forEach(l => map.removeLayer(l)); window.__ccEarlyTiles = null; }
   setAttribution(bm.attrib);
   $('themeBtn').innerHTML = themePref === 'auto' ? ICON_AUTO : curDark ? ICON_MOON : ICON_SUN;
@@ -7518,11 +7484,9 @@ $('hero').addEventListener('click', e => { if (e.target.id === 'hero') hideHero(
 
 
 /* ───────── boot ───────── */
-/* probeBasemap() picks the provider and then calls applyTheme() itself. Calling applyTheme()
-   first as well built a whole tile layer and started downloading its tiles, only for
-   probeBasemap to tear it down and rebuild it a moment later. */
+/* probeBasemap() builds the tile layers through applyTheme(); calling applyTheme() first as
+   well built a whole tile layer only to tear it down and rebuild it a moment later. */
 probeBasemap();
-$('baseSeg').querySelectorAll('button').forEach(b => b.onclick = () => setBasePref(b.dataset.base));
 (function () {
   const row = $('chiprow');
   /* Coalesced to one read per frame. As a MutationObserver callback it read three layout
@@ -7542,7 +7506,6 @@ $('baseSeg').querySelectorAll('button').forEach(b => b.onclick = () => setBasePr
   new MutationObserver(sync).observe(row, { childList: true, subtree: true });
   sync();
 })();
-syncBasePref();
 saveFavs();
 renderCarBar();
 $('savedChip').classList.toggle('on', false);

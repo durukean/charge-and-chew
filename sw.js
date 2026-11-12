@@ -37,6 +37,12 @@ self.addEventListener('activate', e => {
         if (!(await fresh.match(req))) { const r = await old.match(req); if (r) await fresh.put(req, r); }
       }
     }
+    /* CARTO tiles are all "API KEY REQUIRED" watermarks now (BUG-B01) and an older worker cached
+       them cache-first: drop every one, from whichever tile cache holds it. */
+    for (const k of keys.filter(k => k.endsWith('-tiles'))) {
+      const c = await caches.open(k);
+      for (const req of await c.keys()) if (/(^|\.)cartocdn\.com$/.test(new URL(req.url).hostname)) await c.delete(req);
+    }
     await Promise.all(keys.filter(k => !k.startsWith(VERSION) && k !== DATA).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
@@ -64,11 +70,9 @@ self.addEventListener('fetch', event => {
   const sameOrigin = url.origin === self.location.origin;
 
   // ---- map tiles (cross-origin): cache-first, capped — gives an offline map of where you've been
-  if (/basemaps\.cartocdn\.com|server\.arcgisonline\.com/.test(url.hostname)) {
-    // The basemap probe must see the network, never this cache: a cached watermark tile
-    // would make the probe conclude the wrong thing, and a cached good tile would hide a
-    // block that is happening right now.
-    if (url.searchParams.has('probe')) return;
+  // Esri only. A CARTO tile (an old page still asking for one) is never intercepted, so never
+  // cached: it goes to the network like any other cross-origin request (BUG-B01).
+  if (url.hostname === 'server.arcgisonline.com') {
     event.respondWith((async () => {
       const c = await caches.open(TILES);
       const hit = await c.match(request);

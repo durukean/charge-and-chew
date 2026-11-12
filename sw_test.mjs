@@ -36,7 +36,8 @@ async function tileReq(url){
   if (out) await out;
   return out;
 }
-const TILE='https://a.basemaps.cartocdn.com/rastertiles/voyager/12/935/1686@2x.png';
+const TILE='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/12/1686/935';
+const CARTO='https://a.basemaps.cartocdn.com/rastertiles/voyager/12/935/1686@2x.png';
 
 nextSize = 126;                       // watermark / blocked tile
 await tileReq(TILE);
@@ -47,7 +48,11 @@ nextSize = 87968;                     // healthy tile
 await tileReq(TILE+'?x=2');
 const afterGood = (store.get(tilesCache())||new Map()).size;
 
-const probe = await tileReq(TILE+'?probe=1');
+/* CARTO answers every tile with an "API KEY REQUIRED" watermark (BUG-B01): the worker must not
+   even intercept one, so it can never be cached. */
+nextSize = 87968;
+const cartoOut = await tileReq(CARTO);
+const afterCarto = (store.get(tilesCache())||new Map()).size;
 
 /* An opaque tile (requested without crossOrigin) must still reach the map, but never the cache:
    its size reads as 0, so the watermark check cannot vouch for it. */
@@ -66,7 +71,7 @@ const report = (label, ok, okText, badText) => {
 };
 report('watermark tile (126b) cached?', !(afterBad > 0), 'no   OK', 'YES');
 report('healthy tile (88KB) cached?', afterGood > afterBad, 'yes  OK', 'NO');
-report('probe request intercepted?', probe === undefined, 'no   OK (goes to network)', 'YES');
+report('CARTO tile intercepted?', cartoOut === undefined && afterCarto === afterGood, 'no   OK (goes to network)', 'YES (watermark can be cached)');
 report('opaque tile returned?', !!(opaqueRes && opaqueRes.type === 'opaque'), 'yes  OK', 'NO (map loses the tile)');
 report('opaque tile cached?', afterOpaque === afterGood, 'no   OK', 'YES (unvetted tile cached)');
 
@@ -122,8 +127,12 @@ report('data cache unversioned?', dataName === 'cc-data', 'yes  OK', 'NO (' + da
 store.delete('cc-data');
 store.set('cc-v1-data', new Map([[DATA_URL, { size: 4_000_000 }]]));   // left by an older worker
 store.set('cc-v1-shell', new Map([['https://chargeandchew.com/', { size: 1 }]]));
+// a watermark an older worker cached cache-first, next to a good Esri tile
+store.get(tilesCache()).set(CARTO, { size: 2049 });
 let act; for (const f of listeners['activate']) f({ waitUntil: p => { act = p; } });
 await act;
+report('activate purges CARTO tiles?', ![...(store.get(tilesCache()) || new Map()).keys()].some(u => u.includes('cartocdn'))
+       && (store.get(tilesCache()) || new Map()).size > 0, 'yes  OK', 'NO (watermarks stay on the offline map)');
 report('update keeps cached dataset?', !!(store.get('cc-data') && store.get('cc-data').get(DATA_URL)),
        'yes  OK', 'NO (dataset re-downloaded after every update)');
 report('old caches removed?', !store.has('cc-v1-data') && !store.has('cc-v1-shell'), 'yes  OK', 'NO');
