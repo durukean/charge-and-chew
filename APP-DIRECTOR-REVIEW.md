@@ -310,3 +310,60 @@ Each change: gate `./check.sh` green before its commit, guards in `verify.py` / 
 Screenshots: `scratchpad/b9/la-375-{light,dark}-{card,stop}.png`, `la-1280-light-{card,stop}.png`, `den-1280-dark-{card,stop}.png`, `ios-1-card.png` … `ios-9-share-file.png`.
 
 **Final runs** on an rsync snapshot of `e01c48af7` (Overpass and its mirrors mapped to NXDOMAIN in Chrome): `node tools/breaks_check.mjs` all 27 pass (incl. the new calendar case), `node tools/trip_plan_check.mjs` 152/152 (329 rows). `search_audit` full not run: search was not touched.
+
+---
+
+# Audit, 2026-11-12: performance, visuals, overall (after batches 1–9)
+
+Sources: `.director/bugs-2026-11-12.md` (bugs + performance), `.director/ui-2026-11-12.md` (30 visual findings),
+`.director/design-2026-11-12.md` (product, IA, growth, competitors, App Store listing).
+
+## Top 3
+1. **The map can go blank with "API KEY REQUIRED" (BUG-B01, S1).** CARTO now serves a watermark tile to everyone: users who picked CARTO, everyone on Auto after an Esri error burst, and the service worker caches it.
+2. **A plan can only be for today (BUG-B02 + design #1).** `leave=0800` on 3,742 trip-page links plans "this morning". Calendar events can land in the past. There's no way to plan Wednesday the 25th, and no Thanksgiving or Sunday closures.
+3. **Phones hide the stop card's Directions button (UI-26, P1)** now that the card carries the new signal lines. Close behind: the boot waits on Google Fonts (B03: a 3 s font stall means a 3.1 s first paint).
+
+## Bugs
+- **S1:** B01.
+- **S2:**
+  - B02
+  - B03
+  - B04 (hours after midnight use the wrong day)
+  - B05 (a network tap saves a sticky "Non-Tesla only")
+  - UI-26
+  - UI-27 (iPad portrait 761–899 px)
+  - UI-28 (welcome card at 320 px)
+- **S3:** B06–B13. B11 and B12 are suspected only.
+
+## Backlog (impact ÷ effort)
+
+**Batch A: correctness and speed**
+- B01: retire CARTO, purge cached tiles, migrate the saved choice.
+- B03: fonts never block (self-host).
+- Service worker serves the cached page first.
+- UI-26, UI-27, UI-28.
+- B02 + departure day: past times roll to tomorrow; Thanksgiving/Sunday closures, worded "usually closed".
+- B04, B07, B05, B06.
+- Performance: time-zone lookup and plan computed once; search regexes compiled once.
+
+**Batch B: plan travels, cleaner rows, accessibility**
+- Labelled "Send plan".
+- The share link matches the text.
+- A first-run "Plan a drive" row.
+- Search reads "thanksgiving" / "wednesday 7am".
+- UI-29/30/31: row hierarchy, one signal component.
+- UI-32–42.
+- B08–B10.
+- Keyboard and VoiceOver fixes; the iOS text-size cap.
+
+**Batch C: polish and the App Store**
+- P3 polish (UI-43–55).
+- Batch 10 App Store refresh: 5-line What's New, keywords, 6 captioned screenshots with the meal plan first, 1.1.1 (AFTER_APPROVAL, owner OK 2026-11-12).
+
+**Deferred:** column-stored data.js (−23%; touches the build, Python and Swift).
+
+**Needs the owner:**
+- App name/subtitle change.
+- In-App Event and featuring nomination.
+- Holiday promotional text.
+- `track('geo')` analytics.
