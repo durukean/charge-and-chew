@@ -45,6 +45,18 @@ CASES = [
     ("Mo-Sa 07:00-21:00",                 "2026-11-10T03:30:00Z", False, "America/Chicago"),  # 9:30 pm Mon
 ]
 
+# The late-food line on a stop card at 11 pm in Los Angeles (07:00 UTC next day): the chain rule's
+# names, then each nearby place's OSM hours. (names, places with hours, instant, zone, names after)
+LATE_CASES = [
+    (["Taco Bell"], [{"k": "Taco Bell", "hours": "Mo-Su 06:00-21:00"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", ""),
+    (["Taco Bell"], [{"k": "Taco Bell", "hours": "Mo-Su 07:00-02:00"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", "Taco Bell"),
+    (["Taco Bell"], [{"k": "Starbucks", "hours": "Mo-Su 05:00-24:00"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", "Taco Bell|Starbucks"),
+    (["Taco Bell"], [{"k": "Walmart", "hours": "24/7"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", "Taco Bell"),
+    (["Taco Bell"], [{"k": "Taco Bell", "hours": "sunrise-sunset"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", "Taco Bell"),
+    ([], [{"k": "Chipotle", "hours": "Mo-Su 10:45-22:00"}], "2026-11-12T07:00:00Z", "America/Los_Angeles", ""),
+    ([], [{"k": "Chipotle", "hours": "Mo-Su 10:45-22:00"}], "2026-11-12T05:30:00Z", "America/Los_Angeles", "Chipotle"),
+]
+
 def main():
     binpath = next((c for c in CHROME if os.path.exists(c)), None)
     if not binpath:
@@ -66,15 +78,21 @@ def main():
 <iframe src="/index.html?nosw=1" style="display:none" onload="run(this)"></iframe>
 <script>
 const CASES = %s;
+const LATE_CASES = %s;
 function run(f){
+  const lk = f.contentWindow.__lateKeysByHours;
+  const LATE_OUT = LATE_CASES.map(([keys, places, when, tz, want]) => {
+    let got; try { got = lk(keys, places, new Date(when), tz).keys.join('|'); } catch (e) { got = 'ERR ' + e.message; }
+    return { keys, when, want, got };
+  });
   const fn = f.contentWindow.__hoursNow;
   const out = CASES.map(([spec, when, exp, tz]) => {
     let got; try { got = fn(spec, new Date(when), tz); } catch(e){ got = 'ERR ' + e.message; }
     return { spec, when, exp, tz, got: got && typeof got === 'object' ? got.open : got, note: got && got.note };
   });
-  document.getElementById('o').textContent = JSON.stringify(out);
+  document.getElementById('o').textContent = JSON.stringify({ out, late: LATE_OUT });
 }
-</script>""" % json.dumps(CASES))
+</script>""" % (json.dumps(CASES), json.dumps(LATE_CASES)))
     out = os.path.join(tmp, "o.html")
     # Clean up in `finally`: a timeout used to skip cleanup and leave _hours_probe.html in the
     # repo root, where a `git add -A` committed it.
@@ -90,15 +108,22 @@ function run(f){
     m = re.search(r'<pre id="o">(.*?)</pre>', dom, re.S)
     if not m or not m.group(1).strip():
         print("FAIL: probe produced nothing"); return 1
-    got = json.loads(m.group(1).replace("&quot;", '"').replace("&amp;", "&"))
+    res = json.loads(m.group(1).replace("&quot;", '"').replace("&amp;", "&"))
+    got = res["out"]
     bad = 0
+    # The stop card's late-food line (stop signals): OSM hours overrule the late-chain rule.
+    for r in res["late"]:
+        ok = r["got"] == r["want"]
+        if not ok: bad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'}  late food {'|'.join(r['keys']) or '-':24s} @ {r['when'][5:]}  -> {r['got'] or '-'}"
+              f"{'' if ok else '  (want ' + (r['want'] or '-') + ')'}")
     for r in got:
         ok = (r["got"] is None and r["exp"] is None) or (r["got"] == r["exp"])
         if not ok: bad += 1
         print(f"  {'ok  ' if ok else 'FAIL'}  {r['spec'][:38]:40s} @ {r['when'][5:]}{' ' + r['tz'] if r.get('tz') else ''}  -> {r['got']}"
               f"{'  (' + str(r['note']) + ')' if r.get('note') else ''}")
     if bad: print(f"\n{bad} case(s) wrong"); return 1
-    print(f"\nopening hours: {len(got)}/{len(got)} cases pass")
+    print(f"\nopening hours: {len(got) + len(res['late'])}/{len(got) + len(res['late'])} cases pass")
     return 0
 
 if __name__ == "__main__":

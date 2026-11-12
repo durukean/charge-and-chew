@@ -105,7 +105,14 @@ const CASES = [
     r => { const night = r.stops.filter(s => s.label === 'Break' && (mins(s.clock) >= 22 * 60 || mins(s.clock) < 6 * 60));
       const bad = night.filter(s => !LATE.includes(s.chain));
       // One may be a 24-hour site with no late chain in walking distance.
-      return night.length > 3 && bad.length <= 1 ? '' : `night breaks not at late chains: ${bad.map(s => s.clock + ' ' + s.place + ' (' + s.chain + ')').join(', ')}`; }]],
+      return night.length > 3 && bad.length <= 1 ? '' : `night breaks not at late chains: ${bad.map(s => s.clock + ' ' + s.place + ' (' + s.chain + ')').join(', ')}`; },
+    /* Each stop says what is likely open at its clock (stop signals, batch 8): "open late" under
+       a night stop at a late chain, "may be closed then" under one that is not, nothing by day. */
+    r => { const night = s => mins(s.clock) >= 22 * 60 || mins(s.clock) < 6 * 60;
+      const bad = r.stops.filter(s => s.chain && (night(s) ? !s.sig.includes(LATE.includes(s.chain) ? 'open late' : 'may be closed then')
+        : /open late|may be closed/.test(s.sig)));
+      return r.stops.some(s => night(s) && s.sig.includes('open late')) && !bad.length ? ''
+        : `night signals wrong: ${bad.slice(0, 3).map(s => s.clock + ' ' + s.place + ' (' + s.chain + '): "' + s.sig + '"').join(', ') || 'no stop says "open late"'}`; }]],
   /* Coast to coast: more stops than the list renders (LIST_MAX), and every break must still
      open its stop -- 17 of 23 did nothing when the tap looked the stop up by its list row. */
   ['Los Angeles, CA', 'New York, NY', 420, 'America/Los_Angeles', [
@@ -271,7 +278,8 @@ const READ = `(() => {
         const seg = line.split(' · ').find(x => / \\d+ min$/.test(x)) || '';
         const chain = seg.replace(/^\\S+ /, '').replace(/ \\d+ min$/, '');
         out.push({ clock: b.querySelector('.bm').firstChild.textContent.trim(), label: b.querySelector('.bm i').textContent, day,
-          place: b.querySelector('.bt b').textContent, chain, mile: +(b.querySelector('.bm small').textContent.match(/mile (\\d+)/) || [])[1] });
+          place: b.querySelector('.bt b').textContent, chain, mile: +(b.querySelector('.bm small').textContent.match(/mile (\\d+)/) || [])[1],
+          sig: (b.querySelector('.bt .bs') || {}).textContent || '' });
       }
       return out; })() };
 })()`;

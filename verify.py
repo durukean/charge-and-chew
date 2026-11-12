@@ -2015,6 +2015,60 @@ if os.path.exists(_rfi_page):
             _abad.append(_x["slug"])
     check(not _abad, f"{len(_abad)} interstate pages state a Road Food Index rank that differs from the data: {_abad[:3]}")
 
+# ---- Stop signals (batch 8) ----
+# Each signal is shown where it is computed: the guards match the live call sites, and a node run
+# of the real block checks what each one says (and that it says nothing it cannot back).
+_sg0, _sg1 = _html.find("const LATE = new Set(["), _html.find("function breakPicks(vis) {")
+check(_sg0 > 0 and _sg1 > _sg0, "the stop-signal block (LATE ... breakPicks) is missing")
+_SIG = _html[_sg0:_sg1] if _sg0 > 0 and _sg1 > _sg0 else ""
+_pp = _html[_html.index("function popupHtml(s) {"):_html.index("function popupHtml(s) {") + 12000]
+check(re.search(r"\n    \$\{cardSigs\(s\)\}\n    <div class=\"pp-links\">", _pp) is not None,
+      "the stop card no longer shows its signal line (cardSigs)")
+check(re.search(r"<span class=\"tag iso\">isolated</span>' : ''\}\$\{rowSigs\(s\)\}</div>", _html) is not None,
+      "list rows no longer carry their signal tags (rowSigs)")
+check("walkMin(walk) + ' min' : ''}</span>${brkSigs(s, k, ms)}</span>" in _html,
+      "a planned break no longer says what is likely open at its clock (brkSigs)")
+check(re.search(r"(?m)^  if \(stop\) lateByHours\(el, stop, todo, tz\);$", _html) is not None,
+      "the stop card's late-food line is no longer put right by OpenStreetMap hours (lateByHours)")
+check("const r = lateKeysByHours(b ? (b.dataset.keys || '').split('|').filter(Boolean) : []," in _html
+      and "window.__lateKeysByHours = lateKeysByHours;" in _html,
+      "lateByHours no longer asks lateKeysByHours (the rule verify_hours.py tests)")
+if _node and _SIG:
+    _rsig = subprocess.run([_node, "-e", r"""
+let MIN = 0; const BRANDS = {}, MATCH = {};
+for (const [k, c] of [["Taco Bell", "food"], ["Chipotle", "food"], ["Wawa", "store"], ["Walmart", "store"], ["IHOP", "food"]]) BRANDS[k] = { cat: c, e: '' };
+const BUNDLED_KEYS = new Set(Object.keys(BRANDS));
+const walkTo = (s, k, v) => v[0] * 10; const arriveMs = s => s.plan == null ? null : s.plan;
+const localAt = () => ({ min: MIN }); const tzOf = () => 'America/Los_Angeles';
+const clockLabel = m => Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const document = { addEventListener() {} };
+""" + _SIG + r"""
+const f = [], t = (c, msg) => { if (!c) f.push(msg); };
+MATCH[1] = { "Chipotle": [10, 0], "Taco Bell": [20, 0] };     // a late chain at 200 m
+MATCH[2] = { "Chipotle": [10, 0] };                          // food, none late
+MATCH[3] = { "Wawa": [5, 0] };                               // a 24-hour travel stop
+MATCH[4] = { "Walmart": [5, 0] };                            // no food at all
+const S = id => ({ id, st: 'CA', lat: 34, lon: -118 });
+MIN = 23 * 60;
+t(/late food/.test(rowSigs(S(1))), 'a row at 11 pm with Taco Bell has no "late food" tag');
+t(/Taco Bell is usually open late/.test(rowSigs(S(1))), 'the late tag does not say which place, and "usually"');
+t(rowSigs(S(2)) === '', 'a row at night with no late chain still gets a tag');
+t(/late food/.test(rowSigs(S(3))), 'a 24-hour travel stop (Wawa) does not count as late food');
+const c2 = lateSig(S(2)); t(c2 && c2.closed && /may be closed/.test(c2.label), 'at night, food with no late chain is not "may be closed"');
+t(lateSig(S(4)) === null, 'a stop with no food at all says something about late food');
+t(/Likely open now: Taco Bell/.test(cardSigs(S(1))), 'the stop card at night does not say what is likely open now');
+const p = S(1); p.plan = 5; t(/Likely open ~23:00: Taco Bell/.test(cardSigs(p)), 'on a plan, the card does not use the arrival time');
+t(/may be closed then/.test(brkSigs(S(2), 'Chipotle', 0)) && /open late/.test(brkSigs(S(1), 'Taco Bell', 0)), 'a night break does not say open late / may be closed');
+MIN = 13 * 60; nowAt.clear();
+t(rowSigs(S(1)) === '', 'a row by day carries a late-food tag (every McDonald\'s would)');
+t(/Open late: Taco Bell/.test(cardSigs(S(1))), 'the stop card by day does not say what is open late');
+t(brkSigs(S(1), 'Taco Bell', 0) === '', 'a daytime break carries a night signal');
+t(/open late by the hours OpenStreetMap lists/.test(lateSig(S(1), null, ['Chipotle'], true).why), 'an hours-backed item does not say so');
+t(rowSigs(Object.assign(S(1), { lvl: 2 })) === '', 'a Level 2 row carries signals');
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_rsig.stdout.strip() == "OK", "stop signals say the wrong thing:\n  " + (_rsig.stdout + _rsig.stderr).strip()[:600])
+
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.
 def _css_balanced(css):

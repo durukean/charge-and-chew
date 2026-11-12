@@ -448,6 +448,18 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-setcar b{color:var(--accent);font-weight:700}
 .leaflet-container a.pp-nb{color:var(--txt)}   /* Leaflet paints every popup link blue */
 .pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
+/* Stop signals: one quiet line under the places; a tap on an item shows why it is there. */
+.pp-sig{display:flex;flex-wrap:wrap;gap:2px 12px;margin:6px 0 0}
+.pp-sig .sg{display:inline-flex;align-items:center;gap:5px;min-height:28px;padding:0;border:0;background:none;cursor:pointer;
+  font:600 12px var(--sans);color:var(--dim);text-align:left}
+.pp-sig .sg span{text-decoration:underline dotted var(--dim2);text-underline-offset:3px}
+.pp-sig .sg.n{color:var(--warn)}
+.pp-sig .sg .ui-i{flex-shrink:0;color:var(--dim2)}
+.pp-sig .sg.n .ui-i{color:var(--warn)}
+.pp-why{font-size:11.5px;color:var(--dim);line-height:1.4;margin:2px 0 0}
+@media(pointer:coarse){.pp-sig .sg{min-height:36px}}
+.tag.sig{display:inline-flex;align-items:center;gap:3px}
+.tag.sig .ui-i{width:10px;height:10px}
 .pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
   border:1px solid var(--line);color:var(--txt);font:700 12px var(--sans);cursor:pointer}
 .pp-links .pp-morebtn[aria-expanded="true"]{background:var(--surface3)}
@@ -674,6 +686,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
 .brk .bt>span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brk .bt>.bs{font-size:11.5px;color:var(--dim2)}   /* the stop's signals at that clock: open late, restroom */
 @media(pointer:coarse){.brk{padding:12px 0}}
 .row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
 /* The row's lead: the network's mark, as on the map. */
@@ -2089,6 +2102,7 @@ function popupHtml(s) {
     ${poiBlock}
     ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
       : '<div class="pp-warn1">Nothing we track within a 10-minute walk — likely an isolated stop</div>'}
+    ${cardSigs(s)}
     <div class="pp-links">
       <button type="button" class="pp-morebtn" data-more aria-expanded="false">More</button>
       ${CAR ? '<button type="button" class="pp-navbtn" data-carnav>Navigate</button>'
@@ -3011,7 +3025,7 @@ function renderList(vis) {
       ${lead}
       <div class="body">
         <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map"><span>${esc(s.name)}</span></button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${showIdx ? netDot(s, 'netdot') : ''}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}</div>
+        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${showIdx ? netDot(s, 'netdot') : ''}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${rowSigs(s)}</div>
         <div class="ch">${chains}${extra}</div>
       </div>
     </div>`;
@@ -6184,6 +6198,35 @@ async function fillHours(el, stop) {
     const word = oh.open ? 'open' : 'closed';
     t.c.insertAdjacentHTML('beforeend', `<i class="ohs ${oh.open ? 'y' : 'n'}" title="${esc(when ? word + ' when you arrive, about ' + at : oh.note || '')}">${when ? word + ' ~' + at : word}</i>`);
   }
+  if (stop) lateByHours(el, stop, todo, tz);
+}
+/* The late-food item on the stop card, put right by the hours OpenStreetMap lists for the
+   nearest places: a place listed as closed then drops out, one listed as open joins. "Then"
+   is when you would be there at night, otherwise 11 pm that day. */
+function lateKeysByHours(keys, places, probe, tz) {
+  let changed = false;
+  for (const p of places) {
+    const oh = p.hours ? hoursNow(p.hours, probe, tz) : null;
+    if (!oh) continue;                                   // no hours, or hours we cannot read: the rule stands
+    if (oh.open && !keys.includes(p.k) && BRANDS[p.k] && BRANDS[p.k].cat === 'food') { keys = keys.concat(p.k); changed = true; }
+    if (!oh.open && keys.includes(p.k)) { keys = keys.filter(k => k !== p.k); changed = true; }
+  }
+  return { keys, changed };
+}
+window.__lateKeysByHours = lateKeysByHours;   // exercised by verify_hours.py
+function lateByHours(el, stop, todo, tz) {
+  const b = el.querySelector('.pp-sig .sg.late'), w = stopWhen(stop), night = isNight(w.min);
+  const probe = new Date(night ? w.ms : w.ms + (23 * 60 - w.min) * 60000);
+  const r = lateKeysByHours(b ? (b.dataset.keys || '').split('|').filter(Boolean) : [],
+    todo.map(t => ({ k: t.k, hours: (poiDetailCache.get(t.ck) || {}).hours })), probe, tz);
+  if (!r.changed) return;
+  const keys = r.keys;
+  const sig = lateSig(stop, w, keys.slice(0, 2), true), line = el.querySelector('.pp-sig');
+  if (!sig) { if (b) b.remove(); if (line && !line.children.length) line.remove(); return; }
+  const html = `<button type="button" class="sg late${sig.closed ? ' n' : ''}" data-sg="late" data-keys="${esc(sig.keys.join('|'))}" data-why="${esc(sig.why)}" aria-expanded="false" title="${esc(sig.why)}">${SIG_ICON.late}<span>${esc(sig.label)}</span></button>`;
+  if (b) b.outerHTML = html;
+  else if (line) line.insertAdjacentHTML('afterbegin', html);
+  else { const near = el.querySelector('.pp-near'); if (near) near.insertAdjacentHTML('afterend', `<div class="pp-sig">${html}</div><div class="pp-why" hidden></div>`); }
 }
 function poiDetailHtml(p) {
   if (!p) return '<div class="pp-det">No extra details in OpenStreetMap for this one.</div>';
@@ -6554,6 +6597,86 @@ const dwellOf = p => p.meal ? DWELL_MEAL : DWELL_BREAK;
 /* Between 10 pm and 6 am a break goes to a 24-hour site or one of these, most of them open
    late or all night: LA -> New York leaving at 9 pm stopped at Starbucks at 2:35 am. */
 const LATE = new Set(["McDonald's", 'Taco Bell', 'Jack in the Box', "Denny's", 'Waffle House', 'Whataburger', 'IHOP']);
+
+/* ───────── stop signals ─────────
+   Small facts about a stop beyond its chains, each with the reason behind it, and each said
+   no more firmly than the data allows. Rows carry at most two small tags; the stop card one
+   line, where a tap on an item shows its reason; a planned break one short line.
+
+   Food open late: the LATE chains above (the planner's own night rule), plus 24-hour travel
+   stops with hot food. "Usually": hours vary by location. On the stop card OpenStreetMap's
+   hours, where a place lists them, overrule the rule (fillHours). Night is the planner's
+   window, 10 pm to 6 am at the stop, at the time you would be there: the plan's arrival on a
+   planned drive, otherwise now. */
+const LATE_STOPS = new Set(["Buc-ee's", 'Pilot', 'Flying J', "Love's", 'TA Travel Center', 'Wawa', 'Sheetz',
+  'QuikTrip', 'Kwik Trip', 'Royal Farms']);
+const isNight = min => min >= 22 * 60 || min < 6 * 60;
+const nowAt = new Map();          // zone -> [minute stamp, local minutes]: one Intl call per zone per minute
+function stopWhen(s) {
+  const at = arriveMs(s);
+  if (at != null) return { ms: at, planned: true, min: localAt(at, tzOf(s)).min };
+  const tz = tzOf(s), stamp = Math.floor(Date.now() / 60000), c = nowAt.get(tz);
+  if (c && c[0] === stamp) return { ms: Date.now(), planned: false, min: c[1] };
+  const min = localAt(Date.now(), tz).min;
+  nowAt.set(tz, [stamp, min]);
+  return { ms: Date.now(), planned: false, min };
+}
+// Food usually open late at a stop, nearest first: [[chain, metres], ...].
+function lateFoods(s) {
+  const m = MATCH[s.id] || {};
+  return Object.keys(m).filter(k => BUNDLED_KEYS.has(k) && (LATE.has(k) || LATE_STOPS.has(k)))
+    .map(k => [k, walkTo(s, k, m[k])]).sort((a, b) => a[1] - b[1]);
+}
+const hasFood = s => Object.keys(MATCH[s.id] || {}).some(k => BRANDS[k] && BRANDS[k].cat === 'food');
+const SIG_ICON = {
+  late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
+};
+/* The late-food signal at a stop: null when it says nothing (daytime in a row, no food). */
+function lateSig(s, w, names, byHours) {
+  w = w || stopWhen(s);
+  const night = isNight(w.min);
+  if (!names) names = lateFoods(s).slice(0, 2).map(x => x[0]);
+  const at = w.planned ? ' ~' + clockLabel(w.min) : ' now';
+  if (names.length) {
+    return { kind: 'late', night, keys: names, tag: 'late food',
+      label: night ? 'Likely open' + at + ': ' + names.join(', ') : 'Open late: ' + names.join(', '),
+      why: names.join(' and ') + (names.length > 1 ? ' are' : ' is') + (byHours ? ' open late by the hours OpenStreetMap lists'
+        : ' usually open late or all night') + (night && w.planned ? ' (you get here about ' + clockLabel(w.min) + ')' : '') +
+        '. Hours vary by location.' };
+  }
+  if (night && hasFood(s)) return { kind: 'late', night, keys: [], tag: '', closed: true,
+    label: 'Food may be closed' + at, why: 'None of the food here is a chain that usually stays open late. Check the hours before you go.' };
+  return null;
+}
+/* Small outline tags for a list row (the batch-3 badge style), at most two. Late food only
+   at night: in daytime every row with a McDonald's would say it. */
+function rowSigs(s) {
+  if (s.lvl === 2) return '';
+  const out = [], w = stopWhen(s);
+  if (isNight(w.min)) { const L = lateSig(s, w); if (L && L.tag) out.push(`<span class="tag sig" title="${esc(L.why)}">${SIG_ICON.late}${L.tag}</span>`); }
+  return out.slice(0, 2).join('');
+}
+/* The stop card's line: each item a button whose reason opens under the line. */
+function cardSigs(s) {
+  if (s.lvl === 2) return '';
+  const items = [lateSig(s)].filter(Boolean);
+  if (!items.length) return '';
+  return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
+}
+/* A planned break's line: what is true there at that clock. */
+function brkSigs(s, k, ms) {
+  const min = localAt(ms, tzOf(s)).min, bits = [];
+  if (isNight(min) && k) bits.push(LATE.has(k) || LATE_STOPS.has(k) ? 'open late' : 'may be closed then');
+  return bits.length ? `<span class="bs">${bits.join(' · ')}</span>` : '';
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('.pp-sig .sg'); if (!b) return;
+  const box = b.parentNode.nextElementSibling, open = b.getAttribute('aria-expanded') === 'true';
+  b.parentNode.querySelectorAll('.sg').forEach(x => x.setAttribute('aria-expanded', 'false'));
+  if (!box || !box.classList.contains('pp-why')) return;
+  box.hidden = open; box.textContent = open ? '' : b.dataset.why;
+  if (!open) b.setAttribute('aria-expanded', 'true');
+});
 function breakPicks(vis) {
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return [];
   const [first, lastStop] = routeEnds(vis);
@@ -6726,7 +6849,7 @@ function breaksCard(vis) {
   const rows = picks.map(({ s, walk, k, meal, ms, mi }) => ({ mi, ms, s, html: c =>
     `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}"${k ? ` data-k="${esc(k)}"` : ''}>
         <span class="bm">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? bemo(k) + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span></span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? bemo(k) + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span>${brkSigs(s, k, ms)}</span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       </button>` }));
   if (gap) {
