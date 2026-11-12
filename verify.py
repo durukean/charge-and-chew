@@ -2184,6 +2184,34 @@ t((rowSigs(S(12, { pg: 24 })).match(/class="tag sig"/g) || []).length === 2, 'a 
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_rr.stdout.strip() == "OK", "the restroom signal says the wrong thing:\n  " + (_rr.stdout + _rr.stderr).strip()[:700])
 
+# ---- Good for kids (batch 8) [B8-K] ----
+check(re.search(r"(?m)^  if \(F\.kids && !s\.pg\) return false;", _html[_html.index("function passesSpec(s) {"):_html.index("function passesChain(s) {")]) is not None,
+      "the Good for kids filter no longer narrows the list (passesSpec)")
+check("kids: 0 };" in _html[_html.index("const FDEF = {"):_html.index("const FDEF = {") + 120]
+      and "F.kids ? p.set('kids', '1') : p.delete('kids');" in _html
+      and re.search(r"(?m)^if \(q\.get\('kids'\)\) F\.kids = 1;$", _html) is not None
+      and '<button class="ftog" data-f="kids">' in _html and "kids: () => 'Good for kids'" in _html,
+      "Good for kids is not a saved filter, a toggle in Filters and a link parameter (FDEF, ftog, kids=1)")
+check("const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);" in _SIG
+      and "const K = kidsSig(s); if (K) bits.push(K.tag);" in _SIG,
+      "the playground is gone from the stop card or the breaks")
+if _node and _SIG:
+    _kd = subprocess.run([_node, "-e", _SIG_HEAD + _SIG + r"""
+const f = [], t = (c, msg) => { if (!c) f.push(msg); };
+const S = (id, o) => Object.assign({ id, st: 'TX', lat: 30, lon: -97 }, o || {});
+t(kidsSig(S(10, { pg: 24 })).tag === 'playground 3 min' && kidsSig(S(11)) === null, 'the playground tag is wrong');
+t(kidsSig(S(10, { pg: 24, lvl: 2 })) === null, 'a Level 2 site carries a playground signal');
+MATCH[1] = { "Buc-ee's": [12, 0] }; nowAt.clear();
+t(/playground 3 min/.test(rowSigs(S(1, { pg: 24 }))) && /restroom likely/.test(rowSigs(S(1, { pg: 24 }))), 'a row does not carry restroom and playground');
+t(/Playground 3 min/.test(cardSigs(S(1, { pg: 24 }))), 'the stop card does not show the playground');
+t(/playground 3 min/.test(brkSigs(S(1, { pg: 24 }), "Buc-ee's", 0)), 'a planned break does not show the playground');
+MIN = 23 * 60; nowAt.clear(); MATCH[12] = { "Love's": [12, 0], 'Taco Bell': [5, 0] };
+const r12 = rowSigs(S(12, { pg: 24 }));
+t((r12.match(/class="tag sig"/g) || []).length === 2 && !/playground/.test(r12), 'a row carries more than two signals, or the wrong two at night');
+F.kids = 1; t(/^<span class="tag sig"[^>]*><svg[^]*?<\/svg>playground/.test(rowSigs(S(12, { pg: 24 }))), 'with Good for kids on, the playground does not lead');
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_kd.stdout.strip() == "OK", "the playground signal says the wrong thing:\n  " + (_kd.stdout + _kd.stderr).strip()[:700])
+
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.
 def _css_balanced(css):

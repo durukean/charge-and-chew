@@ -186,10 +186,17 @@ location.replace('/?chain=IHOP&nosw=1');
     # A first visit with no location (2026-11-11): the welcome card leads with the drive --
     # From, To, leaving, plan -- and offers example trips instead of the national list.
     dom_hero = seeded("localStorage.clear();", "/?nosw=1")
+    # "Good for kids" (stop signals, batch 8): a saved filter (cc_filters) and a link (?kids=1)
+    # both narrow the list to stops with a playground tag on every row.
+    dom_kids_saved = seeded("localStorage.setItem('cc_hero','0');localStorage.setItem('cc_filters','{\"kids\":1}');", "/?nosw=1")
+    dom_kids_link = render_dom(binpath, f"http://127.0.0.1:{port}/?chain=IHOP&kids=1&nosw=1")
     httpd.shutdown()
-    if dom_filt is None or dom_full is None or dom_hero is None:
+    if dom_filt is None or dom_full is None or dom_hero is None or dom_kids_saved is None or dom_kids_link is None:
         return 1
 
+    def kids_rows(d):
+        rows = re.split(r'<div class="row(?: sel)?" data-id="\d+">', d)[1:]   # rendered rows, not the template in the source
+        return len(rows) > 3 and all(re.search(r'<span class="tag sig" title="A playground is mapped[^"]*"><svg[^>]*>.*?</svg>playground \d+ min</span>', r, re.S) for r in rows)
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
     checks = {
@@ -230,6 +237,10 @@ location.replace('/?chain=IHOP&nosw=1');
             and bool(re.search(r'<div class="heroex" id="heroEx">', dom_hero)),
         # Opened, the welcome card takes focus itself, not its x (whose keyboard ring then
         # showed on open as a square past the card's round corner).
+        "kids_filter_from_saved_settings": kids_rows(dom_kids_saved) and bool(re.search(r'id="filtN"[^>]*>1</span>', dom_kids_saved))
+            and bool(re.search(r'class="ftog on" data-f="kids"', dom_kids_saved)),
+        "kids_filter_from_link": kids_rows(dom_kids_link) and 'Good for kids' in dom_kids_link
+            and bool(re.search(r'id="sheetTitle"[^>]*>.{0,80}?IHOP', dom_kids_link)),
         "welcome_card_focuses_itself_not_its_x": bool(re.search(r'<div id="hero"[^>]*tabindex="-1"[^>]*>', dom_hero)),
     }
     bad = [k for k, v in checks.items() if not v]

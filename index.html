@@ -1313,9 +1313,10 @@ if (document.documentElement.classList.contains('car')) {
         <button class="ftog" data-f="h24"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Open 24 hours</button>
         <button class="ftog" data-f="free"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16 7.5c0-1.9-1.8-3-4-3s-4 1.1-4 3 1.8 2.6 4 3 4 1.3 4 3.3-1.8 3.2-4 3.2-4-1.2-4-3"/></svg> Free to charge</button>
         <button class="ftog" data-f="nodlr"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2"/></svg> Hide dealership lots</button>
+        <button class="ftog" data-f="kids"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 7 4h10l4 17M10 4v9M14 4v9M9 13h6"/></svg> Good for kids (playground)</button>
         <button class="ftog" data-f="noiso"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg> Hide isolated stops (nothing walkable)</button>
       </div>
-      <p class="fhint">Hours and pricing come from public data and are often missing, so these filters can hide good stops.</p>
+      <p class="fhint">Hours, pricing and playgrounds come from public data and are often missing, so these filters can hide good stops.</p>
     </div>
     <div class="fgroup">
       <label id="filtNetLabel">Network</label>
@@ -1630,7 +1631,7 @@ let sortBy = 'walk';
 let netFilter = ['all', 'tesla', 'other'].includes(localStorage.getItem('cc_net'))
   ? localStorage.getItem('cc_net') : 'all';   // all | tesla | other
 let netPick = null;   // an exact network name when the search query asked for one
-const FDEF = { kw: 0, stalls: 0, plug: 0, h24: 0, free: 0, nodlr: 0, noiso: 0 };
+const FDEF = { kw: 0, stalls: 0, plug: 0, h24: 0, free: 0, nodlr: 0, noiso: 0, kids: 0 };
 /* Each filter takes only the values its own control offers. A saved {"kw":"x","plug":7}
    (BUG-18) hid two thousand stops behind an "x+ kW" chip and wrote "205 undefined chargers"
    on the route card. Anything else falls back to the default, for saved values and links. */
@@ -1645,7 +1646,7 @@ const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
   plug: () => (PLUG_NAME[F.plug] || 'Plug') + ' only',
   h24: () => 'Open 24h', free: () => 'Free', nodlr: () => 'No dealerships',
-  noiso: () => 'Walkable only' };
+  noiso: () => 'Walkable only', kids: () => 'Good for kids' };
 /* Everything narrowing the list EXCEPT the chain picks, which are the user's stated
    intent rather than a hidden filter. The network and car filters used to live outside
    activeFilterCount(), so "0 stops" could be caused by a filter that nothing on screen
@@ -2516,6 +2517,7 @@ function passesSpec(s) {
   if (F.free && s.price !== 'free') return false;
   if (F.nodlr && s.dlr) return false;
   if (F.noiso && !(MATCH[s.id] && Object.keys(MATCH[s.id]).length)) return false;
+  if (F.kids && !s.pg) return false;          // a playground within ~300 m, this side of any highway
   return true;
 }
 function passesChain(s) {
@@ -6634,6 +6636,7 @@ function lateFoods(s) {
 const hasFood = s => Object.keys(MATCH[s.id] || {}).some(k => BRANDS[k] && BRANDS[k].cat === 'food');
 const SIG_ICON = {
   wc: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v7M8.5 10.5h7M12 15l-3 6M12 15l3 6"/></svg>',
+  kids: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 7 4h10l4 17M10 4v9M14 4v9M9 13h6"/></svg>',
   late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
 };
 /* The late-food signal at a stop: null when it says nothing (daytime in a row, no food). */
@@ -6689,19 +6692,31 @@ function restroomSig(s, w) {
   if (s.ml && w.min >= 10 * 60 && w.min < 21 * 60) return sig('the charger is at a shopping mall', 'Restrooms in mall hours.');
   return null;
 }
+/* Good for kids: a playground mapped within ~300 m in a straight line (s.pg, tens of metres),
+   never across a highway. From OpenStreetMap via the data build. */
+function kidsSig(s) {
+  if (!s.pg || s.lvl === 2) return null;
+  const n = walkMin(s.pg * 10);
+  return { kind: 'kids', tag: 'playground ' + n + ' min', label: 'Playground ' + n + ' min',
+    why: 'A playground is mapped in OpenStreetMap about ' + s.pg * 10 + ' m away in a straight line, on this side of any highway.' };
+}
 /* Small outline tags for a list row (the batch-3 badge style), at most two: late food (only at
-   night: by day every row with a McDonald's would say it), then restroom. */
+   night: by day every row with a McDonald's would say it), restroom, playground. With "Good
+   for kids" on, the playground leads. */
 function rowSigs(s) {
   if (s.lvl === 2) return '';
   const out = [], w = stopWhen(s), tag = x => x && x.tag ? `<span class="tag sig" title="${esc(x.why)}">${SIG_ICON[x.kind]}${x.tag}</span>` : '';
+  const K = kidsSig(s);
+  if (F.kids) out.push(tag(K));
   if (isNight(w.min)) out.push(tag(lateSig(s, w)));
   out.push(tag(restroomSig(s, w)));
+  if (!F.kids) out.push(tag(K));
   return out.filter(Boolean).slice(0, 2).join('');
 }
 /* The stop card's line: each item a button whose reason opens under the line. */
 function cardSigs(s) {
   if (s.lvl === 2) return '';
-  const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w)].filter(Boolean);
+  const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);
   if (!items.length) return '';
   return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
 }
@@ -6710,6 +6725,7 @@ function brkSigs(s, k, ms) {
   const min = localAt(ms, tzOf(s)).min, bits = [];
   if (isNight(min) && k) bits.push(LATE.has(k) || TRAVEL_STOPS.has(k) ? 'open late' : 'may be closed then');
   if (restroomSig(s, { min, ms, planned: true })) bits.push('restroom likely');
+  const K = kidsSig(s); if (K) bits.push(K.tag);
   return bits.length ? `<span class="bs">${bits.join(' · ')}</span>` : '';
 }
 document.addEventListener('click', e => {
@@ -6986,6 +7002,7 @@ function syncUrl() {
   F.h24 ? p.set('h24', '1') : p.delete('h24');
   F.free ? p.set('free', '1') : p.delete('free');
   F.noiso ? p.set('noiso', '1') : p.delete('noiso');
+  F.kids ? p.set('kids', '1') : p.delete('kids');
   // Both used to be left out, so a shared "EVgo only, no dealerships" view opened unfiltered.
   F.nodlr ? p.set('nodlr', '1') : p.delete('nodlr');
   F.plug ? p.set('plug', ({ 1: 'ccs', 2: 'tesla', 4: 'chademo' })[F.plug]) : p.delete('plug');
@@ -7379,7 +7396,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
 const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'q', 'net', 'netpick', 'plug', 'l2',
-                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr', 'leave'];
+                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr', 'kids', 'leave'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
 if (q.get('netpick') && SITES.some(s => s.net === q.get('netpick'))) {
@@ -7393,6 +7410,7 @@ if (q.get('h24')) F.h24 = 1;
 if (q.get('free')) F.free = 1;
 if (q.get('noiso')) F.noiso = 1;
 if (q.get('nodlr')) F.nodlr = 1;
+if (q.get('kids')) F.kids = 1;
 /* Level 2 comes on from a link that asks for it, or from the visitor's own choice on a plain
    visit -- never from someone else's saved preference riding along a shared view. */
 const wantL2 = VIEW_KEYS.some(k => q.has(k)) ? q.get('l2') === '1'
