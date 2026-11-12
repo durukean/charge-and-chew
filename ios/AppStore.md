@@ -51,6 +51,10 @@ Smarter stops (batch 8, 2026-11-11, branch director/smarter-stops-2026-11-11). D
 > • Good for kids: stops with a playground a short walk away show "playground 4 min", and a new filter shows only those.
 > • Honest walk times: a place across a freeway or divided highway from the charger is marked "across hwy" and listed after the ones on your side; plans prefer food on your side of the road.
 
+Take the plan with you (batch 9, 2026-11-12, branch director/calendar-2026-11-12). Draft What's New lines:
+> • Add to calendar: put every stop of a planned drive in your calendar in one tap ("Charge + lunch: Carl's Jr., Primm NV"), at the right time in each stop's time zone, with the food there, what's likely open and a link back to the plan. Charge & Chew can only add events; it never sees your calendar.
+> • One stop at a time: a stop on your plan says "Lunch on your plan · ~12:30 pm" with its own Add to calendar.
+
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
