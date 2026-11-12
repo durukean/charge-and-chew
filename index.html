@@ -683,6 +683,19 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk.gap .bt span{white-space:normal}
 .bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:12.5px;color:var(--dim)}
 .bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
+/* Add to calendar: under the plan, and on the card of a stop that is on it. */
+.bcal{margin-top:2px;padding:10px 0 6px;border-top:1px solid var(--line)}
+.calbtn{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--surface);color:var(--txt);font:700 13px var(--sans);cursor:pointer}
+.calbtn .ui-i,.pp-cal .ui-i{flex-shrink:0;color:var(--accent)}
+@media(hover:hover){.calbtn:hover{background:var(--surface2)}}
+.pp-plan{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 0;font-size:12px;color:var(--dim)}
+.pp-plan b{color:var(--txt);font-weight:700}
+.pp-plan i{font-style:normal;white-space:nowrap}
+.pp-cal{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;border:0;background:none;padding:4px 0;min-height:32px;
+  color:var(--accent);font:700 12px var(--sans);cursor:pointer;white-space:nowrap}
+.pp-cal .ui-i{width:14px;height:14px}
+@media(pointer:coarse){.calbtn,.pp-cal{min-height:44px}}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
 .brk .bt>span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2109,6 +2122,7 @@ function popupHtml(s) {
     ${ent.length ? `<div class="pp-near">${near}${ent.length > 3 ? `<span class="pp-nmore">+${ent.length - 3}</span>` : ''}</div>`
       : '<div class="pp-warn1">Nothing we track within a 10-minute walk — likely an isolated stop</div>'}
     ${cardSigs(s)}
+    ${planLine(s)}
     <div class="pp-links">
       <button type="button" class="pp-morebtn" data-more aria-expanded="false">More</button>
       ${CAR ? '<button type="button" class="pp-navbtn" data-carnav>Navigate</button>'
@@ -6733,12 +6747,18 @@ function cardSigs(s) {
   if (!items.length) return '';
   return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
 }
-/* A planned break's line: what is true there at that clock. */
-function brkSigs(s, k, ms) {
+/* A planned break's line: what is true there at that clock. The calendar event says the same
+   (brkBits), with the restroom's reason. */
+function brkBits(s, k, ms) {
   const min = localAt(ms, tzOf(s)).min, bits = [];
   if (isNight(min) && k) bits.push(LATE.has(k) || TRAVEL_STOPS.has(k) ? 'open late' : 'may be closed then');
-  if (restroomSig(s, { min, ms, planned: true })) bits.push('restroom likely');
+  const R = restroomSig(s, { min, ms, planned: true });
+  if (R) bits.push('restroom likely');
   const K = kidsSig(s); if (K) bits.push(K.tag);
+  return { bits, rr: R };
+}
+function brkSigs(s, k, ms) {
+  const bits = brkBits(s, k, ms).bits;
   return bits.length ? `<span class="bs">${bits.join(' · ')}</span>` : '';
 }
 document.addEventListener('click', e => {
@@ -6867,6 +6887,11 @@ function bestPerStretch(vis) {
 /* The breaks card's plan, kept for the stop card: when you reach a stop on it, with the
    leaving time and the time at the stops before. */
 let lastPlan = null;
+/* Add to calendar is offered wherever a file or the shell can take it: not in a car's browser
+   (it cannot open a calendar file), and in the iOS app only from a shell that knows the
+   message (bridge version 2; a shell without it would drop the tap). */
+const CAL_ICON = '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>';
+function calOk() { return !CAR && (!NATIVE || !!(window.__ccNative && window.__ccNative.version >= 2)); }
 function arriveMs(s) {
   const P = lastPlan;
   if (!P || P.route !== route || !route.mileAt || !route.mileAt.has(s.id)) return null;
@@ -6943,9 +6968,12 @@ function breaksCard(vis) {
     if (n > day) day = n;
     return mark + r.html(clock);
   }).join('');
+  // The plan, taken along: every stop on it as a calendar event (see addToCalendar).
+  const cal = picks.length && calOk() ? `<div class="bcal"><button type="button" class="calbtn" data-cal="all"
+      aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}Add ${picks.length === 1 ? 'the stop' : picks.length + ' stops'} to calendar</button></div>` : '';
   return `<div class="breaks"><h2 class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</h2>
     <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
-      <span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + '</div>';
+      <span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + cal + '</div>';
 }
 
 /* The longest stretch of the route with no fast charger you could use (any network, the
@@ -7098,6 +7126,127 @@ $('shareBtn').onclick = async () => {
     toast('Copy the URL from the address bar');
   }
 };
+
+/* ───────── add to calendar ─────────
+   The plan, taken along (2026-11): one calendar event per suggested stop -- "Charge + lunch:
+   Carl's Jr., Primm NV" -- at the plan's clock, for as long as the plan stops there (20 min a
+   break, 40 a meal), with the food there, what is likely open, and a link back to this drive
+   at that stop. On the web it is a .ics file (RFC 5545); in the iOS app the shell adds the
+   events itself (EventKit), since a web view cannot open a downloaded file.
+   Times are written in UTC ("...Z"). A drive crosses time zones and a calendar shows a UTC
+   time in whatever zone you are in when you look, so lunch at 12:30 pm Mountain reads 12:30
+   pm once you are in Denver -- with no VTIMEZONE blocks to get wrong. The stop's own clock
+   and zone are in the description. */
+const icsTime = ms => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+// TEXT values (RFC 5545 3.3.11): backslash, semicolon, comma and line breaks escaped.
+const icsText = v => String(v).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r\n|\r|\n/g, '\\n');
+// A quoted parameter value (3.2) may not hold a DQUOTE or a control character.
+const icsParam = v => '"' + String(v).replace(/["\x00-\x1f\x7f]/g, ' ') + '"';
+/* Content lines are folded at 75 octets (3.1): CRLF and one space, the space counting toward
+   the next line's 75. Octets of UTF-8, never splitting a character ("Peet's" is ASCII, an
+   emoji or "é" is not). */
+function icsFold(line) {
+  const out = []; let cur = '', n = 0;
+  for (const ch of line) {                      // whole code points
+    const c = ch.codePointAt(0), b = c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : 4;
+    if (n + b > (out.length ? 74 : 75)) { out.push(cur); cur = ''; n = 0; }
+    cur += ch; n += b;
+  }
+  out.push(cur);
+  return out.join('\r\n ');
+}
+function icsFile(evs, stamp) {
+  const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Charge & Chew//Trip plan//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+  for (const e of evs) {
+    const geo = e.lat.toFixed(6) + ',' + e.lon.toFixed(6);
+    L.push('BEGIN:VEVENT', 'UID:' + icsText(e.uid), 'DTSTAMP:' + icsTime(stamp), 'DTSTART:' + icsTime(e.start), 'DTEND:' + icsTime(e.end),
+      'SUMMARY:' + icsText(e.title), 'LOCATION:' + icsText(e.location), 'GEO:' + geo.replace(',', ';'),
+      // Apple Calendar shows a map for the event from this (and ignores GEO).
+      'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + icsParam(e.address) + ';X-APPLE-RADIUS=100;X-TITLE=' + icsParam(e.place) + ':geo:' + geo,
+      'DESCRIPTION:' + icsText(e.notes), 'URL:' + e.url, 'TRANSP:OPAQUE', 'END:VEVENT');
+  }
+  L.push('END:VCALENDAR');
+  return L.map(icsFold).join('\r\n') + '\r\n';
+}
+// "MST", "CDT": the zone's short name at that moment, for the description.
+function zoneAbbr(ms, tz) {
+  try { for (const x of new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'short' }).formatToParts(new Date(ms))) if (x.type === 'timeZoneName') return x.value; }
+  catch (e) {}
+  return '';
+}
+/* The plan's stops as events (every stop, or only the one with this id), and a file name.
+   UID: the drive (its two ends), the day you leave and the stop -- stable, so adding the same
+   drive again updates those events instead of doubling them, while next month's drive is new. */
+function calEvents(onlyId) {
+  const P = lastPlan;
+  if (!route || route.hwy || !P || P.route !== route || !P.first || !P.picks.length) return null;
+  const a = tripEnd($('fromIn').value, P.first), b = tripEnd($('toIn').value, P.last), trip = slugOf(a) + '-to-' + slugOf(b);
+  const L0 = localAt(P.t0, tzOf(P.first)), day = new Date(L0.dn * 864e5).toISOString().slice(0, 10).replace(/-/g, '');
+  // Back to this drive with this leaving time (the default one is not in the address bar).
+  const link = new URL(shareUrl());
+  link.searchParams.set('leave', hhmm(L0.min)); link.searchParams.set('ref', 'cal');
+  link.searchParams.delete('nosw'); link.searchParams.delete('src');
+  const events = [];
+  for (const p of P.picks) {
+    if (onlyId != null && p.s.id !== onlyId) continue;
+    const s = p.s, tz = tzOf(s), kind = p.meal || 'Break', m = MATCH[s.id] || {};
+    // On the plan's 5-minute clock (the card's), each in the stop's own zone.
+    const start = Math.round(Math.floor(p.ms / 6e4) / 5) * 3e5, end = start + dwellOf(p) * 60000, at = localAt(start, tz);
+    const charger = `a ${s.kw ? s.kw + ' kW ' : ''}charger (${s.net}${s.stalls ? ', ' + s.stalls + (s.stalls === 1 ? ' stall' : ' stalls') : ''})`;
+    const lines = [p.k ? `${kind} at ${p.k}, a ${walkMin(p.walk)}-min walk from ${charger}.` +
+        (acrossHwy(s, p.k) ? ` ${p.k} is across a highway from the charger: the walk is longer than the straight line, or there may be no safe way across.` : '')
+      : `${kind} at ${charger}.`];
+    const other = Object.keys(m).filter(k => k !== p.k && BUNDLED_KEYS.has(k) && BRANDS[k].cat === 'food')
+      .map(k => [k, walkTo(s, k, m[k])]).sort((x, y) => (acrossHwy(s, x[0]) - acrossHwy(s, y[0])) || x[1] - y[1]).slice(0, 3);
+    if (other.length) lines.push('Also a short walk: ' + other.map(([k, w]) => `${k} ${walkMin(w)} min${acrossHwy(s, k) ? ' (across hwy)' : ''}`).join(', ') + '.');
+    const B = brkBits(s, p.k, p.ms);   // as the card does
+    if (B.bits.length) lines.push(B.bits.map(x => x === 'restroom likely' ? `restroom likely (${B.rr.short})` : x).join(' · ').replace(/^./, c => c.toUpperCase()) + '.');
+    const n = at.dn - L0.dn;
+    lines.push(`About ${clockLabel(at.min)}${zoneAbbr(start, tz) ? ' ' + zoneAbbr(start, tz) : ''}${n === 1 ? ' the next day' : n > 1 ? ' on day ' + (n + 1) : ''}, ` +
+      `${dwellOf(p)} min here, mile ${p.mi} of ${Math.round(route.mi)}: leaving ${shortCity(a)} at ${clockLabel(L0.min)}.`);
+    const url = new URL(link.href); url.searchParams.set('stop', s.id);
+    lines.push('', 'Directions: https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lon, 'This drive in Charge & Chew: ' + url.href,
+      '', 'Planned break times, not a charging plan. Check the network\u2019s app for live availability.');
+    /* "Tesla Supercharger, 1503 East Main Street, Barstow, CA": a site named after its own
+       address ("Barstow, CA - 1503 East Main Street - Tesla Supercharger") is called by its network. */
+    const address = (s.street ? s.street + ', ' : '') + s.city + ', ' + s.st;
+    const place = s.street && s.name.indexOf(s.street) >= 0 && !/non-network/i.test(s.net) ? s.net : s.name;
+    events.push({ uid: `${trip}-${day}-${s.id}@chargeandchew.com`, title: `Charge + ${kind.toLowerCase()}: ${p.k ? p.k + ', ' : ''}${s.city} ${s.st}`,
+      start, end, tz, place, address, location: place + ', ' + address, lat: s.lat, lon: s.lon, notes: lines.join('\n'), url: url.href,
+      label: `${kind} ${clockLabel(at.min)}` });
+  }
+  if (!events.length) return null;
+  const one = onlyId != null && P.picks.find(p => p.s.id === onlyId);
+  return { events, name: 'charge-and-chew-' + (one ? slugOf((one.meal || 'break') + ' ' + one.s.city) : trip) + '.ics' };
+}
+function addToCalendar(onlyId) {
+  syncUrl();
+  const C = calEvents(onlyId);
+  if (!C) { toast(onlyId == null ? 'Plan a drive first: its stops go into your calendar' : 'That stop is no longer on the plan'); return; }
+  const n = C.events.length, ics = icsFile(C.events, Date.now());
+  track('calendar', onlyId == null ? 'trip' : 'stop');
+  if (NATIVE) { native('calendar', { mode: onlyId == null ? 'trip' : 'stop', name: C.name, ics, events: C.events }); return; }
+  const href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+  const el = document.createElement('a');
+  el.href = href; el.download = C.name; el.hidden = true;
+  document.body.appendChild(el); el.click(); el.remove();
+  setTimeout(() => URL.revokeObjectURL(href), 60000);
+  toast(`Calendar file saved: open it to add ${n === 1 ? 'the stop' : 'the ' + n + ' stops'}`);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-cal]');
+  if (b) addToCalendar(b.dataset.cal === 'all' ? null : +b.dataset.cal);
+});
+/* The stop card of a stop on the plan says so, with its own Add to calendar. */
+function planLine(s) {
+  const P = lastPlan;
+  if (!calOk() || !P || P.route !== route || !P.first) return '';
+  let p = null; for (const x of P.picks) if (x.s.id === s.id) p = x;
+  if (!p) return '';
+  const at = localAt(p.ms, tzOf(s)), n = at.dn - localAt(P.t0, tzOf(P.first)).dn;
+  return `<div class="pp-plan"><span><b>${p.meal || 'Break'}</b> on your plan · <i>~${clockLabel(at.min)}${n === 1 ? ', next day' : n > 1 ? ', day ' + (n + 1) : ''}</i></span>` +
+    `<button type="button" class="pp-cal" data-cal="${s.id}" aria-label="Add this ${(p.meal || 'break').toLowerCase()} stop to your calendar">${CAL_ICON}Add to calendar</button></div>`;
+}
 
 /* Fitting during boot races the layout: the map can still report a near-zero size, and
    fitBounds would produce a NaN centre. This used to try once and give up silently, which

@@ -190,9 +190,23 @@ location.replace('/?chain=IHOP&nosw=1');
     # both narrow the list to stops with a playground tag on every row.
     dom_kids_saved = seeded("localStorage.setItem('cc_hero','0');localStorage.setItem('cc_filters','{\"kids\":1}');", "/?nosw=1")
     dom_kids_link = render_dom(binpath, f"http://127.0.0.1:{port}/?chain=IHOP&kids=1&nosw=1")
+    # Add to calendar (batch 9): a planned drive, offline. LA -> Las Vegas between two pinned
+    # points (no place search), its road from data/trips.json put into the app's own route cache
+    # (the key and check hash come from the app's own fnv()), leaving 8 am.
+    _html = open(os.path.join(HERE, "index.html"), encoding="utf-8").read()
+    _fnv = _html[_html.index("function fnv(body, seed) {"):_html.index("\n}\n", _html.index("function fnv(body, seed) {")) + 3]
+    _t = json.load(open(os.path.join(HERE, "data", "trips.json")))["Los Angeles, CA -> Las Vegas, NV"]
+    _a, _b = f"{float(_t['alat']):.4f},{float(_t['alon']):.4f}", f"{float(_t['blat']):.4f},{float(_t['blon']):.4f}"
+    _route = json.dumps({"v": _t["pts"], "mi": float(_t["mi"]), "hr": float(_t["hr"])})
+    dom_plan = seeded(_fnv + "localStorage.setItem('cc_hero','0');var rk=" + json.dumps(_a + "," + _b) + ";"
+                      "localStorage.setItem('cc_rte_'+fnv(rk,2166136261),JSON.stringify({t:Date.now(),s:fnv(rk,991),d:" + _route + "}));",
+                      f"/?from={_a}&to={_b}&leave=0800&nosw=1")
     httpd.shutdown()
-    if dom_filt is None or dom_full is None or dom_hero is None or dom_kids_saved is None or dom_kids_link is None:
+    if dom_filt is None or dom_full is None or dom_hero is None or dom_kids_saved is None or dom_kids_link is None or dom_plan is None:
         return 1
+    _cal = re.findall(r'<button type="button" class="calbtn" data-cal="all" aria-label="Add the (?:stop|(\d+) stops) on this plan to your calendar">'
+                      r'<svg[^>]*>.*?</svg>Add (?:the stop|(\d+) stops) to calendar</button>', dom_plan, re.S)
+    _stops = len(re.findall(r'<button type="button" class="brk(?: meal)?" data-brk="\d+"', dom_plan))
 
     def kids_rows(d):
         rows = re.split(r'<div class="row(?: sel)?" data-id="\d+">', d)[1:]   # rendered rows, not the template in the source
@@ -241,6 +255,11 @@ location.replace('/?chain=IHOP&nosw=1');
             and bool(re.search(r'class="ftog on" data-f="kids"', dom_kids_saved)),
         "kids_filter_from_link": kids_rows(dom_kids_link) and 'Good for kids' in dom_kids_link
             and bool(re.search(r'id="sheetTitle"[^>]*>.{0,80}?IHOP', dom_kids_link)),
+        # One button under a plan, naming its stops; none without a plan.
+        "calendar_button_on_a_plan": _stops >= 2 and len(_cal) == 1 and _cal[0][0] == _cal[0][1] == str(_stops),
+        # (The page source holds the templates: match only what rendering produces.)
+        "no_calendar_button_without_a_plan": all(not re.search(r'<button type="button" class="(?:calbtn" data-cal="all" aria-label="Add the|pp-cal" data-cal="\d)', d)
+            for d in (dom, dom_q, dom_kids_link)),
         "welcome_card_focuses_itself_not_its_x": bool(re.search(r'<div id="hero"[^>]*tabindex="-1"[^>]*>', dom_hero)),
     }
     bad = [k for k, v in checks.items() if not v]

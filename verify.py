@@ -2031,7 +2031,7 @@ _sg0, _sg1 = _html.find("const LATE = new Set(["), _html.find("function breakPic
 check(_sg0 > 0 and _sg1 > _sg0, "the stop-signal block (LATE ... breakPicks) is missing")
 _SIG = _html[_sg0:_sg1] if _sg0 > 0 and _sg1 > _sg0 else ""
 _pp = _html[_html.index("function popupHtml(s) {"):_html.index("function popupHtml(s) {") + 12000]
-check(re.search(r"\n    \$\{cardSigs\(s\)\}\n    <div class=\"pp-links\">", _pp) is not None,
+check(re.search(r"\n    \$\{cardSigs\(s\)\}\n    \$\{planLine\(s\)\}\n    <div class=\"pp-links\">", _pp) is not None,
       "the stop card no longer shows its signal line (cardSigs)")
 check(re.search(r"<span class=\"tag iso\">isolated</span>' : ''\}\$\{rowSigs\(s\)\}</div>", _html) is not None,
       "list rows no longer carry their signal tags (rowSigs)")
@@ -2153,7 +2153,7 @@ const document = { addEventListener() {} };
 """
 check("restroomSig(s, w)" in _SIG[_SIG.index("function cardSigs(s) {"):_SIG.index("function brkSigs(")]
       and "out.push(tag(restroomSig(s, w)));" in _SIG
-      and "if (restroomSig(s, { min, ms, planned: true })) bits.push('restroom likely');" in _SIG,
+      and "const R = restroomSig(s, { min, ms, planned: true });\n  if (R) bits.push('restroom likely');" in _SIG,
       "the restroom signal is gone from the stop card, the rows or the breaks")
 if _node and _SIG:
     _rr = subprocess.run([_node, "-e", _SIG_HEAD + _SIG + r"""
@@ -2269,6 +2269,104 @@ for _p in glob.glob(os.path.join(HERE, "trip", "*", "index.html")):
 check(not _xh_bad, f"trip plan rows mark 'across hwy' where the data does not, or miss it: {_xh_bad[:4]}")
 _near_xh = sum(open(_p).read().count('class="xh"') for _p in glob.glob(os.path.join(HERE, "near", "*", "*", "index.html"))[:400])
 check(_near_xh > 0 or not any("xh" in s for s in D["sites"]), "no /near/ page marks a walk across a highway")
+
+# ---- Add to calendar (batch 9) ----
+# The plan as calendar events: a .ics file on the web (RFC 5545), EventKit in the iOS app. The
+# guards match the live call sites, and a node run of the REAL block (icsTime ... calEvents, with
+# the real tzOf/localAt/clockLabel) checks CRLF, folding at 75 octets, TEXT escaping, UTC times on
+# a drive that crosses from Mountain into Central time, the 5-minute clock, and UID stability.
+check(re.search(r"(?m)^  const cal = picks\.length && calOk\(\) \? `<div class=\"bcal\"><button type=\"button\" class=\"calbtn\" data-cal=\"all\"", _html) is not None
+      and "<span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + cal + '</div>';" in _html,
+      "the breaks card no longer offers Add to calendar")
+check(re.search(r"(?m)^  if \(b\) addToCalendar\(b\.dataset\.cal === 'all' \? null : \+b\.dataset\.cal\);", _html) is not None
+      and re.search(r"(?m)^  if \(NATIVE\) \{ native\('calendar', \{ mode: onlyId == null \? 'trip' : 'stop', name: C\.name, ics, events: C\.events \}\); return; \}", _html) is not None
+      and re.search(r"(?m)^  el\.href = href; el\.download = C\.name; el\.hidden = true;\n  document\.body\.appendChild\(el\); el\.click\(\); el\.remove\(\);", _html) is not None
+      and "new Blob([ics], { type: 'text/calendar;charset=utf-8' })" in _html,
+      "Add to calendar no longer reaches the file download or the iOS shell")
+check("function calOk() { return !CAR && (!NATIVE || !!(window.__ccNative && window.__ccNative.version >= 2)); }" in _html
+      and re.search(r"(?m)^  if \(!calOk\(\) \|\| !P \|\| P\.route !== route \|\| !P\.first\) return '';", _html) is not None,
+      "Add to calendar is offered where nothing can take it (a car browser, or an iOS shell without the calendar message)")
+_c0, _c1 = _html.find("const icsTime = "), _html.find("function addToCalendar(onlyId) {")
+_t0, _t1 = _html.find("const ST_TZ = "), _html.find("/* The nearest of the given chains")
+check(0 < _c0 < _c1 and 0 < _t0 < _t1, "the calendar block (icsTime ... calEvents) or the time-zone block is missing")
+if _node and 0 < _c0 < _c1 and 0 < _t0 < _t1:
+    _lines = lambda pat: re.search(pat, _html, re.M).group(0)
+    _cal = subprocess.run([_node, "-e", _html[_t0:_t1] + "\n" + _lines(r"^const tripEnd = .*$") + "\n" + _lines(r"^const slugOf = .*$") + "\n"
+        + _lines(r"^const shortCity = .*$") + "\n" + r"""
+const BRANDS = { "Carl's Jr.": { cat: 'food' }, 'IHOP': { cat: 'food' }, 'Subway': { cat: 'food' }, "Wendy's": { cat: 'food' }, 'Walmart': { cat: 'store' } };
+const BUNDLED_KEYS = new Set(Object.keys(BRANDS)), MATCH = {};
+const walkTo = (s, k, v) => v, walkMin = m => Math.max(1, Math.round(m / 80)), acrossHwy = (s, k) => !!(s.xh && s.xh.indexOf(k) >= 0);
+const dwellOf = p => p.meal ? 40 : 20, brkBits = () => ({ bits: ['restroom likely'], rr: { short: 'Walmart next door' } });
+const shareUrl = () => 'https://chargeandchew.com/?from=Denver%2C+CO&to=Kansas+City%2C+MO&c=5&nosw=1';
+let route = { mi: 603, hwy: null }, lastPlan = null, FROM = 'Denver, CO';
+const $ = id => ({ value: id === 'fromIn' ? FROM : 'Kansas City, MO' });
+""" + _html[_c0:_c1] + r"""
+const f = [], t = (c, m) => { if (!c) f.push(m); };
+const site = (id, city, st, lat, lon, extra) => Object.assign({ id, city, st, lat, lon, name: city + ' Plaza', net: 'EVgo', kw: 350, stalls: 4, street: '1 Main St' }, extra || {});
+// Denver 7:00 am MST = 14:00Z. Limon (Mountain), Goodland KS (Mountain), Colby KS (Central), and a
+// stop whose names hold every character TEXT must escape, a long line, and an emoji.
+const T0 = Date.UTC(2026, 10, 12, 14, 0);
+const odd = site(4, 'Hays', 'KS', 38.88, -99.33, { name: 'Odd; "Name", with \\ back\nslash \u{1F354}' + 'x'.repeat(90), street: '2 Elm; St, Suite \\9' });
+MATCH[1] = { IHOP: 80, Subway: 300 }; MATCH[3] = { Subway: 90, "Carl's Jr.": 160, Walmart: 50 }; MATCH[4] = { "Wendy's": 120 };
+const mk = t0 => ({ route, t0, first: site(9, 'Denver', 'CO', 39.74, -104.99), last: site(8, 'Kansas City', 'MO', 39.1, -94.58), perMin: 1, picks: [
+  { s: site(1, 'Limon', 'CO', 39.26, -103.69), ms: t0 + 90 * 6e4 + 31000, mi: 89, meal: 'Breakfast', k: 'IHOP', walk: 80 },
+  { s: site(2, 'Goodland', 'KS', 39.35, -101.71), ms: t0 + 212 * 6e4 + 59000, mi: 190, meal: null, k: null, walk: 9e9 },
+  { s: site(3, 'Colby', 'KS', 39.39, -101.05), ms: t0 + (4 * 60 + 40) * 6e4, mi: 234, meal: 'Lunch', k: 'Subway', walk: 90 },
+  { s: odd, ms: t0 + 7 * 3600e3, mi: 338, meal: null, k: "Wendy's", walk: 120 }] });
+lastPlan = mk(T0);
+const A = calEvents(null), ics = icsFile(A.events, Date.UTC(2026, 10, 1, 9, 0, 7));
+t(A.name === 'charge-and-chew-denver-to-kansas-city.ics', 'file name ' + A.name);
+t(ics.endsWith('\r\n') && !/\r(?!\n)|(?<!\r)\n/.test(ics), 'lines must end in CRLF, with no bare CR or LF');
+const phys = ics.slice(0, -2).split('\r\n');
+const long = phys.filter(l => Buffer.byteLength(l, 'utf8') > 75);
+t(!long.length, 'content lines over 75 octets: ' + long.slice(0, 2).join(' | '));
+t(phys.some(l => l.startsWith(' ')), 'no line was folded (the description is long enough to need it)');
+t(!phys.some(l => /[\ud800-\udbff]$|^ ?[\udc00-\udfff]/.test(l)), 'folding split a character in two');
+const un = ics.replace(/\r\n /g, '').split('\r\n'), prop = (ev, name) => { const l = ev.find(x => x.startsWith(name + ':') || x.startsWith(name + ';')); return l && l.slice(l.indexOf(':') + 1); };
+const unesc = v => v.replace(/\\(.)/g, (m, c) => c === 'n' || c === 'N' ? '\n' : c);
+const evs = []; let cur = null;
+for (const l of un) { if (l === 'BEGIN:VEVENT') cur = []; else if (l === 'END:VEVENT') { evs.push(cur); cur = null; } else if (cur) cur.push(l); }
+t(un[0] === 'BEGIN:VCALENDAR' && un.includes('VERSION:2.0') && un.some(l => l.startsWith('PRODID:')) && un[un.length - 2] === 'END:VCALENDAR', 'calendar frame');
+t(evs.length === 4, evs.length + ' events, want 4');
+for (const [i, e] of evs.entries()) {
+  for (const n of ['UID', 'DTSTAMP', 'DTSTART', 'DTEND', 'SUMMARY', 'DESCRIPTION']) t(prop(e, n), `event ${i}: no ${n}`);
+  t(prop(e, 'DTSTAMP') === '20261101T090007Z', 'DTSTAMP ' + prop(e, 'DTSTAMP'));
+  for (const n of ['SUMMARY', 'LOCATION', 'DESCRIPTION']) { const v = prop(e, n) || '';
+    t(!/(^|[^\\])(\\\\)*[,;]/.test(v.replace(/\\[\\,;nN]/g, '')), `event ${i} ${n}: an unescaped , or ;`);
+    t(unesc(v) === (n === 'SUMMARY' ? A.events[i].title : n === 'LOCATION' ? A.events[i].location : A.events[i].notes), `event ${i} ${n} does not round-trip`); }
+}
+const S = evs.map(e => prop(e, 'DTSTART')), E = evs.map(e => prop(e, 'DTEND'));
+// Limon 8:30:31 MST -> 8:30 (15:30Z); Goodland, Mountain, 10:32:59 -> the card's 10:30 (17:30Z);
+// Colby, Central: 11:40 MST is 12:40 CST (18:40Z); Hays, Central, 21:00Z.
+t(S.join() === '20261112T153000Z,20261112T173000Z,20261112T184000Z,20261112T210000Z', 'DTSTART ' + S.join());
+t(E.join() === '20261112T161000Z,20261112T175000Z,20261112T192000Z,20261112T212000Z', 'DTEND (40 min a meal, 20 a break) ' + E.join());
+t(/About 8:30 am MST/.test(A.events[0].notes) && /About 10:30 am MST/.test(A.events[1].notes) && /About 12:40 pm CST/.test(A.events[2].notes), 'local clocks in the descriptions');
+t(A.events[2].title === 'Charge + lunch: Subway, Colby KS' && A.events[1].title === 'Charge + break: Goodland KS', 'titles ' + A.events.map(e => e.title));
+t(prop(evs[3], 'SUMMARY') === "Charge + break: Wendy's\\, Hays KS", 'escaped SUMMARY ' + prop(evs[3], 'SUMMARY'));
+t((prop(evs[3], 'LOCATION') || '').includes('Odd\\; "Name"\\, with \\\\ back\\nslash'), 'escaped LOCATION ' + prop(evs[3], 'LOCATION'));
+t(/^GEO:39\.390000;-101\.050000$/m.test(un.join('\n')), 'GEO');
+t(A.events.every(e => /^https:\/\/chargeandchew\.com\/\?/.test(e.url) && /[?&]leave=0700(&|$)/.test(e.url) && /[?&]ref=cal(&|$)/.test(e.url)
+  && /[?&]stop=\d+(&|$)/.test(e.url) && !/nosw/.test(e.url)), 'links back to the drive ' + A.events[0].url);
+// UIDs: one per stop, the same on every export of this drive on this day, a new one on another day.
+const U = A.events.map(e => e.uid);
+t(new Set(U).size === 4 && U.every(u => /^denver-to-kansas-city-20261112-\d+@chargeandchew\.com$/.test(u)), 'UIDs ' + U.join());
+t(calEvents(null).events.map(e => e.uid).join() === U.join(), 'UIDs change between two exports');
+lastPlan = mk(T0 + 2 * 3600e3);
+t(calEvents(null).events.map(e => e.uid).join() === U.join(), 'UIDs change with the leaving hour on the same day');
+lastPlan = mk(T0 + 864e5);
+t(calEvents(null).events.every((e, i) => e.uid !== U[i] && e.uid.includes('-20261113-')), 'the next day\'s drive reuses the UIDs');
+lastPlan = mk(T0);
+const one = calEvents(3);
+t(one && one.events.length === 1 && one.events[0].uid === U[2] && one.name === 'charge-and-chew-lunch-colby.ics', 'one stop: ' + JSON.stringify(one && one.name));
+t(calEvents(77) === null, 'a stop not on the plan made an event');
+route = { mi: 603, hwy: 'I-70' }; t(calEvents(null) === null, 'a highway corridor (no plan) made events'); route = lastPlan.route = { mi: 603, hwy: null };
+lastPlan = Object.assign(mk(T0), { route: { other: 1 } }); t(calEvents(null) === null, 'a stale plan made events');
+t(icsFold('x'.repeat(200)).split('\r\n').map(l => l.length).join() === '75,75,52', 'fold widths ' + icsFold('x'.repeat(200)).split('\r\n').map(l => l.length));
+// A 4-byte emoji that just fits the first line stays on it, whole (split, its halves count 2 x 3 bytes).
+t(icsFold('x'.repeat(71) + '\u{1F354}' + 'y').split('\r\n')[0] === 'x'.repeat(71) + '\u{1F354}', 'fold of a 4-byte character');
+t(icsFold('é'.repeat(40)).split('\r\n').map(l => Buffer.byteLength(l)).join() === '74,7', 'fold of 2-byte characters');
+console.log(f.length ? f.join('\n') : 'OK');"""], capture_output=True, text=True)
+    check(_cal.stdout.strip() == "OK", "the calendar export (.ics) is wrong:\n  " + (_cal.stdout + _cal.stderr).strip()[:900])
 
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.

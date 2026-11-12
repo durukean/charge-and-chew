@@ -205,7 +205,36 @@ const CASES = [
     r => r.sum === 'Your location → Bakersfield, CA' ? '' : `route card "${r.sum}" (want Your location → Bakersfield, CA)`,
     r => r.share && /[?&]from=34\.05\d%2C\+?-118\.24\d(&|$)/.test(r.share.url) && !/[?&]from=me/.test(r.share.url) ? '' : `shared link ${r.share && r.share.url} (want the start's coordinates)`],
     { share: true, me: [34.0522, -118.2437] }],
+  /* Add to calendar (batch 9), across a time zone: one event per stop on the card, each starting
+     at the card's clock in that stop's own zone (the UTC time and the zone the description names
+     agree), lasting the stop's dwell; a stop card on the plan adds just its own stop. */
+  ['Los Angeles, CA', 'Denver, CO', 420, 'America/New_York', [
+    r => r.cal && r.cal.name === 'charge-and-chew-los-angeles-to-denver.ics' && r.cal.type === 'text/calendar;charset=utf-8' ? '' : `file ${JSON.stringify(r.cal && [r.cal.name, r.cal.type])}`,
+    r => { const ev = calEvents(r.cal && r.cal.ics);
+      if (ev.length !== r.stops.length) return `${ev.length} events for ${r.stops.length} stops`;
+      const bad = ev.filter((e, i) => e.local !== r.stops[i].clock || e.mins !== dwell(r.stops[i]) || !e.summary.startsWith('Charge + ' + r.stops[i].label.toLowerCase() + ': '));
+      return bad.length ? 'events off the card: ' + bad.slice(0, 2).map(e => `${e.summary} ${e.start} = ${e.local} (${e.zone}), ${e.mins} min`).join('; ') : ''; },
+    r => r.cal && new Set(calEvents(r.cal.ics).map(e => e.zone)).size >= 2 ? '' : 'the drive did not cross a time zone in the events',
+    r => r.cal && r.cal.one && calEvents(r.cal.one).length === 1 && calEvents(r.cal.one)[0].local === r.stops[0].clock && r.cal.plan.startsWith(r.stops[0].label + ' on your plan') ? ''
+      : `stop card: ${JSON.stringify(r.cal && [r.cal.plan, r.cal.oneName])}`],
+    { cal: true }],
 ];
+/* The events in a .ics: summary, UTC start, minutes, and the local clock it names, checked against
+   the UTC time with that zone's offset. */
+const ZONE_OFF = { EST: -5, EDT: -4, CST: -6, CDT: -5, MST: -7, MDT: -6, PST: -8, PDT: -7 };
+function calEvents(ics) {
+  if (!ics) return [];
+  const out = [];
+  for (const blk of ics.replace(/\r\n /g, '').split('BEGIN:VEVENT').slice(1)) {
+    const p = n => (blk.match(new RegExp('\\r\\n' + n + ':([^\\r]*)')) || [])[1] || '';
+    const t = v => Date.UTC(+v.slice(0, 4), +v.slice(4, 6) - 1, +v.slice(6, 8), +v.slice(9, 11), +v.slice(11, 13));
+    const [, clock, zone] = p('DESCRIPTION').match(/About (\d+:\d\d [ap]m) ([A-Z]{3})/) || [];
+    const loc = new Date(t(p('DTSTART')) + (ZONE_OFF[zone] || 0) * 3600e3), h = loc.getUTCHours(), m = loc.getUTCMinutes();
+    out.push({ summary: p('SUMMARY').replace(/\\,/g, ','), start: p('DTSTART'), zone, said: clock, mins: (t(p('DTEND')) - t(p('DTSTART'))) / 6e4,
+      local: zone in ZONE_OFF && clock === `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}` ? clock : `UTC ${p('DTSTART')} is not ${clock} ${zone}` });
+  }
+  return out;
+}
 // Every case: stops in time order (within a zone this is plain order), a meal at a meal place.
 const ALWAYS = [
   r => r.stops.every(s => s.label !== 'Breakfast' || !NO_BREAKFAST.includes(s.chain)) ? '' : 'breakfast at a place with no breakfast',
@@ -336,6 +365,19 @@ const LIST = `(async () => {
   out.back = rows().length;
   return out;
 })()`;
+// Add to calendar: the file the card's button saves, then a stop card's own button.
+const CAL = `(async () => {
+  const blobs = []; URL.createObjectURL = b => { blobs.push(b); return 'blob:x'; }; URL.revokeObjectURL = () => {};
+  let name = null; HTMLAnchorElement.prototype.click = function () { name = this.download; };
+  document.querySelector('.calbtn').click();
+  const out = { name, type: blobs[0] && blobs[0].type, ics: blobs[0] && await blobs[0].text() };
+  document.querySelector('.brk[data-brk]').click();
+  for (let i = 0; i < 40 && !document.querySelector('.leaflet-popup-content .pp-cal'); i++) await new Promise(r => setTimeout(r, 100));
+  const pc = document.querySelector('.leaflet-popup-content .pp-cal');
+  out.plan = pc ? pc.parentNode.textContent : '';
+  if (pc) { pc.click(); out.oneName = name; out.one = blobs[1] && await blobs[1].text(); }
+  return out;
+})()`;
 // Tap every break in turn; each must open the stop card at the break's own mile, its first
 // place being the chain the break promised.
 const TAPS = `(async () => {
@@ -402,6 +444,7 @@ async function main() {
       if (res && opt && opt.share) res.share = await ev(SHARE);
       if (res && opt && opt.review) res.review = await ev(REVIEW);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
+      if (res && opt && opt.cal) res.cal = await ev(CAL);
       if (!res) why.push('no breaks card (route did not load?)');
       else for (const c of [...checks, ...ALWAYS]) { const w = c(res); if (w) why.push(w); }
     } catch (e) { why.push('error: ' + e.message); }
