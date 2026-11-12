@@ -93,6 +93,9 @@ final class WebViewController: UIViewController {
         // The page asks after a planned drive and a Directions tap: the moment the app has done
         // its job. Directions usually leaves for Maps, so the ask waits until the app is back.
         bridge.onReview = { [weak self] in self?.reviewAfterDirections() }
+        // Add to calendar from a planned drive: EventKit, not a downloaded .ics (a web view
+        // cannot hand a blob download to Calendar).
+        bridge.onCalendar = { [weak self] stops, single, ics, name in self?.calendar.add(stops, single: single, ics: ics, name: name) }
         NotificationCenter.default.addObserver(self, selector: #selector(appBecameActive),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
         // A downloaded data.js the page cannot read: drop it and reload from the bundled copy.
@@ -257,6 +260,8 @@ final class WebViewController: UIViewController {
         let sheet = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(sheet, animated: true)
     }
+
+    private lazy var calendar = CalendarExport(host: self)
 
     // MARK: rating
 

@@ -2368,6 +2368,28 @@ t(icsFold('é'.repeat(40)).split('\r\n').map(l => Buffer.byteLength(l)).join() =
 console.log(f.length ? f.join('\n') : 'OK');"""], capture_output=True, text=True)
     check(_cal.stdout.strip() == "OK", "the calendar export (.ics) is wrong:\n  " + (_cal.stdout + _cal.stderr).strip()[:900])
 
+# iOS side of Add to calendar: the page offers it only to a shell whose bridge says version 2,
+# so the version, the allow-listed message, its wiring and EventKit must all be there together.
+_nb, _wv, _ce = _swf("NativeBridge.swift"), _swf("WebViewController.swift"), _swf("CalendarExport.swift")
+_py = open(os.path.join(HERE, "ios", "project.yml")).read() if os.path.exists(os.path.join(HERE, "ios", "project.yml")) else ""
+if _nb:
+    check(re.search(r"(?m)^\s*version: 2,", _nb) is not None
+          and re.search(r'(?m)^\s*case "calendar":\n\s*// .*\n\s*guard let raw = opts\["events"\] as\? \[\[String: Any\]\], \(1\.\.\.40\)\.contains\(raw\.count\) else \{ return \}', _nb) is not None
+          and re.search(r"(?m)^\s*let stops = raw\.compactMap\(CalendarStop\.init\)\n\s*guard stops\.count == raw\.count else", _nb) is not None
+          and re.search(r'(?m)^\s*onCalendar\?\(stops, mode == "stop", opts\["ics"\] as\? String,', _nb) is not None,
+          "the iOS bridge no longer takes the calendar message (bridge version 2, allow-listed, every event validated)")
+    check(re.search(r"(?m)^\s*bridge\.onCalendar = \{ \[weak self\] stops, single, ics, name in self\?\.calendar\.add\(stops, single: single, ics: ics, name: name\) \}", _wv) is not None,
+          "WebViewController does not hand the calendar message to CalendarExport")
+    check(re.search(r"(?m)^\s*if #available\(iOS 17\.0, \*\) \{ store\.requestWriteOnlyAccessToEvents\(completion: done\) \}\n\s*else \{ store\.requestAccess\(to: \.event, completion: done\) \}", _ce) is not None
+          and re.search(r"(?m)^\s*for s in stops \{ try store\.save\(event\(s, calendar: cal\), span: \.thisEvent, commit: false\) \}\n\s*try store\.commit\(\)", _ce) is not None
+          and re.search(r"(?m)^\s*if #available\(iOS 17\.0, \*\) \{ presentEditor\(stop\); return \}", _ce) is not None
+          and 'u.host == "chargeandchew.com"' in _ce,
+          "CalendarExport lost write-only access, the batch save, the one-stop editor or its link check")
+    _app = _py[:_py.find("ChargeAndChewWidget:")]
+    check(re.search(r'(?m)^\s+NSCalendarsWriteOnlyAccessUsageDescription: "[^"]{20,}"', _app) is not None
+          and re.search(r'(?m)^\s+NSCalendarsUsageDescription: "[^"]{20,}"', _app) is not None,
+          "project.yml: the app target needs NSCalendarsWriteOnlyAccessUsageDescription and NSCalendarsUsageDescription (the request crashes without them)")
+
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.
 def _css_balanced(css):

@@ -26,7 +26,7 @@ final class NativeBridge: NSObject {
         return id;
       }
       window.__ccNative = {
-        version: 1,
+        version: 2,     // 2: knows "calendar" (the page offers Add to calendar only from 2)
         resolve: function (id, coords) {
           var p = pending[id]; if (!p) return;
           if (!p.watch) delete pending[id];
@@ -66,6 +66,9 @@ final class NativeBridge: NSObject {
     var onDataFailed: ((String) -> Void)?
     /// The page decided the app has been useful enough to ask for a rating.
     var onReview: (() -> Void)?
+    /// Add a planned drive's stops (or one stop) to the calendar: the events, whether it is
+    /// one stop, and the page's .ics for the share-a-file fallback.
+    var onCalendar: ((_ stops: [CalendarStop], _ single: Bool, _ ics: String?, _ name: String) -> Void)?
     private let haptic = UIImpactFeedbackGenerator(style: .light)
     /// Requests parked until the user answers the permission sheet.
     private var waiting: [(id: Int, watch: Bool)] = []
@@ -146,6 +149,14 @@ extension NativeBridge: WKScriptMessageHandler {
             Diag.log("js: \(opts["msg"] as? String ?? "")")
         case "review":
             onReview?()
+        case "calendar":
+            // At most a long drive's worth of stops; any malformed one refuses the lot.
+            guard let raw = opts["events"] as? [[String: Any]], (1...40).contains(raw.count) else { return }
+            let stops = raw.compactMap(CalendarStop.init)
+            guard stops.count == raw.count else { Diag.log("calendar: refused a malformed event"); return }
+            let mode = opts["mode"] as? String
+            guard mode == "trip" || (mode == "stop" && stops.count == 1) else { return }
+            onCalendar?(stops, mode == "stop", opts["ics"] as? String, opts["name"] as? String ?? "charge-and-chew.ics")
         case "dataFailed":
             onDataFailed?(opts["why"] as? String ?? "unknown")
         default: break
