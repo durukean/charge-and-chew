@@ -162,6 +162,7 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c>span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}   /* the chip, not a name's own .nw span */
 .card .c>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
+.xh{font-size:10.5px;font-weight:700;color:var(--warn);margin-left:5px;white-space:nowrap}
 .card .c b{font-weight:700}
 .card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
 .card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
@@ -490,13 +491,23 @@ def mark_html(net):
 def speed_tier(kw):
     return "" if not kw else "ultra" if kw >= 250 else "fast" if kw >= 150 else "std" if kw >= 50 else "slow"
 
+# Honest walk times, as in the app: a walk whose straight line crosses a freeway or a divided
+# highway at street level (data.js "xh", from the data build) says so, and such places list
+# after the ones on the charger's side. The minutes stay the straight-line minimum.
+XH_MARK = ('<small class="xh" title="Across a highway from the charger: the walk is longer than the straight '
+           'line, or there may be no safe way across">across hwy</small>')
+
+def xh_mark(s, k):
+    return XH_MARK if k in (s.get("xh") or ()) else ""
+
 def site_card(s, focus, root):
     """Mirrors the app's list row: network mark, speed badge by tier, food chips in amber."""
     m = matches.get(s["id"], {})
     chains = []
-    for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[1]))[:6]:
+    xh = s.get("xh") or ()
+    for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[0] in xh, x[1]))[:6]:
         name = '<b>' + bn(k) + '</b>' if k == focus else bn(k)
-        chains.append(f"<span>{brands[k]['e']} {name} <i>{mins(d)} min</i></span>")
+        chains.append(f"<span>{brands[k]['e']} {name} <i>{mins(d)} min</i>{xh_mark(s, k)}</span>")
     kw = s.get("kw") or 0
     spd = f'<s class="spd {speed_tier(kw)}">{kw} kW</s>' if kw else ""
     stalls = f"<b>{s['stalls']} stall{'s' if s['stalls'] != 1 else ''}</b>" if s.get("stalls") else ""
@@ -879,11 +890,12 @@ def trip_plan_html(plan, a, b, app):
             continue
         s, k = r["s"], r["k"]
         m = matches.get(s["id"], {})
-        others = sorted((d, x) for x, d in m.items() if x != k and brands.get(x, {}).get("cat") == "food")[:2]
+        others = [(d, x) for _, d, x in sorted((x in (s.get("xh") or ()), d, x) for x, d in m.items()
+                                                if x != k and brands.get(x, {}).get("cat") == "food")[:2]]
         # Each "🌮 Taco Bell 1 min" is one unbreakable unit: on a phone the cell broke between
         # the number and "min" ("Denny's 3 / min,"), or left the emoji at the end of a line.
-        food = ([f"<span class=\"nw\">{brands[k]['e']} <b>{bn(k)}</b> {r['walk']} min</span>"] if k else []) + \
-               [f"<span class=\"nw\">{brands[x]['e']} {bn(x)} {mins(d)} min</span>" for d, x in others]
+        food = ([f"<span class=\"nw\">{brands[k]['e']} <b>{bn(k)}</b> {r['walk']} min{xh_mark(s, k)}</span>"] if k else []) + \
+               [f"<span class=\"nw\">{brands[x]['e']} {bn(x)} {mins(d)} min{xh_mark(s, x)}</span>" for d, x in others]
         kw = s.get("kw") or 0
         trs.append(f'<tr><td>{when}<br><small><i class="ml{" meal" if r["label"] != "Break" else ""}">{r["label"]}</i> &middot; mile {r["mi"]}</small></td>'
                    f'<td><a href="{app}&amp;stop={s["id"]}"><b>{esc(place(s))}</b></a><br><small>{esc(s["name"])}</small></td>'
@@ -912,6 +924,7 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway, n_all, food_al
     def at_stop(r):
         kw = r["s"].get("kw") or 0
         return (f"{bn(r['k'])} is a {r['walk']}-minute walk from a {str(kw) + ' kW ' if kw else ''}charger"
+                + (" (across the highway, so further on foot)" if r["k"] in (r["s"].get("xh") or ()) else "")
                 if r["k"] else f"there is a {str(kw) + ' kW ' if kw else ''}charger")
 
     # 1. Where to eat
@@ -922,7 +935,8 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway, n_all, food_al
         if brk:
             ans += (" The break in " if len(brk) == 1 else " The breaks: ") + "; ".join(
                 f"{esc(place(r['s']))} at {plan_clock(r['clock'], r['day'])}" + (" has " if len(brk) == 1 else ", ") +
-                f"{bn(r['k'])} {r['walk']} min from the charger" for r in brk) + "."
+                f"{bn(r['k'])} {r['walk']} min from the charger" +
+                (" (across the highway)" if r["k"] in (r["s"].get("xh") or ()) else "") for r in brk) + "."
     elif brk:
         ans = (f"Leaving {A} at {leave}, no mealtime falls on the way. The plan's break" + ("s" if len(brk) > 1 else "") + " "
                + "; ".join(f"in {esc(place(r['s']))} at {plan_clock(r['clock'], r['day'])}: {at_stop(r)}" for r in brk) + ".")
@@ -931,7 +945,7 @@ def trip_faq(plan, a, b, t, found, withfood, big, tesla, halfway, n_all, food_al
         if halfway:
             s, k, w = halfway
             ans += (f" About halfway, {esc(place(s))} (mile {plan.mile_at[s['id']]}) has {bn(k)} a {mins(w)}-minute walk "
-                    f"from a {s.get('kw') or 0} kW charger.")
+                    f"from a {s.get('kw') or 0} kW charger" + (" (across the highway)" if k in (s.get("xh") or ()) else "") + ".")
     ans += f" In all, {nfood:,} of the roughly {nfound:,} fast chargers along the way have a restaurant within a 10-minute walk."
     qa.append((f"Where should I stop to eat between {A} and {B}?", ans))
 
@@ -1372,7 +1386,8 @@ however many stalls it lists. {RFI['n_sites']:,} sites.</li>
 by brand. Map entries of one chain within {rfi.LOCATION_M} m of each other count as one location (a store and its
 fuel station are often mapped separately). OpenStreetMap is volunteer-made and misses some locations.</li>
 <li><b>Within a walk</b>: within {D['walkM']} m in a straight line, about 10 minutes at 3 mph. Walk times are
-minimums; the real walk is usually longer. &ldquo;Somewhere to eat&rdquo; is any of the {len(_food)} restaurant
+minimums; the real walk is usually longer, and a place whose straight line crosses a freeway or a divided
+highway is marked &ldquo;across hwy&rdquo;. &ldquo;Somewhere to eat&rdquo; is any of the {len(_food)} restaurant
 chains we track or an ice cream shop.</li>
 <li><b>Interstates</b>: the road as OpenStreetMap maps it; miles are measured along the line the map draws, which
 merges both directions and can differ a little from official lengths.</li>
@@ -1684,7 +1699,7 @@ with somewhere to eat within a 10-minute walk, matched against {len(RFI['chains'
 
 - Chargers: US Department of Energy / NREL Alternative Fuels Data Center (https://afdc.energy.gov/fuels/electricity-locations), all networks; under 24 kW, private and truck-only sites left out.
 - Restaurants and stores: OpenStreetMap (https://www.openstreetmap.org), © OpenStreetMap contributors, ODbL.
-- "Within a walk" is within {D['walkM']} m in a straight line, about 10 minutes at 3 mph; walk times are minimums.
+- "Within a walk" is within {D['walkM']} m in a straight line, about 10 minutes at 3 mph; walk times are minimums, and a place across a freeway or divided highway from the charger is marked "across hwy".
 - No live availability, prices or wait times: check the network's own app before relying on a stop.
 
 ## Privacy

@@ -749,6 +749,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 
 .row .ch b{color:var(--txt);font-weight:700}
 .row .ch .more{background:none;color:var(--dim2);padding-left:2px}
+/* "across hwy": the straight-line walk crosses a freeway or divided highway (s.xh). */
+.xh{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.01em;color:var(--warn);margin-left:5px;white-space:nowrap}
 .row .star{font-size:16px;color:var(--dim2);flex-shrink:0;width:44px;height:40px;display:flex;align-items:flex-start;justify-content:center;padding-top:1px;margin:-6px -12px -10px 0;background:none;border:0;cursor:pointer}
 .row .star.on{color:var(--star)}
 .empty{text-align:center;color:var(--dim);font-size:13px;padding:30px 20px;line-height:1.6}
@@ -2028,7 +2030,7 @@ function popupHtml(s) {
      the two things people open a stop for: is it fast, and what is next to it. Those stay
      on top; the rest is one tap away under More. */
   const ent = Object.entries(m)
-    .sort((a, b) => (pri(b[0]) - pri(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));
+    .sort((a, b) => (pri(b[0]) - pri(a[0])) || (acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || mDist(s, a[1]) - mDist(s, b[1]));
   const rows = ent.map(([k, v]) => { const d = mDist(s, v);
     const isLive = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name;
     const label = isLive ? livePoiFor[s.id].name : k;
@@ -2042,7 +2044,7 @@ function popupHtml(s) {
       <span>${bemo(k)} ${at
         ? `<a class="pl" href="${gmaps}" target="_blank" rel="noopener" title="See ${esc(label)} on Google Maps — reviews, photos, hours">${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)}</a>`
         : (active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label))}</span>
-      <span class="d">${walkMin(d)} min · ${fmtFt(d)}</span>
+      <span class="d">${walkMin(d)} min · ${fmtFt(d)}${acrossHwy(s, k) ? ' · across the highway' : ''}</span>
       ${at ? `<a class="go" href="https://www.google.com/maps/dir/?api=1&destination=${coord}&travelmode=walking"
         target="_blank" rel="noopener" title="Walking directions to this ${esc(k)}" aria-label="Walking directions to this ${esc(k)}">↗</a>` : ''}
     </div>`; }).join('')
@@ -2092,7 +2094,7 @@ function popupHtml(s) {
   const near = ent.slice(0, 3).map(([k, v]) => {
     const at = mLatLng(s, v), d = mDist(s, v);
     const label = k === livePoiKey && livePoiFor[s.id] && livePoiFor[s.id].name ? livePoiFor[s.id].name : k;
-    const inner = `${bemo(k)} ${bname(label)} <b>${walkMin(d)} min</b>`;
+    const inner = `${bemo(k)} ${bname(label)} <b>${walkMin(d)} min</b>${xhMark(s, k)}`;
     const hk = at && k !== livePoiKey ? ` data-hk="${esc(k)}" data-at="${at[0].toFixed(5)},${at[1].toFixed(5)}"` : '';
     return at ? `<a class="pp-nb${pri(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
@@ -2991,14 +2993,15 @@ function renderList(vis) {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
-    ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || walkTo(s, a[0], a[1]) - walkTo(s, b[0], b[1]));
+    // Across a highway goes after this side's places: never hidden, never first.
+    ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || (acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || walkTo(s, a[0], a[1]) - walkTo(s, b[0], b[1]));
     // "Discount Tire ≥3min" tells you something; "Tire Shop ≥3min" does not
     const lp = livePoiFor[s.id];
     // Three, then "+N": a fourth chip pushed the count onto a line of its own on a phone.
     const chains = ent.slice(0, 3).map(([k, v]) => {
       const isLive = k === livePoiKey && lp && lp.name;
       const label = isLive ? lp.name : k;              // the real shop, not the category
-      return `<span>${bemo(k)} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i></span>`;
+      return `<span>${bemo(k)} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i>${xhMark(s, k)}</span>`;
     }).join('');
     const extra = ent.length > 3 ? `<span class="more">+${ent.length - 3}</span>` : '';
     const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
@@ -6582,12 +6585,19 @@ function clockLabel(min) {
   const m = ((Math.round(min / 5) * 5) % 1440 + 1440) % 1440, h = Math.floor(m / 60);
   return `${(h % 12) || 12}:${String(m % 60).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`;
 }
-// The nearest of the given chains at a stop: [chain, metres], or [null, 9e9].
+/* The nearest of the given chains at a stop: [chain, metres], or [null, 9e9]. One on the
+   charger's side of the highway first: a straight line across a freeway (s.xh, from the data
+   build) is no 2-minute walk. planner.py mirrors this. */
 function nearestOf(s, keys, m) {
-  let k0 = null, w0 = 9e9;
-  for (const k of keys) { const d = walkTo(s, k, m[k]); if (d < w0) { w0 = d; k0 = k; } }
+  let k0 = null, w0 = 9e9, x0 = true;
+  for (const k of keys) {
+    const d = walkTo(s, k, m[k]), x = !!(s.xh && s.xh.indexOf(k) >= 0);
+    if ((x0 && !x) || (x === x0 && d < w0)) { w0 = d; k0 = k; x0 = x; }
+  }
   return [k0, w0];
 }
+// A place a stop counts as a short walk: under ~5 minutes and not across a highway.
+const farWalk = (s, k, w) => w > 400 || !!(k && s.xh && s.xh.indexOf(k) >= 0);
 const foodKeys = m => (chainQuery() ? chainKeysOn(m) : Object.keys(m)).filter(k => BRANDS[k] && BRANDS[k].cat === 'food');
 // A chain the user asked for counts whatever it is: "LA to Vegas with Starbucks" eats at Starbucks.
 const mealKeys = (m, meal) => foodKeys(m).filter(k => chainQuery() ||
@@ -6627,11 +6637,11 @@ function stopWhen(s) {
   nowAt.set(tz, [stamp, min]);
   return { ms: Date.now(), planned: false, min };
 }
-// Food usually open late at a stop, nearest first: [[chain, metres], ...].
+// Food usually open late at a stop, nearest first (this side of any highway first): [[chain, metres], ...].
 function lateFoods(s) {
   const m = MATCH[s.id] || {};
   return Object.keys(m).filter(k => BUNDLED_KEYS.has(k) && (LATE.has(k) || TRAVEL_STOPS.has(k)))
-    .map(k => [k, walkTo(s, k, m[k])]).sort((a, b) => a[1] - b[1]);
+    .map(k => [k, walkTo(s, k, m[k])]).sort((a, b) => (acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || a[1] - b[1]);
 }
 const hasFood = s => Object.keys(MATCH[s.id] || {}).some(k => BRANDS[k] && BRANDS[k].cat === 'food');
 const SIG_ICON = {
@@ -6664,8 +6674,11 @@ function lateSig(s, w, names, byHours) {
    build (s.ra, s.wc, s.ml) and the bundled chains. */
 const RR_24 = new Set(['Waffle House', "Denny's"]);
 const RR_STORE = new Set(['Walmart', 'Target', 'Costco', "Sam's Club", 'Meijer']);
-// The straight line from the charger to this place crosses a freeway or a divided highway (s.xh).
+/* Honest walk times: the walk shown is a straight line, and where that line crosses a freeway
+   or a divided highway at street level (s.xh, from the data build) the real walk is longer, or
+   there is none. The place is never hidden; it says so. */
 const acrossHwy = (s, k) => !!(s.xh && s.xh.indexOf(k) >= 0);
+const xhMark = (s, k) => acrossHwy(s, k) ? '<small class="xh" title="Across a highway from the charger: the walk is longer than the straight line shown, or there may be no safe way across">across hwy</small>' : '';
 const nextDoor = (k, d) => d <= 150 ? k + ' next door' : k + ', a ' + walkMin(d) + '-min walk';
 function restroomSig(s, w) {
   if (s.lvl === 2) return null;
@@ -6776,7 +6789,7 @@ function breakPicks(vis) {
         if (!k) continue;
         // Near the hour, then a short walk, then power in 50 kW steps (150 vs 175 kW should not
         // beat 20 minutes closer to noon), then closer still, then the shorter walk.
-        const sc = [off > 75 ? 2 : off > 45 ? 1 : 0, w > 400 ? 1 : 0, (s.kw || 0) < 100 ? 1 : 0,
+        const sc = [off > 75 ? 2 : off > 45 ? 1 : 0, farWalk(s, k, w) ? 1 : 0, (s.kw || 0) < 100 ? 1 : 0,
                     -Math.floor(Math.min(s.kw || 0, 350) / 50), Math.round(off / 15), w];
         const key = at.day + meal.name, cur = best.get(key);
         if (!cur || lexLess(sc, cur.sc)) best.set(key, { s, walk: w, k, meal: meal.name, sc, key, mi, ms });
@@ -6814,7 +6827,7 @@ function breakPicks(vis) {
       /* The strongest stop near the mark; failing any, the one nearest it. I-70 east of Salina
          has no stop for 100 miles: skipping that mark left 5.5 h from dinner to the next break. */
       const off = Math.abs(mi - target) > span ? Math.abs(mi - target) : 0;
-      const sc = [off, shut, -Math.min(s.kw || 0, 350), w > 400 ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
+      const sc = [off, shut, -Math.min(s.kw || 0, 350), farWalk(s, k, w) ? 1 : 0, -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
       if (!pick || lexLess(sc, pickScore)) { pick = { s, walk: w, k, meal: null, mi, ms }; pickScore = sc; }
     }
     if (pick) { picks.push(pick); last = pick.mi; extra += DWELL_BREAK; }
@@ -6841,7 +6854,7 @@ function bestPerStretch(vis) {
     if (!route.mileAt.has(s.id)) continue;
     const b = Math.floor(route.mileAt.get(s.id) / span), m = MATCH[s.id] || {}, kw = kwFor(s, F.plug) || 0;
     const [k, w] = nearestOf(s, chainQuery() ? chainKeysOn(m) : foodKeys(m), m);
-    const sc = [s.lvl === 2 ? 1 : 0, k ? 0 : 1, kw < 100 ? 1 : 0, w > 400 ? 1 : 0,
+    const sc = [s.lvl === 2 ? 1 : 0, k ? 0 : 1, kw < 100 ? 1 : 0, farWalk(s, k, w) ? 1 : 0,
                 -Math.floor(Math.min(kw, 350) / 50), -Math.min(s.stalls || 0, 40), s.h24 ? 0 : 1, w];
     const cur = best.get(b);
     if (!cur || lexLess(sc, cur.sc)) best.set(b, { s, sc });
@@ -6908,7 +6921,7 @@ function breaksCard(vis) {
   const rows = picks.map(({ s, walk, k, meal, ms, mi }) => ({ mi, ms, s, html: c =>
     `<button type="button" class="brk${meal ? ' meal' : ''}" data-brk="${s.id}"${k ? ` data-k="${esc(k)}"` : ''}>
         <span class="bm">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>
-        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? bemo(k) + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' : ''}</span>${brkSigs(s, k, ms)}</span>
+        <span class="bt"><b>${esc(s.city)}, ${s.st}</b><span>${s.kw ? s.kw + ' kW · ' : ''}${k ? bemo(k) + ' ' + bname(k) + ' ' + walkMin(walk) + ' min' + (acrossHwy(s, k) ? ' · across hwy' : '') : ''}</span>${brkSigs(s, k, ms)}</span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       </button>` }));
   if (gap) {
@@ -7050,7 +7063,7 @@ function sharePlan() {
   const L = leaveOf(P.first), start = localAt(P.t0, tzOf(P.first)).min;
   const lines = [`${shortCity(a)} → ${shortCity(b)} · leaving ${L && L[1] ? 'tomorrow ' : ''}${clockLabel(start)}`];
   for (const p of P.picks) lines.push(`${at(p.ms, p.s)} ${(p.meal || 'break').toLowerCase()} in ${p.s.city}: ` +
-    (p.k ? `${p.k} ${walkMin(p.walk)} min from a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger` : `a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger`));
+    (p.k ? `${p.k} ${walkMin(p.walk)} min${acrossHwy(p.s, p.k) ? ' (across the highway)' : ''} from a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger` : `a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger`));
   lines.push(`arrive ~${at(P.arrive, P.last)}`);
   const sl = `${slugOf(a)}-to-${slugOf(b)}`;
   let url;

@@ -231,11 +231,18 @@ class Plan:
         return a, b
 
     def _nearest(self, s, keys, m):
-        k0, w0 = None, 9e9
+        """nearestOf(): the nearest on the charger's side of the highway first (s["xh"])."""
+        k0, w0, x0 = None, 9e9, True
+        xh = s.get("xh") or ()
         for k in keys:
-            d = m_dist(s, m[k])
-            if d < w0: w0, k0 = d, k
+            d, x = m_dist(s, m[k]), k in xh
+            if (x0 and not x) or (x == x0 and d < w0): w0, k0, x0 = d, k, x
         return k0, w0
+
+    @staticmethod
+    def _far(s, k, w):
+        """farWalk(): not a short walk -- over ~5 minutes, or across a highway."""
+        return w > 400 or (k is not None and k in (s.get("xh") or ()))
 
     def _food(self, m):
         return [k for k in m if k in self.brands and self.brands[k].get("cat") == "food"]
@@ -272,7 +279,7 @@ class Plan:
                     k, w = self._nearest(s, self._meal_keys(m, name), m)
                     if not k: continue
                     kw = s.get("kw") or 0
-                    sc = [2 if off > 75 else 1 if off > 45 else 0, 1 if w > 400 else 0, 1 if kw < 100 else 0,
+                    sc = [2 if off > 75 else 1 if off > 45 else 0, 1 if self._far(s, k, w) else 0, 1 if kw < 100 else 0,
                           -math.floor(min(kw, 350) / 50), jsround(off / 15), w]
                     key = at["day"] + name
                     cur = best.get(key)
@@ -306,7 +313,7 @@ class Plan:
                     if lk: k, w = lk, lw
                     else: shut = 1 if s.get("h24") else 2
                 off = abs(mi - target) if abs(mi - target) > span else 0
-                sc = [off, shut, -min(s.get("kw") or 0, 350), 1 if w > 400 else 0,
+                sc = [off, shut, -min(s.get("kw") or 0, 350), 1 if self._far(s, k, w) else 0,
                       -min(s.get("stalls") or 0, 40), 0 if s.get("h24") else 1, w]
                 if not pick or sc < pick_sc:
                     pick, pick_sc = {"s": s, "walk": w, "k": k, "meal": None, "mi": mi, "ms": ms}, sc

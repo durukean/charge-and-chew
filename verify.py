@@ -1015,7 +1015,7 @@ if os.path.exists(_trips):
             _k = re.search(r'<td>(?:<span class="nw">)?[^<]*<b>(.*?)</b> (\d+) min', _r.split("</td>")[3] + "</td>") if _r.count("</td>") >= 4 else None
             # Each "🌮 Taco Bell 1 min" is one nowrap unit: phones broke it as "Denny's 3 / min,".
             _fc = _r.split("</td>")[3] if _r.count("</td>") >= 4 else ""
-            if re.sub(r'<span class="nw">(?:(?!</?span)[^<]|<b>|</b>|<span class="nw">[^<]*</span>)*? \d+ min</span>', "", _fc).count(" min"):
+            if re.sub(r'<span class="nw">(?:(?!</?span)[^<]|<b>|</b>|<span class="nw">[^<]*</span>)*? \d+ min(?:<small class="xh"[^>]*>across hwy</small>)?</span>', "", _fc).count(" min"):
                 _bad_plan.append(f"{_sl}: a 'name N min' in the plan's food cell can break across lines")
             if not (_lab and _sid and int(_sid.group(1)) in _sites):
                 _bad_plan.append(f"{_sl}: a stop row without a label, a mile or a real stop link"); continue
@@ -1396,7 +1396,7 @@ check(".brk.meal .bm i{align-self:flex-start;color:var(--chew);background:var(--
       "the breaks card rows lost their polish (meal pill, mile under the clock, chevron, one day mark)")
 # A break opens a card that leads with the chain it promised (Wendy's was hidden in "+14").
 check("popupLead = b.dataset.k ? { id: s.id, k: b.dataset.k } : null;" in _html
-      and ".sort((a, b) => (pri(b[0]) - pri(a[0])) || mDist(s, a[1]) - mDist(s, b[1]));" in _html
+      and ".sort((a, b) => (pri(b[0]) - pri(a[0])) || (acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || mDist(s, a[1]) - mDist(s, b[1]));" in _html
       and "<a class=\"pp-nb${pri(k) ? ' on' : ''}\"" in _html,
       "a suggested break's stop card no longer leads with the promised chain")
 # Meal-timed breaks (2026-11): meals by LOCAL time at each stop, a real meal (no coffee for
@@ -2035,7 +2035,7 @@ check(re.search(r"\n    \$\{cardSigs\(s\)\}\n    <div class=\"pp-links\">", _pp)
       "the stop card no longer shows its signal line (cardSigs)")
 check(re.search(r"<span class=\"tag iso\">isolated</span>' : ''\}\$\{rowSigs\(s\)\}</div>", _html) is not None,
       "list rows no longer carry their signal tags (rowSigs)")
-check("walkMin(walk) + ' min' : ''}</span>${brkSigs(s, k, ms)}</span>" in _html,
+check("' min' + (acrossHwy(s, k) ? ' · across hwy' : '') : ''}</span>${brkSigs(s, k, ms)}</span>" in _html,
       "a planned break no longer says what is likely open at its clock (brkSigs)")
 check(re.search(r"(?m)^  if \(stop\) lateByHours\(el, stop, todo, tz\);$", _html) is not None,
       "the stop card's late-food line is no longer put right by OpenStreetMap hours (lateByHours)")
@@ -2211,6 +2211,64 @@ t((r12.match(/class="tag sig"/g) || []).length === 2 && !/playground/.test(r12),
 F.kids = 1; t(/^<span class="tag sig"[^>]*><svg[^]*?<\/svg>playground/.test(rowSigs(S(12, { pg: 24 }))), 'with Good for kids on, the playground does not lead');
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_kd.stdout.strip() == "OK", "the playground signal says the wrong thing:\n  " + (_kd.stdout + _kd.stderr).strip()[:700])
+
+# ---- Across the highway (batch 8) [B8-H] ----
+check(re.search(r"const sc = \[off > 75 \? 2 : off > 45 \? 1 : 0, farWalk\(s, k, w\) \? 1 : 0,", _html) is not None
+      and "const sc = [off, shut, -Math.min(s.kw || 0, 350), farWalk(s, k, w) ? 1 : 0," in _html
+      and "const sc = [s.lvl === 2 ? 1 : 0, k ? 0 : 1, kw < 100 ? 1 : 0, farWalk(s, k, w) ? 1 : 0," in _html,
+      "meals, breaks or the route list rank a walk across a highway as a short one again (farWalk)")
+check("<i>${walkMin(walkTo(s, k, v))} min</i>${xhMark(s, k)}</span>" in _html
+      and "<b>${walkMin(d)} min</b>${xhMark(s, k)}" in _html
+      and "${acrossHwy(s, k) ? ' · across the highway' : ''}</span>" in _html
+      and "' min' + (acrossHwy(s, k) ? ' · across hwy' : '')" in _html,
+      "a walk across a highway is no longer marked on rows, the stop card or the breaks (xhMark)")
+check("(acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || walkTo(s, a[0], a[1]) - walkTo(s, b[0], b[1])" in _html
+      and "(acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || mDist(s, a[1]) - mDist(s, b[1])" in _html,
+      "places across a highway are listed first again (rows / stop card)")
+if _node and _SIG:
+    _nf = _html[_html.index("function nearestOf(s, keys, m) {"):_html.index("const foodKeys = ")]
+    _hw = subprocess.run([_node, "-e", _SIG_HEAD + _SIG + _nf + r"""
+const f = [], t = (c, msg) => { if (!c) f.push(msg); };
+const S = (id, o) => Object.assign({ id, st: 'TX', lat: 30, lon: -97 }, o || {});
+const m13 = { 'Taco Bell': [5, 0], 'Chipotle': [30, 0] };
+t(nearestOf(S(13, { xh: ['Taco Bell'] }), ['Taco Bell', 'Chipotle'], m13)[0] === 'Chipotle', 'nearestOf picks a place across the highway over one on this side');
+t(nearestOf(S(13, { xh: ['Taco Bell', 'Chipotle'] }), ['Taco Bell', 'Chipotle'], m13)[0] === 'Taco Bell', 'nearestOf, all across: not the nearest');
+t(nearestOf(S(13), ['Taco Bell', 'Chipotle'], m13)[0] === 'Taco Bell', 'nearestOf without highways: not the nearest');
+t(farWalk(S(13, { xh: ['Taco Bell'] }), 'Taco Bell', 50) && !farWalk(S(13), 'Taco Bell', 50) && farWalk(S(13), 'Taco Bell', 401), 'farWalk is wrong');
+t(/across hwy/.test(xhMark(S(13, { xh: ['Taco Bell'] }), 'Taco Bell')) && xhMark(S(13), 'Taco Bell') === '', 'xhMark is wrong');
+MATCH[14] = { 'Taco Bell': [5, 0], 'Waffle House': [8, 0], 'Chipotle': [3, 0] };
+t(lateFoods(S(14, { xh: ['Taco Bell'] })).map(x => x[0]).join() === 'Waffle House,Taco Bell', 'lateFoods does not put this side of the highway first');
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_hw.stdout.strip() == "OK", "the across-the-highway rules say the wrong thing:\n  " + (_hw.stdout + _hw.stderr).strip()[:700])
+# planner.py ranks like the app: same side of the highway first, and a walk across one is not short.
+import planner as _plmod
+_pp0 = _plmod.Plan.__new__(_plmod.Plan)
+_s13 = {"id": 1, "lat": 30.0, "lon": -97.0, "xh": ["Taco Bell"]}
+check(_pp0._nearest(_s13, ["Taco Bell", "Chipotle"], {"Taco Bell": [5, 0], "Chipotle": [30, 0]})[0] == "Chipotle"
+      and _plmod.Plan._far(_s13, "Taco Bell", 50) and not _plmod.Plan._far(_s13, "Chipotle", 50),
+      "planner.py ranks a walk across a highway like the app no longer (_nearest / _far)")
+# Static pages say it too: the generator's chips and the trip plan's food cells.
+_bpy = open(os.path.join(HERE, "build.py")).read()
+check("<i>{mins(d)} min</i>{xh_mark(s, k)}</span>" in _bpy and "{r['walk']} min{xh_mark(s, k)}</span>" in _bpy
+      and "{mins(d)} min{xh_mark(s, x)}</span>" in _bpy and "key=lambda x: (x[0] != focus, x[0] in xh, x[1])" in _bpy,
+      "build.py no longer marks walks across a highway on the pages (xh_mark)")
+_xh_bad, _xh_seen = [], 0
+_by = {s["id"]: s for s in D["sites"]}
+for _p in glob.glob(os.path.join(HERE, "trip", "*", "index.html")):
+    _t = open(_p).read()
+    for _row in re.findall(r'<tr><td>.*?</tr>', _t, re.S):
+        _m = re.search(r'stop=(\d+)"', _row)
+        _f = re.search(r'<td><span class="nw">\S+ <b>(.*?)</b> \d+ min(<small class="xh")?', _row)
+        if not _m or not _f:
+            continue
+        _k = re.sub(r"<[^>]+>", "", _f.group(1)).replace("&#x27;", "'").replace("&amp;", "&")
+        _want = _k in (_by.get(int(_m.group(1)), {}).get("xh") or [])
+        _xh_seen += _want
+        if _want != bool(_f.group(2)):
+            _xh_bad.append(os.path.basename(os.path.dirname(_p)) + ": " + _k)
+check(not _xh_bad, f"trip plan rows mark 'across hwy' where the data does not, or miss it: {_xh_bad[:4]}")
+_near_xh = sum(open(_p).read().count('class="xh"') for _p in glob.glob(os.path.join(HERE, "near", "*", "*", "index.html"))[:400])
+check(_near_xh > 0 or not any("xh" in s for s in D["sites"]), "no /near/ page marks a walk across a highway")
 
 # A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
 # every stylesheet the site ships must have balanced braces, never closing more than it opened.
