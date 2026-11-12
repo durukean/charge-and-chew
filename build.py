@@ -1386,6 +1386,9 @@ merges both directions and can differ a little from official lengths.</li>
 <h2 id="cite">How to cite</h2>
 <p class="cite">Charge &amp; Chew, &ldquo;{RFI_TITLE},&rdquo; data as of {RFI_DATE}, {BASE}/{RFI_DIR}/. Charger data from
 the US Department of Energy (AFDC); chain locations &copy; OpenStreetMap contributors (ODbL).</p>
+<p>The tables and charts on this page are free to reuse, including commercially, under
+<a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: credit
+&ldquo;Charge &amp; Chew Road Food Index&rdquo; with a link to this page, and keep the OpenStreetMap credit above.</p>
 <p>Questions about the data: <a href="mailto:chargeandchew@gmail.com">chargeandchew@gmail.com</a>.</p>"""
 
 RFI_LD = {
@@ -1393,6 +1396,7 @@ RFI_LD = {
     "url": f"{BASE}/{RFI_DIR}/", "dateModified": D["generated"],
     "creator": {"@type": "Organization", "name": BRAND, "url": f"{BASE}/"},
     "creditText": f"{BRAND}, {RFI_TITLE}",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
     "spatialCoverage": {"@type": "Place", "name": "United States"},
     "isBasedOn": ["https://afdc.energy.gov/fuels/electricity-locations", "https://www.openstreetmap.org"],
     "keywords": ["EV charging", "DC fast chargers", "restaurants", "road trips", "interstates"],
@@ -1691,7 +1695,7 @@ No account and no sign-in. Location is used on the device to centre the map and 
 
 {chr(10).join(f"- {x}" for x in rfi.headlines(RFI))}
 
-Cite as: {BRAND}, "{RFI_TITLE}," data as of {RFI_DATE}, {BASE}/{RFI_DIR}/.
+Cite as: {BRAND}, "{RFI_TITLE}," data as of {RFI_DATE}, {BASE}/{RFI_DIR}/. Free to reuse under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) with that credit.
 
 ## Contact
 
