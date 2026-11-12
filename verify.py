@@ -2015,6 +2015,21 @@ if os.path.exists(_rfi_page):
             _abad.append(_x["slug"])
     check(not _abad, f"{len(_abad)} interstate pages state a Road Food Index rank that differs from the data: {_abad[:3]}")
 
+# A stray "}" in pages.css once made browsers drop the next rule (table.trip{...}) unnoticed:
+# every stylesheet the site ships must have balanced braces, never closing more than it opened.
+def _css_balanced(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r'"(?:\\.|[^"\\])*"', '""', css)
+    d = 0
+    for ch in css:
+        d += (ch == "{") - (ch == "}")
+        if d < 0:
+            return False
+    return d == 0
+_css_bad = [f for f in ["assets/pages.css"] if not _css_balanced(open(os.path.join(HERE, f)).read())]
+_css_bad += [f"index.html <style> #{i}" for i, c in enumerate(re.findall(r"<style[^>]*>(.*?)</style>", open(os.path.join(HERE, "index.html")).read(), re.S)) if not _css_balanced(c)]
+check(not _css_bad, f"unbalanced CSS braces (a rule after them is silently dropped): {_css_bad}")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")
