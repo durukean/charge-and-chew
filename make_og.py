@@ -136,6 +136,23 @@ def index_card(tmp, only):
     return 1
 
 
+def cities_card(tmp, only):
+    """One card shared by every /in/<city>/ page (one per city would be ~100 more images)."""
+    if only and "cities" not in only: return 0
+    page = os.path.join(HERE, "in", "index.html")
+    if not os.path.exists(page): return 0
+    m = re.search(r'<p class="lead">(\d+) US cities', open(page, encoding="utf-8").read())
+    if not m: return 0
+    render(TRIP_CARD.replace('<div class="kick">{miles} mi &middot; {drive}</div>', '<div class="kick">City guides</div>')
+           .replace("<h1>{a} <span class=\"n\">&rarr;</span> {b}</h1>", "<h1>{a} <span class=\"n\">{b}</span></h1>")
+           .replace("<p><b>{withfood}</b> charging stops along the way with somewhere to eat a short walk from the plug.</p>",
+                    "<p>The fastest chargers with somewhere to eat a short walk away, in <b>{withfood}</b> US cities.</p>")
+           .format(a="EV fast chargers near food,<br>", b="city by city", size=74, withfood=m.group(1)),
+           os.path.join(HERE, "og", "cities.png"), tmp)
+    print("  cities.png", flush=True)
+    return 1
+
+
 def main():
     D = load_data(os.path.join(HERE, "data.js"))
     counts = {}
@@ -166,6 +183,7 @@ def main():
         print(f"  {sl}.png  ({n:,} chargers)", flush=True)
     made += trip_cards(tmp, only)
     made += index_card(tmp, only)
+    made += cities_card(tmp, only)
     if os.path.exists(tmp): os.remove(tmp)
     print(f"\n{made} cards written to og/ ({skipped} chains skipped: no chargers)")
 

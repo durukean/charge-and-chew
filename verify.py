@@ -1923,6 +1923,70 @@ if os.path.exists(_rfi_page):
     check('"road-food-index"' in open(os.path.join(HERE, "publish.py"), encoding="utf-8").read(),
           "publish.py does not publish road-food-index/")
 
+# ---- city pages /in/<city>/ (2026-11-11) ----
+# Recounted here from data/metros.json the way the app's area view counts (planner.hav within
+# 25 * planner.MI): a page that says "79 DC fast chargers" must open the map on 79.
+_mj = os.path.join(HERE, "data", "metros.json")
+_cidx = os.path.join(HERE, "in", "index.html")
+check(os.path.exists(_mj) and os.path.exists(_cidx), "the city pages or data/metros.json are missing (run build.py)")
+if os.path.exists(_mj) and os.path.exists(_cidx):
+    import planner as _pl
+    from html import unescape as _unesc2
+    _bp2 = open(os.path.join(HERE, "build.py"), encoding="utf-8").read()
+    _cmi = int(re.search(r"(?m)^CITY_MI = (\d+)", _bp2).group(1))
+    _cmin = re.search(r"(?m)^CITY_INDEX_MIN = (\w+)", _bp2).group(1)
+    _cmin = int(re.search(rf"(?m)^{_cmin} = (\d+)", _bp2).group(1)) if not _cmin.isdigit() else int(_cmin)
+    _food_k = {k for k, v in D["brands"].items() if v.get("cat") == "food"}
+    _kept, _skip = [], []
+    for _m in json.load(open(_mj))["metros"]:
+        _sl = re.sub(r"[^a-z0-9]+", "-", _m["name"].lower()).strip("-") + "-" + _m["st"].lower()
+        if any(_pl.hav(_m["lat"], _m["lon"], o["lat"], o["lon"]) <= _cmi * _pl.MI for o in _kept + [x for x in _skip if x.get("thin")]):
+            _skip.append(dict(_m, sl=_sl)); continue
+        _in = [s for s in D["sites"] if abs(s["lat"] - _m["lat"]) < 0.5 and _pl.hav(_m["lat"], _m["lon"], s["lat"], s["lon"]) <= _cmi * _pl.MI]
+        _fd = [s for s in _in if _food_k & set(D["matches"].get(str(s["id"]), {}))]
+        if len(_fd) < _cmin:
+            _skip.append(dict(_m, sl=_sl, thin=True)); continue
+        _kept.append(dict(_m, sl=_sl, n=len(_in), f=len(_fd), kw=max((s.get("kw") or 0) for s in _fd)))
+    _ci = open(_cidx, encoding="utf-8").read()
+    _smx = open(os.path.join(HERE, "sitemap.xml"), encoding="utf-8").read()
+    check(len(_kept) >= 80, f"only {len(_kept)} city pages")
+    _cbad = []
+    for _c in _kept:
+        _f = os.path.join(HERE, "in", _c["sl"], "index.html")
+        if not os.path.exists(_f):
+            _cbad.append(f"{_c['sl']}: no page"); continue
+        _h = open(_f, encoding="utf-8").read()
+        if f"<b>{_c['n']:,} DC fast chargers</b> sit within {_cmi} miles" not in _h or f"<b>{_c['f']:,}</b> of them have somewhere to eat" not in _h:
+            _cbad.append(f"{_c['sl']}: counts"); continue
+        if f'?at={_c["lat"]:.4f},{_c["lon"]:.4f}&amp;r={_cmi}"' not in _h:
+            _cbad.append(f"{_c['sl']}: map link"); continue
+        _k1 = re.search(r'<s class="spd[^"]*">(\d+) kW</s>', _h)
+        if not _k1 or int(_k1.group(1)) != _c["kw"]:
+            _cbad.append(f"{_c['sl']}: first stop is not the fastest"); continue
+        if f'href="{_c["sl"]}/"' not in _ci or f"/in/{_c['sl']}/</loc><lastmod>" not in _smx or "noindex" in _h:
+            _cbad.append(f"{_c['sl']}: not in the index or sitemap, or noindexed"); continue
+        # the FAQ markup says exactly what the page shows
+        _vis = [(_unesc2(re.sub(r"<[^>]+>", "", q)), _unesc2(re.sub(r"<[^>]+>", "", a)))
+                for q, a in re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", _h, re.S)]
+        _faq = next((json.loads(x) for x in re.findall(r'<script type="application/ld\+json">(.*?)</script>', _h, re.S)
+                     if '"FAQPage"' in x), None)
+        if not _faq or len(_vis) < 4 or [(e["name"], e["acceptedAnswer"]["text"]) for e in _faq["mainEntity"]] != _vis:
+            _cbad.append(f"{_c['sl']}: FAQ markup differs from the visible FAQ"); continue
+    check(not _cbad, f"{len(_cbad)} city pages are wrong: {_cbad[:3]}")
+    _pub = [x["sl"] for x in _skip if os.path.exists(os.path.join(HERE, "in", x["sl"], "index.html"))]
+    check(not _pub, f"skipped (thin or overlapping) cities still have pages: {_pub[:3]}")
+    _nin = len(re.findall(r"<loc>https://chargeandchew\.com/in/", _smx))
+    check(_nin == len(_kept) + 1, f"sitemap lists {_nin} /in/ URLs for {len(_kept)} cities + the index")
+    # linked from where a reader already is
+    _ihx = os.path.join(HERE, "near", "ihop", "tx", "index.html")
+    check(not os.path.exists(_ihx) or '../../../in/austin-tx/' in open(_ihx, encoding="utf-8").read(),
+          "a chain's state page no longer links that state's city pages")
+    _tda = os.path.join(HERE, "trip", "dallas-to-austin", "index.html")
+    check(not os.path.exists(_tda) or '../../in/austin-tx/' in open(_tda, encoding="utf-8").read(),
+          "a trip page no longer links the city pages it starts and ends in")
+    check("<!--cities-->" not in open(_tda, encoding="utf-8").read() if os.path.exists(_tda) else True,
+          "the cities placeholder was left in a trip page")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

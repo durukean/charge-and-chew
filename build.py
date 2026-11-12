@@ -316,7 +316,7 @@ WRITTEN = set()
 # a handful had new chargers. The sitemap's lastmod still carries the exact build date.
 import datetime as _dt
 UPDATED = _dt.date.fromisoformat(D['generated']).strftime('%B %Y')
-GENERATED_DIRS = ("near", "along", "trip")
+GENERATED_DIRS = ("near", "along", "trip", "in")
 
 
 def page_stats(key, rows):
@@ -600,6 +600,7 @@ for key, b in brands.items():
 {cards}
 <!--trips-->
 <h2>Other chains near fast chargers in {sn}</h2><div class="chips">{others or '—'}</div>
+<!--cities-->
 <h2>{bn(key)} in other states</h2><div class="chips"><a href="../">All states</a></div>
 {faq_html}"""
         can = f"near/{cs}/{st.lower()}/"
@@ -1135,7 +1136,7 @@ if os.path.exists(TRIP_PATH):
                 f"<p>In order along the route{spread}.</p>\n"
                 f'{"".join(cards)}\n'
                 f"{faq_html}\n"
-                '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>')
+                '<h2>Other road trips</h2><div class="chips" id="tripchips"></div>\n<!--cities-->')
         path = f"trip/{sl}/index.html"
         # Trip pages are the ones people share; make_og.py renders a card naming the drive.
         page(path, title, desc, body, f"trip/{sl}/",
@@ -1403,6 +1404,228 @@ add(f"{RFI_DIR}/index.html")
 print(f"Road Food Index: {len(RFI['chains'])} chains, {len(RFI['interstates'])} interstates, {len(RFI['drives'])} drives")
 
 
+# ---- city pages: "EV fast chargers near food in Austin, TX" ----
+# People type "[city] superchargers" far more than "chargers near Best Buy in Iowa". One page
+# per metro (data/metros.json), covering the fast chargers within the app's default 25 miles of
+# downtown, measured the way the app's area view measures them (planner.hav, planner.MI), so
+# "Open Austin in the map" shows the same set. A metro whose centre is within 25 miles of a
+# larger one's would repeat that page, and one with fewer stops than the list holds is too thin
+# to be worth a search result: both are skipped (counted in the build log).
+CITY_MI = 25
+CITY_BEST = 12
+CITY_INDEX_MIN = CITY_BEST       # stops with food: fewer cannot fill the list
+CITY_NEAR_MI = 150               # "nearby cities"
+_metros = json.load(open(os.path.join(HERE, "data", "metros.json")))["metros"]
+_trips_all = json.load(open(TRIP_PATH)) if os.path.exists(TRIP_PATH) else {}
+_is_food = lambda k: brands.get(k, {}).get("cat") == "food"
+CITIES, CITY_SKIPPED = [], []
+for _m in _metros:
+    _big = next((c for c in CITIES if planner.hav(_m["lat"], _m["lon"], c["lat"], c["lon"]) <= CITY_MI * planner.MI), None)
+    if _big is None:
+        _big = next((c for c in CITY_SKIPPED if c.get("why") == "thin" and
+                     planner.hav(_m["lat"], _m["lon"], c["lat"], c["lon"]) <= CITY_MI * planner.MI), None)
+    if _big is not None:
+        CITY_SKIPPED.append(dict(_m, why=f"within {CITY_MI} mi of {_big['name']}"))
+        continue
+    _in = [s for s in D["sites"] if abs(s["lat"] - _m["lat"]) < 0.5 and
+           planner.hav(_m["lat"], _m["lon"], s["lat"], s["lon"]) <= CITY_MI * planner.MI]
+    _food = [s for s in _in if any(_is_food(k) for k in matches.get(s["id"], {}))]
+    if len(_food) < CITY_INDEX_MIN:
+        CITY_SKIPPED.append(dict(_m, why="thin", n_food=len(_food)))
+        continue
+    CITIES.append(dict(_m, slug=f"{slug(_m['name'])}-{_m['st'].lower()}", sites=_in, food=_food))
+CITY_BY_SLUG = {c["slug"]: c for c in CITIES}
+
+
+def city_walk(s):
+    """The nearest place to eat at a stop: (metres, chain)."""
+    m = matches.get(s["id"], {})
+    return min(((d, k) for k, d in m.items() if _is_food(k)), default=(9e9, None))
+
+
+def city_rank(s):
+    """Fastest first, then the most stalls, then the shortest walk to food."""
+    return (-(s.get("kw") or 0), -min(s.get("stalls") or 0, 40), city_walk(s)[0], s["id"])
+
+
+def city_ends(c):
+    """The road trip guides that start or end in this city."""
+    out = []
+    for tk, t in _trips_all.items():
+        sl = trip_slug(t["a"], t["b"])
+        if sl not in trip_meta: continue
+        if (planner.hav(c["lat"], c["lon"], t["alat"], t["alon"]) <= CITY_MI * planner.MI or
+                planner.hav(c["lat"], c["lon"], t["blat"], t["blon"]) <= CITY_MI * planner.MI):
+            out.append(sl)
+    return sorted(out, key=lambda sl: (trip_names[sl][0] != c["name"], trip_names[sl]))
+
+
+def lst(xs):
+    return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
+
+
+for c in CITIES:
+    N, ST, cs = c["name"], c["st"], c["slug"]
+    where = f"{N}, {ST}"
+    root = "../../"
+    app = f"{root}?at={c['lat']:.4f},{c['lon']:.4f}&amp;r={CITY_MI}"
+    sites_, food_ = c["sites"], c["food"]
+    best = sorted(food_, key=city_rank)[:CITY_BEST]
+    kws = sorted(s.get("kw") or 0 for s in sites_ if s.get("kw"))
+    med = kws[len(kws) // 2] if kws else 0
+    big = sum(1 for k in kws if k >= 150)
+    h24 = [s for s in food_ if s.get("h24")]
+    nets = Counter(s.get("net") for s in sites_ if s.get("net")).most_common(3)
+    ch = Counter(k for s in sites_ for k in matches.get(s["id"], {}) if k not in CATEGORY_KEYS)
+    chains_ = sorted(ch.items(), key=lambda x: (-x[1], x[0]))[:16]
+    food_chains = [(k, n) for k, n in sorted(ch.items(), key=lambda x: (-x[1], x[0])) if _is_food(k)][:5]
+    trips_ = city_ends(c)
+    near_ = sorted((o for o in CITIES if o is not c and
+                    planner.hav(c["lat"], c["lon"], o["lat"], o["lon"]) <= CITY_NEAR_MI * planner.MI),
+                   key=lambda o: planner.hav(c["lat"], c["lon"], o["lat"], o["lon"]))[:8]
+    c.update(n_all=len(sites_), n_food=len(food_), trips=trips_)
+
+    def chain_href(k):
+        return (f"{root}near/{slug(k)}/{ST.lower()}/" if os.path.exists(os.path.join(HERE, "near", slug(k), ST.lower(), "index.html"))
+                else f"{root}near/{slug(k)}/")
+    cards = []
+    for s in best:
+        d, k = city_walk(s)
+        cards.append(site_card(s, k, root).replace(f'href="{root}?chain={esc(k)}&amp;state={s["st"]}"',
+                                                     f'href="{app}&amp;stop={s["id"]}"'))
+    netline = ", ".join(f"{esc(n)} ({c_})" for n, c_ in nets)
+    stats = (f'<p class="stats">Typical power here is <b>{med} kW</b>, and <b>{big}</b> of the {len(sites_):,} '
+             f"charge at 150 kW or more. <b>{len(h24)}</b> of the stops with food are listed as open 24 hours. "
+             f"Most are on {netline}.</p>")
+    # Questions, answered from this city's data. The same strings make the visible answers and
+    # the FAQPage markup, so the two cannot disagree.
+    qa = [(f"How many EV fast chargers near {esc(N)} have food within walking distance?",
+           f"{len(food_):,} of the {len(sites_):,} public DC fast chargers within {CITY_MI} miles of downtown {esc(N)} "
+           f"have somewhere to eat within a 10-minute walk (800 m), based on US Department of Energy charger data "
+           f"matched against OpenStreetMap.")]
+    if best:
+        s0 = best[0]; d0, k0 = city_walk(s0)
+        qa.append((f"What is the fastest charger with food nearby in {esc(N)}?",
+                   f"{esc(s0['name'])} in {esc(s0['city'])}, {s0['st']}, at {s0.get('kw') or 0} kW"
+                   + (f" with {s0['stalls']} stall{'s' if s0['stalls'] != 1 else ''}" if s0.get("stalls") else "")
+                   + f". {bn(k0)} is a {mins(d0)}-minute walk away."))
+    if food_chains:
+        qa.append((f"Which restaurant chains are next to the most fast chargers around {esc(N)}?",
+                   lst([f"{bn(k)} ({n})" for k, n in food_chains]) +
+                   f": the number of fast chargers within {CITY_MI} miles with each one within a 10-minute walk."))
+    if h24:
+        s1 = max(h24, key=lambda s: (s.get("kw") or 0, s.get("stalls") or 0, -s["id"]))
+        qa.append((f"Are there 24-hour fast chargers with food near {esc(N)}?",
+                   f"{len(h24)} of the stops with somewhere to eat nearby are listed as open 24 hours, the fastest "
+                   f"being {esc(s1['name'])} in {esc(s1['city'])} at {s1.get('kw') or 0} kW. The restaurants keep "
+                   f"their own hours."))
+    else:
+        qa.append((f"Are there 24-hour fast chargers with food near {esc(N)}?",
+                   "None of the stops with somewhere to eat nearby is listed as open 24 hours. Check the network's "
+                   "app for hours before a late stop."))
+    if nets:
+        qa.append((f"Which charging networks are around {esc(N)}?",
+                   f"Within {CITY_MI} miles: " + lst([f"{esc(n)} ({c_} sites)" for n, c_ in nets]) +
+                   ". Set your car in the map and it shows which stops your plug fits."))
+    if trips_:
+        qa.append((f"Which road trips from {esc(N)} have charging guides?",
+                   lst([f"{esc(trip_names[sl][0])} to {esc(trip_names[sl][1])}" for sl in trips_[:8]]) +
+                   ": each guide plans the meal stops for leaving at 8 am and lists every charger on the way."))
+    faq_html = '<h2>Common questions</h2><div class="faq">' + "".join(
+        f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in qa) + "</div>"
+    plain = lambda h: unescape(re.sub(r"<[^>]+>", "", h))
+    faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": plain(q), "acceptedAnswer": {"@type": "Answer", "text": plain(a)}} for q, a in qa]}
+    items = [{"@type": "ListItem", "position": i, "item": {
+        "@type": "Place", "name": place_name(s),
+        "address": {"@type": "PostalAddress", "streetAddress": s["street"], "addressLocality": s["city"],
+                    "addressRegion": s["st"], "addressCountry": "US"},
+        "geo": {"@type": "GeoCoordinates", "latitude": s["lat"], "longitude": s["lon"]}}} for i, s in enumerate(best, 1)]
+    ld = "".join(ld_script(x) for x in [
+        {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Cities", "item": f"{BASE}/in/"},
+            {"@type": "ListItem", "position": 2, "name": where, "item": f"{BASE}/in/{cs}/"}]},
+        {"@context": "https://schema.org", "@type": "ItemList", "name": f"EV fast chargers near food in {where}",
+         "numberOfItems": len(food_), "itemListElement": items},
+        faq_schema])
+    body = (f"<h1>EV fast chargers near food in {esc(where)}</h1>\n"
+            f'<p class="lead"><b>{len(sites_):,} DC fast chargers</b> sit within {CITY_MI} miles of downtown {esc(N)}, '
+            f"across every network, and <b>{len(food_):,}</b> of them have somewhere to eat within a 10-minute walk, "
+            "so the charging stop and the meal are the same stop.</p>\n"
+            f'<a class="cta" href="{app}">Open {esc(N)} in the map &rarr;</a>\n{stats}\n'
+            f"<h2>The best stops with food</h2>\n<p>The {len(best)} fastest of the {len(food_):,} with somewhere to eat "
+            "within a walk; with equal power, the most stalls, then the shortest walk.</p>\n" + "".join(cards) + "\n"
+            f"<h2>Chains next to fast chargers around {esc(N)}</h2>\n<p>How many of the {len(sites_):,} have each within a "
+            "10-minute walk:</p>\n<div class=\"chips\">" +
+            "".join(f'<a href="{chain_href(k)}">{brands[k]["e"]} {bn(k)} <small>{n}</small></a>' for k, n in chains_) + "</div>\n" +
+            ((f"<h2>Road trips from {esc(N)}</h2>\n<div class=\"chips\">" +
+              "".join(f'<a href="{root}trip/{sl}/">{esc(trip_names[sl][0])} &rarr; {esc(trip_names[sl][1])}</a>' for sl in trips_) +
+              "</div>\n") if trips_ else "") +
+            (("<h2>Nearby cities</h2>\n<div class=\"chips\">" +
+              "".join(f'<a href="../{o["slug"]}/">{esc(o["name"])}, {o["st"]} <small>{len(o["food"]):,}</small></a>' for o in near_) +
+              '<a href="../"><b>All cities &rarr;</b></a></div>\n') if near_ else
+             '<h2>Other cities</h2>\n<div class="chips"><a href="../"><b>All cities &rarr;</b></a></div>\n') +
+            faq_html)
+    title = f"EV fast chargers near food in {where}"
+    desc = (f"{len(food_):,} of the {len(sites_):,} EV DC fast chargers within {CITY_MI} miles of {where} have somewhere "
+            f"to eat within a 10-minute walk. The fastest stops, the chains next to them, and road trips from {N}.")
+    page(f"in/{cs}/index.html", title, desc, body, f"in/{cs}/", ld, og="cities")
+    add(f"in/{cs}/index.html")
+
+# The index of cities, by region (the trip index's regions, with Alaska and Hawaii in the West).
+CITY_REGIONS = [(t, sts + (" AK HI" if t == "The West" else "")) for t, sts in TRIP_REGIONS]
+_groups = []
+for t, sts in CITY_REGIONS:
+    mine = sorted((c for c in CITIES if c["st"] in sts.split()), key=lambda c: (c["name"], c["st"]))
+    if mine:
+        _groups.append(f"<h2>{t}</h2>\n" + '<div class="chips">' + "".join(
+            f'<a href="{c["slug"]}/">{esc(c["name"])}, {c["st"]} <small>{c["n_food"]:,}</small></a>' for c in mine) + "</div>")
+_lost = [c["slug"] for c in CITIES if not any(f'href="{c["slug"]}/"' in g for g in _groups)]
+if _lost:
+    sys.exit(f"build.py: cities in no region: {_lost}")
+page("in/index.html", "EV fast chargers near food, city by city",
+     f"EV DC fast chargers with somewhere to eat within a 10-minute walk in {len(CITIES)} US cities, from New York "
+     "and Los Angeles to Boise and Savannah: the fastest stops and the chains next to them.",
+     "<h1>EV fast chargers near food, city by city</h1>\n"
+     f'<p class="lead">{len(CITIES)} US cities and metro areas: the fast chargers within {CITY_MI} miles of each '
+     "downtown, the fastest ones with somewhere to eat a short walk away, and the chains next to them. The number "
+     "is how many have food within a 10-minute walk.</p>\n" + "\n".join(_groups) + "\n"
+     "<h2>Not your city?</h2>\n"
+     '<p class="lead">The map covers every fast charger in the US: search a town, or press and hold anywhere. '
+     '<a class="cta" href="../">Open the map &rarr;</a></p>\n'
+     '<p class="lead">Or browse <a href="../trip/">road trips</a>, <a href="../along/">interstates</a> or '
+     '<a href="../near/">chains by state</a>.</p>', "in/")
+add("in/index.html")
+print(f"City pages: {len(CITIES)} (skipped {len(CITY_SKIPPED)}: "
+      + "; ".join(f"{c['name']}, {c['st']} ({c['why'] if c['why'] != 'thin' else str(c['n_food']) + ' with food'})"
+                  for c in CITY_SKIPPED) + ")")
+
+# Link them where a reader already is: a chain's state page lists that state's cities, and a
+# road trip lists the cities it starts and ends in.
+_city_st = {}
+for c in CITIES:
+    _city_st.setdefault(c["st"], []).append(c)
+for path, key, st in NEAR_TRIP_SLOTS:
+    f = os.path.join(HERE, path)
+    doc = open(f).read()
+    sec = ""
+    if st and _city_st.get(st):
+        sec = (f"<h2>Fast chargers near food in {esc(STATES.get(st, st))} cities</h2><div class=\"chips\">" +
+               "".join(f'<a href="../../../in/{c["slug"]}/">{esc(c["name"])}</a>'
+                       for c in sorted(_city_st[st], key=lambda c: -c["n_food"])) + "</div>\n")
+    open(f, "w").write(doc.replace("<!--cities-->\n", sec, 1))
+for sl in trip_meta:
+    f = os.path.join(HERE, f"trip/{sl}/index.html")
+    doc = open(f).read()
+    mine = [c for c in CITIES if sl in c["trips"]]
+    sec = ""
+    if mine:
+        sec = ("<h2>Charging around " + " and ".join(esc(c["name"]) for c in mine[:2]) + "</h2><div class=\"chips\">" +
+               "".join(f'<a href="../../in/{c["slug"]}/">{esc(c["name"])}, {c["st"]} <small>{c["n_food"]:,} stops with food</small></a>'
+                       for c in mine) + "</div>")
+    open(f, "w").write(doc.replace("\n<!--cities-->", "\n" + sec if sec else "", 1))
+
+
 # ---- llms.txt: what this site is, for AI answer engines (llmstxt.org) ----
 # Plain facts and the pages that hold the detail, with this week's numbers. Linked from nowhere:
 # the tools that read it look for it at the root.
@@ -1411,6 +1634,7 @@ LLMS_PAGES = [
      "and the longest charger gaps on popular drives; CSV downloads and a citation line"),
     ("Road trip guides", "trip/", f"{len(trip_links)} US drives, each with a meal-timed plan for leaving at 8 am, "
      "every fast charger within 5 miles of the route and the food a walk from each"),
+    ("City guides", "in/", f"the fast chargers with food a walk away in {len(CITIES)} US cities"),
     ("Chains", "near/", f"fast chargers near each of the {len(RFI['chains'])} chains, nationally and by state"),
     ("Interstates", "along/", "the fast chargers along major interstates, in route order"),
     ("Support", "support/", "how to use the app, what the numbers mean, how to report a problem"),
