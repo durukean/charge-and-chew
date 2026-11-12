@@ -45,6 +45,12 @@ Draft What's New lines, most important first:
 > • Polish: brand names never break mid-word, no hairline seams on the map, 44-point chips, one badge style.
 > • After you plan a drive and tap Directions, the app may ask once (per version) for a rating; "Rate the app" is in About.
 
+Smarter stops (batch 8, 2026-11-11, branch director/smarter-stops-2026-11-11). Draft What's New lines:
+> • Open late: at night, stops say where food is likely still open (Taco Bell, Denny's, Wawa and other late chains, checked against the hours OpenStreetMap lists), and a night break says "open late" or "may be closed then".
+> • Restroom likely: stops at a rest area, a travel stop like Buc-ee's or Love's, mapped public toilets, a 24-hour diner or a big store in store hours say so. Tap it for the reason. Always "likely", never a promise.
+> • Good for kids: stops with a playground a short walk away show "playground 4 min", and a new filter shows only those.
+> • Honest walk times: a place across a freeway or divided highway from the charger is marked "across hwy" and listed after the ones on your side; plans prefer food on your side of the road.
+
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
