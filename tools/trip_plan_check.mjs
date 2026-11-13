@@ -92,7 +92,7 @@ const READ = `(() => {
         k: b.dataset.k || '', walk: seg ? +seg.match(/ (\\d+) min$/)[1] : null });
     }
   }
-  return { leave: sel.options[sel.selectedIndex].textContent, arrive: card.querySelector('.bleave > span').textContent.replace(/^arrive ~/, ''), rows,
+  return { leave: sel.options[sel.selectedIndex].textContent, arrive: card.querySelector('.bleave > span:last-child').textContent.replace(/^arrive ~/, ''), rows,
     n: +((document.querySelector('#routeInfo .rcount') || {}).textContent || '').replace(/[^\\d]/g, '') || null };
 })()`;
 
@@ -161,11 +161,16 @@ async function appPlan(B, port, t, day) {
     await send('Page.enable'); await send('Runtime.enable');
     if (!LIVE) await send('Fetch.enable', { patterns: [{ urlPattern: '*' }] });
     await send('Emulation.setFocusEmulationEnabled', { enabled: true });
-    /* The data's day at 19:00 UTC (daytime in every US zone, whole minutes), the clock running a
-       thousand times slow: the app's "today 8:00 am" is then 8:00:00 to the millisecond, as the
-       page's is, and nothing that waits on time stalls. */
+    /* The data's day at 12:00 UTC (4-7 am in the lower 48, before the 8:00 the link asks for, so
+       it is today's 8 am and not, as a time already past, tomorrow's), moved off a Sunday or
+       Thanksgiving Day, when the app knows chains that usually close and the pages do not. The
+       clock runs a thousand times slow: the app's "today 8:00 am" is then 8:00:00 to the
+       millisecond, as the page's is, and nothing that waits on time stalls. */
+    let dn = Date.UTC(+day.slice(0, 4), +day.slice(5, 7) - 1, +day.slice(8, 10)) / 864e5;
+    const special = n => { const d = new Date(n * 864e5); return d.getUTCDay() === 0 || (d.getUTCMonth() === 10 && d.getUTCDay() === 4 && d.getUTCDate() >= 22 && d.getUTCDate() <= 28); };
+    while (special(dn)) dn++;
     await send('Page.addScriptToEvaluateOnNewDocument', { source: `(() => {
-      const RD = Date, base = RD.UTC(${day.slice(0, 4)}, ${+day.slice(5, 7) - 1}, ${+day.slice(8, 10)}, 19), t0 = RD.now();
+      const RD = Date, base = ${dn} * 864e5 + 12 * 36e5, t0 = RD.now();
       const now = () => base + Math.floor((RD.now() - t0) / 1000);
       class D extends RD { constructor(...a) { if (a.length) super(...a); else super(now()); } static now() { return now(); } }
       window.Date = D; })();` });

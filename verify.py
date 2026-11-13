@@ -1422,7 +1422,7 @@ check("popupLead = b.dataset.k ? { id: s.id, k: b.dataset.k } : null;" in _html
 # Meal-timed breaks (2026-11): meals by LOCAL time at each stop, a real meal (no coffee for
 # lunch, no Popeyes for breakfast), a leaving time that re-plans the card.
 _bp = _html[_html.index("function breakPicks("):_html.index("function breaksCard(")]
-check("const ms = t0 + (into + extra) * 60000, at = localAt(ms, tzOf(s));" in _bp and "nearestOf(s, mealKeys(m, meal.name), m)" in _bp,
+check("const ms = t0 + (into + extra) * 60000, at = localAt(ms, tzOf(s));" in _bp and "nearestOf(s, mealKeys(m, meal.name).filter(x => !closedWhy(x, at)), m)" in _bp,
       "meal stops are no longer timed by local time at each stop (with the time at earlier stops)")
 # Time at stops (2026-11-10): "Dinner 6:00 pm" on LA -> Denver was pure driving time, ~2 h early.
 # Every pick adds its dwell to the clocks after it, the arrival counts them, and the stop card's
@@ -1485,7 +1485,7 @@ console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True
 # The leaving time is part of a shared drive (2026-11-10): the recipient got "now" and other meals.
 check("route && !route.hwy && typeof leavePick === 'number' ? p.set('leave', hhmm(leavePick))" in _html
       and re.search(r"(?m)^if \(leaveQ\) leavePick = \+leaveQ\[1\] \* 60 \+ \+leaveQ\[2\];", _html) is not None
-      and "track('break-leave', ls.value || 'now'); render(); syncUrl();" in _html
+      and "track('break-leave', ls.value || 'now');\n    if (typeof leavePick !== 'number') leaveDay = null;" in _html
       and "const hours = Array.from({ length: 24 }, (_, i) => i * 60);" in _html
       and "'leave'" in _html[_html.index("const VIEW_KEYS = ["):_html.index("const VIEW_KEYS = [") + 300],
       "the leaving time is not written to / read from the link again, or the picker lost hours")
@@ -1737,6 +1737,60 @@ check("return nightNow(first) ? morningOf(first) : null;" in _html
       and _live("else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time beats the night default"),
       "a drive planned at night leaves 'now' again (the default must be 8 am the coming morning, now one tap away)")
 
+# ---- B02: the departure day (2026-11-12) ----
+# A time already past today is the next one; a picked day (day=YYYY-MM-DD) is that day; Thanksgiving
+# is the 4th Thursday; the closures are "usually", per chain and day. Node-runs the real blocks.
+_dv = _html[_html.index("const NIGHT_FROM = "):_html.index("// The first and last stops on the drive")]
+_cw = _html[_html.index("const WDAY = ['Sun'"):_html.index("/* ───────── stop signals")]
+if _node:
+    _r8 = subprocess.run([_node, "-e", r"""let NOWMIN = 15 * 60, TODAY = Date.UTC(2026, 10, 13) / 864e5, route = { hr: 4 };
+const localAt = () => ({ min: NOWMIN, dn: TODAY }), tzOf = () => 'America/Los_Angeles';
+const clockLabel = m => String(m), MORNING_X = 0;
+""" + _cw.replace("if (typeof window !== 'undefined') window.__closedWhy = closedWhy;", "") + _dv + r"""
+const f = [], eq = (a, b, m) => { if (JSON.stringify(a) !== JSON.stringify(b)) f.push(m + ': ' + JSON.stringify(a) + ' want ' + JSON.stringify(b)); };
+const S = { st: 'CA' };
+leavePick = 480; leaveDay = null;
+eq(leaveOf(S), [480, 1], 'leave=0800 at 3 pm is tomorrow');
+NOWMIN = 8 * 60 + 20; eq(leaveOf(S), [480, 0], '8:00 at 8:20 is still today (running late)');
+NOWMIN = 15 * 60; leaveDay = '2026-11-25'; eq(leaveOf(S), [480, 12], 'day=2026-11-25 is 12 days ahead');
+leaveDay = '2026-11-01'; eq(leaveOf(S), [480, 1], 'a past day is dropped and the time rolls');
+leaveDay = '2027-06-01'; eq(leaveOf(S), [480, 1], 'a day beyond DAY_MAX is ignored');
+leavePick = 'now'; leaveDay = null; eq(leaveOf(S), null, 'now');
+leavePick = 900; pickDay('', S); eq(leavePick, 900, 'today keeps a time still to come');
+leavePick = 420; pickDay('', S); eq(leavePick, 'now', 'today drops a time already gone');
+leavePick = 'now'; pickDay('2026-11-25', S); eq([leavePick, leaveDay], [480, '2026-11-25'], 'another day leaves at 8 am');
+eq(leaveDayWords([480, 1], S) + '|' + leaveDayWords([420, 12], S) + '|' + leaveDayWords([420, 0], S), 'tomorrow |Wed, Nov 25, |', 'share words');
+const T = d => Date.UTC(...d) / 864e5;
+eq([T([2026, 10, 26]), T([2026, 10, 19]), T([2029, 10, 22]), T([2029, 10, 29]), T([2025, 10, 27])].map(isThanksgiving), [true, false, true, false, true], 'Thanksgiving = 4th Thursday');
+const o = dayOptions(S, [480, 0]);
+eq([(o.match(/<option/g) || []).length, /value="2026-11-26">Thanksgiving</.test(o), /value="2026-11-29">Sun, Nov 29</.test(o), /value="" selected>Today</.test(o)], [17, true, true, true], 'day options through the Sunday after Thanksgiving');
+const at = (dn) => ({ dn, wd: new Date(dn * 864e5).getUTCDay() });
+eq([closedWhy('Chick-fil-A', at(T([2026, 10, 15]))) !== '', closedWhy('Chick-fil-A', at(T([2026, 10, 14]))), closedWhy('Walmart', at(T([2026, 10, 26]))) !== '',
+    closedWhy('Walmart', at(T([2026, 10, 25]))), closedWhy('IHOP', at(T([2026, 10, 26]))), closedWhy('IKEA', at(T([2026, 10, 26]))), closedWhy('H-E-B', at(T([2026, 10, 26])))],
+   [true, '', true, '', '', '', ''], 'closures: CFA Sundays, Walmart Thanksgiving, nothing else');
+console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
+    check(_r8.stdout.strip() == "OK", "the departure day (B02) is wrong:\n  " + (_r8.stdout + _r8.stderr).strip()[:600])
+check("return now - now % 60000 + (L[0] + L[1] * 1440 - localAt(now, tzOf(first)).min) * 60000;" in _html,
+      "the leaving clock carries the seconds of 'now' again (a stop printed 10:05 or 10:10 by luck)")
+check("route && !route.hwy && typeof leavePick === 'number' && leaveDay ? p.set('day', leaveDay) : p.delete('day');" in _html
+      and _live("if (DAY_RE.test(q.get('day') || '') && leavePick !== 'now') { leaveDay = q.get('day'); if (typeof leavePick !== 'number') leavePick = MORNING; }")
+      and "'leave', 'day'];" in _html,
+      "the departure day is not written to / read from the link (day=YYYY-MM-DD)")
+check('<select id="leaveDaySel" aria-label="Leaving day">${dayOptions(first, leaveOf(first))}</select>' in _html
+      and "pickDay(ds.value, vis || null);" in _html
+      and '<select id="heroDay" aria-label="Leaving day"></select>' in _html and "day.innerHTML = dayOptions(null, L);" in _html
+      and "if (hd.value !== hd.dataset.def) pickDay(hd.value, null);" in _html,
+      "the day picker is gone from the breaks card or the welcome card")
+check("· leaving ${leaveDayWords(L, P.first)}${clockLabel(start)}`];" in _html
+      and "if (L && L[1]) u.searchParams.set('day', isoOfDn(localAt(P.t0, tzOf(P.first)).dn));" in _html
+      and "link.searchParams.set('day', new Date(L0.dn * 864e5).toISOString().slice(0, 10));" in _html,
+      "the shared plan or the calendar link no longer carries the departure day")
+check(re.search(r"(?m)^  C\.events = C\.events\.filter\(e => e\.end > now\);\n  if \(!C\.events\.length\) \{ toast\(", _html) is not None,
+      "Add to calendar can save stops that are already over again (B02; the iOS bridge took them silently)")
+check("const keys = (chainQuery() ? chainKeysOn(m) : foodKeys(m)).filter(x => !closedWhy(x, bat));" in _html
+      and "t = day && near(new Set([...RR_STORE].filter(k => !closedWhy(k, wat))), 250);" in _html
+      and "return why.length ? `<div class=\"bshut\" role=\"note\">" in _html,
+      "breaks, meals or the restroom rule ignore the usual closures, or an empty plan no longer says why")
 # Port-split listings of one site are one stop (2026-11-11): a route through Los Angeles opened on
 # four "City_Of_Vernon 1850 E25Th-..." rows. build_data.merge_ports() merges them (stalls add up);
 # no two listings in data.js may still match its rule.
@@ -2281,7 +2335,7 @@ check("kids: 0 };" in _html[_html.index("const FDEF = {"):_html.index("const FDE
       and re.search(r"(?m)^if \(q\.get\('kids'\)\) F\.kids = 1;$", _html) is not None
       and '<button class="ftog" data-f="kids">' in _html and "kids: () => 'Good for kids'" in _html,
       "Good for kids is not a saved filter, a toggle in Filters and a link parameter (FDEF, ftog, kids=1)")
-check("const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);" in _SIG
+check("const w = stopWhen(s), items = [closedSig(s, w), restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);" in _SIG
       and "const K = kidsSig(s); if (K) bits.push(K.tag);" in _SIG,
       "the playground is gone from the stop card or the breaks")
 if _node and _SIG:

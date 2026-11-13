@@ -181,7 +181,30 @@ const CASES = [
         && / min from a \d+ kW charger$/.test(l)) ? '' : `stop lines ${JSON.stringify(r.share && r.share.lines)} vs ${JSON.stringify(r.stops.map(s => s.clock + ' ' + s.label))}`,
     r => r.share && r.share.lines[r.share.lines.length - 1] === 'arrive ~' + r.arrive.replace(/^arrive ~/, '') ? '' : `last line "${r.share && r.share.lines.slice(-1)}" (card: ${r.arrive})`,
     r => r.share && r.share.url === 'https://chargeandchew.com/trip/los-angeles-to-las-vegas/?ref=share' ? '' : `link ${r.share && r.share.url}`],
-    { share: true }],
+    { share: true, at: '2026-11-12T06:00:00-08:00' }],
+  /* B02: a leaving time already past today is the NEXT one. The trip pages' leave=0800 opened at
+     3 pm planned this morning, and Add to calendar put both stops hours in the past. Now: the day
+     picker says Tomorrow, the share text says so, and every calendar event is tomorrow's. */
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.day === '2026-11-13' && r.dayText === 'Tomorrow' && r.sel === '480' ? '' : `picker ${r.dayText} (${r.day}) ${r.sel} for leave=0800 at 3 pm (want Tomorrow, 8:00)`,
+    r => r.share && /^LA → Las Vegas · leaving tomorrow 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}" at 3 pm`,
+    r => { const d = r.cal && r.cal.ics ? r.cal.ics.split('\r\n').filter(l => l.startsWith('DTSTART')) : [];
+      return d.length === 2 && d.every(l => /^DTSTART:20261113T/.test(l)) ? '' : `calendar ${JSON.stringify(d)} (want two stops on Nov 13, tomorrow)`; },
+    r => r.cal && /day=2026-11-13/.test(r.cal.ics.replace(/\r\n /g, '')) ? '' : 'the calendar link does not carry day=2026-11-13'],
+    { link: true, share: true, cal: true, at: '2026-11-12T15:00:00-08:00' }],
+  /* A picked day: Thanksgiving. Chick-fil-A (closed on Thanksgiving Day and every Sunday) is never
+     a stop then; asked for alone on a Sunday, the plan says why it is empty. */
+  ['Atlanta, GA', 'Orlando, FL', 540, 'America/New_York', [
+    r => r.day === '2026-11-26' && r.dayText === 'Thanksgiving' ? '' : `picker ${r.dayText} (${r.day}) (want Thanksgiving)`,
+    r => r.stops.length >= 2 && r.stops.every(s => s.chain !== 'Chick-fil-A') ? '' : `stops ${r.stops.map(s => s.chain)} on Thanksgiving`,
+    r => /[?&]day=2026-11-26(&|$)/.test(r.url) ? '' : `url ${r.url} lost day=`],
+    { link: true, extra: '&day=2026-11-26', at: '2026-11-13T09:00:00-05:00' }],
+  ['Atlanta, GA', 'Orlando, FL', 540, 'America/New_York', [
+    r => r.stops.length >= 2 && r.stops.filter(s => s.chain === 'Chick-fil-A').length >= 2 ? '' : `stops ${r.stops.map(s => s.chain)} (want Chick-fil-A on a Saturday)`],
+    { link: true, extra: '&chain=Chick-fil-A&day=2026-11-14', at: '2026-11-13T09:00:00-05:00' }],
+  ['Atlanta, GA', 'Orlando, FL', 540, 'America/New_York', [
+    r => r.stops.length === 0 && /Chick-fil-A restaurants are closed on Sundays\. No stop for it on Sun, Nov 15\./.test(r.shut) ? '' : `stops ${r.stops.map(s => s.chain)}, note "${r.shut}" (want none, and why, on a Sunday)`],
+    { link: true, extra: '&chain=Chick-fil-A&day=2026-11-15', at: '2026-11-13T09:00:00-05:00' }],
   ['Los Angeles, CA', 'Bakersfield, CA', null, 'America/Los_Angeles', [
     r => r.share && /^LA → Bakersfield · leaving tomorrow 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}" at 10:30 pm`,
     r => r.share && /[?&]leave=0800(&|$)/.test(r.share.url) && /[?&]ref=share(&|$)/.test(r.share.url) && /[?&]from=/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app, leaving 8:00, ref=share)`],
@@ -285,7 +308,10 @@ const READ = `(() => {
   const card = document.querySelector('.breaks');
   if (!card) return null;
   return { title: card.querySelector('.bh').firstChild.textContent.trim(),
-    arrive: (card.querySelector('.bleave > span') || {}).textContent || '',
+    arrive: (card.querySelector('.bleave > span:last-child') || {}).textContent || '',
+    // The departure day (B02): the day picker beside the hour, and the note when a chain is shut that day.
+    day: (document.getElementById('leaveDaySel') || {}).value, dayText: ((document.querySelector('#leaveDaySel option:checked') || {}).textContent || ''),
+    shut: (card.querySelector('.bshut') || {}).textContent || '',
     url: location.search, sum: (document.querySelector('#routeInfo .sum b') || {}).textContent || '', sel: document.getElementById('leaveSel').value, opts: document.getElementById('leaveSel').options.length,
     first: document.getElementById('leaveSel').options[0].value,
     mlabel: (document.querySelector('#leaveSel option[value="m"]') || {}).textContent || '',
@@ -437,7 +463,7 @@ async function main() {
         class D extends RD { constructor(...a) { if (a.length) super(...a); else super(RD.now() + off); } static now() { return RD.now() + off; } }
         window.Date = D; })();` });
       const lv = opt && opt.link ? (leave === 'now' ? '&leave=now' : `&leave=${String(Math.floor(leave / 60)).padStart(2, '0')}${String(leave % 60).padStart(2, '0')}`) : '';
-      await send('Page.navigate', { url: `http://127.0.0.1:${port}/?nosw=1&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}${lv}` });
+      await send('Page.navigate', { url: `http://127.0.0.1:${port}/?nosw=1&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}${lv}${(opt && opt.extra) || ''}` });
       for (let i = 0; i < 120; i++) { await sleep(500); if (await ev(`!!document.getElementById('leaveSel')`)) break; }
       if (!lv && leave !== null) await ev(`(() => { const s = document.getElementById('leaveSel'); if (!s) return; s.value = ${JSON.stringify(String(leave))}; s.dispatchEvent(new Event('change')); })()`);
       await sleep(400);

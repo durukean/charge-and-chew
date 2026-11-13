@@ -707,6 +707,9 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk.gap .bt span{white-space:normal}
 .bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:12.5px;color:var(--dim)}
 .bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
+.bleave{flex-wrap:wrap;row-gap:4px}
+.bshut{margin:0 0 8px;padding:8px 10px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:12.5px;line-height:1.4}
+.bleave .bl{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0}
 /* Add to calendar: under the plan, and on the card of a stop that is on it. */
 .bcal{margin-top:2px;padding:10px 0 6px;border-top:1px solid var(--line)}
 .calbtn{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;border-radius:999px;
@@ -1282,7 +1285,7 @@ if (document.documentElement.classList.contains('car')) {
         <form class="heroform" id="heroForm" autocomplete="off">
           <label class="hf"><span>From</span><input id="heroFrom" type="text" placeholder="City or address" enterkeyhint="next" autocorrect="off" autocapitalize="words" spellcheck="false"></label>
           <label class="hf"><span>To</span><input id="heroTo" type="text" placeholder="Where are you going?" enterkeyhint="go" autocorrect="off" autocapitalize="words" spellcheck="false"></label>
-          <div class="hfrow"><label class="hleave">Leaving <select id="heroLeave"></select></label><button type="submit" id="heroGo">Plan the drive</button></div>
+          <div class="hfrow"><label class="hleave"><span>Leaving</span> <select id="heroDay" aria-label="Leaving day"></select><select id="heroLeave" aria-label="Leaving time"></select></label><button type="submit" id="heroGo">Plan the drive</button></div>
         </form>
         <div class="heroex" id="heroEx" hidden></div>
         <div class="herosep" aria-hidden="true"><span>or find chargers near a favourite</span></div>
@@ -3072,8 +3075,17 @@ function renderList(vis) {
   /* render() rebuilds the list, select included: put focus back on the new one, or keyboard and
      VoiceOver users are dropped at the top of the page after every change. */
   if (ls) ls.onchange = () => {
-    leavePick = ls.value === '' ? 'now' : ls.value === 'm' ? 'm' : +ls.value; track('break-leave', ls.value || 'now'); render(); syncUrl();
+    leavePick = ls.value === '' ? 'now' : ls.value === 'm' ? 'm' : +ls.value; track('break-leave', ls.value || 'now');
+    if (typeof leavePick !== 'number') leaveDay = null;          // now, or the coming morning: no other day
+    render(); syncUrl();
     const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });
+  };
+  const ds = $('leaveDaySel');
+  if (ds) ds.onchange = () => {
+    const vis = lastPlan && lastPlan.first;
+    pickDay(ds.value, vis || null); track('break-day', ds.selectedIndex > 1 ? 'later' : ds.value ? 'tomorrow' : 'today');
+    render(); syncUrl();
+    const n = $('leaveDaySel'); if (n) n.focus({ preventScroll: true });
   };
   $('list').querySelectorAll('.row').forEach(r => {
     r.onclick = e => {
@@ -6528,11 +6540,57 @@ const nightPlan = (nowMin, driveMin) => nowMin < NIGHT_TO || (nowMin >= NIGHT_FR
 const startMin = first => first ? localAt(Date.now(), tzOf(first)).min : (d => d.getHours() * 60 + d.getMinutes())(new Date());
 const morningOf = first => [MORNING, startMin(first) >= 12 * 60 ? 1 : 0];
 const nightNow = first => nightPlan(startMin(first), route ? route.hr * 60 : 0);
+/* The departure DAY (B02). A leaving time used to be today's, always: a trip page's
+   leave=0800 opened at 3 pm planned this morning, and Add to calendar put the stops five hours
+   in the past; nobody could plan Wednesday the 25th. leaveDay is null (today, or the next such
+   time) or a 'YYYY-MM-DD' date where the drive starts, picked beside the hour or given by a
+   link's day=. A time already past today means the next one, tomorrow, and the day picker says
+   so. */
+let leaveDay = null;
+const DAY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
+const dnOfIso = d => { const m = DAY_RE.exec(d || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5 : NaN; };
+const isoOfDn = dn => new Date(dn * 864e5).toISOString().slice(0, 10);
+const todayDn = first => first ? localAt(Date.now(), tzOf(first)).dn
+  : (d => Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5)(new Date());
+const DAY_MAX = 60, ROLL_GRACE = 30;
+// Days from today to the picked day where the drive starts (0: today, or no day / a past one).
+function dayAhead(first) { const n = dnOfIso(leaveDay) - todayDn(first); return n > 0 && n <= DAY_MAX ? n : 0; }
 function leaveOf(first) {
   if (leavePick === 'now') return null;
   if (leavePick === 'm') return morningOf(first);
-  if (leavePick !== null) return [leavePick, 0];
+  if (leavePick !== null) {
+    const ahead = dayAhead(first);
+    if (ahead) return [leavePick, ahead];
+    // More than half an hour gone today: the next one. Within it, you are just running late.
+    return [leavePick, leavePick < startMin(first) - ROLL_GRACE ? 1 : 0];
+  }
   return nightNow(first) ? morningOf(first) : null;
+}
+/* "leaving tomorrow 8:00 am", "leaving Wed, Nov 25, 7:00 am": the words before a leaving clock. */
+const leaveDayWords = (L, first) => !L || !L[1] ? '' : L[1] === 1 ? 'tomorrow ' : dayLabel(todayDn(first) + L[1]) + ', ';
+/* The day picker: today, tomorrow and the next two weeks; while Thanksgiving is less than a month
+   away, through the Sunday after it, so the holiday week is one scroll away. */
+function dayOptions(first, L) {
+  const t = todayDn(first), sel = L ? L[1] : 0;
+  let last = 14;
+  for (let i = 0; i <= 30; i++) if (isThanksgiving(t + i)) last = Math.max(last, i + 3);
+  last = Math.max(last, sel);
+  let out = '';
+  for (let i = 0; i <= last; i++)
+    out += `<option value="${i ? isoOfDn(t + i) : ''}"${i === sel ? ' selected' : ''}>${i === 0 ? 'Today' : i === 1 ? 'Tomorrow'
+      : isThanksgiving(t + i) ? 'Thanksgiving' : dayLabel(t + i)}</option>`;
+  return out;
+}
+/* A day picked beside the hour: today drops a time already gone (it would mean tomorrow) and the
+   night default; another day keeps a picked hour, else leaves at 8 am. */
+function pickDay(v, first) {
+  if (!v) {
+    leaveDay = null;
+    if (typeof leavePick !== 'number' || leavePick < startMin(first) - ROLL_GRACE) leavePick = 'now';
+  } else {
+    leaveDay = v;
+    if (typeof leavePick !== 'number') leavePick = MORNING;
+  }
 }
 // The first and last stops on the drive, for its start and end time zones.
 function routeEnds(vis) {
@@ -6549,7 +6607,9 @@ function routeEnds(vis) {
 function departMs(first) {
   const now = Date.now(), L = first ? leaveOf(first) : null;
   if (!L) return now;
-  return now + (L[0] + L[1] * 1440 - localAt(now, tzOf(first)).min) * 60000;
+  /* From the start of this minute: from "now" with its seconds, 8:00 am was 8:00:47 and a stop
+     at 10:07:30 printed 10:05 or 10:10 depending on when the page was opened. */
+  return now - now % 60000 + (L[0] + L[1] * 1440 - localAt(now, tzOf(first)).min) * 60000;
 }
 /* The time zone at a stop: its state's, with the states that are split cut by longitude. */
 const ST_TZ = { CA: 'Los_Angeles', NV: 'Los_Angeles', OR: 'Los_Angeles', WA: 'Los_Angeles', AZ: 'Phoenix',
@@ -6621,6 +6681,24 @@ const dwellOf = p => p.meal ? DWELL_MEAL : DWELL_BREAK;
 /* Between 10 pm and 6 am a break goes to a 24-hour site or one of these, most of them open
    late or all night: LA -> New York leaving at 9 pm stopped at Starbucks at 2:35 am. */
 const LATE = new Set(["McDonald's", 'Taco Bell', 'Jack in the Box', "Denny's", 'Waffle House', 'Whataburger', 'IHOP']);
+const WDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const dayLabel = dn => { const d = new Date(dn * 864e5); return WDAY[d.getUTCDay()] + ', ' + MON[d.getUTCMonth()] + ' ' + d.getUTCDate(); };
+// Thanksgiving Day: the fourth Thursday of November.
+const isThanksgiving = dn => { const d = new Date(dn * 864e5); return d.getUTCMonth() === 10 && d.getUTCDay() === 4 && d.getUTCDate() >= 22 && d.getUTCDate() <= 28; };
+/* Usually closed (B02), worded that way and never certain: a stop's chain on the one day it
+   is known to shut. Only chains in the data with a long-standing, announced policy; any we were
+   unsure of are left out. Judged at the stop's own date, at the plan's arrival (else now). */
+const CLOSED_THANKSGIVING = new Set(['Chick-fil-A', 'Costco', 'Target', 'Walmart', "Sam's Club", "Trader Joe's", 'Aldi',
+  'Best Buy', 'Home Depot', "Lowe's", 'Publix']);
+const CLOSED_SUNDAY = new Set(['Chick-fil-A']);
+function closedWhy(k, at) {
+  if (!at) return '';
+  if (CLOSED_SUNDAY.has(k) && at.wd === 0) return k + ' restaurants are closed on Sundays.';
+  if (CLOSED_THANKSGIVING.has(k) && isThanksgiving(at.dn)) return k + ' usually closes on Thanksgiving Day.';
+  return '';
+}
+if (typeof window !== 'undefined') window.__closedWhy = closedWhy;   // exercised by verify.py
 
 /* ───────── stop signals ─────────
    Small facts about a stop beyond its chains, each with the reason behind it, and each said
@@ -6654,6 +6732,7 @@ function lateFoods(s) {
 }
 const hasFood = s => Object.keys(MATCH[s.id] || {}).some(k => BRANDS[k] && BRANDS[k].cat === 'food');
 const SIG_ICON = {
+  shut: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>',
   wc: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v7M8.5 10.5h7M12 15l-3 6M12 15l3 6"/></svg>',
   kids: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 7 4h10l4 17M10 4v9M14 4v9M9 13h6"/></svg>',
   late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
@@ -6709,7 +6788,9 @@ function restroomSig(s, w) {
   t = near(RR_24, 150);
   if (t) return sig(nextDoor(t[0], t[1]), 'It is usually open 24 hours, with restrooms for customers.');
   const day = w.min >= 6 * 60 && w.min < 22 * 60;
-  t = day && near(RR_STORE, 250);
+  // Walmart, Target, Costco... close on Thanksgiving Day: no restroom reason that day.
+  const wat = day ? localAt(w.ms, tzOf(s)) : null;
+  t = day && near(new Set([...RR_STORE].filter(k => !closedWhy(k, wat))), 250);
   if (t) return sig(nextDoor(t[0], t[1]), 'Restrooms in store hours (most are open about 6 am to 10 pm).');
   if (s.ml && w.min >= 10 * 60 && w.min < 21 * 60) return sig('the charger is at a shopping mall', 'Restrooms in mall hours.');
   return null;
@@ -6736,9 +6817,21 @@ function rowSigs(s) {
   return out.filter(Boolean).slice(0, 2).join('');
 }
 /* The stop card's line: each item a button whose reason opens under the line. */
+/* The chains a short walk from a stop that usually close on the day you would be there. */
+function closedSig(s, w) {
+  const m = MATCH[s.id] || {}, at = localAt(w.ms, tzOf(s)), why = [], keys = [];
+  for (const k of Object.keys(m)) { const r = BUNDLED_KEYS.has(k) && closedWhy(k, at); if (r) { keys.push(k); why.push(r); } }
+  if (!keys.length) return null;
+  const when = isThanksgiving(at.dn) ? 'Thanksgiving' : 'Sundays';
+  const list = keys.length < 3 ? keys.join(' and ') : keys.slice(0, -1).join(', ') + ' and ' + keys[keys.length - 1];
+  return { kind: 'shut', closed: true, keys, tag: 'closed ' + (when === 'Sundays' ? 'Sunday' : when),
+    label: 'Usually closed ' + when + ': ' + keys.slice(0, 3).join(', ') + (keys.length > 3 ? ' +' + (keys.length - 3) : ''),
+    why: (keys.length === 1 ? why[0] : when === 'Thanksgiving' ? list + ' usually close on Thanksgiving Day.' : list + ' close on Sundays.') +
+      (w.planned ? ' You get here on ' + dayLabel(at.dn) + '.' : '') + ' Hours vary by location: check before you go.' };
+}
 function cardSigs(s) {
   if (s.lvl === 2) return '';
-  const w = stopWhen(s), items = [restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);
+  const w = stopWhen(s), items = [closedSig(s, w), restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);
   if (!items.length) return '';
   return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
 }
@@ -6800,7 +6893,8 @@ function breakPicks(vis) {
         const off = Math.abs(at.min - meal.at);
         if (off > 120 || at.min < meal.at - 45 || had.has(at.day + meal.name) || (end.day === at.day && end.min <= meal.at + 15)) continue;
         const m = MATCH[s.id] || {};
-        const [k, w] = nearestOf(s, mealKeys(m, meal.name), m);
+        // Not a chain usually closed that day (Chick-fil-A on a Sunday): the next nearest, open one.
+        const [k, w] = nearestOf(s, mealKeys(m, meal.name).filter(x => !closedWhy(x, at)), m);
         if (!k) continue;
         // Near the hour, then a short walk, then power in 50 kW steps (150 vs 175 kW should not
         // beat 20 minutes closer to noon), then closer still, then the shorter walk.
@@ -6831,10 +6925,10 @@ function breakPicks(vis) {
          put Vernon, the one dinner stop, 59 minutes on, and the drive had no dinner. And, like
          a meal, not in the last half hour. */
       if ((mi - last) * perMin < BREAK_MIN * 0.6 || (to - mi) * perMin < (next ? 60 : 30)) continue;
-      const m = MATCH[s.id] || {}, keys = chainQuery() ? chainKeysOn(m) : foodKeys(m);
+      const m = MATCH[s.id] || {}, ms = t0 + (mi * perMin + extra) * 60000, bat = localAt(ms, tzOf(s)), hm = bat.min;
+      const keys = (chainQuery() ? chainKeysOn(m) : foodKeys(m)).filter(x => !closedWhy(x, bat));
       let [k, w] = nearestOf(s, keys, m), shut = 0;
       if (!k) continue;                                       // a break means somewhere to eat
-      const ms = t0 + (mi * perMin + extra) * 60000, hm = localAt(ms, tzOf(s)).min;
       if (hm >= 22 * 60 || hm < 6 * 60) {                     // a late chain, else a 24-hour site
         const [lk, lw] = nearestOf(s, keys.filter(x => LATE.has(x)), m);
         if (lk) { k = lk; w = lw; } else shut = s.h24 ? 1 : 2;
@@ -6966,8 +7060,15 @@ function breaksCard(vis) {
   // The plan, taken along: every stop on it as a calendar event (see addToCalendar).
   const cal = picks.length && calOk() ? `<div class="bcal"><button type="button" class="calbtn" data-cal="all"
       aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}Add ${picks.length === 1 ? 'the stop' : picks.length + ' stops'} to calendar</button></div>` : '';
-  return `<div class="breaks"><h2 class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</h2>
-    <div class="bleave"><label>Leaving <select id="leaveSel">${opts}</select></label>
+  /* A chain you asked for that is shut on the day you leave (Chick-fil-A on a Sunday) leaves the
+     plan empty: say why, rather than an empty card. */
+  const shutNote = (() => {
+    if (picks.length || !active.size) return '';
+    const at = localAt(t0, tzOf(first)), why = [...active].map(k => closedWhy(k, at)).filter(Boolean);
+    return why.length ? `<div class="bshut" role="note">${esc(why.join(' '))} No stop for it on ${esc(dayLabel(at.dn))}.</div>` : '';
+  })();
+  return `<div class="breaks"><h2 class="bh">${picks.length ? 'Suggested breaks' : 'Your drive'}${sub ? ` <small>${sub}</small>` : ''}</h2>${shutNote}
+    <div class="bleave"><span class="bl"><label for="leaveDaySel">Leaving</label> <select id="leaveDaySel" aria-label="Leaving day">${dayOptions(first, leaveOf(first))}</select><select id="leaveSel" aria-label="Leaving time">${opts}</select></span>
       <span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + cal + '</div>';
 }
 
@@ -7066,6 +7167,8 @@ function syncUrl() {
      "now" picked at night is kept, or a reload would bring the morning back. */
   route && !route.hwy && typeof leavePick === 'number' ? p.set('leave', hhmm(leavePick))
     : route && !route.hwy && leavePick === 'now' ? p.set('leave', 'now') : p.delete('leave');
+  // A picked day goes with its time (day=2026-11-25); without one, leave= is the next such time.
+  route && !route.hwy && typeof leavePick === 'number' && leaveDay ? p.set('day', leaveDay) : p.delete('day');
   history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
 }
 /* A drive is shared as its plan, the way road trips are planned: in a group chat.
@@ -7084,7 +7187,7 @@ function sharePlan() {
     return clockLabel(l.min) + (n === 1 ? ' (next day)' : n > 1 ? ` (day ${n + 1})` : ''); };
   const a = tripEnd($('fromIn').value, P.first), b = tripEnd($('toIn').value, P.last);
   const L = leaveOf(P.first), start = localAt(P.t0, tzOf(P.first)).min;
-  const lines = [`${shortCity(a)} → ${shortCity(b)} · leaving ${L && L[1] ? 'tomorrow ' : ''}${clockLabel(start)}`];
+  const lines = [`${shortCity(a)} → ${shortCity(b)} · leaving ${leaveDayWords(L, P.first)}${clockLabel(start)}`];
   for (const p of P.picks) lines.push(`${at(p.ms, p.s)} ${(p.meal || 'break').toLowerCase()} in ${p.s.city}: ` +
     (p.k ? `${p.k} ${walkMin(p.walk)} min${acrossHwy(p.s, p.k) ? ' (across the highway)' : ''} from a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger` : `a ${p.s.kw ? p.s.kw + ' kW ' : ''}charger`));
   lines.push(`arrive ~${at(P.arrive, P.last)}`);
@@ -7096,6 +7199,8 @@ function sharePlan() {
     // The default leaving time is not in the address bar (it is worked out on opening); a plan
     // that says "leaving 8:00 am" must open leaving 8:00 am.
     if (L && !u.searchParams.get('leave')) u.searchParams.set('leave', hhmm(start));
+    // The day too: a friend opening "Wednesday 7 am" on Monday must see Wednesday's plan.
+    if (L && L[1]) u.searchParams.set('day', isoOfDn(localAt(P.t0, tzOf(P.first)).dn));
     u.searchParams.set('ref', 'share');
     url = u.href;
   }
@@ -7179,7 +7284,7 @@ function calEvents(onlyId) {
   const L0 = localAt(P.t0, tzOf(P.first)), day = new Date(L0.dn * 864e5).toISOString().slice(0, 10).replace(/-/g, '');
   // Back to this drive with this leaving time (the default one is not in the address bar).
   const link = new URL(shareUrl());
-  link.searchParams.set('leave', hhmm(L0.min)); link.searchParams.set('ref', 'cal');
+  link.searchParams.set('leave', hhmm(L0.min)); link.searchParams.set('day', new Date(L0.dn * 864e5).toISOString().slice(0, 10)); link.searchParams.set('ref', 'cal');
   link.searchParams.delete('nosw'); link.searchParams.delete('src');
   const events = [];
   for (const p of P.picks) {
@@ -7218,7 +7323,13 @@ function addToCalendar(onlyId) {
   syncUrl();
   const C = calEvents(onlyId);
   if (!C) { toast(onlyId == null ? 'Plan a drive first: its stops go into your calendar' : 'That stop is no longer on the plan'); return; }
-  const n = C.events.length, ics = icsFile(C.events, Date.now());
+  /* Never a stop already over (B02): a plan leaving this morning, opened in the afternoon, put
+     its stops hours in the past, and the app's calendar took them without a word. */
+  const now = Date.now(), past = C.events.filter(e => e.end <= now).length;
+  C.events = C.events.filter(e => e.end > now);
+  if (!C.events.length) { toast((onlyId == null ? 'Those stops are' : 'That stop is') + ' already in the past: pick a later leaving time'); return; }
+  const n = C.events.length, ics = icsFile(C.events, now);
+  if (past) setTimeout(() => toast(`${past === 1 ? '1 stop is' : past + ' stops are'} already past and left out`), NATIVE ? 0 : 3200);
   track('calendar', onlyId == null ? 'trip' : 'stop');
   if (NATIVE) { native('calendar', { mode: onlyId == null ? 'trip' : 'stop', name: C.name, ics, events: C.events }); return; }
   const href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
@@ -7239,7 +7350,9 @@ function planLine(s) {
   let p = null; for (const x of P.picks) if (x.s.id === s.id) p = x;
   if (!p) return '';
   const at = localAt(p.ms, tzOf(s)), n = at.dn - localAt(P.t0, tzOf(P.first)).dn;
-  return `<div class="pp-plan"><span><b>${p.meal || 'Break'}</b> on your plan · <i>~${clockLabel(at.min)}${n === 1 ? ', next day' : n > 1 ? ', day ' + (n + 1) : ''}</i></span>` +
+  // Not today: say which day ("~12:30 pm, Wed, Nov 25"), not "next day" of a day it never names.
+  const notToday = at.dn !== localAt(Date.now(), tzOf(s)).dn;
+  return `<div class="pp-plan"><span><b>${p.meal || 'Break'}</b> on your plan · <i>~${clockLabel(at.min)}${notToday ? ', ' + dayLabel(at.dn) : n === 1 ? ', next day' : n > 1 ? ', day ' + (n + 1) : ''}</i></span>` +
     `<button type="button" class="pp-cal" data-cal="${s.id}" aria-label="Add this ${(p.meal || 'break').toLowerCase()} stop to your calendar">${CAL_ICON}Add to calendar</button></div>`;
 }
 
@@ -7396,6 +7509,12 @@ function showHero() {
     (night ? `<option value="m" selected>${morningLabel(null)}</option>` : '') +
     Array.from({ length: 24 }, (_, i) => `<option value="${i * 60}">${clockLabel(i * 60)}</option>`).join('');
   sel.dataset.def = sel.value;
+  // The day beside it (B02): today unless it is the coming morning at night.
+  const day = $('heroDay');
+  day.innerHTML = dayOptions(null, L);
+  day.dataset.def = day.value;
+  sel.onchange = () => { if (sel.value === '' || sel.value === 'm') day.value = ''; };
+  day.onchange = () => { if (day.value && (sel.value === '' || sel.value === 'm')) sel.value = String(MORNING); };
   $('heroEx').innerHTML = '<small>Or try a drive</small>' + HERO_TRIPS.map(([a, b, name], i) =>
     `<button type="button" data-ex="${i}" aria-label="Plan ${esc(a)} to ${esc(b)}">${esc(name)}</button>`).join('');
   $('heroEx').querySelectorAll('[data-ex]').forEach(b => b.onclick = () => {
@@ -7409,6 +7528,8 @@ function heroPlan(f, t, how) {
   const ls = $('heroLeave');
   // Picked on the card: that time. Left alone: the default, worked out at the drive's start.
   if (ls.value !== ls.dataset.def) leavePick = ls.value === '' ? 'now' : ls.value === 'm' ? 'm' : +ls.value;
+  const hd = $('heroDay');
+  if (hd.value !== hd.dataset.def) pickDay(hd.value, null);
   hideHero(); track('hero-plan', how);
   $('fromIn').value = f || `${lastMe.lat.toFixed(3)}, ${lastMe.lon.toFixed(3)}`;
   routeFromMe = !f;
@@ -7550,7 +7671,7 @@ if (['food', 'store'].includes(q.get('any'))) anyCat = q.get('any');
    used to be merged in, so they could see fewer stops than the sender did. Nothing is saved
    here: their own preferences come back on their next plain visit. */
 const VIEW_KEYS = ['chain', 'any', 'at', 'stop', 'from', 'hwy', 'state', 'poi', 'q', 'net', 'netpick', 'plug', 'l2',
-                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr', 'kids', 'leave'];
+                   'minkw', 'minstalls', 'h24', 'free', 'noiso', 'nodlr', 'kids', 'leave', 'day'];
 if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF); netFilter = 'all'; netPick = null; }
 if (['tesla', 'other'].includes(q.get('net'))) netFilter = q.get('net');
 if (q.get('netpick') && SITES.some(s => s.net === q.get('netpick'))) {
@@ -7582,6 +7703,9 @@ if (q.get('c')) {
 const leaveQ = (q.get('leave') || '').match(/^([01]\d|2[0-3])([0-5]\d)$/);   // ?leave=0700, written by syncUrl
 if (leaveQ) leavePick = +leaveQ[1] * 60 + +leaveQ[2];
 else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time beats the night default
+// ?day=2026-11-25: that day (where the drive starts), at the link's time or 8 am. A day already
+// past is dropped and the time means the next one.
+if (DAY_RE.test(q.get('day') || '') && leavePick !== 'now') { leaveDay = q.get('day'); if (typeof leavePick !== 'number') leavePick = MORNING; }
 booting = false;
 render();
 
