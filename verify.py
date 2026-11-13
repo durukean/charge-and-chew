@@ -1852,6 +1852,13 @@ check(_live("const FIRST_RUN = (() => { for (let i = 0; i < localStorage.length;
       and _live("$('planRowX').onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row', 'hide'); render(); };")
       and _live("if (route && planRowOn()) localStorage.setItem('cc_planrow', '0');"),
       "a located first visit no longer gets the 'Plan a drive' row (or it is never dismissed)")
+# Batch B: a drive typed with its day and time. verify_search.py checks what parseTrip reads
+# (when = day@minutes); search_audit (full) checks the plan's link; this pins the wiring.
+check(_live("const w = tripWhen(t);")
+      and _live("if (r) { if (w.when) r.when = w.when; return r; }")
+      and _live("if (trip.when) { applyWhen(trip.when); track('search-trip-when', trip.when.day || 'time'); }")
+      and _live("if (ahead) { leaveDay = isoOfDn(t + ahead); leavePick = w.min != null ? w.min : MORNING; }"),
+      "a drive typed with a day and time no longer plans that leaving day and time")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app

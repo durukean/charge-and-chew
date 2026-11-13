@@ -304,7 +304,28 @@ const CASES = [
   C('LA', 'fresh', 'buc-ees in texas', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'pharmacy in denver', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('denied', 'fresh', 'starbucks', { clear: true, nochain: true }, '@clear'),
+  /* A drive typed with its day and time (batch B): the holiday words are not places, and the day
+     and time become the leaving day and time in the plan (and its link). "thanksgiving drive la
+     to sf" found nothing. */
+  C('LA', 'fresh', 'thanksgiving drive la to sf', { route: true, ...whenUrl('tg', null) }, '@when'),
+  C('LA', 'fresh', 'la to sf for thanksgiving', { route: true, ...whenUrl('tg', null) }, '@when'),
+  C('LA', 'fresh', 'LA to Vegas wednesday 7am', { route: true, ...whenUrl(3, 420) }, '@when'),
+  C('LA', 'fresh', 'road trip la to vegas tomorrow at 6 am', { route: true, ...whenUrl('tomorrow', 360) }, '@when'),
 ];
+/* What the address bar should say for a drive typed with a day and time, from today in LA: the
+   next such weekday (today when it is today), Thanksgiving while it is within 60 days. */
+function whenUrl(day, min) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: 'numeric', day: 'numeric' })
+    .formatToParts(new Date()).map(x => [x.type, x.value]));
+  const t = Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5;
+  let ahead = null;
+  if (day === 'tomorrow') ahead = 1;
+  else if (typeof day === 'number') ahead = (day - new Date(t * 864e5).getUTCDay() + 7) % 7;
+  else for (let i = 0; i <= 60; i++) { const d = new Date((t + i) * 864e5); if (d.getUTCMonth() === 10 && d.getUTCDay() === 4 && d.getUTCDate() >= 22) { ahead = i; break; } }
+  const hhmm = m => String(Math.floor(m / 60)).padStart(2, '0') + String(m % 60).padStart(2, '0');
+  if (!ahead) return { urlHas: min != null ? ['leave=' + hhmm(min)] : [], urlNot: ['day='] };
+  return { urlHas: ['day=' + new Date((t + ahead) * 864e5).toISOString().slice(0, 10), 'leave=' + hhmm(min == null ? 480 : min)], urlNot: [] };
+}
 
 const QUICK_SET = new Set([
   'LA|fresh|in n out', 'LA|fresh|ihops', 'LA|fresh|walmat', 'LA|fresh|tacos',
@@ -471,6 +492,8 @@ async function main() {
       if (x.toast && !(res.toast || '').includes(x.toast)) why.push(`wanted a toast with "${x.toast}", got "${res.toast}"`);
       if (x.title && !(res.title || '').includes(x.title)) why.push(`wanted the title "${x.title}", got "${res.title}"`);
       if (x.cleanurl && /[?&](chain|poi|any)=/.test(res.url)) why.push(`the URL keeps the last search: ${res.url}`);
+      for (const h of x.urlHas || []) if (!res.url.includes(h)) why.push(`the URL lacks ${h}: ${res.url}`);
+      for (const h of x.urlNot || []) if (res.url.includes(h)) why.push(`the URL has ${h}: ${res.url}`);
     }
     const tag = `${c.who.padEnd(6)} ${c.prior.padEnd(10)} ${JSON.stringify(c.q)}`;
     if (why.length) { fails.push({ c, why, res }); console.log(`FAIL  ${tag}\n        ${why.join('; ')}\n        title: ${res && res.title} | toast: ${res && res.toast}`); }

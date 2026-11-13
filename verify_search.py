@@ -433,6 +433,27 @@ CASES = [
     # A chain we precompute must not be hijacked into a live category lookup.
     ("ihop",                 dict(chains=["IHOP"])),
     ("starbucks",            dict(chains=["Starbucks"])),
+    # ── Batch B: a drive typed with its day and time (the week before Thanksgiving). The holiday
+    #    and trip words are not places, and the day and time are the leaving day and time
+    #    (when = "<day>@<minutes>"). "thanksgiving drive la to sf" found nothing at all.
+    ("thanksgiving drive la to sf",       dict(trip="Los Angeles, CA|San Francisco, CA", when="tg@")),
+    ("la to sf for thanksgiving",         dict(trip="Los Angeles, CA|San Francisco, CA", when="tg@", filter="")),
+    ("LA to Vegas wednesday 7am",         dict(trip="Los Angeles, CA|Las Vegas, NV", when="wd3@420", filter="")),
+    ("wednesday 7am la to vegas",         dict(trip="Los Angeles, CA|Las Vegas, NV", when="wd3@420")),
+    ("road trip la to sf",                dict(trip="Los Angeles, CA|San Francisco, CA", when=None)),
+    ("holiday road trip denver to moab",  dict(trip="Denver|Moab", when=None)),
+    ("la to sf tomorrow at 6:30 am",      dict(trip="Los Angeles, CA|San Francisco, CA", when="tomorrow@390")),
+    ("la to vegas leaving 7",             dict(trip="Los Angeles, CA|Las Vegas, NV", when="@420")),
+    ("la to vegas leaving at 3",          dict(trip="Los Angeles, CA|Las Vegas, NV", when="@900")),   # 3 pm, not 3 am
+    ("la to vegas on friday",             dict(trip="Los Angeles, CA|Las Vegas, NV", when="wd5@")),
+    ("la to sf the day before thanksgiving", dict(trip="Los Angeles, CA|San Francisco, CA", when="tg-1@")),
+    ("sf to la sunday after thanksgiving", dict(trip="San Francisco, CA|Los Angeles, CA", when="tg+3@")),
+    ("la to vegas tomorrow morning with in n out", dict(trip="Los Angeles, CA|Las Vegas, NV", when="tomorrow@480", chains=["In-N-Out"])),
+    ("on my way to vegas tomorrow",       dict(trip="|Las Vegas, NV", when="tomorrow@")),
+    # ...and names that only look like it stay places.
+    ("seattle to friday harbor",          dict(trip="Seattle|Friday Harbor", when=None)),
+    ("la to vegas",                       dict(when=None)),
+    ("thanksgiving",                      dict(trip=None)),
 ]
 
 
@@ -473,6 +494,7 @@ window.__ready = function () {{
               anyCat: pq.anyCat == null ? null : pq.anyCat,
               trip: tp ? tp.from + '|' + tp.to : null,
               filter: tp ? tp.filter : null,
+              when: tp && tp.when ? (tp.when.day || '') + '@' + (tp.when.min == null ? '' : tp.when.min) : null,
               poi: poi ? poi.tags.join('+') : null,
               poiLabel: poi ? poi.label : null,
               station: (function (s) {{ return s ? s.name + '|' + s.town : null; }})(window.__stationAsked(qs[i], p.place))}});
