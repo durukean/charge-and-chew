@@ -1683,6 +1683,15 @@ const cleanFilters = f => {
   return o;
 };
 let F = cleanFilters(Object.assign({}, FDEF, readJSON('cc_filters', {}, isPlainObj)));
+/* What is SAVED, apart from what is on screen (B06). A shared link opens with the defaults plus
+   its own filters (VIEW_KEYS); writing the whole of F whenever a filter was touched then put the
+   link's filters over yours ("Good for kids" x wiped a saved CCS + 24h). Only the filter you
+   change is saved, onto what you had. Outside a link view F and savedF are the same. */
+let savedF = Object.assign({}, F);
+function saveFilters(keys) {
+  for (const k of keys) savedF[k] = F[k];
+  localStorage.setItem('cc_filters', JSON.stringify(savedF));
+}
 const activeFilterCount = () => Object.keys(FDEF).filter(k => F[k]).length;
 const FLABEL = { kw: () => F.kw + '+ kW', stalls: () => F.stalls + '+ stalls',
   plug: () => (PLUG_NAME[F.plug] || 'Plug') + ' only',
@@ -1795,13 +1804,14 @@ function clearNarrowing(k) {
   if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg(); renderLegend(); }
   else if (k === 'car') { onlyMine = false; localStorage.setItem('cc_onlymine', '0'); renderCarBar(); }
   else if (k === 'l2') { setL2(false); return; }
-  else if (k.startsWith('f:')) { F[k.slice(2)] = FDEF[k.slice(2)]; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
+  else if (k.startsWith('f:')) { F[k.slice(2)] = FDEF[k.slice(2)]; saveFilters([k.slice(2)]); syncFilterUI(); }
   render(); syncUrl();
 }
 function clearAllNarrowing() {
   netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all');
   onlyMine = false; localStorage.setItem('cc_onlymine', '0');
-  F = Object.assign({}, FDEF); localStorage.setItem('cc_filters', JSON.stringify(F));
+  const was = Object.keys(FDEF).filter(k => F[k] !== FDEF[k]);   // the ones on screen, not the saved ones behind a link
+  F = Object.assign({}, FDEF); saveFilters(was);
   syncNetSeg(); renderCarBar(); syncFilterUI(); render(); syncUrl();
 }
 let favs = new Set(readJSON('cc_favs', [], Array.isArray));
@@ -3669,7 +3679,9 @@ function renderLegend() {
     const k = row.dataset.net;
     netPick = netPick === k ? null : k;
     netFilter = !netPick ? 'all' : /tesla/i.test(k) ? 'tesla' : 'other';
-    localStorage.setItem('cc_net', netFilter);
+    /* Not saved (B05): picking EVgo here saved "Non-Tesla only", and every later plain visit
+       opened with no Tesla stops. One network is a look, kept in the link (netpick=); only the
+       Tesla / Other segment is a standing choice. */
     syncNetSeg(); renderLegend(); render(); syncUrl();
     if (netPick) { track('legend-net', k); $('legend').classList.add('collapsed'); $('legendToggle').setAttribute('aria-expanded', 'false'); }
   });
@@ -4588,12 +4600,12 @@ $('placeIn').addEventListener('keydown', async e => {
     let fChanged = false;
     if (!p.chains.length && !p.anyCat && q0.chains && chainSig() === q0.chains) { active.clear(); anyCat = null; }
     if (!p.net && q0.net && (netPick || netFilter) === q0.net) {
-      netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all'); syncNetSeg();
+      netFilter = 'all'; netPick = null; syncNetSeg();   // the search set it; it was never saved
     }
     if (!p.plug && q0.plug && F.plug === q0.plug) { F.plug = FDEF.plug; fChanged = true; }
     if (!p.kw && q0.kw && F.kw === q0.kw) { F.kw = FDEF.kw; fChanged = true; }
     if (!p.free && q0.free && F.free) { F.free = FDEF.free; fChanged = true; }
-    if (fChanged) { localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI(); }
+    if (fChanged) { saveFilters(['plug', 'kw', 'free']); syncFilterUI(); }
   }
   /* A category search ("pharmacy") answers with chains (Walgreens, CVS) set after the search
      finished, so the rule above never knew about them: "lax" after "pharmacy in denver"
@@ -4615,19 +4627,19 @@ $('placeIn').addEventListener('keydown', async e => {
   if (p.net) {
     netFilter = p.net === 'tesla' ? 'tesla' : 'other';
     netPick = p.net === 'tesla' ? null : p.net;   // exact network when they named one
-    localStorage.setItem('cc_net', netFilter);
+    // Not saved (B05): "evgo near target" is this search, not every later visit.
     syncNetSeg();
     track('search-net', p.net);
   }
   if (p.free && !F.free) {
-    F.free = 1; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
+    F.free = 1; saveFilters(['free']); syncFilterUI();
   }
   if (p.plug && F.plug !== p.plug) {
-    F.plug = p.plug; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
+    F.plug = p.plug; saveFilters(['plug']); syncFilterUI();
   }
   if (p.l2 && !showL2) await setL2(true);
   if (p.kw && F.kw !== p.kw) {
-    F.kw = p.kw; localStorage.setItem('cc_filters', JSON.stringify(F)); syncFilterUI();
+    F.kw = p.kw; saveFilters(['kw']); syncFilterUI();
   }
   lastQuerySet = {
     chains: p.chains.length || p.anyCat ? chainSig() : null,
@@ -7446,7 +7458,7 @@ syncNetSeg();
 
 /* ───────── spec filters ───────── */
 function setPlug(v) {
-  F.plug = v; localStorage.setItem('cc_filters', JSON.stringify(F));
+  F.plug = v; saveFilters(['plug']);
   syncFilterUI(); render(); syncUrl();
 }
 $('routePlugSeg').querySelectorAll('button').forEach(b => b.onclick = () => { track('route-plug', b.textContent); setPlug(+b.dataset.v); });
@@ -7466,13 +7478,13 @@ function syncFilterUI() {
 document.querySelectorAll('#filters .seg.wide[data-f] button').forEach(b => b.onclick = () => {
   track('filter', b.parentElement.dataset.f);
   F[b.parentElement.dataset.f] = +b.dataset.v;
-  localStorage.setItem('cc_filters', JSON.stringify(F));
+  saveFilters([b.parentElement.dataset.f]);
   syncFilterUI(); render(); syncUrl();
 });
 document.querySelectorAll('#filters .ftog[data-f]').forEach(b => b.onclick = () => {
   track('filter', b.dataset.f);
   F[b.dataset.f] = F[b.dataset.f] ? 0 : 1;
-  localStorage.setItem('cc_filters', JSON.stringify(F));
+  saveFilters([b.dataset.f]);
   syncFilterUI(); render(); syncUrl();
 });
 $('filtBtn').onclick = () => { $('filters').classList.add('show'); syncFilterUI(); };

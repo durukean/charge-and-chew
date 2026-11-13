@@ -1903,6 +1903,22 @@ check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute
 # The update toast is for a page older than its worker only (the first visit after a deploy
 # is already the new page: network-first). The page compares its SW_VER with the worker's
 # VERSION, so the two must move together.
+# ---- B05 / B06: what is saved ----
+# B05: only the Tesla / Other segment, an × on its chip and Clear all save the network; a network
+# picked under "Networks here" or named in a search is for now (and the link), never cc_net.
+_netw = [m.start() for m in re.finditer(r"localStorage\.setItem\('cc_net'", _html)]
+check(len(_netw) == 3
+      and "if (k === 'net') { netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all');" in _html
+      and "netFilter = 'all'; netPick = null; localStorage.setItem('cc_net', 'all');\n  onlyMine = false;" in _html
+      and "  syncNetSeg();\n  localStorage.setItem('cc_net', netFilter);\n  render(); syncUrl();" in _html,
+      "a network picked under Networks here or named in a search is saved again (every later visit opens Tesla-less, B05)")
+# B06: filters are saved one key at a time onto what was saved, so a shared link's filters never
+# replace yours; F is never written whole.
+check(_html.count("localStorage.setItem('cc_filters'") == 1
+      and "function saveFilters(keys) {\n  for (const k of keys) savedF[k] = F[k];\n  localStorage.setItem('cc_filters', JSON.stringify(savedF));" in _html
+      and _html.index("let savedF = Object.assign({}, F);") < _html.index("if (VIEW_KEYS.some(k => q.has(k))) { F = Object.assign({}, FDEF);")
+      and "F = Object.assign({}, FDEF); saveFilters(was);" in _html,
+      "touching a filter in a shared link's view writes the link's filters over the saved ones again (B06)")
 # ---- UI-26/27/28 ----
 # UI-26: the stop card's actions stay pinned to the bottom of its scrolling content, above the
 # signal icons (Leaflet's map-pane svg z-index 200 painted them through the bar).
