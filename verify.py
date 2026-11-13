@@ -894,7 +894,7 @@ check("const BASEMAPS = window.CC_BASEMAPS;" in _html and _html.count("World_Lig
       "tile URLs are defined twice again (early script and app) and can drift apart")
 check("if (window.__ccEarlyTiles) { window.__ccEarlyTiles.forEach(l => map.removeLayer(l));" in _html,
       "the early tile layers are never removed — two base layers stack")
-check(re.search(r"@media \(max-width:759px\)\{#sheet\{height:40vh", _html) is not None
+check(re.search(r"@media \(max-width:899px\)\{#sheet\{height:40vh", _html) is not None
       and "let sheetState = 'mid';" in _html,
       "the phone sheet starts collapsed and jumps open again (a 0.16 layout shift on every load)")
 
@@ -1849,6 +1849,22 @@ check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute
 # The update toast is for a page older than its worker only (the first visit after a deploy
 # is already the new page: network-first). The page compares its SW_VER with the worker's
 # VERSION, so the two must move together.
+# ---- UI-26/27/28 ----
+# UI-26: the stop card's actions stay pinned to the bottom of its scrolling content, above the
+# signal icons (Leaflet's map-pane svg z-index 200 painted them through the bar).
+check(".pp-links{position:sticky;bottom:0;z-index:2;background:var(--surface);" in _html
+      and ".leaflet-popup-content .ui-i{z-index:auto}" in _html and ".pp-links::before{content:''" in _html,
+      "the stop card's Directions/More row scrolls out of view again on a phone (UI-26)")
+# UI-27: the phone styles cover every width the phone layout runs at (wideLayout() is 900 px).
+check("const wideLayout = () => window.matchMedia('(min-width:900px)').matches;" in _html
+      and "@media(max-width:899px){\n  #app.popup-open .mapctl" in _html and "@media(max-width:760px)" not in _html
+      and "@media(min-width:900px){#installCard" in _html,
+      "the phone CSS breakpoint no longer matches wideLayout(): 761-899 px (iPad portrait) runs the phone layout unstyled")
+# UI-28: the welcome card fits at 320 px.
+check(".herogrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))" in _html
+      and ".heroform{display:grid;grid-template-columns:minmax(0,1fr)" in _html
+      and re.search(r"#heroGo\{flex:1 1 100%;min-width:0;", _html) is not None and ".hfrow{display:flex;flex-wrap:wrap;" in _html,
+      "the welcome card's form or chain tiles can run past a 320 px screen again (UI-28)")
 # ---- PERF-B2 / B08 / B09: the service worker ----
 _swj = open(os.path.join(HERE, "sw.js")).read()
 # A page the worker has is served at once, refreshed behind it; a changed copy tells the page.
