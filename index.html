@@ -7694,7 +7694,7 @@ if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') 
 if (!navigator.onLine) track('offline-use');
 
 /* The shell this page belongs to: sw.js's VERSION (verify.py keeps the two equal). */
-const SW_VER = 'cc-v51';
+const SW_VER = 'cc-v52';
 if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
@@ -7719,12 +7719,17 @@ if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
       });
     }).catch(() => { /* offline support simply unavailable */ });
   });
+  /* The worker serves this page from its cache at once and fetches the live copy behind it
+     (PERF-B2); when that copy differs, it says so here and the next load is the new page. */
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data && e.data.type === 'page-updated') offerUpdate(null);
+  });
   const offerUpdate = w => {
     const t = $('toast');
     t.textContent = 'New version — tap to reload';
     t.classList.add('show');
     t.style.pointerEvents = 'auto';
-    t.onclick = () => { w.postMessage('skipWaiting'); location.reload(); };
+    t.onclick = () => { if (w) w.postMessage('skipWaiting'); location.reload(); };
     clearTimeout(toastT);
     toastT = setTimeout(() => { t.classList.remove('show'); t.style.pointerEvents = 'none'; t.onclick = null; }, 12000);
   };

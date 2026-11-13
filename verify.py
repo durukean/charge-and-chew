@@ -495,7 +495,7 @@ check(re.search(r"if \(localStorage\.getItem\('cc_basepref'\) === 'carto' \|\| l
 _swsrc = open(os.path.join(HERE, "sw.js")).read()
 check("if (url.hostname === 'server.arcgisonline.com') {" in _swsrc and "cartocdn" not in _swsrc.split("self.addEventListener('fetch'")[1],
       "the service worker intercepts (and can cache) CARTO tiles again")
-check(re.search(r"for \(const req of await c\.keys\(\)\) if \(/\(\^\|\\\.\)cartocdn\\\.com\$/\.test\(new URL\(req\.url\)\.hostname\)\) await c\.delete\(req\);", _swsrc) is not None,
+check("if (/(^|\\.)cartocdn\\.com$/.test(new URL(req.url).hostname)) { await c.delete(req); continue; }" in _swsrc,
       "the service worker no longer purges cached CARTO watermark tiles on activate")
 # An OSM website= tag is free text anyone can edit; esc() leaves javascript: URLs intact.
 # safeUrl is an allow-list (output always starts with http or is empty), which is what makes
@@ -1849,6 +1849,24 @@ check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute
 # The update toast is for a page older than its worker only (the first visit after a deploy
 # is already the new page: network-first). The page compares its SW_VER with the worker's
 # VERSION, so the two must move together.
+# ---- PERF-B2 / B08 / B09: the service worker ----
+_swj = open(os.path.join(HERE, "sw.js")).read()
+# A page the worker has is served at once, refreshed behind it; a changed copy tells the page.
+check(re.search(r"const hit = await hitP;\n\s*if \(hit\) return hit;", _swj) is not None
+      and "if (prev && await pageChanged(prev, res.clone())) tellPage(event.resultingClientId || event.clientId);" in _swj
+      and "hit ? fetch(url.href, { cache: 'no-cache', credentials: 'same-origin' }) : fetch(request)" in _swj
+      and "res.ok && !res.redirected" in _swj,
+      "pages are network-first again (a warm visit waits for the HTML), or a changed page is never announced")
+check(re.search(r"(?m)^  navigator\.serviceWorker\.addEventListener\('message', e => \{\n\s*if \(e\.data && e\.data\.type === 'page-updated'\) offerUpdate\(null\);", _html) is not None
+      and "t.onclick = () => { if (w) w.postMessage('skipWaiting'); location.reload(); };" in _html,
+      "the page no longer offers a reload when the worker found a newer copy of it")
+# B09: the tile cache survives a shell release.
+check("const TILES = 'cc-tiles';" in _swj and "k !== DATA && k !== TILES" in _swj,
+      "the tile cache is versioned (or deleted on activate) again: every release wipes the offline map")
+# B08: a tile is cached by status and type, not size: Esri label tiles are small.
+check("res.status === 200 && res.type !== 'opaque' && /^image\\/(png|jpe?g|webp)\\b/i.test(res.headers.get('content-type') || '')" in _swj
+      and "byteLength > 2000" not in _swj,
+      "tiles are cached by a size threshold again (the offline map loses its labels), or errors can be cached")
 # ---- BUG-B03: self-hosted fonts that never block the first paint ----
 _FONTS = ["inter-latin.woff2", "bricolage-grotesque-latin.woff2", "jetbrains-mono-latin.woff2"]
 _FDIR = os.path.join(HERE, "assets", "fonts")

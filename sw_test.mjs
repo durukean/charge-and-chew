@@ -5,24 +5,29 @@ const store = new Map();          // cacheName -> Map(url -> {body})
 const mkCache = name => ({
   async match(req){ const m=store.get(name); const k=typeof req==='string'?req:req.url; return m&&m.get(k) ? mkRes(m.get(k)) : undefined; },
   async put(req,res){ const k=typeof req==='string'?req:req.url; if(!store.has(name))store.set(name,new Map());
-                      store.get(name).set(k,{size:res.__size}); },
+                      store.get(name).set(k,{size:res.__size, ct:res.__ct, etag:res.__etag}); },
   async keys(){ const m=store.get(name); return m?[...m.keys()].map(u=>({url:u})):[]; },
   async delete(k){ const m=store.get(name); return m?m.delete(typeof k==='string'?k:k.url):false; },
 });
 /* type: 'basic' same-origin, 'cors' a cross-origin answer the page asked for with CORS (the
    map tiles, since crossOrigin is set), 'opaque' one asked for without -- its body is unreadable
    to the worker, which therefore must never cache it. */
-function mkRes({size, type='basic'}){ return { ok:true, status:200, type, __size:size,
-  clone(){return mkRes({size, type})}, async arrayBuffer(){return new ArrayBuffer(type === 'opaque' ? 0 : size)} }; }
+function mkRes({size, type='basic', status=200, ct='image/png', etag}){ return { ok:status>=200&&status<300, status, type, __size:size, __ct:ct, __etag:etag,
+  headers:{ get:h => h === 'content-type' ? ct : h === 'etag' ? (etag || null) : null },
+  clone(){return mkRes({size, type, status, ct, etag})}, async arrayBuffer(){return new ArrayBuffer(type === 'opaque' ? 0 : size)},
+  async text(){ return 'x'.repeat(size) } }; }
 
 globalThis.self = {
   addEventListener:(t,f)=>{(listeners[t]=listeners[t]||[]).push(f)},
-  location:{origin:'https://chargeandchew.com'}, skipWaiting(){}, clients:{claim(){}},
+  location:{origin:'https://chargeandchew.com'}, skipWaiting(){},
+  clients:{claim(){}, async get(id){ return id ? { postMessage: m => told_page.push([id, m]) } : undefined; }},
 };
 globalThis.caches = { open:async n=>mkCache(n), keys:async()=>[...store.keys()], delete:async n=>store.delete(n),
-  async match(req){ const k=typeof req==='string'?req:req.url; for (const m of store.values()) if (m.get(k)) return mkRes(m.get(k)); return undefined; } };
-let nextSize = 0, nextType = 'cors';
-globalThis.fetch = async req => mkRes({size:nextSize, type: /basemaps|arcgisonline/.test(req && req.url || req) ? nextType : 'basic'});
+  async match(req){ let k=typeof req==='string'?req:req.url; if (k.startsWith('/')) k='https://chargeandchew.com'+k; for (const m of store.values()) if (m.get(k)) return mkRes(m.get(k)); return undefined; } };
+const told_page = [];
+let nextSize = 0, nextType = 'cors', nextStatus = 200, nextCt = 'image/png';
+globalThis.fetch = async req => /basemaps|arcgisonline/.test(req && req.url || req)
+  ? mkRes({size:nextSize, type:nextType, status:nextStatus, ct:nextCt}) : mkRes({size:nextSize, ct:'text/html'});
 globalThis.Response = class { static error(){return{error:true}} };
 globalThis.Request = class { constructor(u,o){this.url=u;Object.assign(this,o)} };
 
@@ -39,10 +44,22 @@ async function tileReq(url){
 const TILE='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/12/1686/935';
 const CARTO='https://a.basemaps.cartocdn.com/rastertiles/voyager/12/935/1686@2x.png';
 
-nextSize = 126;                       // watermark / blocked tile
-await tileReq(TILE);
 const tilesCache = () => [...store.keys()].find(k=>k.endsWith('-tiles'));
-const afterBad = (store.get(tilesCache())||new Map()).size;
+const nTiles = () => (store.get(tilesCache())||new Map()).size;
+/* Errors are never cached: a JSON error answered as 200 ("Map data not yet available"), a 404,
+   an empty body. */
+nextSize = 120; nextCt = 'application/json';
+await tileReq(TILE+'?err=json');
+nextCt = 'image/png'; nextStatus = 404;
+await tileReq(TILE+'?err=404');
+nextStatus = 200; nextSize = 0;
+await tileReq(TILE+'?err=empty');
+const afterBad = nTiles();
+/* A small, mostly transparent Esri label tile IS a real tile (BUG-B08: 22 of 24 were dropped
+   by a 2,000-byte rule, so offline maps had no place names). */
+nextSize = 126;
+await tileReq(TILE);
+const afterLabel = nTiles();
 
 nextSize = 87968;                     // healthy tile
 await tileReq(TILE+'?x=2');
@@ -69,8 +86,10 @@ const report = (label, ok, okText, badText) => {
   if (!ok) failed++;
   console.log('  ' + label.padEnd(31), ok ? okText : badText + '  <-- BUG');
 };
-report('watermark tile (126b) cached?', !(afterBad > 0), 'no   OK', 'YES');
-report('healthy tile (88KB) cached?', afterGood > afterBad, 'yes  OK', 'NO');
+report('error tile (json/404/empty) cached?', afterBad === 0, 'no   OK', 'YES (' + afterBad + ')');
+report('small label tile (126b) cached?', afterLabel === 1, 'yes  OK', 'NO (offline map loses its labels)');
+report('healthy tile (88KB) cached?', afterGood === 2, 'yes  OK', 'NO');
+report('tile cache unversioned?', tilesCache() === 'cc-tiles', 'yes  OK', 'NO (' + tilesCache() + ')');
 report('CARTO tile intercepted?', cartoOut === undefined && afterCarto === afterGood, 'no   OK (goes to network)', 'YES (watermark can be cached)');
 report('opaque tile returned?', !!(opaqueRes && opaqueRes.type === 'opaque'), 'yes  OK', 'NO (map loses the tile)');
 report('opaque tile cached?', afterOpaque === afterGood, 'no   OK', 'YES (unvetted tile cached)');
@@ -128,49 +147,68 @@ store.delete('cc-data');
 store.set('cc-v1-data', new Map([[DATA_URL, { size: 4_000_000 }]]));   // left by an older worker
 store.set('cc-v1-shell', new Map([['https://chargeandchew.com/', { size: 1 }]]));
 // a watermark an older worker cached cache-first, next to a good Esri tile
-store.get(tilesCache()).set(CARTO, { size: 2049 });
+store.get('cc-tiles').set(CARTO, { size: 2049 });
+// an older worker's VERSIONED tile cache: its Esri tiles must move over, its CARTO ones not (B09)
+const OLD_TILE = TILE + '?old=1';
+store.set('cc-v51-tiles', new Map([[OLD_TILE, { size: 5000, ct: 'image/png' }], [CARTO + '?old=1', { size: 2049 }]]));
 let act; for (const f of listeners['activate']) f({ waitUntil: p => { act = p; } });
 await act;
-report('activate purges CARTO tiles?', ![...(store.get(tilesCache()) || new Map()).keys()].some(u => u.includes('cartocdn'))
-       && (store.get(tilesCache()) || new Map()).size > 0, 'yes  OK', 'NO (watermarks stay on the offline map)');
+const tileKeys = [...(store.get('cc-tiles') || new Map()).keys()];
+report('activate purges CARTO tiles?', !tileKeys.some(u => u.includes('cartocdn')) && tileKeys.length > 0,
+       'yes  OK', 'NO (watermarks stay on the offline map)');
+report('update keeps the offline map?', tileKeys.includes(TILE) && tileKeys.includes(OLD_TILE) && !store.has('cc-v51-tiles'),
+       'yes  OK', 'NO (' + tileKeys.length + ' tiles; a shell release wiped the offline map)');
 report('update keeps cached dataset?', !!(store.get('cc-data') && store.get('cc-data').get(DATA_URL)),
        'yes  OK', 'NO (dataset re-downloaded after every update)');
 report('old caches removed?', !store.has('cc-v1-data') && !store.has('cc-v1-shell'), 'yes  OK', 'NO');
 
-/* ---- a slow network must not hold the page hostage ---- */
-async function navReq(fetchImpl, path = '/') {
+/* ---- pages: the cached copy at once, refreshed behind it (PERF-B2) ---- */
+async function navReq(fetchImpl, path = '/', clientId = 'c1') {
   globalThis.fetch = fetchImpl;
   let out, waits = [];
   const ev = { request: { url: 'https://chargeandchew.com' + path, method: 'GET', mode: 'navigate', headers: { get: () => 'text/html' } },
-               respondWith: p => { out = p; }, waitUntil: p => waits.push(p) };
+               resultingClientId: clientId, respondWith: p => { out = p; }, waitUntil: p => waits.push(p) };
   for (const f of listeners['fetch']) f(ev);
   const t0 = Date.now(); const res = await out; const ms = Date.now() - t0;
   await Promise.all(waits.map(w => w.catch(() => {})));   // let the background refresh land
   return { res, ms };
 }
-store.set('cc-v49-shell', new Map([['https://chargeandchew.com/', { size: 111 }]]));   // cached page
-const slow = await navReq(() => new Promise(r => setTimeout(() => r(mkRes({ size: 222 })), 8000)));
-report('slow network -> cached page?', slow.res && slow.res.__size === 111 && slow.ms < 5000,
+const shellName = () => [...store.keys()].find(k => k.startsWith('cc-v') && k.endsWith('-shell'));
+const page = (etag, size) => mkRes({ size, ct: 'text/html', etag });
+store.set('cc-v52-shell', new Map([['https://chargeandchew.com/', { size: 111, ct: 'text/html', etag: 'A' }]]));   // cached page
+// the network 3 s away: the cached page is served at once, the new one lands in the cache
+told_page.length = 0;
+const slow = await navReq(() => new Promise(r => setTimeout(() => r(page('B', 222)), 3000)), '/', 'c-slow');
+report('cached page served at once?', slow.res && slow.res.__size === 111 && slow.ms < 200,
        `yes  OK (${slow.ms} ms)`, `NO (${slow.ms} ms, size ${slow.res && slow.res.__size})`);
-const fast = await navReq(async () => mkRes({ size: 333 }));
-report('fast network -> fresh page?', fast.res && fast.res.__size === 333, 'yes  OK', 'NO');
+report('background refresh cached?', store.get(shellName()).get('https://chargeandchew.com/').size === 222, 'yes  OK', 'NO');
+report('changed page -> page told?', told_page.length === 1 && told_page[0][0] === 'c-slow' && told_page[0][1].type === 'page-updated',
+       'yes  OK', 'NO (' + JSON.stringify(told_page) + ')');
+told_page.length = 0;
+const same = await navReq(async () => page('B', 222), '/', 'c-same');
+report('same page -> no reload offered?', same.res.__size === 222 && told_page.length === 0, 'yes  OK', 'NO (' + JSON.stringify(told_page) + ')');
 
 /* ---- one cached page per path, whatever the query (BUG-20) ----
    Every shared link (?q=, ?from=&to=, ?stop=) used to store its own ~420 KB copy of index.html,
    without limit, and a link never opened before missed the cache on a slow network. */
-store.delete('cc-v49-shell');    // only this worker's own shell from here on
-const shellName = () => [...store.keys()].find(k => k.startsWith('cc-v') && k.endsWith('-shell') && !k.startsWith('cc-v49'));
-for (const q of ['/?q=starbucks', '/?from=LA&to=Vegas', '/?stop=123', '/?chain=IHOP']) await navReq(async () => mkRes({ size: 444 }), q);
+for (const q of ['/?q=starbucks', '/?from=LA&to=Vegas', '/?stop=123', '/?chain=IHOP']) await navReq(async () => page('C', 444), q);
 const shellKeys = [...(store.get(shellName()) || new Map()).keys()];
 report('one shell copy for all links?', shellKeys.length === 1 && shellKeys[0] === 'https://chargeandchew.com/',
        'yes  OK', 'NO (' + shellKeys.join(' ') + ')');
-const unseen = await navReq(() => new Promise(r => setTimeout(() => r(mkRes({ size: 555 })), 8000)), '/?from=Never&to=Seen');
-report('slow, never-seen link -> cache?', unseen.res && unseen.res.__size === 444 && unseen.ms < 5000,
+const unseen = await navReq(() => new Promise(r => setTimeout(() => r(page('D', 555)), 8000)), '/?from=Never&to=Seen');
+report('slow, never-seen link -> cache?', unseen.res && unseen.res.__size === 444 && unseen.ms < 200,
        `yes  OK (${unseen.ms} ms)`, `NO (${unseen.ms} ms, size ${unseen.res && unseen.res.__size})`);
 const offlineNav = await navReq(async () => { throw new TypeError('offline'); }, '/?q=never+seen');
 // 555: the slow load above still refreshed the ONE shared copy in the background
 report('offline, never-seen link -> page?', offlineNav.res && offlineNav.res.__size === 555, 'yes  OK',
        'NO (' + (offlineNav.res && (offlineNav.res.__size || 'fallback page')) + ')');
+// a page with no cached copy waits for the network, up to NAV_TIMEOUT, then whatever is cached
+const fresh = await navReq(async () => page('E', 666), '/trip/somewhere/');
+report('uncached page -> network?', fresh.res && fresh.res.__size === 666, 'yes  OK', 'NO');
+// nothing cached at all: offline, the app's own page stands in rather than an error
+store.get(shellName()).set('https://chargeandchew.com/index.html', { size: 888, ct: 'text/html' });   // precached at install
+const offNew = await navReq(async () => { throw new TypeError('offline'); }, '/trip/elsewhere/');
+report('uncached + offline -> app page?', offNew.res && offNew.res.__size === 888, 'yes  OK', 'NO');
 
 /* "New version — tap to reload" only for a page older than the worker: the page asks the
    installing worker its version over a MessageChannel, and must get this file's VERSION. */
