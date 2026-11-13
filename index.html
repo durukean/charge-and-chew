@@ -684,6 +684,14 @@ html.native .splash-mark svg{width:96px;height:96px}
 .gapnote{margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);
   font-size:12.5px;line-height:1.45}
 .gapnote b{font-weight:800}
+/* "Going somewhere? Plan a drive": a located first visit's way to the planner. */
+.planrow{display:flex;align-items:stretch;gap:4px;margin:10px 0 4px;border-radius:14px;background:var(--good-bg)}
+.planrow .prgo{flex:1;min-width:0;display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 6px 8px 14px;border:0;background:none;
+  font:500 13px/1.35 var(--sans);color:var(--txt);text-align:left;cursor:pointer;border-radius:14px}
+.planrow .prgo b{font-weight:700;display:block}
+.planrow .prgo .ui-i{color:var(--accent);flex-shrink:0}
+.planrow .prgo .chev{margin-left:auto;color:var(--dim2);flex-shrink:0}
+.planrow .prx{width:44px;flex-shrink:0;border:0;background:none;color:var(--dim);font-size:20px;cursor:pointer;border-radius:14px}
 .breaks{margin:0 0 6px;padding:10px 0 6px;border-bottom:1px solid var(--line)}
 .breaks .bh{font-family:var(--display);font-weight:700;font-size:16px;margin:0 0 6px}
 .breaks .bh small{font-weight:500;color:var(--dim);font-size:12px;margin-left:4px}
@@ -711,7 +719,9 @@ html.native .splash-mark svg{width:96px;height:96px}
 .bshut{margin:0 0 8px;padding:8px 10px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:12.5px;line-height:1.4}
 .bleave .bl{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0}
 /* Add to calendar: under the plan, and on the card of a stop that is on it. */
-.bcal{margin-top:2px;padding:10px 0 6px;border-top:1px solid var(--line)}
+.bcal{margin-top:2px;padding:10px 0 6px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px}
+.bcal .calbtn{flex:1 1 auto;justify-content:center}   /* side by side; stacked, each the full width */
+@media(max-width:359px){.bcal .cw{display:none}.bcal .calbtn{padding-left:12px;padding-right:12px}}
 .calbtn{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;border-radius:999px;
   border:1px solid var(--line2);background:var(--surface);color:var(--txt);font:700 13px var(--sans);cursor:pointer}
 .calbtn .ui-i,.pp-cal .ui-i{flex-shrink:0;color:var(--accent)}
@@ -1548,6 +1558,10 @@ const localStorage = (() => {
            key: i => { try { return s.key(i); } catch (e) { return null; } },
            get length() { try { return s.length; } catch (e) { return 0; } } };
 })();
+/* A first visit: nothing of ours in storage yet, read before anything below writes. It turns on
+   the "Going somewhere? Plan a drive" row (planRowOn), which stays until it is used or hidden. */
+const FIRST_RUN = (() => { for (let i = 0; i < localStorage.length; i++) if (/^cc_/.test(localStorage.key(i) || '')) return false; return true; })();
+if (FIRST_RUN) localStorage.setItem('cc_planrow', '1');
 /* A saved value is whatever was last written, by any version of the app, or by hand. Parse
    it defensively and check its shape: `new Set({"x":1})` at boot froze the app for good. */
 const readJSON = (k, fallback, ok) => {
@@ -2931,6 +2945,7 @@ document.addEventListener('click', e => {
 });
 
 /* ───────── list ───────── */
+const planRowOn = () => localStorage.getItem('cc_planrow') === '1';
 function renderList(vis) {
   const filtering = chainQuery() || cat === 'fav';
   /* The bundled-chain fallback turns "coffee" into five active chains, and listing them all
@@ -3011,7 +3026,13 @@ function renderList(vis) {
   const rows = col ? col.rows : vis.slice(0, LIST_MAX);
   const head = col ? `<div class="lsep rlist" role="heading" aria-level="3">${col.label} <span>· ${col.rows.length} of ${vis.length.toLocaleString()}</span></div>`
     : full && bestPerStretch(vis) ? `<div class="lsep rlist" role="heading" aria-level="3">All ${vis.length.toLocaleString()} stops in driving order <button type="button" class="rlnk" id="routeBest">Best per stretch</button></div>` : '';
-  $('list').innerHTML = (bc || gapNote()) + head + rows.map((s, i) => {
+  /* A first-time visitor who let us locate them lands on a list of chargers around them and
+     never sees the welcome card, so never learns the app plans a drive. One row on top, until
+     they plan one or hide it. */
+  if (route && planRowOn()) localStorage.setItem('cc_planrow', '0');
+  const pr = planRowOn() && center && center.kind === 'me' && !route && !CAR
+    ? `<div class="planrow"><button type="button" class="prgo" id="planRowGo"><svg class="ui-i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="5.5" r="2.2"/><path d="M8.7 18.5H13a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h4.3"/></svg><span><b>Going somewhere?</b> Plan a drive with meal stops</span><svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button><button type="button" class="prx" id="planRowX" aria-label="Hide: plan a drive">×</button></div>` : '';
+  $('list').innerHTML = pr + (bc || gapNote()) + head + rows.map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
     const picked = k => active.has(k) || (anyCat && inCat(k, anyCat));
@@ -3062,6 +3083,11 @@ function renderList(vis) {
   }).join('') + (col ? `<button type="button" class="listmore" id="routeAll">Show all ${vis.length.toLocaleString()} stops</button>`
     : vis.length > LIST_MAX
     ? `<div class="empty">Showing the first ${LIST_MAX} of ${vis.length.toLocaleString()}. Narrow the filter to see more.</div>` : '');
+  const pg = $('planRowGo');
+  if (pg) {
+    pg.onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row'); showHero(); setTimeout(() => $('heroTo').focus({ preventScroll: true }), 60); };
+    $('planRowX').onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row', 'hide'); render(); };
+  }
   const ra = $('routeAll');
   if (ra) ra.onclick = () => {
     routeAllFor = route; track('route-all'); render();
@@ -7042,6 +7068,7 @@ let lastPlan = null;
 /* Add to calendar is offered wherever a file or the shell can take it: not in a car's browser
    (it cannot open a calendar file), and in the iOS app only from a shell that knows the
    message (bridge version 2; a shell without it would drop the tap). */
+const SEND_ICON = '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M5 12.5v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
 const CAL_ICON = '<svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>';
 function calOk() { return !CAR && (!NATIVE || !!(window.__ccNative && window.__ccNative.version >= 2)); }
 function arriveMs(s) {
@@ -7120,9 +7147,12 @@ function breaksCard(vis) {
     if (n > day) day = n;
     return mark + r.html(clock);
   }).join('');
-  // The plan, taken along: every stop on it as a calendar event (see addToCalendar).
-  const cal = picks.length && calOk() ? `<div class="bcal"><button type="button" class="calbtn" data-cal="all"
-      aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}Add ${picks.length === 1 ? 'the stop' : picks.length + ' stops'} to calendar</button></div>` : '';
+  /* The plan, taken along: sent to the people you drive with (sendView), and every stop on it as
+     a calendar event (see addToCalendar). Sending was an unlabelled glyph in the sheet header
+     while the calendar had a labelled button; side by side, the same weight. */
+  const calB = picks.length && calOk() ? `<button type="button" class="calbtn" data-cal="all"
+      aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}Add${picks.length === 1 ? ' the stop' : `<span class="cw"> ${picks.length} stops</span>`} to calendar</button>` : '';
+  const cal = picks.length ? `<div class="bcal"><button type="button" class="calbtn" data-send="plan">${SEND_ICON}Send plan</button>${calB}</div>` : '';
   /* A chain you asked for that is shut on the day you leave (Chick-fil-A on a Sunday) leaves the
      plan empty: say why, rather than an empty card. */
   const shutNote = (() => {
@@ -7256,7 +7286,7 @@ function sharePlan() {
   lines.push(`arrive ~${at(P.arrive, P.last)}`);
   const sl = `${slugOf(a)}-to-${slugOf(b)}`;
   let url;
-  if ((' ' + TRIP_PAGES + ' ').includes(' ' + sl + ' ')) url = `https://chargeandchew.com/trip/${sl}/?ref=share`;
+  if ((' ' + TRIP_PAGES + ' ').includes(' ' + sl + ' ') && sameAsTripPage(P, start)) url = `https://chargeandchew.com/trip/${sl}/?ref=share`;
   else {
     const u = new URL(shareUrl());
     // The default leaving time is not in the address bar (it is worked out on opening); a plan
@@ -7269,8 +7299,19 @@ function sharePlan() {
   }
   return { text: lines.join('\n'), url };
 }
+/* The /trip/ guide plans 8 am from the two cities on the 5-mile corridor, every chain and network,
+   with no usual closures. Its link goes out only when this plan is that plan: "leaving 5:40 am",
+   "Thanksgiving" or "with Starbucks" sent the 8 am page, and the friend who opened it saw other
+   stops at other times than the text said. Otherwise the app, with the leaving time and day. */
+function sameAsTripPage(P, start) {
+  if (start !== MORNING || corridorMi !== 5 || chainQuery() || narrowings().length) return false;
+  if (LATLON.test($('fromIn').value.trim()) || LATLON.test($('toIn').value.trim())) return false;
+  const a = localAt(P.t0, tzOf(P.first)).dn, b = localAt(P.arrive, tzOf(P.last)).dn;
+  for (let dn = a; dn <= b; dn++) if (new Date(dn * 864e5).getUTCDay() === 0 || isThanksgiving(dn)) return false;
+  return true;
+}
 const slugOf = v => v.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-$('shareBtn').onclick = async () => {
+async function sendView() {
   track('share');
   syncUrl();
   const plan = sharePlan();
@@ -7288,7 +7329,10 @@ $('shareBtn').onclick = async () => {
     if (e && e.name === 'AbortError') return;
     toast('Copy the URL from the address bar');
   }
-};
+}
+$('shareBtn').onclick = sendView;
+// "Send plan" on the breaks card: the same as Share, which on a drive sends the plan.
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('[data-send]')) sendView(); });
 
 /* ───────── add to calendar ─────────
    The plan, taken along (2026-11): one calendar event per suggested stop -- "Charge + lunch:
@@ -7902,7 +7946,7 @@ if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') 
 if (!navigator.onLine) track('offline-use');
 
 /* The shell this page belongs to: sw.js's VERSION (verify.py keeps the two equal). */
-const SW_VER = 'cc-v52';
+const SW_VER = 'cc-v53';
 if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {

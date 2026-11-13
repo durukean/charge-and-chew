@@ -322,7 +322,7 @@ check("const mileAt = new Map();" in _html and 'class="idx mi"' in _html,
       "route rows lost their mile markers")
 # A route says where its longest charger gap is (geography, never a charging plan).
 # On a drive with a breaks card the gap is a row in it, at its mile (2026-11-10); otherwise a note.
-check("$('list').innerHTML = (bc || gapNote()) + head + rows.map(" in _html and "function gapNote()" in _html
+check("$('list').innerHTML = pr + (bc || gapNote()) + head + rows.map(" in _html and "function gapNote()" in _html
       and "const gap = chargerGap();" in _html[_html.index("function breaksCard("):_html.index("function gapNote()")]
       and 'class="brk gap" role="note"' in _html,
       "route lists no longer flag the longest stretch without a fast charger")
@@ -1830,6 +1830,28 @@ check(_live("const plan = sharePlan();") and "url = `https://chargeandchew.com/t
       and "navigator.share(plan ? { title: 'Charge & Chew', text: plan.text, url }" in _html
       and _live("if (plan) track('share-plan');"),
       "sharing a drive sends a bare link again (it should send the plan as text, with the trip guide)")
+# Batch B: "Send plan" is a labelled button on the breaks card (the same handler as Share), and the
+# link matches the text: the /trip/ guide only for its own plan (8 am, every chain and network,
+# the 5-mile corridor, from the two cities, no Sunday or Thanksgiving), else the app with leave/day.
+# tools/breaks_check.mjs plays both (5:40 am, Thanksgiving, Starbucks -> the app; 8 am -> the guide).
+check(_live("$('shareBtn').onclick = sendView;")
+      and _live("document.addEventListener('click', e => { if (e.target.closest && e.target.closest('[data-send]')) sendView(); });"),
+      "the breaks card's Send plan button no longer sends the plan")
+check(_live("if ((' ' + TRIP_PAGES + ' ').includes(' ' + sl + ' ') && sameAsTripPage(P, start)) url = `https://chargeandchew.com/trip/${sl}/?ref=share`;")
+      and _live("if (start !== MORNING || corridorMi !== 5 || chainQuery() || narrowings().length) return false;")
+      and _live("if (LATLON.test($('fromIn').value.trim()) || LATLON.test($('toIn').value.trim())) return false;")
+      and _live("for (let dn = a; dn <= b; dn++) if (new Date(dn * 864e5).getUTCDay() === 0 || isThanksgiving(dn)) return false;"),
+      "a shared plan links the 8 am trip guide even when the plan it describes is another one")
+# Batch B: a located first visit never saw the welcome card, so never learned the app plans a
+# drive. A row on top of the list ("Going somewhere? Plan a drive") until it is used or hidden.
+check(_live("const FIRST_RUN = (() => { for (let i = 0; i < localStorage.length; i++) if (/^cc_/.test(localStorage.key(i) || '')) return false; return true; })();")
+      and _live("if (FIRST_RUN) localStorage.setItem('cc_planrow', '1');")
+      and _live("const pr = planRowOn() && center && center.kind === 'me' && !route && !CAR")
+      and _live("$('list').innerHTML = pr + (bc || gapNote()) + head + rows.map((s, i) => {")
+      and _live("pg.onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row'); showHero();")
+      and _live("$('planRowX').onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row', 'hide'); render(); };")
+      and _live("if (route && planRowOn()) localStorage.setItem('cc_planrow', '0');"),
+      "a located first visit no longer gets the 'Plan a drive' row (or it is never dismissed)")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app
@@ -2458,7 +2480,8 @@ check(_near_xh > 0 or not any("xh" in s for s in D["sites"]), "no /near/ page ma
 # guards match the live call sites, and a node run of the REAL block (icsTime ... calEvents, with
 # the real tzOf/localAt/clockLabel) checks CRLF, folding at 75 octets, TEXT escaping, UTC times on
 # a drive that crosses from Mountain into Central time, the 5-minute clock, and UID stability.
-check(re.search(r"(?m)^  const cal = picks\.length && calOk\(\) \? `<div class=\"bcal\"><button type=\"button\" class=\"calbtn\" data-cal=\"all\"", _html) is not None
+check(re.search(r"(?m)^  const calB = picks\.length && calOk\(\) \? `<button type=\"button\" class=\"calbtn\" data-cal=\"all\"", _html) is not None
+      and _live("const cal = picks.length ? `<div class=\"bcal\"><button type=\"button\" class=\"calbtn\" data-send=\"plan\">${SEND_ICON}Send plan</button>${calB}</div>` : '';")
       and "<span>arrive ~${when(arrive, last).slice(0, 2).filter(Boolean).join(' · ')}</span></div>` + body + cal + '</div>';" in _html,
       "the breaks card no longer offers Add to calendar")
 check(re.search(r"(?m)^  if \(b\) addToCalendar\(b\.dataset\.cal === 'all' \? null : \+b\.dataset\.cal\);", _html) is not None

@@ -207,7 +207,8 @@ location.replace('/?chain=IHOP&nosw=1');
     if dom_filt is None or dom_full is None or dom_hero is None or dom_kids_saved is None or dom_kids_link is None or dom_plan is None:
         return 1
     _cal = re.findall(r'<button type="button" class="calbtn" data-cal="all" aria-label="Add the (?:stop|(\d+) stops) on this plan to your calendar">'
-                      r'<svg[^>]*>.*?</svg>Add (?:the stop|(\d+) stops) to calendar</button>', dom_plan, re.S)
+                      r'<svg[^>]*>.*?</svg>Add(?: the stop|<span class="cw"> (\d+) stops</span>) to calendar</button>', dom_plan, re.S)
+    _send = re.findall(r'<div class="bcal"><button type="button" class="calbtn" data-send="plan"><svg[^>]*>.*?</svg>Send plan</button>', dom_plan, re.S)
     _stops = len(re.findall(r'<button type="button" class="brk(?: meal)?" data-brk="\d+"', dom_plan))
 
     def kids_rows(d):
@@ -259,6 +260,8 @@ location.replace('/?chain=IHOP&nosw=1');
             and bool(re.search(r'id="sheetTitle"[^>]*>.{0,80}?IHOP', dom_kids_link)),
         # One button under a plan, naming its stops; none without a plan.
         "calendar_button_on_a_plan": _stops >= 2 and len(_cal) == 1 and _cal[0][0] == _cal[0][1] == str(_stops),
+        # Batch B: "Send plan", labelled, beside it (the same handler as Share).
+        "send_plan_button_on_a_plan": _stops >= 1 and len(_send) == 1,
         # (The page source holds the templates: match only what rendering produces.)
         "no_calendar_button_without_a_plan": all(not re.search(r'<button type="button" class="(?:calbtn" data-cal="all" aria-label="Add the|pp-cal" data-cal="\d)', d)
             for d in (dom, dom_q, dom_kids_link)),

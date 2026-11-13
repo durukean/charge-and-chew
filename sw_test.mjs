@@ -175,7 +175,8 @@ async function navReq(fetchImpl, path = '/', clientId = 'c1') {
 }
 const shellName = () => [...store.keys()].find(k => k.startsWith('cc-v') && k.endsWith('-shell'));
 const page = (etag, size) => mkRes({ size, ct: 'text/html', etag });
-store.set('cc-v52-shell', new Map([['https://chargeandchew.com/', { size: 111, ct: 'text/html', etag: 'A' }]]));   // cached page
+// the current shell's cache (sw.js VERSION, read here so a version bump does not break the test)
+store.set((fs.readFileSync('sw.js', 'utf8').match(/const VERSION = '([^']+)'/) || [])[1] + '-shell', new Map([['https://chargeandchew.com/', { size: 111, ct: 'text/html', etag: 'A' }]]));   // cached page
 // the network 3 s away: the cached page is served at once, the new one lands in the cache
 told_page.length = 0;
 const slow = await navReq(() => new Promise(r => setTimeout(() => r(page('B', 222)), 3000)), '/', 'c-slow');

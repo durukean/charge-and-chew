@@ -182,6 +182,24 @@ const CASES = [
     r => r.share && r.share.lines[r.share.lines.length - 1] === 'arrive ~' + r.arrive.replace(/^arrive ~/, '') ? '' : `last line "${r.share && r.share.lines.slice(-1)}" (card: ${r.arrive})`,
     r => r.share && r.share.url === 'https://chargeandchew.com/trip/los-angeles-to-las-vegas/?ref=share' ? '' : `link ${r.share && r.share.url}`],
     { share: true, at: '2026-11-12T06:00:00-08:00' }],
+  /* "Send plan" on the breaks card sends the same. And the link matches the text: the /trip/
+     guide plans 8 am with every chain on a day with no usual closures, so any other plan sends
+     the app with its own leaving time and day (batch B). */
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.sendBtn === 'Send plan' ? '' : `breaks card button "${r.sendBtn}" (want Send plan)`,
+    r => r.share && r.share.url === 'https://chargeandchew.com/trip/los-angeles-to-las-vegas/?ref=share' && r.share.lines.length === r.stops.length + 2 ? '' : `Send plan sent ${JSON.stringify(r.share)}`],
+    { share: true, send: true, at: '2026-11-12T06:00:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', 340, 'America/Los_Angeles', [
+    r => r.share && /^LA → Las Vegas · leaving 5:40 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}"`,
+    r => r.share && !/\/trip\//.test(r.share.url) && /[?&]leave=0540(&|$)/.test(r.share.url) && /[?&]ref=share(&|$)/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app leaving 5:40, not the 8 am guide)`],
+    { share: true, send: true, link: true, at: '2026-11-12T04:00:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.share && /^LA → Las Vegas · leaving Thu, Nov 26, 8:00 am$/.test(r.share.lines[0]) ? '' : `first line "${r.share && r.share.lines[0]}"`,
+    r => r.share && !/\/trip\//.test(r.share.url) && /[?&]day=2026-11-26(&|$)/.test(r.share.url) && /[?&]leave=0800(&|$)/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app on Thanksgiving, not the guide)`],
+    { share: true, link: true, extra: '&day=2026-11-26', at: '2026-11-12T06:00:00-08:00' }],
+  ['Los Angeles, CA', 'Las Vegas, NV', 480, 'America/Los_Angeles', [
+    r => r.share && !/\/trip\//.test(r.share.url) && /[?&]chain=Taco(%20|\+)Bell(&|$)/.test(r.share.url) ? '' : `link ${r.share && r.share.url} (want the app with Taco Bell, not the guide)`],
+    { share: true, link: true, extra: '&chain=Taco%20Bell', at: '2026-11-12T06:00:00-08:00' }],
   /* B02: a leaving time already past today is the NEXT one. The trip pages' leave=0800 opened at
      3 pm planned this morning, and Add to calendar put both stops hours in the past. Now: the day
      picker says Tomorrow, the share text says so, and every calendar event is tomorrow's. */
@@ -346,10 +364,12 @@ const SHARE = `(async () => {
   let got = null;
   navigator.share = async d => { got = d; };
   const w = window.innerWidth; Object.defineProperty(window, 'innerWidth', { value: 400, configurable: true });
-  document.getElementById('shareBtn').click();
+  const sb = window.__SEND && document.querySelector('.breaks .bcal [data-send]');
+  window.__sendBtn = sb ? sb.textContent.trim() : null;
+  (sb || document.getElementById('shareBtn')).click();
   await new Promise(r => setTimeout(r, 300));
   Object.defineProperty(window, 'innerWidth', { value: w, configurable: true });
-  return got && { lines: (got.text || '').split('\\n'), url: got.url };
+  return got && { lines: (got.text || '').split('\\n'), url: got.url, btn: window.__sendBtn };
 })()`;
 // Open a stop, then tap its Directions; then the same off the route. Messages the shell got.
 const REVIEW = `(async () => {
@@ -397,7 +417,7 @@ const LIST = `(async () => {
 const CAL = `(async () => {
   const blobs = []; URL.createObjectURL = b => { blobs.push(b); return 'blob:x'; }; URL.revokeObjectURL = () => {};
   let name = null; HTMLAnchorElement.prototype.click = function () { name = this.download; };
-  document.querySelector('.calbtn').click();
+  document.querySelector('.calbtn[data-cal]').click();
   const out = { name, type: blobs[0] && blobs[0].type, ics: blobs[0] && await blobs[0].text() };
   document.querySelector('.brk[data-brk]').click();
   for (let i = 0; i < 40 && !document.querySelector('.leaflet-popup-content .pp-cal'); i++) await new Promise(r => setTimeout(r, 100));
@@ -469,7 +489,7 @@ async function main() {
       await sleep(400);
       res = await ev(READ);
       if (res && opt && opt.list) res.list = await ev(LIST);
-      if (res && opt && opt.share) res.share = await ev(SHARE);
+      if (res && opt && opt.share) { if (opt.send) await ev('window.__SEND = 1'); res.share = await ev(SHARE); res.sendBtn = res.share && res.share.btn; }
       if (res && opt && opt.review) res.review = await ev(REVIEW);
       if (res && opt && opt.taps) res.taps = await ev(TAPS);
       if (res && opt && opt.cal) res.cal = await ev(CAL);
