@@ -92,14 +92,27 @@ def fmt_d(m):
     return f"{round(m*3.281)} ft" if mi < .1 else f"{mi:.1f} mi"
 
 CSS = """
+/* Fonts, self-hosted (assets/fonts, SIL OFL 1.1, licences beside them): a slow or blocked
+   font host can no longer hold the first paint (BUG-B03). swap: text paints at once in the
+   metric-matched fallbacks below and the real face replaces it when it lands. The fallbacks
+   are local Arial scaled to each face's average letter width and line metrics, so the swap
+   barely moves a line (the guide pages' CLS came from it). Not preloaded: Chrome holds the
+   first paint for a preloaded font, measured at 4x CPU with the fonts 3 s away as FCP 904 ms
+   preloaded against 156 ms without. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:600 800;font-display:swap;src:url(fonts/bricolage-grotesque-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600 700;font-display:swap;src:url(fonts/jetbrains-mono-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter Fallback";font-weight:400 500;src:local("Arial"),local("ArialMT");size-adjust:107.5%;ascent-override:90.1%;descent-override:22.4%;line-gap-override:0%}
+@font-face{font-family:"Inter Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:101.3%;ascent-override:95.6%;descent-override:23.8%;line-gap-override:0%}
+@font-face{font-family:"Bricolage Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:102.7%;ascent-override:90.5%;descent-override:26.3%;line-gap-override:0%}
 :root{
   --bg:#f6f3ee;--surface:#fffdfa;--surface2:#f2eee8;--surface3:#e9e4dc;--line:#e8e2d9;--line2:#d8d0c5;
   --txt:#1c1917;--dim:#5f574f;--dim2:#6c635a;--accent:#0f7a43;--accent-ink:#fff;
   --chew:#a6510a;--chew-bg:#fbefdc;
   --good:#0f7a43;--good-bg:#e7f4ec;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fdf0dc;
   --sh:0 1px 8px rgba(28,25,23,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
-  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#c2640c;
-  --display:"Bricolage Grotesque",Inter,-apple-system,system-ui,sans-serif;
+  --sans:Inter,"Inter Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#c2640c;
+  --display:"Bricolage Grotesque","Bricolage Fallback",Inter,"Inter Fallback",-apple-system,system-ui,sans-serif;
   color-scheme:light;
 }
 /* Same theme as the map: the head script copies the choice saved there (cc_theme) onto
@@ -253,13 +266,10 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 
 # Shared by every generated page and 404.html: one theme-color per scheme (two unlabelled tags
 # left the browser to pick either), the map's saved theme applied before the first paint, and
-# the app's fonts loaded without holding that paint up.
+# the app's fonts (self-hosted, @font-face in pages.css) never hold that paint up.
 HEAD_THEME = """<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" media="print" onload="this.media='all'">"""
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>"""
 
 
 def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
@@ -1739,8 +1749,7 @@ app, removes all of it.</p>
 open-source and privacy-first: no cookies, no personal data, no cross-site tracking. It tells us
 roughly how many people used the site and which pages, and nothing about who you are.</p>
 <h2>Other services the app talks to</h2>
-<p>Map tiles from Esri; fonts from Google Fonts, which like any web host sees your IP address when the page
-loads; charger data from the US DOE / NREL Alternative Fuel Stations database (bundled, refreshed
+<p>Map tiles from Esri; charger data from the US DOE / NREL Alternative Fuel Stations database (bundled, refreshed
 monthly); chain and shop locations from OpenStreetMap, including live lookups through its Overpass
 service. Tapping a place or "Directions" opens Google Maps or Apple Maps, which are governed by
 their own policies.</p>

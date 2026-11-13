@@ -1,12 +1,25 @@
 
+/* Fonts, self-hosted (assets/fonts, SIL OFL 1.1, licences beside them): a slow or blocked
+   font host can no longer hold the first paint (BUG-B03). swap: text paints at once in the
+   metric-matched fallbacks below and the real face replaces it when it lands. The fallbacks
+   are local Arial scaled to each face's average letter width and line metrics, so the swap
+   barely moves a line (the guide pages' CLS came from it). Not preloaded: Chrome holds the
+   first paint for a preloaded font, measured at 4x CPU with the fonts 3 s away as FCP 904 ms
+   preloaded against 156 ms without. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:600 800;font-display:swap;src:url(fonts/bricolage-grotesque-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600 700;font-display:swap;src:url(fonts/jetbrains-mono-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter Fallback";font-weight:400 500;src:local("Arial"),local("ArialMT");size-adjust:107.5%;ascent-override:90.1%;descent-override:22.4%;line-gap-override:0%}
+@font-face{font-family:"Inter Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:101.3%;ascent-override:95.6%;descent-override:23.8%;line-gap-override:0%}
+@font-face{font-family:"Bricolage Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:102.7%;ascent-override:90.5%;descent-override:26.3%;line-gap-override:0%}
 :root{
   --bg:#f6f3ee;--surface:#fffdfa;--surface2:#f2eee8;--surface3:#e9e4dc;--line:#e8e2d9;--line2:#d8d0c5;
   --txt:#1c1917;--dim:#5f574f;--dim2:#6c635a;--accent:#0f7a43;--accent-ink:#fff;
   --chew:#a6510a;--chew-bg:#fbefdc;
   --good:#0f7a43;--good-bg:#e7f4ec;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fdf0dc;
   --sh:0 1px 8px rgba(28,25,23,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
-  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#c2640c;
-  --display:"Bricolage Grotesque",Inter,-apple-system,system-ui,sans-serif;
+  --sans:Inter,"Inter Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#c2640c;
+  --display:"Bricolage Grotesque","Bricolage Fallback",Inter,"Inter Fallback",-apple-system,system-ui,sans-serif;
   color-scheme:light;
 }
 /* Same theme as the map: the head script copies the choice saved there (cc_theme) onto

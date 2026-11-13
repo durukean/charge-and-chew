@@ -15,7 +15,10 @@ const TILES = `${VERSION}-tiles`;   // map tiles for areas already viewed
 const TILE_LIMIT = 400;
 
 const SHELL_URLS = ['/', '/index.html', '/manifest.json', '/favicon.svg', '/icon-192.png',
-                    '/vendor/leaflet.js', '/vendor/leaflet.css', '/assets/pages.css'];
+                    '/vendor/leaflet.js', '/vendor/leaflet.css', '/assets/pages.css',
+                    // self-hosted fonts (BUG-B03): offline, and a returning visit, paint in them
+                    '/assets/fonts/inter-latin.woff2', '/assets/fonts/bricolage-grotesque-latin.woff2',
+                    '/assets/fonts/jetbrains-mono-latin.woff2'];
 
 self.addEventListener('install', e => {
   e.waitUntil((async () => {

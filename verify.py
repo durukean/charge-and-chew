@@ -123,11 +123,13 @@ if os.path.exists(sample):
 # Structured data is quoted verbatim by search engines and AI tools: plain text only, and
 # the network named once. 527 pages showed "Arby&#x27;s"; ~10,000 entries read
 # "Tesla Supercharger — Woodburn, OR - Tesla Supercharger".
-_ld_bad, _ld_dbl, _no_banner = [], 0, []
+_ld_bad, _ld_dbl, _no_banner, _gfont = [], 0, [], []
 for _p in pages + glob.glob(os.path.join(HERE, "trip/**/index.html"), recursive=True):
     _h = open(_p, encoding="utf-8").read()
     if 'name="apple-itunes-app"' not in _h:
         _no_banner.append(os.path.relpath(_p, HERE))
+    if "fonts.googleapis.com" in _h or "fonts.gstatic.com" in _h or 'rel="preload" href="/assets/fonts/' in _h:
+        _gfont.append(os.path.relpath(_p, HERE))
     for _m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', _h, re.S):
         if re.search(r"&#x27;|&#39;|&amp;|&quot;", _m.group(1)):
             _ld_bad.append(os.path.relpath(_p, HERE))
@@ -135,13 +137,18 @@ for _p in pages + glob.glob(os.path.join(HERE, "trip/**/index.html"), recursive=
 check(not _ld_bad, f"{len(_ld_bad)} pages have HTML escapes inside JSON-LD, e.g. {_ld_bad[:2]}")
 check(_ld_dbl == 0, f"{_ld_dbl} JSON-LD place names repeat the network")
 check(not _no_banner, f"{len(_no_banner)} generated pages lack the Smart App Banner, e.g. {_no_banner[:2]}")
+# BUG-B03: fonts are self-hosted. No page may load them from Google (a slow font host held the
+# app's first paint for as long as it stalled), and every page preloads its own copy.
+check(not _gfont, f"{len(_gfont)} generated pages load Google Fonts, or preload a font (Chrome then holds the first paint for it), e.g. {_gfont[:2]}")
 _bp = open(os.path.join(HERE, "build.py")).read()
 check(re.search(r"(?m)^\s*WRITTEN\.add\(os\.path\.normpath\(full\)\)", _bp)
       and re.search(r"(?m)^\s*os\.remove\(_full\)", _bp),
       "build.py no longer retires pages it stopped generating — they live on with stale data")
 _priv = open(os.path.join(HERE, "privacy", "index.html"), encoding="utf-8").read()
-check("Google Fonts" in _priv and "Esri" in _priv and "It stays on your device" not in _priv,
-      "privacy policy no longer discloses Google Fonts / Esri, or claims location stays on the device")
+check("Esri" in _priv and "It stays on your device" not in _priv,
+      "privacy policy no longer discloses Esri, or claims location stays on the device")
+# Fonts are served from this site now (BUG-B03): the policy must not list a host the app no longer contacts.
+check("Google Fonts" not in _priv, "the privacy policy still lists Google Fonts, which no page loads any more")
 # CARTO is retired (BUG-B01): the policy must not name a service the app no longer contacts.
 check("CARTO" not in _priv, "the privacy policy still lists CARTO, which the app no longer uses")
 
@@ -1842,6 +1849,40 @@ check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute
 # The update toast is for a page older than its worker only (the first visit after a deploy
 # is already the new page: network-first). The page compares its SW_VER with the worker's
 # VERSION, so the two must move together.
+# ---- BUG-B03: self-hosted fonts that never block the first paint ----
+_FONTS = ["inter-latin.woff2", "bricolage-grotesque-latin.woff2", "jetbrains-mono-latin.woff2"]
+_FDIR = os.path.join(HERE, "assets", "fonts")
+_css_pages = open(os.path.join(HERE, "assets", "pages.css"), encoding="utf-8").read()
+_404 = open(os.path.join(HERE, "404.html"), encoding="utf-8").read()
+_swtxt = open(os.path.join(HERE, "sw.js")).read()
+_sync = open(os.path.join(HERE, "ios", "sync-web.sh")).read()
+check(all(os.path.getsize(os.path.join(_FDIR, f)) > 20000 and open(os.path.join(_FDIR, f), "rb").read(4) == b"wOF2" for f in _FONTS),
+      "a self-hosted font file is missing or is not WOFF2")
+check(all(os.path.exists(os.path.join(_FDIR, f)) and "SIL Open Font License" in open(os.path.join(_FDIR, f)).read()
+          for f in ["OFL-Inter.txt", "OFL-BricolageGrotesque.txt", "OFL-JetBrainsMono.txt"]),
+      "the fonts' OFL licence files are missing (the licence requires shipping them with the fonts)")
+for _src, _pfx, _name in [(_html, "/assets/fonts/", "index.html"), (_css_pages, "fonts/", "pages.css")]:
+    _faces = re.findall(r"@font-face\{[^}]*\}", _src)
+    check(all(any(("url(" + _pfx + f + ")") in x and "font-display:swap" in x for x in _faces) for f in _FONTS),
+          f"{_name}: a self-hosted font has no @font-face with font-display:swap")
+    check([re.search(r'font-family:"([^"]+)"', x).group(1) for x in _faces if "local(\"Arial" in x and "size-adjust:" in x]
+          == ["Inter Fallback", "Inter Fallback", "Bricolage Fallback"],
+          f"{_name}: the metric-matched Arial fallback faces are gone (the font swap shifts the layout again)")
+check('--sans:Inter,"Inter Fallback",' in _html and '--display:"Bricolage Grotesque","Bricolage Fallback",' in _html
+      and '--sans:Inter,"Inter Fallback",' in _css_pages and '--display:"Bricolage Grotesque","Bricolage Fallback",' in _css_pages,
+      "the font stacks no longer fall back to the metric-matched faces")
+check(not re.search(r"fonts\.(googleapis|gstatic)\.com", _html + _404 + _css_pages),
+      "index.html, 404.html or pages.css loads Google Fonts again; a slow font host would hold the first paint (BUG-B03)")
+check(all(re.search(r'<link rel="stylesheet" href="/', x) for x in re.findall(r'<link[^>]*rel="stylesheet"[^>]*>', _html)),
+      "index.html has a cross-origin render-blocking stylesheet again")
+# Not preloaded on purpose: Chrome holds the first paint for a preloaded font (FCP 904 ms
+# preloaded vs 156 ms without, fonts 3 s away, 4x CPU).
+check('rel="preload" href="/assets/fonts/' not in _html + _404 and 'as="font"' not in _html + _404,
+      "a font is preloaded again: Chrome then holds the first paint until it arrives")
+check(all(("'/assets/fonts/" + f + "'") in _swtxt.split("];")[0] for f in _FONTS),
+      "the service worker does not precache the self-hosted fonts (offline text falls back)")
+check(re.search(r'(?m)^mkdir -p "\$DEST/assets" && cp -R "\$ROOT/assets/fonts" "\$DEST/assets/fonts"$', _sync) is not None,
+      "ios/sync-web.sh does not bundle the self-hosted fonts: the app would fall back to Arial")
 _swv = re.search(r"const VERSION = '([^']+)';", open(os.path.join(HERE, "sw.js")).read())
 _pgv = re.search(r"(?m)^const SW_VER = '([^']+)';", _html)
 check(_swv and _pgv and _swv.group(1) == _pgv.group(1),

@@ -11,6 +11,8 @@ rm -rf "$DEST"; mkdir -p "$DEST"
 cp "$ROOT/index.html" "$ROOT/data.js" "$ROOT/level2.js" "$ROOT/highways.js" "$ROOT/manifest.json" "$DEST/"
 cp "$ROOT/favicon.svg" "$ROOT/icon-192.png" "$ROOT/icon-512.png" "$ROOT/apple-touch-icon.png" "$DEST/"
 cp -R "$ROOT/vendor" "$DEST/vendor"
+# The self-hosted fonts (and their OFL licences): the app never waits on a font host.
+mkdir -p "$DEST/assets" && cp -R "$ROOT/assets/fonts" "$DEST/assets/fonts"
 # The widget's own small index: the full data.js is too big for a widget's memory limit.
 python3 "$HERE/make-widget-index.py" "$ROOT/data.js" "$DEST/widget.tsv"
 # The service worker is pointless here: every asset is already local, and a stale SW cache

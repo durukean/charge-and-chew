@@ -58,10 +58,20 @@ try {
 <script src="/vendor/leaflet.js"></script>
 <!-- Map tiles are the largest paint; open the connection while data.js is still parsing. -->
 <link rel="preconnect" href="https://server.arcgisonline.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <style>
+/* Fonts, self-hosted (assets/fonts, SIL OFL 1.1, licences beside them): a slow or blocked
+   font host can no longer hold the first paint (BUG-B03). swap: text paints at once in the
+   metric-matched fallbacks below and the real face replaces it when it lands. The fallbacks
+   are local Arial scaled to each face's average letter width and line metrics, so the swap
+   barely moves a line (the guide pages' CLS came from it). Not preloaded: Chrome holds the
+   first paint for a preloaded font, measured at 4x CPU with the fonts 3 s away as FCP 904 ms
+   preloaded against 156 ms without. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/fonts/inter-latin.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:600 800;font-display:swap;src:url(/assets/fonts/bricolage-grotesque-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600 700;font-display:swap;src:url(/assets/fonts/jetbrains-mono-latin.woff2) format("woff2")}
+@font-face{font-family:"Inter Fallback";font-weight:400 500;src:local("Arial"),local("ArialMT");size-adjust:107.5%;ascent-override:90.1%;descent-override:22.4%;line-gap-override:0%}
+@font-face{font-family:"Inter Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:101.3%;ascent-override:95.6%;descent-override:23.8%;line-gap-override:0%}
+@font-face{font-family:"Bricolage Fallback";font-weight:600 800;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:102.7%;ascent-override:90.5%;descent-override:26.3%;line-gap-override:0%}
 :root{
   /* One side gutter for everything in the sheet and the sidebar: title, area line, chips,
      the breaks card and the rows. Edges at 12, 14, 15, 18 and 24 px read as "almost aligned",
@@ -87,8 +97,8 @@ try {
   --sh:0 2px 14px rgba(28,25,23,.12); --sh2:0 1px 8px rgba(28,25,23,.08);
   --scrim:linear-gradient(180deg,rgba(246,243,238,.9) 0%,rgba(246,243,238,.4) 55%,transparent 100%);
   --mono:'JetBrains Mono',ui-monospace,monospace;
-  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  --display:"Bricolage Grotesque",Inter,-apple-system,system-ui,sans-serif;
+  --sans:Inter,"Inter Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --display:"Bricolage Grotesque","Bricolage Fallback",Inter,"Inter Fallback",-apple-system,system-ui,sans-serif;
 }
 :root[data-theme="dark"]{
   --bg:#121110; --surface:#1b1a18; --surface2:#24221f; --surface3:#2e2b27;
