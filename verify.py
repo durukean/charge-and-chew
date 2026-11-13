@@ -1903,6 +1903,30 @@ check(re.search(r"(?m)^\s*boot = fromMe \? \(\) => locate\('route', \{ thenRoute
 # The update toast is for a page older than its worker only (the first visit after a deploy
 # is already the new page: network-first). The page compares its SW_VER with the worker's
 # VERSION, so the two must move together.
+# ---- PERF-B3/B4 ----
+# localAt asks Intl once per zone per UTC hour and does the rest with arithmetic: it must give
+# exactly what formatToParts gives, across DST changes, midnights and zones.
+_la = _html[_html.index("const TZ_FMT = new Map()"):_html.index("/* The nearest of the given chains")]
+if _node:
+    _r9 = subprocess.run([_node, "-e", _la + r"""
+const ref = (ms, tz) => { const f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
+  const p = {}; for (const x of f.formatToParts(new Date(ms))) p[x.type] = x.value;
+  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5,
+    wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday) }; };
+const Z = ['America/Los_Angeles', 'America/Denver', 'America/Phoenix', 'America/Chicago', 'America/New_York', 'America/Indiana/Indianapolis', 'America/Anchorage', 'Pacific/Honolulu', 'America/Boise', 'America/Detroit'];
+const f = []; let n = 0, seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const at = [Date.UTC(2026, 2, 8, 9, 59), Date.UTC(2026, 2, 8, 10, 0), Date.UTC(2026, 10, 1, 8, 59, 59), Date.UTC(2026, 10, 1, 9, 0), Date.UTC(2026, 11, 31, 23, 59, 59), Date.UTC(2027, 0, 1, 7, 30)];
+for (let i = 0; i < 3000; i++) at.push(Date.UTC(2026, 0, 1) + Math.floor(rnd() * 400 * 864e5));
+for (const ms of at) for (const tz of Z) { n++; const a = JSON.stringify(localAt(ms, tz)), b = JSON.stringify(ref(ms, tz)); if (a !== b && f.length < 5) f.push(tz + ' ' + new Date(ms).toISOString() + ' ' + a + ' vs ' + b); }
+console.log(f.length ? f.join("\n") : "OK " + n);"""], capture_output=True, text=True)
+    check(_r9.stdout.strip().startswith("OK"), "localAt's cached offsets disagree with Intl:\n  " + (_r9.stdout + _r9.stderr).strip()[:500])
+check("const picks = breakPicksOnce(vis);" in _html
+      and "if (pickMemo && pickMemo.route === route && pickMemo.key === key) return pickMemo.picks;" in _html
+      and "const key = [h, String(leavePick), leaveDay, chainSig(), Math.floor(Date.now() / 60000)].join('|');" in _html,
+      "the plan is worked out on every render again, or its memo ignores the leaving time, day, chains or minute")
+check("for (const [re, key] of chainRes()) {" in _html and "for (const [re, val] of netRes()) {" in _html
+      and _live("setTimeout(warmQueryRes, 1200);") and "new RegExp('(^|\\\\s)' + word" not in _html[_html.index("function parseQuery(raw) {"):],
+      "parseQuery compiles its ~300 regexes on every call again (464 ms first search), or they are not warmed at idle")
 # ---- B05 / B06: what is saved ----
 # B05: only the Tesla / Other segment, an × on its chip and Clear all save the network; a network
 # picked under "Networks here" or named in a search is for now (and the link), never cc_net.

@@ -3912,6 +3912,28 @@ function knownTown(t) {
   }
   return null;
 }
+/* PERF-B4: parseQuery built ~300 RegExps (every chain alias, every network word) on EVERY call;
+   the first search of a session spent 368 ms compiling them (464 ms to the frame at 4x CPU).
+   Built once (none is global, so none keeps a lastIndex), and compiled a few at a time while
+   the page is idle after boot, so the first Enter does not pay for it. */
+let CHAIN_RES = null, NET_RES = null;
+// A trailing s or es as well: "ihops", "taco bells", "wawas" were not chains, and the leftover
+// word went off to be geocoded as a town. Not for a food word standing in for a chain: "tacos"
+// means every taco place, not Taco Bell.
+const chainRes = () => CHAIN_RES || (CHAIN_RES = CHAIN_ALIAS.map(([alias, key]) => [new RegExp('(^|\\s)' +
+  alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + (PLURAL_NO.has(alias) ? '' : '(?:e?s)?') + CHAIN_TAIL + '(\\s|$)'), key]));
+const netRes = () => NET_RES || (NET_RES = NET_WORDS.map(([word, val]) => [new RegExp('(^|\\s)' + word + '(\\s|$)'), val]));
+function warmQueryRes() {
+  const all = chainRes().map(x => x[0]).concat(netRes().map(x => x[0]));
+  let i = 0;
+  const later = f => window.requestIdleCallback ? requestIdleCallback(f, { timeout: 5000 }) : setTimeout(f, 60);
+  const step = () => {
+    const end = performance.now() + 8;
+    while (i < all.length && performance.now() < end) all[i++].test(' warm up the search ');
+    if (i < all.length) later(step);
+  };
+  later(step);
+}
 function parseQuery(raw) {
   let t = ' ' + normalise(raw) + ' ';
   // "dc" on its own is the city; elsewhere ("dc fast charger") it is charger talk and goes.
@@ -3919,13 +3941,8 @@ function parseQuery(raw) {
   const here = HERE_RE.test(t);
   if (here) t = t.replace(new RegExp(HERE_RE.source, 'g'), ' ');
   const chains = [];
-  for (const [alias, key] of CHAIN_ALIAS) {
+  for (const [re, key] of chainRes()) {
     if (chains.indexOf(key) !== -1) continue;
-    // A trailing s or es as well: "ihops", "taco bells", "wawas" were not chains, and the
-    // leftover word went off to be geocoded as a town.
-    // Not for a food word standing in for a chain: "tacos" means every taco place, not Taco Bell.
-    const re = new RegExp('(^|\\s)' + alias.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') +
-      (PLURAL_NO.has(alias) ? '' : '(?:e?s)?') + CHAIN_TAIL + '(\\s|$)');
     if (re.test(t)) { chains.push(key); t = t.replace(re, ' '); }
   }
   /* Food words that mean a set of chains we already have: "tacos" is Taco Bell, Del Taco
@@ -3965,8 +3982,7 @@ function parseQuery(raw) {
   // "supercharger" in the place text, and "supercharger westwood" geocodes to a Tesla
   // Supercharger in Augusta, Georgia rather than Westwood, Los Angeles.
   let net = null;
-  for (const [word, val] of NET_WORDS) {
-    const re = new RegExp('(^|\\s)' + word + '(\\s|$)');
+  for (const [re, val] of netRes()) {
     while (re.test(t)) { if (!net) net = val; t = t.replace(re, ' '); }
   }
   /* "somewhere to eat", "food near me" — a category, not a chain. Only counts when the
@@ -6653,7 +6669,7 @@ function tzOf(s) {
   if ((s.st === 'OR' && s.lon > -117.2) || (s.st === 'NV' && s.lon > -114.1) || (s.st === 'KS' && s.lon < -101.4)) return 'America/Denver';
   return 'America/' + (ST_TZ[s.st] || 'New_York');
 }
-const TZ_FMT = new Map();
+const TZ_FMT = new Map(), TZ_OFF = new Map();   // zone -> formatter; zone@UTC hour -> offset in ms
 // Minutes after local midnight, the local date, that date as a day number (days since 1970,
 // for counting the days of a drive) and the weekday (0 = Sunday), of a moment at a stop.
 function localAt(ms, tz) {
@@ -6665,9 +6681,20 @@ function localAt(ms, tz) {
   }
   if (!f) { const d = new Date(ms);
     return { min: d.getHours() * 60 + d.getMinutes(), day: d.toDateString(), dn: Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5), wd: d.getDay() }; }
-  const p = {}; for (const x of f.formatToParts(new Date(ms))) p[x.type] = x.value;
-  return { min: (+p.hour % 24) * 60 + +p.minute, day: p.year + '-' + p.month + '-' + p.day, dn: Date.UTC(+p.year, +p.month - 1, +p.day) / 864e5,
-    wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday) };
+  /* PERF-B3: formatToParts was 180 ms of a 440 ms long task on LA -> New York (4x CPU): it ran
+     per candidate stop per planning step. A zone's offset only changes on a whole hour (DST),
+     so ask Intl once per zone per UTC hour and do the rest with arithmetic. */
+  const hr = Math.floor(ms / 36e5), key = tz + '@' + hr;
+  let off = TZ_OFF.get(key);
+  if (off === undefined) {
+    const p = {}; for (const x of f.formatToParts(new Date(hr * 36e5))) p[x.type] = x.value;
+    off = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute) - hr * 36e5;
+    if (TZ_OFF.size > 4000) TZ_OFF.clear();
+    TZ_OFF.set(key, off);
+  }
+  const L = new Date(ms + off), dn = Math.floor((ms + off) / 864e5);
+  return { min: L.getUTCHours() * 60 + L.getUTCMinutes(), day: L.getUTCFullYear() + '-' + (L.getUTCMonth() + 1) + '-' + L.getUTCDate(),
+    dn, wd: L.getUTCDay() };
 }
 const hhmm = min => String(Math.floor(min / 60)).padStart(2, '0') + String(min % 60).padStart(2, '0');
 // "tomorrow 8:00 am" in the evening; after midnight the same morning is "this morning".
@@ -6879,6 +6906,20 @@ document.addEventListener('click', e => {
   box.hidden = open; box.textContent = open ? '' : b.dataset.why;
   if (!open) b.setAttribute('aria-expanded', 'true');
 });
+/* The plan, worked out once per input (PERF-B3). A new route renders twice (applyCorridor, then
+   the post-fit zoom), and each render planned LA -> New York from scratch: ~200 ms at 4x CPU
+   for the same answer. Keyed on the route, the stops it plans from, the leaving time and day,
+   the chains asked for and the minute ("now" moves on). */
+let pickMemo = null;
+function breakPicksOnce(vis) {
+  let h = vis.length;
+  for (const s of vis) h = (h * 31 + s.id) | 0;
+  const key = [h, String(leavePick), leaveDay, chainSig(), Math.floor(Date.now() / 60000)].join('|');
+  if (pickMemo && pickMemo.route === route && pickMemo.key === key) return pickMemo.picks;
+  const picks = breakPicks(vis);
+  pickMemo = { route, key, picks };
+  return picks;
+}
 function breakPicks(vis) {
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return [];
   const [first, lastStop] = routeEnds(vis);
@@ -7014,7 +7055,7 @@ function arriveMs(s) {
 function breaksCard(vis) {
   lastPlan = null;
   if (!route || !route.mileAt || route.hwy || route.mi < 60) return '';
-  const picks = breakPicks(vis);
+  const picks = breakPicksOnce(vis);
   const [first, last] = routeEnds(vis);
   if (!first) return '';
   const perMi = route.hr / Math.max(1, route.mi), t0 = departMs(first);
@@ -7730,6 +7771,8 @@ else if (q.get('leave') === 'now') leavePick = 'now';   // a link's leaving time
 if (DAY_RE.test(q.get('day') || '') && leavePick !== 'now') { leaveDay = q.get('day'); if (typeof leavePick !== 'number') leavePick = MORNING; }
 booting = false;
 render();
+// The search regexes, compiled while the page is idle (PERF-B4), not on the first Enter.
+setTimeout(warmQueryRes, 1200);
 
 let boot = null;
 if (q.get('at')) {
