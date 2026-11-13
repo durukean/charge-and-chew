@@ -4995,13 +4995,20 @@ function parseHours(spec) {
   if (/^24\/7$/i.test(t)) return { always: true };
   const week = [[], [], [], [], [], [], []];
   let understood = false;
-  for (const rule of t.split(';')) {
+  /* B07: rules joined with a comma ("Mo-Fr 07:00-22:00, Sa 08:00-20:00") are rules, not spans:
+     a comma after a time and before a day starts a new one. (No lookbehind: iOS 16.0-16.3.) */
+  const rules = t.replace(/(\d)\s*,\s*((?:mo|tu|we|th|fr|sa|su|ph|sh)\b)/gi, '$1;$2').split(';');
+  for (const rule of rules) {
     const r = rule.trim(); if (!r) continue;
     const m = r.match(/^([A-Za-z,\-\s]+?)\s+(.+)$/);
     if (!m) return null;
     const dayPart = m[1].toLowerCase().replace(/\s/g, ''), timePart = m[2].trim();
     const days = [];
+    let holiday = false;
     for (const chunk of dayPart.split(',')) {
+      /* Public and school holidays (PH, SH): we cannot know which days those are, so the rule
+         is left out -- "; PH off" used to make the whole spec unreadable. */
+      if (chunk === 'ph' || chunk === 'sh') { holiday = true; continue; }
       const range = chunk.split('-');
       const a = OH_DAYS[range[0].slice(0, 2)];
       if (a === undefined) return null;
@@ -5012,6 +5019,7 @@ function parseHours(spec) {
         for (let d = a; ; d = (d + 1) % 7) { days.push(d); if (d === b) break; }
       }
     }
+    if (!days.length && holiday) continue;
     if (/^(off|closed)$/i.test(timePart)) { days.forEach(d => week[d] = []); understood = true; continue; }
     const spans = [];
     for (const sp of timePart.split(',')) {
@@ -5034,12 +5042,14 @@ function hoursNow(spec, now, tz) {
   now = now || new Date();
   const lz = tz ? localAt(+now, tz) : null;
   const mins = lz ? lz.min : now.getHours() * 60 + now.getMinutes(), day = lz ? lz.wd : now.getDay();
-  const fmt = m => String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
-  for (const [a, b] of p.week[day]) {
-    // a span ending past midnight is written 20:00-02:00
-    if (b > a ? (mins >= a && mins < b) : (mins >= a || mins < b))
-      return { open: true, note: 'Open until ' + fmt(b) };
-  }
+  const fmt = m => m === 1440 ? 'midnight' : String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  /* A span ending past midnight is written 20:00-02:00. Its small hours belong to the NEXT day
+     (B04): at 1 am Friday "Fr-Sa 10:00-03:00" is not open yet -- Thursday's span is the one
+     that counts, and it closed at 23:00. */
+  for (const [a, b] of p.week[day])
+    if (b > a ? (mins >= a && mins < b) : mins >= a) return { open: true, note: 'Open until ' + fmt(b) };
+  for (const [a, b] of p.week[(day + 6) % 7])
+    if (b <= a && mins < b) return { open: true, note: 'Open until ' + fmt(b) };
   const later = p.week[day].filter(([a]) => a > mins).sort((x, y) => x[0] - y[0])[0];
   if (later) return { open: false, note: 'Opens ' + fmt(later[0]) };
   for (let i = 1; i <= 7; i++) {

@@ -45,6 +45,24 @@ CASES = [
     ("Mo-Fr 01:00-03:00",                 "2026-11-09T07:00:00Z", False, "America/Los_Angeles"),
     ("Mo-Sa 07:00-21:00",                 "2026-11-10T03:30:00Z", True,  "America/Denver"),   # 8:30 pm Mon
     ("Mo-Sa 07:00-21:00",                 "2026-11-10T03:30:00Z", False, "America/Chicago"),  # 9:30 pm Mon
+    # B04: the small hours belong to the night before. 2026-11-13 is a Friday.
+    ("Mo-Th 10:00-23:00; Fr-Sa 10:00-03:00; Su 10:00-23:00", "2026-11-13T01:00", False),  # Fri 1 am: Thu closed at 23:00
+    ("Mo-Th 10:00-23:00; Fr-Sa 10:00-03:00; Su 10:00-23:00", "2026-11-14T01:00", True),   # Sat 1 am: Fri's span
+    ("Mo-Th 10:00-23:00; Fr-Sa 10:00-03:00; Su 10:00-23:00", "2026-11-15T01:00", True),   # Sun 1 am: Sat's span
+    ("Mo-Th 10:00-23:00; Fr-Sa 10:00-03:00; Su 10:00-23:00", "2026-11-15T23:30", False),
+    ("Mo-Th 10:00-23:00; Fr-Sa 10:00-03:00; Su 10:00-23:00", "2026-11-13T23:30", True),   # Fri night, its own span
+    ("Mo-Su 06:00-24:00",                 "2026-11-13T23:30", True),
+    ("Fr 22:00-02:00",                    "2026-11-14T01:00", True),    # Sat 1 am, Friday's late span
+    ("Fr 22:00-02:00",                    "2026-11-13T01:00", False),   # Fri 1 am: Thursday has none
+    # B07: holidays are skipped, not fatal; comma-joined rules are rules.
+    ("Mo-Su 06:00-23:00; PH off",         "2026-11-13T12:00", True),
+    ("Mo-Fr 08:00-18:00; PH 10:00-14:00", "2026-11-13T09:00", True),
+    ("Mo-Fr,PH 08:00-18:00",              "2026-11-14T09:00", False),   # Saturday
+    ("Mo-Fr 07:00-22:00, Sa 08:00-20:00", "2026-11-14T09:00", True),    # Saturday
+    ("Mo-Fr 07:00-22:00, Sa 08:00-20:00", "2026-11-13T21:30", True),    # Friday
+    ("Mo-Fr 07:00-22:00, Sa 08:00-20:00", "2026-11-15T09:00", False),   # Sunday: not listed
+    ("Mo-Fr 07:00-22:00, Sa,Su 08:00-20:00", "2026-11-15T09:00", True),
+    ("PH off",                            "2026-11-13T12:00", None),    # nothing but a holiday rule
 ]
 
 # The late-food line on a stop card at 11 pm in Los Angeles (07:00 UTC next day): the chain rule's
