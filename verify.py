@@ -2757,6 +2757,43 @@ check('<div class="herosep" role="separator" aria-label="or find chargers near a
 check(":where(button,a,[role=button]):focus-visible{border-radius:8px}" in _css,
       "keyboard focus rings on controls are square again (UI-53)")
 
+# ---- guides (UI-50..52, 55) ----
+def _rd(rel):
+    f = os.path.join(HERE, rel)
+    return open(f, encoding="utf-8").read() if os.path.exists(f) else ""
+_near_idx, _along_idx, _rfi = _rd("near/index.html"), _rd("along/index.html"), _rd("road-food-index/index.html")
+# UI-50: counts on chips as the app writes them ("4,649"), and one chain count everywhere: the
+# brands minus the ice cream category, as the app's "90 chains" and the Road Food Index say.
+if D and _near_idx:
+    _nch = sum(1 for k in D["brands"] if k != "Ice cream shop")
+    _said = set(re.findall(r"(\d+) chains", _near_idx + _along_idx + _rfi + _html))
+    check(_said == {str(_nch)}, f"the chain count differs between pages: {sorted(_said)}, data has {_nch} (UI-50)")
+    check(not re.search(r"<small>\d{4,}", _near_idx + _along_idx), "a guide chip count has no thousands separator (UI-50)")
+# UI-51: the lead paragraph is above the body text, not below it.
+check(re.search(r"(?m)^\.lead\{[^}]*font-size:17px", _css_pages) is not None, "the guides' .lead is smaller than the body text (UI-51)")
+# UI-52: a Copy citation button with a live "Copied", and download pills that say they download.
+if _rfi:
+    check('<p class="cite" id="cite-text">' in _rfi
+          and re.search(r'<button type="button" class="copybtn" data-copy="cite-text"><svg[^>]*>.*?</svg>Copy citation</button><span class="copied" role="status" aria-live="polite"></span>', _rfi, re.S) is not None
+          and "navigator.clipboard.writeText(t)" in _rfi,
+          "the Road Food Index lost its Copy citation button (UI-52)")
+    _dl = re.findall(r'<a href="[a-z-]+\.csv" download><svg class="dlg"[^>]*>.*?</svg>', _rfi, re.S)
+    check(len(_dl) >= 3 and len(_dl) == len(re.findall(r'\.csv" download>', _rfi)), "a Road Food Index download pill has no download glyph (UI-52)")
+# UI-55: guide cards show at most 4 food chips and "+N", the app's quiet signals, and the trip
+# table's meal label is the app's amber pill.
+_cards_sample = [_rd(f) for f in ("near/ihop/ca/index.html", "near/mcdonald-s/tx/index.html", "along/i-95/index.html")]
+_cards_sample = [c for c in _cards_sample if c]
+if _cards_sample:
+    _cc = [c for doc in _cards_sample for c in re.findall(r'<div class="c">(.*?)</div>\n<div class="l">', doc, re.S)]
+    check(_cc and max(len(re.findall(r'<i>\d+ min</i>', c)) for c in _cc) <= 4
+          and any('<span class="plus">+' in c for c in _cc),
+          "guide cards show more than 4 food chips, or no '+N' (UI-55)")
+    _sp = "".join(_cards_sample)
+    check('<span class="h24">24h</span>' in _sp and '<span class="sig wc" title="The charger is at a highway rest area or service plaza.' in _sp and '<span class="sig kids" title="A playground is mapped' in _sp,
+          "guide cards lost the app's quiet signals (24h, restroom likely, playground) (UI-55)")
+check("table.trip i.ml.meal{color:var(--chew);background:var(--chew-bg);padding:1px 7px;border-radius:999px}" in _css_pages,
+      "the trip table's meal label is plain amber text, not the app's pill (UI-55)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

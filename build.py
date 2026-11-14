@@ -26,6 +26,7 @@ STATES = {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"Cali
 "UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"}
 
 from data_reader import load_data
+import planner   # the app's plan and stop-signal logic, ported (site cards and /trip/ pages)
 D = load_data(os.path.join(HERE, "data.js"))
 sites = {s["id"]: s for s in D["sites"]}
 brands, matches = D["brands"], {int(k): v for k, v in D["matches"].items()}
@@ -77,6 +78,9 @@ def place_name(s):
 def mins(m): return max(1, round(m / WALK))
 # Precomputed categories read as a kind of place, not a brand: "near an ice cream shop".
 CATEGORY_KEYS = {"Ice cream shop"}
+# How many chains, said one way everywhere (UI-50): the brands minus the categories. /near/ said
+# "91 chains" (it counted ice cream shops) while About and the Road Food Index said 90.
+N_CHAINS = sum(1 for k in brands if k not in CATEGORY_KEYS)
 def near(key):
     """What follows "near" in a title: the brand, or "an ice cream shop" for a category."""
     return f"{art(key)} {key.lower()}" if key in CATEGORY_KEYS else key
@@ -149,7 +153,7 @@ header nav{margin-left:auto;display:flex;gap:14px}
 @media(max-width:480px){header nav{margin-left:-6px}}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
 h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
-.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead{color:var(--dim);margin-bottom:16px;font-size:17px;max-width:62ch}   /* above the 16 px body, not under it (UI-51) */
 .lead b{color:var(--txt)}
 .nw{white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
@@ -176,8 +180,13 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .card .a{color:var(--dim2);font-size:12.5px;margin-top:4px}
 .card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c>span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}   /* the chip, not a name's own .nw span */
+.card .c>span.plus{background:none;color:var(--dim2);padding-left:2px}   /* "+N", as in the app (not .more: that is the "Showing 60 of N" box) */
+/* The app's quiet signals (.sig): 24h on the speed line, and one signal a card shows at any hour (UI-55) */
+.card .sp .h24{font-weight:600;color:var(--txt)}
+.sig{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:12px;color:var(--dim);white-space:nowrap}
+.sig svg{width:12px;height:12px;flex-shrink:0;color:var(--dim2)}
 .card .c>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
-.xh{font-size:10.5px;font-weight:700;color:var(--warn);margin-left:6px;padding-left:6px;border-left:1px solid var(--line2,#d8d0c5);white-space:nowrap}
+.xh{font-size:11px;font-weight:700;color:var(--warn);margin-left:6px;padding-left:6px;border-left:1px solid var(--line2,#d8d0c5);white-space:nowrap}
 .card .c b{font-weight:700}
 .card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
 .card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
@@ -227,6 +236,11 @@ ul.method li{margin-bottom:6px}
 ul.method b{color:var(--txt)}
 .cite{background:var(--surface2);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;
   font-size:14px;line-height:1.6;color:var(--txt);margin-bottom:12px}
+.copyrow{display:flex;align-items:center;gap:12px;margin:-2px 0 16px}
+.copybtn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:10px;cursor:pointer;
+  font:700 14px var(--sans);color:var(--txt);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
+.copied{font-size:14px;font-weight:600;color:var(--good)}
+.chips.dl a{display:inline-flex;align-items:center;gap:6px}.chips.dl .dlg{flex-shrink:0;color:var(--accent)}
 @media(max-width:520px){table.idx .opt{display:none}table.idx th,table.idx td{padding:9px 8px}}
 h2+p,h2+.lead{margin-bottom:12px}
 table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
@@ -240,7 +254,7 @@ table.trip td:first-child{white-space:nowrap;color:var(--txt);font-variant-numer
 table.trip small{color:var(--dim2);font-size:12.5px}
 table.trip td a{color:inherit;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
 table.trip i.ml{font-style:normal;font-weight:700;color:var(--dim)}
-table.trip i.ml.meal{color:var(--chew)}
+table.trip i.ml.meal{color:var(--chew);background:var(--chew-bg);padding:1px 7px;border-radius:999px}   /* the app's meal pill (UI-55) */
 table.trip tr.gap td b{color:var(--warn)}
 .plannote{color:var(--dim);font-size:14px;line-height:1.6;margin:-8px 0 22px}
 .faq{display:flex;flex-direction:column;gap:8px}
@@ -520,22 +534,33 @@ XH_MARK = ('<small class="xh" title="Across a highway from the charger: the walk
 def xh_mark(s, k):
     return XH_MARK if k in (s.get("xh") or ()) else ""
 
+CARD_CHIPS = 4   # 4 + "+N": six chips ran to five lines on a phone, the app shows up to 3 (UI-55)
+
+def sig_html(x):
+    """The app's .sig (sigHtml): a 12 px line icon and a few words, quiet, the reason in the title."""
+    kind, tag, why = x
+    return f'<span class="sig {kind}" title="{esc(why)}">{planner.SIG_ICON[kind]}<span>{esc(tag)}</span></span>'
+
 def site_card(s, focus, root):
-    """Mirrors the app's list row: network mark, speed badge by tier, food chips in amber."""
+    """Mirrors the app's list row: network mark, speed badge by tier, food chips in amber, and
+    the one signal the row would show at any hour (planner.quiet_sig)."""
     m = matches.get(s["id"], {})
     chains = []
     xh = s.get("xh") or ()
-    for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[0] in xh, x[1]))[:6]:
+    for k, d in sorted(m.items(), key=lambda x: (x[0] != focus, x[0] in xh, x[1]))[:CARD_CHIPS]:
         name = '<b>' + bn(k) + '</b>' if k == focus else bn(k)
         chains.append(f"<span>{brands[k]['e']} {name} <i>{mins(d)} min</i>{xh_mark(s, k)}</span>")
     kw = s.get("kw") or 0
     spd = f'<s class="spd {speed_tier(kw)}">{kw} kW</s>' if kw else ""
     stalls = f"<b>{s['stalls']} stall{'s' if s['stalls'] != 1 else ''}</b>" if s.get("stalls") else ""
     net = esc(s.get("net", ""))
-    extra = f'<span>+{len(m) - 6}</span>' if len(m) > 6 else ""
+    h24 = '<span class="h24">24h</span>' if s.get("h24") else ""
+    sg = planner.quiet_sig(s, RAW_MATCHES.get(s["id"], {}))
+    sig = sig_html(sg) if sg else ""
+    extra = f'<span class="plus">+{len(m) - CARD_CHIPS}</span>' if len(m) > CARD_CHIPS else ""
     return f"""<div class="card"><div class="lead">{mark_html(s.get("net", ""))}</div><div class="body">
 <div class="n">{esc(s['name'])}</div>
-<div class="sp">{spd}{stalls}<span>{net}</span></div>
+<div class="sp">{spd}{stalls}{h24}<span>{net}</span>{sig}</div>
 <div class="a">{esc(s['street'])}, {esc(s['city'])}, {s['st']}</div>
 <div class="c">{''.join(chains)}{extra}</div>
 <div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination={s['lat']},{s['lon']}" target="_blank" rel="noopener">Directions</a>\
@@ -619,7 +644,7 @@ for key, b in brands.items():
         if len(v) > STATE_CARD_CAP:
             cards += (f'<p class="more">Showing the {STATE_CARD_CAP} closest of {len(v):,}. '
                       f'<a href="../../../?chain={esc(key)}&amp;state={st}">Open the map to see them all →</a></p>')
-        others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c}</small></a>'
+        others = "".join(f'<a href="../../{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c:,}</small></a>'
                          for k, c in sorted(state_chain[st].items(), key=lambda x: -x[1]) if k != key)
         title = f"EV fast chargers near {near(key)} in {sn} ({len(v):,})"
         desc = f"All {len(v):,} EV DC fast chargers in {sn} with {art(key)} {key} within walking distance — network, power, walk time and directions."
@@ -642,20 +667,21 @@ for key, b in brands.items():
 
 # ---- near/index.html ----
 chain_index_links.sort(reverse=True)
-chains_html = "".join(f'<a href="{cs}/">{brands[k]["e"]} {bn(k)} <small>{n}</small></a>' for n, k, cs in chain_index_links)
+# Counts as the app writes them, "4,649" (UI-50)
+chains_html = "".join(f'<a href="{cs}/">{brands[k]["e"]} {bn(k)} <small>{n:,}</small></a>' for n, k, cs in chain_index_links)
 # Only the strongest few chains per state. Listing all 2,952 combinations turned this into
 # a link farm: it dilutes link equity and reads as low quality. The rest stay reachable from
 # each chain's own page.
 HUB_PER_STATE = 8
 states_html = "".join(
     f'<h2>{STATES.get(st, st)}</h2><div class="chips">' +
-    "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c}</small></a>'
+    "".join(f'<a href="{slug(k)}/{st.lower()}/">{brands[k]["e"]} {bn(k)} <small>{c:,}</small></a>'
             for k, c in sorted(cm.items(), key=lambda x: -x[1])[:HUB_PER_STATE]) +
     (f'<a href="../?state={st}"><b>all {len(cm)} in {st} →</b></a>' if len(cm) > HUB_PER_STATE else "")
     + "</div>"
     for st, cm in sorted(state_chain.items(), key=lambda x: STATES.get(x[0], x[0])))
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
-<p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
+<p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {N_CHAINS} chains (or an ice cream shop) within a 10-minute walk. Pick a chain, or jump to a state.</p>
 <div class="ctas"><a class="cta" href="../">Open the interactive map →</a>
 <a class="cta sec" href="../along/">By interstate</a><a class="cta sec" href="../in/">By city</a></div>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
@@ -787,13 +813,13 @@ left out — on an interstate run they cost more time than they save.<!--rfi--><
 
     # cross-link the corridor pages to each other + an index
     if hw_links:
-        chips = "".join(f'<a href="../{sl}/">{r} <small>{n}</small></a>' for r, sl, n in hw_links)
+        chips = "".join(f'<a href="../{sl}/">{r} <small>{n:,}</small></a>' for r, sl, n in hw_links)
         for r, sl, n in hw_links:
             f = os.path.join(HERE, f"along/{sl}/index.html")
             html_doc = open(f).read().replace('<div class="chips" id="hwchips"></div>',
                 f'<div class="chips">{chips}</div>')
             open(f, "w").write(html_doc)
-        idx_chips = "".join(f'<a href="{sl}/">{r} <small>{n} chargers</small></a>' for r, sl, n in hw_links)
+        idx_chips = "".join(f'<a href="{sl}/">{r} <small>{n:,} chargers</small></a>' for r, sl, n in hw_links)
         body = f'''<h1>EV fast chargers by interstate</h1>
 <p class="lead">Pick an interstate to see every fast charger within {CORRIDOR_MI:g} miles of it, in order
 along the route, with the restaurants and stores within a 10-minute walk of each stop.</p>
@@ -803,7 +829,7 @@ along the route, with the restaurants and stores within a 10-minute walk of each
 <h2>Planning a specific drive?</h2>
 <p class="lead">City-to-city guides pick the stops for you: <a href="../trip/">EV road trip charging with food nearby →</a></p>
 <h2>Or browse by chain</h2>
-<p class="lead">After a specific brand instead? <a href="../near/">All 90 chains, state by state →</a></p>'''
+<p class="lead">After a specific brand instead? <a href="../near/">All {N_CHAINS} chains, state by state →</a></p>'''
         page("along/index.html", "EV fast chargers along the interstates",
              "Fast chargers along I-95, I-10, I-5, I-80 and other major US interstates, in route "
              "order, with nearby food and shopping for each stop.", body, "along/")
@@ -849,7 +875,6 @@ def trip_card(s, focus, root, href):
 # is the app's own code ported, fed the same route, so "Open this drive in the app" opens on the
 # same stops at the same times (tools/trip_plan_check.mjs holds the two together). The date is
 # the data's: clocks only move with daylight saving, so the pages change with the data.
-import planner
 PLAN_DAY = _dt.date.fromisoformat(D["generated"])
 PLAN_LEAVE = 8 * 60
 FAQ_CARS = ("Tesla Model Y", "Ford Mustang Mach-E", "Hyundai Ioniq 5")
@@ -1191,7 +1216,7 @@ if os.path.exists(TRIP_PATH):
     if trip_links:
         names = {sl: (x, y, n) for x, y, sl, n in trip_links}
         chip = lambda sl, pre, unit="": (f'<a href="{pre}{sl}/">{esc(names[sl][0])} &rarr; {esc(names[sl][1])} '
-                                         f'<small>{names[sl][2]}{unit}</small></a>')
+                                         f'<small>{names[sl][2]:,}{unit}</small></a>')
         # Related drives, not all 150: the way back, the other drives from the same start or to
         # the same end (nearest first, so Atlanta -> Miami also gets Orlando -> Miami), the drives
         # on from the destination, then the nearest others.
@@ -1265,7 +1290,7 @@ for path, key, st in NEAR_TRIP_SLOTS:
                f"<p>How many of each drive&rsquo;s fast chargers{' in ' + esc(STATES.get(st, st)) if st else ''} "
                f"have {art(key)} {bn(key)} within a walk:</p><div class=\"chips\">" +
                "".join(f'<a href="{pre}{sl}/">{esc(trip_names[sl][0])} &rarr; {esc(trip_names[sl][1])} '
-                       f'<small>{c} stop{"s" if c != 1 else ""}</small></a>' for sl, c in top) + "</div>")
+                       f'<small>{c:,} stop{"s" if c != 1 else ""}</small></a>' for sl, c in top) + "</div>")
     doc = open(f).read()
     open(f, "w").write(doc.replace("<!--trips-->\n", sec + ("\n" if sec else ""), 1))
 
@@ -1346,6 +1371,18 @@ else:
                   "you leave at 8 am. Each guide has the full plan, every charger on the way and the food a walk "
                   "from each one.")
 
+# UI-52: the download pills say they download (a glyph; they already carry `download`), and the
+# citation has a Copy button that says "Copied" to a screen reader too.
+DL_SVG = ('<svg class="dlg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>')
+COPY_SVG = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/>'
+            '<path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>')
+COPY_JS = """<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;
+var t=document.getElementById(b.getAttribute('data-copy')).textContent.replace(/\\s+/g,' ').trim(),o=b.parentNode.querySelector('.copied');
+function say(m){o.textContent=m;clearTimeout(say.t);say.t=setTimeout(function(){o.textContent=''},3000)}
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){say('Copied')},function(){say('Select the text to copy it')});
+else say('Select the text to copy it')});</script>"""
 _csvs = [("chains", "Chains", f"all {len(RFI['chains'])}"),
          ("interstates", "Interstates", f"all {len(RFI['interstates'])}"),
          ("states", "States", f"all {len(RFI['states'])}"),
@@ -1417,11 +1454,13 @@ merges both directions and can differ a little from official lengths.</li>
 <p class="lead">Data as of <b>{RFI_DATE}</b>. It is refreshed weekly, so the numbers on this page move with it.</p>
 
 <h2 id="download">Download the data</h2>
-<div class="chips">{''.join(f'<a href="{n}.csv" download>{l} <small>CSV, {d}</small></a>' for n, l, d in _csvs)}</div>
+<div class="chips dl">{''.join(f'<a href="{n}.csv" download>{DL_SVG}{l} <small>CSV, {d}</small></a>' for n, l, d in _csvs)}</div>
 
 <h2 id="cite">How to cite</h2>
-<p class="cite">Charge &amp; Chew, &ldquo;{RFI_TITLE},&rdquo; data as of {RFI_DATE}, {BASE}/{RFI_DIR}/. Charger data from
+<p class="cite" id="cite-text">Charge &amp; Chew, &ldquo;{RFI_TITLE},&rdquo; data as of {RFI_DATE}, {BASE}/{RFI_DIR}/. Charger data from
 the US Department of Energy (AFDC); chain locations &copy; OpenStreetMap contributors (ODbL).</p>
+<p class="copyrow"><button type="button" class="copybtn" data-copy="cite-text">{COPY_SVG}Copy citation</button><span class="copied" role="status" aria-live="polite"></span></p>
+{COPY_JS}
 <p>The tables and charts on this page are free to reuse, including commercially, under
 <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: credit
 &ldquo;Charge &amp; Chew Road Food Index&rdquo; with a link to this page, and keep the OpenStreetMap credit above.</p>

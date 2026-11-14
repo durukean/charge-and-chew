@@ -54,6 +54,13 @@ ST_TZ = dict(re.findall(r"(\w\w): '([\w/]+)'", _js(r"const ST_TZ = \{(.*?)\};", 
 if len(MEALS) != 3 or not NOT_A_MEAL or not NO_BREAKFAST or not LATE or len(ST_TZ) < 30:
     raise SystemExit("planner.py: index.html's plan constants changed shape")
 
+# The stop signals the guide cards can show without a clock (UI-55), read like the rest.
+TRAVEL_STOPS = set(_strs(_js(r"const TRAVEL_STOPS = new Set\(\[(.*?)\]\);", "TRAVEL_STOPS")))
+RR_24 = set(_strs(_js(r"const RR_24 = new Set\(\[(.*?)\]\);", "RR_24")))
+SIG_ICON = dict(re.findall(r"^  (wc|kids): '(<svg[^']*</svg>)',?$", _js(r"const SIG_ICON = \{(.*?)\n\};", "SIG_ICON"), re.M))
+if not TRAVEL_STOPS or not RR_24 or set(SIG_ICON) != {"wc", "kids"}:
+    raise SystemExit("planner.py: index.html's stop-signal constants changed shape")
+
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 
@@ -385,3 +392,41 @@ def charge_min(s, car):
     eff = min(cmax, kw or cmax)
     if not eff: return None
     return jsround((0.7 * bat) / (0.55 * eff) * 60)
+
+
+# ---------------------------------------------------------------------- stop signals
+def quiet_sig(s, m):
+    """The one signal a guide card shows, as the app's rows do (rowSigs), for what holds at any
+    hour: a restroom likely (restroomSig's reasons that need no clock -- a rest area, a travel
+    stop a short walk away, mapped public toilets, a 24-hour diner next door), else a playground
+    (kidsSig). The store and mall reasons depend on the hour, so a page that has no hour leaves
+    them out. m is the stop's raw matches. Returns (kind, tag, why) or None."""
+    if s.get("lvl") == 2:
+        return None
+    xh = set(s.get("xh") or ())
+    def near(keys, lim):
+        best = None
+        for k, v in m.items():
+            if k in keys and k not in xh:
+                d = m_dist(s, v)
+                if d <= lim and (best is None or d < best[1]):
+                    best = (k, d)
+        return best
+    def next_door(k, d):
+        return f"{k} next door" if d <= 150 else f"{k}, a {walk_min(d)}-min walk"
+    def wc(short, why):
+        return ("wc", "restroom likely", short[0].upper() + short[1:] + ". " + why + " Likely, not certain.")
+    if s.get("ra"):
+        return wc("the charger is at a highway rest area or service plaza", "Those have restrooms.")
+    t = near(TRAVEL_STOPS, 250)
+    if t:
+        return wc(next_door(*t), "Travel stops like it have public restrooms and are usually open 24 hours.")
+    if s.get("wc"):
+        return wc(f"public toilets mapped {s['wc'] * 10} m away", "From OpenStreetMap.")
+    t = near(RR_24, 150)
+    if t:
+        return wc(next_door(*t), "It is usually open 24 hours, with restrooms for customers.")
+    if s.get("pg"):
+        return ("kids", f"playground {walk_min(s['pg'] * 10)} min",
+                f"A playground is mapped in OpenStreetMap about {s['pg'] * 10} m away in a straight line, on this side of any highway.")
+    return None

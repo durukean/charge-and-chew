@@ -56,7 +56,7 @@ header nav{margin-left:auto;display:flex;gap:14px}
 @media(max-width:480px){header nav{margin-left:-6px}}
 header nav a{color:var(--dim);font-size:13.5px;text-decoration:none;font-weight:600}
 h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px);line-height:1.18;margin-bottom:10px;letter-spacing:-.7px;font-weight:800}
-.lead{color:var(--dim);margin-bottom:16px;font-size:15.5px;max-width:62ch}
+.lead{color:var(--dim);margin-bottom:16px;font-size:17px;max-width:62ch}   /* above the 16 px body, not under it (UI-51) */
 .lead b{color:var(--txt)}
 .nw{white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
@@ -83,8 +83,13 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .card .a{color:var(--dim2);font-size:12.5px;margin-top:4px}
 .card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c>span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}   /* the chip, not a name's own .nw span */
+.card .c>span.plus{background:none;color:var(--dim2);padding-left:2px}   /* "+N", as in the app (not .more: that is the "Showing 60 of N" box) */
+/* The app's quiet signals (.sig): 24h on the speed line, and one signal a card shows at any hour (UI-55) */
+.card .sp .h24{font-weight:600;color:var(--txt)}
+.sig{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:12px;color:var(--dim);white-space:nowrap}
+.sig svg{width:12px;height:12px;flex-shrink:0;color:var(--dim2)}
 .card .c>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
-.xh{font-size:10.5px;font-weight:700;color:var(--warn);margin-left:6px;padding-left:6px;border-left:1px solid var(--line2,#d8d0c5);white-space:nowrap}
+.xh{font-size:11px;font-weight:700;color:var(--warn);margin-left:6px;padding-left:6px;border-left:1px solid var(--line2,#d8d0c5);white-space:nowrap}
 .card .c b{font-weight:700}
 .card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
 .card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
@@ -134,6 +139,11 @@ ul.method li{margin-bottom:6px}
 ul.method b{color:var(--txt)}
 .cite{background:var(--surface2);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px;
   font-size:14px;line-height:1.6;color:var(--txt);margin-bottom:12px}
+.copyrow{display:flex;align-items:center;gap:12px;margin:-2px 0 16px}
+.copybtn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:10px;cursor:pointer;
+  font:700 14px var(--sans);color:var(--txt);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
+.copied{font-size:14px;font-weight:600;color:var(--good)}
+.chips.dl a{display:inline-flex;align-items:center;gap:6px}.chips.dl .dlg{flex-shrink:0;color:var(--accent)}
 @media(max-width:520px){table.idx .opt{display:none}table.idx th,table.idx td{padding:9px 8px}}
 h2+p,h2+.lead{margin-bottom:12px}
 table.trip{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
@@ -147,7 +157,7 @@ table.trip td:first-child{white-space:nowrap;color:var(--txt);font-variant-numer
 table.trip small{color:var(--dim2);font-size:12.5px}
 table.trip td a{color:inherit;text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px}
 table.trip i.ml{font-style:normal;font-weight:700;color:var(--dim)}
-table.trip i.ml.meal{color:var(--chew)}
+table.trip i.ml.meal{color:var(--chew);background:var(--chew-bg);padding:1px 7px;border-radius:999px}   /* the app's meal pill (UI-55) */
 table.trip tr.gap td b{color:var(--warn)}
 .plannote{color:var(--dim);font-size:14px;line-height:1.6;margin:-8px 0 22px}
 .faq{display:flex;flex-direction:column;gap:8px}

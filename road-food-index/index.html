@@ -87,11 +87,17 @@ merges both directions and can differ a little from official lengths.</li>
 <p class="lead">Data as of <b>November 11, 2026</b>. It is refreshed weekly, so the numbers on this page move with it.</p>
 
 <h2 id="download">Download the data</h2>
-<div class="chips"><a href="chains.csv" download>Chains <small>CSV, all 90</small></a><a href="interstates.csv" download>Interstates <small>CSV, all 30</small></a><a href="states.csv" download>States <small>CSV, all 51</small></a><a href="drives.csv" download>Drives <small>CSV, all 152, with their longest gaps</small></a></div>
+<div class="chips dl"><a href="chains.csv" download><svg class="dlg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>Chains <small>CSV, all 90</small></a><a href="interstates.csv" download><svg class="dlg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>Interstates <small>CSV, all 30</small></a><a href="states.csv" download><svg class="dlg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>States <small>CSV, all 51</small></a><a href="drives.csv" download><svg class="dlg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>Drives <small>CSV, all 152, with their longest gaps</small></a></div>
 
 <h2 id="cite">How to cite</h2>
-<p class="cite">Charge &amp; Chew, &ldquo;The Road Food Index,&rdquo; data as of November 11, 2026, https://chargeandchew.com/road-food-index/. Charger data from
+<p class="cite" id="cite-text">Charge &amp; Chew, &ldquo;The Road Food Index,&rdquo; data as of November 11, 2026, https://chargeandchew.com/road-food-index/. Charger data from
 the US Department of Energy (AFDC); chain locations &copy; OpenStreetMap contributors (ODbL).</p>
+<p class="copyrow"><button type="button" class="copybtn" data-copy="cite-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>Copy citation</button><span class="copied" role="status" aria-live="polite"></span></p>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;
+var t=document.getElementById(b.getAttribute('data-copy')).textContent.replace(/\s+/g,' ').trim(),o=b.parentNode.querySelector('.copied');
+function say(m){o.textContent=m;clearTimeout(say.t);say.t=setTimeout(function(){o.textContent=''},3000)}
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){say('Copied')},function(){say('Select the text to copy it')});
+else say('Select the text to copy it')});</script>
 <p>The tables and charts on this page are free to reuse, including commercially, under
 <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>: credit
 &ldquo;Charge &amp; Chew Road Food Index&rdquo; with a link to this page, and keep the OpenStreetMap credit above.</p>
