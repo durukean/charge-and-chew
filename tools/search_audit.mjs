@@ -296,7 +296,7 @@ const CASES = [
   /* A failed lookup leaves nothing of the search before it: "bakery in denver" (offline: the
      bundled Dunkin') then "gym" said "Couldn't look up gym" with chain=Dunkin' still in the
      state and the URL. */
-  C('LA', 'bakeryDenver', 'gym', { offline: true, nochain: true, cleanurl: true, title: "Couldn't look up gym" }, '@nosignal'),
+  C('LA', 'bakeryDenver', 'gym', { offline: true, nochain: true, cleanurl: true, title: "Couldn't look up gym", toast: 'needs a signal' }, '@nosignal'),
   // the search box's x undoes the search: back where you were, the chain it set gone
   C('LA', 'fresh', 'in n out', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),
   C('LA', 'fresh', 'buc-ees', { clear: true, near: ['LA', 30], nochain: true }, '@clear'),

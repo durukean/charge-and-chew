@@ -256,7 +256,7 @@ const CASES = [
       const bad = ev.filter((e, i) => e.local !== r.stops[i].clock || e.mins !== dwell(r.stops[i]) || !e.summary.startsWith('Charge + ' + r.stops[i].label.toLowerCase() + ': '));
       return bad.length ? 'events off the card: ' + bad.slice(0, 2).map(e => `${e.summary} ${e.start} = ${e.local} (${e.zone}), ${e.mins} min`).join('; ') : ''; },
     r => r.cal && new Set(calEvents(r.cal.ics).map(e => e.zone)).size >= 2 ? '' : 'the drive did not cross a time zone in the events',
-    r => r.cal && r.cal.one && calEvents(r.cal.one).length === 1 && calEvents(r.cal.one)[0].local === r.stops[0].clock && r.cal.plan.startsWith(r.stops[0].label + ' on your plan') ? ''
+    r => r.cal && r.cal.one && calEvents(r.cal.one).length === 1 && calEvents(r.cal.one)[0].local === r.stops[0].clock && r.cal.plan.startsWith(r.stops[0].label + ' ~' + r.stops[0].clock) && /· on your plan/.test(r.cal.plan) ? ''
       : `stop card: ${JSON.stringify(r.cal && [r.cal.plan, r.cal.oneName])}`],
     { cal: true }],
 ];

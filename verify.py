@@ -1859,6 +1859,38 @@ check(_live("const w = tripWhen(t);")
       and _live("if (trip.when) { applyWhen(trip.when); track('search-trip-when', trip.when.day || 'time'); }")
       and _live("if (ahead) { leaveDay = isoOfDn(t + ahead); leavePick = w.min != null ? w.min : MORNING; }"),
       "a drive typed with a day and time no longer plans that leaving day and time")
+# ---- Batch B: UI-32..35, 40, 41 and B10/B13 ----
+check("--warn:#a14a07;" in _html and "--warn:#a14a07;" in open(os.path.join(HERE, "assets", "pages.css")).read()
+      and "--warn:#a14a07;" in open(os.path.join(HERE, "build.py")).read()
+      and "border-left:1px solid var(--line2)}   /* a hairline" in _html,
+      "'across hwy' is back to #b45309 (4.4:1 on the amber chip) or runs into the minutes (UI-32)")
+check("<div class=\"pp-plan\"><span><b>${p.meal || 'Break'} ~${clockLabel(at.min)}</b>" in _html
+      and ".pp-cal{min-height:44px;margin:-6px 0}" in _html,
+      "the stop card's plan line orphans its clock again, or its calendar button is under 44 px (UI-33)")
+check(_live("if (!isOffline()) toast(`Searching ${intent.label} ${onRoute ? 'along your route' : 'near ' + scopeLabel}…`);")
+      and _live("if (isOffline()) { const e = new Error('offline'); e.offline = true; throw e; }")
+      and _live("if (off) toast(`Looking up ${plural(intent.label)} needs a signal. The ${BUNDLED_KEYS.size} chains we bundle work offline.`);")
+      and _live("else hideToast();")
+      and _live("document.body.classList.toggle('offline', !on);")
+      and "body.offline .overlay-top{padding-top:" in _html,
+      "an offline category search says 'Searching…' again, or the offline bar covers the search box (B10, UI-34)")
+_fg = _html[_html.index("<label>Only show</label>"):_html.index("<label id=\"filtNetLabel\">")]
+check(_fg.index('data-f="kids"') < _fg.index('<label class="fsub">Hide</label>') < _fg.index('data-f="nodlr"') < _fg.index('data-f="noiso"')
+      and "Hide dealership" not in _fg and "Hide isolated" not in _fg,
+      "Filters' 'Only show' holds 'Hide ...' switches again (UI-35)")
+check('<button id="goBtn">Plan the drive</button>' in _html and _live("if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.closest('.rfield').classList.add('bad'); }")
+      and "#routeInfo.err{color:var(--bad)" in _html and '<span class="u" aria-hidden="true">mi</span>' in _html,
+      "the route form: another verb than the welcome card, '2mi', or an unstyled error (UI-40)")
+# B13: every inset has its longhands; no rule mixes :has() with other selectors; color-mix has a fallback before it.
+_css = _html[:_html.index("</style>")]
+_ins = [l for l in re.findall(r"\{[^{}]*\binset:[^;}]+", _css) if "box-shadow" not in l and not re.search(r"\btop:", l)]
+check(not _ins, f"an inset with no top/right/bottom/left before it (the in-car Chromium predates inset): {_ins[:2]}")
+_has = [r for r in re.findall(r"(?m)^[^{}\n]*:has\([^{]*\{", _css) if "," in r.split("{")[0]]
+check(not _has, f"a rule mixes :has() with other selectors (dropped whole where :has() is unknown): {_has[:2]}")
+_cm = [d for d in re.findall(r"[;{]([a-z-]+):color-mix\(", _css)]
+_cmok = all(re.search(r"\b" + re.escape(d) + r":(?!color-mix)[^;]+;" + re.escape(d) + r":color-mix\(", _css) for d in set(_cm))
+check(_cm and _cmok and len(re.findall(r"(?<![\w-])(color|background):(?!color-mix)[^;{}]+;\1:color-mix\(", _css)) == len(_cm),
+      "a color-mix() with no plain fallback before it (B13)")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app

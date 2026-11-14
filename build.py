@@ -109,7 +109,7 @@ CSS = """
   --bg:#f6f3ee;--surface:#fffdfa;--surface2:#f2eee8;--surface3:#e9e4dc;--line:#e8e2d9;--line2:#d8d0c5;
   --txt:#1c1917;--dim:#5f574f;--dim2:#6c635a;--accent:#0f7a43;--accent-ink:#fff;
   --chew:#a6510a;--chew-bg:#fbefdc;
-  --good:#0f7a43;--good-bg:#e7f4ec;--amber:#f59e0b;--warn:#b45309;--warn-bg:#fdf0dc;
+  --good:#0f7a43;--good-bg:#e7f4ec;--amber:#f59e0b;--warn:#a14a07;--warn-bg:#fdf0dc;
   --sh:0 1px 8px rgba(28,25,23,.08);--mono:'JetBrains Mono',ui-monospace,monospace;
   --sans:Inter,"Inter Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--amber-text:#c2640c;
   --display:"Bricolage Grotesque","Bricolage Fallback",Inter,"Inter Fallback",-apple-system,system-ui,sans-serif;
@@ -175,7 +175,7 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .card .c{font-size:12.5px;margin-top:9px;display:flex;flex-wrap:wrap;gap:5px 7px;color:var(--txt)}
 .card .c>span{background:var(--chew-bg);border-radius:8px;padding:3px 9px}   /* the chip, not a name's own .nw span */
 .card .c>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
-.xh{font-size:10.5px;font-weight:700;color:var(--warn);margin-left:5px;white-space:nowrap}
+.xh{font-size:10.5px;font-weight:700;color:var(--warn);margin-left:6px;padding-left:6px;border-left:1px solid var(--line2,#d8d0c5);white-space:nowrap}
 .card .c b{font-weight:700}
 .card .l{margin-top:12px;font-size:12.5px;display:flex;gap:8px;flex-wrap:wrap}
 .card .l a{text-decoration:none;font-weight:700;padding:8px 14px;border-radius:10px;
