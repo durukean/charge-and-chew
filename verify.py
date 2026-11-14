@@ -1410,7 +1410,7 @@ check(": gap ? '' : `longest leg ~${hmLabel(longest * perMi * 60)}`;" in _bc,
 # Breaks card polish (2026-11-10): the meal as a 12px amber pill (it was 10.5px), the mile under
 # the clock (it was the truncated end of the food line), a chevron, and the day change marked once.
 check(".brk.meal .bm i{align-self:flex-start;color:var(--chew);background:var(--chew-bg)" in _html
-      and ".brk .bm i{font:500 12px/1.35 var(--sans)" in _html
+      and ".brk .bm i{font:500 var(--fs-xs)/1.35 var(--sans)" in _html
       and "<span class=\"bm\">${c}<i>${meal || 'Break'}</i><small>mile ${mi}</small></span>" in _bc
       and '<svg class="chev"' in _bc and "const mark = n > day ? `<div class=\"bday\">" in _bc,
       "the breaks card rows lost their polish (meal pill, mile under the clock, chevron, one day mark)")
@@ -1450,7 +1450,7 @@ check("if (ls) ls.onchange = () => {\n    leavePick = " in _html and 'id="leaveS
       "the breaks card lost its leaving-time picker")
 check("const n = $('leaveSel'); if (n) n.focus({ preventScroll: true });" in _html,
       "changing the leaving time drops keyboard/VoiceOver focus again (the list re-render recreates the select)")
-check(".bleave select{font-size:16px;min-height:44px" in _html,
+check(".bleave select{font-size:var(--fs-input);min-height:44px" in _html and "--fs-input:16px;" in _html,
       "the leaving-time picker is under 16px on touch again (iOS zooms the page into it)")
 
 # Multi-day drives count days (2026-11-10): LA -> New York arrived "next day" after 50 hours.
@@ -1704,7 +1704,7 @@ check("#app.phone #sheet .chiprow .chip{height:44px;" in _html and "#app.phone #
 _hov = [l.strip()[:60] for l in _html.splitlines() if ":hover" in l and "@media(hover:hover)" not in l]
 check(not _hov, f"a :hover rule applies on touch screens again (sticky highlight, UI-12): {_hov[:2]}")
 # One badge vocabulary (UI-14): status tags are one outline style, "1 stall" is plain text.
-check(".tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font-size:10.5px;font-weight:700;line-height:1.6;\n  background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line2)}" in _html
+check(".tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font-size:var(--fs-2xs);font-weight:700;line-height:1.6;\n  background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line2)}" in _html
       and ".tag.free{color:var(--good)}" in _html and ".tag.iso{" not in _html and ".tag.dlr{" not in _html
       and ".tag.one{box-shadow:none;padding:0;" in _html,
       "row badges are back to several different treatments (UI-14)")
@@ -2342,7 +2342,7 @@ check(_live("const nChip = chipsFit(ent, s, label, chipRoom);")
       and _live("const chipRoom = Math.max(200, ($('list').clientWidth || 352) - 32 - (showIdx ? 60 : 56));")
       and re.search(r"\n        \$\{chains \? `<div class=\"ch\">\$\{chains\}\$\{extra\}</div>` : ''\}\n        <div class=\"sub\">\$\{spd\}", _html) is not None
       and "<div class=\"where\"><span class=\"wn\">" in _html
-      and ".row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;" in _html,
+      and ".row .ch{font-size:var(--fs-xs);margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;" in _html,
       "list rows lost their hierarchy (name, food on one line, speed line, where)")
 # UI-30: one signal component; UI-31: the moon is late food's alone.
 check(_live("const sigHtml = x => `<span class=\"sig ${x.kind}${x.n || x.closed ? ' n' : ''}\" title=\"${esc(x.why)}\">${SIG_ICON[x.kind]}<span>${esc(x.tag)}</span></span>`;")
@@ -2756,6 +2756,21 @@ check('<div class="herosep" role="separator" aria-label="or find chargers near a
 # UI-53: square controls get round keyboard rings, at zero specificity.
 check(":where(button,a,[role=button]):focus-visible{border-radius:8px}" in _css,
       "keyboard focus rings on controls are square again (UI-53)")
+
+# UI-54: one type scale. Text sizes are the --fs-* tokens (none under 11 px); only map marks,
+# emoji and close/star glyphs keep pixel sizes of their own.
+_FS_GLYPH = re.compile(r"\.bmark|\.lgsw|\.qm\b|leaflet-popup-close-button|\.rclear\b|\.pp-fav\b|\.row \.star\b|\.prx\b|\.poi-div span|#sugg button i\b|\.pkitem \.e\b|\.heropick \.e\b|\.lm\.bmark|\.wring\.none")
+_fs_bad = []
+for _m in re.finditer(r"([^{}]*)\{([^{}]*)\}", _css):
+    _sel = _m.group(1).strip().split("\n")[-1]
+    if _FS_GLYPH.search(_sel):
+        continue
+    if re.search(r"font-size:[0-9.]+px|font:(?:\d{3} )?[0-9.]+px", _m.group(2)):
+        _fs_bad.append(_sel[-50:])
+_fs_tok = dict(re.findall(r"--(fs-[a-z0-9]+):(\d+)px;", _css))
+check(not _fs_bad and len(_fs_tok) == 10 and min(int(v) for v in _fs_tok.values()) >= 11
+      and set(re.findall(r"var\(--(fs-[a-z0-9]+)\)", _css)) <= set(_fs_tok),
+      f"text sizes off the type scale (UI-54): {_fs_bad[:6]} tokens {_fs_tok}")
 
 # ---- guides (UI-50..52, 55) ----
 def _rd(rel):

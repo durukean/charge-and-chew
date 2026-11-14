@@ -85,6 +85,9 @@ try {
   --txt:#1c1917; --dim:#5f574f; --dim2:#6c635a;
   --accent:#0f7a43; --accent-ink:#ffffff;   /* charge green, 5.6:1 on white */
   --chew:#a6510a; --chew-bg:#fbefdc;        /* food amber, 5.4:1 on its tint */
+  /* Type scale (UI-54): one ladder instead of ~20 half-pixel sizes. Nothing under 11 px; 16 px is
+     the input size iOS does not zoom on. Map marks, emoji and close glyphs keep their own px. */
+  --fs-2xs:11px; --fs-xs:12px; --fs-s:13px; --fs-body:14px; --fs-m:15px; --fs-input:16px; --fs-l:17px; --fs-xl:20px; --fs-2xl:24px; --fs-3xl:28px;
   --ink:#1c1917; --ink-on:#fffdfa;          /* selection */
   --warn-ink:#ffffff;
   --overlay:rgba(28,25,23,.46);   /* one backdrop for every sheet and dialog */
@@ -129,7 +132,7 @@ html:not(.native) .app-only{display:none}   /* "Rate the app": only where there 
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);
-  font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  font-family:var(--sans);font-size:var(--fs-m);line-height:1.45;-webkit-font-smoothing:antialiased}
 button,input{font:inherit;color:inherit}
 button{background:none;border:none;cursor:pointer}
 svg{display:block}
@@ -150,7 +153,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .splash-bar{width:150px;height:3px;background:var(--surface3);border-radius:2px;overflow:hidden}
 .splash-bar i{display:block;height:100%;width:38%;background:var(--accent);border-radius:2px;animation:slide 1.1s ease-in-out infinite}
 @keyframes slide{0%{transform:translateX(-120%)}100%{transform:translateX(370%)}}
-#splash small{color:var(--dim2);font-size:13px}
+#splash small{color:var(--dim2);font-size:var(--fs-s)}
 
 /* ═══ map ═══ */
 #mapWrap{flex:1;position:relative;min-height:0}
@@ -162,7 +165,7 @@ html.native .splash-mark svg{width:96px;height:96px}
    "normal" blending keeps the overlap from adding up into a brighter line instead. */
 .leaflet-container img.leaflet-tile{mix-blend-mode:normal;width:256.5px!important;height:256.5px!important}
 .leaflet-control-attribution{background:var(--glass)!important;color:var(--dim2)!important;
-  font-size:10px!important;padding:2px 6px!important;border-radius:6px 0 0 0}
+  font-size:var(--fs-2xs)!important;padding:2px 6px!important;border-radius:6px 0 0 0}
 .leaflet-control-attribution a{color:var(--dim)!important}
 
 /* ═══ overlay ═══ */
@@ -177,7 +180,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh)}
 .searchpill .mark{width:36px;height:36px;flex-shrink:0;display:grid;place-items:center}
 .searchpill .mark svg{width:32px;height:32px}
-.searchpill input{flex:1;background:none;border:none;outline:none;font-size:14.5px;min-width:0;font-weight:500}
+.searchpill input{flex:1;background:none;border:none;outline:none;font-size:var(--fs-m);min-width:0;font-weight:500}
 .searchpill input::placeholder{color:var(--dim2);font-weight:400}
 .searchpill .clr{color:var(--dim2);padding:5px;display:none}
 .searchpill.has .clr{display:block}
@@ -192,12 +195,12 @@ html.native .splash-mark svg{width:96px;height:96px}
 #carBar{display:none}
 #carBar.show{display:flex;gap:7px;align-items:center}
 #carBar .cartag{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:12px;
-  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2);font-size:12.5px;font-weight:600;
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2);font-size:var(--fs-s);font-weight:600;
   flex:1;min-width:0}
 #carBar .cartag .m{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#carBar .cartag .spec{color:var(--dim2);font-weight:500;font-size:11px;font-family:var(--mono)}
+#carBar .cartag .spec{color:var(--dim2);font-weight:500;font-size:var(--fs-2xs);font-family:var(--mono)}
 #carBar .mine{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:12px;
-  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2);font-size:12px;font-weight:700;
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2);font-size:var(--fs-xs);font-weight:700;
   color:var(--dim);white-space:nowrap}
 #carBar .mine.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 
@@ -242,10 +245,10 @@ html.native .splash-mark svg{width:96px;height:96px}
 .qf{display:flex;gap:7px}
 .chip{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:100px;
   background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh2);
-  font-size:13px;font-weight:600;white-space:nowrap;color:var(--txt);
+  font-size:var(--fs-s);font-weight:600;white-space:nowrap;color:var(--txt);
   transition:transform .12s,background .15s,border-color .15s,color .15s}
 .chip:active{transform:scale(.94)}
-.chip .cnt{font-size:10.5px;color:var(--dim2);font-weight:500}
+.chip .cnt{font-size:var(--fs-2xs);color:var(--dim2);font-weight:500}
 .chip.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .chip.on .cnt{color:var(--ink-on);color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}   /* plain colour first (B13) */
 .chip.more{border-style:dashed;color:var(--txt);background:var(--surface);box-shadow:none}
@@ -277,11 +280,11 @@ html.native .splash-mark svg{width:96px;height:96px}
   border-radius:12px;padding:0 12px;height:42px;margin-bottom:8px}
 .rfield .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .rfield .dot.a{background:var(--good)}.rfield .dot.b{background:var(--bad)}
-.rfield input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
+.rfield input{flex:1;background:none;border:none;outline:none;font-size:var(--fs-body);min-width:0}
 .rfield input::placeholder{color:var(--dim2)}
 .rfield .mini{color:var(--dim);padding:4px;display:grid;place-items:center}
 .rrow2{display:flex;gap:8px;align-items:center}
-.rplug{margin-top:6px}.rplug .rlab{font-size:12px;font-weight:700;color:var(--dim)}.rplug .seg{flex:1}
+.rplug{margin-top:6px}.rplug .rlab{font-size:var(--fs-xs);font-weight:700;color:var(--dim)}.rplug .seg{flex:1}
 .rplug .seg button{flex:1}
 /* The panel needs its own close: on a phone the FAB stack (including the route toggle)
    is hidden while the panel is open, because it collided with the fields. */
@@ -291,20 +294,20 @@ html.native .splash-mark svg{width:96px;height:96px}
 #routePanel.collapsed .rclose{display:none}
 #routePanel:not(.collapsed) .rfield:first-of-type{margin-right:42px}
 #goBtn{flex:1;height:44px;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:700;
-  font-size:14.5px;box-shadow:var(--sh2);transition:.15s}
+  font-size:var(--fs-m);box-shadow:var(--sh2);transition:.15s}
 #goBtn:disabled{opacity:.5}
 .seg{display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px;
   height:44px;align-items:center}
-.seg button{padding:0 12px;height:36px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--dim)}
+.seg button{padding:0 12px;height:36px;border-radius:9px;font-size:var(--fs-s);font-weight:700;color:var(--dim)}
 .seg button.on{background:var(--ink);color:var(--ink-on);box-shadow:none}
 
-#routeInfo{font-size:12.5px;color:var(--dim);margin-top:8px;min-height:16px;padding:0 2px}
+#routeInfo{font-size:var(--fs-s);color:var(--dim);margin-top:8px;min-height:16px;padding:0 2px}
 #routeInfo.err{color:var(--bad);font-weight:600}
 .rfield.bad{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
-#corridorSeg .u{align-self:center;font-size:11px;font-weight:600;color:var(--dim2);padding:0 6px 0 3px}
+#corridorSeg .u{align-self:center;font-size:var(--fs-2xs);font-weight:600;color:var(--dim2);padding:0 6px 0 3px}
 #routePanel.collapsed .rfield,#routePanel.collapsed .rrow2{display:none}
 #routePanel.collapsed #routeInfo{margin:0;display:flex;align-items:center;gap:10px;padding:12px 13px;
-  color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;min-height:0}
+  color:var(--txt);font-size:var(--fs-s);font-weight:600;cursor:pointer;min-height:0}
 #routePanel.collapsed #routeInfo .sum{flex:1;min-width:0;line-height:1.35}
 /* Trip, then numbers: wrapped as one string, the line broke after a dangling "·" and clipped
    the count, which is the part people look for. The trip may take two lines ("Los Angeles, CA
@@ -314,8 +317,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 #routePanel.collapsed #routeInfo .sum b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
   white-space:normal;overflow-wrap:anywhere}
 #routePanel.collapsed #routeInfo .sum b{font-weight:600}
-#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--dim);font-weight:500;font-size:12px}
-#routePanel.collapsed #routeInfo .ed{color:var(--accent);font-size:12px;font-weight:700;flex-shrink:0}
+#routePanel.collapsed #routeInfo .sum i{font-style:normal;color:var(--dim);font-weight:500;font-size:var(--fs-xs)}
+#routePanel.collapsed #routeInfo .ed{color:var(--accent);font-size:var(--fs-xs);font-weight:700;flex-shrink:0}
 #routeInfo .rclear{display:none}
 #routePanel.collapsed #routeInfo .rclear{display:inline-flex;align-items:center;justify-content:center;border:0;background:none;color:var(--dim);font-size:18px;line-height:1;cursor:pointer;width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-left:2px}
 @media(hover:hover){#routePanel.collapsed #routeInfo .rclear:hover{color:var(--txt);background:var(--surface2)}}
@@ -326,13 +329,13 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh);animation:drop .2s}
 #centerCard .ic{color:var(--accent);flex-shrink:0}
 #centerCard .txt{flex:1;min-width:0}
-#centerCard .lbl{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#centerCard .sub{font-size:11px;color:var(--dim2)}
+#centerCard .lbl{font-size:var(--fs-body);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#centerCard .sub{font-size:var(--fs-2xs);color:var(--dim2)}
 #centerCard .rad{display:flex;gap:3px;background:var(--surface2);border-radius:9px;padding:3px}
-#centerCard .rad button{font-size:11px;font-weight:700;color:var(--dim);padding:4px 8px;border-radius:6px}
+#centerCard .rad button{font-size:var(--fs-2xs);font-weight:700;color:var(--dim);padding:4px 8px;border-radius:6px}
 #centerCard .rad button.on{background:var(--ink);color:var(--ink-on)}
 /* "10 / 25 / 50" said no unit anywhere on a phone, where the subtitle is hidden (UI-10). */
-#centerCard .rad .u{align-self:center;font-size:11px;font-weight:600;color:var(--dim2);padding:0 6px 0 3px}
+#centerCard .rad .u{align-self:center;font-size:var(--fs-2xs);font-weight:600;color:var(--dim2);padding:0 6px 0 3px}
 #centerCard .x{color:var(--dim2);padding:3px;display:grid;place-items:center}
 /* The smallest controls measured 18-34 px on a phone, well under the ~44 px a thumb needs.
    An invisible extension enlarges what can be tapped without moving or resizing anything.
@@ -349,27 +352,27 @@ html.native .splash-mark svg{width:96px;height:96px}
    tapping again, which is why moving the map felt like it did nothing. */
 #searchHere{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 14px);
   transform:translateX(-50%);z-index:602;border:0;border-radius:100px;cursor:pointer;
-  background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:13px;
+  background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:var(--fs-s);
   padding:0 16px;height:38px;box-shadow:0 4px 16px rgba(0,0,0,.22);white-space:nowrap;
   animation:drop .18s}
 #searchHere[hidden]{display:none}
 #searchHere:active{transform:translateX(-50%) scale(.96)}
 #pinHint{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 16px);transform:translateX(-50%);z-index:601;
-  background:var(--accent);color:var(--accent-ink);font-size:12.5px;font-weight:700;padding:9px 15px;
+  background:var(--accent);color:var(--accent-ink);font-size:var(--fs-s);font-weight:700;padding:9px 15px;
   border-radius:12px;box-shadow:var(--sh);display:none;white-space:nowrap}
 #pinHint.show{display:block;animation:drop .2s}
 
 /* network key — brand colours are meaningless without one */
 #legend{position:absolute;left:12px;bottom:14px;z-index:600;background:var(--surface);
   border:1px solid var(--line);border-radius:13px;box-shadow:var(--sh);overflow:hidden;max-width:210px}
-#legendToggle{display:flex;align-items:center;gap:8px;width:100%;padding:9px 11px;font-size:12.5px;
+#legendToggle{display:flex;align-items:center;gap:8px;width:100%;padding:9px 11px;font-size:var(--fs-s);
   font-weight:700;color:var(--txt)}
 #legendToggle .sw{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 #legendToggle svg{margin-left:auto;color:var(--dim2);transition:transform .18s}
 #legend.collapsed #legendList{display:none}
 #legend:not(.collapsed) #legendToggle svg{transform:rotate(180deg)}
 #legendList{padding:0 11px 10px;display:flex;flex-direction:column;gap:5px;max-height:44vh;overflow-y:auto}
-#legendList div,#filtNetList div{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+#legendList div,#filtNetList div{display:flex;align-items:center;gap:8px;font-size:var(--fs-xs);color:var(--dim)}
 #legendList div[data-net],#filtNetList div[data-net]{cursor:pointer;padding:3px 6px;margin:0 -6px;border-radius:8px}
 #filtNetList{display:flex;flex-direction:column;gap:2px}
 #legendList div[data-net].on,#filtNetList div[data-net].on{background:var(--surface2);color:var(--txt);font-weight:700}
@@ -389,14 +392,14 @@ html.native .splash-mark svg{width:96px;height:96px}
 .lgsw{display:inline-flex}#legendToggle .lgsw .sw{width:14px;height:14px;font-size:8px;margin-right:-3px;border:1.5px solid var(--surface)}
 #legendToggle .lgsw .sw.two{font-size:6px}
 #legendList span,#filtNetList span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#legendList i,#filtNetList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:10.5px;font-family:var(--mono)}
+#legendList i,#filtNetList i{margin-left:auto;font-style:normal;color:var(--dim2);font-size:var(--fs-2xs);font-family:var(--mono)}
 /* Esri's required credit is long and wraps to two lines on a phone, where it used to sit
    on top of the legend. It has to stay visible, so give it the full width at the very
    bottom and lift the legend clear of it. */
 @media(max-width:520px){
   #legend{max-width:160px;bottom:40px}
   #legendList{max-height:34vh}
-  .leaflet-control-attribution{font-size:9px!important;line-height:1.35!important;
+  .leaflet-control-attribution{font-size:var(--fs-2xs)!important;line-height:1.35!important;
     max-width:100vw!important;border-radius:0!important}
 }
 
@@ -421,28 +424,28 @@ html.native .splash-mark svg{width:96px;height:96px}
 .leaflet-popup-tip{background:var(--surface);border:1px solid var(--line)}
 /* On short viewports (a laptop in landscape, a phone with the keyboard up) the stop
    details ran off the top of the map with the name cut off and no way to scroll. */
-.leaflet-popup-content{margin:14px 16px;font-size:13px;scrollbar-gutter:stable;
+.leaflet-popup-content{margin:14px 16px;font-size:var(--fs-s);scrollbar-gutter:stable;
   max-height:var(--pop-max,min(62vh,420px));overflow-y:auto;overscroll-behavior:contain}
 
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
 .pp-name:focus{outline:none}.pp-name:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:4px}
 .pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;padding-right:22px}
-.pp-name{font-family:var(--display);font-weight:700;font-size:18px;flex:1;line-height:1.2;letter-spacing:-.3px}
+.pp-name{font-family:var(--display);font-weight:700;font-size:var(--fs-l);flex:1;line-height:1.2;letter-spacing:-.3px}
 .pp-fav{font-size:17px;color:var(--dim2);flex-shrink:0;line-height:1}
 .pp-fav.on{color:var(--star)}
-.pp-net{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;margin-bottom:6px}
+.pp-net{display:flex;align-items:center;gap:7px;font-size:var(--fs-xs);font-weight:700;margin-bottom:6px}
 .pp-net .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.pp-meta{color:var(--dim);font-size:11.5px;margin-bottom:4px}
-.pp-car{display:flex;flex-wrap:wrap;gap:5px 10px;align-items:center;font-size:11.5px;color:var(--dim);
+.pp-meta{color:var(--dim);font-size:var(--fs-xs);margin-bottom:4px}
+.pp-car{display:flex;flex-wrap:wrap;gap:5px 10px;align-items:center;font-size:var(--fs-xs);color:var(--dim);
   margin:8px 0;padding:8px 10px;background:var(--surface2);border-radius:11px}
-.pp-car .cc{font-weight:700;font-size:11px}
+.pp-car .cc{font-weight:700;font-size:var(--fs-2xs)}
 .pp-car .cc.native{color:var(--good)}.pp-car .cc.adapter{color:var(--warn)}.pp-car .cc.null{color:var(--bad)}
-.pp-host{color:var(--warn);font-size:11.5px;margin-bottom:8px}
+.pp-host{color:var(--warn);font-size:var(--fs-xs);margin-bottom:8px}
 .pp-list{max-height:170px;overflow-y:auto;overflow-x:hidden;margin-top:6px}
-.pp-chain{display:flex;align-items:baseline;gap:12px;padding:3px 0;font-size:12.5px}
+.pp-chain{display:flex;align-items:baseline;gap:12px;padding:3px 0;font-size:var(--fs-s)}
 /* The name takes the slack, so the walk times line up in one column instead of floating. */
 .pp-chain>span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pp-chain .d{color:var(--chew);white-space:nowrap;font-weight:700;font-size:11.5px}
+.pp-chain .d{color:var(--chew);white-space:nowrap;font-weight:700;font-size:var(--fs-xs)}
 .pp-links{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;gap:8px}
 /* UI-26: the card scrolls inside the visible band of map, and its actions came last, so on a
    phone with the signal and plan lines Directions was the first thing cut off (a 6 px green
@@ -455,37 +458,37 @@ html.native .splash-mark svg{width:96px;height:96px}
 /* Leaflet gives every svg in the map pane z-index 200 (.leaflet-map-pane svg), which applies to
    an icon that is a flex item: the signal icons painted through the pinned actions. */
 .leaflet-popup-content .ui-i{z-index:auto}
-.pp-links a{flex:1;text-align:center;color:var(--txt);font-size:12px;text-decoration:none;font-weight:700;
+.pp-links a{flex:1;text-align:center;color:var(--txt);font-size:var(--fs-xs);text-decoration:none;font-weight:700;
   padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--line)}
 .pp-links a:last-child{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .pp-links .pp-navbtn{flex:1;padding:13px 8px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);
-  color:var(--accent-ink);font:700 13px var(--sans);cursor:pointer}
+  color:var(--accent-ink);font:700 var(--fs-s) var(--sans);cursor:pointer}
 .pp-links a.rep{flex:0 0 auto;color:var(--dim2);background:none;border-color:transparent;padding:8px 4px}
 /* The stop card: speed, stalls, network on one line; the three nearest places as chips. */
-.pp-sum{display:flex;flex-wrap:wrap;align-items:center;gap:5px 9px;font-size:12.5px;color:var(--dim);margin:2px 0 8px}
-.pp-sum s.spd{font-size:12px;padding:3px 8px}
+.pp-sum{display:flex;flex-wrap:wrap;align-items:center;gap:5px 9px;font-size:var(--fs-s);color:var(--dim);margin:2px 0 8px}
+.pp-sum s.spd{font-size:var(--fs-xs);padding:3px 8px}
 .pp-sum .tag{margin-left:0}
 .pp-nn{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--txt);min-width:0}
 .pp-nn .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .pp-mile{font-weight:600;color:var(--accent)}
-.pp-warn1{color:var(--warn);font-size:12px;margin:0 0 8px;line-height:1.4}
+.pp-warn1{color:var(--warn);font-size:var(--fs-xs);margin:0 0 8px;line-height:1.4}
 .pp-near{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 2px}
 .pp-nb{display:inline-flex;align-items:center;gap:5px;background:var(--chew-bg);border:1px solid transparent;
-  border-radius:999px;padding:6px 10px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none;
+  border-radius:999px;padding:6px 10px;font-size:var(--fs-s);font-weight:600;color:var(--txt);text-decoration:none;
   max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pp-nb b{color:var(--chew);font-weight:700;font-size:11.5px}
+.pp-nb b{color:var(--chew);font-weight:700;font-size:var(--fs-xs)}
 .pp-nb.on{border-color:var(--chew)}
-.pp-nb .ohs{font-style:normal;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
+.pp-nb .ohs{font-style:normal;font-size:var(--fs-2xs);font-weight:700;padding:1px 6px;border-radius:999px;margin-left:2px}
 .pp-nb .ohs.y{color:var(--good);background:var(--good-bg)}
 .pp-nb .ohs.n{color:var(--dim);background:var(--surface3)}
 .pp-setcar{display:block;width:100%;text-align:left;background:none;border:0;padding:2px 0 8px;margin:0;cursor:pointer;
-  color:var(--dim);font:500 12px var(--sans)}
+  color:var(--dim);font:500 var(--fs-xs) var(--sans)}
 .pp-setcar b{color:var(--accent);font-weight:700}
 .leaflet-container a.pp-nb{color:var(--txt)}   /* Leaflet paints every popup link blue */
-.pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
+.pp-nmore{align-self:center;color:var(--dim2);font-size:var(--fs-xs);font-weight:600;padding:0 2px}
 /* Stop signals: one quiet line under the places; a tap on an item shows why it is there. */
 .pp-sig{display:flex;flex-wrap:wrap;gap:2px 12px;margin:6px 0 0}
-.sig{display:inline-flex;align-items:center;gap:4px;font:600 12px/1.3 var(--sans);color:var(--dim);white-space:nowrap;min-width:0}
+.sig{display:inline-flex;align-items:center;gap:4px;font:600 var(--fs-xs)/1.3 var(--sans);color:var(--dim);white-space:nowrap;min-width:0}
 .sig .ui-i{width:12px;height:12px;flex-shrink:0;color:var(--dim2)}
 .sig.n,.sig.n .ui-i{color:var(--warn)}
 .pp-sig .sg{min-height:28px;padding:0;border:0;background:none;cursor:pointer;text-align:left;white-space:normal}
@@ -493,32 +496,32 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-sig .sg.n{color:var(--warn)}
 .pp-sig .sg .ui-i{flex-shrink:0;color:var(--dim2)}
 .pp-sig .sg.n .ui-i{color:var(--warn)}
-.pp-why{font-size:11.5px;color:var(--dim);line-height:1.4;margin:2px 0 0}
+.pp-why{font-size:var(--fs-xs);color:var(--dim);line-height:1.4;margin:2px 0 0}
 @media(pointer:coarse){.pp-sig .sg{min-height:36px}}
 .pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
-  border:1px solid var(--line);color:var(--txt);font:700 12px var(--sans);cursor:pointer}
+  border:1px solid var(--line);color:var(--txt);font:700 var(--fs-xs) var(--sans);cursor:pointer}
 .pp-links .pp-morebtn[aria-expanded="true"]{background:var(--surface3)}
 .pp-more{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
-.pp-h{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim2);margin:8px 0 2px}
+.pp-h{font-size:var(--fs-2xs);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim2);margin:8px 0 2px}
 .pp-sec{display:flex;gap:16px;margin-top:10px}
-.pp-sec a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none}
+.pp-sec a{font-size:var(--fs-xs);font-weight:700;color:var(--accent);text-decoration:none}
 .poi-div{background:none!important;border:none!important}
 .poi-div span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;
   background:var(--surface);border:2px solid var(--amber);font-size:15px;box-shadow:var(--sh2)}
 .leaflet-tooltip{background:var(--surface);border:1px solid var(--line2);color:var(--txt);
-  font-size:11.5px;font-weight:600;border-radius:8px;box-shadow:var(--sh2)}
+  font-size:var(--fs-xs);font-weight:600;border-radius:8px;box-shadow:var(--sh2)}
 .leaflet-tooltip-top:before{border-top-color:var(--line2)}
 
 /* ═══ sheet ═══ */
 .clus{background:none!important;border:0!important}
 .clus i{display:flex;align-items:center;justify-content:center;width:100%;height:100%;
-  border-radius:50%;font:800 12px/1 var(--display);font-style:normal;
+  border-radius:50%;font:800 var(--fs-xs)/1 var(--display);font-style:normal;
   color:#fff;background:rgba(15,122,67,.95);border:2px solid rgba(255,253,250,.92);
   box-shadow:0 2px 8px rgba(0,0,0,.28);cursor:pointer}
 :root[data-theme="dark"] .clus i{background:rgba(52,201,122,.92);color:#0b1a10;
   border-color:rgba(18,17,16,.85)}
-.clus.big i{font-size:12.5px}
-.heropick .c small{font-weight:600;font-size:10.5px;color:var(--dim2);text-transform:none}
+.clus.big i{font-size:var(--fs-s)}
+.heropick .c small{font-weight:600;font-size:var(--fs-2xs);color:var(--dim2);text-transform:none}
 /* Esri's dark canvas is a mid-grey that floats against our near-black chrome. Filter the
    tile pane (not the overlay pane, so markers keep their colour) to sit it in the theme. */
 :root[data-theme="dark"] #map.bm-esri .leaflet-tile-pane{filter:brightness(.62) contrast(1.06) saturate(.9)}
@@ -535,12 +538,12 @@ html.native .splash-mark svg{width:96px;height:96px}
    a flat green-to-amber square was the one off-brand graphic in the app. */
 .ic-mark{width:34px;height:34px;flex-shrink:0}.ic-mark svg{width:100%;height:100%;display:block}
 .ic-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
-.ic-txt b{font-size:13.5px}
-.ic-txt span{font-size:11.5px;color:var(--dim);line-height:1.35}
+.ic-txt b{font-size:var(--fs-body)}
+.ic-txt span{font-size:var(--fs-xs);color:var(--dim);line-height:1.35}
 .ic-act{display:flex;align-items:center;gap:6px;flex-shrink:0}
-#icGo{background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:12.5px;
+#icGo{background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:var(--fs-s);
   padding:9px 14px;border-radius:10px;min-height:38px}
-#icNo{color:var(--dim);font-size:12px;font-weight:600;padding:9px 8px;min-height:38px}
+#icNo{color:var(--dim);font-size:var(--fs-xs);font-weight:600;padding:9px 8px;min-height:38px}
 @media(min-width:900px){#installCard{left:auto;right:16px;max-width:390px}}
 /* Search examples. The app can look up any shop type or brand live, but nothing on screen
    said so — the placeholder only ever showed a chain, so nobody would think to type
@@ -548,16 +551,16 @@ html.native .splash-mark svg{width:96px;height:96px}
 #sugg{position:fixed;z-index:1300;background:var(--surface);border:1px solid var(--line);
   border-radius:14px;box-shadow:var(--sh);padding:6px;overflow:auto;overscroll-behavior:contain}
 #sugg[hidden]{display:none}
-#sugg .sg-h{font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+#sugg .sg-h{font-size:var(--fs-2xs);font-weight:800;letter-spacing:.04em;text-transform:uppercase;
   color:var(--dim2);padding:8px 10px 5px}
 #sugg button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border-radius:10px;
-  font-size:13.5px;font-weight:600;color:var(--txt);text-align:left;min-height:42px}
+  font-size:var(--fs-body);font-weight:600;color:var(--txt);text-align:left;min-height:42px}
 #sugg button.cur{background:var(--surface2)}
 /* Hover only on devices that hover: on touch a tapped row kept its highlight after you came
    back to it (UI-12). */
 @media(hover:hover){#sugg button:hover{background:var(--surface2)}}
 #sugg button i{font-style:normal;font-size:15px;width:20px;text-align:center;flex-shrink:0}
-#sugg button small{color:var(--dim2);font-weight:500;font-size:11.5px;margin-left:auto;flex-shrink:0}
+#sugg button small{color:var(--dim2);font-weight:500;font-size:var(--fs-xs);margin-left:auto;flex-shrink:0}
 /* Up to 899 px: the phone layout runs until wideLayout() switches to the sidebar at 900, so the
    phone styles must too. At 760 the 761-899 band (every iPad in portrait but the mini) ran the
    phone layout without them: map buttons on the search bar and route card, no gutter (UI-27). */
@@ -578,26 +581,26 @@ html.native .splash-mark svg{width:96px;height:96px}
   /* Sheet as the control surface (see relayout()). Everything below is scoped to
      #app.phone so the desktop never sees it. */
   #app.phone #legend{display:none}
-  #app.phone .leaflet-control-attribution{max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+  #app.phone .leaflet-control-attribution{max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:var(--fs-2xs)}
   #app.phone .sheethead{padding-bottom:4px}
   /* The area is a line under the count, not a second card stacked on the sheet. */
   #app.phone #sheet #centerCard.show{margin:-2px var(--gutter) 6px;padding:0;border-radius:0;box-shadow:none;
     background:none;border:0;animation:none;gap:8px}
   #app.phone #sheet #centerCard .ic{color:var(--dim)}
   #app.phone #sheet #centerCard .lbl{font-weight:600;color:var(--dim)}
-  #app.phone #sheet #centerCard .lbl{font-size:13px}
+  #app.phone #sheet #centerCard .lbl{font-size:var(--fs-s)}
   #app.phone #sheet #centerCard .sub{display:none}      /* the title above already says it */
-  #app.phone #sheet #centerCard .rad button{height:30px;padding:0 11px;font-size:12.5px}
+  #app.phone #sheet #centerCard .rad button{height:30px;padding:0 11px;font-size:var(--fs-s)}
   #app.phone #sheet .chiprow{padding:2px var(--gutter) 7px;flex-shrink:0;margin:0}
   /* 44 px: the coarse-pointer rule asks for it, and this one used to win on specificity with
      40 (UI-11). */
-  #app.phone #sheet .chiprow .chip{height:44px;padding:0 12px;font-size:12.5px}
+  #app.phone #sheet .chiprow .chip{height:44px;padding:0 12px;font-size:var(--fs-s)}
   /* Sticky offsets ignore the row's side padding, so chips scrolled past the pinned chip
      showed in that strip. Pin to the real edge and let the backing cover the strip. */
   #app.phone #sheet .chiprow .moreend{right:calc(-1 * var(--gutter))}
   #app.phone #sheet .chiprow .moreend::before{right:calc(-1 * var(--gutter) - 1px)}
   #app.phone #carBar.show{display:contents}
-  #app.phone #carBar .cartag,#app.phone #carBar .mine{height:44px;border-radius:100px;padding:0 12px;font-size:12.5px;
+  #app.phone #carBar .cartag,#app.phone #carBar .mine{height:44px;border-radius:100px;padding:0 12px;font-size:var(--fs-s);
     font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px;border:1px solid var(--line);
     background:var(--surface);color:var(--txt);flex-shrink:0;box-shadow:var(--sh)}
   #app.phone #carBar .cartag .spec{display:none}       /* "250kW · NACS" is a detail, not a chip */
@@ -623,41 +626,41 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-chain.tap{cursor:pointer;border-radius:8px;margin:0 -6px;padding-left:6px;padding-right:6px}
 @media(hover:hover){.pp-chain.tap:hover{background:var(--surface2)}}
 .pp-chain .go{margin-left:8px;color:var(--chew);text-decoration:none;font-weight:800;
-  font-size:14px;padding:2px 5px;border-radius:6px;flex-shrink:0}
+  font-size:var(--fs-body);padding:2px 5px;border-radius:6px;flex-shrink:0}
 @media(hover:hover){.pp-chain .go:hover{background:var(--surface2)}}
-.pp-det{font-size:11.5px;color:var(--dim);padding:2px 0 7px 22px;line-height:1.5}
+.pp-det{font-size:var(--fs-xs);color:var(--dim);padding:2px 0 7px 22px;line-height:1.5}
 .pp-det .oh{margin-right:6px}
 .pp-det a{color:var(--accent);font-weight:700;text-decoration:none;margin-right:10px}
 /* The place you actually searched for: which one, open or not, how to reach it. */
 /* What the charge time is actually good for, given what is within a walk. */
 /* What the charge is good for is about food, so it wears food's amber. */
 .pp-dwell{background:var(--chew-bg);border:0;color:var(--txt);
-  border-radius:10px;padding:7px 10px;margin:7px 0 2px;font-size:12px;line-height:1.45}
+  border-radius:10px;padding:7px 10px;margin:7px 0 2px;font-size:var(--fs-xs);line-height:1.45}
 .pp-dwell b{font-weight:800;color:var(--chew)}
 .pp-dwell.tight{background:var(--surface2);color:var(--dim)}
 .pp-poi{background:var(--surface2);border:1px solid var(--line);border-radius:11px;
   padding:9px 11px;margin:9px 0 4px}
-.pp-poi-h{font-weight:800;font-size:13.5px}
-.pp-poi-h i{font-style:normal;font-weight:600;color:var(--dim2);font-size:12px}
-.pp-poi-a{color:var(--dim);font-size:11.5px;margin-top:2px}
+.pp-poi-h{font-weight:800;font-size:var(--fs-body)}
+.pp-poi-h i{font-style:normal;font-weight:600;color:var(--dim2);font-size:var(--fs-xs)}
+.pp-poi-a{color:var(--dim);font-size:var(--fs-xs);margin-top:2px}
 .pp-poi-s{margin-top:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.oh{font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px}
+.oh{font-size:var(--fs-2xs);font-weight:800;padding:2px 7px;border-radius:999px}
 .oh.y{background:var(--good-bg);color:var(--good)}
 .oh.n{background:var(--warn-bg);color:var(--warn)}   /* amber text was 1.6:1 on its tint */
-.ohn{font-size:11.5px;color:var(--dim)}
+.ohn{font-size:var(--fs-xs);color:var(--dim)}
 .pp-poi-l{display:flex;gap:12px;margin-top:7px}
-.pp-poi-l a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none}
+.pp-poi-l a{font-size:var(--fs-xs);font-weight:700;color:var(--accent);text-decoration:none}
 .fbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 14px 9px}
 .fbar[hidden]{display:none}   /* display:flex beat the hidden attribute: 9 px of nothing in the sheet */
 .fbar .fb{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);
   background:var(--surface2);color:var(--txt);border-radius:999px;padding:5px 9px;
-  font-size:11.5px;font-weight:700;line-height:1;min-height:26px}
+  font-size:var(--fs-xs);font-weight:700;line-height:1;min-height:26px}
 .fbar .fb b{font-weight:700}
-.fbar .fb button{border:0;background:none;color:var(--dim);font-size:14px;line-height:1;
+.fbar .fb button{border:0;background:none;color:var(--dim);font-size:var(--fs-body);line-height:1;
   cursor:pointer;padding:2px 1px 2px 2px;border-radius:50%}
 @media(hover:hover){.fbar .fb button:hover{color:var(--txt)}}
 .fbar .fball{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;
-  padding:6px 11px;font-size:11.5px;font-weight:800;cursor:pointer;min-height:28px}
+  padding:6px 11px;font-size:var(--fs-xs);font-weight:800;cursor:pointer;min-height:28px}
 #sheet{position:relative;z-index:800;background:var(--surface);border-top:1px solid var(--line);
   border-radius:22px 22px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.14);display:flex;flex-direction:column;
   flex-shrink:0;height:56px;transition:height .28s cubic-bezier(.32,.72,0,1)}
@@ -672,10 +675,10 @@ html.native .splash-mark svg{width:96px;height:96px}
 .vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .handle i{width:38px;height:4px;border-radius:2px;background:var(--line2);display:block}
 .sheethead{display:flex;align-items:center;gap:9px;padding:0 var(--gutter) 10px;flex-shrink:0}
-.sheethead .t{flex:1;font-family:var(--display);font-size:17px;font-weight:700;min-width:0;overflow:hidden;line-height:1.25;
+.sheethead .t{flex:1;font-family:var(--display);font-size:var(--fs-l);font-weight:700;min-width:0;overflow:hidden;line-height:1.25;
   letter-spacing:-.2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}   /* two lines: the end is what you picked */
 .sheethead .t em{font-style:normal;color:var(--dim2);font-weight:500}
-.sortbtn{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt);background:none;
+.sortbtn{display:flex;align-items:center;gap:5px;font-size:var(--fs-xs);color:var(--txt);background:none;
   border:none;padding:6px 4px;font-weight:700;flex-shrink:0}
 .sortbtn .ci{color:var(--accent);opacity:.7}
 .iconbtn.sm{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);
@@ -689,27 +692,27 @@ html.native .splash-mark svg{width:96px;height:96px}
 :root[data-theme="dark"] .row{background:transparent;box-shadow:none}
 .row:active{transform:scale(.99)}
 .row .idx{width:26px;height:26px;border-radius:9px;background:var(--accent);color:var(--accent-ink);
-  font-size:12px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:2px}
+  font-size:var(--fs-xs);font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:2px}
 /* On a route: the mile marker, the same footprint as the walk ring it replaces. */
 .row .idx.mi{width:48px;height:48px;border-radius:14px;display:flex;flex-direction:column;align-items:center;
   justify-content:center;margin-top:0;gap:0;
   /* a tint, not a slab: a column of solid green squares outweighed the stops themselves */
   background:var(--good-bg);background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent)}   /* plain tint first (B13) */
-.row .idx.mi b{font:800 13px/1.1 var(--mono)}
+.row .idx.mi b{font:800 var(--fs-s)/1.1 var(--mono)}
 .gapnote{margin:2px 0 10px;padding:10px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);
-  font-size:12.5px;line-height:1.45}
+  font-size:var(--fs-s);line-height:1.45}
 .gapnote b{font-weight:800}
 /* "Going somewhere? Plan a drive": a located first visit's way to the planner. */
 .planrow{display:flex;align-items:stretch;gap:4px;margin:10px 0 4px;border-radius:14px;background:var(--good-bg)}
 .planrow .prgo{flex:1;min-width:0;display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 6px 8px 14px;border:0;background:none;
-  font:500 13px/1.35 var(--sans);color:var(--txt);text-align:left;cursor:pointer;border-radius:14px}
+  font:500 var(--fs-s)/1.35 var(--sans);color:var(--txt);text-align:left;cursor:pointer;border-radius:14px}
 .planrow .prgo b{font-weight:700;display:block}
 .planrow .prgo .ui-i{color:var(--accent);flex-shrink:0}
 .planrow .prgo .chev{margin-left:auto;color:var(--dim2);flex-shrink:0}
 .planrow .prx{width:44px;flex-shrink:0;border:0;background:none;color:var(--dim);font-size:20px;cursor:pointer;border-radius:14px}
 .breaks{margin:0 0 6px;padding:10px 0 6px;border-bottom:1px solid var(--line)}
-.breaks .bh{font-family:var(--display);font-weight:700;font-size:16px;margin:0 0 6px}
-.breaks .bh small{font-weight:500;color:var(--dim);font-size:12px;margin-left:4px;white-space:nowrap}
+.breaks .bh{font-family:var(--display);font-weight:700;font-size:var(--fs-input);margin:0 0 6px}
+.breaks .bh small{font-weight:500;color:var(--dim);font-size:var(--fs-xs);margin-left:4px;white-space:nowrap}
 /* "...about every 1.7 h of" / "driving": the subtitle wrapped under the title with a one-word
    orphan at 320 (UI-45). It is one unit, on its own line on a phone. */
 @media(max-width:359px){.breaks .bh small{display:block;margin:2px 0 0}}
@@ -719,46 +722,46 @@ html.native .splash-mark svg{width:96px;height:96px}
   background:none;border:0;cursor:pointer;color:inherit;font:inherit}
 .brk+.brk{border-top:1px solid var(--line);border-radius:0}
 @media(hover:hover){.brk:hover{background:var(--surface2);box-shadow:-8px 0 0 var(--surface2),8px 0 0 var(--surface2)}}
-.brk .bm{flex:0 0 74px;font:700 15px/1.2 var(--display);color:var(--txt);display:flex;flex-direction:column}
-.brk .bm i{font:500 12px/1.35 var(--sans);color:var(--dim);font-style:normal}
+.brk .bm{flex:0 0 74px;font:700 var(--fs-m)/1.2 var(--display);color:var(--txt);display:flex;flex-direction:column}
+.brk .bm i{font:500 var(--fs-xs)/1.35 var(--sans);color:var(--dim);font-style:normal}
 /* The meal is what the card is for: it was the smallest text on screen (10.5 px). */
 .brk.meal .bm i{align-self:flex-start;color:var(--chew);background:var(--chew-bg);font-weight:600;padding:0 7px;border-radius:999px;margin-top:2px}
 /* Where on the drive, under the time: on the food line it was the part cut off at 375 px. */
-.brk .bm small{font:500 11.5px/1.35 var(--sans);color:var(--dim);margin-top:1px}
+.brk .bm small{font:500 var(--fs-xs)/1.35 var(--sans);color:var(--dim);margin-top:1px}
 .brk .chev{flex:0 0 14px;color:var(--dim2)}
-.bday{font:600 12px var(--sans);color:var(--dim);margin:4px 0 0;padding:8px 0 2px;border-top:1px solid var(--line)}
+.bday{font:600 var(--fs-xs) var(--sans);color:var(--dim);margin:4px 0 0;padding:8px 0 2px;border-top:1px solid var(--line)}
 .brk.gap{cursor:default}
 @media(hover:hover){.brk.gap:hover{background:none;box-shadow:none}}
 .brk.gap .bt b{color:var(--warn)}
 .brk.gap .bt span{white-space:normal}
-.bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:12.5px;color:var(--dim)}
+.bleave{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:var(--fs-s);color:var(--dim)}
 .bleave select{font:inherit;color:var(--txt);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:3px 6px;margin-left:4px}
 .bleave{flex-wrap:wrap;row-gap:4px}
-.bshut{margin:0 0 8px;padding:8px 10px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:12.5px;line-height:1.4}
+.bshut{margin:0 0 8px;padding:8px 10px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:var(--fs-s);line-height:1.4}
 .bleave .bl{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0}
 /* Add to calendar: under the plan, and on the card of a stop that is on it. */
 .bcal{margin-top:2px;padding:10px 0 6px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px}
 .bcal .calbtn{flex:1 1 auto;justify-content:center}   /* side by side; stacked, each the full width */
 @media(max-width:359px){.bcal .cw{display:none}.bcal .calbtn{padding-left:12px;padding-right:12px}}
 .calbtn{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 14px;border-radius:999px;
-  border:1px solid var(--line2);background:var(--surface);color:var(--txt);font:700 13px var(--sans);cursor:pointer}
+  border:1px solid var(--line2);background:var(--surface);color:var(--txt);font:700 var(--fs-s) var(--sans);cursor:pointer}
 .calbtn .ui-i,.pp-cal .ui-i{flex-shrink:0;color:var(--accent)}
 @media(hover:hover){.calbtn:hover{background:var(--surface2)}}
-.pp-plan{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 8px;margin:8px 0 0;font-size:12px;color:var(--dim)}
+.pp-plan{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 8px;margin:8px 0 0;font-size:var(--fs-xs);color:var(--dim)}
 .pp-plan>span:first-child{flex:1 1 auto;min-width:0}
 .pp-plan b{color:var(--txt);font-weight:700}
 .pp-plan i{font-style:normal;white-space:nowrap}
 .pp-cal{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;border:0;background:none;padding:4px 0;min-height:32px;
-  color:var(--accent);font:700 12px var(--sans);cursor:pointer;white-space:nowrap}
+  color:var(--accent);font:700 var(--fs-xs) var(--sans);cursor:pointer;white-space:nowrap}
 .pp-cal .ui-i{width:14px;height:14px}
 @media(pointer:coarse){.calbtn{min-height:44px}}
 .pp-cal{min-height:44px;margin:-6px 0}   /* 44 px to tap, the same size to the eye (UI-33) */
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.brk .bt b{font-size:14px;font-weight:700}
-.brk .bt>span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brk .bt b{font-size:var(--fs-body);font-weight:700}
+.brk .bt>span{font-size:var(--fs-s);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brk .bt>.bs{display:flex;flex-wrap:wrap;gap:2px 10px;margin-top:1px}   /* the stop's signals at that clock (.sig) */
 @media(pointer:coarse){.brk{padding:12px 0}}
-.row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
+.row .idx.mi span{font-size:var(--fs-2xs);font-weight:600;opacity:.88}
 /* The row's lead: the network's mark, as on the map. */
 .lmark{width:44px;flex-shrink:0;display:flex;justify-content:flex-start;padding-top:1px}   /* the mark sits on the gutter */
 .lmark .lm{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
@@ -768,8 +771,8 @@ html.native .splash-mark svg{width:96px;height:96px}
 .ui-i{display:inline-block;vertical-align:-3px;flex-shrink:0}
 .wring{width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;flex-direction:column;
   align-items:center;justify-content:center;background:var(--good-bg);color:var(--good);gap:0}
-.wring b{font-size:12.5px;font-weight:800;font-family:var(--mono);line-height:1.1}
-.wring span{font-size:9.5px;font-weight:600;opacity:.88;line-height:1}
+.wring b{font-size:var(--fs-s);font-weight:800;font-family:var(--mono);line-height:1.1}
+.wring span{font-size:var(--fs-2xs);font-weight:600;opacity:.88;line-height:1}
 .wring.none{background:var(--surface2);color:var(--dim2);font-size:15px}
 :root[data-theme="dark"] .wring{background:var(--good-bg);color:var(--good)}
 :root[data-theme="dark"] .wring.none{background:var(--surface3);color:var(--dim2)}
@@ -777,7 +780,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .n{display:flex;gap:6px;align-items:flex-start}
 /* The highlight reaches into the gutter; the content stays on it. */
 .row.sel{background:var(--surface2);border-radius:14px;border-bottom-color:transparent;margin:0 -10px;padding-left:10px;padding-right:10px}
-.row .n b,.row .n .rowname{font-family:var(--display);font-size:16.5px;font-weight:700;flex:1;min-width:0;line-height:1.25;letter-spacing:-.2px}
+.row .n b,.row .n .rowname{font-family:var(--display);font-size:var(--fs-input);font-weight:700;flex:1;min-width:0;line-height:1.25;letter-spacing:-.2px}
 /* The clamp sits on the text, not the button: a <button> ignores line-clamp, so long names
    were cut off mid-word with no ellipsis. */
 .row .n b,.row .n .rowname>span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
@@ -786,7 +789,7 @@ html.native .splash-mark svg{width:96px;height:96px}
    replaced. Rows were click-only, so a keyboard user could not open a single charger. */
 .row .n .rowname{background:none;border:0;padding:0;margin:0;font-family:inherit;color:inherit;
   text-align:left;cursor:pointer;border-radius:4px}
-.row s.spd,.pp-sum s.spd{text-decoration:none;color:var(--dim);font-size:11px;white-space:nowrap;font-weight:700;
+.row s.spd,.pp-sum s.spd{text-decoration:none;color:var(--dim);font-size:var(--fs-2xs);white-space:nowrap;font-weight:700;
   font-family:var(--mono);background:var(--surface2);border-radius:6px;padding:2px 7px;line-height:1.5}
 :root[data-theme="dark"] .row s.spd,:root[data-theme="dark"] .pp-sum s.spd{background:var(--surface3)}
 /* Speed bands on the kW badge. Colour carries it at a glance; the title and the popup say it
@@ -799,25 +802,25 @@ html.native .splash-mark svg{width:96px;height:96px}
 :root .row s.spd.fast,:root .pp-sum s.spd.fast{color:var(--good);background:var(--good-bg)}
 :root .row s.spd.slow,:root .pp-sum s.spd.slow{color:var(--dim);background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
 :root .row s.spd.l2,:root .pp-sum s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
-.pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
+.pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 var(--fs-xs) var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
 /* A row (UI-29): the name; the food; the charger's speed line ([kW] 6 stalls · 24h · free, warnings,
    one signal); where it is, on one line. */
-.row .sub{color:var(--dim2);font-size:11.5px;margin-top:7px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.row .sub{color:var(--dim2);font-size:var(--fs-xs);margin-top:7px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
 .row .sub .st{font-weight:600;color:var(--dim)}
 .row .sub .st .free{color:var(--good);font-weight:700}
-.row .where{display:flex;gap:4px;min-width:0;margin-top:4px;color:var(--dim2);font-size:11.5px;line-height:1.35}
+.row .where{display:flex;gap:4px;min-width:0;margin-top:4px;color:var(--dim2);font-size:var(--fs-xs);line-height:1.35}
 .row .where .wn{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .row .where .wd{flex-shrink:0;white-space:nowrap}
 .row .sub .nw,.nw{white-space:nowrap}
 .nocaps{text-transform:none}   /* "0.3 mi" and "away" landed on separate lines */
 .row .sub .tag,.row .sub .cbadge{margin-left:0}
 .row .where .netdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
-.row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:10.5px;
+.row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:var(--fs-2xs);
   background:var(--good-bg);color:var(--good);font-family:var(--mono)}
 .row .cbadge.adapter{background:var(--warn-bg);color:var(--warn)}
 .row .cbadge.null{background:var(--bad-bg);color:var(--bad)}
-.row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;gap:5px;min-width:0}
+.row .ch{font-size:var(--fs-xs);margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;gap:5px;min-width:0}
 .row .ch>span.shut{opacity:.55}   /* usually closed then: the row's signal says so, the title why */
 .row .ch>span{background:var(--chew-bg);border-radius:8px;padding:3px 7px;color:var(--txt);display:inline-flex;align-items:baseline;
   min-width:0;flex:0 1 auto;white-space:nowrap;gap:4px}   /* not a name's own .nw span */
@@ -829,16 +832,16 @@ html.native .splash-mark svg{width:96px;height:96px}
 .row .ch b{color:var(--txt);font-weight:700}
 .row .ch .more{background:none;color:var(--dim2);padding-left:2px}
 /* "across hwy": the straight-line walk crosses a freeway or divided highway (s.xh). */
-.xh{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.01em;color:var(--warn);margin-left:6px;padding-left:6px;white-space:nowrap;
+.xh{font-style:normal;font-size:var(--fs-2xs);font-weight:700;letter-spacing:.01em;color:var(--warn);margin-left:6px;padding-left:6px;white-space:nowrap;
   border-left:1px solid var(--line2)}   /* a hairline: "5 min | across hwy", not "5 min across" (UI-32) */
 .row .star{font-size:16px;color:var(--dim2);flex-shrink:0;width:44px;height:40px;display:flex;align-items:flex-start;justify-content:center;padding-top:1px;margin:-6px -12px -10px 0;background:none;border:0;cursor:pointer}
 .row .star.on{color:var(--star)}
-.empty{text-align:center;color:var(--dim);font-size:13px;padding:30px 20px;line-height:1.6}
-.empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:14.5px}
+.empty{text-align:center;color:var(--dim);font-size:var(--fs-s);padding:30px 20px;line-height:1.6}
+.empty b{color:var(--txt);display:block;margin-bottom:5px;font-size:var(--fs-m)}
 .empty strong{color:var(--txt);font-weight:700}
 /* the "Show them" pill inside an empty state was an unstyled <button> glued to "here." */
 .empty .fball{display:block;margin:12px auto 0;border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;
-  padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer}
+  padding:8px 16px;font-size:var(--fs-s);font-weight:800;cursor:pointer}
 
 /* ═══ modals ═══ */
 .modal{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:2000;background:var(--overlay);backdrop-filter:blur(7px);
@@ -857,13 +860,13 @@ html.native .splash-mark svg{width:96px;height:96px}
   .pk h3{touch-action:none}
 }
 .pk.dragging{transition:none!important}
-.pk h3{font-family:var(--display);font-size:20px;font-weight:700;padding:18px 16px 12px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
+.pk h3{font-family:var(--display);font-size:var(--fs-xl);font-weight:700;padding:18px 16px 12px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
 .pk h3 span{flex:1}
-.pk .subnote{padding:0 16px 12px;color:var(--dim);font-size:12.5px;line-height:1.5}
+.pk .subnote{padding:0 16px 12px;color:var(--dim);font-size:var(--fs-s);line-height:1.5}
 .pk .searchbox{display:flex;align-items:center;gap:9px;margin:0 16px 12px;background:var(--surface2);
   border:1px solid var(--line);border-radius:12px;height:44px;padding:0 13px}
 .pk .searchbox svg{color:var(--dim2);flex-shrink:0}
-.pk .searchbox input{flex:1;background:none;border:none;outline:none;font-size:14px;min-width:0}
+.pk .searchbox input{flex:1;background:none;border:none;outline:none;font-size:var(--fs-body);min-width:0}
 .pkgrid{overflow-y:auto;padding:0 16px 16px;flex:1;min-height:0;-webkit-overflow-scrolling:touch}
 /* The sheet is a flex column capped at 86vh. Without a body that can shrink and scroll, the
    Filters content ran off the bottom of the screen -- the network list, Appearance and the
@@ -873,7 +876,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 #carGrid{display:grid;grid-template-columns:1fr;gap:8px;align-content:start}
 #filters .pkgrid{padding:2px 0 8px}
 .pkgroup{margin-bottom:16px}
-.pkgroup h4{font-size:11.5px;font-weight:800;color:var(--dim);text-transform:uppercase;
+.pkgroup h4{font-size:var(--fs-xs);font-weight:800;color:var(--dim);text-transform:uppercase;
   letter-spacing:.05em;margin:0 2px 8px}
 .pkgroup h4 small{color:var(--dim2);font-weight:600}
 .pkgrid-in{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
@@ -882,29 +885,29 @@ html.native .splash-mark svg{width:96px;height:96px}
    ellipsis. The name now has the whole cell, and a longer one wraps rather than clips. */
 .pkitem{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:9px;row-gap:1px;
   align-items:center;padding:11px 12px;border-radius:12px;background:var(--surface2);
-  border:1px solid var(--line);font-size:13px;font-weight:600;text-align:left;transition:.12s}
+  border:1px solid var(--line);font-size:var(--fs-s);font-weight:600;text-align:left;transition:.12s}
 .pkitem:active{transform:scale(.97)}
 .pkitem.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .pkitem .e{font-size:17px;grid-row:1/3;align-self:center}
 .pkitem .nm{min-width:0;overflow:hidden;overflow-wrap:break-word;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.pkitem .c{font-size:10.5px;color:var(--dim2);font-weight:600;line-height:1.2}
+.pkitem .c{font-size:var(--fs-2xs);color:var(--dim2);font-weight:600;line-height:1.2}
 .pkitem.on .c{color:var(--ink-on);color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}
 .caritem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:var(--surface2);
-  border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left;transition:.12s}
+  border:1px solid var(--line);font-size:var(--fs-body);font-weight:600;text-align:left;transition:.12s}
 .caritem.on{background:var(--ink);border-color:var(--ink);color:var(--ink-on)}
 .caritem .m{flex:1}
-.caritem .spec{font-size:11px;color:var(--dim2);font-weight:600;font-family:var(--mono)}
+.caritem .spec{font-size:var(--fs-2xs);color:var(--dim2);font-weight:600;font-family:var(--mono)}
 .caritem.on .spec{color:var(--ink-on);color:color-mix(in srgb,var(--ink-on) 80%,var(--ink))}
 .fgroup{padding:0 16px 14px}
 .fgroup label.fsub{margin-top:14px}
-.fgroup label{display:block;font-size:12px;font-weight:700;color:var(--dim);margin-bottom:8px;
+.fgroup label{display:block;font-size:var(--fs-xs);font-weight:700;color:var(--dim);margin-bottom:8px;
   text-transform:uppercase;letter-spacing:.04em}
 .seg.wide{height:44px;width:100%}
 .seg.wide button{flex:1;padding:0}
-.fhint{font-size:11.5px;color:var(--dim2);margin-top:7px;line-height:1.45}
+.fhint{font-size:var(--fs-xs);color:var(--dim2);margin-top:7px;line-height:1.45}
 .ftoggles{display:flex;flex-direction:column;gap:7px}
 .ftog{display:flex;align-items:center;gap:9px;height:44px;padding:0 13px;border-radius:12px;
-  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:600;text-align:left}
+  background:var(--surface2);border:1px solid var(--line);font-size:var(--fs-body);font-weight:600;text-align:left}
 .ftog.on{color:var(--txt)}   /* the switch says it is on; the row stays calm */
 /* A switch at the end, so each row reads as on/off before it is tapped -- they looked like
    plain grey buttons. */
@@ -917,24 +920,24 @@ html.native .splash-mark svg{width:96px;height:96px}
    colour. Status tags (24h, free, dealership, isolated) are one outline style, with colour
    only where it means something (free is green). "1 stall" is plain text, like "6 stalls",
    in the warning colour because a single stall is a risk. */
-.tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font-size:10.5px;font-weight:700;line-height:1.6;
+.tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font-size:var(--fs-2xs);font-weight:700;line-height:1.6;
   background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line2)}
 .tag.free{color:var(--good)}
-.lsep{padding:14px 16px 6px;font-size:13px;font-weight:600;line-height:1.3;color:var(--txt);border-top:1px solid var(--line)}
+.lsep{padding:14px 16px 6px;font-size:var(--fs-s);font-weight:600;line-height:1.3;color:var(--txt);border-top:1px solid var(--line)}
 .lsep span{font-weight:400;color:var(--dim)}
 /* The short route list: what it is on top, the way to everything below. */
 .lsep.rlist{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding-left:0;padding-right:0}
 .breaks + .lsep.rlist{border-top:0;padding-top:6px}     /* the card's own rule is the divider */
 .lsep .rlnk{margin-left:auto;border:0;background:none;padding:6px 0;min-height:32px;font:inherit;font-weight:700;color:var(--accent);cursor:pointer}
 .listmore{display:block;width:100%;min-height:48px;margin:6px 0 18px;border:1px solid var(--line2);border-radius:14px;
-  background:var(--surface);color:var(--txt);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  background:var(--surface);color:var(--txt);font:inherit;font-size:var(--fs-body);font-weight:700;cursor:pointer}
 @media(hover:hover){.listmore:hover{background:var(--surface2)}}
-.tag.one{box-shadow:none;padding:0;border-radius:0;font-size:11.5px;font-weight:600;line-height:inherit;color:var(--warn)}
-.pp-note{color:var(--dim2);font-size:10.5px;margin-top:8px;line-height:1.4}
-.pp-warn{color:var(--warn);font-size:11.5px;margin:8px 0;padding:8px 10px;background:var(--warn-bg);
+.tag.one{box-shadow:none;padding:0;border-radius:0;font-size:var(--fs-xs);font-weight:600;line-height:inherit;color:var(--warn)}
+.pp-note{color:var(--dim2);font-size:var(--fs-2xs);margin-top:8px;line-height:1.4}
+.pp-warn{color:var(--warn);font-size:var(--fs-xs);margin:8px 0;padding:8px 10px;background:var(--warn-bg);
   border-radius:10px;line-height:1.45}
 .pkfoot{display:flex;gap:9px;padding:13px 16px;border-top:1px solid var(--line);flex-shrink:0}
-.pkfoot button{flex:1;height:46px;border-radius:13px;font-weight:700;font-size:14.5px}
+.pkfoot button{flex:1;height:46px;border-radius:13px;font-weight:700;font-size:var(--fs-m)}
 .pkfoot .clear{background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
 .pkfoot .done{background:var(--accent);color:var(--accent-ink)}
 
@@ -963,24 +966,24 @@ html.native .splash-mark svg{width:96px;height:96px}
 
 .hero-mark{width:56px;height:56px;margin-bottom:12px}
 .hero-mark svg{width:100%;height:100%}
-.herocard .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);
+.herocard .badge{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);font-weight:700;color:var(--accent);
   background:var(--surface2);border:1px solid var(--line);padding:5px 11px;border-radius:20px;margin-bottom:14px}
-.herocard h1{font-family:var(--display);font-size:28px;font-weight:800;letter-spacing:-.8px;line-height:1.14;margin-bottom:8px}
+.herocard h1{font-family:var(--display);font-size:var(--fs-3xl);font-weight:800;letter-spacing:-.8px;line-height:1.14;margin-bottom:8px}
 .herocard h1 .c{color:var(--accent)}.herocard h1 .h{color:var(--amber-text)}
 .herocard h1 i{color:var(--dim2);font-style:normal;margin:0 2px;font-weight:600}
-.herocard p{color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:16px}
+.herocard p{color:var(--dim);font-size:var(--fs-body);line-height:1.5;margin-bottom:16px}
 /* minmax(0,1fr), not 1fr: a track sized to its min-content let "1,525 chargers" (nowrap) push
    the tiles 3 px past a 320 px screen (UI-28). */
 .herogrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}
 .heropick{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;
   column-gap:9px;row-gap:1px;align-items:center;padding:11px 13px;border-radius:14px;
-  background:var(--surface2);border:1px solid var(--line);font-size:13.5px;font-weight:700;
+  background:var(--surface2);border:1px solid var(--line);font-size:var(--fs-body);font-weight:700;
   text-align:left;transition:.12s}
 @media(hover:hover){.heropick:hover{border-color:var(--accent)}}
 .heropick:active{transform:scale(.97)}
 .heropick .e{font-size:19px;grid-row:1/3;align-self:center}
 .heropick>span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.heropick .c{font-size:10.5px;color:var(--dim2);font-weight:600;white-space:nowrap}
+.heropick .c{font-size:var(--fs-2xs);color:var(--dim2);font-weight:600;white-space:nowrap}
 /* Route first: From -> To, leaving, plan. The drive is what people come for; the chain grid
    is the second question, below. */
 /* Text, not the wordmark: --amber-text on --surface is 4.04:1 at 14 px; --chew is 5.4:1 (UI-49). */
@@ -989,52 +992,52 @@ html.native .splash-mark svg{width:96px;height:96px}
 .hf{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 12px;border-radius:13px;
   background:var(--surface2);border:1px solid var(--line)}
 .hf:focus-within{border-color:var(--accent)}
-.hf span{width:36px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--dim2)}
-.hf input{flex:1;min-width:0;height:46px;border:0;background:none;outline:none;font:inherit;font-size:16px;color:var(--txt)}
+.hf span{width:36px;flex-shrink:0;font-size:var(--fs-xs);font-weight:700;color:var(--dim2)}
+.hf input{flex:1;min-width:0;height:46px;border:0;background:none;outline:none;font:inherit;font-size:var(--fs-input);color:var(--txt)}
 .hf input::placeholder{color:var(--dim2)}
 .hf.me input::placeholder{color:var(--accent);font-weight:600}   /* "Your location": filled in, not a prompt */
 .hfrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 /* Leaving on its own line and the button full width under it: "Leaving" + the picker + a
    nowrap button were ~285 px, wider than the card at 320 px, and ran off its edge (UI-28). */
-.hleave{display:flex;align-items:center;gap:6px;flex:1 1 100%;min-width:0;font-size:13px;font-weight:600;color:var(--dim)}
+.hleave{display:flex;align-items:center;gap:6px;flex:1 1 100%;min-width:0;font-size:var(--fs-s);font-weight:600;color:var(--dim)}
 .hleave select{flex:1 1 0;min-width:0;min-height:46px;padding:0 6px;border-radius:12px;border:1px solid var(--line);
-  background:var(--surface2);color:var(--txt);font:inherit;font-size:16px}
+  background:var(--surface2);color:var(--txt);font:inherit;font-size:var(--fs-input)}
 #heroGo{flex:1 1 100%;min-width:0;height:48px;border-radius:13px;background:var(--accent);color:var(--accent-ink);
-  font-weight:800;font-size:15px;white-space:nowrap}
+  font-weight:800;font-size:var(--fs-m);white-space:nowrap}
 @media(max-width:350px){#hero{padding-left:10px;padding-right:10px}.herocard{padding-left:16px;padding-right:16px}}
 /* Two by two at every width: four in a row ran 29 px past the card's padding (8 px past its
    edge) from 441 px up, and 84 px at 441 px. */
 .heroex{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 14px}
 .heroex[hidden]{display:none}
-.heroex small{grid-column:1/-1;font-size:12px;font-weight:600;color:var(--dim2)}
+.heroex small{grid-column:1/-1;font-size:var(--fs-xs);font-weight:600;color:var(--dim2)}
 .heroex button{min-height:38px;padding:0 12px;border-radius:100px;border:1px solid var(--line);background:var(--surface);
-  color:var(--txt);font-size:13px;font-weight:600;white-space:nowrap}
+  color:var(--txt);font-size:var(--fs-s);font-weight:600;white-space:nowrap}
 @media(hover:hover){.heroex button:hover{border-color:var(--accent)}}
-.herosep{display:flex;align-items:center;gap:10px;margin:2px 0 10px;font-size:12px;font-weight:600;color:var(--dim2)}
+.herosep{display:flex;align-items:center;gap:10px;margin:2px 0 10px;font-size:var(--fs-xs);font-weight:600;color:var(--dim2)}
 .herosep::before,.herosep::after{content:'';flex:1;height:1px;background:var(--line)}
 /* Short phones (iPhone SE, or any phone with Safari's toolbars showing): the card ran past
    the fold and its top, close button included, started off-screen. Tighter, not hidden. */
 @media (max-height:700px){
   .hero-mark{display:none}                 /* the logo is in the search bar right behind */
   .herocard{padding-top:18px;padding-bottom:16px}
-  .herocard h1{font-size:22px;margin-bottom:6px}
-  .herocard p{font-size:13px;margin-bottom:10px}
+  .herocard h1{font-size:var(--fs-xl);margin-bottom:6px}
+  .herocard p{font-size:var(--fs-s);margin-bottom:10px}
   .herogrid{gap:6px;margin-bottom:8px}
   .heropick{padding-top:8px;padding-bottom:8px}
   #heroAll{height:42px}
   .hf{min-height:44px}.hf input{height:42px}
 }
 #heroAll{width:100%;height:46px;border-radius:13px;background:var(--surface2);color:var(--txt);border:1px solid var(--line);
-  font-weight:700;font-size:14.5px;margin-bottom:9px}
-#heroSkip{width:100%;color:var(--dim);font-size:13px;font-weight:600;padding:6px}
+  font-weight:700;font-size:var(--fs-m);margin-bottom:9px}
+#heroSkip{width:100%;color:var(--dim);font-size:var(--fs-s);font-weight:600;padding:6px}
 
 /* ═══ about ═══ */
 #about{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:3000;background:var(--overlay);backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px}
 #about:target{display:flex}
 #about .box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;
-  max-width:470px;max-height:82vh;overflow-y:auto;font-size:13.5px;color:var(--dim);line-height:1.6}
-#about h2{font-family:var(--display);color:var(--txt);font-size:22px;font-weight:800;margin-bottom:12px;letter-spacing:-.4px}
+  max-width:470px;max-height:82vh;overflow-y:auto;font-size:var(--fs-body);color:var(--dim);line-height:1.6}
+#about h2{font-family:var(--display);color:var(--txt);font-size:var(--fs-xl);font-weight:800;margin-bottom:12px;letter-spacing:-.4px}
 #about h2 .c{color:var(--accent)}#about h2 .h{color:var(--amber-text)}
 #about p{margin-bottom:12px}
 #about b{color:var(--txt)}
@@ -1045,7 +1048,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   #about p>a{padding:6px 0;margin:-6px 0}}
 .chainlinks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .chainlinks a{background:var(--surface2);border:1px solid var(--line);border-radius:100px;
-  padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--txt);text-decoration:none}
+  padding:6px 11px;font-size:var(--fs-s);font-weight:600;color:var(--txt);text-decoration:none}
 /* Close at the top as well: the only way out used to be a link several screens down. It sits
    in a header that stays put with the title, on the sheet's own background: a lone sticky x
    floated over the text, which ran under and around it while scrolling. top:-24px is the
@@ -1057,19 +1060,19 @@ html.native .splash-mark svg{width:96px;height:96px}
 #about .abhead h2{margin:0}
 #about .xclose{flex:none;width:38px;height:38px;border-radius:12px;
   display:grid;place-items:center;background:var(--surface2);border:1px solid var(--line);color:var(--dim)}
-#about .about-ver{color:var(--dim2);font-size:12px;margin-top:4px}
-#about .about-small{color:var(--dim);font-size:12.5px;line-height:1.5}
-#about .about-list{margin:-4px 0 14px 18px;color:var(--dim);font-size:13.5px;line-height:1.5}
+#about .about-ver{color:var(--dim2);font-size:var(--fs-xs);margin-top:4px}
+#about .about-small{color:var(--dim);font-size:var(--fs-s);line-height:1.5}
+#about .about-list{margin:-4px 0 14px 18px;color:var(--dim);font-size:var(--fs-body);line-height:1.5}
 #about .about-list li{margin-bottom:4px}
 #about .close{display:block;text-align:center;margin-top:6px;padding:12px;background:var(--surface2);
   border-radius:12px;color:var(--txt);font-weight:700;text-decoration:none}
 
 #offlineBar{position:fixed;top:0;left:0;right:0;z-index:5000;background:var(--warn);color:var(--warn-ink);
-  font-size:12.5px;font-weight:700;text-align:center;padding:calc(env(safe-area-inset-top) + 6px) 10px 6px}
+  font-size:var(--fs-s);font-weight:700;text-align:center;padding:calc(env(safe-area-inset-top) + 6px) 10px 6px}
 #offlineBar[hidden]{display:none}
 /* Skip link: off-screen until focused, then on top of everything. */
 .skip{position:fixed;left:12px;top:-60px;z-index:6000;padding:10px 16px;border-radius:12px;background:var(--ink);color:var(--ink-on);
-  font:700 14px var(--sans);text-decoration:none}
+  font:700 var(--fs-body) var(--sans);text-decoration:none}
 .skip:focus{top:calc(env(safe-area-inset-top) + 10px)}
 body.offline .overlay-top{padding-top:calc(env(safe-area-inset-top) + 40px)}
 /* iOS Larger Text past ~120% (html.bigtext, set by the app shell with -webkit-text-size-adjust):
@@ -1079,7 +1082,7 @@ html.bigtext #centerCard .rad button,html.bigtext #app.phone #sheet #centerCard 
 html.bigtext .row .ch{flex-wrap:wrap}
 html.bigtext .row .ch>span{white-space:normal}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);
-  transform:translateX(-50%) translateY(14px);background:var(--txt);color:var(--bg);font-size:13px;
+  transform:translateX(-50%) translateY(14px);background:var(--txt);color:var(--bg);font-size:var(--fs-s);
   font-weight:600;padding:11px 19px;border-radius:13px;box-shadow:var(--sh);z-index:4000;opacity:0;
   pointer-events:none;transition:.25s;max-width:min(90vw,420px);width:max-content;text-align:center;line-height:1.35}
 /* Long toasts wrap: the cut-off half was usually the instruction ("…or tap the map"). */
@@ -1129,31 +1132,31 @@ html.bigtext .row .ch>span{white-space:normal}
      the 50-mile radius button, making it untappable. margin-right is what actually reserves
      the column on a static element. */
   #centerCard.show{margin-right:72px}
-  .chip{height:44px;padding:0 16px;font-size:14px}
+  .chip{height:44px;padding:0 16px;font-size:var(--fs-body)}
   .searchpill{height:54px}
   .searchpill .pbtn{width:46px;height:46px}
   .mbtn{width:54px;height:54px;border-radius:17px}
   .seg{height:50px}
-  .seg button{height:42px;padding:0 14px;font-size:13.5px}
+  .seg button{height:42px;padding:0 14px;font-size:var(--fs-body)}
   .ftog{height:50px}
   .rfield{height:48px}
   #goBtn{height:50px}
   .row{padding:13px 0}
   /* 48 px to tap, but no taller than the name in the layout: a one-line name left an 11 px hole above the food. */
   .row .star{font-size:20px;width:48px;height:48px;padding-top:4px;margin-bottom:-24px}
-  .sortbtn{padding:12px 8px;font-size:13px}
+  .sortbtn{padding:12px 8px;font-size:var(--fs-s)}
   .iconbtn.sm{width:44px;height:44px}   /* share/close buttons: the last ones under 44 */
-  #centerCard .rad button{padding:7px 11px;font-size:12.5px}
+  #centerCard .rad button{padding:7px 11px;font-size:var(--fs-s)}
   .pkitem,.caritem{padding:14px 13px}
   .heropick{padding:15px 14px}
   .leaflet-popup-close-button{width:44px;height:44px;font-size:24px!important}
   /* iOS Safari zooms the page into any focused field under 16px, and the page cannot
      scroll back out (html is overflow:hidden). */
-  .searchpill input,.rfield input,.pk .searchbox input{font-size:16px}
-  .bleave select{font-size:16px;min-height:44px;padding:6px 8px}
-  #filtNetList div[data-net]{min-height:44px;padding:0 10px;font-size:13.5px}
+  .searchpill input,.rfield input,.pk .searchbox input{font-size:var(--fs-input)}
+  .bleave select{font-size:var(--fs-input);min-height:44px;padding:6px 8px}
+  #filtNetList div[data-net]{min-height:44px;padding:0 10px;font-size:var(--fs-body)}
   .pp-links a{padding:13px 8px}.pp-links a.rep{padding:13px 4px}.pp-links .pp-morebtn{padding:13px 18px}
-  .pp-nb{padding:8px 10px;font-size:12.5px}
+  .pp-nb{padding:8px 10px;font-size:var(--fs-s)}
   .pp-sec a{display:inline-block;padding:10px 0}
   .pp-poi-l a,.pp-det a{display:inline-block;padding:10px 0}
   #heroSkip{padding:14px 6px}
@@ -1175,7 +1178,7 @@ html.bigtext .row .ch>span{white-space:normal}
    blur behind sheets is the single most expensive thing to paint, so it goes. */
 html.car *,html.car *::before,html.car *::after{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 html.car{--side:470px}
-html.car body{font-size:16px}
+html.car body{font-size:var(--fs-input)}
 
 /* The car's own look: charcoal or near-white surfaces, one blue for anything you can act on,
    medium-weight type with room around it. Our brand stays in the wordmark and the marks. */
@@ -1194,11 +1197,11 @@ html.car[data-theme="dark"]{--accent:#5b83ef;--accent-ink:#fff;--bg:#0f1012;--su
   html.car #mapWrap{margin:14px 14px 14px 14px;border-radius:22px;overflow:hidden}
 }
 html.car .row{border-radius:16px}
-html.car .row .n b,html.car .row .n .rowname{font-size:16px;font-weight:600;letter-spacing:-.1px}
+html.car .row .n b,html.car .row .n .rowname{font-size:var(--fs-input);font-weight:600;letter-spacing:-.1px}
 html.car .chip{font-weight:500}
 html.car .searchpill{border-radius:16px}
 html.car .leaflet-popup-content-wrapper{border-radius:20px}
-html.car .pp-name{font-size:17px;font-weight:600}
+html.car .pp-name{font-size:var(--fs-l);font-weight:600}
 
 /* Motion: short, eased, transform and opacity only (no layout, no blur), and none at all
    for anyone who asks the system to reduce motion. */
@@ -1223,9 +1226,9 @@ html.car .pp-name{font-size:17px;font-weight:600}
   html.car button:active,html.car .chip:active,html.car .pp-links a:active,html.car .mbtn:active{transform:scale(.96)}
 }
 html.car .pp-carnav{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--surface2);border:1px solid var(--line)}
-html.car .pp-carnav small{display:block;color:var(--dim);font-size:12.5px;margin-bottom:4px}
-html.car .pp-carnav b{display:block;font-size:17px;line-height:1.3}
-html.car .pp-carnav span{display:block;color:var(--dim);font-size:13px;margin-top:3px}
+html.car .pp-carnav small{display:block;color:var(--dim);font-size:var(--fs-s);margin-bottom:4px}
+html.car .pp-carnav b{display:block;font-size:var(--fs-l);line-height:1.3}
+html.car .pp-carnav span{display:block;color:var(--dim);font-size:var(--fs-s);margin-top:3px}
 </style>
 <script>
 /* Car mode: apply the touch-screen rules unconditionally -- the car's browser does not
@@ -3030,7 +3033,7 @@ function focusPlan() {
 function chipsFit(ent, s, label, room) {
   let used = 0, n = 0;
   for (const [k, v] of ent.slice(0, 3)) {
-    const w = 44 + 5.5 * (label(k).length + String(walkMin(walkTo(s, k, v))).length + 5) + (acrossHwy(s, k) ? 66 : 0);
+    const w = 44 + 5.5 * (label(k).length + String(walkMin(walkTo(s, k, v))).length + 5) + (acrossHwy(s, k) ? 72 : 0);   // "across hwy" at 11 px is ~6 px wider than at 10 (UI-54)
     // "+N" is ~14 px and 8 a digit; 16 px to spare for the fit's error.
     if (n && used + w + (ent.length > n + 1 ? 14 + 8 * String(ent.length - n - 1).length : 0) > room - 16) break;
     used += w + 5; n++;
