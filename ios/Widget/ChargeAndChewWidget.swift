@@ -104,7 +104,8 @@ struct StopView: View {
                         Text(family == .systemSmall ? "Nearest with food" : "Nearest stop with food")
                             .font(.caption2.weight(.bold)).foregroundStyle(.secondary).lineLimit(1)
                     }
-                    Text(c.name).font(.system(size: family == .systemSmall ? 14 : 16, weight: .bold))
+                    // Dynamic Type styles, not fixed points: the name follows Larger Text like the rest.
+                    Text(c.name).font(family == .systemSmall ? .subheadline.weight(.bold) : .headline)
                         .lineLimit(2).minimumScaleFactor(0.85).layoutPriority(1)
                     Text(stats(c)).font(.caption.monospacedDigit()).foregroundStyle(.secondary).lineLimit(1)
                     if family != .systemSmall {
@@ -112,11 +113,15 @@ struct StopView: View {
                     }
                     // Small widgets stack the chips: two side by side truncated "IHOP" to "IH…".
                     let chips = Array(c.food.prefix(family == .systemSmall ? 2 : 3).enumerated())
-                    let chip: (Charger.Place) -> AnyView = { f in AnyView(
-                        Text("\(f.emoji) \(f.brand) \(max(1, Int((f.metres / 80).rounded()))) min")
+                    // VoiceOver reads "IHOP, 3-minute walk", not "pancakes IHOP 3 min".
+                    let chip: (Charger.Place) -> AnyView = { f in
+                        let n = max(1, Int((f.metres / 80).rounded()))
+                        return AnyView(
+                        Text("\(f.emoji) \(f.brand) \(n) min")
                             .font(.caption2.weight(.semibold)).lineLimit(1).minimumScaleFactor(0.8)
                             .padding(.horizontal, 7).padding(.vertical, 4)
-                            .background(Color.primary.opacity(0.08), in: Capsule())) }
+                            .background(Color.primary.opacity(0.08), in: Capsule())
+                            .accessibilityLabel(Text("\(f.brand), \(n)-minute walk"))) }
                     if family == .systemSmall {
                         VStack(alignment: .leading, spacing: 4) { ForEach(chips, id: \.offset) { _, f in chip(f) } }
                     } else {

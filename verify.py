@@ -1188,7 +1188,7 @@ for _needle, _why in [
     ("window.__parseTrip", "parseTrip is not exported — the search suite cannot test it"),
     ("TRIP_REJECT", "the trip false-positive guard is gone"),
     ("CITY_ALIAS", "city abbreviations (LA, NYC, SF) no longer expand"),
-    ("runRoute(tripPoi ? { poi: tripPoi } : {});",
+    ("runRoute(tripPoi ? { poi: tripPoi, focus: true } : { focus: true });",
      "a parsed trip is never handed to the router"),
     # ---- a category wanted ALONG the drive ----
     # "LA to las vegas near ice cream shop" used to put the whole tail into the
@@ -1923,6 +1923,32 @@ check('<h1>EV fast chargers along <span class="nw">I-95</span></h1>' in _g["alon
       "/along/ breaks 'I-95' at its hyphen or ends the state list in '….' (UI-39)")
 check('<div class="ctas"><a class="cta" href="../">Open the interactive map →</a>' in _g["near/index.html"],
       "the guides home stacks three equal CTAs again (UI-42)")
+# ---- Batch B: B11 and accessibility (web and iOS) ----
+_nb3 = open(os.path.join(HERE, "ios", "ChargeAndChew", "NativeBridge.swift")).read()
+_wv3 = open(os.path.join(HERE, "ios", "ChargeAndChew", "WebViewController.swift")).read()
+_wg3 = open(os.path.join(HERE, "ios", "Widget", "ChargeAndChewWidget.swift")).read()
+check(_live("window.__ccCalRefused = () => toast('Couldn\\u2019t add these stops to your calendar. Update the app, or try again.');")
+      and _nb3.count("return refuseCalendar(") == 3 and 'evaluateJavaScript("window.__ccCalRefused && window.__ccCalRefused()")' in _nb3
+      and "else { return }" not in _nb3[_nb3.index('case "calendar":'):_nb3.index('case "dataFailed":')],
+      "the iOS shell drops a calendar payload it refuses without telling the page again (B11)")
+check(_live("$('goBtn').onclick = () => runRoute({ focus: true });") and _live("if (opts.focus) planFocusUntil = Date.now() + 2500;")
+      and _live("if (route) setTimeout(focusPlan, 0);") and _live("runRoute({ focus: true });", 1)
+      and _live("h.tabIndex = -1; h.focus({ preventScroll: true });"),
+      "after Plan the drive, focus no longer moves to the plan's heading")
+check(_live("if (el && nm) { el.setAttribute('role', 'dialog'); el.setAttribute('aria-labelledby', nm.id); }")
+      and '<div class="pp-name" id="ppn-${s.id}" tabindex="-1">' in _html
+      and _live("const f = pe && (pe.querySelector('.pp-name') || pe.querySelector('a[href], button, [tabindex=\"0\"]')); if (f) f.focus({ preventScroll: true }); }"),
+      "the stop card is no longer a labelled dialog, or keyboard focus starts on the Save star again")
+check('<body>\n<a class="skip" href="#placeIn">Skip to search</a>' in _html
+      and _live("e.preventDefault(); $('placeIn').focus();") and _live("if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;"),
+      "the skip link or the '/' shortcut to search is gone")
+check("case let c where c.isAccessibilityCategory: zoom = 1.2" not in _wv3
+      and re.search(r"(?m)^\s*let scale = UIFontMetrics\(forTextStyle: \.body\)\.scaledValue\(for: 17, compatibleWith: traitCollection\) / 17$", _wv3) is not None
+      and "webView.evaluateJavaScript(Self.textAdjustJS(textAdjust))" in _wv3
+      and "html.bigtext .row .ch{flex-wrap:wrap}" in _html,
+      "iOS Larger Text is capped again (it scales the text fully, ~310% at the largest size)")
+check(".font(.system(size:" not in _wg3 and '.accessibilityLabel(Text("\\(f.brand), \\(n)-minute walk"))' in _wg3,
+      "the widget uses fixed font sizes again, or VoiceOver reads its food emoji")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app
@@ -2667,7 +2693,7 @@ _nb, _wv, _ce = _swf("NativeBridge.swift"), _swf("WebViewController.swift"), _sw
 _py = open(os.path.join(HERE, "ios", "project.yml")).read() if os.path.exists(os.path.join(HERE, "ios", "project.yml")) else ""
 if _nb:
     check(re.search(r"(?m)^\s*version: 2,", _nb) is not None
-          and re.search(r'(?m)^\s*case "calendar":\n\s*// .*\n\s*guard let raw = opts\["events"\] as\? \[\[String: Any\]\], \(1\.\.\.40\)\.contains\(raw\.count\) else \{ return \}', _nb) is not None
+          and re.search(r'(?m)^\s*case "calendar":\n(?:\s*// .*\n)+\s*guard let raw = opts\["events"\] as\? \[\[String: Any\]\], \(1\.\.\.40\)\.contains\(raw\.count\) else \{ return refuseCalendar\("count"\) \}', _nb) is not None
           and re.search(r"(?m)^\s*let stops = raw\.compactMap\(CalendarStop\.init\)\n\s*guard stops\.count == raw\.count else", _nb) is not None
           and re.search(r'(?m)^\s*onCalendar\?\(stops, mode == "stop", opts\["ics"\] as\? String,', _nb) is not None,
           "the iOS bridge no longer takes the calendar message (bridge version 2, allow-listed, every event validated)")

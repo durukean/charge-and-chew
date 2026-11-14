@@ -150,16 +150,28 @@ extension NativeBridge: WKScriptMessageHandler {
         case "review":
             onReview?()
         case "calendar":
-            // At most a long drive's worth of stops; any malformed one refuses the lot.
-            guard let raw = opts["events"] as? [[String: Any]], (1...40).contains(raw.count) else { return }
+            // At most a long drive's worth of stops; any malformed one refuses the lot -- and
+            // says so to the page (B11): dropped silently, the tap did nothing at all.
+            guard let raw = opts["events"] as? [[String: Any]], (1...40).contains(raw.count) else { return refuseCalendar("count") }
             let stops = raw.compactMap(CalendarStop.init)
-            guard stops.count == raw.count else { Diag.log("calendar: refused a malformed event"); return }
+            guard stops.count == raw.count else { return refuseCalendar("malformed") }
             let mode = opts["mode"] as? String
-            guard mode == "trip" || (mode == "stop" && stops.count == 1) else { return }
+            guard mode == "trip" || (mode == "stop" && stops.count == 1) else { return refuseCalendar("mode") }
             onCalendar?(stops, mode == "stop", opts["ics"] as? String, opts["name"] as? String ?? "charge-and-chew.ics")
         case "dataFailed":
             onDataFailed?(opts["why"] as? String ?? "unknown")
         default: break
+        }
+    }
+}
+
+extension NativeBridge {
+    /// The page shows its own message (window.__ccCalRefused, index.html); an older page has
+    /// no hook and the call does nothing.
+    fileprivate func refuseCalendar(_ why: String) {
+        Diag.log("calendar: refused (\(why))")
+        DispatchQueue.main.async {
+            self.webView?.evaluateJavaScript("window.__ccCalRefused && window.__ccCalRefused()")
         }
     }
 }

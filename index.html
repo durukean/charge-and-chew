@@ -418,6 +418,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   max-height:var(--pop-max,min(62vh,420px));overflow-y:auto;overscroll-behavior:contain}
 
 .leaflet-popup-close-button{color:var(--dim2)!important;padding:9px 9px 0 0!important;font-size:19px!important}
+.pp-name:focus{outline:none}.pp-name:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:4px}
 .pp-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;padding-right:22px}
 .pp-name{font-family:var(--display);font-weight:700;font-size:18px;flex:1;line-height:1.2;letter-spacing:-.3px}
 .pp-fav{font-size:17px;color:var(--dim2);flex-shrink:0;line-height:1}
@@ -1054,7 +1055,17 @@ html.native .splash-mark svg{width:96px;height:96px}
 #offlineBar{position:fixed;top:0;left:0;right:0;z-index:5000;background:var(--warn);color:var(--warn-ink);
   font-size:12.5px;font-weight:700;text-align:center;padding:calc(env(safe-area-inset-top) + 6px) 10px 6px}
 #offlineBar[hidden]{display:none}
+/* Skip link: off-screen until focused, then on top of everything. */
+.skip{position:fixed;left:12px;top:-60px;z-index:6000;padding:10px 16px;border-radius:12px;background:var(--ink);color:var(--ink-on);
+  font:700 14px var(--sans);text-decoration:none}
+.skip:focus{top:calc(env(safe-area-inset-top) + 10px)}
 body.offline .overlay-top{padding-top:calc(env(safe-area-inset-top) + 40px)}
+/* iOS Larger Text past ~120% (html.bigtext, set by the app shell with -webkit-text-size-adjust):
+   the text grows and the layout keeps its width, so nothing may have a fixed height and the food
+   wraps rather than shrink its names to nothing. */
+html.bigtext #centerCard .rad button,html.bigtext #app.phone #sheet #centerCard .rad button{height:auto;min-height:30px;line-height:1.2}
+html.bigtext .row .ch{flex-wrap:wrap}
+html.bigtext .row .ch>span{white-space:normal}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);
   transform:translateX(-50%) translateY(14px);background:var(--txt);color:var(--bg);font-size:13px;
   font-weight:600;padding:11px 19px;border-radius:13px;box-shadow:var(--sh);z-index:4000;opacity:0;
@@ -1219,6 +1230,7 @@ if (document.documentElement.classList.contains('car')) {
 </script>
 </head>
 <body>
+<a class="skip" href="#placeIn">Skip to search</a>
 <div id="splash">
   <div class="splash-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg1" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask1"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask1)"><rect width="64" height="64" fill="url(#ccg1)"/></g></svg></div>
   <div class="splash-logo"><span class="c">Charge</span><span class="amp">&amp;</span><span class="h">Chew</span></div>
@@ -1645,6 +1657,9 @@ const byId = {}; SITES.forEach(s => byId[s.id] = s);
    install nudge, sharing location.href, the Web Share API -- has to know it is not in one:
    a shared link that reads http://127.0.0.1:61234/ is a bug, not a link. */
 const NATIVE = !!(window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.cc);
+/* The iOS shell refuses a calendar payload it cannot trust (too many events, a malformed one)
+   and says so here (B11): it used to drop it, and the tap did nothing. */
+window.__ccCalRefused = () => toast('Couldn\u2019t add these stops to your calendar. Update the app, or try again.');
 const native = (cmd, opts) => { if (NATIVE) window.webkit.messageHandlers.cc.postMessage({ cmd, id: 0, opts: opts || {} }); };
 if (NATIVE) {
   document.documentElement.classList.add('native');
@@ -2195,7 +2210,7 @@ function popupHtml(s) {
     return at ? `<a class="pp-nb${pri(k) ? ' on' : ''}"${hk} href="${gPlace(label, at[0].toFixed(5), at[1].toFixed(5))}" target="_blank" rel="noopener">${inner}</a>`
               : `<span class="pp-nb">${inner}</span>`;
   }).join('');
-  return `<div class="pp-top"><div class="pp-name">${esc(s.name)}</div>
+  return `<div class="pp-top"><div class="pp-name" id="ppn-${s.id}" tabindex="-1">${esc(s.name)}</div>
       <button class="pp-fav ${favs.has(s.id) ? 'on' : ''}" data-fav="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
     <div class="pp-sum">${badge}${units ? `<span>${units}</span>` : ''}<span class="pp-nn">${netDot(s, 'dot')}${esc(s.net)}</span>${s.h24 ? '<span class="tag">24h</span>' : ''}${route && route.mileAt && route.mileAt.has(s.id) ? `<span class="pp-mile">mile ${route.mileAt.get(s.id)} of ${Math.round(route.mi).toLocaleString('en-US')}</span>` : ''}</div>
     ${carLine ? carLine + (cm != null ? dwellAdvice(s, cm) : '')
@@ -2373,6 +2388,9 @@ map.on('popupopen', e => {
   // Before showPOIs moves the map below: that move must already see the stop as open.
   $('app').classList.add('popup-open'); $('searchHere').hidden = true;
   const el = e.popup.getElement();
+  // A dialog to assistive tech, named by the stop's name (not a run of unlabelled text).
+  const nm = el && el.querySelector('.pp-name');
+  if (el && nm) { el.setAttribute('role', 'dialog'); el.setAttribute('aria-labelledby', nm.id); }
   const b = el && el.querySelector('[data-fav]');
   if (b) b.onclick = () => {
     toggleFav(+b.dataset.fav);
@@ -2654,7 +2672,8 @@ function flyToStop(s, byKeyboard) {
     if (opened) return; opened = true; popupPad(mk[s.id]); mk[s.id].openPopup();
     // From the keyboard, carry focus into the panel that just opened.
     if (byKeyboard) { const pe = mk[s.id].getPopup() && mk[s.id].getPopup().getElement();
-      const f = pe && pe.querySelector('a[href], button, [tabindex="0"]'); if (f) f.focus(); }
+      // The name, not the first control: focus on the Save star read "Save, toggle button" first.
+      const f = pe && (pe.querySelector('.pp-name') || pe.querySelector('a[href], button, [tabindex="0"]')); if (f) f.focus({ preventScroll: true }); }
   };
   if (REDUCED_MOTION) map.setView([s.lat, s.lon], Math.max(map.getZoom(), 13), { animate: false });
   else map.flyTo([s.lat, s.lon], Math.max(map.getZoom(), 13), { duration: .7 });
@@ -2979,6 +2998,17 @@ document.addEventListener('click', e => {
 
 /* ───────── list ───────── */
 const planRowOn = () => localStorage.getItem('cc_planrow') === '1';
+/* After "Plan the drive", focus goes to the plan's heading, so a keyboard or VoiceOver user is
+   taken to the answer instead of being left on the button. A new route renders twice (the fit
+   re-renders), so for a moment each render puts it back if focus fell to the page. */
+let planFocusUntil = 0;
+function focusPlan() {
+  if (Date.now() > planFocusUntil) return;
+  const h = document.querySelector('#list .breaks .bh') || $('sheetTitle');
+  const a = document.activeElement;
+  if (a && a !== document.body && a.isConnected && !a.closest('#routePanel, #hero, .searchpill') && a !== h) return;
+  h.tabIndex = -1; h.focus({ preventScroll: true });
+}
 /* How many place chips fit on one line of a row: three, unless they would wrap. A chip's width
    from its text, fitted on 381 rendered chips (44 px of emoji and padding + 5.5 px a character
    of "Taco Bell 1 min", within ~10 px either way), plus
@@ -3141,6 +3171,7 @@ function renderList(vis) {
   }).join('') + (col ? `<button type="button" class="listmore" id="routeAll">Show all ${vis.length.toLocaleString()} stops</button>`
     : vis.length > LIST_MAX
     ? `<div class="empty">Showing the first ${LIST_MAX} of ${vis.length.toLocaleString()}. Narrow the filter to see more.</div>` : '');
+  if (route) setTimeout(focusPlan, 0);
   const pg = $('planRowGo');
   if (pg) {
     pg.onclick = () => { localStorage.setItem('cc_planrow', '0'); track('plan-row'); showHero(); setTimeout(() => $('heroTo').focus({ preventScroll: true }), 60); };
@@ -4856,7 +4887,7 @@ $('placeIn').addEventListener('keydown', async e => {
        `active` and needs no lookup. */
     const tripPoi = (!p.chains.length && trip.filter) ? detectPoiIntent(trip.filter) : null;
     if (tripPoi) track('live-poi-route', tripPoi.tags[0]);
-    runRoute(tripPoi ? { poi: tripPoi } : {});
+    runRoute(tripPoi ? { poi: tripPoi, focus: true } : { focus: true });
     return;
   }
 
@@ -6478,6 +6509,15 @@ function poiDetailHtml(p) {
   ].filter(Boolean).join('');
   return `<div class="pp-det">${state}${p.addr ? '<br>' + esc(p.addr) : ''}${links ? '<br>' + links : ''}</div>`;
 }
+/* "/" goes to search from anywhere but a text field, as on most sites with one search box. */
+document.addEventListener('keydown', e => {
+  if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+  const t = e.target;
+  if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+  if (document.querySelector('.modal.show') || location.hash === '#about') return;
+  e.preventDefault(); $('placeIn').focus();
+});
+document.querySelector('.skip').addEventListener('click', e => { e.preventDefault(); $('placeIn').focus(); });
 /* Enter and Space activate anything presented as a button that is not a native one (legend
    and network rows, a popup's chain rows). They were focusable but did nothing. */
 document.addEventListener('keydown', e => {
@@ -6613,6 +6653,8 @@ async function runRoute(opts) {
     }
     if (stale()) return;
     noteRouteFrom(); clearCenter();
+    // A drive the user asked for just now: keyboard and VoiceOver land on its plan (renderList).
+    if (opts.focus) planFocusUntil = Date.now() + 2500;
     applyCorridor(trip.v, trip.mi, trip.hr);
     /* applyCorridor drops any live POI matches, because they were computed for a circle
        that no longer applies. Re-run them against the route we just drew. */
@@ -6628,7 +6670,7 @@ async function runRoute(opts) {
   }
   finally { $('goBtn').disabled = false; }
 }
-$('goBtn').onclick = () => runRoute();
+$('goBtn').onclick = () => runRoute({ focus: true });
 function clearRouteErr() {
   $('routeInfo').classList.remove('err');
   for (const id of ['fromIn', 'toIn']) { $(id).removeAttribute('aria-invalid'); $(id).closest('.rfield').classList.remove('bad'); }
@@ -7610,6 +7652,10 @@ function addToCalendar(onlyId) {
   if (past) setTimeout(() => toast(`${past === 1 ? '1 stop is' : past + ' stops are'} already past and left out`), NATIVE ? 0 : 3200);
   track('calendar', onlyId == null ? 'trip' : 'stop');
   if (NATIVE) { native('calendar', { mode: onlyId == null ? 'trip' : 'stop', name: C.name, ics, events: C.events }); return; }
+  /* iOS Safari (B12) downloads this to Files behind a prompt rather than opening Calendar. A
+     top-level data:text/calendar navigation would be the way, but Safari refuses it (tried in
+     the iOS 26 Simulator, 2026-11-13: nothing happens), and webcal:// needs a server to serve
+     the file. So the download stays, and the toast below says to open it. */
   const href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
   const el = document.createElement('a');
   el.href = href; el.download = C.name; el.hidden = true;
@@ -7816,7 +7862,7 @@ function heroPlan(f, t, how) {
   $('routePanel').classList.add('show');
   $('routeToggle').classList.add('on');
   $('overlayTop').classList.add('routing');
-  runRoute();
+  runRoute({ focus: true });
 }
 $('heroForm').onsubmit = e => { e.preventDefault(); heroPlan($('heroFrom').value.trim(), $('heroTo').value.trim(), 'typed'); };
 // Return in "From" moves to "To", as the keyboard's Next key says.

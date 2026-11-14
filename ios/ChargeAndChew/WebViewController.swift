@@ -217,18 +217,22 @@ final class WebViewController: UIViewController {
         view.window?.overrideUserInterfaceStyle = style
     }
 
-    /// Larger Text in Settings. The page is sized in CSS pixels and ignores Dynamic Type, so
-    /// scale the whole page, modestly: past ~1.2 the phone layout runs out of width.
+    /// Larger Text in Settings, all the way (it stopped at 120% before; the largest accessibility
+    /// size is ~310%). The page is sized in CSS pixels, so the scale is the body text style's own
+    /// (17 pt at the default). Up to 1.35 it zooms the whole page; past that the phone layout
+    /// runs out of width (430 pt at 3x is a 140 px page), so the rest scales the TEXT alone,
+    /// via -webkit-text-size-adjust, and the layout reflows around it.
     @objc private func applyTextSize() {
-        let zoom: CGFloat
-        switch traitCollection.preferredContentSizeCategory {
-        case .extraLarge: zoom = 1.06
-        case .extraExtraLarge: zoom = 1.12
-        case .extraExtraExtraLarge: zoom = 1.16
-        case let c where c.isAccessibilityCategory: zoom = 1.2
-        default: zoom = 1
-        }
+        let scale = UIFontMetrics(forTextStyle: .body).scaledValue(for: 17, compatibleWith: traitCollection) / 17
+        let zoom = min(max(scale, 1), Self.zoomCap)
         if webView.pageZoom != zoom { webView.pageZoom = zoom }
+        textAdjust = max(100, Int((scale / zoom * 100).rounded()))
+        webView.evaluateJavaScript(Self.textAdjustJS(textAdjust))
+    }
+    static let zoomCap: CGFloat = 1.0
+    private var textAdjust = 100
+    static func textAdjustJS(_ pct: Int) -> String {
+        "document.documentElement.style.webkitTextSizeAdjust='\(pct)%';document.documentElement.classList.toggle('bigtext',\(pct)>100)"
     }
     override var preferredStatusBarStyle: UIStatusBarStyle { dark ? .lightContent : .darkContent }
 
@@ -386,6 +390,7 @@ extension WebViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         Diag.log("didFinish \(webView.url?.absoluteString ?? "?")")
+        if textAdjust > 100 { webView.evaluateJavaScript(Self.textAdjustJS(textAdjust)) }   // a new page has no inline style
         hideSplash()
         if let u = pendingDeepLink { pendingDeepLink = nil; open(deepLink: u) }
     }
