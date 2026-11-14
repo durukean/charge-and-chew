@@ -219,7 +219,9 @@ location.replace('/?chain=IHOP&nosw=1');
             sg = re.findall(r'<span class="sig (\w+)(?: n)?" title="([^"]*)"><svg[^>]*>.*?</svg><span>([^<]*)</span></span>', r, re.S)
             return len(sg) == 1 and (re.fullmatch(r'playground \d+ min', sg[0][2]) and sg[0][1].startswith('A playground is mapped')
                                      or sg[0][0] in ('shut', 'xh', 'wc', 'late'))
-        return len(rows) > 3 and all(one(r) for r in rows) and any('<span class="sig kids"' in r for r in rows)
+        # At night (10 pm-6 am) late food outranks the playground on every row, so the playground
+        # may show on none: then the late-food signal stands in (it only ever shows at night).
+        return len(rows) > 3 and all(one(r) for r in rows) and any('<span class="sig kids"' in r or '<span class="sig late' in r for r in rows)
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
     checks = {
