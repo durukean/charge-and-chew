@@ -207,7 +207,7 @@ location.replace('/?chain=IHOP&nosw=1');
     if dom_filt is None or dom_full is None or dom_hero is None or dom_kids_saved is None or dom_kids_link is None or dom_plan is None:
         return 1
     _cal = re.findall(r'<button type="button" class="calbtn" data-cal="all" aria-label="Add the (?:stop|(\d+) stops) on this plan to your calendar">'
-                      r'<svg[^>]*>.*?</svg>Add(?: the stop|<span class="cw"> (\d+) stops</span>) to calendar</button>', dom_plan, re.S)
+                      r'<svg[^>]*>.*?</svg><span>Add(?: the stop|<span class="cw"> (\d+) stops</span>) to calendar</span></button>', dom_plan, re.S)
     _send = re.findall(r'<div class="bcal"><button type="button" class="calbtn" data-send="plan"><svg[^>]*>.*?</svg>Send plan</button>', dom_plan, re.S)
     _stops = len(re.findall(r'<button type="button" class="brk(?: meal)?" data-brk="\d+"', dom_plan))
 

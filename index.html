@@ -3012,14 +3012,15 @@ function focusPlan() {
 /* How many place chips fit on one line of a row: three, unless they would wrap. A chip's width
    from its text, fitted on 381 rendered chips (44 px of emoji and padding + 5.5 px a character
    of "Taco Bell 1 min", within ~10 px either way), plus
-   "across hwy" (~66 px), a 5 px gap, and "+N" (~28 px) when some are left over. The line never
+   "across hwy" (~66 px), a 5 px gap, and "+N" when some are left over. The line never
    wraps: a chip a few pixels short shortens its name ("Starbuc… 3 min"), never its minutes. At
    least one. No layout is read per row: one width per render. */
 function chipsFit(ent, s, label, room) {
   let used = 0, n = 0;
   for (const [k, v] of ent.slice(0, 3)) {
     const w = 44 + 5.5 * (label(k).length + String(walkMin(walkTo(s, k, v))).length + 5) + (acrossHwy(s, k) ? 66 : 0);
-    if (n && used + w + (ent.length > n + 1 ? 28 : 0) > room) break;
+    // "+N" is ~14 px and 8 a digit; 16 px to spare for the fit's error.
+    if (n && used + w + (ent.length > n + 1 ? 14 + 8 * String(ent.length - n - 1).length : 0) > room - 16) break;
     used += w + 5; n++;
   }
   return Math.max(1, n);
@@ -7364,7 +7365,7 @@ function breaksCard(vis) {
      a calendar event (see addToCalendar). Sending was an unlabelled glyph in the sheet header
      while the calendar had a labelled button; side by side, the same weight. */
   const calB = picks.length && calOk() ? `<button type="button" class="calbtn" data-cal="all"
-      aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}Add${picks.length === 1 ? ' the stop' : `<span class="cw"> ${picks.length} stops</span>`} to calendar</button>` : '';
+      aria-label="Add the ${picks.length === 1 ? 'stop' : picks.length + ' stops'} on this plan to your calendar">${CAL_ICON}<span>Add${picks.length === 1 ? ' the stop' : `<span class="cw"> ${picks.length} stops</span>`} to calendar</span></button>` : '';
   const cal = picks.length ? `<div class="bcal"><button type="button" class="calbtn" data-send="plan">${SEND_ICON}Send plan</button>${calB}</div>` : '';
   /* A chain you asked for that is shut on the day you leave (Chick-fil-A on a Sunday) leaves the
      plan empty: say why, rather than an empty card. */
