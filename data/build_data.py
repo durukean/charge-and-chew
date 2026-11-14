@@ -87,6 +87,18 @@ MIN_KW = 24                        # below this it is not DC fast (AFDC miscateg
 _CODE_TAIL = _re.compile(r'\s+(?:DCFC|DC\s?FAST|EVSE|STATION|CHARGER|PORT)?\s*'
                          r'[A-Z]{0,5}\d{1,6}[A-Z0-9]{0,4}$', _re.I)
 
+NAME_MAX = 72
+# fetch_chargers.py cut every name at 60 characters until 2026-11 (UI-36): 184 names ended
+# mid-word ("... - Tesla Supercharg", "... Parking Lo"). A name of exactly that length was cut.
+OLD_CUT = 60
+
+def title_case(n):
+    """str.title() without its apostrophe bug: "WENDY'S" -> "Wendy's", not "Wendy'S" (UI-36).
+    "O'REILLY" -> "O'Reilly" (a letter after the apostrophe that starts a word stays capital)."""
+    return _re.sub(r"[A-Za-z]+('[A-Za-z]+)?", lambda m: m.group(0)[0].upper() + m.group(0)[1:].lower()
+                   if not _re.fullmatch(r"[A-Za-z]'[A-Za-z]{2,}", m.group(0))
+                   else m.group(0)[:3].upper() + m.group(0)[3:].lower(), n)
+
 def pretty_name(name, host=""):
     """Machine names like 'PIE AE HEB E51ST DCFC1' are what the user reads. Tidy them."""
     n = (name or "").strip()
@@ -117,9 +129,25 @@ def pretty_name(name, host=""):
         n = " ".join(w[:len(w) // 2])
     letters = [c for c in n if c.isalpha()]
     if letters and sum(c.isupper() for c in letters) / len(letters) > 0.85 and len(n) > 6:
-        n = n.title()                       # ALL CAPS -> Title Case
+        n = title_case(n)                   # ALL CAPS -> Title Case
         n = _re.sub(r'\b(Ev|Dc|Ac|Hq|Us|Ii|Iii|Iv)\b', lambda m: m.group(0).upper(), n)
-    return n[:60]
+    n = _re.sub(r"(?<=[a-z])'S\b", "'s", n)  # "Wendy'S Nodak EV" as it came from the source
+    return n
+
+
+def display_name(n, net, cut):
+    """The last step, after de-duplication (which compares names, so shortening them first
+    merged 37 Tesla sites into neighbours): "Barstow, CA - 1503 East Main Street - Tesla
+    Supercharger" loses the tail the network line under it already says -- cut at 60, that tail
+    was where it broke off ("- Tesla Supercharg"); and a name is never cut mid-word: one that
+    was cut drops its last, partial word and ends in an ellipsis (UI-36)."""
+    if net == "Tesla Supercharger" or cut:
+        t = _re.sub(r'\s+[-–]\s+Tesla(?:\s+S[a-z]*)?$', '', n)
+        if t != n and len(t) >= 4:
+            n, cut = t, False
+    if cut or len(n) > NAME_MAX:
+        n = n[:NAME_MAX].rsplit(' ', 1)[0].rstrip(' -–—,·(') + '…'
+    return n
 
 _KEEP_UPPER = {"N", "S", "E", "W", "NE", "NW", "SE", "SW", "US", "SR", "FM", "CR", "PO", "II", "III", "IV"}
 
@@ -133,7 +161,7 @@ def unshout(t):
         if w in _KEEP_UPPER or _re.fullmatch(r'[A-Z]-?\d+[A-Z]?', w):   # I-35, US, NE, 5A
             out.append(w)
         else:
-            w = w.title()
+            w = title_case(w)
             w = _re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), w)  # 1St -> 1st
             w = _re.sub(r"'S\b", "'s", w)
             out.append(w)
@@ -175,6 +203,7 @@ def clean(sites):
             stats["private"] += 1; continue
         # tidy the name BEFORE de-duplicating: "PIE AE AUSTIN HS DCFC1" and "...DCFC2" are the
         # same site, and only look identical once the trailing cabinet code is stripped
+        s["_cut"] = len((s.get("name") or "").strip()) == OLD_CUT
         pn = pretty_name(s.get("name", ""))
         if pn != s.get("name"):
             s["name"] = pn; stats["renamed"] += 1
@@ -231,6 +260,8 @@ def clean(sites):
     stats["dup"] = len(kept) - len(deduped)
 
     deduped, stats["ports"] = merge_ports(deduped)
+    for s in deduped:
+        s["name"] = display_name(s["name"], s.get("net"), s.pop("_cut", False))
 
     for s in deduped:
         if DEALER_RE.search(s["name"]):

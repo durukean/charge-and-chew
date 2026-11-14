@@ -1802,13 +1802,15 @@ if D:
     _grid = {}
     for _s in D["sites"]:
         _grid.setdefault((int(_s["lat"] * 200), int(_s["lon"] * 200)), []).append(_s)
+    # The merge compared names before display_name() took the Tesla tail off (UI-36): put it back.
+    _asbuilt = lambda x: dict(x, name=x["name"] + " - Tesla Supercharger") if x.get("net") == "Tesla Supercharger" and not x["name"].endswith("\u2026") else x
     _split = []
     for _s in D["sites"]:
         _c = (int(_s["lat"] * 200), int(_s["lon"] * 200))
         for _di in (-1, 0, 1):
             for _dj in (-1, 0, 1):
                 _split += [(_s["name"], _t["name"]) for _t in _grid.get((_c[0] + _di, _c[1] + _dj), ())
-                           if _t["id"] > _s["id"] and _same_site(_s, _t)]
+                           if _t["id"] > _s["id"] and _same_site(_asbuilt(_s), _asbuilt(_t))]
     check(not _split, f"{len(_split)} port-split listings of one site are separate stops again, e.g. {_split[:2]}")
 # A route lists the best stop per ~30-minute stretch, with "Show all N stops" below (2026-11-11).
 # tools/breaks_check.mjs plays it (short list, one per stretch, show all, back, break taps).
@@ -1891,6 +1893,22 @@ _cm = [d for d in re.findall(r"[;{]([a-z-]+):color-mix\(", _css)]
 _cmok = all(re.search(r"\b" + re.escape(d) + r":(?!color-mix)[^;]+;" + re.escape(d) + r":color-mix\(", _css) for d in set(_cm))
 check(_cm and _cmok and len(re.findall(r"(?<![\w-])(color|background):(?!color-mix)[^;{}]+;\1:color-mix\(", _css)) == len(_cm),
       "a color-mix() with no plain fallback before it (B13)")
+# UI-36: station names. No word cut in half at the old 60-character fetch limit, no "Wendy'S",
+# no "- Tesla Supercharger" tail the network line already says. The data, and the functions.
+_nm = [x.get("name", "") for x in D["sites"]]
+_bad36 = [n for n in _nm if (len(n) == 60 and not n.endswith("\u2026") and re.search(r"[A-Za-z]{2}$", n) and re.search(r"(?i)tesla s\w*$|\b\w{1,3}$", n))
+          or re.search(r"[a-z]'[A-Z]\b", n) or re.search(r"\s[-–]\s+Tesla(?:\s+S[a-z]*)?$", n)]
+check(len(_nm) > 10000 and not _bad36, f"{len(_bad36)} station names are cut mid-word, title-cased after an apostrophe or carry the Tesla tail: {_bad36[:3]}")
+sys.path.insert(0, os.path.join(HERE, "data"))
+import build_data as _bdm
+check(_bdm.title_case("WENDY'S NODAK EV") == "Wendy's Nodak Ev" and _bdm.title_case("O'REILLY AUTO") == "O'Reilly Auto"
+      and _bdm.pretty_name("LOVE'S TRAVEL STOP 374") .startswith("Love's")
+      and _bdm.display_name("Barstow, CA - 1503 East Main Street - Tesla Supercharger", "Tesla Supercharger", False) == "Barstow, CA - 1503 East Main Street"
+      and _bdm.display_name("Las Vegas, NV - Las Vegas Boulevard South - Tesla Supercharg", "Tesla Supercharger", True) == "Las Vegas, NV - Las Vegas Boulevard South"
+      and _bdm.display_name("Lewis & Clark Community College - Weber Workforce Parking Lo", "ChargePoint", True) == "Lewis & Clark Community College - Weber Workforce Parking\u2026"
+      and 's["name"] = display_name(s["name"], s.get("net"), s.pop("_cut", False))' in open(os.path.join(HERE, "data", "build_data.py")).read()
+      and '"name": s.get("station_name", "").strip()[:120],' in open(os.path.join(HERE, "data", "fetch_chargers.py")).read(),
+      "station names: title case after an apostrophe, the Tesla tail or the mid-word cut is back in the data build (UI-36)")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app

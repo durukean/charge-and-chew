@@ -107,7 +107,7 @@ def distill(fs):
         hours = (s.get("access_days_time") or "")
         out.append({
             "id": s["id"],
-            "name": s.get("station_name", "").strip()[:60],
+            "name": s.get("station_name", "").strip()[:120],   # cut at a word in build_data (UI-36)
             "lat": round(lat, 5), "lon": round(lon, 5),
             "city": s.get("city", "") or "", "st": s.get("state", "") or "",
             "street": (s.get("street_address") or "")[:60],
