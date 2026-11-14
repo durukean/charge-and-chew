@@ -2730,6 +2730,33 @@ check(re.search(r'<div class="ic-mark" aria-hidden="true"><svg viewBox="0 0 64 6
       and not re.search(r"\.ic-mark\{[^}]*gradient", _css),
       "the install card's mark is not the app logo (UI-43)")
 
+# UI-44: the folded route card's trip may take two lines, and its numbers end in "N stops"
+# (the list's word), with no "within 5 mi" to push the count off a 320 px screen.
+check(re.search(r"#routePanel\.collapsed #routeInfo \.sum b\{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;\s*white-space:normal", _css) is not None
+      and "`<span class=\"rcount\">${routeCountText()}</span></i></span>`" in _html
+      and re.search(r"return `\$\{n\.toLocaleString\('en-US'\)\} \$\{F\.plug \? PLUG_NAME\[F\.plug\] \+ ' ' : ''\}stop\$\{n === 1 \? '' : 's'\}`;", _html) is not None,
+      "the route card's trip is clipped to one line or its count says 'chargers within N mi' again (UI-44)")
+# UI-45: the breaks card's subtitle is one unit, on its own line on a phone.
+check(re.search(r"\.breaks \.bh small\{[^}]*white-space:nowrap\}", _css) is not None
+      and "@media(max-width:359px){.breaks .bh small{display:block;margin:2px 0 0}}" in _css,
+      "the breaks card's subtitle can orphan a word again (UI-45)")
+# UI-46: saved stops with none here say how many are saved, not "0 stops saved".
+check("$('sheetTitle').innerHTML = cat === 'fav' && !vis.length && favs.size\n    ? `${favs.size.toLocaleString()} saved <em>· none " in _html,
+      "the Saved title says '0 stops saved' when the saved stops are elsewhere (UI-46)")
+# UI-47: a drive's destinations are sorted by distance from the start and say "N mi away".
+check("function routeOrigin(t) {" in _html
+      and ".sort((a, b) => away(a) - away(b)).slice(0, 6)" in _html
+      and "sub: d != null && d >= 1 ? `${d.toLocaleString('en-US')} mi away` : nCharger(p.c) });" in _html,
+      "route suggestions are back to the biggest towns with their charger counts (UI-47)")
+# UI-48 / UI-49: US spelling, the separator is read out, and "eat" is text-contrast amber.
+check('<div class="herosep" role="separator" aria-label="or find chargers near a favorite">' in _html
+      and "near a favourite" not in _html
+      and ".herocard p .h{color:var(--chew);font-weight:700}" in _css,
+      "the welcome card's separator is hidden from screen readers, spelt 'favourite', or 'eat' is 4.0:1 amber (UI-48/49)")
+# UI-53: square controls get round keyboard rings, at zero specificity.
+check(":where(button,a,[role=button]):focus-visible{border-radius:8px}" in _css,
+      "keyboard focus rings on controls are square again (UI-53)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

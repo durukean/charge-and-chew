@@ -272,6 +272,8 @@ location.replace('/?chain=IHOP&nosw=1');
         "no_calendar_button_without_a_plan": all(not re.search(r'<button type="button" class="(?:calbtn" data-cal="all" aria-label="Add the|pp-cal" data-cal="\d)', d)
             for d in (dom, dom_q, dom_kids_link)),
         "welcome_card_focuses_itself_not_its_x": bool(re.search(r'<div id="hero"[^>]*tabindex="-1"[^>]*>', dom_hero)),
+        # Batch C (UI-44): the folded route card ends "N mi · Xh Ym · N stops", the list's word.
+        "route_card_counts_stops": bool(re.search(r'<span class="sum"><b>[^<]+</b><i>[\d,]+ mi · [^<]+ · <span class="rcount">[\d,]+ stops</span></i></span>', dom_plan)),
     }
     bad = [k for k, v in checks.items() if not v]
     for k, v in checks.items():
