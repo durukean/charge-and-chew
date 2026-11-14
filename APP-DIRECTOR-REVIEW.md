@@ -437,4 +437,4 @@ Screenshots: `scratchpad/bB/shots/`:
 **Final runs** were on an rsync snapshot of `1af282252c` (the tools' ROOT is their own directory, so they serve the snapshot), with Overpass at NXDOMAIN:
 - `node tools/breaks_check.mjs`: 35/35, 4 of them new.
 - `node tools/trip_plan_check.mjs`: 152/152 (329 rows).
-- `node tools/search_audit.mjs`: SEARCH_RESULT.
+- `node tools/search_audit.mjs`: **277/277** (273 + 4 new @when cases). The last code commit, `69a623d2a9` (calendar label span and chip slack), is cosmetic, and its gate was green.
