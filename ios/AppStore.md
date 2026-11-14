@@ -66,6 +66,15 @@ Audit batch A (2026-11-12/13, branch director/audit-2026-11-12). Draft What's Ne
 > • Picking one network no longer hides Tesla stops on later visits, and opening a shared link no longer changes your saved filters.
 > • The map no longer goes blank for anyone who had picked the CARTO map style.
 
+Audit batch B (2026-11-13, branch director/audit-b-2026-11-13). Draft What's New lines:
+> • Send plan: a labelled button next to Add to calendar. The link opens the same plan your friends read: the same leaving time and day.
+> • Search understands how people say it: "thanksgiving drive LA to SF", "LA to Vegas wednesday 7am", "Denver to Moab leaving tomorrow at 6" plan that day and time.
+> • Cleaner results: each stop shows the food first, then the charger, then where it is, with the one thing that matters most: usually closed, across the highway, restroom likely, late food, or a playground.
+> • Larger Text now goes all the way: the app follows your largest text size, and so does the widget.
+> • VoiceOver and keyboards: after Plan the drive you land on the plan, a stop opens as a labelled card that starts with its name, and "/" jumps to search.
+> • Station names are never cut off mid-word ("Wendy's", not "Wendy'S").
+> • Offline, a search that needs a signal says so right away.
+
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
