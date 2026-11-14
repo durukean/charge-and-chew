@@ -36,3 +36,26 @@ the stop with `ccapp://stop?at=36.1672,-115.1485&stop=166933`.
 | `3-search.png` | "pharmacy in denver": 43 stops near Walgreens / CVS in Denver | **Search what you need, where you're going** |
 | `4-chain.png` | "in n out": 8 stops near In-N-Out around you | **Find your favorite, near you** |
 | `5-nearby.png` | opens on your location: 69 stops in Las Vegas | **Every fast charger, by what's next door** |
+
+## 1.1.1 set (`1.1.1/`): captioned, meal plan first
+
+Captured 2026-11-14 on "CC Shots 6.9" from build 46's code (main `ec4e03a37c`), status bar 9:41
+(`simctl status_bar override`), location downtown Las Vegas, Tesla Model Y set, light theme forced
+(`cc_theme=light` in the app's WebKit localStorage, since the page goes dark after sunset). Each
+screen opened with a deep link (`ccapp://plan?from=Los%20Angeles&to=Las%20Vegas&leave=0800`,
+`ccapp://x?q=thanksgiving%20drive%20la%20to%20sf`,
+`ccapp://plan?from=Los%20Angeles&to=San%20Francisco&kids=1&leave=0800`,
+`ccapp://x?at=36.1450,-115.1700&r=10`), then sheet drags and taps. Press HOME and relaunch from the
+home screen before capturing, or iOS shows a "◀ <app>" back breadcrumb in the status bar.
+Captions burned in: raw capture scaled to 1100 px in a rounded frame on charge green (#0f7a43),
+Bricolage Grotesque headline + Inter subline, rendered by headless Chrome at 1320×2868
+(Chrome's PNG has no alpha channel; checked with `sips -g hasAlpha`).
+
+| file | shows | caption |
+|---|---|---|
+| `1-plan.png` | LA → Las Vegas, Suggested breaks: 10:05 am Barstow, 12:30 pm **Lunch** Primm (Carl's Jr.), Send plan, Add 2 stops to calendar | **Lunch, planned around your drive** |
+| `2-rows.png` | route rows: Hesperia, Barstow ×2, Baker; food chips with walk times, restroom likely | **Food first, then the charger** |
+| `3-stop.png` | Barstow Supercharger card: 23 min, quick meal at Taco Bell, walk lines, "Break ~10:05 am · on your plan · Add to calendar" | **Your charge, matched to a meal** |
+| `4-search.png` | "thanksgiving drive la to sf": LA → SF, Leaving **Thanksgiving** 8:00 am, breaks | **Type it the way you'd say it** |
+| `5-kids.png` | LA → SF with Good for kids: playground 3 min / 2 min on each break | **Good for kids** |
+| `6-map.png` | Las Vegas, 53 stops within 10 mi, network marks | **Every fast charger, by what's next door** |

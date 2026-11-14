@@ -2,8 +2,9 @@
 
 Everything App Store Connect asks for. 1.0.5 released 2026-10-19; 1.0.6 (build 35, the redesign)
 released 2026-10-20; 1.0.7 (build 36) released 2026-10-22; **1.0.8** (build 39, search audit
-fixes) approved 2026-10-26 and never released: it is folded into **1.1.0**. Listing, keywords and screenshots are
-the 1.0.6 ones; release stays manual. The old-design preview video is gone and still needs
+fixes) approved 2026-10-26 and never released: it is folded into **1.1.0** (build 45, READY_FOR_SALE).
+**1.1.1** (build 46) is prepared in App Store Connect with new keywords and six captioned screenshots,
+not yet submitted; it alone releases automatically after approval, later versions go back to manual. The old-design preview video is gone and still needs
 re-recording in the new design.
 
 **Name** (30): `Charge & Chew: EV Stops`
@@ -12,7 +13,42 @@ re-recording in the new design.
 
 ---
 
-## Next (after 1.1.0): live on the web 2026-10-28, not yet in an iOS build
+## 1.1.1 (build 46, prepared 2026-11-14, NOT yet submitted; release AFTER_APPROVAL)
+
+Carries everything in "Next" below (live on the web since 2026-10-28 … 2026-11-14): meal-timed
+breaks, Add to calendar (EventKit, write-only), Send plan, day/time-aware search, smarter stops,
+audit batches A, B and C. Built from main `ec4e03a37c` (web app byte-identical to the live site).
+The user asked that 1.1.1 release automatically once approved (`releaseType: AFTER_APPROVAL`);
+that covers 1.1.1 only. Submission waits until the In-App Event's reviewSubmission (7272acc4)
+is no longer open: only one reviewSubmission can be open at a time.
+
+**Promotional text:** unchanged (the Thanksgiving line on 1.1.0; change it back after Thanksgiving).
+
+**Keywords** (98/100; nothing already in the name or subtitle, no brand names; dropped
+`tesla`, `supercharger`, `ihop`, `ice cream`, `dining`):
+`charging,road trip,electric car,restaurant,meal,lunch,dinner,calendar,nacs,ccs,route,restroom,kids`
+
+**What's New:**
+> • Meals on the way: plan a drive and your breaks land at breakfast, lunch and dinner, with a real meal a short walk from the charger. Pick the day you leave, add every stop to your calendar in one tap, or Send plan to whoever is riding along.
+> • Search the way you say it: "thanksgiving drive LA to SF" or "LA to Vegas wednesday 7am" plans that day and time.
+> • Cleaner stops: the food first, then the charger, with the one thing that matters most (usually closed, across the highway, restroom likely, late food or a playground). Names are never cut off mid-word.
+> • Larger Text goes all the way, in the app and the widget, and VoiceOver lands you on your plan.
+> • Offline, a search that needs a signal says so right away. Long drives plan faster, plus many fixes.
+
+**Review notes** (replace the "what is new" steps):
+> WHAT IS NEW IN 1.1.1 (meal-timed break plan, Add to calendar) — how to try it:
+> 1. Allow location when asked (or decline: everything below works without it).
+> 2. Search:  LA to Las Vegas   — the "Suggested breaks" card times each stop (e.g. 12:30 pm Lunch in Primm, NV).
+> 3. Tap "Add 2 stops to calendar" under that card. iOS asks for WRITE-ONLY calendar access (EventKit requestWriteOnlyAccessToEvents): the app adds the planned stops and cannot read any existing events. Declining offers Share File (.ics) instead.
+> 4. A single stop's "Add to calendar" (open a stop on the plan) uses the system event editor and needs no permission.
+> 5. Search:  thanksgiving drive la to sf   — the plan is for Thanksgiving Day, leaving 8:00 am.
+
+**Screenshots** (6.9", `ios/screenshots/1.1.1/`, captioned, no alpha): 1-plan, 2-rows, 3-stop,
+4-search, 5-kids, 6-map. See `ios/screenshots/README.md`.
+
+---
+
+## Next (after 1.1.0): live on the web 2026-10-28 onward; all of it ships in 1.1.1 (build 46)
 
 From two probes (93, then ~150 queries) the audit did not cover, and meal-timed breaks.
 Draft What's New lines:
@@ -81,7 +117,10 @@ Audit batch C (2026-11-13/14, branch director/audit-c-2026-11-13). Draft What's 
 > • Saved stops elsewhere: the list says "4 saved · none here" instead of "0 stops saved".
 > • One consistent type scale: no text smaller than 11 points, and clearer keyboard focus rings.
 
-## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
+## 1.1.0 (build 45): historical
+
+Submitted 2026-10-28 (it was WAITING_FOR_REVIEW then); approved and released, READY_FOR_SALE
+(checked via the API 2026-11-14), manual release. The text below is as submitted.
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
 approved 1.0.8 was cancelled (Developer Rejected) and its version record renamed to 1.1.0.
