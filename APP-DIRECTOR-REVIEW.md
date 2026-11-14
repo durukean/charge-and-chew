@@ -438,3 +438,67 @@ Screenshots: `scratchpad/bB/shots/`:
 - `node tools/breaks_check.mjs`: 35/35, 4 of them new.
 - `node tools/trip_plan_check.mjs`: 152/152 (329 rows).
 - `node tools/search_audit.mjs`: **277/277** (273 + 4 new @when cases). The last code commit, `69a623d2a9` (calendar label span and chip slack), is cosmetic, and its gate was green.
+
+## Changes made: audit batch C (2026-11-13/14: P3 polish, UI-43 to UI-55)
+
+Process for each change:
+- `./check.sh` was green on an rsync snapshot of exactly what each commit holds, and the commit was made from that snapshot.
+- Guards in `verify.py` and `verify_ui.py`.
+- Every new guard was mutation-tested: 37 runs, all caught.
+  - `tools/mutate.py` for index.html.
+  - A multi-file mutator for the generated pages.
+  - Rebuild-then-verify for build.py and planner.py.
+  - One guard was tightened after its mutation slipped through: the rest-area restroom reason is now checked by its own text.
+- Overpass was never reached: every headless Chrome mapped it to NXDOMAIN, and there were no data refetches.
+- Branch `director/audit-c-2026-11-13`. Not pushed. SW `cc-v54` (bumped once, with `sw.js`).
+
+| # | What changed | Why | Verified by |
+|---|---|---|---|
+| UI-43 (`4a146490bf`) | The install card shows the app's mark (the bolt with a bite, inline SVG), not a green-to-amber square. | The only off-brand graphic in the app. | Screenshot, 375 light and dark. |
+| UI-44 (`a36c02d902`) | The folded route card's trip may take two lines. Its numbers read "269 mi · 4h 57m · 236 stops": "stops", as in the list title, with no "within 5 mi". | At 320 the card read "Los Angeles, CA → Las Ve…" and "236 charge…". It said "chargers" while the list said "stops". | 320: the trip is 18 px tall and clipped → 35 px on 2 lines, not clipped; the numbers are no longer clipped. `verify_ui` checks the rendered card. `trip_plan_check` still reads the count. |
+| UI-45 | The breaks subtitle is one unit (nowrap). Below 360 px it sits on its own line. | "…about every 1.7 h of" / "driving". | 320: the subtitle sits on its own line. 375 and 1280 are unchanged (one line). |
+| UI-46 | Saved, with none of them in the area: the title reads "4 saved · none here" (or "none on this route"). | The title said "0 stops saved" and the body said "None of your 4…". | Before "0 stops saved" → after "4 saved · none here". |
+| UI-47 | After "&lt;town&gt; to", the list shows the top 60 towns that are 75 to 1,200 mi from the start, nearest first, each with "N mi away". This applies when the start is a town we have; otherwise the old list shows. | "Los Angeles to …" led with Houston, "79 chargers". | Los Angeles: Bakersfield 100, San Diego 111, Fresno 207, Las Vegas 228, San Jose 300, Stockton 319 (straight-line miles). |
+| UI-48/49 | "favorite". The separator is `role=separator` with a label (it was `aria-hidden`). "eat" uses `--chew` (#a6510a, 5.4:1). | US spelling; screen readers lost the section intro; "eat" was 4.04:1. | Screenshot; guard. |
+| UI-53 | `:where(button,a,[role=button]):focus-visible{border-radius:8px}`. At zero specificity, a control's own radius always wins. Focus already went to the stop's name (batch B). | The star's square ring cut into the title. | CDP: a focused `.pp-fav` has `:focus-visible`, an 8 px radius and a solid outline (screenshot). The ring's top edge is still clipped by the card's scroll box. |
+| UI-50/51/52/55 (`21749ae8e5`) | **Guides.** **Cards:** 4 chips + "+N" (class `.plus`: `.more` is the "Showing 60" box and drew a bordered pill); 24h on the speed line; one quiet signal from `planner.quiet_sig()`. That signal uses the app's `restroomSig` reasons that need no clock (rest area, travel stop ≤250 m, mapped toilets, 24-hour diner ≤150 m), else the playground. `TRAVEL_STOPS`, `RR_24` and the icons are read from index.html. **Trip table:** "Lunch" is the amber pill. **Counts:** chip counts read "4,649". One `N_CHAINS` (brands minus the ice cream category) = **90** on /near/, /along/, the Road Food Index and the app; /near/ said 91. **Text:** `.lead` is 17 px over the 16 px body; the guides' `.xh` is 11 px. **Road Food Index:** a "Copy citation" button (clipboard, "Copied" in a live region) and a download glyph on each CSV pill. Pages rebuilt (2,100). | Brand coherence and copy consistency | IHOP in California card height at 375: 285–336 → 225–279 (typical 285 → 255); at 1280: 187–217 → 187. A real click on Copy citation in headless Chrome, with clipboard permission, gave "Copied", and the clipboard held the citation. No horizontal scroll at 375. |
+| test (`416f873dd4`) | `verify_ui`'s Good-for-kids check accepts the late-food signal in place of a playground. | Found at midnight: from 10 pm to 6 am late food outranks the playground on every row, so the check failed on the batch B code too. It was clock-dependent, not a regression. | Green at 00:30 and by day. |
+| UI-54 (`1d97a039eb` + welcome tiles) | **Type scale.** Ten tokens: `--fs-2xs` 11, `xs` 12, `s` 13, `body` 14, `m` 15, `input` 16, `l` 17, `xl` 20, `2xl` 24, `3xl` 28. 171 text sizes map to them, rounding .5 up: 9.5–11 → 11, 11.5 → 12, 12.5 → 13, 13.5 → 14, 14.5 → 15, 16.5/18 → 17, 19/22 → 20. Two exceptions: row names 16.5 → **16** (at 17, "Danville, CA - Blackhawk Plaza" wrapped at 375), and the 22 px headings → 20. Map marks, emoji and close/star glyphs keep their own px; so do the two boot-failure inline styles (14/15). `chipsFit` allows 72 px for "across hwy" (66 before; measured 74 → 79.7 px with its gap). At 320 the welcome tiles put the emoji above the name, because "4,552 chargers" at 11 px ran past the tile. | About 20 half-pixel sizes; tags at 10–10.5 px and the mile ring at 9.5 px. | Row heights, before → after, taken in the same minute: see below. 0 clipped chip names on every list. No horizontal scroll at 320, 375 or 1280. |
+
+**Row heights (first 10 rendered rows, px), before → after:**
+- **Barstow:**
+  - 375: 125–146 (avg 126) → 125–145 (avg 126).
+  - 320: max 165 → 165.
+  - 1280: 130–148 → 131 (with the 16 px names, no row takes two lines).
+- **Concord, kids on:**
+  - 375: 125–146 → 125–145.
+  - 320: max 165 → 165.
+- **LA → Denver route:** 125–165 → 125–165.
+- **Santa Monica and Houston:** max 146 → 145 at 375.
+
+**Other measurements, before → after:**
+- **Breaks card**, LA → Las Vegas, taken at the same time: 320 411 → 410, 375 388 → 390, 1280 301 → 304.
+  - The leaving-time picker's width depends on the clock: after 10 pm it offers "tomorrow 8:00 am", so a mid-day and a midnight shot differ by about 45 px. Compare same-time pairs only.
+- **Stop card:** 315 → 315 at 320 and 375; 325 → 327 at 1280.
+- **Filters:** unchanged (698 / 671).
+- **Welcome card:**
+  - 375: 1075 → 1080.
+  - 320: 1075 → 1168 (stacked tiles; the card scrolls, and nothing is clipped).
+
+**Not done / notes**
+- UI-53's ring on the stop card's star is rounded now, but the popup's scroll box still clips its top 2 px. Fixing it needs padding in the card header; left alone.
+- Pre-existing and out of scope: at 320 px, between 10 pm and 6 am the welcome card's time picker shows "this morr…" (the night option is longer than the select).
+- UI-47 distances are straight-line ("mi away"), not road miles.
+- The guide signal is the time-free subset. Store and mall restrooms and late food need an hour, and a static page has none.
+
+**Final runs** were on an rsync snapshot of `1d97a039eb`, with Overpass at NXDOMAIN:
+- `node tools/breaks_check.mjs`: all pass.
+- `node tools/trip_plan_check.mjs`: 152/152 (329 rows).
+- `node tools/search_audit.mjs`: **277/277**.
+- The last commit, `563e3f1bbe` (welcome tiles at 320, CSS only), had its own green gate.
+
+Screenshots are in `scratchpad/bC/shots/`:
+- `before-*` and `after-*`: rows, breaks, stop card, Filters and welcome at 320, 375 and 1280, light and dark.
+- `before2-*`/`after2-*` (same-time pairs) and `*-guide-*`.
+- `mid-*`: install card, suggestions, saved, focus ring.
+- `after-welcome-hp-*`: the welcome tiles.

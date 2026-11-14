@@ -75,6 +75,12 @@ Audit batch B (2026-11-13, branch director/audit-b-2026-11-13). Draft What's New
 > • Station names are never cut off mid-word ("Wendy's", not "Wendy'S").
 > • Offline, a search that needs a signal says so right away.
 
+Audit batch C (2026-11-13/14, branch director/audit-c-2026-11-13). Draft What's New lines:
+> • Start typing a drive ("Los Angeles to …") and destinations show how far away they are, nearest first.
+> • Your planned drive's card shows the whole trip and "236 stops", the same count as the list.
+> • Saved stops elsewhere: the list says "4 saved · none here" instead of "0 stops saved".
+> • One consistent type scale: no text smaller than 11 points, and clearer keyboard focus rings.
+
 ## 1.1.0 (build 45, submitted 2026-10-28, WAITING_FOR_REVIEW, manual release)
 
 1.1.0 carries everything in 1.0.8 and in the 1.0.9 draft (build 42, never submitted). The
