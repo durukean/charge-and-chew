@@ -5,9 +5,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
+<meta name="theme-color" content="#f6f3ee">
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours(),d=t==='dark'||(t!=='light'&&(h<7||h>=19));document.documentElement.dataset.theme=d?'dark':'light';document.querySelector('meta[name=theme-color]').content=d?'#121110':'#f6f3ee'}catch(e){}</script>
 <title>EV chargers with food along I-25 | Charge & Chew</title>
 <meta name="description" content="155 public DC fast chargers within 3 miles of I-25, 132 of them within a 10-minute walk of a restaurant or store. Ordered along the route through 3 states.">
 <link rel="canonical" href="https://chargeandchew.com/along/i-25/">
@@ -26,8 +25,8 @@
 <link rel="stylesheet" href="../../assets/pages.css"></head><body><div class="wrap">
 <header><a class="logo" href="../../"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="../../">Map</a><a href="../../near/">All chains</a><a href="../../trip/">Road trips</a></nav></header>
-<h1>EV fast chargers along I-25</h1>
-<p class="lead"><b>155 DC fast chargers</b> sit within 3 miles of I-25, and
+<h1>EV fast chargers along <span class="nw">I-25</span></h1>
+<p class="lead"><b>155 DC fast chargers</b> sit within 3 miles of <span class="nw">I-25</span>, and
 <b>132</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
 order along the route, WY → CO → NM.</p>
 <a class="cta" href="../../?hwy=I-25">Open I-25 in the map →</a>
@@ -397,8 +396,9 @@ left out — on an interstate run they cost more time than they save. On the <a 
 <div class="l"><a class="pri" href="https://www.google.com/maps/dir/?api=1&destination=39.56271,-104.87345" target="_blank" rel="noopener">Directions</a><a href="../../?chain=Red Robin&amp;state=CO">Show on map</a></div>
 </div></div>
 <h2>Other interstates</h2><div class="chips"><a href="../i-4/">I-4 <small>77</small></a><a href="../i-5/">I-5 <small>708</small></a><a href="../i-10/">I-10 <small>480</small></a><a href="../i-15/">I-15 <small>293</small></a><a href="../i-20/">I-20 <small>201</small></a><a href="../i-24/">I-24 <small>44</small></a><a href="../i-25/">I-25 <small>155</small></a><a href="../i-26/">I-26 <small>46</small></a><a href="../i-30/">I-30 <small>59</small></a><a href="../i-35/">I-35 <small>242</small></a><a href="../i-40/">I-40 <small>273</small></a><a href="../i-44/">I-44 <small>79</small></a><a href="../i-45/">I-45 <small>67</small></a><a href="../i-55/">I-55 <small>146</small></a><a href="../i-64/">I-64 <small>153</small></a><a href="../i-65/">I-65 <small>120</small></a><a href="../i-70/">I-70 <small>330</small></a><a href="../i-71/">I-71 <small>60</small></a><a href="../i-74/">I-74 <small>75</small></a><a href="../i-75/">I-75 <small>415</small></a><a href="../i-77/">I-77 <small>98</small></a><a href="../i-80/">I-80 <small>520</small></a><a href="../i-81/">I-81 <small>138</small></a><a href="../i-84/">I-84 <small>163</small></a><a href="../i-85/">I-85 <small>180</small></a><a href="../i-90/">I-90 <small>568</small></a><a href="../i-91/">I-91 <small>99</small></a><a href="../i-94/">I-94 <small>339</small></a><a href="../i-95/">I-95 <small>795</small></a><a href="../i-96/">I-96 <small>76</small></a></div>
-<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated November 2026 · <a href="../../road-food-index/">Road Food Index</a> · <a href="../../in/">Cities</a> · <a href="../../privacy/">Privacy</a> · <a href="../../support/">Support</a>.
-Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
+<footer><nav class="fl" aria-label="More from Charge &amp; Chew"><a href="../../road-food-index/">Road Food Index</a><a href="../../in/">Cities</a><a href="../../privacy/">Privacy</a><a href="../../support/">Support</a></nav>
+<p>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated November 2026.
+Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</p></footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>

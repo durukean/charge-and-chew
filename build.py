@@ -116,7 +116,8 @@ CSS = """
   color-scheme:light;
 }
 /* Same theme as the map: the head script copies the choice saved there (cc_theme) onto
-   data-theme; with no choice the OS decides. */
+   data-theme; with no choice, the hour decides, as in the map. The media block below only
+   applies with scripts off. */
 :root[data-theme="dark"]{
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
   --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#34c97a;--accent-ink:#0b1a10;--amber-text:#fbbf24;
@@ -153,6 +154,7 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .nw{white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}.ctas .cta{margin:0}   /* one action, then the quiet ones (UI-42) */
 .cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
 .card{display:flex;gap:13px;align-items:flex-start;padding:16px 2px;border-bottom:1px solid var(--line)}
 /* Mirrors the app's list row: the network's mark leads, speed coloured by tier, food amber. */
@@ -251,8 +253,14 @@ table.trip tr.gap td b{color:var(--warn)}
 .faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
-@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}
-  header nav{gap:6px}header nav a{padding:12px 6px}footer a{display:inline-block;padding:10px 2px}}
+/* The footer's links are a row of real targets; the credit links stay in the sentence (UI-38:
+   every link a 40 px box broke the credits into ragged lines). */
+footer .fl{display:flex;flex-wrap:wrap;gap:0 18px;margin-bottom:6px}
+footer .fl a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+footer p{margin:0}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:12px 16px}
+  header nav{gap:6px}header nav a{padding:12px 6px}
+  table.idx td a,table.trip td a{display:inline-block;padding:13px 0;margin:-13px 0}}
 /* On a phone the table's last column was cut off mid-word; there each stop is a stack. */
 @media(max-width:520px){
   table.trip,table.trip tbody{display:block;width:100%;min-width:0}
@@ -264,12 +272,13 @@ footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid v
 }
 """
 
-# Shared by every generated page and 404.html: one theme-color per scheme (two unlabelled tags
-# left the browser to pick either), the map's saved theme applied before the first paint, and
-# the app's fonts (self-hosted, @font-face in pages.css) never hold that paint up.
-HEAD_THEME = """<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>"""
+# Shared by every generated page and 404.html: the map's saved theme (else the hour, as in the
+# map) applied before the first paint, and ONE theme-color that the same script sets to match.
+# Two media-scoped tags followed the OS while the page followed the hour: a near-black Safari
+# toolbar over a cream page at noon (UI-37). The app's fonts (self-hosted, @font-face in
+# pages.css) never hold that paint up.
+HEAD_THEME = """<meta name="theme-color" content="#f6f3ee">
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours(),d=t==='dark'||(t!=='light'&&(h<7||h>=19));document.documentElement.dataset.theme=d?'dark':'light';document.querySelector('meta[name=theme-color]').content=d?'#121110':'#f6f3ee'}catch(e){}</script>"""
 
 
 def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
@@ -306,8 +315,9 @@ def page(path, title, desc, body, canonical, jsonld="", thin=False, og=None):
 <header><a class="logo" href="{root}"><span class="mk"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ccg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask)"><rect width="64" height="64" fill="url(#ccg)"/></g></svg></span><span><span class="c">Charge</span> &amp; <span class="h">Chew</span></span></a>
 <nav><a href="{root}">Map</a><a href="{root}near/">All chains</a><a href="{root}trip/">Road trips</a></nav></header>
 {body}
-<footer>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {UPDATED} · <a href="{root}road-food-index/">Road Food Index</a> · <a href="{root}in/">Cities</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}support/">Support</a>.
-Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</footer>
+<footer><nav class="fl" aria-label="More from Charge &amp; Chew"><a href="{root}road-food-index/">Road Food Index</a><a href="{root}in/">Cities</a><a href="{root}privacy/">Privacy</a><a href="{root}support/">Support</a></nav>
+<p>Charger data: US DOE / NREL <a href="https://afdc.energy.gov/fuels/electricity-locations">AFDC</a> · Chain locations: <a href="https://www.openstreetmap.org">OpenStreetMap</a> · Updated {UPDATED}.
+Walk times are minimums from straight-line distance at ~3 mph; the real walk is usually longer. Not affiliated with Tesla, Inc. or any listed chain. "Supercharger" is a trademark of Tesla, Inc.</p></footer>
 </div>
 <script data-goatcounter="https://chargeandchew.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>"""
@@ -646,8 +656,8 @@ states_html = "".join(
     for st, cm in sorted(state_chain.items(), key=lambda x: STATES.get(x[0], x[0])))
 body = f"""<h1>EV fast chargers near restaurants &amp; stores</h1>
 <p class="lead">{len(matches):,} of {len(sites):,} US DC fast chargers — every major network — have at least one of these {len(chain_index_links)} chains within a 10-minute walk. Pick a chain, or jump to a state.</p>
-<a class="cta" href="../">Open the interactive map →</a>
-<p><a class="cta sec" href="../along/">Browse by interstate instead →</a> <a class="cta sec" href="../in/">Browse by city →</a></p>
+<div class="ctas"><a class="cta" href="../">Open the interactive map →</a>
+<a class="cta sec" href="../along/">By interstate</a><a class="cta sec" href="../in/">By city</a></div>
 <h2>By chain</h2><div class="chips">{chains_html}</div>
 {states_html}"""
 page("near/index.html", "EV fast chargers near every chain, by state", "Browse US EV DC fast chargers by the restaurant or store next to them — IHOP, Walmart, Chick-fil-A, Buc-ee's and more, state by state.", body, "near/")
@@ -757,10 +767,11 @@ if os.path.exists(HW_PATH):
         desc = (f"{len(found):,} public DC fast chargers within {CORRIDOR_MI:g} miles of {disp}, "
                 f"{len(withchain):,} of them within a 10-minute walk of a restaurant or store. "
                 f"Ordered along the route through {len(states)} states.")
-        body = f'''<h1>EV fast chargers along {disp}</h1>
-<p class="lead"><b>{len(found):,} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {disp}, and
+        nd = f'<span class="nw">{disp}</span>'     # "I-" / "95" never split at the hyphen (UI-39)
+        body = f'''<h1>EV fast chargers along {nd}</h1>
+<p class="lead"><b>{len(found):,} DC fast chargers</b> sit within {CORRIDOR_MI:g} miles of {nd}, and
 <b>{len(withchain):,}</b> of those have somewhere to eat or shop within a 10-minute walk. Listed in
-order along the route, {" → ".join(states[:12])}{" …" if len(states) > 12 else ""}.</p>
+order along the route, {" → ".join(states[:12])}{" and more" if len(states) > 12 else ""}.</p>
 <a class="cta" href="../../?hwy={disp}">Open {disp} in the map →</a>
 <p class="stats">Typical power along this corridor is <b>{med} kW</b>, with <b>{big}</b> stops at
 150 kW or more and <b>{h24}</b> listed as open 24 hours. Chargers under {INTERSTATE_MIN_KW} kW are

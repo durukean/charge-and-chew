@@ -4,9 +4,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ee">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121110">
-<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours();document.documentElement.dataset.theme=(t==='dark'||(t!=='light'&&(h<7||h>=19)))?'dark':'light'}catch(e){}</script>
+<meta name="theme-color" content="#f6f3ee">
+<script>try{var t=localStorage.getItem('cc_theme'),h=new Date().getHours(),d=t==='dark'||(t!=='light'&&(h<7||h>=19));document.documentElement.dataset.theme=d?'dark':'light';document.querySelector('meta[name=theme-color]').content=d?'#121110':'#f6f3ee'}catch(e){}</script>
 <title>Page not found | Charge &amp; Chew</title>
 <meta name="robots" content="noindex">
 

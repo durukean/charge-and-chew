@@ -23,7 +23,8 @@
   color-scheme:light;
 }
 /* Same theme as the map: the head script copies the choice saved there (cc_theme) onto
-   data-theme; with no choice the OS decides. */
+   data-theme; with no choice, the hour decides, as in the map. The media block below only
+   applies with scripts off. */
 :root[data-theme="dark"]{
   --bg:#121110;--surface:#1b1a18;--surface2:#24221f;--surface3:#2e2b27;--line:#2c2925;--line2:#3b3732;
   --txt:#f4f1ec;--dim:#b3aba1;--dim2:#9f968c;--accent:#34c97a;--accent-ink:#0b1a10;--amber-text:#fbbf24;
@@ -60,6 +61,7 @@ h1{font-family:var(--display);text-wrap:balance;font-size:clamp(24px,3.6vw,34px)
 .nw{white-space:nowrap}
 .cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;font-weight:700;padding:12px 18px;border-radius:12px;margin-bottom:26px;font-size:15px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}.ctas .cta{margin:0}   /* one action, then the quiet ones (UI-42) */
 .cta.sec{background:var(--surface2);color:var(--txt);border:1px solid var(--line)}
 .card{display:flex;gap:13px;align-items:flex-start;padding:16px 2px;border-bottom:1px solid var(--line)}
 /* Mirrors the app's list row: the network's mark leads, speed coloured by tier, food amber. */
@@ -158,8 +160,14 @@ table.trip tr.gap td b{color:var(--warn)}
 .faq p{padding:0 0 13px;color:var(--dim);font-size:14px;line-height:1.6}
 footer{margin-top:44px;color:var(--dim2);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;
   line-height:1.6}
-@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:10px 14px}
-  header nav{gap:6px}header nav a{padding:12px 6px}footer a{display:inline-block;padding:10px 2px}}
+/* The footer's links are a row of real targets; the credit links stay in the sentence (UI-38:
+   every link a 40 px box broke the credits into ragged lines). */
+footer .fl{display:flex;flex-wrap:wrap;gap:0 18px;margin-bottom:6px}
+footer .fl a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+footer p{margin:0}
+@media(pointer:coarse){.chips a{padding:11px 15px}.card .l a{padding:12px 16px}
+  header nav{gap:6px}header nav a{padding:12px 6px}
+  table.idx td a,table.trip td a{display:inline-block;padding:13px 0;margin:-13px 0}}
 /* On a phone the table's last column was cut off mid-word; there each stop is a stack. */
 @media(max-width:520px){
   table.trip,table.trip tbody{display:block;width:100%;min-width:0}

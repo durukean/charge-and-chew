@@ -899,7 +899,7 @@ check(re.search(r"@media \(max-width:899px\)\{#sheet\{height:40vh", _html) is no
       "the phone sheet starts collapsed and jumps open again (a 0.16 layout shift on every load)")
 
 # Weekly refresh: a footer with the exact date would rewrite every page every week.
-check(re.search(r"Updated [A-Z][a-z]+ \d{4} ·", open(os.path.join(HERE, "near", "ihop", "index.html")).read()) is not None,
+check(re.search(r"Updated [A-Z][a-z]+ \d{4}[.·]", open(os.path.join(HERE, "near", "ihop", "index.html")).read()) is not None,
       "generated pages print the exact data date again — every weekly refresh would rewrite all of them")
 check("'17 9 * * 1'" in open(os.path.join(HERE, ".github", "workflows", "refresh-data.yml")).read(),
       "the data refresh is no longer weekly")
@@ -1909,6 +1909,20 @@ check(_bdm.title_case("WENDY'S NODAK EV") == "Wendy's Nodak Ev" and _bdm.title_c
       and 's["name"] = display_name(s["name"], s.get("net"), s.pop("_cut", False))' in open(os.path.join(HERE, "data", "build_data.py")).read()
       and '"name": s.get("station_name", "").strip()[:120],' in open(os.path.join(HERE, "data", "fetch_chargers.py")).read(),
       "station names: title case after an apostrophe, the Tesla tail or the mid-word cut is back in the data build (UI-36)")
+# Guide pages (batch B): one theme-color the head script sets with the theme (UI-37); a footer
+# link row apart from the credits (UI-38); "I-95" kept whole and no "…." (UI-39); one action on
+# the guides home (UI-42). Checked on the generated pages, not only in build.py.
+_g = {k: open(os.path.join(HERE, *k.split("/"))).read() for k in ("near/index.html", "along/i-95/index.html", "trip/los-angeles-to-las-vegas/index.html", "404.html", "privacy/index.html")}
+check(all(v.count('name="theme-color"') == 1 and "media=\"(prefers-color-scheme" not in v.split("</head>")[0]
+          and "document.querySelector('meta[name=theme-color]').content=d?'#121110':'#f6f3ee'" in v for v in _g.values()),
+      "a guide page's browser chrome follows the OS again while the page follows the hour (UI-37)")
+check("footer .fl a{display:inline-flex;align-items:center;min-height:44px" in open(os.path.join(HERE, "assets", "pages.css")).read()
+      and "footer a{display:inline-block;padding:10px 2px}" not in open(os.path.join(HERE, "assets", "pages.css")).read(),
+      "the guide footer turns every inline credit link into a 40 px box again (UI-38)")
+check('<h1>EV fast chargers along <span class="nw">I-95</span></h1>' in _g["along/i-95/index.html"] and " ….</p>" not in _g["along/i-95/index.html"],
+      "/along/ breaks 'I-95' at its hyphen or ends the state list in '….' (UI-39)")
+check('<div class="ctas"><a class="cta" href="../">Open the interactive map →</a>' in _g["near/index.html"],
+      "the guides home stacks three equal CTAs again (UI-42)")
 check("const TRIP_PAGES = '" in open(os.path.join(HERE, "build.py")).read(),
       "build.py no longer writes the trip-guide list into index.html")
 # The rating ask (2026-11-11): after a planned drive and a Directions tap, at most once per app
@@ -2265,7 +2279,7 @@ _gen = (glob.glob(os.path.join(HERE, "near/**/index.html"), recursive=True) +
         glob.glob(os.path.join(HERE, "trip/**/index.html"), recursive=True) +
         glob.glob(os.path.join(HERE, "in/**/index.html"), recursive=True))
 _nofoot = [os.path.relpath(p_, HERE) for p_ in _gen
-           if not re.search(r'<footer>[^<]*(?:<a[^>]*>[^<]*</a>[^<]*)*<a href="(?:\.\./)*road-food-index/">Road Food Index</a> · <a href="(?:\.\./)*in/">Cities</a>',
+           if not re.search(r'<footer><nav class="fl" aria-label="[^"]*"><a href="(?:\.\./)*road-food-index/">Road Food Index</a><a href="(?:\.\./)*in/">Cities</a>',
                             open(p_, encoding="utf-8").read())]
 check(len(_gen) > 2000 and not _nofoot, f"{len(_nofoot)} generated pages lack the Road Food Index / Cities footer links: {_nofoot[:2]}")
 _ab = _html[_html.find('<div id="about"'):_html.find('<div id="offlineBar"')]
