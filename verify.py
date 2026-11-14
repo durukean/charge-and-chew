@@ -2772,6 +2772,11 @@ check(not _fs_bad and len(_fs_tok) == 10 and min(int(v) for v in _fs_tok.values(
       and set(re.findall(r"var\(--(fs-[a-z0-9]+)\)", _css)) <= set(_fs_tok),
       f"text sizes off the type scale (UI-54): {_fs_bad[:6]} tokens {_fs_tok}")
 
+# ...and at 320 the welcome tiles stack the emoji above the name, so "4,552 chargers" at 11 px
+# stays inside the tile.
+check("@media(max-width:359px){.heropick{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto}.heropick .e{grid-row:auto;line-height:1.1}}" in _css,
+      "the welcome tiles' counts run past the tile at 320 px again (UI-54)")
+
 # ---- guides (UI-50..52, 55) ----
 def _rd(rel):
     f = os.path.join(HERE, rel)
