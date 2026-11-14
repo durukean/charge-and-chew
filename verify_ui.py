@@ -213,7 +213,13 @@ location.replace('/?chain=IHOP&nosw=1');
 
     def kids_rows(d):
         rows = re.split(r'<div class="row(?: sel)?" data-id="\d+">', d)[1:]   # rendered rows, not the template in the source
-        return len(rows) > 3 and all(re.search(r'<span class="tag sig" title="A playground is mapped[^"]*"><svg[^>]*>.*?</svg>playground \d+ min</span>', r, re.S) for r in rows)
+        # One signal per row (UI-29): the playground, unless one that outranks it (usually closed,
+        # across hwy, restroom likely, late food) is there instead.
+        def one(r):
+            sg = re.findall(r'<span class="sig (\w+)(?: n)?" title="([^"]*)"><svg[^>]*>.*?</svg><span>([^<]*)</span></span>', r, re.S)
+            return len(sg) == 1 and (re.fullmatch(r'playground \d+ min', sg[0][2]) and sg[0][1].startswith('A playground is mapped')
+                                     or sg[0][0] in ('shut', 'xh', 'wc', 'late'))
+        return len(rows) > 3 and all(one(r) for r in rows) and any('<span class="sig kids"' in r for r in rows)
 
     # --dump-dom gives us the rendered DOM; assert on what the app produced.
     checks = {

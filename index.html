@@ -369,7 +369,7 @@ html.native .splash-mark svg{width:96px;height:96px}
   letter-spacing:-.3px;overflow:hidden}
 .bmark.two{font-size:7px}
 .bmark svg{width:100%;height:100%;display:block}
-.row .sub .netdot.bmark{width:13px;height:13px;margin-right:5px;vertical-align:-2px}
+.row .where .netdot.bmark{width:13px;height:13px;margin-right:5px;vertical-align:-2px}
 .pp-nn .dot.bmark{width:16px;height:16px;font-size:10px}.pp-nn .dot.bmark.two{font-size:8px}
 #legendList .lg.bmark,#filtNetList .lg.bmark{width:16px;height:16px;font-size:10px}
 #legendList .lg.bmark.two,#filtNetList .lg.bmark.two{font-size:8px}
@@ -471,16 +471,16 @@ html.native .splash-mark svg{width:96px;height:96px}
 .pp-nmore{align-self:center;color:var(--dim2);font-size:12px;font-weight:600;padding:0 2px}
 /* Stop signals: one quiet line under the places; a tap on an item shows why it is there. */
 .pp-sig{display:flex;flex-wrap:wrap;gap:2px 12px;margin:6px 0 0}
-.pp-sig .sg{display:inline-flex;align-items:center;gap:5px;min-height:28px;padding:0;border:0;background:none;cursor:pointer;
-  font:600 12px var(--sans);color:var(--dim);text-align:left}
+.sig{display:inline-flex;align-items:center;gap:4px;font:600 12px/1.3 var(--sans);color:var(--dim);white-space:nowrap;min-width:0}
+.sig .ui-i{width:12px;height:12px;flex-shrink:0;color:var(--dim2)}
+.sig.n,.sig.n .ui-i{color:var(--warn)}
+.pp-sig .sg{min-height:28px;padding:0;border:0;background:none;cursor:pointer;text-align:left;white-space:normal}
 .pp-sig .sg span{text-decoration:underline dotted var(--dim2);text-underline-offset:3px}
 .pp-sig .sg.n{color:var(--warn)}
 .pp-sig .sg .ui-i{flex-shrink:0;color:var(--dim2)}
 .pp-sig .sg.n .ui-i{color:var(--warn)}
 .pp-why{font-size:11.5px;color:var(--dim);line-height:1.4;margin:2px 0 0}
 @media(pointer:coarse){.pp-sig .sg{min-height:36px}}
-.tag.sig{display:inline-flex;align-items:center;gap:3px}
-.tag.sig .ui-i{width:10px;height:10px}
 .pp-links .pp-morebtn{flex:0 0 auto;padding:8px 16px;border-radius:10px;background:var(--surface2);
   border:1px solid var(--line);color:var(--txt);font:700 12px var(--sans);cursor:pointer}
 .pp-links .pp-morebtn[aria-expanded="true"]{background:var(--surface3)}
@@ -669,7 +669,7 @@ html.native .splash-mark svg{width:96px;height:96px}
    straight line 34 pt above the bottom of an iPhone, like a web page, not a list. */
 #list{overflow-y:auto;overscroll-behavior:contain;padding:0 var(--gutter) calc(16px + env(safe-area-inset-bottom));flex:1}
 .row{content-visibility:auto;contain-intrinsic-size:auto 128px;   /* off-screen rows skip layout */
-  display:flex;gap:12px;padding:15px 0;border-radius:0;margin:0;background:transparent;
+  display:flex;gap:12px;padding:13px 0;border-radius:0;margin:0;background:transparent;
   border:0;border-bottom:1px solid var(--line);box-shadow:none;cursor:pointer;transition:.12s;align-items:flex-start}
 :root[data-theme="dark"] .row{background:transparent;box-shadow:none}
 .row:active{transform:scale(.99)}
@@ -736,7 +736,7 @@ html.native .splash-mark svg{width:96px;height:96px}
 .brk .bt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .brk .bt b{font-size:14px;font-weight:700}
 .brk .bt>span{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brk .bt>.bs{font-size:11.5px;color:var(--dim2)}   /* the stop's signals at that clock: open late, restroom */
+.brk .bt>.bs{display:flex;flex-wrap:wrap;gap:2px 10px;margin-top:1px}   /* the stop's signals at that clock (.sig) */
 @media(pointer:coarse){.brk{padding:12px 0}}
 .row .idx.mi span{font-size:9.5px;font-weight:600;opacity:.88}
 /* The row's lead: the network's mark, as on the map. */
@@ -781,21 +781,30 @@ html.native .splash-mark svg{width:96px;height:96px}
 :root .row s.spd.l2,:root .pp-sum s.spd.l2{color:var(--dim);background:none;border:1.5px dashed var(--dim2);padding:1px 6px}
 .pp-plugs{display:flex;flex-wrap:wrap;gap:4px 10px;font:600 12px var(--mono);color:var(--dim);margin-top:4px}
 .pp-plugs b{color:var(--txt)}
-.row .sub{color:var(--dim2);font-size:11.5px;margin-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
+/* A row (UI-29): the name; the food; the charger's speed line ([kW] 6 stalls · 24h · free, warnings,
+   one signal); where it is, on one line. */
+.row .sub{color:var(--dim2);font-size:11.5px;margin-top:7px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
 .row .sub .st{font-weight:600;color:var(--dim)}
-.row .sub .where{min-width:0}
+.row .sub .st .free{color:var(--good);font-weight:700}
+.row .where{display:flex;gap:4px;min-width:0;margin-top:4px;color:var(--dim2);font-size:11.5px;line-height:1.35}
+.row .where .wn{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.row .where .wd{flex-shrink:0;white-space:nowrap}
 .row .sub .nw,.nw{white-space:nowrap}
 .nocaps{text-transform:none}   /* "0.3 mi" and "away" landed on separate lines */
 .row .sub .tag,.row .sub .cbadge{margin-left:0}
-.row .sub .netdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.row .where .netdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .row .cbadge{margin-left:6px;padding:1px 7px;border-radius:6px;font-weight:800;font-size:10.5px;
   background:var(--good-bg);color:var(--good);font-family:var(--mono)}
 .row .cbadge.adapter{background:var(--warn-bg);color:var(--warn)}
 .row .cbadge.null{background:var(--bad-bg);color:var(--bad)}
-.row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:wrap;gap:5px 7px}
-.row .ch>span{background:var(--chew-bg);border-radius:8px;padding:3px 8px;color:var(--txt)}   /* not a name's own .nw span */
+.row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;gap:5px;min-width:0}
+.row .ch>span.shut{opacity:.55}   /* usually closed then: the row's signal says so, the title why */
+.row .ch>span{background:var(--chew-bg);border-radius:8px;padding:3px 7px;color:var(--txt);display:inline-flex;align-items:baseline;
+  min-width:0;flex:0 1 auto;white-space:nowrap;gap:4px}   /* not a name's own .nw span */
 .row .ch>span i{font-style:normal;color:var(--chew);font-weight:700;margin-left:2px}
 .row .ch .more{background:none}
+.row .ch .cn{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.row .ch>span>i,.row .ch .xh,.row .ch>.more{flex-shrink:0}
 
 .row .ch b{color:var(--txt);font-weight:700}
 .row .ch .more{background:none;color:var(--dim2);padding-left:2px}
@@ -1095,8 +1104,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   .ftog{height:50px}
   .rfield{height:48px}
   #goBtn{height:50px}
-  .row{padding:15px 0}
-  .row .star{font-size:20px;width:48px;height:48px;padding-top:4px}
+  .row{padding:13px 0}
+  /* 48 px to tap, but no taller than the name in the layout: a one-line name left an 11 px hole above the food. */
+  .row .star{font-size:20px;width:48px;height:48px;padding-top:4px;margin-bottom:-24px}
   .sortbtn{padding:12px 8px;font-size:13px}
   .iconbtn.sm{width:44px;height:44px}   /* share/close buttons: the last ones under 44 */
   #centerCard .rad button{padding:7px 11px;font-size:12.5px}
@@ -1371,7 +1381,7 @@ if (document.documentElement.classList.contains('car')) {
         <button class="ftog" data-f="free"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16 7.5c0-1.9-1.8-3-4-3s-4 1.1-4 3 1.8 2.6 4 3 4 1.3 4 3.3-1.8 3.2-4 3.2-4-1.2-4-3"/></svg> Free to charge</button>
         <button class="ftog" data-f="nodlr"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2"/></svg> Hide dealership lots</button>
         <button class="ftog" data-f="kids"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 7 4h10l4 17M10 4v9M14 4v9M9 13h6"/></svg> Good for kids (playground)</button>
-        <button class="ftog" data-f="noiso"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg> Hide isolated stops (nothing walkable)</button>
+        <button class="ftog" data-f="noiso"><svg class="ui-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 10.2-4.3"/><path d="M18 11c0 1.6-.6 3.2-1.5 4.7"/><path d="M3 3l18 18"/></svg> Hide isolated stops (nothing walkable)</button>
       </div>
       <p class="fhint">Hours, pricing and playgrounds come from public data and are often missing, so these filters can hide good stops.</p>
     </div>
@@ -2946,6 +2956,21 @@ document.addEventListener('click', e => {
 
 /* ───────── list ───────── */
 const planRowOn = () => localStorage.getItem('cc_planrow') === '1';
+/* How many place chips fit on one line of a row: three, unless they would wrap. A chip's width
+   from its text, fitted on 381 rendered chips (44 px of emoji and padding + 5.5 px a character
+   of "Taco Bell 1 min", within ~10 px either way), plus
+   "across hwy" (~66 px), a 5 px gap, and "+N" (~28 px) when some are left over. The line never
+   wraps: a chip a few pixels short shortens its name ("Starbuc… 3 min"), never its minutes. At
+   least one. No layout is read per row: one width per render. */
+function chipsFit(ent, s, label, room) {
+  let used = 0, n = 0;
+  for (const [k, v] of ent.slice(0, 3)) {
+    const w = 44 + 5.5 * (label(k).length + String(walkMin(walkTo(s, k, v))).length + 5) + (acrossHwy(s, k) ? 66 : 0);
+    if (n && used + w + (ent.length > n + 1 ? 28 : 0) > room) break;
+    used += w + 5; n++;
+  }
+  return Math.max(1, n);
+}
 function renderList(vis) {
   const filtering = chainQuery() || cat === 'fav';
   /* The bundled-chain fallback turns "coffee" into five active chains, and listing them all
@@ -3032,6 +3057,8 @@ function renderList(vis) {
   if (route && planRowOn()) localStorage.setItem('cc_planrow', '0');
   const pr = planRowOn() && center && center.kind === 'me' && !route && !CAR
     ? `<div class="planrow"><button type="button" class="prgo" id="planRowGo"><svg class="ui-i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="18.5" r="2.2"/><circle cx="17.5" cy="5.5" r="2.2"/><path d="M8.7 18.5H13a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h4.3"/></svg><span><b>Going somewhere?</b> Plan a drive with meal stops</span><svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button><button type="button" class="prx" id="planRowX" aria-label="Hide: plan a drive">×</button></div>` : '';
+  /* The width the place chips have on a row, read once, before this render writes anything. */
+  const chipRoom = Math.max(200, ($('list').clientWidth || 352) - 32 - (showIdx ? 60 : 56));
   $('list').innerHTML = pr + (bc || gapNote()) + head + rows.map((s, i) => {
     const m = MATCH[s.id] || {};
     const ent = Object.entries(m);
@@ -3040,14 +3067,19 @@ function renderList(vis) {
     ent.sort((a, b) => (picked(b[0]) - picked(a[0])) || (acrossHwy(s, a[0]) - acrossHwy(s, b[0])) || walkTo(s, a[0], a[1]) - walkTo(s, b[0], b[1]));
     // "Discount Tire ≥3min" tells you something; "Tire Shop ≥3min" does not
     const lp = livePoiFor[s.id];
-    // Three, then "+N": a fourth chip pushed the count onto a line of its own on a phone.
-    const chains = ent.slice(0, 3).map(([k, v]) => {
-      const isLive = k === livePoiKey && lp && lp.name;
-      const label = isLive ? lp.name : k;              // the real shop, not the category
-      return `<span>${bemo(k)} ${active.has(k) ? '<b>' + bname(label) + '</b>' : bname(label)} <i>${walkMin(walkTo(s, k, v))} min</i>${xhMark(s, k)}</span>`;
-    }).join('');
-    const extra = ent.length > 3 ? `<span class="more">+${ent.length - 3}</span>` : '';
-    const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi away` : '';
+    /* Up to three, then "+N" -- as many as fit on one line (UI-29): the chips used to wrap to a
+       second line on most phone rows. */
+    const label = k => k === livePoiKey && lp && lp.name ? lp.name : k;   // the real shop, not the category
+    const nChip = chipsFit(ent, s, label, chipRoom);
+    const shown = ent.slice(0, nChip).map(e => e[0]);
+    // Food all across a highway is the row's signal; otherwise each chip says it of itself.
+    const xhAll = shown.length > 0 && shown.every(k => acrossHwy(s, k));
+    // A chain on the row usually closed then (Chick-fil-A on a Sunday): its chip dims, and says why.
+    const C = s.lvl === 2 ? null : closedSig(s, stopWhen(s)), shut = C ? C.keys.filter(k => shown.indexOf(k) >= 0) : [];
+    const chains = ent.slice(0, nChip).map(([k, v]) =>
+      `<span${shut.indexOf(k) >= 0 ? ` class="shut" title="${esc(closedWhy(k, localAt(stopWhen(s).ms, tzOf(s))))}"` : ''}><span class="cn">${bemo(k)} ${active.has(k) ? '<b>' + bname(label(k)) + '</b>' : bname(label(k))}</span> <i>${walkMin(walkTo(s, k, v))} min</i>${xhAll ? '' : xhMark(s, k)}</span>`).join('');
+    const extra = ent.length > nChip ? `<span class="more">+${ent.length - nChip}</span>` : '';
+    const dist = center ? `${(hav(center.lat, center.lon, s.lat, s.lon) / MI).toFixed(1)} mi` : '';
     const cm = chargeMin(s), cp = compat(s);
     /* A charge time next to "✕ incompatible" is a contradiction — if the car cannot plug
        in, there is no charge time. */
@@ -3070,14 +3102,17 @@ function renderList(vis) {
       : (kwFor(s, F.plug) ? `<s class="spd ${speedTier(kwFor(s, F.plug))}" title="${TIER_NAME[speedTier(kwFor(s, F.plug))]}${F.plug ? ' · ' + PLUG_NAME[F.plug] : ''}">${kwFor(s, F.plug)} kW</s>` : '');
     const stallTxt = s.stalls && !(s.stalls === 1 && s.lvl !== 2)
       ? `${s.stalls} ${s.lvl === 2 ? (s.stalls === 1 ? 'port' : 'ports') : 'stalls'}` : '';
+    // The charger's own facts on the speed line, as words: "6 stalls · 24h · free" (UI-29).
+    const status = [stallTxt, s.h24 ? '24h' : '', s.price === 'free' ? '<b class="free">free</b>' : ''].filter(Boolean).join(' · ');
     const sep = !showIdx && s.dlr && i > 0 && !rows[i - 1].dlr
       ? '<div class="lsep" role="heading" aria-level="3">At car dealerships <span>· often for that brand\'s drivers, and limited hours</span></div>' : '';
     return `${sep}<div class="row${s.id === openStopId ? ' sel' : ''}" data-id="${s.id}">
       ${lead}
       <div class="body">
         <div class="n"><button type="button" class="rowname" aria-label="Show ${esc(s.name)} on the map"><span>${esc(s.name)}</span></button><button class="star ${favs.has(s.id) ? 'on' : ''}" data-star="${s.id}" aria-pressed="${favs.has(s.id)}" aria-label="${favs.has(s.id) ? 'Remove' : 'Save'} ${esc(s.name)}"><span aria-hidden="true">${favs.has(s.id) ? '★' : '☆'}</span></button></div>
-        <div class="sub">${spd}${stallTxt ? `<span class="st">${stallTxt}</span>` : ''}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}<span class="where">${showIdx ? netDot(s, 'netdot') : ''}${esc(s.net)} · ${esc(s.city)}, ${s.st}${dist ? ` · <span class="nw">${dist}</span>` : ''}</span>${carBadge}${s.h24 ? '<span class="tag">24h</span>' : ''}${s.price === 'free' ? '<span class="tag free">free</span>' : ''}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!Object.keys(MATCH[s.id] || {}).length ? '<span class="tag iso">isolated</span>' : ''}${rowSigs(s)}</div>
-        <div class="ch">${chains}${extra}</div>
+        ${chains ? `<div class="ch">${chains}${extra}</div>` : ''}
+        <div class="sub">${spd}${s.stalls === 1 && s.lvl !== 2 ? '<span class="tag one">1 stall</span>' : ''}${status ? `<span class="st">${status}</span>` : ''}${carBadge}${s.dlr ? '<span class="tag dlr">dealership</span>' : ''}${!ent.length ? '<span class="tag iso">isolated</span>' : ''}${rowSigs(s, xhAll, shut.length ? C : null)}</div>
+        <div class="where"><span class="wn">${showIdx ? netDot(s, 'netdot') : ''}${esc(s.net)} · ${esc(s.city)}, ${s.st}</span>${dist ? `<span class="wd">· ${dist}</span>` : ''}</div>
       </div>
     </div>`;
   }).join('') + (col ? `<button type="button" class="listmore" id="routeAll">Show all ${vis.length.toLocaleString()} stops</button>`
@@ -6859,8 +6894,8 @@ if (typeof window !== 'undefined') window.__closedWhy = closedWhy;   // exercise
 
 /* ───────── stop signals ─────────
    Small facts about a stop beyond its chains, each with the reason behind it, and each said
-   no more firmly than the data allows. Rows carry at most two small tags; the stop card one
-   line, where a tap on an item shows its reason; a planned break one short line.
+   no more firmly than the data allows. A row carries the one that matters most (rowSigs); the
+   stop card one line, where a tap on an item shows its reason; a planned break one short line.
 
    Food open late: the LATE chains above (the planner's own night rule), plus 24-hour travel
    stops with hot food. "Usually": hours vary by location. On the stop card OpenStreetMap's
@@ -6892,7 +6927,9 @@ const SIG_ICON = {
   shut: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>',
   wc: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v7M8.5 10.5h7M12 15l-3 6M12 15l3 6"/></svg>',
   kids: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21 7 4h10l4 17M10 4v9M14 4v9M9 13h6"/></svg>',
-  late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>'
+  late: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>',
+  // a road: two edges and a centre line
+  xh: '<svg class="ui-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 21M16 3l4 18M12 4v3M12 11v3M12 18v2"/></svg>'
 };
 /* The late-food signal at a stop: null when it says nothing (daytime in a row, no food). */
 function lateSig(s, w, names, byHours) {
@@ -6960,18 +6997,24 @@ function kidsSig(s) {
   return { kind: 'kids', tag: 'playground ' + n + ' min', label: 'Playground ' + n + ' min',
     why: 'A playground is mapped in OpenStreetMap about ' + s.pg * 10 + ' m away in a straight line, on this side of any highway.' };
 }
-/* Small outline tags for a list row (the batch-3 badge style), at most two: late food (only at
-   night: by day every row with a McDonald's would say it), restroom, playground. With "Good
-   for kids" on, the playground leads. */
-function rowSigs(s) {
+/* One signal component (UI-30): rows, the stop card and the plan draw a stop's signals the same
+   way -- a 12 px line icon and a few words, quiet, in the warning colour only for a warning --
+   with one vocabulary: "late food", "restroom likely", "playground N min", "across hwy",
+   "usually closed". The stop card's items are buttons that open their reason (cardSigs). */
+const sigHtml = x => `<span class="sig ${x.kind}${x.n || x.closed ? ' n' : ''}" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.tag)}</span></span>`;
+const XH_WHY = 'The food here is across a highway from the charger: the walk is longer than the straight line shown, or there may be no safe way across.';
+/* A list row's one signal (UI-29): the one that would change the decision, in this order -- a
+   chain on the row usually closed then; its food all across a highway; a restroom likely; food
+   open late (only at night: by day every row with a McDonald's would say it); and, with Good for
+   kids on, the playground. Rows used to carry two outline badges beside four more for the
+   charger, four lines of metadata before the food. */
+function rowSigs(s, xhAll, C) {
   if (s.lvl === 2) return '';
-  const out = [], w = stopWhen(s), tag = x => x && x.tag ? `<span class="tag sig" title="${esc(x.why)}">${SIG_ICON[x.kind]}${x.tag}</span>` : '';
-  const K = kidsSig(s);
-  if (F.kids) out.push(tag(K));
-  if (isNight(w.min)) out.push(tag(lateSig(s, w)));
-  out.push(tag(restroomSig(s, w)));
-  if (!F.kids) out.push(tag(K));
-  return out.filter(Boolean).slice(0, 2).join('');
+  const w = stopWhen(s), late = isNight(w.min) ? lateSig(s, w) : null;
+  const x = (C && { kind: 'shut', n: 1, tag: 'usually closed', why: C.why })
+    || (xhAll && { kind: 'xh', n: 1, tag: 'across hwy', why: XH_WHY })
+    || restroomSig(s, w) || (late && late.tag ? late : null) || (F.kids ? kidsSig(s) : null);
+  return x ? sigHtml(x) : '';
 }
 /* The stop card's line: each item a button whose reason opens under the line. */
 /* The chains a short walk from a stop that usually close on the day you would be there. */
@@ -6990,7 +7033,7 @@ function cardSigs(s) {
   if (s.lvl === 2) return '';
   const w = stopWhen(s), items = [closedSig(s, w), restroomSig(s, w), lateSig(s, w), kidsSig(s)].filter(Boolean);
   if (!items.length) return '';
-  return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
+  return `<div class="pp-sig">${items.map(x => `<button type="button" class="sg sig ${x.kind}${x.closed ? ' n' : ''}" data-sg="${x.kind}"${x.keys ? ` data-keys="${esc(x.keys.join('|'))}"` : ''} data-why="${esc(x.why)}" aria-expanded="false" title="${esc(x.why)}">${SIG_ICON[x.kind]}<span>${esc(x.label)}</span></button>`).join('')}</div><div class="pp-why" hidden></div>`;
 }
 /* A planned break's line: what is true there at that clock. The calendar event says the same
    (brkBits), with the restroom's reason. */
@@ -7002,9 +7045,16 @@ function brkBits(s, k, ms) {
   const K = kidsSig(s); if (K) bits.push(K.tag);
   return { bits, rr: R };
 }
+/* The plan's line, in the same component and words as the rows (the calendar keeps brkBits). */
 function brkSigs(s, k, ms) {
-  const bits = brkBits(s, k, ms).bits;
-  return bits.length ? `<span class="bs">${bits.join(' · ')}</span>` : '';
+  const min = localAt(ms, tzOf(s)).min, out = [];
+  if (isNight(min) && k) out.push(LATE.has(k) || TRAVEL_STOPS.has(k)
+    ? { kind: 'late', tag: 'late food', why: k + ' is usually open late or all night. Hours vary by location.' }
+    : { kind: 'late', n: 1, tag: 'food may be closed', why: k + ' may be closed when you get here. Check the hours before you go.' });
+  const R = restroomSig(s, { min, ms, planned: true });
+  if (R) out.push(R);
+  const K = kidsSig(s); if (K) out.push(K);
+  return out.length ? `<span class="bs">${out.map(sigHtml).join('')}</span>` : '';
 }
 document.addEventListener('click', e => {
   const b = e.target.closest && e.target.closest('.pp-sig .sg'); if (!b) return;

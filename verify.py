@@ -1681,8 +1681,8 @@ check("--gutter:16px;" in _html
       and "#list{overflow-y:auto;overscroll-behavior:contain;padding:0 var(--gutter) calc(16px + env(safe-area-inset-bottom));flex:1}" in _html
       and "#app.phone #sheet .chiprow{padding:2px var(--gutter) 7px;" in _html
       and "#app.phone #sheet #centerCard.show{margin:-2px var(--gutter) 6px;padding:0;" in _html
-      and "display:flex;gap:12px;padding:15px 0;border-radius:0;" in _html
-      and "  .row{padding:15px 0}" in _html and "  .row{padding:14px 0}" in _html
+      and "display:flex;gap:12px;padding:13px 0;border-radius:0;" in _html
+      and "  .row{padding:13px 0}" in _html and "  .row{padding:14px 0}" in _html
       and ".breaks{margin:0 0 6px;padding:10px 0 6px;" in _html
       and ".brk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:9px 0;" in _html,
       "the sheet's left edges are off the 16 px gutter again (UI-08)")
@@ -2245,8 +2245,22 @@ _SIG = _html[_sg0:_sg1] if _sg0 > 0 and _sg1 > _sg0 else ""
 _pp = _html[_html.index("function popupHtml(s) {"):_html.index("function popupHtml(s) {") + 12000]
 check(re.search(r"\n    \$\{cardSigs\(s\)\}\n    \$\{planLine\(s\)\}\n    <div class=\"pp-links\">", _pp) is not None,
       "the stop card no longer shows its signal line (cardSigs)")
-check(re.search(r"<span class=\"tag iso\">isolated</span>' : ''\}\$\{rowSigs\(s\)\}</div>", _html) is not None,
-      "list rows no longer carry their signal tags (rowSigs)")
+check("<span class=\"tag iso\">isolated</span>' : ''}${rowSigs(s, xhAll, shut.length ? C : null)}</div>" in _html,
+      "list rows no longer carry their signal (rowSigs)")
+# UI-29: a row is name / food / speed line / where. Chips fit one line (chipsFit), food first.
+check(_live("const nChip = chipsFit(ent, s, label, chipRoom);")
+      and _live("const chipRoom = Math.max(200, ($('list').clientWidth || 352) - 32 - (showIdx ? 60 : 56));")
+      and re.search(r"\n        \$\{chains \? `<div class=\"ch\">\$\{chains\}\$\{extra\}</div>` : ''\}\n        <div class=\"sub\">\$\{spd\}", _html) is not None
+      and "<div class=\"where\"><span class=\"wn\">" in _html
+      and ".row .ch{font-size:12px;margin-top:7px;color:var(--dim);display:flex;flex-wrap:nowrap;" in _html,
+      "list rows lost their hierarchy (name, food on one line, speed line, where)")
+# UI-30: one signal component; UI-31: the moon is late food's alone.
+check(_live("const sigHtml = x => `<span class=\"sig ${x.kind}${x.n || x.closed ? ' n' : ''}\" title=\"${esc(x.why)}\">${SIG_ICON[x.kind]}<span>${esc(x.tag)}</span></span>`;")
+      and "class=\"sg sig ${x.kind}" in _html and "return out.length ? `<span class=\"bs\">${out.map(sigHtml).join('')}</span>` : '';" in _html
+      and "tag sig" not in _html,
+      "rows, the stop card and the plan no longer draw signals with one component (sigHtml / .sig)")
+_moon = 'M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z'
+check(_html.count(_moon) == 1, "the late-food moon is used for something else again (Hide isolated stops had it)")
 check("' min' + (acrossHwy(s, k) ? ' · across hwy' : '') : ''}</span>${brkSigs(s, k, ms)}</span>" in _html,
       "a planned break no longer says what is likely open at its clock (brkSigs)")
 check(re.search(r"(?m)^  if \(stop\) lateByHours\(el, stop, todo, tz\);$", _html) is not None,
@@ -2275,12 +2289,12 @@ MIN = 23 * 60;
 t(/late food/.test(rowSigs(S(1))), 'a row at 11 pm with Taco Bell has no "late food" tag');
 t(/Taco Bell is usually open late/.test(rowSigs(S(1))), 'the late tag does not say which place, and "usually"');
 t(rowSigs(S(2)) === '', 'a row at night with no late chain still gets a tag');
-t(/late food/.test(rowSigs(S(3))), 'a 24-hour travel stop (Wawa) does not count as late food');
+t(lateSig(S(3)).tag === 'late food', 'a 24-hour travel stop (Wawa) does not count as late food');
 const c2 = lateSig(S(2)); t(c2 && c2.closed && /may be closed/.test(c2.label), 'at night, food with no late chain is not "may be closed"');
 t(lateSig(S(4)) === null, 'a stop with no food at all says something about late food');
 t(/Likely open now: Taco Bell/.test(cardSigs(S(1))), 'the stop card at night does not say what is likely open now');
 const p = S(1); p.plan = 5; t(/Likely open ~23:00: Taco Bell/.test(cardSigs(p)), 'on a plan, the card does not use the arrival time');
-t(/may be closed then/.test(brkSigs(S(2), 'Chipotle', 0)) && /open late/.test(brkSigs(S(1), 'Taco Bell', 0)), 'a night break does not say open late / may be closed');
+t(/food may be closed/.test(brkSigs(S(2), 'Chipotle', 0)) && /late food/.test(brkSigs(S(1), 'Taco Bell', 0)), 'a night break does not say late food / food may be closed');
 MIN = 13 * 60; nowAt.clear();
 t(rowSigs(S(1)) === '', 'a row by day carries a late-food tag (every McDonald\'s would)');
 t(/Open late: Taco Bell/.test(cardSigs(S(1))), 'the stop card by day does not say what is open late');
@@ -2364,7 +2378,7 @@ const clockLabel = m => String(m); const esc = t => String(t).replace(/"/g, '&qu
 const document = { addEventListener() {} };
 """
 check("restroomSig(s, w)" in _SIG[_SIG.index("function cardSigs(s) {"):_SIG.index("function brkSigs(")]
-      and "out.push(tag(restroomSig(s, w)));" in _SIG
+      and "|| restroomSig(s, w) || (late && late.tag ? late : null) || (F.kids ? kidsSig(s) : null);" in _SIG
       and "const R = restroomSig(s, { min, ms, planned: true });\n  if (R) bits.push('restroom likely');" in _SIG,
       "the restroom signal is gone from the stop card, the rows or the breaks")
 if _node and _SIG:
@@ -2392,7 +2406,8 @@ t(R(S(1, { lvl: 2 })) === null, 'a Level 2 site carries a restroom signal');
 t(/restroom likely/.test(brkSigs(S(1), "Buc-ee's", 0)) && !/restroom/.test(brkSigs(S(9), 'Chipotle', 0)), 'a planned break does not say "restroom likely" where the rule does');
 nowAt.clear(); t(/restroom likely/.test(rowSigs(S(1))) && !/restroom/.test(rowSigs(S(9))), 'a row does not carry "restroom likely" where the rule does');
 MIN = 23 * 60; nowAt.clear(); MATCH[12] = { "Love's": [12, 0], 'Taco Bell': [5, 0] };
-t((rowSigs(S(12, { pg: 24 })).match(/class="tag sig"/g) || []).length === 2, 'a row carries more than two signals');
+t((rowSigs(S(12, { pg: 24 })).match(/class="sig /g) || []).length === 1 && /restroom likely/.test(rowSigs(S(12, { pg: 24 }))), 'a row carries more than one signal, or not the restroom before late food');
+t(/across hwy/.test(rowSigs(S(12), true)) && /usually closed/.test(rowSigs(S(12), true, { why: 'x' })), 'a row does not lead with closed, then across the highway');
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_rr.stdout.strip() == "OK", "the restroom signal says the wrong thing:\n  " + (_rr.stdout + _rr.stderr).strip()[:700])
 
@@ -2414,13 +2429,13 @@ const S = (id, o) => Object.assign({ id, st: 'TX', lat: 30, lon: -97 }, o || {})
 t(kidsSig(S(10, { pg: 24 })).tag === 'playground 3 min' && kidsSig(S(11)) === null, 'the playground tag is wrong');
 t(kidsSig(S(10, { pg: 24, lvl: 2 })) === null, 'a Level 2 site carries a playground signal');
 MATCH[1] = { "Buc-ee's": [12, 0] }; nowAt.clear();
-t(/playground 3 min/.test(rowSigs(S(1, { pg: 24 }))) && /restroom likely/.test(rowSigs(S(1, { pg: 24 }))), 'a row does not carry restroom and playground');
+t(!/playground/.test(rowSigs(S(1, { pg: 24 }))) && /restroom likely/.test(rowSigs(S(1, { pg: 24 }))), 'a row shows the playground over the restroom, or with Good for kids off');
 t(/Playground 3 min/.test(cardSigs(S(1, { pg: 24 }))), 'the stop card does not show the playground');
 t(/playground 3 min/.test(brkSigs(S(1, { pg: 24 }), "Buc-ee's", 0)), 'a planned break does not show the playground');
 MIN = 23 * 60; nowAt.clear(); MATCH[12] = { "Love's": [12, 0], 'Taco Bell': [5, 0] };
 const r12 = rowSigs(S(12, { pg: 24 }));
-t((r12.match(/class="tag sig"/g) || []).length === 2 && !/playground/.test(r12), 'a row carries more than two signals, or the wrong two at night');
-F.kids = 1; t(/^<span class="tag sig"[^>]*><svg[^]*?<\/svg>playground/.test(rowSigs(S(12, { pg: 24 }))), 'with Good for kids on, the playground does not lead');
+t((r12.match(/class="sig /g) || []).length === 1 && !/playground/.test(r12), 'a row carries more than one signal, or the playground at night with kids off');
+F.kids = 1; t(/^<span class="sig kids"[^>]*><svg[^]*?<\/svg><span>playground 3 min/.test(rowSigs(S(13, { pg: 24 }))), 'with Good for kids on, a row with nothing else does not show the playground');
 console.log(f.length ? f.join("\n") : "OK");"""], capture_output=True, text=True)
     check(_kd.stdout.strip() == "OK", "the playground signal says the wrong thing:\n  " + (_kd.stdout + _kd.stderr).strip()[:700])
 
@@ -2429,7 +2444,8 @@ check(re.search(r"const sc = \[off > 75 \? 2 : off > 45 \? 1 : 0, farWalk\(s, k,
       and "const sc = [off, shut, -Math.min(s.kw || 0, 350), farWalk(s, k, w) ? 1 : 0," in _html
       and "const sc = [s.lvl === 2 ? 1 : 0, k ? 0 : 1, kw < 100 ? 1 : 0, farWalk(s, k, w) ? 1 : 0," in _html,
       "meals, breaks or the route list rank a walk across a highway as a short one again (farWalk)")
-check("<i>${walkMin(walkTo(s, k, v))} min</i>${xhMark(s, k)}</span>" in _html
+check("<i>${walkMin(walkTo(s, k, v))} min</i>${xhAll ? '' : xhMark(s, k)}</span>" in _html
+      and "|| (xhAll && { kind: 'xh', n: 1, tag: 'across hwy', why: XH_WHY })" in _html
       and "<b>${walkMin(d)} min</b>${xhMark(s, k)}" in _html
       and "${acrossHwy(s, k) ? ' · across the highway' : ''}</span>" in _html
       and "' min' + (acrossHwy(s, k) ? ' · across hwy' : '')" in _html,
