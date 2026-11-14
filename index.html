@@ -524,8 +524,9 @@ html.native .splash-mark svg{width:96px;height:96px}
   animation:icIn .22s ease-out}
 @keyframes icIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #installCard[hidden]{display:none}
-.ic-mark{width:34px;height:34px;border-radius:9px;flex-shrink:0;
-  background:linear-gradient(135deg,#16a34a,#f59e0b)}
+/* The app's own mark (the bolt with a bite), as on the splash and the welcome card (UI-43):
+   a flat green-to-amber square was the one off-brand graphic in the app. */
+.ic-mark{width:34px;height:34px;flex-shrink:0}.ic-mark svg{width:100%;height:100%;display:block}
 .ic-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
 .ic-txt b{font-size:13.5px}
 .ic-txt span{font-size:11.5px;color:var(--dim);line-height:1.35}
@@ -1490,7 +1491,7 @@ if (document.documentElement.classList.contains('car')) {
 <div id="offlineBar" hidden>Offline — showing saved data</div>
 <div id="sugg" role="listbox" aria-label="Search examples" hidden></div>
 <div id="installCard" hidden>
-  <div class="ic-mark" aria-hidden="true"></div>
+  <div class="ic-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><defs><linearGradient id="ccg4" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient><mask id="ccmask4"><rect width="64" height="64" fill="#000"/><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M31.5 9 L17 35.5 h9.5 l-2.5 19 L42 27 H31 z" fill="#000"/><circle cx="57" cy="18" r="12.5" fill="#000"/><circle cx="47.5" cy="14.5" r="3.6" fill="#000"/><circle cx="57.5" cy="30.5" r="3.6" fill="#000"/></mask></defs><g mask="url(#ccmask4)"><rect width="64" height="64" fill="url(#ccg4)"/></g></svg></div>
   <div class="ic-txt"><b>Add to your home screen</b><span id="icSub">Opens instantly, works offline on the road.</span></div>
   <div class="ic-act"><button id="icGo">Add</button><button id="icNo" aria-label="Not now">Not now</button></div>
 </div>
@@ -8166,7 +8167,7 @@ if (matchMedia('(display-mode: standalone)').matches || q.get('src') === 'pwa') 
 if (!navigator.onLine) track('offline-use');
 
 /* The shell this page belongs to: sw.js's VERSION (verify.py keeps the two equal). */
-const SW_VER = 'cc-v53';
+const SW_VER = 'cc-v54';
 if ('serviceWorker' in navigator && q.get('nosw') !== '1' && !NATIVE) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {

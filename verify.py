@@ -2724,6 +2724,12 @@ _css_bad = [f for f in ["assets/pages.css"] if not _css_balanced(open(os.path.jo
 _css_bad += [f"index.html <style> #{i}" for i, c in enumerate(re.findall(r"<style[^>]*>(.*?)</style>", open(os.path.join(HERE, "index.html")).read(), re.S)) if not _css_balanced(c)]
 check(not _css_bad, f"unbalanced CSS braces (a rule after them is silently dropped): {_css_bad}")
 
+# ---- audit batch C (P3 polish, UI-43..55) ----
+# UI-43: the install card shows the app's own mark (the bolt with a bite), not a flat gradient square.
+check(re.search(r'<div class="ic-mark" aria-hidden="true"><svg viewBox="0 0 64 64">.*?<mask id="ccmask4">.*?<path d="M31\.5 9 L17 35\.5[^"]*"[^>]*/>.*?</svg></div>', _html, re.S) is not None
+      and not re.search(r"\.ic-mark\{[^}]*gradient", _css),
+      "the install card's mark is not the app logo (UI-43)")
+
 print(f"checked data.js, {len(pages)} pages, sitemap, assets")
 for w in warn:
     print(f"  WARN  {w}")

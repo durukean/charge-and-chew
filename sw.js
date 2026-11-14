@@ -5,7 +5,7 @@
       so without this a returning visitor refetches everything every 10 minutes.
    The shell cache is versioned; bump VERSION (and index.html's SW_VER) to roll out a new shell.
    The dataset and the map tiles are not: an app update must not throw either away.        */
-const VERSION = 'cc-v53';
+const VERSION = 'cc-v54';
 const SHELL = `${VERSION}-shell`;   // app shell (html/css/js/icons)
 /* NOT versioned. data.js is addressed by a hash of its content (?v=), so a new dataset is a new
    URL whatever this worker's version is. Versioning this cache threw the ~1 MB dataset away on
